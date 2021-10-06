@@ -6,25 +6,24 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
-import com.utechia.tdf.databinding.FragmentReservationBinding
+import com.utechia.tdf.databinding.FragmentTeaBoyBinding
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
 class TeaBoyFragment : Fragment() {
 
-    private lateinit var binding: FragmentReservationBinding
+    private lateinit var binding: FragmentTeaBoyBinding
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
-        binding = FragmentReservationBinding.inflate(inflater, container, false)
+        binding = FragmentTeaBoyBinding.inflate(inflater, container, false)
         return binding.root
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-
 
     }
 

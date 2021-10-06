@@ -4,21 +4,28 @@
     <option name="filePathToZoomLevelMap">
       <map>
         <entry key="..\:/Users/Dr Computer/AndroidStudioProjects/TDF/app/src/main/res/drawable/bottom_navigation.xml" value="0.2203125" />
+        <entry key="..\:/Users/Dr Computer/AndroidStudioProjects/TDF/app/src/main/res/drawable/bottom_toolbar.xml" value="0.2203125" />
         <entry key="..\:/Users/Dr Computer/AndroidStudioProjects/TDF/app/src/main/res/drawable/button_border.xml" value="0.2203125" />
         <entry key="..\:/Users/Dr Computer/AndroidStudioProjects/TDF/app/src/main/res/drawable/highlight_color.xml" value="0.2203125" />
         <entry key="..\:/Users/Dr Computer/AndroidStudioProjects/TDF/app/src/main/res/drawable/ic_baseline_add_24.xml" value="0.2203125" />
         <entry key="..\:/Users/Dr Computer/AndroidStudioProjects/TDF/app/src/main/res/drawable/ic_home.xml" value="0.2203125" />
+        <entry key="..\:/Users/Dr Computer/AndroidStudioProjects/TDF/app/src/main/res/drawable/ic_notification_bing.xml" value="0.2203125" />
         <entry key="..\:/Users/Dr Computer/AndroidStudioProjects/TDF/app/src/main/res/drawable/ic_profile.xml" value="0.2203125" />
         <entry key="..\:/Users/Dr Computer/AndroidStudioProjects/TDF/app/src/main/res/drawable/ic_reservation.xml" value="0.2203125" />
         <entry key="..\:/Users/Dr Computer/AndroidStudioProjects/TDF/app/src/main/res/drawable/ic_scan.xml" value="0.2203125" />
         <entry key="..\:/Users/Dr Computer/AndroidStudioProjects/TDF/app/src/main/res/drawable/ic_teaboy.xml" value="0.2203125" />
         <entry key="..\:/Users/Dr Computer/AndroidStudioProjects/TDF/app/src/main/res/drawable/nav_item.xml" value="0.2203125" />
-        <entry key="..\:/Users/Dr Computer/AndroidStudioProjects/TDF/app/src/main/res/layout/activity_main.xml" value="0.25" />
+        <entry key="..\:/Users/Dr Computer/AndroidStudioProjects/TDF/app/src/main/res/drawable/navigation_drawer.xml" value="0.2203125" />
+        <entry key="..\:/Users/Dr Computer/AndroidStudioProjects/TDF/app/src/main/res/layout/activity_main.xml" value="0.1" />
         <entry key="..\:/Users/Dr Computer/AndroidStudioProjects/TDF/app/src/main/res/layout/button_custom.xml" value="0.33" />
+        <entry key="..\:/Users/Dr Computer/AndroidStudioProjects/TDF/app/src/main/res/layout/fragment_home.xml" value="0.1" />
+        <entry key="..\:/Users/Dr Computer/AndroidStudioProjects/TDF/app/src/main/res/layout/fragment_reservation.xml" value="0.1" />
+        <entry key="..\:/Users/Dr Computer/AndroidStudioProjects/TDF/app/src/main/res/layout/header_navigation_drawer.xml" value="0.25" />
+        <entry key="..\:/Users/Dr Computer/AndroidStudioProjects/TDF/app/src/main/res/menu/navigation_drawer.xml" value="0.20416666666666666" />
       </map>
     </option>
   </component>
-  <component name="ProjectRootManager" version="2" languageLevel="JDK_15" project-jdk-name="17" project-jdk-type="JavaSDK">
+  <component name="ProjectRootManager" version="2" languageLevel="JDK_11" project-jdk-name="17" project-jdk-type="JavaSDK">
     <output url="file://$PROJECT_DIR$/out" />
   </component>
 </project>

@@ -17,4 +17,5 @@
     <style name="MenuItems" parent="Theme.AppCompat.Light">
         <item name="android:textSize">@dimen/_7ssp</item>
     </style>
+
 </resources>

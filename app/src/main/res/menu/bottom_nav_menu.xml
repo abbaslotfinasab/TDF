@@ -4,12 +4,12 @@
     xmlns:android="http://schemas.android.com/apk/res/android">
 
     <item
-        android:id="@+id/navigation_home"
+        android:id="@+id/homeFragment"
         android:icon="@drawable/ic_home"
         android:title="Home"/>
 
     <item
-        android:id="@+id/navigation_teaBoy"
+        android:id="@+id/teaBoyFragment"
         android:icon="@drawable/ic_teaboy"
         android:title="TeaBoy"/>
 
@@ -21,12 +21,12 @@
 
 
     <item
-        android:id="@+id/navigation_reservation"
+        android:id="@+id/reservationFragment"
         android:icon="@drawable/ic_reservation"
         android:title="Reservation"/>
 
     <item
-        android:id="@+id/navigation_profile"
+        android:id="@+id/profileFragment"
         android:icon="@drawable/ic_profile"
         android:title="Profile"/>
 
