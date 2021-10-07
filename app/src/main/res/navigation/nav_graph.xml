@@ -19,10 +19,37 @@
         android:id="@+id/reservationFragment"
         android:name="com.utechia.tdf.fragment.ReservationFragment"
         android:label="fragment_reservation"
-        tools:layout="@layout/fragment_reservation" />
+        tools:layout="@layout/fragment_reservation" >
+        <action
+            android:id="@+id/action_reservationFragment_to_createReservationFragmant"
+            app:destination="@id/createReservationFragmant" />
+        <action
+            android:id="@+id/action_reservationFragment_to_reservationDetails"
+            app:destination="@id/reservationDetails" />
+    </fragment>
     <fragment
         android:id="@+id/profileFragment"
         android:name="com.utechia.tdf.fragment.ProfileFragment"
         android:label="fragment_profile"
         tools:layout="@layout/fragment_profile" />
+    <fragment
+        android:id="@+id/notificationFragment"
+        android:name="com.utechia.tdf.fragment.NotificationFragment"
+        android:label="fragment_notification"
+        tools:layout="@layout/fragment_notification" />
+    <fragment
+        android:id="@+id/createReservationFragmant"
+        android:name="com.utechia.tdf.fragment.CreateReservationFragmant"
+        android:label="fragment_create_reservation_fragmant"
+        tools:layout="@layout/fragment_create_reservation_fragmant" >
+        <action
+            android:id="@+id/action_craeteReservationFragmant_to_reservationDetails"
+            app:destination="@id/reservationDetails" />
+    </fragment>
+    <fragment
+        android:id="@+id/reservationDetails"
+        android:name="com.utechia.tdf.fragment.ReservationFragment"
+        android:label="fragment_reservation_details"
+        tools:layout="@layout/fragment_reservation_details" />
+
 </navigation>
