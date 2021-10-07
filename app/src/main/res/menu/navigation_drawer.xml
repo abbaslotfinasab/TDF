@@ -12,8 +12,9 @@
         <item
             android:id="@+id/item1"
             android:icon="@drawable/ic_layer"
-            android:title="Survey System"
-            android:checked="true" />
+            android:enabled="true"
+            android:checkable="true"
+            android:title="Survey System"/>
         <item
             android:title=""
             android:enabled="false"/>
@@ -38,6 +39,10 @@
             android:id="@+id/item4"
             android:icon="@drawable/ic_stickynote"
             android:title="Calendar" />
+
+        <item
+            android:title=""
+            android:enabled="false"/>
 
         <item
             android:title=""
