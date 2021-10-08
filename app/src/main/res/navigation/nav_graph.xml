@@ -21,8 +21,8 @@
         android:label="fragment_reservation"
         tools:layout="@layout/fragment_reservation" >
         <action
-            android:id="@+id/action_reservationFragment_to_createReservationFragmant"
-            app:destination="@id/createReservationFragmant" />
+            android:id="@+id/action_reservationFragment_to_createReservationFragment"
+            app:destination="@id/createReservationFragment" />
         <action
             android:id="@+id/action_reservationFragment_to_reservationDetails"
             app:destination="@id/reservationDetails" />
@@ -38,12 +38,12 @@
         android:label="fragment_notification"
         tools:layout="@layout/fragment_notification" />
     <fragment
-        android:id="@+id/createReservationFragmant"
-        android:name="com.utechia.tdf.fragment.CreateReservationFragmant"
-        android:label="fragment_create_reservation_fragmant"
-        tools:layout="@layout/fragment_create_reservation_fragmant" >
+        android:id="@+id/createReservationFragment"
+        android:name="com.utechia.tdf.fragment.CreateReservationFragment"
+        android:label="fragment_create_reservation"
+        tools:layout="@layout/fragment_create_reservation" >
         <action
-            android:id="@+id/action_craeteReservationFragmant_to_reservationDetails"
+            android:id="@+id/action_CreateReservationFragment_to_reservationDetails"
             app:destination="@id/reservationDetails" />
     </fragment>
     <fragment
@@ -51,5 +51,41 @@
         android:name="com.utechia.tdf.fragment.ReservationFragment"
         android:label="fragment_reservation_details"
         tools:layout="@layout/fragment_reservation_details" />
+    <fragment
+        android:id="@+id/qrCodeFragment"
+        android:name="com.utechia.tdf.fragment.QrCodeFragment"
+        android:label="fragment_qr_code"
+        tools:layout="@layout/fragment_qr_code" />
+    <fragment
+        android:id="@+id/surveySystemFragment"
+        android:name="com.utechia.tdf.fragment.SurveySystemFragment"
+        android:label="fragment_survey_system"
+        tools:layout="@layout/fragment_survey_system" />
+    <fragment
+        android:id="@+id/eventSystemFragment"
+        android:name="com.utechia.tdf.fragment.EventSystemFragment"
+        android:label="fragment_event_system"
+        tools:layout="@layout/fragment_event_system" />
+    <fragment
+        android:id="@+id/ticketSystemFragment"
+        android:name="com.utechia.tdf.fragment.TicketSystemFragment"
+        android:label="fragment_ticket_system"
+        tools:layout="@layout/fragment_ticket_system" >
+        <action
+            android:id="@+id/action_ticketSystemFragment_to_createTicketFragment"
+            app:destination="@id/createTicketFragment" />
+    </fragment>
+
+    <fragment
+        android:id="@+id/calendarFragment"
+        android:name="com.utechia.tdf.fragment.CalendarFragment"
+        android:label="fragment_calendar"
+        tools:layout="@layout/fragment_calendar" />
+
+    <fragment
+        android:id="@+id/createTicketFragment"
+        android:name="com.utechia.tdf.fragment.CreateTicketFragment"
+        android:label="fragment_create_ticket"
+        tools:layout="@layout/fragment_create_ticket" />
 
 </navigation>

@@ -10,7 +10,7 @@
             android:enabled="false"/>
 
         <item
-            android:id="@+id/item1"
+            android:id="@+id/surveySystemFragment"
             android:icon="@drawable/ic_layer"
             android:enabled="true"
             android:checkable="true"
@@ -20,7 +20,7 @@
             android:enabled="false"/>
 
         <item
-            android:id="@+id/item2"
+            android:id="@+id/eventSystemFragment"
             android:icon="@drawable/ic_people"
             android:title="Event System" />
 
@@ -28,7 +28,7 @@
             android:title=""
             android:enabled="false"/>
         <item
-            android:id="@+id/item3"
+            android:id="@+id/ticketSystemFragment"
             android:icon="@drawable/ic_document_normal"
             android:title="Ticket System" />
 
@@ -36,7 +36,7 @@
             android:title=""
             android:enabled="false"/>
         <item
-            android:id="@+id/item4"
+            android:id="@+id/calendarFragment"
             android:icon="@drawable/ic_stickynote"
             android:title="Calendar" />
 
@@ -57,7 +57,7 @@
             android:enabled="false"/>
 
         <item
-            android:id="@+id/item5"
+            android:id="@+id/exit"
             android:icon="@drawable/ic_baseline_power_settings_new_24"
             android:title="Exit" />
 

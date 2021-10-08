@@ -1,6 +1,5 @@
 package com.utechia.tdf.fragment
 
-
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -10,22 +9,21 @@ import android.widget.ImageView
 import android.widget.TextView
 import androidx.drawerlayout.widget.DrawerLayout
 import androidx.fragment.app.Fragment
-import androidx.navigation.fragment.findNavController
 import com.google.android.material.bottomnavigation.BottomNavigationView
 import com.utechia.tdf.R
-import com.utechia.tdf.databinding.FragmentReservationBinding
+import com.utechia.tdf.databinding.FragmentQrCodeBinding
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
-class ReservationFragment : Fragment() {
+class QrCodeFragment : Fragment() {
 
-    private lateinit var binding: FragmentReservationBinding
+    private lateinit var binding: FragmentQrCodeBinding
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
-        binding = FragmentReservationBinding.inflate(inflater, container, false)
+        binding = FragmentQrCodeBinding.inflate(inflater, container, false)
         return binding.root
     }
 
@@ -34,7 +32,6 @@ class ReservationFragment : Fragment() {
 
         val drawerLayout: DrawerLayout = requireActivity().findViewById(R.id.drawer_layout)
         val itemMenu: ImageView = requireActivity().findViewById(R.id.menu)
-        val itemNotification: ImageView = requireActivity().findViewById(R.id.notification)
         val button: ImageButton = requireActivity().findViewById(R.id.customButton)
         val bottomNavigationView: BottomNavigationView = requireActivity().findViewById(R.id.bottom_navigation)
         val back: ImageView = requireActivity().findViewById(R.id.back)
@@ -43,7 +40,6 @@ class ReservationFragment : Fragment() {
         val subTitle: TextView = requireActivity().findViewById(R.id.subTitle)
 
         bottomNavigationView.visibility = View.VISIBLE
-        itemNotification.isEnabled = true
         button.visibility = View.VISIBLE
         itemMenu.visibility = View.VISIBLE
         back.visibility = View.GONE
@@ -52,9 +48,8 @@ class ReservationFragment : Fragment() {
         subTitle.visibility = View.VISIBLE
 
 
-        binding.plus.setOnClickListener {
-            findNavController().navigate(R.id.action_reservationFragment_to_createReservationFragment)
-        }
+
+
 
     }
 

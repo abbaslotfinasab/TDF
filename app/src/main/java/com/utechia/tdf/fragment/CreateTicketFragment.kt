@@ -1,22 +1,23 @@
 package com.utechia.tdf.fragment
+
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
-import com.utechia.tdf.databinding.FragmentCreateReservationFragmantBinding
+import com.utechia.tdf.databinding.FragmentCreateTicketBinding
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
-class CreateReservationFragmant : Fragment() {
+class CreateTicketFragment : Fragment() {
 
-    private lateinit var binding: FragmentCreateReservationFragmantBinding
+    private lateinit var binding: FragmentCreateTicketBinding
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
-        binding = FragmentCreateReservationFragmantBinding.inflate(inflater, container, false)
+        binding = FragmentCreateTicketBinding.inflate(inflater, container, false)
         return binding.root
     }
 

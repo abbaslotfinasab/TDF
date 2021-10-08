@@ -23,59 +23,84 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" >
 
-    <ImageView
-        android:id="@+id/menu"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_gravity="end"
-        android:layout_marginStart="20dp"
-        android:src="@drawable/ic_menu"
-        app:layout_constraintBottom_toBottomOf="@+id/toolbar"
-        app:layout_constraintStart_toStartOf="@+id/toolbar"
-        app:layout_constraintTop_toTopOf="parent" />
-
-        <TextView
-            android:id="@+id/textView"
+        <ImageView
+            android:id="@+id/menu"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="20dp"
-            android:layout_marginBottom="10dp"
+            android:src="@drawable/ic_menu"
+            app:layout_constraintBottom_toBottomOf="@+id/toolbar"
+            app:layout_constraintStart_toStartOf="@+id/toolbar"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <ImageView
+            android:id="@+id/back"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="30dp"
+            android:src="@drawable/ic_back"
+            android:visibility="gone"
+            app:layout_constraintBottom_toBottomOf="@+id/toolbar"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            android:elevation="10dp"/>
+
+        <TextView
+            android:id="@+id/name"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="20dp"
+            android:layout_marginEnd="20dp"
             android:maxLines="1"
             android:text="Taylan Hersek"
             android:textColor="@color/white"
             android:textSize="@dimen/_14ssp"
             android:textStyle="bold"
+            android:visibility="gone"
             app:layout_constraintBottom_toBottomOf="@+id/toolbar"
-            app:layout_constraintStart_toEndOf="@+id/menu"
+            app:layout_constraintEnd_toStartOf="@+id/notification"
+            app:layout_constraintStart_toEndOf="@+id/back"
             app:layout_constraintTop_toTopOf="parent" />
 
         <TextView
+            android:id="@+id/title"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginStart="20dp"
-            android:layout_marginBottom="10dp"
+            android:layout_marginStart="10dp"
+            android:layout_marginBottom="5dp"
+            android:maxLines="1"
+            android:text="Taylan Hersek"
+            android:textColor="@color/white"
+            android:textSize="@dimen/_14ssp"
+            android:textStyle="bold"
+            app:layout_constraintBottom_toTopOf="@+id/subTitle"
+            app:layout_constraintStart_toEndOf="@+id/menu" />
+
+        <TextView
+            android:id="@+id/subTitle"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="10dp"
             android:maxLines="1"
             android:text="Project Manager"
             android:textColor="@color/white"
             android:textSize="@dimen/_10ssp"
-            app:layout_constraintBottom_toBottomOf="@+id/toolbar"
-            app:layout_constraintStart_toEndOf="@+id/menu"
-            app:layout_constraintTop_toBottomOf="@+id/textView" />
+            app:layout_constraintBottom_toBottomOf="@+id/menu"
+            app:layout_constraintStart_toEndOf="@+id/menu" />
 
-    <ImageView
-        android:id="@+id/notification"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_gravity="end"
-        android:layout_marginEnd="20dp"
-        android:src="@drawable/ic_notification_bing"
-        app:layout_constraintBottom_toBottomOf="@+id/toolbar"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        <ImageView
+            android:id="@+id/notification"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="20dp"
+            android:src="@drawable/ic_notification_bing"
+            app:layout_constraintBottom_toBottomOf="@+id/toolbar"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 
-    <fragment
+    <androidx.fragment.app.FragmentContainerView
         android:id="@+id/nav_host_fragment"
         android:name="androidx.navigation.fragment.NavHostFragment"
         android:layout_width="0dp"
@@ -95,7 +120,7 @@
         android:elevation="5dp"
         android:background="@drawable/bottom_navigation"
         app:itemIconTint="@drawable/nav_item"
-        app:labelVisibilityMode="labeled"
+        app:labelVisibilityMode='labeled'
         app:itemTextAppearanceActive="@style/MenuItems"
         app:itemTextAppearanceInactive="@style/MenuItems"
         app:itemTextColor="@drawable/nav_item"
