@@ -7,6 +7,9 @@ import android.widget.ImageButton
 import android.widget.ImageView
 import android.widget.TextView
 import android.widget.Toast
+import androidx.cardview.widget.CardView
+import androidx.constraintlayout.widget.ConstraintLayout
+import androidx.coordinatorlayout.widget.CoordinatorLayout
 import androidx.core.view.GravityCompat
 import androidx.drawerlayout.widget.DrawerLayout
 import androidx.fragment.app.Fragment
@@ -31,7 +34,7 @@ class MainActivity : AppCompatActivity() {
         val itemNotification:ImageView = findViewById(R.id.notification)
         val button:ImageButton = findViewById(R.id.customButton)
         val bottomNavigationView: BottomNavigationView = findViewById(R.id.bottom_navigation)
-        val back: ImageView = findViewById(R.id.back)
+        val back: ConstraintLayout = findViewById(R.id.back)
         val name: TextView = findViewById(R.id.name)
         val title: TextView = findViewById(R.id.title)
         val subTitle: TextView =findViewById(R.id.subTitle)

@@ -6,6 +6,8 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.ImageView
 import android.widget.TextView
+import androidx.cardview.widget.CardView
+import androidx.constraintlayout.widget.ConstraintLayout
 import androidx.fragment.app.Fragment
 import com.google.android.material.bottomnavigation.BottomNavigationView
 import com.utechia.tdf.R
@@ -31,7 +33,7 @@ class SurveySystemFragment : Fragment() {
         val navBar: BottomNavigationView = requireActivity().findViewById(R.id.bottom_navigation)
         val custom: ImageView = requireActivity().findViewById(R.id.customButton)
         val menu: ImageView = requireActivity().findViewById(R.id.menu)
-        val back: ImageView = requireActivity().findViewById(R.id.back)
+        val back: ConstraintLayout = requireActivity().findViewById(R.id.back)
         val name: TextView = requireActivity().findViewById(R.id.name)
         val title: TextView = requireActivity().findViewById(R.id.title)
         val subTitle: TextView = requireActivity().findViewById(R.id.subTitle)

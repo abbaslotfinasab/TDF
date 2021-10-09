@@ -8,6 +8,9 @@ import android.widget.ImageButton
 import android.widget.ImageView
 import android.widget.TextView
 import android.widget.Toast
+import androidx.cardview.widget.CardView
+import androidx.constraintlayout.widget.ConstraintLayout
+import androidx.coordinatorlayout.widget.CoordinatorLayout
 import androidx.fragment.app.Fragment
 import com.google.android.material.bottomnavigation.BottomNavigationView
 import com.utechia.tdf.R
@@ -34,7 +37,7 @@ class NotificationFragment : Fragment() {
         val notificationIcon: ImageView = requireActivity().findViewById(R.id.notification)
         val custom: ImageView = requireActivity().findViewById(R.id.customButton)
         val menu: ImageView = requireActivity().findViewById(R.id.menu)
-        val back: ImageView = requireActivity().findViewById(R.id.back)
+        val back: ConstraintLayout = requireActivity().findViewById(R.id.back)
         val name: TextView = requireActivity().findViewById(R.id.name)
         val title: TextView = requireActivity().findViewById(R.id.title)
         val subTitle: TextView = requireActivity().findViewById(R.id.subTitle)

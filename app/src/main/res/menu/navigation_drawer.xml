@@ -6,10 +6,6 @@
         android:checkableBehavior="single">
 
         <item
-            android:title=""
-            android:enabled="false"/>
-
-        <item
             android:id="@+id/surveySystemFragment"
             android:icon="@drawable/ic_layer"
             android:enabled="true"
@@ -52,9 +48,6 @@
             android:title=""
             android:enabled="false"/>
 
-        <item
-            android:title=""
-            android:enabled="false"/>
 
         <item
             android:id="@+id/exit"

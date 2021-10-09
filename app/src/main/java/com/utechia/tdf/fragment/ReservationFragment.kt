@@ -8,6 +8,8 @@ import android.view.ViewGroup
 import android.widget.ImageButton
 import android.widget.ImageView
 import android.widget.TextView
+import androidx.cardview.widget.CardView
+import androidx.constraintlayout.widget.ConstraintLayout
 import androidx.drawerlayout.widget.DrawerLayout
 import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.findNavController
@@ -37,7 +39,7 @@ class ReservationFragment : Fragment() {
         val itemNotification: ImageView = requireActivity().findViewById(R.id.notification)
         val button: ImageButton = requireActivity().findViewById(R.id.customButton)
         val bottomNavigationView: BottomNavigationView = requireActivity().findViewById(R.id.bottom_navigation)
-        val back: ImageView = requireActivity().findViewById(R.id.back)
+        val back: ConstraintLayout = requireActivity().findViewById(R.id.back)
         val name: TextView = requireActivity().findViewById(R.id.name)
         val title: TextView = requireActivity().findViewById(R.id.title)
         val subTitle: TextView = requireActivity().findViewById(R.id.subTitle)
