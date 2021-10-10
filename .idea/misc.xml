@@ -7,6 +7,7 @@
         <entry key="..\:/Users/Dr Computer/AndroidStudioProjects/TDF/app/src/main/res/drawable/bottom_navigation.xml" value="0.2203125" />
         <entry key="..\:/Users/Dr Computer/AndroidStudioProjects/TDF/app/src/main/res/drawable/bottom_toolbar.xml" value="0.2203125" />
         <entry key="..\:/Users/Dr Computer/AndroidStudioProjects/TDF/app/src/main/res/drawable/button_border.xml" value="0.2203125" />
+        <entry key="..\:/Users/Dr Computer/AndroidStudioProjects/TDF/app/src/main/res/drawable/cancel_button.xml" value="0.2203125" />
         <entry key="..\:/Users/Dr Computer/AndroidStudioProjects/TDF/app/src/main/res/drawable/date.xml" value="0.2203125" />
         <entry key="..\:/Users/Dr Computer/AndroidStudioProjects/TDF/app/src/main/res/drawable/highlight_color.xml" value="0.2203125" />
         <entry key="..\:/Users/Dr Computer/AndroidStudioProjects/TDF/app/src/main/res/drawable/ic_back.xml" value="0.2203125" />
@@ -25,11 +26,13 @@
         <entry key="..\:/Users/Dr Computer/AndroidStudioProjects/TDF/app/src/main/res/drawable/ic_teaboy.xml" value="0.2203125" />
         <entry key="..\:/Users/Dr Computer/AndroidStudioProjects/TDF/app/src/main/res/drawable/nav_item.xml" value="0.2203125" />
         <entry key="..\:/Users/Dr Computer/AndroidStudioProjects/TDF/app/src/main/res/drawable/navigation_drawer.xml" value="0.2203125" />
-        <entry key="..\:/Users/Dr Computer/AndroidStudioProjects/TDF/app/src/main/res/layout/activity_main.xml" value="0.33" />
+        <entry key="..\:/Users/Dr Computer/AndroidStudioProjects/TDF/app/src/main/res/drawable/scan_button.xml" value="0.2203125" />
+        <entry key="..\:/Users/Dr Computer/AndroidStudioProjects/TDF/app/src/main/res/drawable/spinner_item.xml" value="0.2203125" />
+        <entry key="..\:/Users/Dr Computer/AndroidStudioProjects/TDF/app/src/main/res/layout/activity_main.xml" value="0.25" />
         <entry key="..\:/Users/Dr Computer/AndroidStudioProjects/TDF/app/src/main/res/layout/button_custom.xml" value="0.33" />
         <entry key="..\:/Users/Dr Computer/AndroidStudioProjects/TDF/app/src/main/res/layout/fragment_calendar.xml" value="0.1" />
         <entry key="..\:/Users/Dr Computer/AndroidStudioProjects/TDF/app/src/main/res/layout/fragment_craete_reservation_fragmant.xml" value="0.1" />
-        <entry key="..\:/Users/Dr Computer/AndroidStudioProjects/TDF/app/src/main/res/layout/fragment_create_reservation.xml" value="0.18" />
+        <entry key="..\:/Users/Dr Computer/AndroidStudioProjects/TDF/app/src/main/res/layout/fragment_create_reservation.xml" value="0.5" />
         <entry key="..\:/Users/Dr Computer/AndroidStudioProjects/TDF/app/src/main/res/layout/fragment_create_ticeket.xml" value="0.1" />
         <entry key="..\:/Users/Dr Computer/AndroidStudioProjects/TDF/app/src/main/res/layout/fragment_create_ticket.xml" value="0.11548913043478261" />
         <entry key="..\:/Users/Dr Computer/AndroidStudioProjects/TDF/app/src/main/res/layout/fragment_event_system.xml" value="0.1" />

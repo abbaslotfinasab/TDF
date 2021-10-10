@@ -3,6 +3,7 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.AdapterView
 import android.widget.ImageView
 import android.widget.TextView
 import androidx.constraintlayout.widget.ConstraintLayout
@@ -59,12 +60,12 @@ class CreateReservationFragment : Fragment(),CalendarChangesObserver {
         calendar.time = Date()
         currentMonth = calendar[Calendar.MONTH]
 
-
         back.setOnClickListener {
 
             activity?.supportFragmentManager?.popBackStack()
         }
 
+        binding.months.setSelection(currentMonth)
 
         val myCalendarViewManager = object : CalendarViewManager {
             override fun setCalendarViewResourceId(
@@ -94,6 +95,9 @@ class CreateReservationFragment : Fragment(),CalendarChangesObserver {
             }
         }
 
+
+
+
         val myCalendarChangesObserver = object : CalendarChangesObserver {
             // you can override more methods, in this example we need only this one
             override fun whenSelectionChanged(isSelected: Boolean, position: Int, date: Date) {
@@ -114,6 +118,7 @@ class CreateReservationFragment : Fragment(),CalendarChangesObserver {
                 }
             }
         }
+
         val src:SingleRowCalendar = activity?.findViewById(R.id.main_single_row_calendar)!!
         val singleRowCalendar = src.apply {
             calendarViewManager = myCalendarViewManager
@@ -124,42 +129,63 @@ class CreateReservationFragment : Fragment(),CalendarChangesObserver {
             init()
         }
 
-         fun getDatesOfNextMonth(): List<Date> {
-            currentMonth++ // + because we want next month
-            if (currentMonth == 12) {
-                // we will switch to january of next year, when we reach last month of year
-                calendar.set(Calendar.YEAR, calendar[Calendar.YEAR] + 1)
-                currentMonth = 0 // 0 == january
-            }
-            return getDates(mutableListOf())
-        }
 
-        fun getDatesOfPreviousMonth(): List<Date> {
-            currentMonth-- // - because we want previous month
-            if (currentMonth == -1) {
-                // we will switch to december of previous year, when we reach first month of year
-                calendar.set(Calendar.YEAR, calendar[Calendar.YEAR] - 1)
-                currentMonth = 11 // 11 == december
-            }
-            return getDates(mutableListOf())
-        }
+        binding.months.onItemSelectedListener = object : AdapterView.OnItemSelectedListener{
 
-         fun getFutureDatesOfCurrentMonth(): List<Date> {
-            // get all next dates of current month
-            currentMonth = calendar[Calendar.MONTH]
-            return getDates(mutableListOf())
+            override fun onItemSelected(
+                parent: AdapterView<*>?,
+                view: View?,
+                position: Int,
+                id: Long
+            ) {
+
+                currentMonth = position
+               /* singleRowCalendar.setDates(getDates(mutableListOf()))*/
+            }
+
+            override fun onNothingSelected(parent: AdapterView<*>?) {
+            }
+
+
         }
 
     }
 
-    private fun getDates(list: MutableList<Date>): List<Date> {
+ /*   fun getDatesOfNextMonth(): List<Date> {
+        currentMonth++ // + because we want next month
+        if (currentMonth == 12) {
+            // we will switch to january of next year, when we reach last month of year
+            calendar.set(Calendar.YEAR, calendar[Calendar.YEAR] + 1)
+            currentMonth = 0 // 0 == january
+        }
+        return getDates(mutableListOf())
+    }*/
+
+ /*   fun getDatesOfPreviousMonth(): List<Date> {
+        currentMonth-- // - because we want previous month
+        if (currentMonth == -1) {
+            // we will switch to december of previous year, when we reach first month of year
+            calendar.set(Calendar.YEAR, calendar[Calendar.YEAR] - 1)
+            currentMonth = 11 // 11 == december
+        }
+        return getDates(mutableListOf())
+    }
+*/
+   /* fun getFutureDatesOfCurrentMonth(): List<Date> {
+        // get all next dates of current month
+        currentMonth = calendar[Calendar.MONTH]
+        return getDates(mutableListOf())
+    }*/
+
+
+    private fun getDates(list: MutableList<Date>,position:Int): List<Date> {
         // load dates of whole month
-        calendar.set(Calendar.MONTH, currentMonth)
+        calendar.set(Calendar.MONTH, position)
         calendar.set(Calendar.DAY_OF_MONTH, 1)
         list.add(calendar.time)
-        while (currentMonth == calendar[Calendar.MONTH]) {
+        while (position == calendar[Calendar.MONTH]) {
             calendar.add(Calendar.DATE, +1)
-            if (calendar[Calendar.MONTH] == currentMonth)
+            if (calendar[Calendar.MONTH] == position)
                 list.add(calendar.time)
         }
         calendar.add(Calendar.DATE, -1)

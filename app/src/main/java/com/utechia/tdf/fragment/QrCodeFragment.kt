@@ -1,5 +1,8 @@
 package com.utechia.tdf.fragment
 
+import android.graphics.Color
+import android.graphics.drawable.ColorDrawable
+import android.graphics.drawable.Drawable
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -20,6 +23,7 @@ import dagger.hilt.android.AndroidEntryPoint
 class QrCodeFragment : Fragment() {
 
     private lateinit var binding: FragmentQrCodeBinding
+    private var count = 0
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -41,13 +45,47 @@ class QrCodeFragment : Fragment() {
         val title: TextView = requireActivity().findViewById(R.id.title)
         val subTitle: TextView = requireActivity().findViewById(R.id.subTitle)
 
-        bottomNavigationView.visibility = View.VISIBLE
-        button.visibility = View.VISIBLE
-        itemMenu.visibility = View.VISIBLE
-        back.visibility = View.GONE
-        name.visibility = View.GONE
-        title.visibility = View.VISIBLE
-        subTitle.visibility = View.VISIBLE
+        bottomNavigationView.visibility = View.GONE
+        button.visibility = View.GONE
+        itemMenu.visibility = View.GONE
+        back.visibility = View.VISIBLE
+        name.visibility = View.VISIBLE
+        name.text = "Qr Code"
+        title.visibility = View.GONE
+        subTitle.visibility = View.GONE
+
+         back.setOnClickListener {
+
+            activity?.supportFragmentManager?.popBackStack()
+        }
+
+        binding.button.setOnClickListener {
+
+            when (count%2) {
+
+                0-> {
+                    binding.load.visibility = android.view.View.VISIBLE
+                    binding.button.text = "Cancel"
+                    binding.button.apply {
+                        background = resources.getDrawable(R.drawable.cancel_button)
+                        setTextColor(resources.getColor(R.color.black))
+                    }
+
+                }
+                1->{
+                    binding.button.text = "Scan"
+                    binding.load.visibility = View.GONE
+                    binding.button.apply {
+                        background = resources.getDrawable(R.drawable.scan_button)
+                        setTextColor(resources.getColor(R.color.white))
+                    }
+                }
+
+            }
+
+            count += 1
+
+        }
 
 
 

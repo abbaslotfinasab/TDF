@@ -1,6 +1,7 @@
 package com.utechia.tdf.fragment
 
 
+import android.graphics.drawable.ColorDrawable
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -33,6 +34,7 @@ class TeaBoyFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
+        val main: ConstraintLayout = activity?.findViewById(R.id.mainLayout)!!
         val drawerLayout: DrawerLayout = requireActivity().findViewById(R.id.drawer_layout)
         val itemMenu: ImageView = requireActivity().findViewById(R.id.menu)
         val itemNotification: ImageView = requireActivity().findViewById(R.id.notification)
@@ -51,6 +53,8 @@ class TeaBoyFragment : Fragment() {
         name.visibility = View.GONE
         title.visibility = View.VISIBLE
         subTitle.visibility = View.VISIBLE
+
+        main.background = ColorDrawable(resources.getColor(R.color.white))
 
 
     }

@@ -1,5 +1,6 @@
 package com.utechia.tdf.fragment
 
+import android.graphics.drawable.ColorDrawable
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -31,6 +32,7 @@ class TicketSystemFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
+        val main: ConstraintLayout = activity?.findViewById(R.id.mainLayout)!!
         val navBar: BottomNavigationView = requireActivity().findViewById(R.id.bottom_navigation)
         val custom: ImageView = requireActivity().findViewById(R.id.customButton)
         val menu: ImageView = requireActivity().findViewById(R.id.menu)
@@ -46,6 +48,10 @@ class TicketSystemFragment : Fragment() {
         name.text = "Ticket System"
         title.visibility = View.GONE
         subTitle.visibility = View.GONE
+
+
+        main.background = ColorDrawable(resources.getColor(R.color.gray))
+
 
 
         back.setOnClickListener {

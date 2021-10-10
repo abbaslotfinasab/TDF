@@ -6,15 +6,30 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     tools:context="fragment.CreateReservationFragment">
 
+    <Spinner
+        android:id="@+id/months"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="10dp"
+        android:layout_marginEnd="10dp"
+        android:background="@drawable/spinner_item"
+        android:entries="@array/month_array"
+        android:gravity="center"
+        android:overlapAnchor="false"
+        android:paddingEnd="@dimen/_13sdp"
+        android:spinnerMode="dropdown"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
     <com.michalsvec.singlerowcalendar.calendar.SingleRowCalendar
         android:id="@+id/main_single_row_calendar"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="20dp"
+        android:layout_marginTop="10dp"
         app:deselection="false"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/months"
         app:longPress="false"
         app:multiSelection="false" />
 

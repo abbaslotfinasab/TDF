@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="utf-8"?>
+<selector xmlns:android="http://schemas.android.com/apk/res/android">
+<item><layer-list>
+<item><shape>
+
+    <solid android:color="@color/white"/>
+    <stroke android:color="#2C68AF"
+        android:width="2dp"/>
+    <corners android:radius="@dimen/_25sdp"/>
+
+</shape></item>
+    <item
+        android:right="5dp"
+        android:gravity="center_vertical|right"
+        android:drawable="@drawable/expand_icon"/>
+
+</layer-list></item>
+</selector>
