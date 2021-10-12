@@ -18,5 +18,8 @@
         <item name="android:textSize">@dimen/_7ssp</item>
     </style>
 
-    <color name="transparent" />
+    <style name="ProgressBar" parent="Theme.AppCompat.Light">
+        <item name="colorAccent">#557EF2</item>
+    </style>
+
 </resources>

@@ -41,6 +41,15 @@
             android:enabled="false"/>
 
         <item
+            android:id="@+id/permissionFragment"
+            android:icon="@drawable/ic_stickynote"
+            android:title="Permission" />
+
+        <item
+            android:title=""
+            android:enabled="false"/>
+
+        <item
             android:title=""
             android:enabled="false"/>
 

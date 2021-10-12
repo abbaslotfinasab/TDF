@@ -10,7 +10,7 @@
 
 </shape></item>
     <item
-        android:right="5dp"
+        android:right="@dimen/_2sdp"
         android:gravity="center_vertical|right"
         android:drawable="@drawable/expand_icon"/>
 

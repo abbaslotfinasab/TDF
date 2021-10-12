@@ -26,6 +26,9 @@
         <action
             android:id="@+id/action_reservationFragment_to_reservationDetails"
             app:destination="@id/reservationDetails" />
+        <action
+            android:id="@+id/action_reservationFragment_self"
+            app:destination="@id/reservationFragment" />
     </fragment>
     <fragment
         android:id="@+id/profileFragment"
@@ -45,6 +48,15 @@
         <action
             android:id="@+id/action_CreateReservationFragment_to_reservationDetails"
             app:destination="@id/reservationDetails" />
+        <action
+            android:id="@+id/action_createReservationFragment_self"
+            app:destination="@id/createReservationFragment" />
+        <argument
+            android:name="month_id"
+            app:argType="integer" />
+        <argument
+            android:name="day_id"
+            app:argType="integer" />
     </fragment>
     <fragment
         android:id="@+id/reservationDetails"

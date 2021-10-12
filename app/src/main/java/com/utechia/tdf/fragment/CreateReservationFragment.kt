@@ -1,33 +1,48 @@
 package com.utechia.tdf.fragment
+import android.graphics.drawable.ColorDrawable
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.AdapterView
 import android.widget.ImageView
 import android.widget.TextView
+import android.widget.Toast
 import androidx.constraintlayout.widget.ConstraintLayout
 import androidx.fragment.app.Fragment
+import androidx.fragment.app.viewModels
+import androidx.navigation.fragment.findNavController
+import androidx.recyclerview.widget.LinearLayoutManager
 import com.google.android.material.bottomnavigation.BottomNavigationView
-import com.michalsvec.singlerowcalendar.calendar.CalendarChangesObserver
-import com.michalsvec.singlerowcalendar.calendar.CalendarViewManager
-import com.michalsvec.singlerowcalendar.calendar.SingleRowCalendar
-import com.michalsvec.singlerowcalendar.calendar.SingleRowCalendarAdapter
-import com.michalsvec.singlerowcalendar.selection.CalendarSelectionManager
-import com.michalsvec.singlerowcalendar.utils.DateUtils
+import com.utechia.domain.moodel.RoomModel
+import com.utechia.domain.utile.Result
 import com.utechia.tdf.R
+import com.utechia.tdf.adapter.CreateReservationAdapter
 import com.utechia.tdf.databinding.FragmentCreateReservationBinding
+import com.utechia.tdf.utile.ItemDecoration
+import com.utechia.tdf.viewmodel.DayViewModel
+import com.utechia.tdf.viewmodel.RoomViewModel
 import dagger.hilt.android.AndroidEntryPoint
+import java.text.SimpleDateFormat
 import java.util.*
 
 @AndroidEntryPoint
-class CreateReservationFragment : Fragment(),CalendarChangesObserver {
-
-    private val calendar = Calendar.getInstance()
-    private var currentMonth = 0
-
+class CreateReservationFragment : Fragment() {
 
     private lateinit var binding: FragmentCreateReservationBinding
+    private val dayViewModel: DayViewModel by viewModels()
+    private val roomViewModel: RoomViewModel by viewModels()
+    private val roomModel:MutableList<RoomModel> = mutableListOf()
+
+    private var createReservationAdapter: CreateReservationAdapter = CreateReservationAdapter()
+
+    private var sdf = SimpleDateFormat("MM")
+    private val mDate:Date = Date()
+    private var currentMonth = sdf.format(mDate)
+
+    private var _sdf = SimpleDateFormat("dd")
+    private val dDate:Date = Date()
+    private var currentDay = _sdf.format(dDate)
+
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -40,6 +55,12 @@ class CreateReservationFragment : Fragment(),CalendarChangesObserver {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
+        if (arguments != null) {
+            currentMonth = requireArguments().getInt("day_id",currentMonth.toInt()).toString()
+            currentDay = requireArguments().getInt("day_id", currentDay.toInt()).toString()
+        }
+
+        val main: ConstraintLayout = activity?.findViewById(R.id.mainLayout)!!
         val navBar: BottomNavigationView = requireActivity().findViewById(R.id.bottom_navigation)
         val notificationIcon: ImageView = requireActivity().findViewById(R.id.notification)
         val custom: ImageView = requireActivity().findViewById(R.id.customButton)
@@ -57,139 +78,121 @@ class CreateReservationFragment : Fragment(),CalendarChangesObserver {
         title.visibility = View.VISIBLE
         subTitle.visibility = View.VISIBLE
 
-        calendar.time = Date()
-        currentMonth = calendar[Calendar.MONTH]
+        main.background = ColorDrawable(resources.getColor(R.color.white))
+
+        binding.btnConfirm.bringToFront()
 
         back.setOnClickListener {
 
             activity?.supportFragmentManager?.popBackStack()
         }
 
-        binding.months.setSelection(currentMonth)
+    /*    dayViewModel.getDay(10)
+        dayObserver()*/
 
-        val myCalendarViewManager = object : CalendarViewManager {
-            override fun setCalendarViewResourceId(
-                position: Int,
-                date: Date,
-                isSelected: Boolean
-            ): Int {
+        roomViewModel.getRoom(13, 10)
 
-                val cal = Calendar.getInstance()
-                cal.time = date
+        binding.reservationRecyclerView.apply {
+            layoutManager =
+                LinearLayoutManager(requireActivity(), LinearLayoutManager.VERTICAL, false)
 
-                return if (isSelected)
-                    R.layout.item_date_selected
-                else
-                    R.layout.item_date
-            }
-
-            override fun bindDataToCalendarView(
-                holder: SingleRowCalendarAdapter.CalendarViewHolder,
-                date: Date,
-                position: Int,
-                isSelected: Boolean
-            ) {
-                holder.itemView.findViewById<TextView>(R.id.tv_date_calendar_item).text = DateUtils.getDay3LettersName(date)
-                holder.itemView.findViewById<TextView>(R.id.tv_day_calendar_item).text = DateUtils.getDayNumber(date)
-
-            }
+            adapter = createReservationAdapter
+            addItemDecoration(ItemDecoration())
         }
 
+        roomObserver()
+    }
+
+    private fun dayObserver() {
+        dayViewModel.dayModel.observe(viewLifecycleOwner, {
+
+            when (it) {
+                is Result.Success -> {
+                    binding.reservationRecyclerView.visibility = View.VISIBLE
+                    binding.prg.visibility = View.GONE
+                    binding.errorText.visibility = View.GONE
+                    binding.btnRefresh.visibility = View.GONE
+                 /*   createReservationRecyclerViewAdapter.addDay(it.data)*/
+
+                }
+
+                is Result.Loading -> {
+                    binding.reservationRecyclerView.visibility = View.GONE
+                    binding.prg.visibility = View.VISIBLE
+                    binding.errorText.visibility = View.GONE
+                    binding.btnRefresh.visibility = View.GONE
 
 
+                }
 
-        val myCalendarChangesObserver = object : CalendarChangesObserver {
-            // you can override more methods, in this example we need only this one
-            override fun whenSelectionChanged(isSelected: Boolean, position: Int, date: Date) {
-                super.whenSelectionChanged(isSelected, position, date)
+                is Result.Error -> {
+                    binding.reservationRecyclerView.visibility = View.GONE
+                    binding.prg.visibility = View.GONE
+                    binding.errorText.visibility = View.GONE
+                    binding.btnRefresh.visibility = View.GONE
+                    binding.errorText.apply {
+                        visibility = View.VISIBLE
+                        text = it.message
+                    }
+                    binding.btnRefresh.apply {
+                        visibility = View.VISIBLE
+                        setOnClickListener {
+                            findNavController().navigate(R.id.action_createReservationFragment_self)
+                        }
+                    }
+
+
+                }
             }
-        }
+        })
 
-        val mySelectionManager = object : CalendarSelectionManager {
-            override fun canBeItemSelected(position: Int, date: Date): Boolean {
-                // set date to calendar according to position
-                val cal = Calendar.getInstance()
-                cal.time = date
-                //in this example sunday and saturday can't be selected, other item can be selected
-                return when (cal[Calendar.DAY_OF_WEEK]) {
-                   /* Calendar.SATURDAY -> false
-                    Calendar.SUNDAY -> false*/
-                    else -> true
+    }
+
+
+    private fun roomObserver() {
+        roomViewModel.roomModel.observe(viewLifecycleOwner){
+            when (it) {
+                is Result.Success -> {
+                    binding.reservationRecyclerView.visibility = View.VISIBLE
+                    binding.prg.visibility = View.GONE
+                    binding.errorText.visibility = View.GONE
+                    binding.btnRefresh.visibility = View.GONE
+
+                    Toast.makeText(context,it.data[0].name,Toast.LENGTH_SHORT).show()
+                    createReservationAdapter.addData(it.data)
+
+
+                }
+
+                is Result.Loading -> {
+                    binding.reservationRecyclerView.visibility = View.GONE
+                    binding.prg.visibility = View.VISIBLE
+                    binding.errorText.visibility = View.GONE
+                    binding.btnRefresh.visibility = View.GONE
+
+
+                }
+
+                is Result.Error -> {
+                    binding.reservationRecyclerView.visibility = View.GONE
+                    binding.prg.visibility = View.GONE
+                    binding.errorText.visibility = View.GONE
+                    binding.btnRefresh.visibility = View.GONE
+                    binding.errorText.apply {
+                        visibility = View.VISIBLE
+                        text = it.message
+                    }
+                    binding.btnRefresh.apply {
+                        visibility = View.VISIBLE
+                        setOnClickListener {
+                            findNavController().navigate(R.id.action_createReservationFragment_self)
+                        }
+                    }
+
+
                 }
             }
         }
-
-        val src:SingleRowCalendar = activity?.findViewById(R.id.main_single_row_calendar)!!
-        val singleRowCalendar = src.apply {
-            calendarViewManager = myCalendarViewManager
-            calendarChangesObserver = myCalendarChangesObserver
-            calendarSelectionManager = mySelectionManager
-            futureDaysCount = 30
-            includeCurrentDate = true
-            init()
-        }
-
-
-        binding.months.onItemSelectedListener = object : AdapterView.OnItemSelectedListener{
-
-            override fun onItemSelected(
-                parent: AdapterView<*>?,
-                view: View?,
-                position: Int,
-                id: Long
-            ) {
-
-                currentMonth = position
-               /* singleRowCalendar.setDates(getDates(mutableListOf()))*/
-            }
-
-            override fun onNothingSelected(parent: AdapterView<*>?) {
-            }
-
-
-        }
-
     }
-
- /*   fun getDatesOfNextMonth(): List<Date> {
-        currentMonth++ // + because we want next month
-        if (currentMonth == 12) {
-            // we will switch to january of next year, when we reach last month of year
-            calendar.set(Calendar.YEAR, calendar[Calendar.YEAR] + 1)
-            currentMonth = 0 // 0 == january
-        }
-        return getDates(mutableListOf())
-    }*/
-
- /*   fun getDatesOfPreviousMonth(): List<Date> {
-        currentMonth-- // - because we want previous month
-        if (currentMonth == -1) {
-            // we will switch to december of previous year, when we reach first month of year
-            calendar.set(Calendar.YEAR, calendar[Calendar.YEAR] - 1)
-            currentMonth = 11 // 11 == december
-        }
-        return getDates(mutableListOf())
-    }
-*/
-   /* fun getFutureDatesOfCurrentMonth(): List<Date> {
-        // get all next dates of current month
-        currentMonth = calendar[Calendar.MONTH]
-        return getDates(mutableListOf())
-    }*/
-
-
-    private fun getDates(list: MutableList<Date>,position:Int): List<Date> {
-        // load dates of whole month
-        calendar.set(Calendar.MONTH, position)
-        calendar.set(Calendar.DAY_OF_MONTH, 1)
-        list.add(calendar.time)
-        while (position == calendar[Calendar.MONTH]) {
-            calendar.add(Calendar.DATE, +1)
-            if (calendar[Calendar.MONTH] == position)
-                list.add(calendar.time)
-        }
-        calendar.add(Calendar.DATE, -1)
-        return list
-    }
-
 }
+
