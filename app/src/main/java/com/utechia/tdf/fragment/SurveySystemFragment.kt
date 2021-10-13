@@ -42,7 +42,7 @@ class SurveySystemFragment : Fragment() {
         menu.visibility = View.GONE
         back.visibility = View.VISIBLE
         name.visibility = View.VISIBLE
-        name.text = "Survey System"
+        name.text = "Survey"
         title.visibility = View.GONE
         subTitle.visibility = View.GONE
 

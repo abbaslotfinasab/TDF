@@ -3,6 +3,7 @@ package com.utechia.tdf.activity
 import android.graphics.drawable.ColorDrawable
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.os.Handler
 import android.view.View
 import android.widget.ImageButton
 import android.widget.ImageView
@@ -18,6 +19,7 @@ import androidx.navigation.fragment.NavHostFragment
 import androidx.navigation.ui.setupWithNavController
 import com.google.android.material.bottomnavigation.BottomNavigationView
 import com.google.android.material.navigation.NavigationView
+import com.utechia.tdf.fragment.PermissionFragment
 import com.utechia.tdf.R
 import com.utechia.tdf.fragment.*
 import dagger.hilt.android.AndroidEntryPoint
@@ -93,68 +95,102 @@ class MainActivity : AppCompatActivity() {
 
                 R.id.surveySystemFragment -> {
 
-                    val fragment:Fragment = SurveySystemFragment()
-
-                    supportFragmentManager
-                        .beginTransaction()
-                        .addToBackStack(null)
-                        .replace(navHostFragment.id,fragment)
-                        .commit()
-
                     drawerLayout.closeDrawer(GravityCompat.START)
+
+                    Handler().postDelayed({
+
+                        val fragment:Fragment = SurveySystemFragment()
+
+                        supportFragmentManager
+                            .beginTransaction()
+                            .addToBackStack(null)
+                            .replace(navHostFragment.id,fragment)
+                            .commit()
+                    },300)
 
                     true
                 }
                 R.id.eventSystemFragment -> {
 
-                    val fragment:Fragment = EventSystemFragment()
-
-                    supportFragmentManager
-                        .beginTransaction()
-                        .addToBackStack(null)
-                        .replace(navHostFragment.id,fragment)
-                        .commit()
-
                     drawerLayout.closeDrawer(GravityCompat.START)
+
+                    Handler().postDelayed({
+                        val fragment:Fragment = EventSystemFragment()
+
+                        supportFragmentManager
+                            .beginTransaction()
+                            .addToBackStack(null)
+                            .replace(navHostFragment.id,fragment)
+                            .commit()
+                    },300)
+
+
+
 
                     true
                 }
                 R.id.ticketSystemFragment -> {
 
-                    val fragment:Fragment = TicketSystemFragment()
-
-                    supportFragmentManager
-                        .beginTransaction()
-                        .addToBackStack(null)
-                        .replace(navHostFragment.id,fragment)
-                        .commit()
-
                     drawerLayout.closeDrawer(GravityCompat.START)
+
+                    Handler().postDelayed({
+                        val fragment:Fragment = TicketSystemFragment()
+
+                        supportFragmentManager
+                            .beginTransaction()
+                            .addToBackStack(null)
+                            .replace(navHostFragment.id,fragment)
+                            .commit()
+
+                    },300)
+
 
                     true
                 }
 
                 R.id.calendarFragment -> {
 
-                    val fragment:Fragment = CalendarFragment()
+                    drawerLayout.closeDrawer(GravityCompat.START)
 
-                    supportFragmentManager
-                        .beginTransaction()
-                        .addToBackStack(null)
-                        .replace(navHostFragment.id,fragment)
-                        .commit()
+                    Handler().postDelayed({
+                        val fragment:Fragment = CalendarFragment()
+
+                        supportFragmentManager
+                            .beginTransaction()
+                            .addToBackStack(null)
+                            .replace(navHostFragment.id,fragment)
+                            .commit()
+
+                    },300)
+
+                    true
+                }
+
+                R.id.permissionFragment -> {
 
                     drawerLayout.closeDrawer(GravityCompat.START)
+
+                    Handler().postDelayed({
+
+                        val fragment:Fragment = PermissionFragment()
+
+                        supportFragmentManager
+                            .beginTransaction()
+                            .addToBackStack(null)
+                            .replace(navHostFragment.id,fragment)
+                            .commit()
+                    },300)
 
                     true
                 }
                 R.id.exit -> {
 
-
-                    Toast.makeText(this,"Log out",Toast.LENGTH_SHORT).show()
-
-
                     drawerLayout.closeDrawer(GravityCompat.START)
+
+                    Handler().postDelayed({
+                        Toast.makeText(this,"Log out",Toast.LENGTH_SHORT).show()
+                                          },300)
+
 
                     true
                 }

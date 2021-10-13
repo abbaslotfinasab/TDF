@@ -7,13 +7,47 @@ import android.widget.TextView
 import androidx.constraintlayout.widget.ConstraintLayout
 import androidx.core.content.ContextCompat
 import androidx.recyclerview.widget.RecyclerView
-import com.utechia.domain.moodel.DayModel
 import com.utechia.tdf.R
+import java.util.*
+import kotlin.collections.ArrayList
 
-class DatePickerAdapter(private val dayModel: MutableList<DayModel>):RecyclerView.Adapter<RecyclerView.ViewHolder>() {
+class DatePickerAdapter:RecyclerView.Adapter<RecyclerView.ViewHolder>() {
 
-    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): RecyclerView.ViewHolder = ViewHolder( LayoutInflater.from(parent.context)
-        .inflate(R.layout.item_date, parent, false))
+    private var calendar = Calendar.getInstance()
+    private var day:ArrayList<Int> = arrayListOf()
+    private var week:ArrayList<Int> = arrayListOf()
+    private var selected = -1
+
+    var currentMonth: Int = 0
+    var currentDay: Int = 0
+
+
+
+    fun addData(_currentMonth: Int) {
+        day.clear()
+        week.clear()
+        currentMonth = _currentMonth
+        calendar.set(Calendar.MONTH, _currentMonth)
+        val s = calendar.getActualMinimum(Calendar.DAY_OF_MONTH)
+        val e = calendar.getActualMaximum(Calendar.DAY_OF_MONTH)
+
+        for (i in s..e) {
+            calendar.set(Calendar.MONTH, _currentMonth)
+            day.add(i)
+            calendar.set(Calendar.DAY_OF_MONTH, i)
+            week.add(calendar.get(Calendar.DAY_OF_WEEK))
+
+        }
+
+        notifyItemRangeChanged(0, e-1 )
+
+    }
+
+    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): RecyclerView.ViewHolder =
+        ViewHolder(
+            LayoutInflater.from(parent.context)
+                .inflate(R.layout.item_date, parent, false)
+        )
 
     override fun onBindViewHolder(holder: RecyclerView.ViewHolder, position: Int) {
 
@@ -21,7 +55,7 @@ class DatePickerAdapter(private val dayModel: MutableList<DayModel>):RecyclerVie
 
     }
 
-    override fun getItemCount(): Int = dayModel.size
+    override fun getItemCount(): Int = day.size
 
 
     override fun getItemViewType(position: Int): Int = position
@@ -33,26 +67,73 @@ class DatePickerAdapter(private val dayModel: MutableList<DayModel>):RecyclerVie
 
         fun bind0(position: Int) {
 
-            weekTitle.text = dayModel[position].weekDay
-            dayNumber.text = dayModel[position].id.toString()
-
-            if (position % 2 == 0) {
-
-                var count = 0
-                timeLayout.setOnClickListener {
-                    count += 1
-                    if (count % 2 == 1)
-                        it.background =
-                            ContextCompat.getDrawable(itemView.context, R.drawable.ic_day_selected)
-                    else
-                        it.background =
-                            ContextCompat.getDrawable(itemView.context, R.drawable.ic_day)
+            when (week[position]) {
+                1 -> {
+                    weekTitle.text = "Sun"
                 }
 
+                2 -> {
+                    weekTitle.text = "Mon"
+                }
+
+                3 -> {
+                    weekTitle.text = "Tue"
+                }
+
+                4 -> {
+                    weekTitle.text = "Wed"
+                }
+
+                5 -> {
+                    weekTitle.text = "Thu"
+                }
+
+                6 -> {
+                    weekTitle.text = "Fri"
+                }
+
+                7 -> {
+                    weekTitle.text = "Sat"
+                }
+            }
+
+            dayNumber.text = day[position].toString()
+
+            var count = 0
+            timeLayout.setOnClickListener {
+                count += 1
+                if (count % 2 == 1) {
+                    currentDay = position + 1
+
+                    it.background =
+                        ContextCompat.getDrawable(
+                            itemView.context,
+                            R.drawable.ic_day_selected
+                        )
+                    weekTitle.setTextColor(
+                        ContextCompat.getColor(
+                            itemView.context,
+                            R.color.white
+                        )
+                    )
+
+                } else {
+                    currentDay = Calendar.DAY_OF_MONTH
+
+                    it.background =
+                        ContextCompat.getDrawable(itemView.context, R.drawable.ic_day)
+                    weekTitle.setTextColor(
+                        ContextCompat.getColor(
+                            itemView.context,
+                            R.color.black
+                        )
+                    )
+
+                }
 
             }
 
         }
     }
-
 }
+

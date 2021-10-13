@@ -34,6 +34,12 @@ class ReservationFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View {
         binding = FragmentReservationBinding.inflate(inflater, container, false)
+
+        binding.plus.setOnClickListener {
+
+            findNavController().navigate(R.id.action_reservationFragment_to_createReservationFragment)
+        }
+
         return binding.root
     }
 
@@ -60,11 +66,6 @@ class ReservationFragment : Fragment() {
         subTitle.visibility = View.VISIBLE
 
         main.background = ColorDrawable(resources.getColor(R.color.gray))
-
-        binding.plus.setOnClickListener {
-
-            findNavController().navigate(R.id.action_reservationFragment_to_createReservationFragment)
-        }
 
         reservationViewModel.getBooked()
         observerViewModel()

@@ -46,9 +46,6 @@
         android:label="fragment_create_reservation"
         tools:layout="@layout/fragment_create_reservation" >
         <action
-            android:id="@+id/action_CreateReservationFragment_to_reservationDetails"
-            app:destination="@id/reservationDetails" />
-        <action
             android:id="@+id/action_createReservationFragment_self"
             app:destination="@id/createReservationFragment" />
         <argument
@@ -57,12 +54,34 @@
         <argument
             android:name="day_id"
             app:argType="integer" />
+        <action
+            android:id="@+id/action_createReservationFragment_to_reservationDetails"
+            app:destination="@id/reservationDetails" />
     </fragment>
     <fragment
         android:id="@+id/reservationDetails"
-        android:name="com.utechia.tdf.fragment.ReservationFragment"
+        android:name="com.utechia.tdf.fragment.ReservationDetails"
         android:label="fragment_reservation_details"
-        tools:layout="@layout/fragment_reservation_details" />
+        tools:layout="@layout/fragment_reservation_details" >
+        <argument
+            android:name="roomTitle"
+            app:argType="string" />
+        <argument
+            android:name="currentDay"
+            app:argType="integer" />
+        <argument
+            android:name="currentMonth"
+            app:argType="integer" />
+        <argument
+            android:name="imageRoom"
+            app:argType="string" />
+        <argument
+            android:name="time"
+            app:argType="integer" />
+        <argument
+            android:name="duration"
+            app:argType="integer" />
+    </fragment>
     <fragment
         android:id="@+id/qrCodeFragment"
         android:name="com.utechia.tdf.fragment.QrCodeFragment"
@@ -99,5 +118,10 @@
         android:name="com.utechia.tdf.fragment.CreateTicketFragment"
         android:label="fragment_create_ticket"
         tools:layout="@layout/fragment_create_ticket" />
+    <fragment
+        android:id="@+id/permissionFragment"
+        android:name="com.utechia.tdf.fragment.PermissionFragment"
+        android:label="fragment_permission"
+        tools:layout="@layout/fragment_permission" />
 
 </navigation>

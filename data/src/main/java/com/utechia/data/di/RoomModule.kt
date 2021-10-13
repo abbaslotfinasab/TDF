@@ -33,8 +33,4 @@ class RoomModule {
     @Provides
     fun provideBandDao(db: AppDatabase) = db.reservationDao()
 
-    @Singleton
-    @Provides
-    fun provideDayDao(db: AppDatabase) = db.dayDao()
-
 }

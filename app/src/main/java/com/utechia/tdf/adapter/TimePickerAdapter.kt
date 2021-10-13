@@ -7,15 +7,21 @@ import android.widget.TextView
 import androidx.constraintlayout.widget.ConstraintLayout
 import androidx.core.content.ContextCompat
 import androidx.recyclerview.widget.RecyclerView
+import com.utechia.domain.moodel.RoomModel
 import com.utechia.tdf.R
 import java.text.SimpleDateFormat
 import java.util.*
 
-class TimePickerAdapter:RecyclerView.Adapter<RecyclerView.ViewHolder>() {
+class TimePickerAdapter(private val roomModel: RoomModel):RecyclerView.Adapter<RecyclerView.ViewHolder>() {
 
     private val timeList:MutableList<String> = mutableListOf()
     private val sdf:SimpleDateFormat = SimpleDateFormat("HH:mm")
     private val calendar:Calendar = Calendar.getInstance()
+
+    var roomTitle = ""
+    var imageRoom = ""
+    var time = 0
+    var duration = 0
 
     init {
         getTime()
@@ -61,8 +67,16 @@ class TimePickerAdapter:RecyclerView.Adapter<RecyclerView.ViewHolder>() {
             var count = 0
             timeLayout.setOnClickListener{
                 count += 1
-                if (count %2 == 1)
-                it.background = ContextCompat.getDrawable(itemView.context,R.drawable.ic_timeselected)
+                if (count %2 == 1) {
+                    it.background =
+                        ContextCompat.getDrawable(itemView.context, R.drawable.ic_timeselected)
+                    time = position
+                    roomTitle = roomModel.name.toString()
+                    imageRoom = roomModel.image.toString()
+                    duration = 3
+                }
+
+
                 else
                     it.background = ContextCompat.getDrawable(itemView.context,R.drawable.ic_time)
 

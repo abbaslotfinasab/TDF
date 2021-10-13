@@ -5,12 +5,13 @@
         android:id="@+id/group1"
         android:checkableBehavior="single">
 
+
         <item
-            android:id="@+id/surveySystemFragment"
-            android:icon="@drawable/ic_layer"
-            android:enabled="true"
-            android:checkable="true"
-            android:title="Survey System"/>
+            android:id="@+id/calendarFragment"
+            android:icon="@drawable/ic_stickynote"
+            android:title="Calendar" />
+
+
         <item
             android:title=""
             android:enabled="false"/>
@@ -18,7 +19,18 @@
         <item
             android:id="@+id/eventSystemFragment"
             android:icon="@drawable/ic_people"
-            android:title="Event System" />
+            android:title="Events" />
+
+        <item
+            android:title=""
+            android:enabled="false"/>
+
+        <item
+            android:id="@+id/surveySystemFragment"
+            android:icon="@drawable/ic_layer"
+            android:enabled="true"
+            android:checkable="true"
+            android:title="Surveys"/>
 
         <item
             android:title=""
@@ -26,15 +38,7 @@
         <item
             android:id="@+id/ticketSystemFragment"
             android:icon="@drawable/ic_document_normal"
-            android:title="Ticket System" />
-
-        <item
-            android:title=""
-            android:enabled="false"/>
-        <item
-            android:id="@+id/calendarFragment"
-            android:icon="@drawable/ic_stickynote"
-            android:title="Calendar" />
+            android:title="Support Ticket" />
 
         <item
             android:title=""
@@ -43,7 +47,7 @@
         <item
             android:id="@+id/permissionFragment"
             android:icon="@drawable/ic_stickynote"
-            android:title="Permission" />
+            android:title="Request Permission" />
 
         <item
             android:title=""

@@ -1,38 +1,26 @@
 package com.utechia.tdf.adapter
 
+import android.os.Handler
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.*
-import androidx.core.os.bundleOf
-import androidx.navigation.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
-import com.utechia.domain.moodel.DayModel
 import com.utechia.domain.moodel.RoomModel
 import com.utechia.tdf.R
 import java.util.*
 
 class CreateReservationAdapter: RecyclerView.Adapter<RecyclerView.ViewHolder>() {
 
-    private val dayModel:MutableList<DayModel> = mutableListOf()
-    private val roomModel: MutableList<RoomModel> = arrayListOf()
+    private val roomModel: MutableList<RoomModel> = mutableListOf()
     private val calendar = Calendar.getInstance()
-
-
-
-    /*fun addDay(_dayModel:MutableList<DayModel>){
-
-        dayModel.clear()
-        dayModel.addAll(_dayModel)
-
-    }*/
 
     fun addData(data: MutableList<RoomModel>){
         roomModel.clear()
         roomModel.addAll(data)
-        notifyItemRangeChanged(1,roomModel.size-1)
+        notifyItemRangeChanged(0,roomModel.size-1)
     }
 
     override fun getItemCount(): Int{
@@ -74,7 +62,7 @@ class CreateReservationAdapter: RecyclerView.Adapter<RecyclerView.ViewHolder>() 
 
             0 -> {
 
-                (holder as ViewHolder0)
+                (holder as ViewHolder0).bind0()
             }
 
             else -> {
@@ -88,10 +76,18 @@ class CreateReservationAdapter: RecyclerView.Adapter<RecyclerView.ViewHolder>() 
 
     inner class ViewHolder0(itemView: View) : RecyclerView.ViewHolder(itemView){
 
-      /*  private val spinner:Spinner = itemView.findViewById(R.id.months)
+        private val spinner:Spinner = itemView.findViewById(R.id.months)
         private val mothRecycler:RecyclerView = itemView.findViewById(R.id.mothRecyclerView)
+        private val mAdapter:DatePickerAdapter = DatePickerAdapter()
 
-        fun bind0(position: Int){
+        fun bind0(){
+
+            mothRecycler.apply {
+                layoutManager = LinearLayoutManager(itemView.context,LinearLayoutManager.HORIZONTAL,false)
+                adapter = mAdapter
+
+            }
+
             spinner.onItemSelectedListener = object :AdapterView.OnItemSelectedListener{
 
                 override fun onItemSelected(
@@ -100,9 +96,17 @@ class CreateReservationAdapter: RecyclerView.Adapter<RecyclerView.ViewHolder>() 
                     position: Int,
                     id: Long
                 ) {
-                    val bundle = bundleOf("" to position)
 
-                    itemView.findNavController().navigate(R.id.action_createReservationFragment_self,bundle)
+
+                    mothRecycler.smoothScrollToPosition(0)
+
+                    Handler().postDelayed({
+                        mAdapter.addData(position)
+                    },350)
+
+
+
+                   /* itemView.findNavController().navigate(R.id.action_createReservationFragment_self,bundle)*/
                 }
 
                 override fun onNothingSelected(parent: AdapterView<*>?) {
@@ -111,18 +115,8 @@ class CreateReservationAdapter: RecyclerView.Adapter<RecyclerView.ViewHolder>() 
 
             }
 
-            mothRecycler.apply {
-
-                adapter = DatePickerAdapter(dayModel)
-                layoutManager = LinearLayoutManager(itemView.context,LinearLayoutManager.HORIZONTAL,false)
-
-            }
-
         }
 
-
-
-*/
     }
 
 
@@ -148,7 +142,7 @@ class CreateReservationAdapter: RecyclerView.Adapter<RecyclerView.ViewHolder>() 
                 .into(roomImage)
 
             recyclerView.apply {
-                adapter = TimePickerAdapter()
+                adapter = TimePickerAdapter(roomModel[position-1])
                 layoutManager = LinearLayoutManager(itemView.context,LinearLayoutManager.HORIZONTAL,false)
             }
 

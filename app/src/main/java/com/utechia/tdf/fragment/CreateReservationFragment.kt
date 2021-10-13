@@ -6,8 +6,8 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.ImageView
 import android.widget.TextView
-import android.widget.Toast
 import androidx.constraintlayout.widget.ConstraintLayout
+import androidx.core.os.bundleOf
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
@@ -17,9 +17,10 @@ import com.utechia.domain.moodel.RoomModel
 import com.utechia.domain.utile.Result
 import com.utechia.tdf.R
 import com.utechia.tdf.adapter.CreateReservationAdapter
+import com.utechia.tdf.adapter.DatePickerAdapter
+import com.utechia.tdf.adapter.TimePickerAdapter
 import com.utechia.tdf.databinding.FragmentCreateReservationBinding
 import com.utechia.tdf.utile.ItemDecoration
-import com.utechia.tdf.viewmodel.DayViewModel
 import com.utechia.tdf.viewmodel.RoomViewModel
 import dagger.hilt.android.AndroidEntryPoint
 import java.text.SimpleDateFormat
@@ -29,11 +30,11 @@ import java.util.*
 class CreateReservationFragment : Fragment() {
 
     private lateinit var binding: FragmentCreateReservationBinding
-    private val dayViewModel: DayViewModel by viewModels()
     private val roomViewModel: RoomViewModel by viewModels()
-    private val roomModel:MutableList<RoomModel> = mutableListOf()
 
     private var createReservationAdapter: CreateReservationAdapter = CreateReservationAdapter()
+    private var datePickerAdapter:DatePickerAdapter = DatePickerAdapter()
+    private lateinit var timePickerAdapter:TimePickerAdapter
 
     private var sdf = SimpleDateFormat("MM")
     private val mDate:Date = Date()
@@ -83,12 +84,8 @@ class CreateReservationFragment : Fragment() {
         binding.btnConfirm.bringToFront()
 
         back.setOnClickListener {
-
-            activity?.supportFragmentManager?.popBackStack()
+            findNavController().popBackStack()
         }
-
-    /*    dayViewModel.getDay(10)
-        dayObserver()*/
 
         roomViewModel.getRoom(13, 10)
 
@@ -100,54 +97,18 @@ class CreateReservationFragment : Fragment() {
             addItemDecoration(ItemDecoration())
         }
 
+        binding.btnConfirm.setOnClickListener {
+
+            val bundle = bundleOf("currentDay" to datePickerAdapter.currentDay,
+                "currentMonth" to datePickerAdapter.currentMonth,
+            "roomTitle" to timePickerAdapter.roomTitle,"time" to timePickerAdapter.time,"imageRoom" to timePickerAdapter.imageRoom, "duration" to timePickerAdapter.duration)
+
+            findNavController().navigate(R.id.action_createReservationFragment_to_reservationDetails,bundle)
+
+        }
+
         roomObserver()
     }
-
-    private fun dayObserver() {
-        dayViewModel.dayModel.observe(viewLifecycleOwner, {
-
-            when (it) {
-                is Result.Success -> {
-                    binding.reservationRecyclerView.visibility = View.VISIBLE
-                    binding.prg.visibility = View.GONE
-                    binding.errorText.visibility = View.GONE
-                    binding.btnRefresh.visibility = View.GONE
-                 /*   createReservationRecyclerViewAdapter.addDay(it.data)*/
-
-                }
-
-                is Result.Loading -> {
-                    binding.reservationRecyclerView.visibility = View.GONE
-                    binding.prg.visibility = View.VISIBLE
-                    binding.errorText.visibility = View.GONE
-                    binding.btnRefresh.visibility = View.GONE
-
-
-                }
-
-                is Result.Error -> {
-                    binding.reservationRecyclerView.visibility = View.GONE
-                    binding.prg.visibility = View.GONE
-                    binding.errorText.visibility = View.GONE
-                    binding.btnRefresh.visibility = View.GONE
-                    binding.errorText.apply {
-                        visibility = View.VISIBLE
-                        text = it.message
-                    }
-                    binding.btnRefresh.apply {
-                        visibility = View.VISIBLE
-                        setOnClickListener {
-                            findNavController().navigate(R.id.action_createReservationFragment_self)
-                        }
-                    }
-
-
-                }
-            }
-        })
-
-    }
-
 
     private fun roomObserver() {
         roomViewModel.roomModel.observe(viewLifecycleOwner){
@@ -157,9 +118,8 @@ class CreateReservationFragment : Fragment() {
                     binding.prg.visibility = View.GONE
                     binding.errorText.visibility = View.GONE
                     binding.btnRefresh.visibility = View.GONE
-
-                    Toast.makeText(context,it.data[0].name,Toast.LENGTH_SHORT).show()
                     createReservationAdapter.addData(it.data)
+                    timePickerAdapter = TimePickerAdapter(it.data[0])
 
 
                 }

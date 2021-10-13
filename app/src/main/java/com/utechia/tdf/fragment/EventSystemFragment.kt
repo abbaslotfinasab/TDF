@@ -44,7 +44,7 @@ class EventSystemFragment : Fragment() {
         menu.visibility = View.GONE
         back.visibility = View.VISIBLE
         name.visibility = View.VISIBLE
-        name.text = "Event System"
+        name.text = "Event"
         title.visibility = View.GONE
         subTitle.visibility = View.GONE
 
