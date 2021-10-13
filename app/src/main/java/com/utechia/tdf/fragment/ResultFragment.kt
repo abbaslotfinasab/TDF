@@ -1,36 +1,48 @@
 package com.utechia.tdf.fragment
 
+import android.graphics.Color
 import android.graphics.drawable.ColorDrawable
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.view.Window
+import android.widget.ImageButton
 import android.widget.ImageView
 import android.widget.TextView
+import android.widget.Toast
+import androidx.cardview.widget.CardView
 import androidx.constraintlayout.widget.ConstraintLayout
+import androidx.coordinatorlayout.widget.CoordinatorLayout
+import androidx.fragment.app.DialogFragment
 import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.findNavController
 import com.google.android.material.bottomnavigation.BottomNavigationView
 import com.utechia.tdf.R
-import com.utechia.tdf.databinding.FragmentReservationDetailsBinding
+import com.utechia.tdf.databinding.FragmentNotificationBinding
+import com.utechia.tdf.databinding.FragmentResultBinding
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
-class ReservationDetails : Fragment() {
+class ResultFragment : DialogFragment() {
 
-    private lateinit var binding: FragmentReservationDetailsBinding
+    private lateinit var binding: FragmentResultBinding
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
-        binding = FragmentReservationDetailsBinding.inflate(inflater, container, false)
+        binding = FragmentResultBinding.inflate(inflater, container, false)
+
+        if(dialog !=null && dialog?.window !=null){
+            dialog?.window?.setBackgroundDrawable(ColorDrawable(Color.TRANSPARENT))
+            dialog?.window?.requestFeature(Window.FEATURE_NO_TITLE)
+        }
         return binding.root
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-
         val main: ConstraintLayout = activity?.findViewById(R.id.mainLayout)!!
         val navBar: BottomNavigationView = requireActivity().findViewById(R.id.bottom_navigation)
         val notificationIcon: ImageView = requireActivity().findViewById(R.id.notification)
@@ -51,19 +63,15 @@ class ReservationDetails : Fragment() {
 
         main.background = ColorDrawable(resources.getColor(R.color.white))
 
-
-        back.setOnClickListener {
-            findNavController().popBackStack()
+        dialog?.setOnDismissListener {
+            findNavController().navigate(R.id.action_resultFragment_to_reservationFragment)
         }
-
-
 
         binding.btnConfirm.setOnClickListener {
 
-            findNavController().navigate(R.id.action_reservationDetails_to_resultFragment)
+            findNavController().navigate(R.id.action_resultFragment_to_reservationFragment)
 
         }
-
 
     }
 

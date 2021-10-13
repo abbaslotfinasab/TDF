@@ -38,11 +38,11 @@ class CreateReservationFragment : Fragment() {
 
     private var sdf = SimpleDateFormat("MM")
     private val mDate:Date = Date()
-    private var currentMonth = sdf.format(mDate)
+    private var currentMonth = sdf.format(mDate).toInt()
 
     private var _sdf = SimpleDateFormat("dd")
     private val dDate:Date = Date()
-    private var currentDay = _sdf.format(dDate)
+    private var currentDay = _sdf.format(dDate).toInt()
 
 
     override fun onCreateView(
@@ -57,8 +57,8 @@ class CreateReservationFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
 
         if (arguments != null) {
-            currentMonth = requireArguments().getInt("day_id",currentMonth.toInt()).toString()
-            currentDay = requireArguments().getInt("day_id", currentDay.toInt()).toString()
+            currentMonth = requireArguments().getInt("day_id",currentMonth)
+            currentDay = requireArguments().getInt("day_id", currentDay)
         }
 
         val main: ConstraintLayout = activity?.findViewById(R.id.mainLayout)!!
@@ -87,7 +87,7 @@ class CreateReservationFragment : Fragment() {
             findNavController().popBackStack()
         }
 
-        roomViewModel.getRoom(13, 10)
+        roomViewModel.getRoom(currentDay, currentMonth)
 
         binding.reservationRecyclerView.apply {
             layoutManager =
@@ -100,7 +100,7 @@ class CreateReservationFragment : Fragment() {
         binding.btnConfirm.setOnClickListener {
 
             val bundle = bundleOf("currentDay" to datePickerAdapter.currentDay,
-                "currentMonth" to datePickerAdapter.currentMonth,
+                "currentMonth" to createReservationAdapter.currentMonth,
             "roomTitle" to timePickerAdapter.roomTitle,"time" to timePickerAdapter.time,"imageRoom" to timePickerAdapter.imageRoom, "duration" to timePickerAdapter.duration)
 
             findNavController().navigate(R.id.action_createReservationFragment_to_reservationDetails,bundle)

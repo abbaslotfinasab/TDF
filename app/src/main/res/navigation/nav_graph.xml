@@ -81,6 +81,9 @@
         <argument
             android:name="duration"
             app:argType="integer" />
+        <action
+            android:id="@+id/action_reservationDetails_to_resultFragment"
+            app:destination="@id/resultFragment" />
     </fragment>
     <fragment
         android:id="@+id/qrCodeFragment"
@@ -123,5 +126,14 @@
         android:name="com.utechia.tdf.fragment.PermissionFragment"
         android:label="fragment_permission"
         tools:layout="@layout/fragment_permission" />
+    <dialog
+        android:id="@+id/resultFragment"
+        android:name="com.utechia.tdf.fragment.ResultFragment"
+        android:label="fragment_result"
+        tools:layout="@layout/fragment_result" >
+        <action
+            android:id="@+id/action_resultFragment_to_reservationFragment"
+            app:destination="@id/reservationFragment" />
+    </dialog>
 
 </navigation>

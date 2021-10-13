@@ -5,6 +5,7 @@
       <map>
         <entry key="..\:/Users/Dr Computer/AndroidStudioProjects/TDF/app/src/main/res/drawable/back_booked.xml" value="0.2203125" />
         <entry key="..\:/Users/Dr Computer/AndroidStudioProjects/TDF/app/src/main/res/drawable/banner.xml" value="0.2203125" />
+        <entry key="..\:/Users/Dr Computer/AndroidStudioProjects/TDF/app/src/main/res/drawable/border.xml" value="0.2203125" />
         <entry key="..\:/Users/Dr Computer/AndroidStudioProjects/TDF/app/src/main/res/drawable/bottom_navigation.xml" value="0.2203125" />
         <entry key="..\:/Users/Dr Computer/AndroidStudioProjects/TDF/app/src/main/res/drawable/bottom_toolbar.xml" value="0.2203125" />
         <entry key="..\:/Users/Dr Computer/AndroidStudioProjects/TDF/app/src/main/res/drawable/button_border.xml" value="0.2203125" />
@@ -13,12 +14,17 @@
         <entry key="..\:/Users/Dr Computer/AndroidStudioProjects/TDF/app/src/main/res/drawable/highlight_color.xml" value="0.2203125" />
         <entry key="..\:/Users/Dr Computer/AndroidStudioProjects/TDF/app/src/main/res/drawable/ic_back.xml" value="0.2203125" />
         <entry key="..\:/Users/Dr Computer/AndroidStudioProjects/TDF/app/src/main/res/drawable/ic_baseline_add_24.xml" value="0.2203125" />
+        <entry key="..\:/Users/Dr Computer/AndroidStudioProjects/TDF/app/src/main/res/drawable/ic_baseline_person_24.xml" value="0.2203125" />
         <entry key="..\:/Users/Dr Computer/AndroidStudioProjects/TDF/app/src/main/res/drawable/ic_baseline_power_settings_new_24.xml" value="0.2203125" />
+        <entry key="..\:/Users/Dr Computer/AndroidStudioProjects/TDF/app/src/main/res/drawable/ic_border.xml" value="0.2203125" />
+        <entry key="..\:/Users/Dr Computer/AndroidStudioProjects/TDF/app/src/main/res/drawable/ic_clock.xml" value="0.2203125" />
         <entry key="..\:/Users/Dr Computer/AndroidStudioProjects/TDF/app/src/main/res/drawable/ic_day.xml" value="0.2203125" />
         <entry key="..\:/Users/Dr Computer/AndroidStudioProjects/TDF/app/src/main/res/drawable/ic_ellipse_30.xml" value="0.2203125" />
         <entry key="..\:/Users/Dr Computer/AndroidStudioProjects/TDF/app/src/main/res/drawable/ic_group_20337.xml" value="0.2203125" />
         <entry key="..\:/Users/Dr Computer/AndroidStudioProjects/TDF/app/src/main/res/drawable/ic_home.xml" value="0.2203125" />
+        <entry key="..\:/Users/Dr Computer/AndroidStudioProjects/TDF/app/src/main/res/drawable/ic_icon_back.xml" value="0.2203125" />
         <entry key="..\:/Users/Dr Computer/AndroidStudioProjects/TDF/app/src/main/res/drawable/ic_layer.xml" value="0.2203125" />
+        <entry key="..\:/Users/Dr Computer/AndroidStudioProjects/TDF/app/src/main/res/drawable/ic_load.xml" value="0.2203125" />
         <entry key="..\:/Users/Dr Computer/AndroidStudioProjects/TDF/app/src/main/res/drawable/ic_menu.xml" value="0.2203125" />
         <entry key="..\:/Users/Dr Computer/AndroidStudioProjects/TDF/app/src/main/res/drawable/ic_notification_bing.xml" value="0.2203125" />
         <entry key="..\:/Users/Dr Computer/AndroidStudioProjects/TDF/app/src/main/res/drawable/ic_profile.xml" value="0.2203125" />
@@ -34,6 +40,7 @@
         <entry key="..\:/Users/Dr Computer/AndroidStudioProjects/TDF/app/src/main/res/drawable/navigation_drawer.xml" value="0.2203125" />
         <entry key="..\:/Users/Dr Computer/AndroidStudioProjects/TDF/app/src/main/res/drawable/refresh_button.xml" value="0.2203125" />
         <entry key="..\:/Users/Dr Computer/AndroidStudioProjects/TDF/app/src/main/res/drawable/scan_button.xml" value="0.2203125" />
+        <entry key="..\:/Users/Dr Computer/AndroidStudioProjects/TDF/app/src/main/res/drawable/spinner_back.xml" value="0.2203125" />
         <entry key="..\:/Users/Dr Computer/AndroidStudioProjects/TDF/app/src/main/res/drawable/spinner_item.xml" value="0.2203125" />
         <entry key="..\:/Users/Dr Computer/AndroidStudioProjects/TDF/app/src/main/res/layout/activity_main.xml" value="0.25" />
         <entry key="..\:/Users/Dr Computer/AndroidStudioProjects/TDF/app/src/main/res/layout/button_custom.xml" value="0.33" />
@@ -47,8 +54,9 @@
         <entry key="..\:/Users/Dr Computer/AndroidStudioProjects/TDF/app/src/main/res/layout/fragment_notification.xml" value="0.1" />
         <entry key="..\:/Users/Dr Computer/AndroidStudioProjects/TDF/app/src/main/res/layout/fragment_permission.xml" value="0.1" />
         <entry key="..\:/Users/Dr Computer/AndroidStudioProjects/TDF/app/src/main/res/layout/fragment_qr_code.xml" value="0.1" />
-        <entry key="..\:/Users/Dr Computer/AndroidStudioProjects/TDF/app/src/main/res/layout/fragment_reservation.xml" value="0.33" />
-        <entry key="..\:/Users/Dr Computer/AndroidStudioProjects/TDF/app/src/main/res/layout/fragment_reservation_details.xml" value="0.1" />
+        <entry key="..\:/Users/Dr Computer/AndroidStudioProjects/TDF/app/src/main/res/layout/fragment_reservation.xml" value="0.22" />
+        <entry key="..\:/Users/Dr Computer/AndroidStudioProjects/TDF/app/src/main/res/layout/fragment_reservation_details.xml" value="0.33" />
+        <entry key="..\:/Users/Dr Computer/AndroidStudioProjects/TDF/app/src/main/res/layout/fragment_result.xml" value="0.15" />
         <entry key="..\:/Users/Dr Computer/AndroidStudioProjects/TDF/app/src/main/res/layout/fragment_survey_system.xml" value="0.1" />
         <entry key="..\:/Users/Dr Computer/AndroidStudioProjects/TDF/app/src/main/res/layout/fragment_ticket_system.xml" value="0.18" />
         <entry key="..\:/Users/Dr Computer/AndroidStudioProjects/TDF/app/src/main/res/layout/header_navigation_drawer.xml" value="0.25" />

@@ -8,6 +8,7 @@ import androidx.constraintlayout.widget.ConstraintLayout
 import androidx.core.content.ContextCompat
 import androidx.recyclerview.widget.RecyclerView
 import com.utechia.tdf.R
+import java.text.SimpleDateFormat
 import java.util.*
 import kotlin.collections.ArrayList
 
@@ -18,8 +19,15 @@ class DatePickerAdapter:RecyclerView.Adapter<RecyclerView.ViewHolder>() {
     private var week:ArrayList<Int> = arrayListOf()
     private var selected = -1
 
-    var currentMonth: Int = 0
-    var currentDay: Int = 0
+    private var sdf = SimpleDateFormat("MM")
+    private val mDate:Date = Date()
+    private val mCurrentMonth = sdf.format(mDate).toInt()
+    var currentMonth = sdf.format(mDate).toInt()
+
+    private var _sdf = SimpleDateFormat("dd")
+    private val dDate:Date = Date()
+    private val mCurrentDay = _sdf.format(dDate).toInt()
+    var currentDay = _sdf.format(dDate).toInt()
 
 
 
@@ -65,7 +73,22 @@ class DatePickerAdapter:RecyclerView.Adapter<RecyclerView.ViewHolder>() {
         private val dayNumber: TextView = itemView.findViewById(R.id.dateNumber)
         private val timeLayout: ConstraintLayout = itemView.findViewById(R.id.backDate)
 
+        var count = 0
+
         fun bind0(position: Int) {
+
+
+
+            if (position == mCurrentDay-1 && currentMonth==mCurrentMonth-1){
+                count+1
+             select()
+            }
+            else{
+              unselect()
+
+            }
+
+
 
             when (week[position]) {
                 1 -> {
@@ -99,39 +122,45 @@ class DatePickerAdapter:RecyclerView.Adapter<RecyclerView.ViewHolder>() {
 
             dayNumber.text = day[position].toString()
 
-            var count = 0
             timeLayout.setOnClickListener {
                 count += 1
                 if (count % 2 == 1) {
                     currentDay = position + 1
 
-                    it.background =
-                        ContextCompat.getDrawable(
-                            itemView.context,
-                            R.drawable.ic_day_selected
-                        )
-                    weekTitle.setTextColor(
-                        ContextCompat.getColor(
-                            itemView.context,
-                            R.color.white
-                        )
-                    )
+                select()
 
                 } else {
-                    currentDay = Calendar.DAY_OF_MONTH
-
-                    it.background =
-                        ContextCompat.getDrawable(itemView.context, R.drawable.ic_day)
-                    weekTitle.setTextColor(
-                        ContextCompat.getColor(
-                            itemView.context,
-                            R.color.black
-                        )
-                    )
-
+                 unselect()
                 }
 
             }
+
+        }
+
+        private fun select(){
+            timeLayout.background =
+                ContextCompat.getDrawable(
+                    itemView.context,
+                    R.drawable.ic_day_selected
+                )
+            weekTitle.setTextColor(
+                ContextCompat.getColor(
+                    itemView.context,
+                    R.color.white
+                )
+            )
+
+        }
+
+        private fun unselect(){
+            timeLayout.background =
+                ContextCompat.getDrawable(itemView.context, R.drawable.ic_day)
+            weekTitle.setTextColor(
+                ContextCompat.getColor(
+                    itemView.context,
+                    R.color.black
+                )
+            )
 
         }
     }

@@ -10,12 +10,22 @@ import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.utechia.domain.moodel.RoomModel
 import com.utechia.tdf.R
+import java.text.SimpleDateFormat
 import java.util.*
 
 class CreateReservationAdapter: RecyclerView.Adapter<RecyclerView.ViewHolder>() {
 
     private val roomModel: MutableList<RoomModel> = mutableListOf()
-    private val calendar = Calendar.getInstance()
+
+    private var sdf = SimpleDateFormat("MM")
+    private val mDate:Date = Date()
+    private val mCurrent = sdf.format(mDate).toInt()-1
+    var currentMonth = sdf.format(mDate).toInt()-1
+
+    private var _sdf = SimpleDateFormat("dd")
+    private val dDate:Date = Date()
+    var currentDay = _sdf.format(dDate).toInt()-1
+
 
     fun addData(data: MutableList<RoomModel>){
         roomModel.clear()
@@ -85,8 +95,11 @@ class CreateReservationAdapter: RecyclerView.Adapter<RecyclerView.ViewHolder>() 
             mothRecycler.apply {
                 layoutManager = LinearLayoutManager(itemView.context,LinearLayoutManager.HORIZONTAL,false)
                 adapter = mAdapter
+                mAdapter.addData(currentMonth)
 
             }
+
+            spinner.setSelection(currentMonth)
 
             spinner.onItemSelectedListener = object :AdapterView.OnItemSelectedListener{
 
@@ -98,11 +111,19 @@ class CreateReservationAdapter: RecyclerView.Adapter<RecyclerView.ViewHolder>() 
                 ) {
 
 
-                    mothRecycler.smoothScrollToPosition(0)
+                    if (position ==mCurrent)
+                    mothRecycler.smoothScrollToPosition(currentDay)
+                    else
+                        mothRecycler.smoothScrollToPosition(0)
+
+                    currentMonth=position
 
                     Handler().postDelayed({
-                        mAdapter.addData(position)
-                    },350)
+                        mAdapter.addData(currentMonth)
+                    },400)
+
+
+
 
 
 
@@ -110,7 +131,7 @@ class CreateReservationAdapter: RecyclerView.Adapter<RecyclerView.ViewHolder>() 
                 }
 
                 override fun onNothingSelected(parent: AdapterView<*>?) {
-                    spinner.setSelection(calendar.get(Calendar.DAY_OF_MONTH))
+
                 }
 
             }
