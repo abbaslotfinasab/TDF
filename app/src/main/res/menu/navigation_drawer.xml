@@ -46,7 +46,7 @@
 
         <item
             android:id="@+id/permissionFragment"
-            android:icon="@drawable/ic_stickynote"
+            android:icon="@drawable/ic_permission"
             android:title="Request Permission" />
 
         <item

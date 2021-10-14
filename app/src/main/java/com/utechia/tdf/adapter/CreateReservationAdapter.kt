@@ -22,6 +22,7 @@ class CreateReservationAdapter: RecyclerView.Adapter<RecyclerView.ViewHolder>() 
     private val mCurrent = sdf.format(mDate).toInt()-1
     var currentMonth = sdf.format(mDate).toInt()-1
 
+
     private var _sdf = SimpleDateFormat("dd")
     private val dDate:Date = Date()
     var currentDay = _sdf.format(dDate).toInt()-1
@@ -110,9 +111,23 @@ class CreateReservationAdapter: RecyclerView.Adapter<RecyclerView.ViewHolder>() 
                     id: Long
                 ) {
 
+                    mAdapter.lastItemSelectedPos = -1
 
-                    if (position ==mCurrent)
-                    mothRecycler.smoothScrollToPosition(currentDay)
+                    if (position ==mCurrent){
+
+                        when {
+
+                            position<8  -> { mothRecycler.smoothScrollToPosition(0)}
+
+                            position in 9..16 -> { mothRecycler.smoothScrollToPosition(16)}
+
+                            position in 17..24 -> { mothRecycler.smoothScrollToPosition(24)}
+
+                            position >25  -> { mothRecycler.smoothScrollToPosition(position)}
+
+                        }
+
+                    }
                     else
                         mothRecycler.smoothScrollToPosition(0)
 

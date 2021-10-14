@@ -4,6 +4,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.TextView
+import android.widget.Toast
 import androidx.constraintlayout.widget.ConstraintLayout
 import androidx.core.content.ContextCompat
 import androidx.recyclerview.widget.RecyclerView
@@ -17,7 +18,10 @@ class DatePickerAdapter:RecyclerView.Adapter<RecyclerView.ViewHolder>() {
     private var calendar = Calendar.getInstance()
     private var day:ArrayList<Int> = arrayListOf()
     private var week:ArrayList<Int> = arrayListOf()
-    private var selected = -1
+
+    var lastItemSelectedPos = -1
+    var start = 0
+
 
     private var sdf = SimpleDateFormat("MM")
     private val mDate:Date = Date()
@@ -29,9 +33,8 @@ class DatePickerAdapter:RecyclerView.Adapter<RecyclerView.ViewHolder>() {
     private val mCurrentDay = _sdf.format(dDate).toInt()
     var currentDay = _sdf.format(dDate).toInt()
 
-
-
     fun addData(_currentMonth: Int) {
+        start = 1
         day.clear()
         week.clear()
         currentMonth = _currentMonth
@@ -73,24 +76,10 @@ class DatePickerAdapter:RecyclerView.Adapter<RecyclerView.ViewHolder>() {
         private val dayNumber: TextView = itemView.findViewById(R.id.dateNumber)
         private val timeLayout: ConstraintLayout = itemView.findViewById(R.id.backDate)
 
-        var count = 0
-
         fun bind0(position: Int) {
 
-
-
-            if (position == mCurrentDay-1 && currentMonth==mCurrentMonth-1){
-                count+1
-             select()
-            }
-            else{
-              unselect()
-
-            }
-
-
-
             when (week[position]) {
+
                 1 -> {
                     weekTitle.text = "Sun"
                 }
@@ -122,37 +111,52 @@ class DatePickerAdapter:RecyclerView.Adapter<RecyclerView.ViewHolder>() {
 
             dayNumber.text = day[position].toString()
 
+            if (position == mCurrentDay-1 && currentMonth==mCurrentMonth-1 && start == 1|| position == lastItemSelectedPos){
+
+             select(position)
+                start = 0
+
+            }
+            else
+                unselect()
+
             timeLayout.setOnClickListener {
-                count += 1
-                if (count % 2 == 1) {
-                    currentDay = position + 1
 
-                select()
+                notifyItemChanged(mCurrentDay-1)
 
-                } else {
-                 unselect()
-                }
+                notifyItemChanged(lastItemSelectedPos)
+
+                lastItemSelectedPos = position
+
+                select(position)
+
+                Toast.makeText(itemView.context,"$currentDay",Toast.LENGTH_LONG).show()
+
 
             }
 
         }
 
-        private fun select(){
-            timeLayout.background =
+         private fun select(position: Int){
+
+             currentDay = position + 1
+
+             timeLayout.background =
                 ContextCompat.getDrawable(
                     itemView.context,
                     R.drawable.ic_day_selected
                 )
+
             weekTitle.setTextColor(
                 ContextCompat.getColor(
                     itemView.context,
                     R.color.white
                 )
             )
-
         }
 
-        private fun unselect(){
+         private fun unselect(){
+
             timeLayout.background =
                 ContextCompat.getDrawable(itemView.context, R.drawable.ic_day)
             weekTitle.setTextColor(
@@ -161,7 +165,6 @@ class DatePickerAdapter:RecyclerView.Adapter<RecyclerView.ViewHolder>() {
                     R.color.black
                 )
             )
-
         }
     }
 }
