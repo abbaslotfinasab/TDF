@@ -130,8 +130,6 @@ class DatePickerAdapter:RecyclerView.Adapter<RecyclerView.ViewHolder>() {
 
                 select(position)
 
-                Toast.makeText(itemView.context,"$currentDay",Toast.LENGTH_LONG).show()
-
 
             }
 
