@@ -77,13 +77,16 @@
             app:argType="string" />
         <argument
             android:name="time"
-            app:argType="integer" />
+            app:argType="string" />
         <argument
-            android:name="duration"
+            android:name="capacity"
             app:argType="integer" />
         <action
             android:id="@+id/action_reservationDetails_to_resultFragment"
             app:destination="@id/resultFragment" />
+        <argument
+            android:name="duration"
+            app:argType="string" />
     </fragment>
     <fragment
         android:id="@+id/qrCodeFragment"

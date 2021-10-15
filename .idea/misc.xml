@@ -44,10 +44,12 @@
         <entry key="..\:/Users/Dr Computer/AndroidStudioProjects/TDF/app/src/main/res/drawable/navigation_drawer.xml" value="0.2203125" />
         <entry key="..\:/Users/Dr Computer/AndroidStudioProjects/TDF/app/src/main/res/drawable/refresh_button.xml" value="0.2203125" />
         <entry key="..\:/Users/Dr Computer/AndroidStudioProjects/TDF/app/src/main/res/drawable/scan_button.xml" value="0.2203125" />
+        <entry key="..\:/Users/Dr Computer/AndroidStudioProjects/TDF/app/src/main/res/drawable/snackbar.xml" value="0.2203125" />
         <entry key="..\:/Users/Dr Computer/AndroidStudioProjects/TDF/app/src/main/res/drawable/spinner_back.xml" value="0.2203125" />
         <entry key="..\:/Users/Dr Computer/AndroidStudioProjects/TDF/app/src/main/res/drawable/spinner_item.xml" value="0.2203125" />
         <entry key="..\:/Users/Dr Computer/AndroidStudioProjects/TDF/app/src/main/res/layout/activity_main.xml" value="0.25" />
         <entry key="..\:/Users/Dr Computer/AndroidStudioProjects/TDF/app/src/main/res/layout/button_custom.xml" value="0.33" />
+        <entry key="..\:/Users/Dr Computer/AndroidStudioProjects/TDF/app/src/main/res/layout/content.xml" value="0.1" />
         <entry key="..\:/Users/Dr Computer/AndroidStudioProjects/TDF/app/src/main/res/layout/fragment_calendar.xml" value="0.1" />
         <entry key="..\:/Users/Dr Computer/AndroidStudioProjects/TDF/app/src/main/res/layout/fragment_craete_reservation_fragmant.xml" value="0.1" />
         <entry key="..\:/Users/Dr Computer/AndroidStudioProjects/TDF/app/src/main/res/layout/fragment_create_reservation.xml" value="0.25" />
@@ -59,7 +61,7 @@
         <entry key="..\:/Users/Dr Computer/AndroidStudioProjects/TDF/app/src/main/res/layout/fragment_permission.xml" value="0.1" />
         <entry key="..\:/Users/Dr Computer/AndroidStudioProjects/TDF/app/src/main/res/layout/fragment_qr_code.xml" value="0.1" />
         <entry key="..\:/Users/Dr Computer/AndroidStudioProjects/TDF/app/src/main/res/layout/fragment_reservation.xml" value="0.22" />
-        <entry key="..\:/Users/Dr Computer/AndroidStudioProjects/TDF/app/src/main/res/layout/fragment_reservation_details.xml" value="0.25" />
+        <entry key="..\:/Users/Dr Computer/AndroidStudioProjects/TDF/app/src/main/res/layout/fragment_reservation_details.xml" value="0.22" />
         <entry key="..\:/Users/Dr Computer/AndroidStudioProjects/TDF/app/src/main/res/layout/fragment_result.xml" value="0.15" />
         <entry key="..\:/Users/Dr Computer/AndroidStudioProjects/TDF/app/src/main/res/layout/fragment_survey_system.xml" value="0.1" />
         <entry key="..\:/Users/Dr Computer/AndroidStudioProjects/TDF/app/src/main/res/layout/fragment_ticket_system.xml" value="0.18" />

@@ -13,31 +13,21 @@ import java.text.SimpleDateFormat
 import java.util.*
 import kotlin.collections.ArrayList
 
-class DatePickerAdapter:RecyclerView.Adapter<RecyclerView.ViewHolder>() {
+class DatePickerAdapter(val createReservationAdapter: CreateReservationAdapter):RecyclerView.Adapter<RecyclerView.ViewHolder>() {
 
     private var calendar = Calendar.getInstance()
     private var day:ArrayList<Int> = arrayListOf()
     private var week:ArrayList<Int> = arrayListOf()
+    private var _currentMonth = 0
 
     var lastItemSelectedPos = -1
     var start = 0
 
-
-    private var sdf = SimpleDateFormat("MM")
-    private val mDate:Date = Date()
-    private val mCurrentMonth = sdf.format(mDate).toInt()
-    var currentMonth = sdf.format(mDate).toInt()
-
-    private var _sdf = SimpleDateFormat("dd")
-    private val dDate:Date = Date()
-    private val mCurrentDay = _sdf.format(dDate).toInt()
-    var currentDay = _sdf.format(dDate).toInt()
-
-    fun addData(_currentMonth: Int) {
-        start = 1
+    fun addData(position : Int) {
+        start=1
         day.clear()
         week.clear()
-        currentMonth = _currentMonth
+        _currentMonth = position
         calendar.set(Calendar.MONTH, _currentMonth)
         val s = calendar.getActualMinimum(Calendar.DAY_OF_MONTH)
         val e = calendar.getActualMaximum(Calendar.DAY_OF_MONTH)
@@ -49,9 +39,7 @@ class DatePickerAdapter:RecyclerView.Adapter<RecyclerView.ViewHolder>() {
             week.add(calendar.get(Calendar.DAY_OF_WEEK))
 
         }
-
-        notifyItemRangeChanged(0, e-1 )
-
+        notifyItemRangeChanged(0,e-1)
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): RecyclerView.ViewHolder =
@@ -111,10 +99,9 @@ class DatePickerAdapter:RecyclerView.Adapter<RecyclerView.ViewHolder>() {
 
             dayNumber.text = day[position].toString()
 
-            if (position == mCurrentDay-1 && currentMonth==mCurrentMonth-1 && start == 1|| position == lastItemSelectedPos){
+            if (position == createReservationAdapter.dCurrent &&_currentMonth==createReservationAdapter.mCurrent && start == 1|| position == lastItemSelectedPos){
 
              select(position)
-                start = 0
 
             }
             else
@@ -122,7 +109,9 @@ class DatePickerAdapter:RecyclerView.Adapter<RecyclerView.ViewHolder>() {
 
             timeLayout.setOnClickListener {
 
-                notifyItemChanged(mCurrentDay-1)
+                start=0
+
+                notifyItemChanged(createReservationAdapter.dCurrent)
 
                 notifyItemChanged(lastItemSelectedPos)
 
@@ -130,14 +119,14 @@ class DatePickerAdapter:RecyclerView.Adapter<RecyclerView.ViewHolder>() {
 
                 select(position)
 
-
             }
 
         }
 
          private fun select(position: Int){
 
-             currentDay = position + 1
+             createReservationAdapter.currentDay = position + 1
+             createReservationAdapter.currentMonth = _currentMonth
 
              timeLayout.background =
                 ContextCompat.getDrawable(

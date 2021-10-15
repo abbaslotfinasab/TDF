@@ -9,36 +9,8 @@ import androidx.core.content.ContextCompat
 import androidx.recyclerview.widget.RecyclerView
 import com.utechia.domain.moodel.RoomModel
 import com.utechia.tdf.R
-import java.text.SimpleDateFormat
-import java.util.*
 
-class TimePickerAdapter(private val roomModel: RoomModel):RecyclerView.Adapter<RecyclerView.ViewHolder>() {
-
-    private val timeList:MutableList<String> = mutableListOf()
-    private val sdf:SimpleDateFormat = SimpleDateFormat("HH:mm")
-    private val calendar:Calendar = Calendar.getInstance()
-
-    var roomTitle = ""
-    var imageRoom = ""
-    var time = 0
-    var duration = 0
-
-    init {
-        getTime()
-    }
-
-    private fun getTime(){
-        timeList.clear()
-        for(i in 0 until 24){
-            calendar.set(Calendar.HOUR_OF_DAY,i)
-            calendar.set(Calendar.MINUTE,0)
-            timeList.add(sdf.format(calendar.time))
-            calendar.set(Calendar.HOUR_OF_DAY,i)
-            calendar.set(Calendar.MINUTE,30)
-            timeList.add(sdf.format(calendar.time))
-        }
-
-    }
+class TimePickerAdapter( private val timeList:MutableList<String>,private val roomModel: RoomModel, private val createReservationAdapter: CreateReservationAdapter):RecyclerView.Adapter<RecyclerView.ViewHolder>() {
 
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): RecyclerView.ViewHolder = ViewHolder( LayoutInflater.from(parent.context)
@@ -64,23 +36,29 @@ class TimePickerAdapter(private val roomModel: RoomModel):RecyclerView.Adapter<R
             if (position%2==0)
             timeTitle.text = timeList[position]
 
-            var count = 0
+            var count = -1
             timeLayout.setOnClickListener{
                 count += 1
-                if (count %2 == 1) {
+
+                if (count % 2 == 0){
+
+                    createReservationAdapter.selectedRoom.add(roomModel.id!!)
+
+                    createReservationAdapter.selectedTime.add(position.toFloat())
+
                     it.background =
                         ContextCompat.getDrawable(itemView.context, R.drawable.ic_timeselected)
-                    time = position
-                    roomTitle = roomModel.name.toString()
-                    imageRoom = roomModel.image.toString()
-                    duration = 3
                 }
 
+                else {
+                    createReservationAdapter.selectedRoom.remove(roomModel.id)
 
-                else
-                    it.background = ContextCompat.getDrawable(itemView.context,R.drawable.ic_time)
+                    it.background = ContextCompat.getDrawable(itemView.context, R.drawable.ic_time)
+
+                }
 
             }
+
         }
 
     }

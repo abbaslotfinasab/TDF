@@ -6,6 +6,7 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.ImageView
 import android.widget.TextView
+import android.widget.Toast
 import androidx.constraintlayout.widget.ConstraintLayout
 import androidx.core.os.bundleOf
 import androidx.fragment.app.Fragment
@@ -13,7 +14,6 @@ import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.google.android.material.bottomnavigation.BottomNavigationView
-import com.utechia.domain.moodel.RoomModel
 import com.utechia.domain.utile.Result
 import com.utechia.tdf.R
 import com.utechia.tdf.adapter.CreateReservationAdapter
@@ -31,9 +31,10 @@ class CreateReservationFragment : Fragment() {
 
     private lateinit var binding: FragmentCreateReservationBinding
     private val roomViewModel: RoomViewModel by viewModels()
+    private val timeList:MutableList<String> = mutableListOf()
 
     private var createReservationAdapter: CreateReservationAdapter = CreateReservationAdapter()
-    private var datePickerAdapter:DatePickerAdapter = DatePickerAdapter()
+    private var datePickerAdapter:DatePickerAdapter = DatePickerAdapter(createReservationAdapter)
     private lateinit var timePickerAdapter:TimePickerAdapter
 
     private var sdf = SimpleDateFormat("MM")
@@ -84,7 +85,9 @@ class CreateReservationFragment : Fragment() {
         binding.btnConfirm.bringToFront()
 
         back.setOnClickListener {
+
             findNavController().popBackStack()
+
         }
 
         roomViewModel.getRoom(currentDay, currentMonth)
@@ -99,11 +102,40 @@ class CreateReservationFragment : Fragment() {
 
         binding.btnConfirm.setOnClickListener {
 
-            val bundle = bundleOf("currentDay" to datePickerAdapter.currentDay,
-                "currentMonth" to createReservationAdapter.currentMonth,
-            "roomTitle" to timePickerAdapter.roomTitle,"time" to timePickerAdapter.time,"imageRoom" to timePickerAdapter.imageRoom, "duration" to timePickerAdapter.duration)
+            if (createReservationAdapter.selectedRoom.size  == 1 ){
 
-            findNavController().navigate(R.id.action_createReservationFragment_to_reservationDetails,bundle)
+                if(createReservationAdapter.selectedTime.size>1) {
+
+                    val lastSelectedPosition = createReservationAdapter.selectedRoom.elementAt(0)
+
+                    createReservationAdapter.sortTime()
+
+                    val bundle = bundleOf(
+                        "currentDay" to createReservationAdapter.currentDay,
+                        "currentMonth" to createReservationAdapter.currentMonth,
+                        "roomTitle" to createReservationAdapter.roomModel[lastSelectedPosition].name,
+                        "capacity" to createReservationAdapter.roomModel[lastSelectedPosition].capacity,
+                        "imageRoom" to createReservationAdapter.roomModel[lastSelectedPosition].image,
+                        "time" to createReservationAdapter.finalTime,
+                        "duration" to createReservationAdapter.duration
+                    )
+
+
+                    findNavController().navigate(
+                        R.id.action_createReservationFragment_to_reservationDetails,
+                        bundle
+                    )
+
+                }
+
+                else {
+                    Toast.makeText(context, "Please select two times", Toast.LENGTH_SHORT).show()
+                }
+            }
+
+            else {
+                Toast.makeText(context,"Please select one room",Toast.LENGTH_SHORT).show()
+            }
 
         }
 
@@ -119,7 +151,7 @@ class CreateReservationFragment : Fragment() {
                     binding.errorText.visibility = View.GONE
                     binding.btnRefresh.visibility = View.GONE
                     createReservationAdapter.addData(it.data)
-                    timePickerAdapter = TimePickerAdapter(it.data[0])
+                    timePickerAdapter = TimePickerAdapter(timeList,it.data[0],createReservationAdapter)
 
 
                 }
@@ -148,7 +180,6 @@ class CreateReservationFragment : Fragment() {
                             findNavController().navigate(R.id.action_createReservationFragment_self)
                         }
                     }
-
 
                 }
             }

@@ -15,30 +15,75 @@ import java.util.*
 
 class CreateReservationAdapter: RecyclerView.Adapter<RecyclerView.ViewHolder>() {
 
-    private val roomModel: MutableList<RoomModel> = mutableListOf()
+    val roomModel: MutableList<RoomModel> = mutableListOf()
+
+    var selectedRoom :MutableSet<Int> = mutableSetOf()
+
+    var selectedTime:MutableSet<Float> = mutableSetOf()
+
+    var finalTime = ""
+
+    var duration = ""
 
     private var sdf = SimpleDateFormat("MM")
     private val mDate:Date = Date()
-    private val mCurrent = sdf.format(mDate).toInt()-1
+    var mCurrent = sdf.format(mDate).toInt()-1
     var currentMonth = sdf.format(mDate).toInt()-1
-
 
     private var _sdf = SimpleDateFormat("dd")
     private val dDate:Date = Date()
+    var dCurrent = _sdf.format(dDate).toInt()-1
     var currentDay = _sdf.format(dDate).toInt()-1
 
+    private val timeList:MutableList<String> = mutableListOf()
+    private val tf:SimpleDateFormat = SimpleDateFormat("HH:mm")
+    private val calendar:Calendar = Calendar.getInstance()
 
     fun addData(data: MutableList<RoomModel>){
         roomModel.clear()
+        selectedRoom.clear()
+        selectedTime.clear()
+        timeList.clear()
+        currentMonth = mCurrent
+        currentDay = dCurrent
         roomModel.addAll(data)
+        finalTime = ""
+        duration = ""
+
+        for(i in 0 until 24){
+
+            calendar.set(Calendar.HOUR_OF_DAY,i)
+            calendar.set(Calendar.MINUTE,0)
+            timeList.add(tf.format(calendar.time))
+            calendar.set(Calendar.HOUR_OF_DAY,i)
+            calendar.set(Calendar.MINUTE,30)
+            timeList.add(tf.format(calendar.time))
+
+        }
         notifyItemRangeChanged(0,roomModel.size-1)
     }
+
+    fun sortTime(){
+
+        selectedTime.sorted()
+
+        if (selectedTime.last()-selectedTime.first()<0){
+            finalTime = timeList[selectedTime.last().toInt()] +"-"+timeList[selectedTime.first().toInt()]
+            duration = "${(selectedTime.first() - selectedTime.last())/2} hrs"
+
+        }
+        else{
+            finalTime = timeList[selectedTime.first().toInt()] +"-"+timeList[selectedTime.last().toInt()]
+            duration = "${(selectedTime.last() - selectedTime.first())/2} hrs"
+        }
+        selectedTime.clear()
+    }
+
 
     override fun getItemCount(): Int{
 
         return roomModel.size+1
     }
-
 
     override fun getItemViewType(position: Int): Int{
 
@@ -63,6 +108,7 @@ class CreateReservationAdapter: RecyclerView.Adapter<RecyclerView.ViewHolder>() 
                     .inflate(R.layout.item_reservation_room, parent, false))
 
             }
+
         }
 
     }
@@ -89,18 +135,19 @@ class CreateReservationAdapter: RecyclerView.Adapter<RecyclerView.ViewHolder>() 
 
         private val spinner:Spinner = itemView.findViewById(R.id.months)
         private val mothRecycler:RecyclerView = itemView.findViewById(R.id.mothRecyclerView)
-        private val mAdapter:DatePickerAdapter = DatePickerAdapter()
+        private val mAdapter:DatePickerAdapter = DatePickerAdapter(this@CreateReservationAdapter)
 
         fun bind0(){
 
             mothRecycler.apply {
+
                 layoutManager = LinearLayoutManager(itemView.context,LinearLayoutManager.HORIZONTAL,false)
                 adapter = mAdapter
-                mAdapter.addData(currentMonth)
+                mAdapter.addData(mCurrent)
 
             }
 
-            spinner.setSelection(currentMonth)
+            spinner.setSelection(mCurrent)
 
             spinner.onItemSelectedListener = object :AdapterView.OnItemSelectedListener{
 
@@ -112,42 +159,20 @@ class CreateReservationAdapter: RecyclerView.Adapter<RecyclerView.ViewHolder>() 
                 ) {
 
                     mAdapter.lastItemSelectedPos = -1
+                    currentDay = dCurrent+1
 
-                    if (position ==mCurrent){
-
-                        when {
-
-                            position<8  -> { mothRecycler.smoothScrollToPosition(0)}
-
-                            position in 9..16 -> { mothRecycler.smoothScrollToPosition(16)}
-
-                            position in 17..24 -> { mothRecycler.smoothScrollToPosition(24)}
-
-                            position >25  -> { mothRecycler.smoothScrollToPosition(position)}
-
-                        }
-
-                    }
-                    else
+                    if (position == mCurrent) {
+                        mothRecycler.smoothScrollToPosition(dCurrent)
+                    } else {
                         mothRecycler.smoothScrollToPosition(0)
-
-                    currentMonth=position
-
+                    }
                     Handler().postDelayed({
-                        mAdapter.addData(currentMonth)
-                    },400)
-
-
-
-
-
-
-                   /* itemView.findNavController().navigate(R.id.action_createReservationFragment_self,bundle)*/
-                }
-
-                override fun onNothingSelected(parent: AdapterView<*>?) {
+                        mAdapter.addData(position)
+                    }, 400)
 
                 }
+
+                override fun onNothingSelected(parent: AdapterView<*>?) {}
 
             }
 
@@ -162,6 +187,7 @@ class CreateReservationAdapter: RecyclerView.Adapter<RecyclerView.ViewHolder>() 
         private val capacity:TextView = itemView.findViewById(R.id.capacity)
         private val roomImage:ImageView = itemView.findViewById(R.id.roomImage)
         private val recyclerView:RecyclerView = itemView.findViewById(R.id.roomRecyclerView)
+        private lateinit var mAdapter:TimePickerAdapter
         private val space:Space = itemView.findViewById(R.id.last)
 
 
@@ -177,9 +203,12 @@ class CreateReservationAdapter: RecyclerView.Adapter<RecyclerView.ViewHolder>() 
                 .error(R.drawable.room)
                 .into(roomImage)
 
+            mAdapter = TimePickerAdapter(timeList,roomModel[position-1],this@CreateReservationAdapter)
+
             recyclerView.apply {
-                adapter = TimePickerAdapter(roomModel[position-1])
+                adapter =mAdapter
                 layoutManager = LinearLayoutManager(itemView.context,LinearLayoutManager.HORIZONTAL,false)
+
             }
 
             if (position == roomModel.size){
