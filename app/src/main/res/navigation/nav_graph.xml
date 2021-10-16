@@ -87,6 +87,9 @@
         <argument
             android:name="duration"
             app:argType="string" />
+        <action
+            android:id="@+id/action_reservationDetails_to_createReservationFragment"
+            app:destination="@id/createReservationFragment" />
     </fragment>
     <fragment
         android:id="@+id/qrCodeFragment"

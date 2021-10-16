@@ -14,6 +14,7 @@
         <entry key="..\:/Users/Dr Computer/AndroidStudioProjects/TDF/app/src/main/res/drawable/highlight_color.xml" value="0.2203125" />
         <entry key="..\:/Users/Dr Computer/AndroidStudioProjects/TDF/app/src/main/res/drawable/ic_back.xml" value="0.2203125" />
         <entry key="..\:/Users/Dr Computer/AndroidStudioProjects/TDF/app/src/main/res/drawable/ic_baseline_add_24.xml" value="0.2203125" />
+        <entry key="..\:/Users/Dr Computer/AndroidStudioProjects/TDF/app/src/main/res/drawable/ic_baseline_add_circle_outline_24.xml" value="0.2203125" />
         <entry key="..\:/Users/Dr Computer/AndroidStudioProjects/TDF/app/src/main/res/drawable/ic_baseline_person_24.xml" value="0.2203125" />
         <entry key="..\:/Users/Dr Computer/AndroidStudioProjects/TDF/app/src/main/res/drawable/ic_baseline_power_settings_new_24.xml" value="0.2203125" />
         <entry key="..\:/Users/Dr Computer/AndroidStudioProjects/TDF/app/src/main/res/drawable/ic_border.xml" value="0.2203125" />
@@ -21,6 +22,7 @@
         <entry key="..\:/Users/Dr Computer/AndroidStudioProjects/TDF/app/src/main/res/drawable/ic_day.xml" value="0.2203125" />
         <entry key="..\:/Users/Dr Computer/AndroidStudioProjects/TDF/app/src/main/res/drawable/ic_ellipse_30.xml" value="0.2203125" />
         <entry key="..\:/Users/Dr Computer/AndroidStudioProjects/TDF/app/src/main/res/drawable/ic_group_20337.xml" value="0.2203125" />
+        <entry key="..\:/Users/Dr Computer/AndroidStudioProjects/TDF/app/src/main/res/drawable/ic_group_20338.xml" value="0.2203125" />
         <entry key="..\:/Users/Dr Computer/AndroidStudioProjects/TDF/app/src/main/res/drawable/ic_home.xml" value="0.2203125" />
         <entry key="..\:/Users/Dr Computer/AndroidStudioProjects/TDF/app/src/main/res/drawable/ic_icon_back.xml" value="0.2203125" />
         <entry key="..\:/Users/Dr Computer/AndroidStudioProjects/TDF/app/src/main/res/drawable/ic_invite.xml" value="0.2203125" />
@@ -60,7 +62,7 @@
         <entry key="..\:/Users/Dr Computer/AndroidStudioProjects/TDF/app/src/main/res/layout/fragment_notification.xml" value="0.1" />
         <entry key="..\:/Users/Dr Computer/AndroidStudioProjects/TDF/app/src/main/res/layout/fragment_permission.xml" value="0.1" />
         <entry key="..\:/Users/Dr Computer/AndroidStudioProjects/TDF/app/src/main/res/layout/fragment_qr_code.xml" value="0.1" />
-        <entry key="..\:/Users/Dr Computer/AndroidStudioProjects/TDF/app/src/main/res/layout/fragment_reservation.xml" value="0.22" />
+        <entry key="..\:/Users/Dr Computer/AndroidStudioProjects/TDF/app/src/main/res/layout/fragment_reservation.xml" value="0.2" />
         <entry key="..\:/Users/Dr Computer/AndroidStudioProjects/TDF/app/src/main/res/layout/fragment_reservation_details.xml" value="0.22" />
         <entry key="..\:/Users/Dr Computer/AndroidStudioProjects/TDF/app/src/main/res/layout/fragment_result.xml" value="0.15" />
         <entry key="..\:/Users/Dr Computer/AndroidStudioProjects/TDF/app/src/main/res/layout/fragment_survey_system.xml" value="0.1" />

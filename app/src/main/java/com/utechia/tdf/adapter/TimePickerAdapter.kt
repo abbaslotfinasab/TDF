@@ -4,14 +4,13 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.TextView
+import android.widget.Toast
 import androidx.constraintlayout.widget.ConstraintLayout
 import androidx.core.content.ContextCompat
 import androidx.recyclerview.widget.RecyclerView
-import com.utechia.domain.moodel.RoomModel
 import com.utechia.tdf.R
 
-class TimePickerAdapter( private val timeList:MutableList<String>,private val roomModel: RoomModel, private val createReservationAdapter: CreateReservationAdapter):RecyclerView.Adapter<RecyclerView.ViewHolder>() {
-
+class TimePickerAdapter( private val timeList:MutableList<String>, private val createReservationAdapter: CreateReservationAdapter,var columnPosition: Int):RecyclerView.Adapter<RecyclerView.ViewHolder>() {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): RecyclerView.ViewHolder = ViewHolder( LayoutInflater.from(parent.context)
         .inflate(R.layout.item_time, parent, false))
@@ -33,26 +32,38 @@ class TimePickerAdapter( private val timeList:MutableList<String>,private val ro
 
         fun bind0(position: Int) {
 
+
+
             if (position%2==0)
             timeTitle.text = timeList[position]
 
-            var count = -1
+            var clicked = false
             timeLayout.setOnClickListener{
-                count += 1
 
-                if (count % 2 == 0){
+                if (!clicked){
 
-                    createReservationAdapter.selectedRoom.add(roomModel.id!!)
+                    if (createReservationAdapter.lastPosition == columnPosition || createReservationAdapter.count ==0){
+                        it.background =
+                            ContextCompat.getDrawable(itemView.context, R.drawable.ic_timeselected)
+                        createReservationAdapter.selectedTime.add(position.toFloat())
+                        createReservationAdapter.selectedRoom.add(columnPosition)
+                        clicked=true
+                        createReservationAdapter.lastPosition = columnPosition
+                        createReservationAdapter.count +=1
+                    }
+                    else{
 
-                    createReservationAdapter.selectedTime.add(position.toFloat())
+                        Toast.makeText(itemView.context,"Please select one room",Toast.LENGTH_SHORT).show()
+                    }
 
-                    it.background =
-                        ContextCompat.getDrawable(itemView.context, R.drawable.ic_timeselected)
                 }
 
                 else {
-                    createReservationAdapter.selectedRoom.remove(roomModel.id)
-
+                    clicked = false
+                    createReservationAdapter.count -=1
+                    createReservationAdapter.selectedTime.remove(position.toFloat())
+                    if (createReservationAdapter.selectedTime.size==0)
+                        createReservationAdapter.selectedRoom.remove(columnPosition)
                     it.background = ContextCompat.getDrawable(itemView.context, R.drawable.ic_time)
 
                 }

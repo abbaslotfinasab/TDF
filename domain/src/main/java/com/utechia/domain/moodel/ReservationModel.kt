@@ -6,17 +6,27 @@ data class ReservationModel(
 
     var title:String?,
 
+    var capacity :Int?,
+
+    var roomImage:String?,
+
     var room_id:Int?,
 
-    var date:String?,
+    var day:String?,
+
+    var month:String?,
+
+    var year:String?,
 
     var time:String?,
+
+    var guest:Int?,
 
     var duration:String?,
 
     var description:String?,
 
-   /* var guess_id:MutableList<Int>,*/
+   /* var guest:MutableList<Int>,*/
 
 
 

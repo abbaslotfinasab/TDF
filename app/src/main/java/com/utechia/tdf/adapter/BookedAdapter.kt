@@ -4,23 +4,38 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.TextView
+import android.widget.Toast
 import androidx.appcompat.widget.AppCompatButton
+import androidx.core.os.bundleOf
+import androidx.navigation.findNavController
 import androidx.recyclerview.widget.RecyclerView
 import com.utechia.domain.moodel.ReservationModel
 import com.utechia.tdf.R
 
-class BookedAdapter(private val bookList:MutableList<ReservationModel>):RecyclerView.Adapter<RecyclerView.ViewHolder>() {
+class BookedAdapter:RecyclerView.Adapter<RecyclerView.ViewHolder>() {
+
+    private val bookList:MutableList<ReservationModel> = mutableListOf()
+
+    fun addData(_bookList:MutableList<ReservationModel>){
+
+        bookList.clear()
+        bookList.addAll(_bookList)
+
+        notifyItemRangeChanged(0,_bookList.size)
+
+
+    }
 
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): RecyclerView.ViewHolder =
-        ViewHolder(
+        ViewHolder0(
             LayoutInflater.from(parent.context)
                 .inflate(R.layout.item_booked, parent, false)
         )
 
     override fun onBindViewHolder(holder: RecyclerView.ViewHolder, position: Int) {
 
-        (holder as ViewHolder).bind0(position)
+        (holder as ViewHolder0).bind0(position)
 
     }
 
@@ -29,12 +44,11 @@ class BookedAdapter(private val bookList:MutableList<ReservationModel>):Recycler
 
     override fun getItemViewType(position: Int): Int = position
 
-    inner class ViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
-        private val roomTitle: TextView = itemView.findViewById(R.id.roomTitle)
-        private val roomMember: TextView = itemView.findViewById(R.id.guestRoom)
+    inner class ViewHolder0(itemView: View) : RecyclerView.ViewHolder(itemView) {
+        private val roomTitle: TextView = itemView.findViewById(R.id.titleRoom)
         private val roomTime: TextView = itemView.findViewById(R.id.timeRoom)
         private val roomDuration: TextView = itemView.findViewById(R.id.durationRoom)
-        private val roomDate: TextView = itemView.findViewById(R.id.dateRoom)
+        private val roomDate: TextView = itemView.findViewById(R.id.date)
         private val more: AppCompatButton = itemView.findViewById(R.id.more)
 
         fun bind0(position: Int) {
@@ -42,12 +56,25 @@ class BookedAdapter(private val bookList:MutableList<ReservationModel>):Recycler
             roomTitle.text = bookList[position].title
             roomTime.text = bookList[position].time
             roomDuration.text = bookList[position].duration
-            roomDate.text = bookList[position].date
-
+            roomDate.text =  bookList[position].month +"/"+bookList[position].day+"/"+bookList[position].year
             more.setOnClickListener {
+                val bundle = bundleOf(
+                    "currentDay" to bookList[position].day!!.toInt(),
+                    "currentMonth" to bookList[position].month!!.toInt()-1,
+                    "roomId" to bookList[position].room_id,
+                    "roomTitle" to bookList[position].title,
+                    "capacity" to bookList[position].capacity,
+                    "imageRoom" to bookList[position].roomImage,
+                    "time" to bookList[position].time,
+                    "duration" to bookList[position].duration,
+                    "description" to bookList[position].description,
+                    "kind" to 1
 
-                /*   bookList[position].id
-                bookList[position].room_id*/
+
+                )
+
+                itemView.findNavController().navigate(R.id.action_reservationFragment_to_reservationDetails,bundle)
+
             }
 
         }

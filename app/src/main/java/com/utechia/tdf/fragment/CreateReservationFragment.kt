@@ -17,34 +17,18 @@ import com.google.android.material.bottomnavigation.BottomNavigationView
 import com.utechia.domain.utile.Result
 import com.utechia.tdf.R
 import com.utechia.tdf.adapter.CreateReservationAdapter
-import com.utechia.tdf.adapter.DatePickerAdapter
-import com.utechia.tdf.adapter.TimePickerAdapter
 import com.utechia.tdf.databinding.FragmentCreateReservationBinding
-import com.utechia.tdf.utile.ItemDecoration
+import com.utechia.tdf.utile.ItemDecorationReservation
 import com.utechia.tdf.viewmodel.RoomViewModel
 import dagger.hilt.android.AndroidEntryPoint
-import java.text.SimpleDateFormat
-import java.util.*
 
 @AndroidEntryPoint
 class CreateReservationFragment : Fragment() {
 
     private lateinit var binding: FragmentCreateReservationBinding
     private val roomViewModel: RoomViewModel by viewModels()
-    private val timeList:MutableList<String> = mutableListOf()
 
     private var createReservationAdapter: CreateReservationAdapter = CreateReservationAdapter()
-    private var datePickerAdapter:DatePickerAdapter = DatePickerAdapter(createReservationAdapter)
-    private lateinit var timePickerAdapter:TimePickerAdapter
-
-    private var sdf = SimpleDateFormat("MM")
-    private val mDate:Date = Date()
-    private var currentMonth = sdf.format(mDate).toInt()
-
-    private var _sdf = SimpleDateFormat("dd")
-    private val dDate:Date = Date()
-    private var currentDay = _sdf.format(dDate).toInt()
-
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -56,11 +40,6 @@ class CreateReservationFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-
-        if (arguments != null) {
-            currentMonth = requireArguments().getInt("day_id",currentMonth)
-            currentDay = requireArguments().getInt("day_id", currentDay)
-        }
 
         val main: ConstraintLayout = activity?.findViewById(R.id.mainLayout)!!
         val navBar: BottomNavigationView = requireActivity().findViewById(R.id.bottom_navigation)
@@ -90,19 +69,19 @@ class CreateReservationFragment : Fragment() {
 
         }
 
-        roomViewModel.getRoom(currentDay, currentMonth)
+        roomViewModel.getRoom(17, 10)
 
         binding.reservationRecyclerView.apply {
             layoutManager =
                 LinearLayoutManager(requireActivity(), LinearLayoutManager.VERTICAL, false)
 
             adapter = createReservationAdapter
-            addItemDecoration(ItemDecoration())
+            addItemDecoration(ItemDecorationReservation())
         }
 
         binding.btnConfirm.setOnClickListener {
 
-            if (createReservationAdapter.selectedRoom.size  == 1 ){
+            if (createReservationAdapter.selectedRoom.size!=0){
 
                 if(createReservationAdapter.selectedTime.size>1) {
 
@@ -113,11 +92,13 @@ class CreateReservationFragment : Fragment() {
                     val bundle = bundleOf(
                         "currentDay" to createReservationAdapter.currentDay,
                         "currentMonth" to createReservationAdapter.currentMonth,
+                        "roomId" to createReservationAdapter.roomModel[lastSelectedPosition].id,
                         "roomTitle" to createReservationAdapter.roomModel[lastSelectedPosition].name,
                         "capacity" to createReservationAdapter.roomModel[lastSelectedPosition].capacity,
                         "imageRoom" to createReservationAdapter.roomModel[lastSelectedPosition].image,
                         "time" to createReservationAdapter.finalTime,
-                        "duration" to createReservationAdapter.duration
+                        "duration" to createReservationAdapter.duration,
+                        "description" to ""
                     )
 
 
@@ -125,17 +106,14 @@ class CreateReservationFragment : Fragment() {
                         R.id.action_createReservationFragment_to_reservationDetails,
                         bundle
                     )
-
                 }
 
                 else {
                     Toast.makeText(context, "Please select two times", Toast.LENGTH_SHORT).show()
                 }
             }
-
-            else {
+            else
                 Toast.makeText(context,"Please select one room",Toast.LENGTH_SHORT).show()
-            }
 
         }
 
@@ -151,8 +129,6 @@ class CreateReservationFragment : Fragment() {
                     binding.errorText.visibility = View.GONE
                     binding.btnRefresh.visibility = View.GONE
                     createReservationAdapter.addData(it.data)
-                    timePickerAdapter = TimePickerAdapter(timeList,it.data[0],createReservationAdapter)
-
 
                 }
 

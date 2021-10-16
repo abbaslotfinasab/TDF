@@ -7,8 +7,8 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.ImageView
 import android.widget.TextView
-import android.widget.Toast
 import androidx.constraintlayout.widget.ConstraintLayout
+import androidx.core.os.bundleOf
 import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.findNavController
 import com.google.android.material.bottomnavigation.BottomNavigationView
@@ -24,6 +24,8 @@ class ReservationDetails : Fragment() {
 
     private lateinit var binding: FragmentReservationDetailsBinding
 
+    private val calendar:Calendar = Calendar.getInstance()
+
     private var sdf = SimpleDateFormat("MM")
     private val mDate: Date = Date()
     private var currentMonth = sdf.format(mDate).toInt()
@@ -34,12 +36,16 @@ class ReservationDetails : Fragment() {
 
     private var month:ArrayList<String> = arrayListOf()
 
+    private var roomId = 0
     private var capacity = 0
     private var roomTitle = ""
     private var imageRoom = ""
     private var time = ""
     private var duration = ""
     private var guest = 0
+    private var description = ""
+    private var year = calendar.get(Calendar.YEAR)
+    private var kind = 0
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -89,11 +95,14 @@ class ReservationDetails : Fragment() {
 
             currentMonth = requireArguments().getInt("currentMonth",currentMonth)
             currentDay = requireArguments().getInt("currentDay", currentDay)
+            roomId = requireArguments().getInt("roomId",0)
             roomTitle = requireArguments().getString("roomTitle","")
             capacity = requireArguments().getInt("capacity",0)
             time = requireArguments().getString("time","")
             duration = requireArguments().getString("duration","")
             imageRoom = requireArguments().getString("imageRoom","")
+            description = requireArguments().getString("description","")
+            kind = requireArguments().getInt("kind",0)
 
         }
 
@@ -103,19 +112,45 @@ class ReservationDetails : Fragment() {
         binding.duration.text = duration
         binding.dateDay.text =  currentDay.toString()
         binding.dateMonth.text =  month[currentMonth]
+        binding.dateYear.text =  year.toString()
+        binding.description.setText(description)
 
         back.setOnClickListener {
             findNavController().popBackStack()
         }
 
-
-
+        if (kind ==0)
+        binding.btnConfirm.text = "Book Now"
+        else
+            binding.btnConfirm.text = "Edit Meeting"
 
 
         binding.btnConfirm.setOnClickListener {
+            description = binding.description.text.toString()
+            val bundle = bundleOf(
+                "currentDay" to currentDay,
+                "currentMonth" to currentMonth+1,
+                "roomId" to roomId,
+                "roomTitle" to roomTitle,
+                "capacity" to capacity,
+                "imageRoom" to imageRoom,
+                "currentYear" to year.toString(),
+                "time" to time,
+                "duration" to duration,
+                "guest" to guest,
+                "description" to description
+            )
 
-            findNavController().navigate(R.id.action_reservationDetails_to_resultFragment)
+            if (kind ==0) {
+                findNavController().navigate(
+                    R.id.action_reservationDetails_to_resultFragment,
+                    bundle
+                )
+            }
 
+            else{
+                findNavController().navigate(R.id.action_reservationDetails_to_createReservationFragment)
+            }
         }
 
 

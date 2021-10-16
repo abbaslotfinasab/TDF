@@ -20,6 +20,7 @@ import com.google.android.material.bottomnavigation.BottomNavigationView
 import com.utechia.tdf.R
 import com.utechia.tdf.adapter.BookedAdapter
 import com.utechia.tdf.databinding.FragmentReservationBinding
+import com.utechia.tdf.utile.ItemDecorationBooked
 import com.utechia.tdf.viewmodel.ReservationViewModel
 import dagger.hilt.android.AndroidEntryPoint
 
@@ -28,19 +29,16 @@ class ReservationFragment : Fragment() {
 
     private lateinit var binding: FragmentReservationBinding
     private val reservationViewModel:ReservationViewModel by viewModels()
+    private val bookedAdapter:BookedAdapter = BookedAdapter()
+
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
         binding = FragmentReservationBinding.inflate(inflater, container, false)
-
-        binding.plus.setOnClickListener {
-
-            findNavController().navigate(R.id.action_reservationFragment_to_createReservationFragment)
-        }
-
         return binding.root
+
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
@@ -48,16 +46,16 @@ class ReservationFragment : Fragment() {
 
         val main: ConstraintLayout = activity?.findViewById(R.id.mainLayout)!!
         val itemMenu: ImageView = requireActivity().findViewById(R.id.menu)
-        val itemNotification: ImageView = requireActivity().findViewById(R.id.notification)
         val button: ImageButton = requireActivity().findViewById(R.id.customButton)
         val bottomNavigationView: BottomNavigationView = requireActivity().findViewById(R.id.bottom_navigation)
         val back: ConstraintLayout = requireActivity().findViewById(R.id.back)
         val name: TextView = requireActivity().findViewById(R.id.name)
         val title: TextView = requireActivity().findViewById(R.id.title)
         val subTitle: TextView = requireActivity().findViewById(R.id.subTitle)
+        val itemNotification: ImageView = requireActivity().findViewById(R.id.notification)
+
 
         bottomNavigationView.visibility = View.VISIBLE
-        itemNotification.isEnabled = true
         button.visibility = View.VISIBLE
         itemMenu.visibility = View.VISIBLE
         back.visibility = View.GONE
@@ -66,6 +64,18 @@ class ReservationFragment : Fragment() {
         subTitle.visibility = View.VISIBLE
 
         main.background = ColorDrawable(resources.getColor(R.color.gray))
+
+        binding.plus.setOnClickListener {
+
+            findNavController().navigate(R.id.action_reservationFragment_to_createReservationFragment)
+        }
+
+
+        binding.bookedRecyclerView.apply {
+            adapter =bookedAdapter
+            addItemDecoration(ItemDecorationBooked())
+            layoutManager = LinearLayoutManager(context,LinearLayoutManager.VERTICAL,false)
+        }
 
         reservationViewModel.getBooked()
         observerViewModel()
@@ -89,17 +99,14 @@ class ReservationFragment : Fragment() {
                     }
                     else{
                         binding.createLayout.visibility = View.GONE
+
                         binding.bookedRecyclerView.visibility = View.VISIBLE
                         binding.prg.visibility = View.GONE
                         binding.errorText.visibility = View.GONE
                         binding.btnRefresh.visibility = View.GONE
+                        bookedAdapter.addData(it.data)
 
-                        binding.bookedRecyclerView.apply {
-                            adapter = BookedAdapter(it.data)
-                            layoutManager = LinearLayoutManager(requireActivity(),LinearLayoutManager.HORIZONTAL,false)
-                        }
                     }
-
 
                 }
 

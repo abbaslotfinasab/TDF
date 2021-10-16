@@ -5,6 +5,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.*
+import androidx.constraintlayout.widget.ConstraintLayout
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
@@ -24,6 +25,9 @@ class CreateReservationAdapter: RecyclerView.Adapter<RecyclerView.ViewHolder>() 
     var finalTime = ""
 
     var duration = ""
+
+    var lastPosition = -1
+    var count = 0
 
     private var sdf = SimpleDateFormat("MM")
     private val mDate:Date = Date()
@@ -49,6 +53,8 @@ class CreateReservationAdapter: RecyclerView.Adapter<RecyclerView.ViewHolder>() 
         roomModel.addAll(data)
         finalTime = ""
         duration = ""
+        count = 0
+        lastPosition =-1
 
         for(i in 0 until 24){
 
@@ -60,7 +66,7 @@ class CreateReservationAdapter: RecyclerView.Adapter<RecyclerView.ViewHolder>() 
             timeList.add(tf.format(calendar.time))
 
         }
-        notifyItemRangeChanged(0,roomModel.size-1)
+        notifyItemRangeChanged(0,roomModel.size)
     }
 
     fun sortTime(){
@@ -77,6 +83,7 @@ class CreateReservationAdapter: RecyclerView.Adapter<RecyclerView.ViewHolder>() 
             duration = "${(selectedTime.last() - selectedTime.first())/2} hrs"
         }
         selectedTime.clear()
+        count=0
     }
 
 
@@ -144,6 +151,7 @@ class CreateReservationAdapter: RecyclerView.Adapter<RecyclerView.ViewHolder>() 
                 layoutManager = LinearLayoutManager(itemView.context,LinearLayoutManager.HORIZONTAL,false)
                 adapter = mAdapter
                 mAdapter.addData(mCurrent)
+                count=0
 
             }
 
@@ -160,6 +168,7 @@ class CreateReservationAdapter: RecyclerView.Adapter<RecyclerView.ViewHolder>() 
 
                     mAdapter.lastItemSelectedPos = -1
                     currentDay = dCurrent+1
+                    count=0
 
                     if (position == mCurrent) {
                         mothRecycler.smoothScrollToPosition(dCurrent)
@@ -186,6 +195,8 @@ class CreateReservationAdapter: RecyclerView.Adapter<RecyclerView.ViewHolder>() 
         private val roomTitle: TextView = itemView.findViewById(R.id.roomTitle)
         private val capacity:TextView = itemView.findViewById(R.id.capacity)
         private val roomImage:ImageView = itemView.findViewById(R.id.roomImage)
+        private val back:ConstraintLayout = itemView.findViewById(R.id.backArrow)
+        private val forward:ConstraintLayout = itemView.findViewById(R.id.forwardArrow)
         private val recyclerView:RecyclerView = itemView.findViewById(R.id.roomRecyclerView)
         private lateinit var mAdapter:TimePickerAdapter
         private val space:Space = itemView.findViewById(R.id.last)
@@ -203,12 +214,20 @@ class CreateReservationAdapter: RecyclerView.Adapter<RecyclerView.ViewHolder>() 
                 .error(R.drawable.room)
                 .into(roomImage)
 
-            mAdapter = TimePickerAdapter(timeList,roomModel[position-1],this@CreateReservationAdapter)
+            mAdapter = TimePickerAdapter(timeList,this@CreateReservationAdapter,position-1)
 
             recyclerView.apply {
                 adapter =mAdapter
                 layoutManager = LinearLayoutManager(itemView.context,LinearLayoutManager.HORIZONTAL,false)
 
+            }
+
+            back.setOnClickListener {
+                recyclerView.smoothScrollToPosition(0)
+            }
+
+            forward.setOnClickListener {
+                recyclerView.smoothScrollToPosition(47)
             }
 
             if (position == roomModel.size){

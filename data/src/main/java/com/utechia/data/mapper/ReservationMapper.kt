@@ -14,15 +14,25 @@ class ReservationMapper @Inject constructor() {
 
             reservationModel.title?:"",
 
+            reservationModel.capacity?:0,
+
+            reservationModel.roomImage?:"",
+
             reservationModel.room_id?:0,
 
-            reservationModel.date?:"",
+        reservationModel.day?:"",
+
+        reservationModel.month?:"",
+
+            reservationModel.year?:"",
 
             reservationModel.time?:"",
 
-            reservationModel.duration?:"",
+            reservationModel.guest?:0,
 
             reservationModel.duration?:"",
+
+            reservationModel.description?:"",
 
            /* reservationModel.guess_id*/
 
@@ -39,18 +49,27 @@ class ReservationMapper @Inject constructor() {
 
             reservationModel.title?:"",
 
+            reservationModel.capacity?:0,
+
+            reservationModel.roomImage?:"",
+
             reservationModel.room_id?:0,
 
-            reservationModel.date?:"",
+            reservationModel.day?:"",
+
+            reservationModel.month?:"",
+
+            reservationModel.year?:"",
 
             reservationModel.time?:"",
 
-            reservationModel.duration?:"",
+            reservationModel.guest?:0,
 
             reservationModel.duration?:"",
 
-       /*     reservationModel.guess_id
-*/
+            reservationModel.description?:"",
+
+            /* reservationModel.guess_id*/
 
 
         )

@@ -45,4 +45,14 @@ class ReservationViewModel @Inject constructor(
         }
     }
 
+    fun reserve(reservationModel: ReservationModel){
+
+        viewModelScope.launch(Dispatchers.IO+handler) {
+
+            reservationUseCaseImpl.reserve(reservationModel)
+
+
+        }
+    }
+
 }

@@ -7,26 +7,25 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.view.Window
-import android.widget.ImageButton
 import android.widget.ImageView
 import android.widget.TextView
-import android.widget.Toast
-import androidx.cardview.widget.CardView
 import androidx.constraintlayout.widget.ConstraintLayout
-import androidx.coordinatorlayout.widget.CoordinatorLayout
 import androidx.fragment.app.DialogFragment
-import androidx.fragment.app.Fragment
+import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
 import com.google.android.material.bottomnavigation.BottomNavigationView
+import com.utechia.domain.moodel.ReservationModel
 import com.utechia.tdf.R
-import com.utechia.tdf.databinding.FragmentNotificationBinding
 import com.utechia.tdf.databinding.FragmentResultBinding
+import com.utechia.tdf.viewmodel.ReservationViewModel
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
 class ResultFragment : DialogFragment() {
 
     private lateinit var binding: FragmentResultBinding
+    private val reservationViewModel:ReservationViewModel by viewModels()
+    private lateinit var reservationModel:ReservationModel
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -61,14 +60,33 @@ class ResultFragment : DialogFragment() {
         title.visibility = View.VISIBLE
         subTitle.visibility = View.VISIBLE
 
+        if (arguments != null) {
+
+            reservationModel = ReservationModel(null,
+                requireArguments().getString("roomTitle",""),
+                requireArguments().getInt("capacity",0),
+                requireArguments().getString("roomImage",""),
+                requireArguments().getInt("roomId",0),
+                requireArguments().getInt("currentDay", 0).toString(),
+            requireArguments().getInt("currentMonth",0).toString(),
+                requireArguments().getString("currentYear",""),
+            requireArguments().getString("time",""),
+                requireArguments().getInt("guest",0),
+                requireArguments().getString("duration",""),
+            requireArguments().getString("description",""),
+            )
+
+        }
+
         main.background = ColorDrawable(resources.getColor(R.color.white))
 
         dialog?.setOnDismissListener {
+            reservationViewModel.reserve(reservationModel)
             findNavController().navigate(R.id.action_resultFragment_to_reservationFragment)
         }
 
         binding.btnConfirm.setOnClickListener {
-
+            reservationViewModel.reserve(reservationModel)
             findNavController().navigate(R.id.action_resultFragment_to_reservationFragment)
 
         }
