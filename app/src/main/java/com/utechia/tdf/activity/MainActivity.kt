@@ -1,148 +1,118 @@
 package com.utechia.tdf.activity
 
-import android.graphics.drawable.ColorDrawable
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.os.Handler
+import android.os.Looper
 import android.view.View
-import android.widget.ImageButton
-import android.widget.ImageView
-import android.widget.TextView
 import android.widget.Toast
-import androidx.cardview.widget.CardView
-import androidx.constraintlayout.widget.ConstraintLayout
-import androidx.coordinatorlayout.widget.CoordinatorLayout
 import androidx.core.view.GravityCompat
-import androidx.drawerlayout.widget.DrawerLayout
-import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.NavHostFragment
 import androidx.navigation.ui.setupWithNavController
-import com.google.android.material.bottomnavigation.BottomNavigationView
-import com.google.android.material.navigation.NavigationView
-import com.utechia.tdf.fragment.PermissionFragment
 import com.utechia.tdf.R
-import com.utechia.tdf.fragment.*
+import com.utechia.tdf.databinding.ActivityMainBinding
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
 class MainActivity : AppCompatActivity() {
 
+    private lateinit var binding:ActivityMainBinding
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_main)
-
-        val navigationView:NavigationView = findViewById(R.id.navigationView)
-        val drawerLayout:DrawerLayout = findViewById(R.id.drawer_layout)
-        val itemMenu:ImageView = findViewById(R.id.menu)
-        val itemNotification:ImageView = findViewById(R.id.notification)
-        val button:ImageButton = findViewById(R.id.customButton)
-        val bottomNavigationView: BottomNavigationView = findViewById(R.id.bottom_navigation)
-        val back: ConstraintLayout = findViewById(R.id.back)
-        val name: TextView = findViewById(R.id.name)
-        val title: TextView = findViewById(R.id.title)
-        val subTitle: TextView =findViewById(R.id.subTitle)
-
-        bottomNavigationView.visibility = View.VISIBLE
-        itemNotification.isEnabled = true
-        button.visibility = View.VISIBLE
-        itemMenu.visibility = View.VISIBLE
-        back.visibility = View.GONE
-        name.visibility = View.GONE
-        title.visibility = View.VISIBLE
-        subTitle.visibility = View.VISIBLE
-
+        binding = ActivityMainBinding.inflate(layoutInflater)
+        setContentView(binding.root)
 
         val navHostFragment = supportFragmentManager.findFragmentById(R.id.nav_host_fragment) as NavHostFragment
         val navController = navHostFragment.navController
-        bottomNavigationView.setupWithNavController(navController)
 
-        button.bringToFront()
+        navController.addOnDestinationChangedListener{_, destination, _ ->
+            binding.bottomNavigation.setupWithNavController(navController)
+           when (destination.id){
 
+                R.id.homeFragment,
+                R.id.teaBoyFragment,
+                R.id.reservationFragment,
+                R.id.profileFragment,
+                R.id.qrCodeFragment -> {
 
-        itemMenu.setOnClickListener {
+                    binding.customButton.visibility = View.VISIBLE
+                    binding.bottomNavigation.visibility = View.VISIBLE
 
-            drawerLayout.openDrawer(GravityCompat.START)
+                }
+                else -> {
 
-        }
+                    binding.customButton.visibility = View.GONE
+                    binding.bottomNavigation.visibility = View.GONE
 
-        itemNotification.setOnClickListener {
-
-            val fragment:Fragment = NotificationFragment()
-
-            supportFragmentManager
-                .beginTransaction()
-                .addToBackStack(null)
-                .replace(navHostFragment.id,fragment)
-                .commit()
-
-        }
-
-        button.setOnClickListener {
-
-            val fragment:Fragment = QrCodeFragment()
-
-            supportFragmentManager
-                .beginTransaction()
-                .addToBackStack(null)
-                .replace(navHostFragment.id,fragment)
-                .commit()
+                }
 
         }
 
-        navigationView.setNavigationItemSelectedListener {
 
-            when(it.itemId){
+
+        }
+
+        binding.bottomNavigation.setupWithNavController(navController)
+
+        binding.menu.setOnClickListener {
+
+            binding.drawerLayout.openDrawer(GravityCompat.END)
+
+        }
+
+        binding.customButton.apply {
+
+            this.bringToFront()
+
+            setOnClickListener {
+
+                navController.navigate(R.id.qrCodeFragment)
+
+            }
+        }
+
+
+        binding.navigationView.setNavigationItemSelectedListener {
+
+            when(it.itemId) {
 
                 R.id.surveySystemFragment -> {
 
-                    drawerLayout.closeDrawer(GravityCompat.START)
+                    binding.drawerLayout.closeDrawer(GravityCompat.END)
 
-                    Handler().postDelayed({
+                    Handler(Looper.getMainLooper()).postDelayed({
 
-                        val fragment:Fragment = SurveySystemFragment()
+                        navController.navigateUp()
+                        navController.navigate(R.id.surveySystemFragment)
 
-                        supportFragmentManager
-                            .beginTransaction()
-                            .addToBackStack(null)
-                            .replace(navHostFragment.id,fragment)
-                            .commit()
-                    },300)
+                    }, 300)
 
                     true
                 }
                 R.id.eventSystemFragment -> {
 
-                    drawerLayout.closeDrawer(GravityCompat.START)
+                    binding.drawerLayout.closeDrawer(GravityCompat.END)
 
-                    Handler().postDelayed({
-                        val fragment:Fragment = EventSystemFragment()
+                    Handler(Looper.getMainLooper()).postDelayed({
 
-                        supportFragmentManager
-                            .beginTransaction()
-                            .addToBackStack(null)
-                            .replace(navHostFragment.id,fragment)
-                            .commit()
-                    },300)
+                        navController.navigateUp()
+                        navController.navigate(R.id.eventSystemFragment)
 
-
-
+                    }, 300)
 
                     true
                 }
                 R.id.ticketSystemFragment -> {
 
-                    drawerLayout.closeDrawer(GravityCompat.START)
+                    binding.drawerLayout.closeDrawer(GravityCompat.END)
 
-                    Handler().postDelayed({
-                        val fragment:Fragment = TicketSystemFragment()
+                    Handler(Looper.getMainLooper()).postDelayed({
 
-                        supportFragmentManager
-                            .beginTransaction()
-                            .addToBackStack(null)
-                            .replace(navHostFragment.id,fragment)
-                            .commit()
+                        navController.navigateUp()
+                        navController.navigate(R.id.ticketSystemFragment)
 
-                    },300)
+                    }, 300)
 
 
                     true
@@ -150,46 +120,38 @@ class MainActivity : AppCompatActivity() {
 
                 R.id.calendarFragment -> {
 
-                    drawerLayout.closeDrawer(GravityCompat.START)
+                    binding.drawerLayout.closeDrawer(GravityCompat.END)
 
-                    Handler().postDelayed({
-                        val fragment:Fragment = CalendarFragment()
+                    Handler(Looper.getMainLooper()).postDelayed({
 
-                        supportFragmentManager
-                            .beginTransaction()
-                            .addToBackStack(null)
-                            .replace(navHostFragment.id,fragment)
-                            .commit()
+                        navController.navigateUp()
+                        navController.navigate(R.id.calendarFragment)
 
-                    },300)
+                    }, 300)
 
                     true
                 }
 
                 R.id.permissionFragment -> {
 
-                    drawerLayout.closeDrawer(GravityCompat.START)
+                    binding.drawerLayout.closeDrawer(GravityCompat.END)
 
-                    Handler().postDelayed({
+                    Handler(Looper.getMainLooper()).postDelayed({
 
-                        val fragment:Fragment = PermissionFragment()
+                        navController.navigateUp()
+                        navController.navigate(R.id.permissionFragment)
 
-                        supportFragmentManager
-                            .beginTransaction()
-                            .addToBackStack(null)
-                            .replace(navHostFragment.id,fragment)
-                            .commit()
-                    },300)
+                    }, 300)
 
                     true
                 }
                 R.id.exit -> {
 
-                    drawerLayout.closeDrawer(GravityCompat.START)
+                    binding.drawerLayout.closeDrawer(GravityCompat.END)
 
-                    Handler().postDelayed({
-                        Toast.makeText(this,"Log out",Toast.LENGTH_SHORT).show()
-                                          },300)
+                    Handler(Looper.getMainLooper()).postDelayed({
+                        Toast.makeText(this, "Log out", Toast.LENGTH_SHORT).show()
+                    }, 300)
 
 
                     true
@@ -197,13 +159,9 @@ class MainActivity : AppCompatActivity() {
 
                 else -> {
                     false
+                }
+
             }
-
-
-
-        }
-
-
 
         }
 

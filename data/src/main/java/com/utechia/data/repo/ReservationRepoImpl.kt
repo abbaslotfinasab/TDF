@@ -1,62 +1,58 @@
 package com.utechia.data.repo
 
 import com.utechia.data.api.Service
-import com.utechia.data.dao.ReservationDao
-import com.utechia.data.mapper.ReservationMapper
-import com.utechia.data.utile.NetworkHandler
-import com.utechia.domain.moodel.ReservationModel
+import com.utechia.data.entity.Invite
+import com.utechia.data.entity.Reservation
+import com.utechia.domain.model.ReservationModel
 import com.utechia.domain.repository.ReservationRepo
-import java.io.IOException
 import javax.inject.Inject
+import javax.inject.Singleton
 
+@Singleton
 class ReservationRepoImpl @Inject constructor(
 
-    private val reservationMapper:dagger.Lazy<ReservationMapper>,
-    private val reservationDao: ReservationDao,
     private val service: Service,
-    private val networkHandler: NetworkHandler
 
     ): ReservationRepo {
 
-    @Throws(IOException::class)
+    private var reservation:MutableList<Reservation> = mutableListOf()
+    private var invite:MutableList<Invite> = mutableListOf()
+
     override suspend fun reserve(reservationModel: ReservationModel) {
 
-        if(networkHandler.isNetworkConnected()) {
-
-            reservationDao.saveReservation(reservationMapper.get().toMapper(reservationModel))
+        reservationModel.invite.map {
+            invite.add(
+                Invite(
+                    it.id,
+                    it.name,
+                    it.image,
+                    it.profession,
+                    it.invited
+                )
+            )
         }
-
-        else
-            throw IOException("No Internet Connection")
-
-
+        reservation.add(
+            Reservation(
+                reservationModel.id,
+                reservationModel.title,
+                reservationModel.capacity,
+                reservationModel.room_id,
+                reservationModel.day,
+                reservationModel.month,
+                reservationModel.year,
+                reservationModel.starTime,
+                reservationModel.endTime,
+                reservationModel.duration,
+                reservationModel.description,
+                invite
+            )
+        )
     }
 
-    override suspend fun getAll(): MutableList<ReservationModel> {
+    override suspend fun getAll(): MutableList<ReservationModel> =
+        reservation.map { it.toDomain() }.toMutableList()
 
-        if(networkHandler.isNetworkConnected()) {
 
-            return reservationDao.getAll().map {
-
-                reservationMapper.get().inMapper(it)
-
-            }.toMutableList()
-
-        }
-        else
-            throw IOException("No Internet Connection")
-
-    }
-
-    override suspend fun get(id: Int): ReservationModel {
-
-        if(networkHandler.isNetworkConnected()) {
-
-            return reservationMapper.get().inMapper(reservationDao.get(id))
-
-        }
-        throw IOException("No Internet Connection")
-
-    }
+    override suspend fun get(id: Int): ReservationModel = reservation[id].toDomain()
 
 }

@@ -5,7 +5,7 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.utechia.domain.moodel.RoomModel
+import com.utechia.domain.model.RoomModel
 import com.utechia.domain.usecases.RoomUseCaseImpl
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.CoroutineExceptionHandler
@@ -30,11 +30,15 @@ class RoomViewModel @Inject constructor(
         _roomModel.postValue(exception.message?.let { Result.Error(it) })
     }
 
-    fun getRoom(day_id:Int,month_id:Int){
+    init {
+        getRoom()
+    }
+
+    private fun getRoom(){
 
         viewModelScope.launch(Dispatchers.IO+handler) {
 
-            roomUseCaseImpl.execute(day_id,month_id).let {
+            roomUseCaseImpl.execute().let {
 
                 _roomModel.postValue(Result.Success(it))
 

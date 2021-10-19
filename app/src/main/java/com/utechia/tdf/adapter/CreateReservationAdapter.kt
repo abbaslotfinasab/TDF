@@ -9,7 +9,7 @@ import androidx.constraintlayout.widget.ConstraintLayout
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
-import com.utechia.domain.moodel.RoomModel
+import com.utechia.domain.model.RoomModel
 import com.utechia.tdf.R
 import java.text.SimpleDateFormat
 import java.util.*
@@ -194,7 +194,6 @@ class CreateReservationAdapter: RecyclerView.Adapter<RecyclerView.ViewHolder>() 
 
         private val roomTitle: TextView = itemView.findViewById(R.id.roomTitle)
         private val capacity:TextView = itemView.findViewById(R.id.capacity)
-        private val roomImage:ImageView = itemView.findViewById(R.id.roomImage)
         private val back:ConstraintLayout = itemView.findViewById(R.id.backArrow)
         private val forward:ConstraintLayout = itemView.findViewById(R.id.forwardArrow)
         private val recyclerView:RecyclerView = itemView.findViewById(R.id.roomRecyclerView)
@@ -207,12 +206,6 @@ class CreateReservationAdapter: RecyclerView.Adapter<RecyclerView.ViewHolder>() 
             roomTitle.text = roomModel[position-1].name
 
             capacity.text = roomModel[position-1].capacity.toString()
-
-            Glide.with(itemView.context)
-                .load(roomModel[position-1].image)
-                .centerCrop().centerInside()
-                .error(R.drawable.room)
-                .into(roomImage)
 
             mAdapter = TimePickerAdapter(timeList,this@CreateReservationAdapter,position-1)
 

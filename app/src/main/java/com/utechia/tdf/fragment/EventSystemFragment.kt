@@ -32,28 +32,6 @@ class EventSystemFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
 
 
-        val navBar: BottomNavigationView = requireActivity().findViewById(R.id.bottom_navigation)
-        val custom: ImageView = requireActivity().findViewById(R.id.customButton)
-        val menu: ImageView = requireActivity().findViewById(R.id.menu)
-        val back: ConstraintLayout = requireActivity().findViewById(R.id.back)
-        val name: TextView = requireActivity().findViewById(R.id.name)
-        val title: TextView = requireActivity().findViewById(R.id.title)
-        val subTitle: TextView = requireActivity().findViewById(R.id.subTitle)
-        navBar.visibility = View.GONE
-        custom.visibility = View.GONE
-        menu.visibility = View.GONE
-        back.visibility = View.VISIBLE
-        name.visibility = View.VISIBLE
-        name.text = "Event"
-        title.visibility = View.GONE
-        subTitle.visibility = View.GONE
-
-
-        back.setOnClickListener {
-
-            activity?.supportFragmentManager?.popBackStack()
-        }
-
 
 
 

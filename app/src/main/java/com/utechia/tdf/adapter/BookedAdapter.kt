@@ -4,12 +4,11 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.TextView
-import android.widget.Toast
 import androidx.appcompat.widget.AppCompatButton
 import androidx.core.os.bundleOf
 import androidx.navigation.findNavController
 import androidx.recyclerview.widget.RecyclerView
-import com.utechia.domain.moodel.ReservationModel
+import com.utechia.domain.model.ReservationModel
 import com.utechia.tdf.R
 
 class BookedAdapter:RecyclerView.Adapter<RecyclerView.ViewHolder>() {
@@ -54,28 +53,12 @@ class BookedAdapter:RecyclerView.Adapter<RecyclerView.ViewHolder>() {
         fun bind0(position: Int) {
 
             roomTitle.text = bookList[position].title
-            roomTime.text = bookList[position].time
             roomDuration.text = bookList[position].duration
             roomDate.text =  bookList[position].month +"/"+bookList[position].day+"/"+bookList[position].year
-            more.setOnClickListener {
-                val bundle = bundleOf(
-                    "currentDay" to bookList[position].day!!.toInt(),
-                    "currentMonth" to bookList[position].month!!.toInt()-1,
-                    "roomId" to bookList[position].room_id,
-                    "roomTitle" to bookList[position].title,
-                    "capacity" to bookList[position].capacity,
-                    "imageRoom" to bookList[position].roomImage,
-                    "time" to bookList[position].time,
-                    "duration" to bookList[position].duration,
-                    "description" to bookList[position].description,
-                    "kind" to 1
 
 
-                )
+                itemView.findNavController().navigate(R.id.action_reservationFragment_to_reservationDetails)
 
-                itemView.findNavController().navigate(R.id.action_reservationFragment_to_reservationDetails,bundle)
-
-            }
 
         }
     }

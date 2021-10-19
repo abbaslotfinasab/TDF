@@ -1,6 +1,6 @@
 package com.utechia.domain.repository
 
-import com.utechia.domain.moodel.ReservationModel
+import com.utechia.domain.model.ReservationModel
 
 interface ReservationRepo {
 

@@ -1,4 +1,4 @@
-package com.utechia.domain.moodel
+package com.utechia.domain.model
 
 data class ReservationModel(
 
@@ -8,8 +8,6 @@ data class ReservationModel(
 
     var capacity :Int?,
 
-    var roomImage:String?,
-
     var room_id:Int?,
 
     var day:String?,
@@ -18,16 +16,14 @@ data class ReservationModel(
 
     var year:String?,
 
-    var time:String?,
+    var starTime:String?,
 
-    var guest:Int?,
+    var endTime:String?,
 
     var duration:String?,
 
     var description:String?,
 
-   /* var guest:MutableList<Int>,*/
-
-
+    var invite: MutableList<InviteModel>
 
 )

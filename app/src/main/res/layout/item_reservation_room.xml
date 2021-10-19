@@ -14,7 +14,7 @@
         android:layout_marginTop="5dp"
         android:text="Meeting Room 1"
         android:textColor="@color/black"
-        android:textSize="@dimen/_14ssp"
+        android:textSize="16sp"
         android:textStyle="bold"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
@@ -27,7 +27,7 @@
         android:layout_marginEnd="2dp"
         android:textColor="@color/black"
         android:text="Capacity:"
-        android:textSize="@dimen/_12ssp"
+        android:textSize="12sp"
         app:layout_constraintEnd_toStartOf="@+id/capacity"
         app:layout_constraintTop_toTopOf="parent" />
 
@@ -39,7 +39,7 @@
         android:layout_marginEnd="20dp"
         android:text="6"
         android:textColor="@color/black"
-        android:textSize="@dimen/_12ssp"
+        android:textSize="12sp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
@@ -50,7 +50,7 @@
         android:layout_marginStart="20dp"
         android:layout_marginTop="20dp"
         android:layout_marginEnd="20dp"
-        app:cardCornerRadius="@dimen/_15sdp"
+        app:cardCornerRadius="16dp"
         app:cardPreventCornerOverlap="true"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -59,7 +59,7 @@
         <ImageView
             android:id="@+id/roomImage"
             android:layout_width="match_parent"
-            android:layout_height="@dimen/_110sdp"
+            android:layout_height="11dp"
             android:scaleType="fitXY" />
 
     </androidx.cardview.widget.CardView>
@@ -136,7 +136,7 @@
     <Space
         android:id="@+id/last"
         android:layout_width="match_parent"
-        android:layout_height="@dimen/_30sdp"
+        android:layout_height="30dp"
         android:visibility="gone"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintTop_toBottomOf="@id/roomRecyclerView"

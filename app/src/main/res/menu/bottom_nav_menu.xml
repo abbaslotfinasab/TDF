@@ -1,17 +1,16 @@
 <?xml version="1.0" encoding="utf-8"?>
-
 <menu
     xmlns:android="http://schemas.android.com/apk/res/android">
 
     <item
         android:id="@+id/homeFragment"
-        android:icon="@drawable/ic_home"
-        android:title="Home"/>
+        android:icon="@drawable/ic_hous"
+        android:title="HOME"/>
 
     <item
         android:id="@+id/teaBoyFragment"
-        android:icon="@drawable/ic_teaboy"
-        android:title="TeaBoy"/>
+        android:icon="@drawable/ic_coffee"
+        android:title="REFRESHMENTS"/>
 
     <item
         android:id="@+id/navigation_qrcode"
@@ -23,13 +22,11 @@
     <item
         android:id="@+id/reservationFragment"
         android:icon="@drawable/ic_reservation"
-        android:title="Reservation"/>
+        android:title="RESERVATION"/>
 
     <item
         android:id="@+id/profileFragment"
         android:icon="@drawable/ic_profile"
-        android:title="Profile"/>
-
-
+        android:title="PROFILE"/>
 
 </menu>

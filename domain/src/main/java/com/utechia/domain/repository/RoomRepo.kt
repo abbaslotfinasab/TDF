@@ -1,9 +1,9 @@
 package com.utechia.domain.repository
 
-import com.utechia.domain.moodel.RoomModel
+import com.utechia.domain.model.RoomModel
 
 interface RoomRepo {
 
-    suspend fun getRoom(day_id: Int,month_id:Int):MutableList<RoomModel>
+    suspend fun getRoom():MutableList<RoomModel>
 
 }

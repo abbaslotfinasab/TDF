@@ -12,7 +12,7 @@
         android:layout_marginTop="10dp"
         android:text="Date"
         android:textColor="@color/black"
-        android:textSize="@dimen/_14ssp"
+        android:textSize="14sp"
         android:textStyle="bold"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
@@ -23,7 +23,7 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="10dp"
         android:layout_marginEnd="20dp"
-        android:paddingEnd="@dimen/_11sdp"
+        android:paddingEnd="12sp"
         android:background="@drawable/spinner_item"
         android:popupBackground="@drawable/spinner_back"
         android:entries="@array/month_array"
