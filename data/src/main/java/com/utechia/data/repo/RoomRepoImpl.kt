@@ -1,6 +1,5 @@
 package com.utechia.data.repo
 
-import com.utechia.data.api.Service
 import com.utechia.data.entity.Hour
 import com.utechia.data.entity.Room
 import com.utechia.domain.model.RoomModel
@@ -11,7 +10,7 @@ import javax.inject.Singleton
 @Singleton
 class RoomRepoImpl @Inject constructor(
 
-    private val service: Service,
+  /*  private val service: Service,*/
 
     ):RoomRepo {
 
@@ -40,12 +39,12 @@ class RoomRepoImpl @Inject constructor(
         hour.add(Hour(17,"16:30",true))
 
         room.clear()
-        room.add(Room(0,"11th floor meeting Room 1",6 ,hour))
-        room.add(Room(1,"11th floor meeting Room 2",9 ,hour))
-        room.add(Room(2,"12th floor meeting Room 3",3 ,hour))
-        room.add(Room(3,"12th floor meeting Room 4",12 ,hour))
-        room.add(Room(4,"13th floor meeting Room 5",7 ,hour))
-        room.add(Room(5,"13th floor meeting Room 6",20 ,hour))
+        room.add(Room(0,"Meeting Room 1","11th floor",6 ,hour))
+        room.add(Room(1,"Meeting Room 2","12th floor",9 ,hour))
+        room.add(Room(2,"Meeting Room 3","13th floor",3 ,hour))
+        room.add(Room(3,"Meeting Room 4","14th floor",12 ,hour))
+        room.add(Room(4,"Meeting Room 5","15th floor",7 ,hour))
+        room.add(Room(5,"Meeting Room 6","16th floor",20 ,hour))
 
         return room.map { it.toDomain() }.toMutableList()
 

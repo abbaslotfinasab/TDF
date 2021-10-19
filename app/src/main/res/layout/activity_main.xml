@@ -17,7 +17,7 @@
         <androidx.constraintlayout.widget.ConstraintLayout
             android:id="@+id/toolbar"
             android:layout_width="match_parent"
-            android:layout_height="100dp"
+            android:layout_height="115dp"
             android:background="#001133"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
@@ -25,10 +25,11 @@
 
             <ImageView
                 android:id="@+id/profilePicture"
-                android:layout_width="50dp"
-                android:layout_height="50dp"
+                android:layout_width="51dp"
+                android:layout_height="51dp"
                 android:layout_marginStart="20dp"
-                android:src="@drawable/ic_baseline_person_24"
+                android:src="@mipmap/profile"
+                android:scaleType="centerInside"
                 android:background="@drawable/profilebackground"
                 app:layout_constraintBottom_toBottomOf="@+id/toolbar"
                 app:layout_constraintStart_toStartOf="@+id/toolbar"
@@ -98,7 +99,7 @@
         <com.google.android.material.bottomnavigation.BottomNavigationView
             android:id="@+id/bottom_navigation"
             android:layout_width="match_parent"
-            android:layout_height="100dp"
+            android:layout_height="115dp"
             android:elevation="5dp"
             android:background="#305CE0"
             app:itemIconTint="@drawable/nav_item"
@@ -111,13 +112,14 @@
 
         <ImageButton
             android:id="@+id/customButton"
-            android:layout_width="80dp"
-            android:layout_height="80dp"
-            android:background="@drawable/button_border"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:background="@null"
+            android:src="@mipmap/btn"
+            android:scaleType="centerCrop"
             android:clickable="true"
             android:elevation="10dp"
             android:focusable="true"
-            android:src="@drawable/ic_scan"
             app:layout_constraintBottom_toBottomOf="@+id/nav_host_fragment"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
@@ -130,8 +132,6 @@
         android:layout_width="wrap_content"
         android:layout_height="match_parent"
         android:layout_gravity="end"
-        android:theme="@style/NavigationTheme"
-        android:background="@drawable/navigation_drawer"
         app:headerLayout="@layout/header_navigation_drawer"
         app:menu="@menu/navigation_drawer">
 
@@ -150,14 +150,13 @@
                 android:layout_height="wrap_content"
                 android:layout_marginStart="20dp"
                 android:layout_gravity="center_vertical"
-                android:src="@drawable/ic_baseline_power_settings_new_24"/>
+                android:src="@drawable/ic_export"/>
 
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="10dp"
                 android:textSize="12sp"
-                android:textStyle="bold"
                 android:textColor="@color/black"
                 android:layout_gravity="center_vertical"
                 android:text="Exit"/>

@@ -1,6 +1,7 @@
 <resources>
     <string name="app_name">TDF</string>
     <string name="hello_blank_fragment">Hello blank fragment</string>
+
     <string-array name="month_array">
         <item>January</item>
         <item>February</item>
@@ -14,14 +15,6 @@
         <item>October</item>
         <item>November</item>
         <item>December</item>
-    </string-array>
-
-    <string-array name="people_array">
-        <item>John Dao</item>
-        <item>John Dao</item>
-        <item>John Dao</item>
-        <item>John Dao</item>
-        <item>John Dao</item>
     </string-array>
 
 </resources>

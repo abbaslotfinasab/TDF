@@ -5,6 +5,8 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
+import androidx.navigation.fragment.findNavController
+import com.utechia.tdf.R
 import com.utechia.tdf.databinding.FragmentTicketSystemBinding
 import dagger.hilt.android.AndroidEntryPoint
 
@@ -26,9 +28,9 @@ class TicketSystemFragment : Fragment() {
 
 
         binding.plusT.setOnClickListener {
-/*
-            findNavController().navigate(R.id.action_reservationFragment_to_createReservationFragment)
-*/
+
+            findNavController().navigate(R.id.action_ticketSystemFragment_to_createTicketFragment)
+
         }
 
 

@@ -6,6 +6,8 @@ data class RoomModel(
 
      var name:String?,
 
+     var floor:String?,
+
      var capacity:Int?,
 
      var hour:MutableList<HourModel>

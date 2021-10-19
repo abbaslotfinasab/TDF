@@ -4,7 +4,7 @@ import android.os.Parcelable
 import com.squareup.moshi.JsonClass
 import com.utechia.data.base.ResponseObject
 import com.utechia.domain.model.RoomModel
-import kotlinx.android.parcel.Parcelize
+import kotlinx.parcelize.Parcelize
 
 
 @Parcelize
@@ -15,6 +15,8 @@ data class Room(
 
     var name:String?,
 
+    var floor:String?,
+
     var capacity:Int?,
 
     var hour:MutableList<Hour>
@@ -23,6 +25,6 @@ data class Room(
 
 ):Parcelable , ResponseObject<RoomModel> {
     override fun toDomain(): RoomModel {
-        return RoomModel(id,name,capacity,hour.map {it.toDomain()}.toMutableList())
+        return RoomModel(id,name,floor,capacity,hour.map {it.toDomain()}.toMutableList())
     }
 }

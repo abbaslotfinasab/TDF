@@ -8,10 +8,13 @@ import android.widget.Toast
 import com.utechia.domain.utile.Result
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
+import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
+import com.utechia.tdf.R
 import com.utechia.tdf.adapter.BookedAdapter
 import com.utechia.tdf.databinding.FragmentReservationBinding
 import com.utechia.tdf.utile.ItemDecorationBooked
+import com.utechia.tdf.utile.ItemDecorationReservation
 import com.utechia.tdf.viewmodel.ReservationViewModel
 import dagger.hilt.android.AndroidEntryPoint
 
@@ -38,9 +41,9 @@ class ReservationFragment : Fragment() {
 
         binding.plus.setOnClickListener {
 
-/*
+
             findNavController().navigate(R.id.action_reservationFragment_to_createReservationFragment)
-*/
+
         }
 
 
@@ -48,6 +51,7 @@ class ReservationFragment : Fragment() {
             adapter =bookedAdapter
             addItemDecoration(ItemDecorationBooked())
             layoutManager = LinearLayoutManager(context,LinearLayoutManager.VERTICAL,false)
+        addItemDecoration(ItemDecorationReservation())
         }
 
         reservationViewModel.getBooked()

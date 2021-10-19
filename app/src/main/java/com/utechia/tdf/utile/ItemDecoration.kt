@@ -14,8 +14,10 @@ class ItemDecorationReservation: RecyclerView.ItemDecoration() {
         @NonNull parent: RecyclerView,
         @NonNull state: RecyclerView.State
     ) {
-            outRect.bottom = 30
-            outRect.top = 30
+        outRect.bottom = 10
+        outRect.top = 10
+        outRect.left = 10
+        outRect.right = 10
 
 
     }
