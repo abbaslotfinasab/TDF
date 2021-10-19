@@ -41,7 +41,7 @@ class MainActivity : AppCompatActivity() {
 
                 }
                 else -> {
-
+                    binding.drawerLayout.closeDrawer(GravityCompat.END)
                     binding.customButton.visibility = View.GONE
                     binding.bottomNavigation.visibility = View.GONE
 
@@ -79,40 +79,34 @@ class MainActivity : AppCompatActivity() {
 
                 R.id.surveySystemFragment -> {
 
-                    binding.drawerLayout.closeDrawer(GravityCompat.END)
-
                     Handler(Looper.getMainLooper()).postDelayed({
 
                         navController.navigateUp()
                         navController.navigate(R.id.surveySystemFragment)
 
-                    }, 300)
+                    }, 50)
 
                     true
                 }
                 R.id.eventSystemFragment -> {
-
-                    binding.drawerLayout.closeDrawer(GravityCompat.END)
 
                     Handler(Looper.getMainLooper()).postDelayed({
 
                         navController.navigateUp()
                         navController.navigate(R.id.eventSystemFragment)
 
-                    }, 300)
+                    }, 50)
 
                     true
                 }
                 R.id.ticketSystemFragment -> {
-
-                    binding.drawerLayout.closeDrawer(GravityCompat.END)
 
                     Handler(Looper.getMainLooper()).postDelayed({
 
                         navController.navigateUp()
                         navController.navigate(R.id.ticketSystemFragment)
 
-                    }, 300)
+                    }, 50)
 
 
                     true
@@ -120,39 +114,25 @@ class MainActivity : AppCompatActivity() {
 
                 R.id.calendarFragment -> {
 
-                    binding.drawerLayout.closeDrawer(GravityCompat.END)
-
                     Handler(Looper.getMainLooper()).postDelayed({
 
                         navController.navigateUp()
                         navController.navigate(R.id.calendarFragment)
 
-                    }, 300)
+                    }, 50)
+
 
                     true
                 }
 
                 R.id.permissionFragment -> {
 
-                    binding.drawerLayout.closeDrawer(GravityCompat.END)
-
                     Handler(Looper.getMainLooper()).postDelayed({
 
                         navController.navigateUp()
                         navController.navigate(R.id.permissionFragment)
 
-                    }, 300)
-
-                    true
-                }
-                R.id.exit -> {
-
-                    binding.drawerLayout.closeDrawer(GravityCompat.END)
-
-                    Handler(Looper.getMainLooper()).postDelayed({
-                        Toast.makeText(this, "Log out", Toast.LENGTH_SHORT).show()
-                    }, 300)
-
+                    }, 50)
 
                     true
                 }
@@ -164,6 +144,16 @@ class MainActivity : AppCompatActivity() {
             }
 
         }
+
+        binding.exit.setOnClickListener {
+
+            Handler(Looper.getMainLooper()).postDelayed({
+
+                Toast.makeText(this,"Log out",Toast.LENGTH_SHORT).show()
+
+            }, 50)
+        }
+
 
     }
 

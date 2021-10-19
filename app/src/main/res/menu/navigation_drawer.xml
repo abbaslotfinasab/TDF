@@ -29,40 +29,4 @@
             android:icon="@drawable/ic_permission"
             android:title="Request Permission" />
 
-
-    <item
-        android:title=""
-        android:enabled="false"/>
-
-
-    <item
-        android:title=""
-        android:enabled="false"/>
-
-
-    <item
-        android:title=""
-        android:enabled="false"/>
-
-
-    <item
-        android:title=""
-        android:enabled="false"/>
-
-
-    <item
-        android:title=""
-        android:enabled="false"/>
-
-
-    <item
-        android:title=""
-        android:enabled="false"/>
-
-
-    <item
-            android:id="@+id/exit"
-            android:icon="@drawable/ic_baseline_power_settings_new_24"
-            android:title="Exit" />
-
 </menu>

@@ -133,7 +133,40 @@
         android:theme="@style/NavigationTheme"
         android:background="@drawable/navigation_drawer"
         app:headerLayout="@layout/header_navigation_drawer"
-        app:menu="@menu/navigation_drawer"/>
+        app:menu="@menu/navigation_drawer">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/exit"
+            android:layout_gravity="bottom"
+            android:paddingBottom="20dp"
+            android:clickable="true"
+            android:orientation="horizontal"
+            android:focusable="true">
+
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="20dp"
+                android:layout_gravity="center_vertical"
+                android:src="@drawable/ic_baseline_power_settings_new_24"/>
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="10dp"
+                android:textSize="12sp"
+                android:textStyle="bold"
+                android:textColor="@color/black"
+                android:layout_gravity="center_vertical"
+                android:text="Exit"/>
+
+
+        </LinearLayout>
+
+
+    </com.google.android.material.navigation.NavigationView>
 
 
 </androidx.drawerlayout.widget.DrawerLayout>
