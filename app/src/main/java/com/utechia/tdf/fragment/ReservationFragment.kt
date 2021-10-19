@@ -1,17 +1,14 @@
 package com.utechia.tdf.fragment
 
-
-
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Toast
 import com.utechia.domain.utile.Result
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
-import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
-import com.utechia.tdf.R
 import com.utechia.tdf.adapter.BookedAdapter
 import com.utechia.tdf.databinding.FragmentReservationBinding
 import com.utechia.tdf.utile.ItemDecorationBooked
@@ -41,7 +38,9 @@ class ReservationFragment : Fragment() {
 
         binding.plus.setOnClickListener {
 
+/*
             findNavController().navigate(R.id.action_reservationFragment_to_createReservationFragment)
+*/
         }
 
 
@@ -67,17 +66,13 @@ class ReservationFragment : Fragment() {
                         binding.createLayout.visibility = View.VISIBLE
                         binding.bookedRecyclerView.visibility = View.GONE
                         binding.prg.visibility = View.GONE
-                        binding.errorText.visibility = View.GONE
-                        binding.btnRefresh.visibility = View.GONE
+
 
                     }
                     else{
                         binding.createLayout.visibility = View.GONE
-
                         binding.bookedRecyclerView.visibility = View.VISIBLE
                         binding.prg.visibility = View.GONE
-                        binding.errorText.visibility = View.GONE
-                        binding.btnRefresh.visibility = View.GONE
                         bookedAdapter.addData(it.data)
 
                     }
@@ -88,26 +83,14 @@ class ReservationFragment : Fragment() {
                     binding.createLayout.visibility = View.GONE
                     binding.bookedRecyclerView.visibility = View.GONE
                     binding.prg.visibility = View.VISIBLE
-                    binding.errorText.visibility = View.GONE
-                    binding.btnRefresh.visibility = View.GONE
-
-
 
                 }
 
                 is Result.Error ->{
-                    binding.errorText.apply {
-                        visibility = View.VISIBLE
-                        text = it.message
-                    }
-                    binding.btnRefresh.apply {
-                        visibility = View.VISIBLE
-                        setOnClickListener {
-                            findNavController().navigate(R.id.action_reservationFragment_self)
-                        }
-                    }
-
-
+                    binding.createLayout.visibility = View.GONE
+                    binding.bookedRecyclerView.visibility = View.GONE
+                    binding.prg.visibility = View.GONE
+                    Toast.makeText(context,it.message,Toast.LENGTH_SHORT).show()
                 }
             }
 

@@ -6,7 +6,6 @@
     android:id="@+id/drawer_layout"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:fitsSystemWindows="true"
     tools:openDrawer="end">
 
     <androidx.constraintlayout.widget.ConstraintLayout
@@ -131,8 +130,6 @@
         android:layout_width="wrap_content"
         android:layout_height="match_parent"
         android:layout_gravity="end"
-        android:fitsSystemWindows="true"
-        android:layout_marginTop="38dp"
         android:theme="@style/NavigationTheme"
         android:background="@drawable/navigation_drawer"
         app:headerLayout="@layout/header_navigation_drawer"
