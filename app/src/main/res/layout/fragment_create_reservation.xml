@@ -8,9 +8,10 @@
     tools:context="fragment.CreateReservationFragment">
 
     <TextView
-        android:id="@+id/textView"
+        android:id="@+id/meetingTitle"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:visibility="gone"
         android:layout_marginTop="35dp"
         android:gravity="center"
         android:text="Reserve Meeting Room"
@@ -21,12 +22,13 @@
         app:layout_constraintTop_toTopOf="parent" />
 
     <androidx.constraintlayout.widget.ConstraintLayout
-        android:id="@+id/constraintLayout4"
+        android:id="@+id/calendarLayout"
         android:layout_width="match_parent"
-        android:layout_height="76dp"
+        android:visibility="gone"
+        android:layout_height="79dp"
         android:layout_marginTop="27dp"
         android:background="@color/white"
-        app:layout_constraintTop_toBottomOf="@+id/textView">
+        app:layout_constraintTop_toBottomOf="@+id/meetingTitle">
 
 
         <ImageView
@@ -44,38 +46,38 @@
             android:id="@+id/increaseDay"
             android:layout_width="30dp"
             android:layout_height="20dp"
-            android:layout_marginStart="35dp"
-            android:layout_marginTop="8dp"
+            android:layout_marginBottom="8dp"
             android:background="@null"
             android:scaleType="centerCrop"
             android:src="@drawable/ic_baseline_keyboard_arrow_up_24"
-            app:layout_constraintStart_toEndOf="@+id/imageView5"
-            app:layout_constraintTop_toTopOf="parent" />
+            app:layout_constraintBottom_toTopOf="@+id/day"
+            app:layout_constraintEnd_toEndOf="@+id/day"
+            app:layout_constraintStart_toStartOf="@+id/day" />
 
 
         <TextView
             android:id="@+id/day"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_marginStart="40dp"
             android:text="21"
             android:textColor="#4164E6"
             android:textSize="16sp"
-            app:layout_constraintBottom_toTopOf="@+id/decreaseDay"
-            app:layout_constraintEnd_toEndOf="@+id/decreaseDay"
-            app:layout_constraintStart_toStartOf="@+id/increaseDay"
-            app:layout_constraintTop_toBottomOf="@+id/increaseDay" />
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toEndOf="@+id/imageView5"
+            app:layout_constraintTop_toTopOf="parent" />
 
         <ImageButton
             android:id="@+id/decreaseDay"
             android:layout_width="30dp"
             android:layout_height="20dp"
-            android:layout_marginStart="35dp"
-            android:layout_marginBottom="8dp"
+            android:layout_marginTop="8dp"
             android:background="@null"
             android:scaleType="centerCrop"
             android:src="@drawable/ic_baseline_keyboard_arrow_down_24"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintStart_toEndOf="@+id/imageView5" />
+            app:layout_constraintEnd_toEndOf="@+id/day"
+            app:layout_constraintStart_toStartOf="@+id/day"
+            app:layout_constraintTop_toBottomOf="@+id/day" />
 
         <View
             android:id="@+id/view"
@@ -93,13 +95,13 @@
             android:id="@+id/increaseMonth"
             android:layout_width="30dp"
             android:layout_height="20dp"
-            android:layout_marginTop="8dp"
+            android:layout_marginBottom="8dp"
             android:background="@null"
             android:scaleType="centerCrop"
             android:src="@drawable/ic_baseline_keyboard_arrow_up_24"
-            app:layout_constraintEnd_toStartOf="@+id/increaseYear"
-            app:layout_constraintStart_toEndOf="@+id/increaseDay"
-            app:layout_constraintTop_toTopOf="parent" />
+            app:layout_constraintBottom_toTopOf="@+id/month"
+            app:layout_constraintEnd_toEndOf="@+id/month"
+            app:layout_constraintStart_toStartOf="@+id/month" />
 
         <TextView
             android:id="@+id/month"
@@ -109,22 +111,22 @@
             android:text="October"
             android:textColor="#4164E6"
             android:textSize="16sp"
-            app:layout_constraintBottom_toTopOf="@+id/decreaseMonth"
-            app:layout_constraintEnd_toEndOf="@+id/decreaseMonth"
-            app:layout_constraintStart_toStartOf="@+id/increaseMonth"
-            app:layout_constraintTop_toBottomOf="@+id/increaseMonth" />
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
 
         <ImageButton
             android:id="@+id/decreaseMonth"
             android:layout_width="30dp"
             android:layout_height="20dp"
-            android:layout_marginBottom="8dp"
+            android:layout_marginTop="8dp"
             android:background="@null"
             android:scaleType="centerCrop"
             android:src="@drawable/ic_baseline_keyboard_arrow_down_24"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toStartOf="@+id/increaseYear"
-            app:layout_constraintStart_toEndOf="@+id/decreaseDay" />
+            app:layout_constraintEnd_toEndOf="@+id/month"
+            app:layout_constraintStart_toStartOf="@+id/month"
+            app:layout_constraintTop_toBottomOf="@+id/month" />
 
         <View
             android:id="@+id/view3"
@@ -142,51 +144,52 @@
             android:id="@+id/increaseYear"
             android:layout_width="30dp"
             android:layout_height="20dp"
-            android:layout_marginTop="8dp"
-            android:layout_marginEnd="40dp"
+            android:layout_marginBottom="8dp"
             android:background="@null"
             android:scaleType="centerCrop"
             android:src="@drawable/ic_baseline_keyboard_arrow_up_24"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
+            app:layout_constraintBottom_toTopOf="@+id/year"
+            app:layout_constraintEnd_toEndOf="@+id/year"
+            app:layout_constraintStart_toStartOf="@+id/year" />
 
 
         <TextView
             android:id="@+id/year"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_marginEnd="82dp"
             android:text="2021"
             android:textColor="#4164E6"
             android:textSize="16sp"
-            app:layout_constraintBottom_toTopOf="@+id/decreaseYear"
-            app:layout_constraintEnd_toEndOf="@+id/decreaseYear"
-            app:layout_constraintStart_toStartOf="@+id/increaseYear"
-            app:layout_constraintTop_toBottomOf="@+id/increaseYear" />
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
 
 
         <ImageButton
             android:id="@+id/decreaseYear"
             android:layout_width="30dp"
             android:layout_height="20dp"
-            android:layout_marginEnd="40dp"
-            android:layout_marginBottom="8dp"
+            android:layout_marginTop="8dp"
             android:background="@null"
             android:scaleType="centerCrop"
             android:src="@drawable/ic_baseline_keyboard_arrow_down_24"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent" />
+            app:layout_constraintEnd_toEndOf="@+id/year"
+            app:layout_constraintStart_toStartOf="@+id/year"
+            app:layout_constraintTop_toBottomOf="@+id/year" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 
     <androidx.constraintlayout.widget.ConstraintLayout
-        android:id="@+id/constraintLayout6"
+        android:id="@+id/roomLayout"
+        android:visibility="gone"
         android:layout_width="match_parent"
         android:layout_height="90dp"
         android:layout_marginTop="10dp"
         android:background="@color/white"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/constraintLayout4">
+        app:layout_constraintTop_toBottomOf="@+id/calendarLayout">
 
         <ImageView
             android:id="@+id/imageView6"
@@ -203,21 +206,21 @@
             android:id="@+id/increaseRoom"
             android:layout_width="30dp"
             android:layout_height="20dp"
-            android:layout_marginTop="10dp"
+            android:layout_marginBottom="10dp"
             android:background="@null"
             android:scaleType="centerCrop"
             android:src="@drawable/ic_baseline_keyboard_arrow_up_24"
+            app:layout_constraintBottom_toTopOf="@+id/roomTitle"
             app:layout_constraintEnd_toEndOf="@+id/roomTitle"
-            app:layout_constraintStart_toStartOf="@+id/roomTitle"
-            app:layout_constraintTop_toTopOf="parent" />
+            app:layout_constraintStart_toStartOf="@+id/roomTitle" />
 
         <TextView
             android:id="@+id/roomTitle"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginStart="35dp"
+            android:layout_marginStart="28dp"
             android:gravity="center"
-            android:text="meeting Room 1"
+            android:text="Meeting Room 1"
             android:textColor="#4164E6"
             android:textSize="16sp"
             app:layout_constraintBottom_toBottomOf="parent"
@@ -228,11 +231,10 @@
             android:id="@+id/decreaseRoom"
             android:layout_width="30dp"
             android:layout_height="20dp"
-            android:layout_marginBottom="10dp"
+            android:layout_marginTop="10dp"
             android:background="@null"
             android:scaleType="centerCrop"
             android:src="@drawable/ic_baseline_keyboard_arrow_down_24"
-            app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="@+id/roomTitle"
             app:layout_constraintStart_toStartOf="@+id/roomTitle"
             app:layout_constraintTop_toBottomOf="@+id/roomTitle" />
@@ -242,38 +244,37 @@
             android:id="@+id/increaseFloor"
             android:layout_width="30dp"
             android:layout_height="20dp"
-            android:layout_marginTop="10dp"
-            android:layout_marginEnd="40dp"
+            android:layout_marginBottom="10dp"
             android:background="@null"
             android:scaleType="centerCrop"
             android:src="@drawable/ic_baseline_keyboard_arrow_up_24"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
+            app:layout_constraintBottom_toTopOf="@+id/floor"
+            app:layout_constraintEnd_toEndOf="@+id/floor"
+            app:layout_constraintStart_toStartOf="@+id/floor" />
 
         <TextView
             android:id="@+id/floor"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_marginEnd="65dp"
             android:gravity="center"
             android:text="11th floor"
             android:textColor="#4164E6"
             android:textSize="16sp"
             app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="@+id/increaseFloor"
-            app:layout_constraintStart_toStartOf="@+id/decreaseFloor"
+            app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
 
         <ImageButton
             android:id="@+id/decreaseFloor"
             android:layout_width="30dp"
             android:layout_height="20dp"
-            android:layout_marginEnd="40dp"
-            android:layout_marginBottom="10dp"
+            android:layout_marginTop="10dp"
             android:background="@null"
             android:scaleType="centerCrop"
             android:src="@drawable/ic_baseline_keyboard_arrow_down_24"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintEnd_toEndOf="@+id/floor"
+            app:layout_constraintStart_toStartOf="@+id/floor"
             app:layout_constraintTop_toBottomOf="@+id/roomTitle" />
 
 
@@ -281,15 +282,17 @@
     </androidx.constraintlayout.widget.ConstraintLayout>
 
     <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/timeLayout"
         android:layout_width="match_parent"
         android:layout_height="0dp"
+        android:visibility="gone"
         android:layout_marginTop="10dp"
         android:layout_marginBottom="25dp"
         android:background="@color/white"
         app:layout_constraintBottom_toTopOf="@+id/appCompatButton"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/constraintLayout6">
+        app:layout_constraintTop_toBottomOf="@+id/roomLayout">
 
         <ImageView
             android:id="@+id/clockWall"
@@ -308,7 +311,6 @@
             android:layout_marginStart="35dp"
             android:layout_marginTop="10dp"
             android:gravity="center"
-            android:text="13:00 - 14:00"
             android:textColor="#4164E6"
             android:textSize="16sp"
             app:layout_constraintStart_toEndOf="@+id/clockWall"
@@ -321,7 +323,6 @@
             android:layout_marginStart="35dp"
             android:layout_marginTop="3dp"
             android:gravity="center"
-            android:text="1 hour"
             android:textColor="#4164E6"
             android:textSize="14sp"
             app:layout_constraintStart_toEndOf="@+id/clockWall"
@@ -332,7 +333,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="10dp"
-            android:layout_marginEnd="40dp"
+            android:layout_marginEnd="60dp"
             android:gravity="center"
             android:text="Capacity:"
             android:textColor="#4164E6"
@@ -371,6 +372,7 @@
 
     <androidx.appcompat.widget.AppCompatButton
         android:id="@+id/appCompatButton"
+        android:visibility="gone"
         android:layout_width="0dp"
         android:layout_height="60dp"
         android:layout_marginStart="35dp"

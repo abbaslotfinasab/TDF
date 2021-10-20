@@ -10,6 +10,7 @@ import com.utechia.domain.usecases.ReservationUseCaseImpl
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.CoroutineExceptionHandler
 import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
 import javax.inject.Inject
 
@@ -35,12 +36,15 @@ class ReservationViewModel @Inject constructor(
 
         viewModelScope.launch(Dispatchers.IO+handler) {
 
+            _reservationModel.postValue(Result.Loading)
+
+            delay(1000)
+
             reservationUseCaseImpl.getAll().let {
 
                 _reservationModel.postValue(Result.Success(it))
 
             }
-
 
         }
     }

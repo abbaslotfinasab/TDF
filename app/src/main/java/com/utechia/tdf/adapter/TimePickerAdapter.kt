@@ -9,8 +9,9 @@ import androidx.core.content.ContextCompat
 import androidx.recyclerview.widget.RecyclerView
 import com.utechia.domain.model.HourModel
 import com.utechia.tdf.R
+import com.utechia.tdf.fragment.CreateReservationFragment
 
-class TimePickerAdapter:RecyclerView.Adapter<RecyclerView.ViewHolder>() {
+class TimePickerAdapter(private val createReservationFragment: CreateReservationFragment):RecyclerView.Adapter<RecyclerView.ViewHolder>() {
 
     private val timeList:MutableList<HourModel> = mutableListOf()
 
@@ -31,7 +32,7 @@ class TimePickerAdapter:RecyclerView.Adapter<RecyclerView.ViewHolder>() {
 
     }
 
-    override fun getItemCount(): Int = timeList.size
+    override fun getItemCount(): Int = timeList.size-1
 
 
     override fun getItemViewType(position: Int): Int = position
@@ -43,8 +44,11 @@ class TimePickerAdapter:RecyclerView.Adapter<RecyclerView.ViewHolder>() {
 
         fun bind0(position: Int) {
 
-            var count = -1
+            var clicked = false
+
             title.text = timeList[position].title
+
+            back.setBackgroundColor(android.graphics.Color.parseColor("#96AAF0"))
 
             if (!timeList[position].available){
                 back.apply {
@@ -54,16 +58,30 @@ class TimePickerAdapter:RecyclerView.Adapter<RecyclerView.ViewHolder>() {
 
             }
             else {
-
                 back.setOnClickListener {
 
-                    count +=1
+                    clicked = if (!clicked) {
+                        it.setBackgroundColor(android.graphics.Color.parseColor("#30B68B"))
 
-                    if (count % 2 ==0)
-                    it.setBackgroundColor(android.graphics.Color.parseColor("#30B68B"))
-                    else
+                        createReservationFragment.selected.add(timeList[position].title)
+                        createReservationFragment.selected.add(timeList[position+1].title)
+                        createReservationFragment.setTime()
+
+                        true
+
+                    } else {
+
                         it.setBackgroundColor(android.graphics.Color.parseColor("#96AAF0"))
 
+                        if (createReservationFragment.selected.size<3)
+                            createReservationFragment.selected.clear()
+                        else
+                            createReservationFragment.selected.remove(timeList[position+1].title)
+
+                        createReservationFragment.setTime()
+
+                        false
+                    }
                 }
             }
         }

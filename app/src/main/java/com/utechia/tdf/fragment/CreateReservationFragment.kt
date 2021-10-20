@@ -24,13 +24,14 @@ class CreateReservationFragment : Fragment() {
     private lateinit var binding: FragmentCreateReservationBinding
     private val roomViewModel: RoomViewModel by viewModels()
     private val roomModel:MutableList<RoomModel> = mutableListOf()
-    private val timePickerAdapter:TimePickerAdapter = TimePickerAdapter()
+    private val timePickerAdapter:TimePickerAdapter = TimePickerAdapter(this)
     private val calendar: Calendar = Calendar.getInstance()
     private var day = calendar.get(Calendar.DAY_OF_MONTH)
     private var month = calendar.get(Calendar.MONTH)
     private var year = calendar.get(Calendar.YEAR)
     private var room = 0
     private var th = 0
+    var selected:MutableSet<String> = mutableSetOf()
 
 
     override fun onCreateView(
@@ -91,18 +92,28 @@ class CreateReservationFragment : Fragment() {
         }
 
         binding.increaseRoom.setOnClickListener {
+
+            binding.time.text = ""
+            binding.duration.text = ""
+
             if (room<roomModel.size - 1)
             room +=1
             binding.roomTitle.text = roomModel[room].name
             binding.capacity.text = roomModel[room].capacity.toString()
+            selected.clear()
             timePickerAdapter.addData(roomModel[room].hour)
         }
 
         binding.decreaseRoom.setOnClickListener {
+
+            binding.time.text = ""
+            binding.duration.text = ""
+
             if (room>0)
             room -=1
             binding.roomTitle.text = roomModel[room].name
             binding.capacity.text = roomModel[room].capacity.toString()
+            selected.clear()
             timePickerAdapter.addData(roomModel[room].hour)
         }
 
@@ -126,7 +137,9 @@ class CreateReservationFragment : Fragment() {
             addItemDecoration(ItemDecorationReservation())
 
         }
+
         roomObserver()
+
     }
 
 
@@ -134,6 +147,11 @@ class CreateReservationFragment : Fragment() {
         roomViewModel.roomModel.observe(viewLifecycleOwner){
             when (it) {
                 is Result.Success -> {
+                    binding.meetingTitle.visibility = View.VISIBLE
+                    binding.calendarLayout.visibility = View.VISIBLE
+                    binding.roomLayout.visibility = View.VISIBLE
+                    binding.timeLayout.visibility = View.VISIBLE
+                    binding.appCompatButton.visibility = View.VISIBLE
                     roomModel.addAll(it.data)
                     binding.prg.visibility = View.GONE
                     timePickerAdapter.addData(roomModel[room].hour)
@@ -141,17 +159,53 @@ class CreateReservationFragment : Fragment() {
                 }
 
                 is Result.Loading -> {
+                    binding.meetingTitle.visibility = View.GONE
+                    binding.calendarLayout.visibility = View.GONE
+                    binding.roomLayout.visibility = View.GONE
+                    binding.timeLayout.visibility = View.GONE
+                    binding.appCompatButton.visibility = View.GONE
                     binding.prg.visibility = View.VISIBLE
 
                 }
 
                 is Result.Error -> {
                     binding.prg.visibility = View.GONE
+                    binding.meetingTitle.visibility = View.GONE
+                    binding.calendarLayout.visibility = View.GONE
+                    binding.roomLayout.visibility = View.GONE
+                    binding.timeLayout.visibility = View.GONE
+                    binding.appCompatButton.visibility = View.GONE
                     Toast.makeText(context,it.message,Toast.LENGTH_SHORT).show()
 
                 }
             }
         }
     }
+
+    fun setTime(){
+
+        when (selected.size){
+
+            0 -> {
+                binding.time.text = ""
+                binding.duration.text = ""
+
+            }
+            2 ->{
+                binding.time.text = selected.elementAt(0) + " "+"-" +" "+ selected.elementAt(selected.size-1)
+                binding.duration.text = "30 min"
+
+            }
+
+            else ->{
+                val duration : Float = ((selected.size.toFloat() -1.0) / 2).toFloat()
+                binding.time.text = selected.elementAt(0) + " "+"-" +" "+ selected.elementAt(selected.size-1)
+                binding.duration.text = "$duration hrs"
+            }
+
+
+        }
+    }
+
 }
 

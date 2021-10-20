@@ -1,22 +1,88 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.core.widget.NestedScrollView
+    xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/white"
+    android:fillViewport="true"
+    android:background="#E5E5E5"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     tools:context=".fragment.TeaBoyFragment">
 
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
 
     <TextView
-        android:layout_width="wrap_content"
+        android:id="@+id/meetingTitle"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="Refreshments Screen"
-        android:textSize="16sp"
-        app:layout_constraintBottom_toBottomOf="parent"
+        android:layout_marginTop="30dp"
+        android:gravity="center"
+        android:text="Refreshments"
+        android:textColor="@color/black"
+        android:textSize="22sp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
+    <ImageView
+        android:id="@+id/food"
+        android:layout_width="165dp"
+        android:layout_height="165dp"
+        android:layout_marginStart="35dp"
+        android:layout_marginTop="28dp"
+        android:scaleType="fitCenter"
+        android:background="@mipmap/food"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/meetingTitle" />
 
-</androidx.constraintlayout.widget.ConstraintLayout>
+
+    <ImageButton
+        android:id="@+id/drink"
+        android:layout_width="165dp"
+        android:layout_height="165dp"
+        android:layout_marginTop="28dp"
+        android:layout_marginEnd="35dp"
+        android:background="@mipmap/drink"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/meetingTitle" />
+
+    <ImageButton
+        android:id="@+id/favorite"
+        android:layout_width="165dp"
+        android:layout_height="165dp"
+        android:layout_marginTop="12dp"
+        android:layout_marginEnd="35dp"
+        android:background="@mipmap/favorit"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/drink" />
+
+    <ImageView
+        android:id="@+id/order"
+        android:layout_width="165dp"
+        android:layout_height="165dp"
+        android:layout_marginStart="35dp"
+        android:layout_marginTop="12dp"
+        android:scaleType="fitCenter"
+        android:background="@mipmap/orders"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/food" />
+
+    <AutoCompleteTextView
+        android:id="@+id/searchbar"
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:layout_marginStart="30dp"
+        android:layout_marginTop="30dp"
+        android:layout_marginEnd="30dp"
+        android:background="@color/white"
+        android:hint="Search"
+        android:paddingStart="10dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/order" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+</androidx.core.widget.NestedScrollView>

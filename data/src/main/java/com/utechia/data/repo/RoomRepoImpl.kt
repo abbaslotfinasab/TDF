@@ -37,6 +37,7 @@ class RoomRepoImpl @Inject constructor(
         hour.add(Hour(15,"15:30",true))
         hour.add(Hour(16,"16:00",true))
         hour.add(Hour(17,"16:30",true))
+        hour.add(Hour(18,"17:00",false))
 
         room.clear()
         room.add(Room(0,"Meeting Room 1","11th floor",6 ,hour))

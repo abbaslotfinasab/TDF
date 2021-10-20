@@ -10,6 +10,7 @@ import com.utechia.domain.usecases.RoomUseCaseImpl
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.CoroutineExceptionHandler
 import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
 import javax.inject.Inject
 
@@ -37,6 +38,10 @@ class RoomViewModel @Inject constructor(
     private fun getRoom(){
 
         viewModelScope.launch(Dispatchers.IO+handler) {
+
+            _roomModel.postValue(Result.Loading)
+
+            delay(2000)
 
             roomUseCaseImpl.execute().let {
 
