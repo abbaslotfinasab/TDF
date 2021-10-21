@@ -28,38 +28,24 @@ class TeaBoyFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
 
         binding.food.setOnClickListener {
-            unselect()
-            it.setBackgroundResource(R.mipmap.foodselected)
+
         }
 
         binding.drink.setOnClickListener {
-            unselect()
-            it.setBackgroundResource(R.mipmap.drinkselected)
+
         }
 
         binding.favorite.setOnClickListener {
-            unselect()
-            it.setBackgroundResource(R.mipmap.favoriteselected)
+
         }
 
         binding.order.setOnClickListener {
-            unselect()
-            it.setBackgroundResource(R.mipmap.orderselected)
+
         }
 
 
 
 
     }
-
-    private fun unselect() {
-
-        binding.food.setBackgroundResource(R.mipmap.food)
-        binding.drink.setBackgroundResource(R.mipmap.drink)
-        binding.favorite.setBackgroundResource(R.mipmap.favorit)
-        binding.order.setBackgroundResource(R.mipmap.orders)
-
-    }
-
 
 }

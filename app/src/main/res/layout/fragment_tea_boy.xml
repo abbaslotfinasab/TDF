@@ -26,27 +26,27 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
-    <ImageView
-        android:id="@+id/food"
-        android:layout_width="165dp"
-        android:layout_height="165dp"
-        android:layout_marginStart="35dp"
-        android:layout_marginTop="28dp"
-        android:scaleType="fitCenter"
-        android:background="@mipmap/food"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/meetingTitle" />
+        <ImageView
+            android:id="@+id/food"
+            android:layout_width="165dp"
+            android:layout_height="165dp"
+            android:layout_marginStart="35dp"
+            android:layout_marginTop="63dp"
+            android:background="@drawable/food_state"
+            android:scaleType="fitCenter"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/meetingTitle" />
 
 
-    <ImageButton
-        android:id="@+id/drink"
-        android:layout_width="165dp"
-        android:layout_height="165dp"
-        android:layout_marginTop="28dp"
-        android:layout_marginEnd="35dp"
-        android:background="@mipmap/drink"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/meetingTitle" />
+        <ImageButton
+            android:id="@+id/drink"
+            android:layout_width="165dp"
+            android:layout_height="165dp"
+            android:layout_marginTop="63dp"
+            android:layout_marginEnd="35dp"
+            android:background="@drawable/drink_state"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/meetingTitle" />
 
     <ImageButton
         android:id="@+id/favorite"
@@ -54,7 +54,7 @@
         android:layout_height="165dp"
         android:layout_marginTop="12dp"
         android:layout_marginEnd="35dp"
-        android:background="@mipmap/favorit"
+        android:background="@drawable/favorite_state"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/drink" />
 
@@ -65,23 +65,10 @@
         android:layout_marginStart="35dp"
         android:layout_marginTop="12dp"
         android:scaleType="fitCenter"
-        android:background="@mipmap/orders"
+        android:background="@drawable/order_state"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/food" />
 
-    <AutoCompleteTextView
-        android:id="@+id/searchbar"
-        android:layout_width="match_parent"
-        android:layout_height="50dp"
-        android:layout_marginStart="30dp"
-        android:layout_marginTop="30dp"
-        android:layout_marginEnd="30dp"
-        android:background="@color/white"
-        android:hint="Search"
-        android:paddingStart="10dp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/order" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 
