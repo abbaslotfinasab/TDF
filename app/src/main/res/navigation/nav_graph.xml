@@ -14,7 +14,11 @@
         android:id="@+id/teaBoyFragment"
         android:name="com.utechia.tdf.fragment.TeaBoyFragment"
         android:label="fragment_tea_boy"
-        tools:layout="@layout/fragment_tea_boy" />
+        tools:layout="@layout/fragment_tea_boy" >
+        <action
+            android:id="@+id/action_teaBoyFragment_to_createRefreshmentFragment"
+            app:destination="@id/createRefreshmentFragment" />
+    </fragment>
     <fragment
         android:id="@+id/reservationFragment"
         android:name="com.utechia.tdf.fragment.ReservationFragment"
@@ -141,5 +145,14 @@
             android:id="@+id/action_resultFragment_to_reservationFragment"
             app:destination="@id/reservationFragment" />
     </dialog>
+    <fragment
+        android:id="@+id/createRefreshmentFragment"
+        android:name="com.utechia.tdf.fragment.CreateRefreshmentFragment"
+        android:label="fragment_create_refreshment"
+        tools:layout="@layout/fragment_create_refreshment" >
+        <argument
+            android:name="kind"
+            app:argType="integer" />
+    </fragment>
 
 </navigation>

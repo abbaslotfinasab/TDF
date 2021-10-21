@@ -88,16 +88,19 @@
         <entry key="..\:/Users/Dr Computer/AndroidStudioProjects/tdf_oms_android_application_kotlin_v1/app/src/main/res/drawable/ic_baseline_power_settings_new_24.xml" value="0.2203125" />
         <entry key="..\:/Users/Dr Computer/AndroidStudioProjects/tdf_oms_android_application_kotlin_v1/app/src/main/res/drawable/ic_calendar_svgrepo_com.xml" value="0.2203125" />
         <entry key="..\:/Users/Dr Computer/AndroidStudioProjects/tdf_oms_android_application_kotlin_v1/app/src/main/res/drawable/ic_coffee.xml" value="0.2203125" />
+        <entry key="..\:/Users/Dr Computer/AndroidStudioProjects/tdf_oms_android_application_kotlin_v1/app/src/main/res/drawable/ic_coffee_cup_2.xml" value="0.165234375" />
         <entry key="..\:/Users/Dr Computer/AndroidStudioProjects/tdf_oms_android_application_kotlin_v1/app/src/main/res/drawable/ic_food_back.xml" value="0.21614583333333334" />
         <entry key="..\:/Users/Dr Computer/AndroidStudioProjects/tdf_oms_android_application_kotlin_v1/app/src/main/res/drawable/ic_group_33739.xml" value="0.2203125" />
         <entry key="..\:/Users/Dr Computer/AndroidStudioProjects/tdf_oms_android_application_kotlin_v1/app/src/main/res/drawable/ic_home.xml" value="0.2203125" />
         <entry key="..\:/Users/Dr Computer/AndroidStudioProjects/tdf_oms_android_application_kotlin_v1/app/src/main/res/drawable/ic_menu.xml" value="0.2203125" />
+        <entry key="..\:/Users/Dr Computer/AndroidStudioProjects/tdf_oms_android_application_kotlin_v1/app/src/main/res/drawable/ic_menu_board.xml" value="0.165234375" />
         <entry key="..\:/Users/Dr Computer/AndroidStudioProjects/tdf_oms_android_application_kotlin_v1/app/src/main/res/drawable/ic_note.xml" value="0.2203125" />
         <entry key="..\:/Users/Dr Computer/AndroidStudioProjects/tdf_oms_android_application_kotlin_v1/app/src/main/res/drawable/ic_notification_bing.xml" value="0.2203125" />
         <entry key="..\:/Users/Dr Computer/AndroidStudioProjects/tdf_oms_android_application_kotlin_v1/app/src/main/res/drawable/ic_qr_start.xml" value="0.2203125" />
         <entry key="..\:/Users/Dr Computer/AndroidStudioProjects/tdf_oms_android_application_kotlin_v1/app/src/main/res/drawable/ic_qrcode.xml" value="0.2203125" />
         <entry key="..\:/Users/Dr Computer/AndroidStudioProjects/tdf_oms_android_application_kotlin_v1/app/src/main/res/drawable/ic_scan.xml" value="0.2203125" />
         <entry key="..\:/Users/Dr Computer/AndroidStudioProjects/tdf_oms_android_application_kotlin_v1/app/src/main/res/drawable/ic_stop_qr.xml" value="0.2203125" />
+        <entry key="..\:/Users/Dr Computer/AndroidStudioProjects/tdf_oms_android_application_kotlin_v1/app/src/main/res/drawable/ic_teaboy_back.xml" value="0.165234375" />
         <entry key="..\:/Users/Dr Computer/AndroidStudioProjects/tdf_oms_android_application_kotlin_v1/app/src/main/res/drawable/invite_back.xml" value="0.1125" />
         <entry key="..\:/Users/Dr Computer/AndroidStudioProjects/tdf_oms_android_application_kotlin_v1/app/src/main/res/drawable/invite_back_selected.xml" value="0.1125" />
         <entry key="..\:/Users/Dr Computer/AndroidStudioProjects/tdf_oms_android_application_kotlin_v1/app/src/main/res/drawable/more_button.xml" value="0.1125" />
@@ -109,6 +112,8 @@
         <entry key="..\:/Users/Dr Computer/AndroidStudioProjects/tdf_oms_android_application_kotlin_v1/app/src/main/res/drawable/spinner_item.xml" value="0.1125" />
         <entry key="..\:/Users/Dr Computer/AndroidStudioProjects/tdf_oms_android_application_kotlin_v1/app/src/main/res/layout/activity_main.xml" value="0.18" />
         <entry key="..\:/Users/Dr Computer/AndroidStudioProjects/tdf_oms_android_application_kotlin_v1/app/src/main/res/layout/custom_list_item.xml" value="0.10960144927536232" />
+        <entry key="..\:/Users/Dr Computer/AndroidStudioProjects/tdf_oms_android_application_kotlin_v1/app/src/main/res/layout/fragment_craete_refreshment.xml" value="0.10960144927536232" />
+        <entry key="..\:/Users/Dr Computer/AndroidStudioProjects/tdf_oms_android_application_kotlin_v1/app/src/main/res/layout/fragment_create_refreshment.xml" value="0.34444444444444444" />
         <entry key="..\:/Users/Dr Computer/AndroidStudioProjects/tdf_oms_android_application_kotlin_v1/app/src/main/res/layout/fragment_create_reservation.xml" value="0.1" />
         <entry key="..\:/Users/Dr Computer/AndroidStudioProjects/tdf_oms_android_application_kotlin_v1/app/src/main/res/layout/fragment_create_ticket.xml" value="0.11594202898550725" />
         <entry key="..\:/Users/Dr Computer/AndroidStudioProjects/tdf_oms_android_application_kotlin_v1/app/src/main/res/layout/fragment_event_system.xml" value="0.11594202898550725" />
