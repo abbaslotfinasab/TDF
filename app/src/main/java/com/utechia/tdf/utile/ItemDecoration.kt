@@ -41,3 +41,19 @@ class ItemDecorationBooked: RecyclerView.ItemDecoration() {
     }
 }
 
+class ItemDecorationOrder: RecyclerView.ItemDecoration() {
+
+
+    override fun getItemOffsets(
+        @NonNull outRect: Rect,
+        @NonNull view: View,
+        @NonNull parent: RecyclerView,
+        @NonNull state: RecyclerView.State
+    ) {
+        outRect.left = 30
+        outRect.right = 30
+
+
+    }
+}
+

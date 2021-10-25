@@ -5,14 +5,23 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Toast
 import androidx.fragment.app.Fragment
+import androidx.fragment.app.viewModels
+import androidx.recyclerview.widget.LinearLayoutManager
+import com.utechia.domain.utile.Result
+import com.utechia.tdf.adapter.RefreshmentAdapter
 import com.utechia.tdf.databinding.FragmentCreateRefreshmentBinding
+import com.utechia.tdf.utile.ItemDecorationOrder
+import com.utechia.tdf.viewmodel.TeaBoyViewModel
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
 class CreateRefreshmentFragment : Fragment() {
 
     private lateinit var binding: FragmentCreateRefreshmentBinding
+    val teaBoyViewModel: TeaBoyViewModel by viewModels()
+    private val refreshmentAdapter: RefreshmentAdapter = RefreshmentAdapter(this)
     private var kind = 0
 
     override fun onCreateView(
@@ -26,16 +35,22 @@ class CreateRefreshmentFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        if (arguments!=null)
+        if (arguments != null)
             kind = requireArguments().getInt("kind", 0)
 
         select(kind)
+
+        teaBoyViewModel.getRefreshment(kind)
+        observer()
+
 
 
         binding.food.setOnClickListener {
 
             unselect()
             select(1)
+            teaBoyViewModel.getRefreshment(1)
+            observer()
 
 
         }
@@ -44,6 +59,8 @@ class CreateRefreshmentFragment : Fragment() {
 
             unselect()
             select(2)
+            teaBoyViewModel.getRefreshment(2)
+            observer()
 
 
         }
@@ -53,6 +70,9 @@ class CreateRefreshmentFragment : Fragment() {
 
             unselect()
             select(3)
+            teaBoyViewModel.getRefreshment(3)
+            observer()
+
 
         }
 
@@ -61,18 +81,23 @@ class CreateRefreshmentFragment : Fragment() {
 
             unselect()
             select(4)
+            teaBoyViewModel.getRefreshment(4)
+            observer()
+        }
 
-
-
+        binding.recyclerView.apply {
+            adapter = refreshmentAdapter
+            layoutManager = LinearLayoutManager(context,LinearLayoutManager.HORIZONTAL,false)
+            addItemDecoration(ItemDecorationOrder())
         }
 
     }
 
-    private fun select(kind:Int){
+    private fun select(kind: Int) {
 
-        when(kind){
+        when (kind) {
 
-            1 ->{
+            1 -> {
 
                 unselect()
                 binding.food.setBackgroundColor(Color.parseColor("#335DE0"))
@@ -81,14 +106,14 @@ class CreateRefreshmentFragment : Fragment() {
 
             }
 
-            2 ->{
+            2 -> {
                 unselect()
                 binding.drink.setBackgroundColor(Color.parseColor("#335DE0"))
                 binding.drinkText.setTextColor(Color.WHITE)
                 binding.title.text = binding.drinkText.text.toString()
             }
 
-            3 ->{
+            3 -> {
                 unselect()
                 binding.favorite.setBackgroundColor(Color.parseColor("#335DE0"))
                 binding.favoriteText.setTextColor(Color.WHITE)
@@ -96,7 +121,7 @@ class CreateRefreshmentFragment : Fragment() {
 
             }
 
-            4 ->{
+            4 -> {
                 unselect()
                 binding.order.setBackgroundColor(Color.parseColor("#335DE0"))
                 binding.orderText.setTextColor(Color.WHITE)
@@ -105,8 +130,6 @@ class CreateRefreshmentFragment : Fragment() {
 
 
         }
-
-
     }
 
     private fun unselect() {
@@ -122,4 +145,24 @@ class CreateRefreshmentFragment : Fragment() {
 
     }
 
+    private fun observer() {
+
+        teaBoyViewModel.teaBoyModel.observe(viewLifecycleOwner) {
+
+            when (it) {
+                is Result.Success -> {
+                    refreshmentAdapter.addData(it.data)
+                }
+
+
+                is Result.Loading -> {
+                }
+
+
+                is Result.Error -> {
+                    Toast.makeText(context, it.message, Toast.LENGTH_SHORT).show()
+                }
+            }
+        }
+    }
 }

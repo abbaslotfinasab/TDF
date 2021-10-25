@@ -39,7 +39,7 @@
             android:layout_marginTop="9dp"
             android:background="@drawable/ic_teaboy_back"
             android:scaleType="centerInside"
-            android:src="@mipmap/berger"
+            android:src="@drawable/ic_berger"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
