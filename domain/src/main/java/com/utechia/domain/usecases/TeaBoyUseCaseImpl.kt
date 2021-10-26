@@ -13,7 +13,7 @@ class TeaBoyUseCaseImpl @Inject constructor(private val teaBoyRepo: TeaBoyRepo)
         return teaBoyRepo.getRefreshment(category)
     }
 
-    override suspend fun order(refreshmentModel: RefreshmentModel) {
+    override suspend fun order(refreshmentModel: MutableList<RefreshmentModel>) {
         return teaBoyRepo.order(refreshmentModel)
     }
 
@@ -21,8 +21,8 @@ class TeaBoyUseCaseImpl @Inject constructor(private val teaBoyRepo: TeaBoyRepo)
        return teaBoyRepo.like(refreshmentModel)
     }
 
-    override suspend fun delete(refreshmentModel: RefreshmentModel) {
-        return teaBoyRepo.delete(refreshmentModel)
+    override suspend fun delete(id:Int) {
+        return teaBoyRepo.delete(id)
 
     }
 

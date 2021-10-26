@@ -55,8 +55,9 @@ class RefreshmentAdapter(private val teaBoyFragment: CreateRefreshmentFragment):
         fun bind0(position: Int) {
 
             name.text = refreshment[position].name
-
-
+            layout.visibility = View.GONE
+            add.visibility = View.VISIBLE
+            number.text = refreshment[position].number.toString()
             dislike.visibility = View.GONE
             like.visibility = View.VISIBLE
 
@@ -77,7 +78,8 @@ class RefreshmentAdapter(private val teaBoyFragment: CreateRefreshmentFragment):
             dislike.setOnClickListener {
                 it.visibility = View.GONE
                 like.visibility = View.VISIBLE
-                teaBoyFragment.teaBoyViewModel.delete(refreshment[position])
+                refreshment[position].favorit=false
+                teaBoyFragment.teaBoyViewModel.delete(position)
 
             }
 
@@ -109,18 +111,29 @@ class RefreshmentAdapter(private val teaBoyFragment: CreateRefreshmentFragment):
                 layout.visibility = View.VISIBLE
             }
             plus.setOnClickListener {
+
                 refreshment[position].number = refreshment[position].number?.plus(1)
                 number.text = refreshment[position].number .toString()
+                orders.add(refreshment[position])
+
             }
+
             number.setOnClickListener {
                 layout.visibility = View.GONE
                 add.visibility = View.VISIBLE
             }
 
             minus.setOnClickListener {
-                if (refreshment[position].number!! >0) {
+
+                if (refreshment[position].number!! >1) {
                     refreshment[position].number = refreshment[position].number?.minus(1)
                     number.text = refreshment[position].number.toString()
+                    orders[refreshment[position].id!!] = refreshment[position]
+                }
+                else {
+                    if (orders.size>0)
+                    orders.removeAt(refreshment[position].id!!)
+                    number.text = "0"
                 }
             }
         }

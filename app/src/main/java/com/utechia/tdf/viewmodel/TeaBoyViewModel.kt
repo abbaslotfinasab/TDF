@@ -53,11 +53,11 @@ class TeaBoyViewModel @Inject constructor(
 
     }
 
-    fun delete(refreshmentModel: RefreshmentModel){
+    fun delete(id:Int){
 
         viewModelScope.launch(Dispatchers.IO+handler) {
 
-            teaBoyUseCaseImpl.delete(refreshmentModel)
+            teaBoyUseCaseImpl.delete(id)
 
         }
 
@@ -74,7 +74,7 @@ class TeaBoyViewModel @Inject constructor(
 
     }
 
-    fun order(refreshmentModel: RefreshmentModel){
+    fun order(refreshmentModel: MutableList<RefreshmentModel>){
 
         viewModelScope.launch(Dispatchers.IO+handler) {
 

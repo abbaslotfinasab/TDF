@@ -8,9 +8,9 @@ interface TeaBoyRepo {
 
     fun like(refreshmentModel: RefreshmentModel)
 
-    fun order(refreshmentModel: RefreshmentModel)
+    fun order(refreshmentModel: MutableList<RefreshmentModel>)
 
-    fun delete(refreshmentModel: RefreshmentModel)
+    fun delete(id:Int)
 
     fun cancel(refreshmentModel: RefreshmentModel)
 

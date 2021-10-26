@@ -92,6 +92,9 @@ class CreateRefreshmentFragment : Fragment() {
         }
 
         binding.appCompatButton.setOnClickListener {
+
+            teaBoyViewModel.order(refreshmentAdapter.orders)
+
         }
 
     }
@@ -104,7 +107,6 @@ class CreateRefreshmentFragment : Fragment() {
 
                 unselect()
                 binding.food.setBackgroundColor(Color.parseColor("#335DE0"))
-                binding.appCompatButton.visibility = View.VISIBLE
                 binding.foodText.setTextColor(Color.WHITE)
                 binding.title.text = binding.foodText.text.toString()
 
@@ -113,7 +115,6 @@ class CreateRefreshmentFragment : Fragment() {
             2 -> {
                 unselect()
                 binding.drink.setBackgroundColor(Color.parseColor("#335DE0"))
-                binding.appCompatButton.visibility = View.VISIBLE
                 binding.drinkText.setTextColor(Color.WHITE)
                 binding.title.text = binding.drinkText.text.toString()
             }
@@ -121,7 +122,6 @@ class CreateRefreshmentFragment : Fragment() {
             3 -> {
                 unselect()
                 binding.favorite.setBackgroundColor(Color.parseColor("#335DE0"))
-                binding.appCompatButton.visibility = View.GONE
                 binding.favoriteText.setTextColor(Color.WHITE)
                 binding.title.text = binding.favoriteText.text.toString()
 
@@ -130,7 +130,6 @@ class CreateRefreshmentFragment : Fragment() {
             4 -> {
                 unselect()
                 binding.order.setBackgroundColor(Color.parseColor("#335DE0"))
-                binding.appCompatButton.visibility = View.GONE
                 binding.orderText.setTextColor(Color.WHITE)
                 binding.title.text = binding.orderText.text.toString()
             }
@@ -158,6 +157,11 @@ class CreateRefreshmentFragment : Fragment() {
 
             when (it) {
                 is Result.Success -> {
+                    if(it.data.size==0)
+                        binding.appCompatButton.visibility = View.GONE
+                    else
+                        binding.appCompatButton.visibility = View.VISIBLE
+
                     refreshmentAdapter.addData(it.data)
                 }
 
@@ -169,6 +173,7 @@ class CreateRefreshmentFragment : Fragment() {
                 is Result.Error -> {
                     refreshmentAdapter.refreshment.clear()
                     binding.recyclerView.visibility = View.GONE
+                    binding.appCompatButton.visibility = View.GONE
                     Toast.makeText(context, it.message, Toast.LENGTH_SHORT).show()
                 }
             }

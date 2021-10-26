@@ -44,16 +44,17 @@ class TeaBoyRepoImpl @Inject constructor(
     }
 
 
-    override fun order(refreshmentModel: RefreshmentModel) {
-        orderModel.add(Refreshment(refreshmentModel.id,refreshmentModel.category,refreshmentModel.name,refreshmentModel.image,refreshmentModel.favorit,refreshmentModel.number,refreshmentModel.calorie,refreshmentModel.time))
+    override fun order(refreshmentModel: MutableList<RefreshmentModel>) {
+        refreshmentModel.map {
+            orderModel.add((Refreshment(it.id,it.category,it.name,it.image,it.favorit,it.number,it.calorie,it.time)))
+        }
 
     }
 
 
-    override fun delete(refreshmentModel: RefreshmentModel) {
-        likeModel.remove(Refreshment(refreshmentModel.id,refreshmentModel.category,refreshmentModel.name,refreshmentModel.image,refreshmentModel.favorit,refreshmentModel.number,refreshmentModel.calorie,refreshmentModel.time))
+    override fun delete(id:Int) {
+        likeModel.removeAt(id)
     }
-
 
     override fun cancel(refreshmentModel: RefreshmentModel) {
         orderModel.remove(Refreshment(refreshmentModel.id,refreshmentModel.category,refreshmentModel.name,refreshmentModel.image,refreshmentModel.favorit,refreshmentModel.number,refreshmentModel.calorie,refreshmentModel.time))

@@ -18,6 +18,4 @@ data class RefreshmentModel(
 
     var time:String?,
 
-
-
     )
