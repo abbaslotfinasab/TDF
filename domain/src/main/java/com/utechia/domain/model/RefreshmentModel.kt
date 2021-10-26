@@ -16,5 +16,8 @@ data class RefreshmentModel(
 
     var calorie:Int?,
 
+    var time:String?,
 
-)
+
+
+    )

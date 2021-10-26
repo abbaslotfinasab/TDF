@@ -153,6 +153,14 @@
         <argument
             android:name="kind"
             app:argType="integer" />
+        <action
+            android:id="@+id/action_createRefreshmentFragment_to_cartFragment"
+            app:destination="@id/cartFragment" />
     </fragment>
+    <dialog
+        android:id="@+id/cartFragment"
+        android:name="com.utechia.tdf.fragment.CartFragment"
+        android:label="fragment_cart"
+        tools:layout="@layout/fragment_cart" />
 
 </navigation>

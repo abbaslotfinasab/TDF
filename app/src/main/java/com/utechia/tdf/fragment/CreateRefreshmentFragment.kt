@@ -91,6 +91,9 @@ class CreateRefreshmentFragment : Fragment() {
             addItemDecoration(ItemDecorationOrder())
         }
 
+        binding.appCompatButton.setOnClickListener {
+        }
+
     }
 
     private fun select(kind: Int) {
@@ -101,6 +104,7 @@ class CreateRefreshmentFragment : Fragment() {
 
                 unselect()
                 binding.food.setBackgroundColor(Color.parseColor("#335DE0"))
+                binding.appCompatButton.visibility = View.VISIBLE
                 binding.foodText.setTextColor(Color.WHITE)
                 binding.title.text = binding.foodText.text.toString()
 
@@ -109,6 +113,7 @@ class CreateRefreshmentFragment : Fragment() {
             2 -> {
                 unselect()
                 binding.drink.setBackgroundColor(Color.parseColor("#335DE0"))
+                binding.appCompatButton.visibility = View.VISIBLE
                 binding.drinkText.setTextColor(Color.WHITE)
                 binding.title.text = binding.drinkText.text.toString()
             }
@@ -116,6 +121,7 @@ class CreateRefreshmentFragment : Fragment() {
             3 -> {
                 unselect()
                 binding.favorite.setBackgroundColor(Color.parseColor("#335DE0"))
+                binding.appCompatButton.visibility = View.GONE
                 binding.favoriteText.setTextColor(Color.WHITE)
                 binding.title.text = binding.favoriteText.text.toString()
 
@@ -124,6 +130,7 @@ class CreateRefreshmentFragment : Fragment() {
             4 -> {
                 unselect()
                 binding.order.setBackgroundColor(Color.parseColor("#335DE0"))
+                binding.appCompatButton.visibility = View.GONE
                 binding.orderText.setTextColor(Color.WHITE)
                 binding.title.text = binding.orderText.text.toString()
             }
@@ -160,6 +167,8 @@ class CreateRefreshmentFragment : Fragment() {
 
 
                 is Result.Error -> {
+                    refreshmentAdapter.refreshment.clear()
+                    binding.recyclerView.visibility = View.GONE
                     Toast.makeText(context, it.message, Toast.LENGTH_SHORT).show()
                 }
             }

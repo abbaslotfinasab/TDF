@@ -25,8 +25,10 @@ data class Refreshment(
 
     var calorie:Int?,
 
+    var time:String?,
+
 ): Parcelable, ResponseObject<RefreshmentModel> {
     override fun toDomain(): RefreshmentModel {
-        return RefreshmentModel(id,category,name,image,favorit,number,calorie)
+        return RefreshmentModel(id,category,name,image,favorit,number,calorie,time)
     }
 }

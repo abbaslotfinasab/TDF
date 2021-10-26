@@ -4,7 +4,10 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.ImageView
+import android.widget.LinearLayout
 import android.widget.TextView
+import androidx.core.os.bundleOf
+import androidx.navigation.findNavController
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.utechia.domain.model.RefreshmentModel
@@ -13,12 +16,13 @@ import com.utechia.tdf.fragment.CreateRefreshmentFragment
 
 class RefreshmentAdapter(private val teaBoyFragment: CreateRefreshmentFragment): RecyclerView.Adapter<RecyclerView.ViewHolder>()  {
 
-    private var refreshment:MutableList<RefreshmentModel> = mutableListOf()
+    var refreshment:MutableList<RefreshmentModel> = mutableListOf()
+    var orders:MutableList<RefreshmentModel> = mutableListOf()
 
     fun addData(_refreshmentModel: MutableList<RefreshmentModel>){
         refreshment.clear()
         refreshment.addAll(_refreshmentModel)
-        notifyItemRangeChanged(0,refreshment.size)
+        notifyDataSetChanged()
 
     }
 
@@ -42,6 +46,11 @@ class RefreshmentAdapter(private val teaBoyFragment: CreateRefreshmentFragment):
         private val dislike: ImageView = itemView.findViewById(R.id.dislike)
         private val add: ImageView = itemView.findViewById(R.id.plus)
         private val name: TextView = itemView.findViewById(R.id.name)
+        private val layout: LinearLayout = itemView.findViewById(R.id.number)
+        private val plus: TextView = itemView.findViewById(R.id.plusNumber)
+        private val number: TextView = itemView.findViewById(R.id.numberText)
+        private val minus: TextView = itemView.findViewById(R.id.minusNumber)
+
 
         fun bind0(position: Int) {
 
@@ -61,7 +70,7 @@ class RefreshmentAdapter(private val teaBoyFragment: CreateRefreshmentFragment):
             like.setOnClickListener {
                 it.visibility = View.GONE
                 dislike.visibility = View.VISIBLE
-                refreshment[position].favorit = true
+                refreshment[position].favorit=true
                 teaBoyFragment.teaBoyViewModel.like(refreshment[position])
             }
 
@@ -74,7 +83,7 @@ class RefreshmentAdapter(private val teaBoyFragment: CreateRefreshmentFragment):
 
             Glide.with(itemView.context)
                 .load(
-                    if (position==0)
+                    if (refreshment[position].id==0)
                     R.mipmap.image1
                 else
                     R.mipmap.image2
@@ -82,8 +91,37 @@ class RefreshmentAdapter(private val teaBoyFragment: CreateRefreshmentFragment):
                 .centerCrop()
                 .into(image)
 
-            add.setOnClickListener {
+            image.setOnClickListener {
 
+                val bundle = bundleOf(
+                    "image" to refreshment[position].id,
+                    "name" to  refreshment[position].name,
+                    "cal" to  refreshment[position].calorie,
+                    "time" to  refreshment[position].time
+                )
+
+                itemView.findNavController().navigate(R.id.action_createRefreshmentFragment_to_cartFragment,bundle)
+
+            }
+
+            add.setOnClickListener {
+                it.visibility = View.GONE
+                layout.visibility = View.VISIBLE
+            }
+            plus.setOnClickListener {
+                refreshment[position].number = refreshment[position].number?.plus(1)
+                number.text = refreshment[position].number .toString()
+            }
+            number.setOnClickListener {
+                layout.visibility = View.GONE
+                add.visibility = View.VISIBLE
+            }
+
+            minus.setOnClickListener {
+                if (refreshment[position].number!! >0) {
+                    refreshment[position].number = refreshment[position].number?.minus(1)
+                    number.text = refreshment[position].number.toString()
+                }
             }
         }
     }

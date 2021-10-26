@@ -20,8 +20,8 @@ class TeaBoyRepoImpl @Inject constructor(
     override fun getRefreshment(category: Int): MutableList<RefreshmentModel> {
 
         refreshment.clear()
-        refreshment.add(Refreshment(0,2,"Special Coffee","https://bayanbox.ir/view/3467016343917373981/chamomile-tea-thumb-1-732x549.jpg",false,0,150))
-        refreshment.add(Refreshment(1,2,"Special Tea","https://www.illy.com/content/dam/channels/website/consumer/italy/landing/milk-frother/750x500-Cappuccino.jpg",false,0,150))
+        refreshment.add(Refreshment(0,2,"Special Coffee","https://bayanbox.ir/view/3467016343917373981/chamomile-tea-thumb-1-732x549.jpg",false,0,150,"5-10min"))
+        refreshment.add(Refreshment(1,2,"Special Tea","https://www.illy.com/content/dam/channels/website/consumer/italy/landing/milk-frother/750x500-Cappuccino.jpg",false,0,150,"5-10min"))
 
         return when(category){
 
@@ -38,18 +38,25 @@ class TeaBoyRepoImpl @Inject constructor(
 
     }
 
+
     override fun like(refreshmentModel: RefreshmentModel) {
-        likeModel.add(Refreshment(refreshmentModel.id,refreshmentModel.category,refreshmentModel.name,refreshmentModel.image,refreshmentModel.favorit,refreshmentModel.number,refreshmentModel.calorie))
+        likeModel.add(Refreshment(refreshmentModel.id,refreshmentModel.category,refreshmentModel.name,refreshmentModel.image,refreshmentModel.favorit,refreshmentModel.number,refreshmentModel.calorie,refreshmentModel.time))
     }
+
 
     override fun order(refreshmentModel: RefreshmentModel) {
+        orderModel.add(Refreshment(refreshmentModel.id,refreshmentModel.category,refreshmentModel.name,refreshmentModel.image,refreshmentModel.favorit,refreshmentModel.number,refreshmentModel.calorie,refreshmentModel.time))
+
     }
+
 
     override fun delete(refreshmentModel: RefreshmentModel) {
-        likeModel.remove(Refreshment(refreshmentModel.id,refreshmentModel.category,refreshmentModel.name,refreshmentModel.image,refreshmentModel.favorit,refreshmentModel.number,refreshmentModel.calorie,))
+        likeModel.remove(Refreshment(refreshmentModel.id,refreshmentModel.category,refreshmentModel.name,refreshmentModel.image,refreshmentModel.favorit,refreshmentModel.number,refreshmentModel.calorie,refreshmentModel.time))
     }
 
+
     override fun cancel(refreshmentModel: RefreshmentModel) {
-        orderModel.remove(Refreshment(refreshmentModel.id,refreshmentModel.category,refreshmentModel.name,refreshmentModel.image,refreshmentModel.favorit,refreshmentModel.number,refreshmentModel.calorie,))
+        orderModel.remove(Refreshment(refreshmentModel.id,refreshmentModel.category,refreshmentModel.name,refreshmentModel.image,refreshmentModel.favorit,refreshmentModel.number,refreshmentModel.calorie,refreshmentModel.time))
     }
+
 }
