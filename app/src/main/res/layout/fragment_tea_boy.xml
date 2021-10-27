@@ -14,6 +14,7 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="30dp"
         android:gravity="center"
+        android:fontFamily="@font/poppins"
         android:text="Refreshments"
         android:textColor="@color/black"
         android:textSize="22sp"
@@ -21,27 +22,41 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
+    <AutoCompleteTextView
+        android:id="@+id/autoCompleteTextView"
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:layout_marginStart="30dp"
+        android:layout_marginTop="10dp"
+        android:layout_marginEnd="30dp"
+        android:background="@color/white"
+        android:hint="search"
+        android:padding="10dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/meetingTitle" />
+
     <ImageView
         android:id="@+id/food"
         android:layout_width="165dp"
         android:layout_height="165dp"
         android:layout_marginStart="35dp"
-        android:layout_marginTop="25dp"
+        android:layout_marginTop="20dp"
         android:background="@drawable/food_state"
         android:scaleType="fitCenter"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/meetingTitle" />
+        app:layout_constraintTop_toBottomOf="@+id/autoCompleteTextView" />
 
 
     <ImageButton
         android:id="@+id/drink"
         android:layout_width="165dp"
         android:layout_height="165dp"
-        android:layout_marginTop="25dp"
+        android:layout_marginTop="20dp"
         android:layout_marginEnd="35dp"
         android:background="@drawable/drink_state"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/meetingTitle" />
+        app:layout_constraintTop_toBottomOf="@+id/autoCompleteTextView" />
 
     <ImageButton
         android:id="@+id/favorite"
@@ -67,7 +82,7 @@
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
-        android:layout_height="60dp"
+        android:layout_height="70dp"
         android:layout_marginStart="21dp"
         android:layout_marginTop="20dp"
         android:layout_marginEnd="21dp"

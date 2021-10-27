@@ -9,7 +9,7 @@
 
     <item
         android:id="@+id/teaBoyFragment"
-        android:icon="@drawable/ic_coffee"
+        android:icon="@drawable/ic_refreshment"
         android:title="REFRESHMENTS"/>
 
     <item

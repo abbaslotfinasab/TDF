@@ -42,7 +42,7 @@
             android:layout_width="35dp"
             android:layout_height="35dp"
             android:layout_marginTop="15dp"
-            android:layout_marginEnd="10dp"
+            android:layout_marginEnd="11dp"
             android:src="@drawable/ic_group_20338"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
@@ -80,8 +80,7 @@
         android:background="@color/white"
         android:gravity="center"
         android:orientation="vertical"
-        android:src="@drawable/ic_group_20338"
-        android:visibility="gone"
+        android:visibility="visible"
         app:layout_constraintEnd_toEndOf="@+id/constraintLayout4"
         app:layout_constraintTop_toTopOf="parent">
 
@@ -97,8 +96,8 @@
 
         <TextView
             android:id="@+id/numberText"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            android:layout_width="35dp"
+            android:layout_height="35dp"
             android:layout_marginTop="5dp"
             android:background="@drawable/ic_rectangle_4177"
             android:gravity="center"

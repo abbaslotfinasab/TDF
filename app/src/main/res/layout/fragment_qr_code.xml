@@ -34,8 +34,8 @@
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:id="@+id/scanCode"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_width="295dp"
+        android:layout_height="297dp"
         android:layout_marginTop="30dp"
         android:background="@drawable/ic_qr_border"
         app:layout_constraintEnd_toEndOf="parent"
@@ -46,10 +46,6 @@
             android:id="@+id/imageView3"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginStart="40dp"
-            android:layout_marginTop="40dp"
-            android:layout_marginEnd="40dp"
-            android:layout_marginBottom="100dp"
             android:src="@drawable/ic_qrcode"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"

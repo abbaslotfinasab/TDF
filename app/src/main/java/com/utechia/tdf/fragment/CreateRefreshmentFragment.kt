@@ -8,8 +8,10 @@ import android.view.ViewGroup
 import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
+import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.utechia.domain.utile.Result
+import com.utechia.tdf.R
 import com.utechia.tdf.adapter.RefreshmentAdapter
 import com.utechia.tdf.databinding.FragmentCreateRefreshmentBinding
 import com.utechia.tdf.utile.ItemDecorationOrder
@@ -85,6 +87,17 @@ class CreateRefreshmentFragment : Fragment() {
             observer()
         }
 
+
+        binding.title.setOnClickListener {
+            binding.title.setTextColor(Color.BLACK)
+            binding.subtitle.setTextColor(Color.parseColor("#9D9D9D"))
+        }
+
+        binding.subtitle.setOnClickListener {
+            binding.subtitle.setTextColor(Color.BLACK)
+            binding.title.setTextColor(Color.parseColor("#9D9D9D"))
+        }
+
         binding.recyclerView.apply {
             adapter = refreshmentAdapter
             layoutManager = LinearLayoutManager(context,LinearLayoutManager.HORIZONTAL,false)
@@ -94,6 +107,7 @@ class CreateRefreshmentFragment : Fragment() {
         binding.appCompatButton.setOnClickListener {
 
             teaBoyViewModel.order(refreshmentAdapter.orders)
+            findNavController().navigate(R.id.action_createRefreshmentFragment_to_orderFragment)
 
         }
 
@@ -108,7 +122,8 @@ class CreateRefreshmentFragment : Fragment() {
                 unselect()
                 binding.food.setBackgroundColor(Color.parseColor("#335DE0"))
                 binding.foodText.setTextColor(Color.WHITE)
-                binding.title.text = binding.foodText.text.toString()
+                binding.title.visibility = View.GONE
+                binding.subtitle.visibility = View.GONE
 
             }
 
@@ -116,23 +131,23 @@ class CreateRefreshmentFragment : Fragment() {
                 unselect()
                 binding.drink.setBackgroundColor(Color.parseColor("#335DE0"))
                 binding.drinkText.setTextColor(Color.WHITE)
-                binding.title.text = binding.drinkText.text.toString()
-            }
+                binding.title.visibility = View.VISIBLE
+                binding.subtitle.visibility = View.VISIBLE            }
 
             3 -> {
                 unselect()
                 binding.favorite.setBackgroundColor(Color.parseColor("#335DE0"))
                 binding.favoriteText.setTextColor(Color.WHITE)
-                binding.title.text = binding.favoriteText.text.toString()
-
+                binding.title.visibility = View.GONE
+                binding.subtitle.visibility = View.GONE
             }
 
             4 -> {
                 unselect()
                 binding.order.setBackgroundColor(Color.parseColor("#335DE0"))
                 binding.orderText.setTextColor(Color.WHITE)
-                binding.title.text = binding.orderText.text.toString()
-            }
+                binding.title.visibility = View.GONE
+                binding.subtitle.visibility = View.GONE            }
 
 
         }
@@ -166,14 +181,10 @@ class CreateRefreshmentFragment : Fragment() {
                 }
 
 
-                is Result.Loading -> {
-                }
+                is Result.Loading -> {}
 
 
                 is Result.Error -> {
-                    refreshmentAdapter.refreshment.clear()
-                    binding.recyclerView.visibility = View.GONE
-                    binding.appCompatButton.visibility = View.GONE
                     Toast.makeText(context, it.message, Toast.LENGTH_SHORT).show()
                 }
             }

@@ -21,6 +21,7 @@ class RefreshmentAdapter(private val teaBoyFragment: CreateRefreshmentFragment):
 
     fun addData(_refreshmentModel: MutableList<RefreshmentModel>){
         refreshment.clear()
+        orders.clear()
         refreshment.addAll(_refreshmentModel)
         notifyDataSetChanged()
 
@@ -111,7 +112,7 @@ class RefreshmentAdapter(private val teaBoyFragment: CreateRefreshmentFragment):
                 layout.visibility = View.VISIBLE
             }
             plus.setOnClickListener {
-
+                orders.clear()
                 refreshment[position].number = refreshment[position].number?.plus(1)
                 number.text = refreshment[position].number .toString()
                 orders.add(refreshment[position])
