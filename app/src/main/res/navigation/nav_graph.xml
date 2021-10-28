@@ -160,7 +160,7 @@
             android:id="@+id/action_createRefreshmentFragment_to_orderFragment"
             app:destination="@id/orderFragment" />
     </fragment>
-    <dialog
+    <fragment
         android:id="@+id/cartFragment"
         android:name="com.utechia.tdf.fragment.CartFragment"
         android:label="fragment_cart"

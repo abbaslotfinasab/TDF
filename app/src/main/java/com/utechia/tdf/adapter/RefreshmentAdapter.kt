@@ -100,7 +100,9 @@ class RefreshmentAdapter(private val teaBoyFragment: CreateRefreshmentFragment):
                     "image" to refreshment[position].id,
                     "name" to  refreshment[position].name,
                     "cal" to  refreshment[position].calorie,
-                    "time" to  refreshment[position].time
+                    "time" to  refreshment[position].time,
+                    "number" to  refreshment[position].number
+
                 )
 
                 itemView.findNavController().navigate(R.id.action_createRefreshmentFragment_to_cartFragment,bundle)

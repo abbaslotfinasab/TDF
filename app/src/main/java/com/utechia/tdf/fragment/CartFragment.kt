@@ -1,20 +1,18 @@
 package com.utechia.tdf.fragment
 
-import android.graphics.Color
-import android.graphics.drawable.ColorDrawable
+
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.view.Window
-import androidx.fragment.app.DialogFragment
+import androidx.fragment.app.Fragment
 import com.bumptech.glide.Glide
 import com.utechia.tdf.R
 import com.utechia.tdf.databinding.FragmentCartBinding
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
-class CartFragment : DialogFragment() {
+class CartFragment : Fragment() {
 
     private lateinit var binding: FragmentCartBinding
 
@@ -22,6 +20,8 @@ class CartFragment : DialogFragment() {
     private var name = ""
     private var cal = 0
     private var time = ""
+    private var number = 0
+
 
 
     override fun onCreateView(
@@ -29,11 +29,6 @@ class CartFragment : DialogFragment() {
         savedInstanceState: Bundle?
     ): View {
         binding = FragmentCartBinding.inflate(inflater, container, false)
-
-        if(dialog !=null && dialog?.window !=null) {
-            dialog?.window?.setBackgroundDrawable(ColorDrawable(Color.TRANSPARENT))
-            dialog?.window?.requestFeature(Window.FEATURE_NO_TITLE)
-        }
         return binding.root
     }
 
@@ -45,6 +40,7 @@ class CartFragment : DialogFragment() {
             name = requireArguments().getString("name","")
             cal = requireArguments().getInt("cal",0)
             time = requireArguments().getString("time","")
+            number = requireArguments().getInt("number",0)
         }
 
         Glide.with(requireActivity())
@@ -59,6 +55,21 @@ class CartFragment : DialogFragment() {
         binding.name.text = name
         binding.cal.text = cal.toString()+"cal"
         binding.time.text = time
+        binding.numberText.text = number.toString()
+
+        binding.plusNumber.setOnClickListener {
+            number +=1
+            binding.numberText.text = number.toString()
+        }
+
+        binding.minusNumber.setOnClickListener {
+
+            if (number>0) {
+                number -=1
+                binding.numberText.text = number.toString()
+            }
+
+        }
 
 
     }

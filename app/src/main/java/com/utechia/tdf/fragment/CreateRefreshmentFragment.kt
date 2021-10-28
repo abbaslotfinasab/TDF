@@ -91,11 +91,16 @@ class CreateRefreshmentFragment : Fragment() {
         binding.title.setOnClickListener {
             binding.title.setTextColor(Color.BLACK)
             binding.subtitle.setTextColor(Color.parseColor("#9D9D9D"))
+            binding.subLine.visibility = View.GONE
+            binding.titleLine.visibility = View.VISIBLE
         }
 
         binding.subtitle.setOnClickListener {
             binding.subtitle.setTextColor(Color.BLACK)
             binding.title.setTextColor(Color.parseColor("#9D9D9D"))
+            binding.subLine.visibility = View.VISIBLE
+            binding.titleLine.visibility = View.GONE
+
         }
 
         binding.recyclerView.apply {

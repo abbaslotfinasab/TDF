@@ -59,7 +59,6 @@ class OrderFragment : Fragment() {
                 is Result.Success -> {
                     binding.prg.visibility = View.GONE
                     binding.appCompatButton.visibility = View.VISIBLE
-                    binding.imageView11.visibility = View.VISIBLE
                     binding.textView6.visibility = View.VISIBLE
                     binding.textView7.visibility = View.VISIBLE
                     binding.time.visibility = View.VISIBLE
@@ -70,7 +69,6 @@ class OrderFragment : Fragment() {
 
                 is Result.Loading -> {
                     binding.appCompatButton.visibility = View.GONE
-                    binding.imageView11.visibility = View.GONE
                     binding.textView6.visibility = View.GONE
                     binding.textView7.visibility = View.GONE
                     binding.time.visibility = View.GONE
@@ -81,7 +79,6 @@ class OrderFragment : Fragment() {
                 is Result.Error -> {
                     orderAdapter.orders.clear()
                     binding.appCompatButton.visibility = View.GONE
-                    binding.imageView11.visibility = View.GONE
                     binding.textView6.visibility = View.GONE
                     binding.textView7.visibility = View.GONE
                     binding.time.visibility = View.GONE
