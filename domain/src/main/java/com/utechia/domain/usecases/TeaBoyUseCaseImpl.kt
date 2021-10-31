@@ -29,4 +29,8 @@ class TeaBoyUseCaseImpl @Inject constructor(private val teaBoyRepo: TeaBoyRepo)
     override suspend fun cancel(refreshmentModel: RefreshmentModel) {
         return teaBoyRepo.cancel(refreshmentModel)
     }
+
+    override suspend fun getCard(id: Int): MutableList<RefreshmentModel> {
+        return teaBoyRepo.getCard(id)
+    }
 }

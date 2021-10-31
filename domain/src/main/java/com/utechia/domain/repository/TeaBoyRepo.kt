@@ -6,6 +6,8 @@ interface TeaBoyRepo {
 
     fun getRefreshment(category:Int) : MutableList<RefreshmentModel>
 
+    fun getCard(id:Int) : MutableList<RefreshmentModel>
+
     fun like(refreshmentModel: RefreshmentModel)
 
     fun order(refreshmentModel: MutableList<RefreshmentModel>)
@@ -13,6 +15,5 @@ interface TeaBoyRepo {
     fun delete(id:Int)
 
     fun cancel(refreshmentModel: RefreshmentModel)
-
 
 }

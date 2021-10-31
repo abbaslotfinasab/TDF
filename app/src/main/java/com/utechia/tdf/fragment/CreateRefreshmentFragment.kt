@@ -6,6 +6,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
+import androidx.appcompat.widget.SearchView
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
@@ -13,8 +14,10 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import com.utechia.domain.utile.Result
 import com.utechia.tdf.R
 import com.utechia.tdf.adapter.RefreshmentAdapter
+import com.utechia.tdf.adapter.SearchAdapter
 import com.utechia.tdf.databinding.FragmentCreateRefreshmentBinding
 import com.utechia.tdf.utile.ItemDecorationOrder
+import com.utechia.tdf.viewmodel.SearchViewModel
 import com.utechia.tdf.viewmodel.TeaBoyViewModel
 import dagger.hilt.android.AndroidEntryPoint
 
@@ -23,6 +26,8 @@ class CreateRefreshmentFragment : Fragment() {
 
     private lateinit var binding: FragmentCreateRefreshmentBinding
     val teaBoyViewModel: TeaBoyViewModel by viewModels()
+    private val searchViewModel: SearchViewModel by viewModels()
+    private val searchAdapter: SearchAdapter = SearchAdapter(1)
     private val refreshmentAdapter: RefreshmentAdapter = RefreshmentAdapter(this)
     private var kind = 0
 
@@ -36,6 +41,44 @@ class CreateRefreshmentFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+
+        binding.appCompatButton.visibility = View.GONE
+
+
+        binding.autoCompleteTextView.setOnQueryTextListener(object : SearchView.OnQueryTextListener{
+
+            override fun onQueryTextSubmit(query: String?): Boolean {
+
+                searchAdapter.searchList.clear()
+
+                if(query!="") {
+                    query?.let { searchViewModel.getBooked(it) }
+                    observe()
+                }
+                else
+                    binding.searchRecycler.visibility = View.GONE
+
+
+                return false
+            }
+            override fun onQueryTextChange(newText: String?): Boolean {
+
+                searchAdapter.searchList.clear()
+
+
+                if(newText!="") {
+                    newText?.let { searchViewModel.getBooked(it) }
+                    observe()
+                }
+                else
+                    binding.searchRecycler.visibility = View.GONE
+
+
+                return false
+            }
+
+        })
+
 
         if (arguments != null)
             kind = requireArguments().getInt("kind", 0)
@@ -116,6 +159,12 @@ class CreateRefreshmentFragment : Fragment() {
 
         }
 
+        binding.searchRecycler.apply {
+            adapter = searchAdapter
+            bringToFront()
+            layoutManager = LinearLayoutManager(context,LinearLayoutManager.VERTICAL,false)
+        }
+
     }
 
     private fun select(kind: Int) {
@@ -186,7 +235,8 @@ class CreateRefreshmentFragment : Fragment() {
                 }
 
 
-                is Result.Loading -> {}
+                is Result.Loading -> {
+                }
 
 
                 is Result.Error -> {
@@ -195,4 +245,28 @@ class CreateRefreshmentFragment : Fragment() {
             }
         }
     }
+
+    fun observe(){
+        searchViewModel.searchModel.observe(viewLifecycleOwner){
+
+            when (it) {
+                is Result.Success -> {
+                    binding.searchRecycler.visibility = View.VISIBLE
+                    searchAdapter.addData(it.data)
+                }
+
+
+                is Result.Loading -> {}
+
+
+                is Result.Error -> {
+                    searchAdapter.searchList.clear()
+                    binding.searchRecycler.visibility = View.GONE
+                    Toast.makeText(context, it.message, Toast.LENGTH_SHORT).show()
+                }
+            }
+        }
+
+    }
+
 }

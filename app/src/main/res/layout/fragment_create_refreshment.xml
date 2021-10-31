@@ -7,41 +7,48 @@
     android:background="#E5E5E5"
     tools:context=".fragment.CreateRefreshmentFragment">
 
-
-    <ImageView
-        android:id="@+id/imageView9"
-        android:layout_width="wrap_content"
-        android:layout_height="40dp"
-        android:layout_marginStart="35dp"
+    <TextView
+        android:id="@+id/meetingTitle"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
         android:layout_marginTop="30dp"
-        android:background="@color/white"
-        android:src="@drawable/ic_baseline_search_24"
+        android:fontFamily="@font/poppins"
+        android:gravity="center"
+        android:text="Refreshments"
+        android:textColor="@color/black"
+        android:textSize="22sp"
+        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
-    <EditText
+    <androidx.appcompat.widget.SearchView
         android:id="@+id/autoCompleteTextView"
         android:layout_width="0dp"
         android:layout_height="40dp"
-        android:layout_marginStart="0dp"
-        android:layout_marginTop="30dp"
+        android:layout_marginStart="35dp"
+        android:layout_marginTop="10dp"
         android:layout_marginEnd="35dp"
         android:background="@color/white"
-        android:hint="search"
-        android:padding="10dp"
+        android:gravity="start"
         android:textSize="14sp"
+        app:iconifiedByDefault="false"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toEndOf="@+id/imageView9"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/meetingTitle"
+        app:queryBackground="@null"
+        app:queryHint="search"
+        app:searchHintIcon="@null"
+        app:searchIcon="@drawable/ic_baseline_search_24" />
 
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/searchRecycler"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
+        android:background="@color/white"
         android:visibility="gone"
         app:layout_constraintEnd_toEndOf="@+id/autoCompleteTextView"
-        app:layout_constraintStart_toStartOf="@+id/imageView9"
+        app:layout_constraintStart_toStartOf="@+id/autoCompleteTextView"
         app:layout_constraintTop_toBottomOf="@+id/autoCompleteTextView" />
 
     <androidx.constraintlayout.widget.ConstraintLayout

@@ -22,40 +22,34 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
-    <ImageView
-        android:id="@+id/imageView9"
-        android:layout_width="wrap_content"
-        android:layout_height="40dp"
-        android:layout_marginStart="35dp"
-        android:layout_marginTop="10dp"
-        android:background="@color/white"
-        android:src="@drawable/ic_baseline_search_24"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/meetingTitle" />
-
-    <EditText
+    <androidx.appcompat.widget.SearchView
         android:id="@+id/autoCompleteTextView"
         android:layout_width="0dp"
         android:layout_height="40dp"
-        android:layout_marginStart="-1dp"
+        android:layout_marginStart="35dp"
         android:layout_marginTop="10dp"
         android:layout_marginEnd="35dp"
         android:background="@color/white"
-        android:hint="search"
-        android:padding="10dp"
+        android:gravity="start"
         android:textSize="14sp"
+        app:iconifiedByDefault="false"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toEndOf="@+id/imageView9"
-        app:layout_constraintTop_toBottomOf="@+id/meetingTitle" />
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/meetingTitle"
+        app:queryBackground="@null"
+        app:queryHint="search"
+        app:searchHintIcon="@null"
+        app:searchIcon="@drawable/ic_baseline_search_24" />
 
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/searchRecycler"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
+        android:background="@color/white"
         android:visibility="gone"
         app:layout_constraintEnd_toEndOf="@+id/autoCompleteTextView"
-        app:layout_constraintStart_toStartOf="@+id/imageView9"
+        app:layout_constraintStart_toStartOf="@+id/autoCompleteTextView"
         app:layout_constraintTop_toBottomOf="@+id/autoCompleteTextView" />
 
     <ImageView
@@ -74,20 +68,20 @@
         android:id="@+id/drink"
         android:layout_width="165dp"
         android:layout_height="165dp"
+        android:layout_marginStart="13dp"
         android:layout_marginTop="20dp"
-        android:layout_marginEnd="35dp"
         android:background="@drawable/drink_state"
-        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/food"
         app:layout_constraintTop_toBottomOf="@+id/autoCompleteTextView" />
 
     <ImageButton
         android:id="@+id/favorite"
         android:layout_width="165dp"
         android:layout_height="165dp"
+        android:layout_marginStart="13dp"
         android:layout_marginTop="12dp"
-        android:layout_marginEnd="35dp"
         android:background="@drawable/favorite_state"
-        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/order"
         app:layout_constraintTop_toBottomOf="@+id/drink" />
 
     <ImageView
@@ -96,8 +90,8 @@
         android:layout_height="165dp"
         android:layout_marginStart="35dp"
         android:layout_marginTop="12dp"
-        android:scaleType="fitCenter"
         android:background="@drawable/order_state"
+        android:scaleType="fitCenter"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/food" />
 

@@ -45,7 +45,6 @@ class ReservationViewModel @Inject constructor(
                 _reservationModel.postValue(Result.Success(it))
 
             }
-
         }
     }
 
@@ -55,8 +54,6 @@ class ReservationViewModel @Inject constructor(
 
             reservationUseCaseImpl.reserve(reservationModel)
 
-
         }
     }
-
 }

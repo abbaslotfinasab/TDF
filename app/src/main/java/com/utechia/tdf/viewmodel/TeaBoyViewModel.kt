@@ -43,6 +43,20 @@ class TeaBoyViewModel @Inject constructor(
 
     }
 
+    fun getCard(id:Int){
+
+        viewModelScope.launch(Dispatchers.IO+handler) {
+
+            teaBoyUseCaseImpl.getCard(id).let {
+
+                _teaBoyModel.postValue(Result.Success(it))
+
+            }
+
+        }
+
+    }
+
     fun like(refreshmentModel: RefreshmentModel){
 
         viewModelScope.launch(Dispatchers.IO+handler) {

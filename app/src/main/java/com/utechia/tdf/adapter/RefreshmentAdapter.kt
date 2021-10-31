@@ -74,6 +74,7 @@ class RefreshmentAdapter(private val teaBoyFragment: CreateRefreshmentFragment):
                 dislike.visibility = View.VISIBLE
                 refreshment[position].favorit=true
                 teaBoyFragment.teaBoyViewModel.like(refreshment[position])
+                itemView.findNavController().navigate(R.id.action_createRefreshmentFragment_to_favoriteResultFragment)
             }
 
             dislike.setOnClickListener {
@@ -97,12 +98,7 @@ class RefreshmentAdapter(private val teaBoyFragment: CreateRefreshmentFragment):
             image.setOnClickListener {
 
                 val bundle = bundleOf(
-                    "image" to refreshment[position].id,
-                    "name" to  refreshment[position].name,
-                    "cal" to  refreshment[position].calorie,
-                    "time" to  refreshment[position].time,
-                    "number" to  refreshment[position].number
-
+                    "mId" to position,
                 )
 
                 itemView.findNavController().navigate(R.id.action_createRefreshmentFragment_to_cartFragment,bundle)
