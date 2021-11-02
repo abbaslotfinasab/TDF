@@ -27,8 +27,6 @@ class TeaBoyViewModel @Inject constructor(
         _teaBoyModel.postValue(exception.message?.let { Result.Error(it) })
     }
 
-
-
     fun getRefreshment(category:Int){
 
         viewModelScope.launch(Dispatchers.IO+handler) {

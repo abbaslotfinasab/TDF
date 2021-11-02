@@ -5,7 +5,7 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.TextView
 import androidx.constraintlayout.widget.ConstraintLayout
-import androidx.core.content.ContextCompat
+import android.graphics.Color.parseColor
 import androidx.recyclerview.widget.RecyclerView
 import com.utechia.domain.model.HourModel
 import com.utechia.tdf.R
@@ -48,11 +48,11 @@ class TimePickerAdapter(private val createReservationFragment: CreateReservation
 
             title.text = timeList[position].title
 
-            back.setBackgroundColor(android.graphics.Color.parseColor("#96AAF0"))
+            back.setBackgroundColor(parseColor("#96AAF0"))
 
             if (!timeList[position].available){
                 back.apply {
-                    setBackgroundColor(ContextCompat.getColor(itemView.context,R.color.black))
+                    setBackgroundColor(parseColor("#E9E9E9"))
                     isEnabled = false
                 }
 
@@ -61,7 +61,7 @@ class TimePickerAdapter(private val createReservationFragment: CreateReservation
                 back.setOnClickListener {
 
                     clicked = if (!clicked) {
-                        it.setBackgroundColor(android.graphics.Color.parseColor("#30B68B"))
+                        it.setBackgroundColor(parseColor("#30B68B"))
 
                         createReservationFragment.selected.add(timeList[position].title)
                         createReservationFragment.selected.add(timeList[position+1].title)
@@ -71,7 +71,7 @@ class TimePickerAdapter(private val createReservationFragment: CreateReservation
 
                     } else {
 
-                        it.setBackgroundColor(android.graphics.Color.parseColor("#96AAF0"))
+                        it.setBackgroundColor(parseColor("#96AAF0"))
 
                         if (createReservationFragment.selected.size<3)
                             createReservationFragment.selected.clear()

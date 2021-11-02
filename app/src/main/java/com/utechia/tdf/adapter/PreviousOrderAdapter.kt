@@ -9,8 +9,9 @@ import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.utechia.domain.model.RefreshmentModel
 import com.utechia.tdf.R
+import com.utechia.tdf.fragment.PreviousOrdersFragment
 
-class OrderAdapter: RecyclerView.Adapter<RecyclerView.ViewHolder>() {
+class PreviousOrderAdapter(private val previousOrder:PreviousOrdersFragment): RecyclerView.Adapter<RecyclerView.ViewHolder>() {
 
     var orders: MutableList<RefreshmentModel> = mutableListOf()
 
@@ -20,11 +21,10 @@ class OrderAdapter: RecyclerView.Adapter<RecyclerView.ViewHolder>() {
         notifyDataSetChanged()
     }
 
-
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): RecyclerView.ViewHolder =
         ViewHolder(
             LayoutInflater.from(parent.context)
-                .inflate(R.layout.order_item, parent, false)
+                .inflate(R.layout.previous_order_item, parent, false)
         )
 
     override fun onBindViewHolder(holder: RecyclerView.ViewHolder, position: Int) {
@@ -36,14 +36,13 @@ class OrderAdapter: RecyclerView.Adapter<RecyclerView.ViewHolder>() {
     inner class ViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
         private val image: ImageView = itemView.findViewById(R.id.image)
         private val name: TextView = itemView.findViewById(R.id.name)
-        private val plus: TextView = itemView.findViewById(R.id.plusNumber)
-        private val number: TextView = itemView.findViewById(R.id.numberText)
-        private val minus: TextView = itemView.findViewById(R.id.minusNumber)
+        private val remove: ImageView = itemView.findViewById(R.id.exit)
+        private val again: TextView = itemView.findViewById(R.id.again)
+
 
         fun bind0(position: Int) {
 
             name.text = orders[position].name
-            number.text = orders[position].number.toString()
 
             Glide.with(itemView.context)
                 .load(
@@ -55,25 +54,15 @@ class OrderAdapter: RecyclerView.Adapter<RecyclerView.ViewHolder>() {
                 .centerCrop()
                 .into(image)
 
-            plus.setOnClickListener {
-
-                orders[position].number = orders[position].number?.plus(1)
-                number.text = orders[position].number .toString()
+            remove.setOnClickListener {
+                previousOrder.teaBoyViewModel.cancel(orders[position])
+                orders.removeAt(position)
+                notifyItemChanged(position)
+            }
+            again.setOnClickListener {
+                previousOrder.teaBoyViewModel.order(orders)
             }
 
-            minus.setOnClickListener {
-
-                if (orders[position].number!! >1) {
-                    orders[position].number = orders[position].number?.minus(1)
-                    number.text = orders[position].number.toString()
-                    orders[orders[position].id!!] = orders[position]
-                }
-                else {
-                    if (orders.size>0)
-                        orders.removeAt(orders[position].id!!)
-                    number.text = "0"
-                }
-            }
         }
     }
 }

@@ -35,8 +35,8 @@ class FavoriteResultFragment : DialogFragment() {
         super.onViewCreated(view, savedInstanceState)
 
         binding.appCompatButton.setOnClickListener {
-
             dialog?.dismiss()
+            findNavController().navigate(R.id.action_favoriteResultFragment_to_favoriteFragment)
         }
 
     }

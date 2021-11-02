@@ -8,6 +8,8 @@ import android.view.View
 import android.view.ViewGroup
 import android.view.Window
 import androidx.fragment.app.DialogFragment
+import androidx.navigation.fragment.findNavController
+import com.utechia.tdf.R
 import com.utechia.tdf.databinding.FragmentOrderResultBinding
 import dagger.hilt.android.AndroidEntryPoint
 
@@ -35,6 +37,7 @@ class OrderResultFragment : DialogFragment() {
 
         binding.appCompatButton.setOnClickListener {
             dialog?.dismiss()
+            findNavController().navigate(R.id.action_orderResultFragment_to_previousOrdersFragment)
         }
 
 

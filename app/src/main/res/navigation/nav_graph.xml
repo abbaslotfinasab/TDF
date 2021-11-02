@@ -21,6 +21,12 @@
         <action
             android:id="@+id/action_teaBoyFragment_to_cartFragment"
             app:destination="@id/cartFragment" />
+        <action
+            android:id="@+id/action_teaBoyFragment_to_favoriteFragment"
+            app:destination="@id/favoriteFragment" />
+        <action
+            android:id="@+id/action_teaBoyFragment_to_previousOrdersFragment"
+            app:destination="@id/previousOrdersFragment" />
     </fragment>
     <fragment
         android:id="@+id/reservationFragment"
@@ -165,6 +171,12 @@
         <action
             android:id="@+id/action_createRefreshmentFragment_to_favoriteResultFragment"
             app:destination="@id/favoriteResultFragment" />
+        <action
+            android:id="@+id/action_createRefreshmentFragment_to_favoriteFragment"
+            app:destination="@id/favoriteFragment" />
+        <action
+            android:id="@+id/action_createRefreshmentFragment_to_previousOrdersFragment"
+            app:destination="@id/previousOrdersFragment" />
     </fragment>
     <fragment
         android:id="@+id/cartFragment"
@@ -189,11 +201,29 @@
         android:id="@+id/orderResultFragment"
         android:name="com.utechia.tdf.fragment.OrderResultFragment"
         android:label="fragment_order_result"
-        tools:layout="@layout/fragment_order_result" />
+        tools:layout="@layout/fragment_order_result" >
+        <action
+            android:id="@+id/action_orderResultFragment_to_previousOrdersFragment"
+            app:destination="@id/previousOrdersFragment" />
+    </dialog>
     <dialog
         android:id="@+id/favoriteResultFragment"
         android:name="com.utechia.tdf.fragment.FavoriteResultFragment"
         android:label="fragment_favorite_result"
-        tools:layout="@layout/fragment_favorite_result" />
+        tools:layout="@layout/fragment_favorite_result" >
+        <action
+            android:id="@+id/action_favoriteResultFragment_to_favoriteFragment"
+            app:destination="@id/favoriteFragment" />
+    </dialog>
+    <fragment
+        android:id="@+id/favoriteFragment"
+        android:name="com.utechia.tdf.fragment.FavoriteFragment"
+        android:label="fragment_favorite"
+        tools:layout="@layout/fragment_favorite" />
+    <fragment
+        android:id="@+id/previousOrdersFragment"
+        android:name="com.utechia.tdf.fragment.PreviousOrdersFragment"
+        android:label="fragment_previous_orders"
+        tools:layout="@layout/fragment_previous_orders" />
 
 </navigation>

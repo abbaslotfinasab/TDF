@@ -115,9 +115,7 @@ class CreateRefreshmentFragment : Fragment() {
 
             unselect()
             select(3)
-            teaBoyViewModel.getRefreshment(3)
-            observer()
-
+            findNavController().navigate(R.id.action_createRefreshmentFragment_to_favoriteFragment)
 
         }
 
@@ -126,8 +124,7 @@ class CreateRefreshmentFragment : Fragment() {
 
             unselect()
             select(4)
-            teaBoyViewModel.getRefreshment(4)
-            observer()
+            findNavController().navigate(R.id.action_createRefreshmentFragment_to_previousOrdersFragment)
         }
 
 
@@ -237,7 +234,6 @@ class CreateRefreshmentFragment : Fragment() {
 
                 is Result.Loading -> {
                 }
-
 
                 is Result.Error -> {
                     Toast.makeText(context, it.message, Toast.LENGTH_SHORT).show()
