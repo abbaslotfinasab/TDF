@@ -1,9 +1,12 @@
 package com.utechia.tdf.login
 
+import android.content.Intent
+import android.net.Uri
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.core.content.ContextCompat
 import androidx.fragment.app.Fragment
 import com.utechia.tdf.databinding.FragmentLoginBinding
 import dagger.hilt.android.AndroidEntryPoint
@@ -23,12 +26,10 @@ class LoginFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        binding.web.visibility = View.GONE
-
 
         binding.appCompatButton.setOnClickListener {
-            binding.web.visibility = View.VISIBLE
-            binding.web.loadUrl("https://www.google.com")
+            val browserIntent = Intent(Intent.ACTION_VIEW, Uri.parse("https://www.google.com"))
+            ContextCompat.startActivity(requireContext(), browserIntent, null)
         }
 
     }
