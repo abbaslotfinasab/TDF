@@ -7,6 +7,7 @@ import android.os.Looper
 import android.view.View
 import android.widget.Toast
 import androidx.core.view.GravityCompat
+import androidx.drawerlayout.widget.DrawerLayout
 import androidx.navigation.fragment.NavHostFragment
 import androidx.navigation.ui.setupWithNavController
 import com.utechia.tdf.R
@@ -40,16 +41,19 @@ class MainActivity : AppCompatActivity() {
                     binding.bottomNavigation.visibility = View.VISIBLE
 
                 }
+               R.id.loginFragment ->{
+                   binding.toolbar.visibility = View.GONE
+                   binding.customButton.visibility = View.GONE
+                   binding.bottomNavigation.visibility = View.GONE
+                   binding.drawerLayout.setDrawerLockMode(DrawerLayout.LOCK_MODE_LOCKED_CLOSED)
+               }
                 else -> {
                     binding.drawerLayout.closeDrawer(GravityCompat.END)
                     binding.customButton.visibility = View.GONE
                     binding.bottomNavigation.visibility = View.GONE
 
                 }
-
         }
-
-
 
         }
 

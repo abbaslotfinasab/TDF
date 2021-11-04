@@ -6,7 +6,7 @@
     android:layout_height="match_parent"
     android:background="#E5E5E5"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    tools:context=".fragment.ReservationFragment">
+    tools:context=".reservation.ReservationFragment">
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:id="@+id/createLayout"

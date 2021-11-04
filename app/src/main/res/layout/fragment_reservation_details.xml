@@ -4,371 +4,181 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="#E5E5E5"
     android:fillViewport="true"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    tools:context=".fragment.ReservationDetails">
+    tools:context=".reservation.ReservationDetails">
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent">
 
-
-        <TextView
-            android:id="@+id/roomTitle"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="20dp"
-            android:layout_marginTop="15dp"
-            android:text=""
-            android:textColor="@color/black"
-            android:textSize="16sp"
-            android:textStyle="bold"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
-
-        <TextView
-            android:id="@+id/capacityTitle"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="15dp"
-            android:layout_marginEnd="2dp"
-            android:text="Capacity:"
-            android:textColor="@color/black"
-            android:textSize="12sp"
-            app:layout_constraintEnd_toStartOf="@+id/capacity"
-            app:layout_constraintTop_toTopOf="parent" />
-
-        <TextView
-            android:id="@+id/capacity"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="15dp"
-            android:layout_marginEnd="20dp"
-            android:text="6"
-            android:textColor="@color/black"
-            android:textSize="12sp"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
-
-        <androidx.cardview.widget.CardView
-            android:id="@+id/cardView"
+        <ImageView
+            android:id="@+id/roomImage"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="20dp"
-            android:layout_marginTop="20dp"
-            android:layout_marginEnd="20dp"
-            app:cardCornerRadius="15dp"
-            app:cardPreventCornerOverlap="true"
+            android:layout_height="238dp"
+            android:scaleType="fitXY"
+            android:src="@mipmap/meeting"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/capacityTitle">
+            app:layout_constraintTop_toTopOf="parent" />
 
-            <ImageView
-                android:id="@+id/roomImage"
-                android:layout_width="match_parent"
-                android:layout_height="110dp"
-                android:src="@drawable/room"
-                android:scaleType="fitXY" />
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:text="French Investors \n Meeting"
+            android:textColor="@color/white"
+            android:textSize="22sp"
+            app:layout_constraintBottom_toBottomOf="@+id/roomImage"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="@+id/roomImage" />
 
-        </androidx.cardview.widget.CardView>
 
         <androidx.constraintlayout.widget.ConstraintLayout
             android:id="@+id/constraintLayout"
-            android:layout_width="30dp"
-            android:layout_height="30dp"
-            android:layout_marginStart="20dp"
-            android:layout_marginTop="20dp"
-            android:background="@drawable/ic_icon_back"
+            android:layout_width="match_parent"
+            android:layout_height="169dp"
+            android:background="@color/white"
+            android:layout_marginTop="10dp"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/cardView">
+            app:layout_constraintTop_toBottomOf="@+id/roomImage">
 
 
             <ImageView
+                android:id="@+id/imageView9"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:src="@drawable/ic_clock"
-                app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintEnd_toEndOf="parent"
+                android:layout_marginStart="56dp"
+                android:layout_marginTop="36dp"
+                android:src="@drawable/ic_document_text"
                 app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="22dp"
+                android:layout_marginTop="36dp"
+                android:text=" Lorem ipsum dolor sit amet, consectetur \n adipiscing elit. Auctor quis egestas augue \n amet. Faucibus aliquet lectus enim eu,\n sed at id metus accumsan. Tristique \n commodo at vulputate interdum."
+                android:textAlignment="textStart"
+                android:textColor="#3360DD"
+                android:textSize="14sp"
+                app:layout_constraintStart_toEndOf="@+id/imageView9"
                 app:layout_constraintTop_toTopOf="parent" />
 
         </androidx.constraintlayout.widget.ConstraintLayout>
 
-        <TextView
-            android:id="@+id/time"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="5dp"
-            android:text="13:00 - 14:30"
-            android:textColor="@color/black"
-            android:textSize="12sp"
-            app:layout_constraintBottom_toBottomOf="@+id/constraintLayout"
-            app:layout_constraintStart_toEndOf="@+id/constraintLayout"
-            app:layout_constraintTop_toTopOf="@+id/constraintLayout" />
-
 
         <androidx.constraintlayout.widget.ConstraintLayout
-            android:id="@+id/constraintLayout2"
-            android:layout_width="30dp"
-            android:layout_height="30dp"
-            android:layout_marginEnd="80dp"
-            android:background="@drawable/ic_icon_back"
-            app:layout_constraintBottom_toBottomOf="@+id/duration"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toTopOf="@+id/time">
-
-            <ImageView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:src="@drawable/ic_load"
-                app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent" />
-        </androidx.constraintlayout.widget.ConstraintLayout>
-
-        <TextView
-            android:id="@+id/duration"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="3dp"
-            android:text="90 min"
-            android:textColor="@color/black"
-            android:textSize="12sp"
-            app:layout_constraintBottom_toBottomOf="@+id/constraintLayout2"
-            app:layout_constraintStart_toEndOf="@+id/constraintLayout2"
-            app:layout_constraintTop_toTopOf="@+id/constraintLayout2" />
-
-
-        <androidx.constraintlayout.widget.ConstraintLayout
-            android:id="@+id/constraintLayout3"
-            android:layout_width="30dp"
-            android:layout_height="30dp"
-            android:layout_marginStart="20dp"
-            android:layout_marginTop="20dp"
-            android:background="@drawable/ic_icon_back"
+            android:id="@+id/constraintLayout1"
+            android:layout_width="match_parent"
+            android:layout_height="125dp"
+            android:background="@color/white"
+            android:layout_marginTop="10dp"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/constraintLayout">
 
-            <ImageView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:src="@drawable/ic_note"
-                app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent" />
-
-        </androidx.constraintlayout.widget.ConstraintLayout>
-
-        <TextView
-            android:id="@+id/dateDay"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="5dp"
-            android:text="21"
-            android:textColor="@color/black"
-            android:textSize="12sp"
-            app:layout_constraintBottom_toBottomOf="@+id/constraintLayout3"
-            app:layout_constraintStart_toEndOf="@+id/constraintLayout3"
-            app:layout_constraintTop_toTopOf="@+id/constraintLayout3" />
-
-        <TextView
-            android:id="@+id/dateMonth"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="2dp"
-            android:text="September"
-            android:textColor="@color/black"
-            android:textSize="12sp"
-            app:layout_constraintBottom_toBottomOf="@+id/constraintLayout3"
-            app:layout_constraintStart_toEndOf="@+id/dateDay"
-            app:layout_constraintTop_toTopOf="@+id/constraintLayout3" />
-
-        <TextView
-            android:id="@+id/dateYear"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="2dp"
-            android:text="2021"
-            android:textColor="@color/black"
-            android:textSize="12sp"
-            app:layout_constraintBottom_toBottomOf="@+id/constraintLayout3"
-            app:layout_constraintStart_toEndOf="@+id/dateMonth"
-            app:layout_constraintTop_toTopOf="@+id/constraintLayout3" />
-
-
-        <androidx.constraintlayout.widget.ConstraintLayout
-            android:id="@+id/constraintLayout5"
-            android:layout_width="30dp"
-            android:layout_height="30dp"
-            android:background="@drawable/ic_icon_back"
-            android:layout_marginEnd="80dp"
-            app:layout_constraintBottom_toBottomOf="@+id/dateYear"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toTopOf="@+id/dateYear">
 
             <ImageView
+                android:id="@+id/imageView10"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:src="@drawable/ic_baseline_person_outline_24"
-                app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintEnd_toEndOf="parent"
+                android:layout_marginStart="56dp"
+                android:layout_marginTop="36dp"
+                android:src="@drawable/ic_location"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent" />
-        </androidx.constraintlayout.widget.ConstraintLayout>
 
-        <TextView
-            android:id="@+id/guest"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="4dp"
-            android:text="0"
-            android:textColor="@color/black"
-            android:textSize="12sp"
-            app:layout_constraintBottom_toBottomOf="@+id/constraintLayout5"
-            app:layout_constraintStart_toEndOf="@+id/constraintLayout5"
-            app:layout_constraintTop_toTopOf="@+id/constraintLayout5" />
-
-
-        <TextView
-            android:id="@+id/textView0"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="20dp"
-            android:layout_marginTop="20dp"
-            android:text="Description"
-            android:textColor="#9999A7"
-            android:textSize="12sp"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/constraintLayout3" />
-
-        <androidx.constraintlayout.widget.ConstraintLayout
-            android:id="@+id/editText1"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="20dp"
-            android:layout_marginTop="15dp"
-            android:layout_marginEnd="20dp"
-            android:background="@drawable/border"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/textView0">
-
-            <EditText
-                android:id="@+id/description"
-                android:layout_width="match_parent"
-                android:layout_height="100dp"
-                android:background="@null"
-                android:gravity="start"
-                android:padding="10dp"
-                app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
+            <TextView
+                android:id="@+id/textView12"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="22dp"
+                android:layout_marginTop="36dp"
+                android:text="21 September 2021"
+                android:textAlignment="textStart"
+                android:textColor="#3360DD"
+                android:textSize="14sp"
+                app:layout_constraintStart_toEndOf="@+id/imageView10"
                 app:layout_constraintTop_toTopOf="parent" />
+
+            <TextView
+                android:id="@+id/textView13"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="22dp"
+                android:layout_marginTop="10dp"
+                android:text="12:00 - 13:00"
+                android:textAlignment="textStart"
+                android:textColor="#3360DD"
+                android:textSize="14sp"
+                app:layout_constraintStart_toEndOf="@+id/imageView10"
+                app:layout_constraintTop_toBottomOf="@+id/textView12" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="22dp"
+                android:layout_marginTop="7dp"
+                android:text="1 hour"
+                android:textAlignment="textStart"
+                android:textColor="#3360DD"
+                android:textSize="14sp"
+                app:layout_constraintStart_toEndOf="@+id/imageView10"
+                app:layout_constraintTop_toBottomOf="@+id/textView13" />
+
         </androidx.constraintlayout.widget.ConstraintLayout>
 
         <androidx.constraintlayout.widget.ConstraintLayout
-            android:id="@+id/btnInvite"
+            android:id="@+id/constraintLayout2"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="20dp"
-            android:layout_marginTop="20dp"
-            android:layout_marginEnd="20dp"
-            app:layout_constraintEnd_toEndOf="parent"
+            android:layout_height="88dp"
+            android:background="@color/white"
+            android:layout_marginTop="10dp"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/editText1">
+            app:layout_constraintTop_toBottomOf="@+id/constraintLayout1">
 
-            <androidx.constraintlayout.widget.ConstraintLayout
-                android:id="@+id/btnName"
-                android:layout_width="match_parent"
-                android:layout_height="40dp"
-                android:background="@drawable/invite_back_selected"
-                app:layout_constraintEnd_toEndOf="parent"
+
+            <ImageView
+                android:id="@+id/imageView11"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="56dp"
+                android:layout_marginTop="36dp"
+                android:src="@drawable/ic_clock"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent">
+                app:layout_constraintTop_toTopOf="parent" />
 
-                <TextView
-                    android:id="@+id/name"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginStart="20dp"
-                    android:layout_marginTop="5dp"
-                    android:layout_marginBottom="5dp"
-                    android:gravity="center"
-                    android:text="Invite People"
-                    android:textColor="@color/black"
-                    app:layout_constraintBottom_toBottomOf="parent"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toTopOf="parent" />
-
-                <ImageView
-                    android:id="@+id/arrow"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="5dp"
-                    android:layout_marginEnd="20dp"
-                    android:layout_marginBottom="5dp"
-                    android:src="@drawable/ic_invite"
-                    app:layout_constraintBottom_toBottomOf="parent"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintTop_toTopOf="parent" />
-
-
-                <TextView
-                    android:id="@+id/Title"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginStart="20dp"
-                    android:layout_marginTop="5dp"
-                    android:layout_marginBottom="5dp"
-                    android:visibility="gone"
-                    android:gravity="center"
-                    android:text="  Choose People"
-                    android:textColor="@color/white"
-                    app:layout_constraintBottom_toBottomOf="parent"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toTopOf="parent" />
-
-                <ImageView
-                    android:id="@+id/arrowUp"
-                    android:layout_width="6dp"
-                    android:layout_height="5dp"
-                    android:layout_marginTop="5dp"
-                    android:layout_marginEnd="20dp"
-                    android:visibility="gone"
-                    android:layout_marginBottom="5dp"
-                    android:src="@drawable/ic_invite_selected"
-                    app:layout_constraintBottom_toBottomOf="parent"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintTop_toTopOf="parent" />
-
-
-            </androidx.constraintlayout.widget.ConstraintLayout>
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="22dp"
+                android:layout_marginTop="36dp"
+                android:textAlignment="textStart"
+                android:text="Meeting Room 1"
+                android:textColor="#3360DD"
+                android:textSize="14sp"
+                app:layout_constraintStart_toEndOf="@+id/imageView11"
+                app:layout_constraintTop_toTopOf="parent" />
 
         </androidx.constraintlayout.widget.ConstraintLayout>
 
-        <androidx.appcompat.widget.AppCompatButton
-            android:id="@+id/btnConfirm"
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/constraintLayout3"
             android:layout_width="match_parent"
-            android:layout_height="40dp"
-            android:layout_marginStart="20dp"
-            android:layout_marginTop="20dp"
-            android:layout_marginEnd="20dp"
-            android:layout_marginBottom="10dp"
-            android:background="@drawable/scan_button"
-            android:padding="3dp"
-            android:text="Book Now"
-            android:textAllCaps="false"
-            android:textColor="@color/white"
-            android:visibility="visible"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
+            android:layout_height="276dp"
+            android:background="@color/white"
+            android:layout_marginTop="10dp"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/btnInvite" />
+            app:layout_constraintTop_toBottomOf="@+id/constraintLayout2">
+
+
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
 
     </androidx.constraintlayout.widget.ConstraintLayout>
-
 
 </androidx.core.widget.NestedScrollView>
 

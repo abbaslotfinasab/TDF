@@ -5,7 +5,7 @@
     android:layout_width="350dp"
     android:layout_height="407dp"
     android:background="@color/white"
-    tools:context=".fragment.FavoriteResultFragment">
+    tools:context=".favorite.FavoriteResultFragment">
 
 
     <ImageView

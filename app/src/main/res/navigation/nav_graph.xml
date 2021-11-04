@@ -3,16 +3,16 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/nav_graph"
-    app:startDestination="@id/homeFragment">
+    app:startDestination="@id/loginFragment">
 
     <fragment
         android:id="@+id/homeFragment"
-        android:name="com.utechia.tdf.fragment.HomeFragment"
+        android:name="com.utechia.tdf.home.HomeFragment"
         android:label="fragment_home"
         tools:layout="@layout/fragment_home" />
     <fragment
         android:id="@+id/teaBoyFragment"
-        android:name="com.utechia.tdf.fragment.TeaBoyFragment"
+        android:name="com.utechia.tdf.refreshment.RefreshmentsFragment"
         android:label="fragment_tea_boy"
         tools:layout="@layout/fragment_tea_boy" >
         <action
@@ -30,7 +30,7 @@
     </fragment>
     <fragment
         android:id="@+id/reservationFragment"
-        android:name="com.utechia.tdf.fragment.ReservationFragment"
+        android:name="com.utechia.tdf.reservation.ReservationFragment"
         android:label="fragment_reservation"
         tools:layout="@layout/fragment_reservation" >
         <action
@@ -45,17 +45,17 @@
     </fragment>
     <fragment
         android:id="@+id/profileFragment"
-        android:name="com.utechia.tdf.fragment.ProfileFragment"
+        android:name="com.utechia.tdf.profile.ProfileFragment"
         android:label="fragment_profile"
         tools:layout="@layout/fragment_profile" />
     <fragment
         android:id="@+id/notificationFragment"
-        android:name="com.utechia.tdf.fragment.NotificationFragment"
+        android:name="com.utechia.tdf.more.NotificationFragment"
         android:label="fragment_notification"
         tools:layout="@layout/fragment_notification" />
     <fragment
         android:id="@+id/createReservationFragment"
-        android:name="com.utechia.tdf.fragment.CreateReservationFragment"
+        android:name="com.utechia.tdf.reservation.CreateReservationFragment"
         android:label="fragment_create_reservation"
         tools:layout="@layout/fragment_create_reservation" >
         <action
@@ -73,7 +73,7 @@
     </fragment>
     <fragment
         android:id="@+id/reservationDetails"
-        android:name="com.utechia.tdf.fragment.ReservationDetails"
+        android:name="com.utechia.tdf.reservation.ReservationDetails"
         android:label="fragment_reservation_details"
         tools:layout="@layout/fragment_reservation_details" >
         <argument
@@ -106,22 +106,22 @@
     </fragment>
     <fragment
         android:id="@+id/qrCodeFragment"
-        android:name="com.utechia.tdf.fragment.QrCodeFragment"
+        android:name="com.utechia.tdf.qrcode.QrCodeFragment"
         android:label="fragment_qr_code"
         tools:layout="@layout/fragment_qr_code" />
     <fragment
         android:id="@+id/surveySystemFragment"
-        android:name="com.utechia.tdf.fragment.SurveySystemFragment"
+        android:name="com.utechia.tdf.more.SurveySystemFragment"
         android:label="fragment_survey_system"
         tools:layout="@layout/fragment_survey_system" />
     <fragment
         android:id="@+id/eventSystemFragment"
-        android:name="com.utechia.tdf.fragment.EventSystemFragment"
+        android:name="com.utechia.tdf.more.EventSystemFragment"
         android:label="fragment_event_system"
         tools:layout="@layout/fragment_event_system" />
     <fragment
         android:id="@+id/ticketSystemFragment"
-        android:name="com.utechia.tdf.fragment.TicketSystemFragment"
+        android:name="com.utechia.tdf.more.TicketSystemFragment"
         android:label="fragment_ticket_system"
         tools:layout="@layout/fragment_ticket_system" >
         <action
@@ -131,18 +131,18 @@
 
     <fragment
         android:id="@+id/calendarFragment"
-        android:name="com.utechia.tdf.fragment.CalendarFragment"
+        android:name="com.utechia.tdf.more.CalendarFragment"
         android:label="fragment_calendar"
         tools:layout="@layout/fragment_calendar" />
 
     <fragment
         android:id="@+id/createTicketFragment"
-        android:name="com.utechia.tdf.fragment.CreateTicketFragment"
+        android:name="com.utechia.tdf.more.CreateTicketFragment"
         android:label="fragment_create_ticket"
         tools:layout="@layout/fragment_create_ticket" />
     <fragment
         android:id="@+id/permissionFragment"
-        android:name="com.utechia.tdf.fragment.PermissionFragment"
+        android:name="com.utechia.tdf.more.PermissionFragment"
         android:label="fragment_permission"
         tools:layout="@layout/fragment_permission" />
     <dialog
@@ -156,7 +156,7 @@
     </dialog>
     <fragment
         android:id="@+id/createRefreshmentFragment"
-        android:name="com.utechia.tdf.fragment.CreateRefreshmentFragment"
+        android:name="com.utechia.tdf.refreshment.CreateRefreshmentFragment"
         android:label="fragment_create_refreshment"
         tools:layout="@layout/fragment_create_refreshment" >
         <argument
@@ -180,7 +180,7 @@
     </fragment>
     <fragment
         android:id="@+id/cartFragment"
-        android:name="com.utechia.tdf.fragment.CartFragment"
+        android:name="com.utechia.tdf.refreshment.CartFragment"
         android:label="fragment_cart"
         tools:layout="@layout/fragment_cart" >
         <action
@@ -189,7 +189,7 @@
     </fragment>
     <fragment
         android:id="@+id/orderFragment"
-        android:name="com.utechia.tdf.fragment.OrderFragment"
+        android:name="com.utechia.tdf.order.OrderFragment"
         android:label="fragment_order"
         tools:layout="@layout/fragment_order" >
         <action
@@ -217,13 +217,35 @@
     </dialog>
     <fragment
         android:id="@+id/favoriteFragment"
-        android:name="com.utechia.tdf.fragment.FavoriteFragment"
+        android:name="com.utechia.tdf.favorite.FavoriteFragment"
         android:label="fragment_favorite"
         tools:layout="@layout/fragment_favorite" />
     <fragment
         android:id="@+id/previousOrdersFragment"
-        android:name="com.utechia.tdf.fragment.PreviousOrdersFragment"
+        android:name="com.utechia.tdf.order.PreviousOrdersFragment"
         android:label="fragment_previous_orders"
         tools:layout="@layout/fragment_previous_orders" />
+    <fragment
+        android:id="@+id/loginFragment"
+        android:name="com.utechia.tdf.login.LoginFragment"
+        android:label="fragment_login"
+        tools:layout="@layout/fragment_login"/>
+
+    <dialog
+        android:id="@+id/waitingFragment"
+        android:name="com.utechia.tdf.login.WaitingFragment"
+        android:label="fragment_waiting"
+        tools:layout="@layout/fragment_waiting" >
+
+        <deepLink
+            android:id="@+id/deepLink"
+            app:uri="tdf://tdf.gov.sa?token={token}" />
+
+        <argument
+            android:name="token"
+            app:argType="string"
+            app:nullable="true" />
+
+    </dialog>
 
 </navigation>
