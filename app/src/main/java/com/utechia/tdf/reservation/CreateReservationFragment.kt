@@ -5,8 +5,10 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
+import androidx.core.os.bundleOf
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
+import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.GridLayoutManager
 import com.utechia.domain.model.RoomModel
 import com.utechia.domain.utile.Result
@@ -26,9 +28,12 @@ class CreateReservationFragment : Fragment() {
     private var day = calendar.get(Calendar.DAY_OF_MONTH)
     private var month = calendar.get(Calendar.MONTH)
     private var year = calendar.get(Calendar.YEAR)
+    private var duration = ""
     private var room = 0
     private var th = 0
-    var selected:MutableSet<String> = mutableSetOf()
+    private var firstTime = ""
+    private var laseTime = ""
+
 
 
     override fun onCreateView(
@@ -76,7 +81,7 @@ class CreateReservationFragment : Fragment() {
         }
 
         binding.increaseYear.setOnClickListener{
-            if (year<2029)
+            if (year<2030)
             year +=1
             binding.year.text = year.toString()
 
@@ -97,7 +102,6 @@ class CreateReservationFragment : Fragment() {
             room +=1
             binding.roomTitle.text = roomModel[room].name
             binding.capacity.text = roomModel[room].capacity.toString()
-            selected.clear()
             timePickerAdapter.addData(roomModel[room].hour)
         }
 
@@ -110,7 +114,6 @@ class CreateReservationFragment : Fragment() {
             room -=1
             binding.roomTitle.text = roomModel[room].name
             binding.capacity.text = roomModel[room].capacity.toString()
-            selected.clear()
             timePickerAdapter.addData(roomModel[room].hour)
         }
 
@@ -133,6 +136,24 @@ class CreateReservationFragment : Fragment() {
             adapter = timePickerAdapter
             addItemDecoration(ItemDecorationReservation())
 
+        }
+
+        binding.appCompatButton.setOnClickListener {
+
+            val bundle = bundleOf(
+
+                "day" to day,
+                "month" to month,
+                "year" to year,
+                "room" to room,
+                "floor" to th,
+                "duration" to duration,
+                "firstTime" to firstTime,
+                "lastTime" to laseTime,
+
+            )
+
+            findNavController().navigate(R.id.action_createReservationFragment_to_reservationDetails,bundle)
         }
 
         roomObserver()
@@ -179,9 +200,12 @@ class CreateReservationFragment : Fragment() {
         }
     }
 
-    fun setTime(){
+    fun setTime(selected:Int,first:String,last:String){
 
-        when (selected.size){
+        firstTime = first
+        laseTime = last
+
+        when (selected){
 
             0 -> {
                 binding.time.text = ""
@@ -189,20 +213,18 @@ class CreateReservationFragment : Fragment() {
 
             }
             2 ->{
-                binding.time.text = selected.elementAt(0) + " "+"-" +" "+ selected.elementAt(selected.size-1)
+                binding.time.text = "$first - $last"
                 binding.duration.text = "30 min"
+                duration = "30 min"
 
             }
 
             else ->{
-                val duration : Float = ((selected.size.toFloat() -1.0) / 2).toFloat()
-                binding.time.text = selected.elementAt(0) + " "+"-" +" "+ selected.elementAt(selected.size-1)
+                duration = ((selected.toFloat() -1.0) / 2).toFloat().toString()
+                binding.time.text = "$first - $last"
                 binding.duration.text = "$duration hrs"
             }
-
-
         }
     }
-
 }
 

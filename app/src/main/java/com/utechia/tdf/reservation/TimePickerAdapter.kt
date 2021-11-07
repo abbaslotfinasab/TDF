@@ -13,11 +13,13 @@ import com.utechia.tdf.R
 class TimePickerAdapter(private val createReservationFragment: CreateReservationFragment):RecyclerView.Adapter<RecyclerView.ViewHolder>() {
 
     private val timeList:MutableList<HourModel> = mutableListOf()
+    private var selected : MutableSet<String> = mutableSetOf()
 
 
     fun addData(data:MutableList<HourModel>){
 
         timeList.clear()
+        selected.clear()
         timeList.addAll(data)
         notifyItemRangeChanged(0,timeList.size)
     }
@@ -62,25 +64,22 @@ class TimePickerAdapter(private val createReservationFragment: CreateReservation
                     clicked = if (!clicked) {
                         it.setBackgroundColor(parseColor("#30B68B"))
 
-                        createReservationFragment.selected.add(timeList[position].title)
-                        createReservationFragment.selected.add(timeList[position+1].title)
-                        createReservationFragment.setTime()
+                        selected.add(timeList[position].title)
+                        selected.add(timeList[position+1].title)
 
                         true
 
                     } else {
-
                         it.setBackgroundColor(parseColor("#96AAF0"))
 
-                        if (createReservationFragment.selected.size<3)
-                            createReservationFragment.selected.clear()
-                        else
-                            createReservationFragment.selected.remove(timeList[position+1].title)
-
-                        createReservationFragment.setTime()
+                        selected.remove(timeList[position].title)
+                        selected.remove(timeList[position+1].title)
 
                         false
                     }
+
+                    createReservationFragment.setTime(selected.size,selected.elementAt(0),selected.elementAt(selected.size-1))
+
                 }
             }
         }

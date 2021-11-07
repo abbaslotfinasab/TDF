@@ -3,7 +3,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/nav_graph"
-    app:startDestination="@id/loginFragment">
+    app:startDestination="@id/homeFragment">
 
     <fragment
         android:id="@+id/homeFragment"
@@ -147,7 +147,7 @@
         tools:layout="@layout/fragment_permission" />
     <dialog
         android:id="@+id/resultFragment"
-        android:name="com.utechia.tdf.fragment.ResultFragment"
+        android:name="com.utechia.tdf.reservation.ResultFragment"
         android:label="fragment_result"
         tools:layout="@layout/fragment_result" >
         <action
@@ -199,7 +199,7 @@
 
     <dialog
         android:id="@+id/orderResultFragment"
-        android:name="com.utechia.tdf.fragment.OrderResultFragment"
+        android:name="com.utechia.tdf.order.OrderResultFragment"
         android:label="fragment_order_result"
         tools:layout="@layout/fragment_order_result" >
         <action
@@ -208,7 +208,7 @@
     </dialog>
     <dialog
         android:id="@+id/favoriteResultFragment"
-        android:name="com.utechia.tdf.fragment.FavoriteResultFragment"
+        android:name="com.utechia.tdf.favorite.FavoriteResultFragment"
         android:label="fragment_favorite_result"
         tools:layout="@layout/fragment_favorite_result" >
         <action
