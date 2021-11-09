@@ -4,6 +4,7 @@ import android.content.Context
 import com.utechia.data.api.Service
 import com.squareup.moshi.Moshi
 import com.squareup.moshi.kotlin.reflect.KotlinJsonAdapterFactory
+import com.utechia.data.utile.AuthInterceptor
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
@@ -24,12 +25,11 @@ class ApiModule {
     @Provides
     @Singleton
     fun provideOkHttpClient(@ApplicationContext context:Context): OkHttpClient {
-        val okHttpBuilder = OkHttpClient.Builder()
-        okHttpBuilder.addInterceptor(HttpLoggingInterceptor())
-        okHttpBuilder.connectTimeout(30,TimeUnit.SECONDS)
-        okHttpBuilder.readTimeout(30, TimeUnit.SECONDS)
-
-        return okHttpBuilder.build()
+        return OkHttpClient.Builder()
+            .addInterceptor(AuthInterceptor(context))
+            .connectTimeout(30,TimeUnit.SECONDS)
+            .readTimeout(30, TimeUnit.SECONDS)
+            .build()
     }
     @Provides
     @Singleton
@@ -43,7 +43,7 @@ class ApiModule {
     @Singleton
     fun provideRetrofit(okHttpClient: OkHttpClient): Retrofit {
         return Retrofit.Builder()
-            .baseUrl("http://google.com/")
+            .baseUrl("http://3.66.226.231/api/")
             .addConverterFactory(MoshiConverterFactory.create())
             .client(okHttpClient)
             .build()

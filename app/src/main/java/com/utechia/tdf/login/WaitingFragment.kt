@@ -9,6 +9,9 @@ import android.view.ViewGroup
 import android.view.Window
 import android.widget.Toast
 import androidx.fragment.app.DialogFragment
+import androidx.fragment.app.viewModels
+import androidx.navigation.fragment.findNavController
+import com.utechia.tdf.R
 import com.utechia.tdf.databinding.FragmentWaitingBinding
 import dagger.hilt.android.AndroidEntryPoint
 
@@ -16,7 +19,7 @@ import dagger.hilt.android.AndroidEntryPoint
 class WaitingFragment : DialogFragment() {
 
     private lateinit var binding: FragmentWaitingBinding
-    private var token = ""
+    private val loginViewModel: LoginViewModel by viewModels()
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -36,11 +39,13 @@ class WaitingFragment : DialogFragment() {
 
         if (arguments!=null) {
 
-            token = requireArguments().getString("token", "")
-            Toast.makeText(context,token,Toast.LENGTH_SHORT).show()
-
+            val code = requireArguments().getString("code", "")
+            loginViewModel.verify(code)
         }
 
+        binding.appCompatButton.setOnClickListener {
+            findNavController().navigate(R.id.action_waitingFragment_to_homeFragment)
+        }
 
     }
 

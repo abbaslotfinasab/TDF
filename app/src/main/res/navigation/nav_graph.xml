@@ -3,7 +3,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/nav_graph"
-    app:startDestination="@id/homeFragment">
+    app:startDestination="@id/loginFragment">
 
     <fragment
         android:id="@+id/homeFragment"
@@ -239,12 +239,15 @@
 
         <deepLink
             android:id="@+id/deepLink"
-            app:uri="tdf://tdf.gov.sa/?token={token}" />
+            app:uri="https://auth.tdf.gov.sa:4002/?code={code}" />
 
         <argument
-            android:name="token"
+            android:name="code"
             app:argType="string"
             app:nullable="true" />
+        <action
+            android:id="@+id/action_waitingFragment_to_homeFragment"
+            app:destination="@id/homeFragment" />
 
     </dialog>
 
