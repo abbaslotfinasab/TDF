@@ -6,7 +6,4 @@ interface LoginUseCase {
 
     suspend fun execute(): LoginModel
 
-    suspend fun verify(code:String)
-
-
 }

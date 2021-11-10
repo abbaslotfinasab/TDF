@@ -33,11 +33,14 @@ class LoginFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
 
         binding.appCompatButton.setOnClickListener {
-            val browserIntent = Intent(Intent.ACTION_VIEW, Uri.parse(uri))
-            ContextCompat.startActivity(requireContext(), browserIntent, null)
-        }
 
-        loginViewModel.getLogin()
+            if (uri != "") {
+                val browserIntent = Intent(Intent.ACTION_VIEW, Uri.parse(uri))
+                ContextCompat.startActivity(requireContext(), browserIntent, null)
+            }else
+                Toast.makeText(context,"Please try later",Toast.LENGTH_SHORT).show()
+
+        }
 
         observer()
 
@@ -51,7 +54,7 @@ class LoginFragment : Fragment() {
 
                 is Result.Success -> {
 
-                    uri = it.data.url!!
+                    uri = it.data.url.toString()
 
                 }
 

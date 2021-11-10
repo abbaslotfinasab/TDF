@@ -37,4 +37,9 @@ abstract class RepositoryModule {
         loginRepoImpl: LoginRepoImpl
     ): LoginRepo
 
+    @Binds
+    abstract fun bindVerifyRepositoryService(
+        verifyRepoImpl: VerifyRepoImpl
+    ): VerifyRepo
+
 }

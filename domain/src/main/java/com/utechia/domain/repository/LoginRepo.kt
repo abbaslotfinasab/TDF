@@ -6,6 +6,4 @@ interface LoginRepo {
 
     suspend fun getLogin(): LoginModel
 
-    suspend fun verifyLogin(code:String)
-
 }

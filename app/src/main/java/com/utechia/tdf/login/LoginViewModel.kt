@@ -10,6 +10,7 @@ import com.utechia.domain.utile.Result
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.CoroutineExceptionHandler
 import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
 import javax.inject.Inject
 
@@ -29,7 +30,12 @@ class LoginViewModel @Inject constructor(
         _loginModel.postValue(exception.message?.let { Result.Error(it) })
     }
 
-    fun getLogin(){
+    init {
+
+        getLogin()
+    }
+
+     private fun getLogin(){
 
         viewModelScope.launch(Dispatchers.IO+handler)  {
 
@@ -39,16 +45,6 @@ class LoginViewModel @Inject constructor(
 
                 _loginModel.postValue(Result.Success(it))
             }
-        }
-    }
-
-     fun verify(code:String){
-
-        viewModelScope.launch(Dispatchers.IO+handler)  {
-
-            _loginModel.postValue(Result.Loading)
-
-            loginUseCaseImpl.verify(code)
         }
     }
 }

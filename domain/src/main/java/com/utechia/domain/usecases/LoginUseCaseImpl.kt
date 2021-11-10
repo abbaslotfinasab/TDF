@@ -12,7 +12,4 @@ class LoginUseCaseImpl @Inject constructor(private val loginRepo: LoginRepo):Log
         return loginRepo.getLogin()
     }
 
-    override suspend fun verify(code: String) {
-        return loginRepo.verifyLogin(code)
-    }
 }

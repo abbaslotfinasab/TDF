@@ -2,8 +2,7 @@
 <navigation xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    android:id="@+id/nav_graph"
-    app:startDestination="@id/loginFragment">
+    android:id="@+id/nav_graph">
 
     <fragment
         android:id="@+id/homeFragment"
@@ -248,7 +247,19 @@
         <action
             android:id="@+id/action_waitingFragment_to_homeFragment"
             app:destination="@id/homeFragment" />
+        <action
+            android:id="@+id/action_waitingFragment_to_authenticationFragment"
+            app:destination="@id/authenticationFragment" />
 
+    </dialog>
+    <dialog
+        android:id="@+id/authenticationFragment"
+        android:name="com.utechia.tdf.login.AuthenticationFragment"
+        android:label="fragment_authentication"
+        tools:layout="@layout/fragment_authentication" >
+        <action
+            android:id="@+id/action_authenticationFragment_to_homeFragment"
+            app:destination="@id/homeFragment" />
     </dialog>
 
 </navigation>

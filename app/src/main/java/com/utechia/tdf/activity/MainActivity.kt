@@ -7,7 +7,6 @@ import android.os.Bundle
 import android.os.Handler
 import android.os.Looper
 import android.view.View
-import android.widget.Toast
 import androidx.core.content.ContextCompat
 import androidx.core.view.GravityCompat
 import androidx.drawerlayout.widget.DrawerLayout
@@ -22,7 +21,6 @@ class MainActivity : AppCompatActivity() {
 
     private lateinit var binding:ActivityMainBinding
     private lateinit var pref: SharedPreferences
-    private var user = ""
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -33,16 +31,18 @@ class MainActivity : AppCompatActivity() {
 
         val navHostFragment = supportFragmentManager.findFragmentById(R.id.nav_host_fragment) as NavHostFragment
         val navController = navHostFragment.navController
+        val graph = navController.navInflater.inflate(R.navigation.nav_graph)
 
         if (pref.getString("user_id",null) ==  null){
 
-            navController.graph.setStartDestination(R.id.homeFragment)
+            graph.setStartDestination(R.id.loginFragment)
+
                 }
                 else
                 {
-                    user = pref.getString("user_id",null).toString()
-                    navController.graph.setStartDestination(R.id.homeFragment)
+                    graph.setStartDestination(R.id.homeFragment)
                 }
+        navHostFragment.navController.graph = graph
 
         navController.addOnDestinationChangedListener{_, destination, _ ->
             binding.bottomNavigation.setupWithNavController(navController)
@@ -51,7 +51,7 @@ class MainActivity : AppCompatActivity() {
 
                 R.id.homeFragment ->{
                     design(0)
-                    Toast.makeText(this,user,Toast.LENGTH_SHORT).show()
+
                 }
                 R.id.teaBoyFragment ->{
                     design(0)
@@ -74,6 +74,10 @@ class MainActivity : AppCompatActivity() {
                }
 
                R.id.waitingFragment -> {
+                   design(1)
+               }
+
+               R.id.authenticationFragment -> {
                    design(1)
                }
 
@@ -178,13 +182,12 @@ class MainActivity : AppCompatActivity() {
 
         binding.exit.setOnClickListener {
 
-            Handler(Looper.getMainLooper()).postDelayed({
 
-                Toast.makeText(this,"Log out",Toast.LENGTH_SHORT).show()
+            pref.edit().remove("user_id").remove("user_token").apply()
+            navController.navigateUp()
+            navController.navigate(R.id.loginFragment)
 
-            }, 50)
         }
-
 
     }
 
