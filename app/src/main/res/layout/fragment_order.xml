@@ -59,7 +59,7 @@
         android:layout_height="60dp"
         android:layout_marginStart="40dp"
         android:layout_marginEnd="40dp"
-        android:layout_marginBottom="20dp"
+        android:layout_marginBottom="60dp"
         android:background="#3360DD"
         android:text="CheckOut"
         android:textAllCaps="false"

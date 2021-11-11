@@ -15,7 +15,7 @@ class ItemDecorationBooked: RecyclerView.ItemDecoration() {
         @NonNull state: RecyclerView.State
     ) {
         if(parent.getChildAdapterPosition(view)==state.itemCount-1)
-            outRect.bottom = 170
+            outRect.bottom = 240
         else
             outRect.bottom = 20
         outRect.top = 20
