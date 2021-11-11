@@ -216,8 +216,8 @@ class MainActivity : AppCompatActivity() {
             2->{
                 window.statusBarColor = ContextCompat.getColor(this,R.color.status)
                 binding.toolbar.visibility = View.VISIBLE
-                binding.customButton.visibility = View.VISIBLE
-                binding.bottomNavigation.visibility = View.VISIBLE
+                binding.customButton.visibility = View.GONE
+                binding.bottomNavigation.visibility = View.GONE
                 binding.drawerLayout.setDrawerLockMode(DrawerLayout.LOCK_MODE_UNLOCKED)
                 binding.drawerLayout.closeDrawer(GravityCompat.END)
 
