@@ -34,9 +34,9 @@ class VerifyViewModel @Inject constructor(
 
         viewModelScope.launch(Dispatchers.IO+handler)  {
 
-            delay(3000)
-
             _verifyModel.postValue(Result.Loading)
+
+            delay(2000)
 
             verifyUseCaseImpl.verify(code).let {
 

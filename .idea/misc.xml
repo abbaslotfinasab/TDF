@@ -3,6 +3,8 @@
   <component name="DesignSurface">
     <option name="filePathToZoomLevelMap">
       <map>
+        <entry key="..\:/Users/Abbas/StudioProjects/tdf_oms_android_application_kotlin_v1/app/src/main/res/drawable/back_progress.xml" value="0.18958333333333333" />
+        <entry key="..\:/Users/Abbas/StudioProjects/tdf_oms_android_application_kotlin_v1/app/src/main/res/layout/fragment_login.xml" value="0.18" />
         <entry key="..\:/Users/Dr Computer/AndroidStudioProjects/TDF/app/src/main/res/drawable/back_booked.xml" value="0.2203125" />
         <entry key="..\:/Users/Dr Computer/AndroidStudioProjects/TDF/app/src/main/res/drawable/banner.xml" value="0.2203125" />
         <entry key="..\:/Users/Dr Computer/AndroidStudioProjects/TDF/app/src/main/res/drawable/border.xml" value="0.2203125" />

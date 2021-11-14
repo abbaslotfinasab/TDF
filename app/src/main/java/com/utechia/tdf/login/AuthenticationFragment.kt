@@ -36,9 +36,7 @@ class AuthenticationFragment : DialogFragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        binding.appCompatButton.setOnClickListener {
-            findNavController().navigate(R.id.action_authenticationFragment_to_homeFragment)
-        }
+
 
 
     }

@@ -19,6 +19,7 @@ class LoginFragment : Fragment() {
 
     private lateinit var binding: FragmentLoginBinding
     private val loginViewModel: LoginViewModel by viewModels()
+
     private var uri = ""
 
     override fun onCreateView(
