@@ -21,10 +21,9 @@ class CreateRefreshmentFragment : Fragment() {
 
     private lateinit var binding: FragmentCreateRefreshmentBinding
     val refreshmentViewModel: RefreshmentViewModel by viewModels()
-    private val searchViewModel: SearchViewModel by viewModels()
     private val searchAdapter: SearchAdapter = SearchAdapter(1)
-    private val refreshmentAdapter: RefreshmentAdapter = RefreshmentAdapter(this)
-    private var kind = 0
+    private val refreshmentAdapter: RefreshmentAdapter = RefreshmentAdapter()
+    private var category = ""
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -47,8 +46,8 @@ class CreateRefreshmentFragment : Fragment() {
                 searchAdapter.searchList.clear()
 
                 if(query!="") {
-                    query?.let { searchViewModel.getBooked(it) }
-                    observe()
+                    query?.let { refreshmentViewModel.search(it) }
+                    observer(0)
                 }
                 else
                     binding.searchRecycler.visibility = View.GONE
@@ -62,8 +61,8 @@ class CreateRefreshmentFragment : Fragment() {
 
 
                 if(newText!="") {
-                    newText?.let { searchViewModel.getBooked(it) }
-                    observe()
+                    newText?.let { refreshmentViewModel.search(it) }
+                    observer(0)
                 }
                 else
                     binding.searchRecycler.visibility = View.GONE
@@ -76,21 +75,19 @@ class CreateRefreshmentFragment : Fragment() {
 
 
         if (arguments != null)
-            kind = requireArguments().getInt("kind", 0)
+            category = requireArguments().getString("category", "")
 
-        select(kind)
+        select(category)
 
-        refreshmentViewModel.getRefreshment(kind)
-        observer()
-
-
+        refreshmentViewModel.getRefreshment("food")
+        observer(1)
 
         binding.food.setOnClickListener {
 
             unselect()
-            select(1)
-            refreshmentViewModel.getRefreshment(1)
-            observer()
+            select("Snacks")
+            refreshmentViewModel.getRefreshment(binding.foodText.toString())
+            observer(1)
 
 
         }
@@ -98,9 +95,9 @@ class CreateRefreshmentFragment : Fragment() {
         binding.drink.setOnClickListener {
 
             unselect()
-            select(2)
-            refreshmentViewModel.getRefreshment(2)
-            observer()
+            select("Drinks")
+            refreshmentViewModel.getRefreshment(binding.drinkText.toString())
+            observer(1)
 
 
         }
@@ -109,7 +106,7 @@ class CreateRefreshmentFragment : Fragment() {
         binding.favorite.setOnClickListener {
 
             unselect()
-            select(3)
+            select("Favorites")
             findNavController().navigate(R.id.action_createRefreshmentFragment_to_favoriteFragment)
 
         }
@@ -118,7 +115,7 @@ class CreateRefreshmentFragment : Fragment() {
         binding.order.setOnClickListener {
 
             unselect()
-            select(4)
+            select("Orders")
             findNavController().navigate(R.id.action_createRefreshmentFragment_to_previousOrdersFragment)
         }
 
@@ -128,6 +125,8 @@ class CreateRefreshmentFragment : Fragment() {
             binding.subtitle.setTextColor(Color.parseColor("#9D9D9D"))
             binding.subLine.visibility = View.GONE
             binding.titleLine.visibility = View.VISIBLE
+            refreshmentViewModel.getRefreshment(binding.title.toString())
+            observer(1)
         }
 
         binding.subtitle.setOnClickListener {
@@ -135,6 +134,9 @@ class CreateRefreshmentFragment : Fragment() {
             binding.title.setTextColor(Color.parseColor("#9D9D9D"))
             binding.subLine.visibility = View.VISIBLE
             binding.titleLine.visibility = View.GONE
+            refreshmentViewModel.getRefreshment(binding.subtitle.toString())
+            observer(1)
+
 
         }
 
@@ -146,7 +148,6 @@ class CreateRefreshmentFragment : Fragment() {
 
         binding.appCompatButton.setOnClickListener {
 
-            refreshmentViewModel.order(refreshmentAdapter.orders)
             findNavController().navigate(R.id.action_createRefreshmentFragment_to_orderFragment)
 
         }
@@ -159,11 +160,11 @@ class CreateRefreshmentFragment : Fragment() {
 
     }
 
-    private fun select(kind: Int) {
+    private fun select(category: String) {
 
-        when (kind) {
+        when (category) {
 
-            1 -> {
+            "Snacks" -> {
 
                 unselect()
                 binding.food.setBackgroundColor(Color.parseColor("#335DE0"))
@@ -173,14 +174,14 @@ class CreateRefreshmentFragment : Fragment() {
 
             }
 
-            2 -> {
+            "Drinks" -> {
                 unselect()
                 binding.drink.setBackgroundColor(Color.parseColor("#335DE0"))
                 binding.drinkText.setTextColor(Color.WHITE)
                 binding.title.visibility = View.VISIBLE
                 binding.subtitle.visibility = View.VISIBLE            }
 
-            3 -> {
+            "Orders" -> {
                 unselect()
                 binding.favorite.setBackgroundColor(Color.parseColor("#335DE0"))
                 binding.favoriteText.setTextColor(Color.WHITE)
@@ -188,7 +189,7 @@ class CreateRefreshmentFragment : Fragment() {
                 binding.subtitle.visibility = View.GONE
             }
 
-            4 -> {
+            "Favorites" -> {
                 unselect()
                 binding.order.setBackgroundColor(Color.parseColor("#335DE0"))
                 binding.orderText.setTextColor(Color.WHITE)
@@ -212,22 +213,21 @@ class CreateRefreshmentFragment : Fragment() {
 
     }
 
-    private fun observer() {
+    private fun observer(kind:Int) {
 
-        refreshmentViewModel.teaBoyModel.observe(viewLifecycleOwner) {
+        refreshmentViewModel.refreshmentModel.observe(viewLifecycleOwner) {
 
             when (it) {
                 is Result.Success -> {
-                    if(it.data.size==0)
-                        binding.appCompatButton.visibility = View.GONE
+                    if (kind == 0)
+                    searchAdapter.addData(it.data)
                     else
-                        binding.appCompatButton.visibility = View.VISIBLE
-
-                    refreshmentAdapter.addData(it.data)
+                        refreshmentAdapter.addData(it.data)
                 }
 
 
                 is Result.Loading -> {
+
                 }
 
                 is Result.Error -> {
@@ -236,28 +236,4 @@ class CreateRefreshmentFragment : Fragment() {
             }
         }
     }
-
-    fun observe(){
-        searchViewModel.searchModel.observe(viewLifecycleOwner){
-
-            when (it) {
-                is Result.Success -> {
-                    binding.searchRecycler.visibility = View.VISIBLE
-                    searchAdapter.addData(it.data)
-                }
-
-
-                is Result.Loading -> {}
-
-
-                is Result.Error -> {
-                    searchAdapter.searchList.clear()
-                    binding.searchRecycler.visibility = View.GONE
-                    Toast.makeText(context, it.message, Toast.LENGTH_SHORT).show()
-                }
-            }
-        }
-
-    }
-
 }

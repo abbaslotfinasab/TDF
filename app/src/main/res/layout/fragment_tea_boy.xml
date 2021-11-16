@@ -13,71 +13,26 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent">
 
-    <TextView
-        android:id="@+id/meetingTitle"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="20dp"
-        android:fontFamily="@font/poppins"
-        android:gravity="center"
-        android:text="Refreshments"
-        android:textColor="@color/black"
-        android:textSize="22sp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        <ImageView
+            android:id="@+id/food"
+            android:layout_width="165dp"
+            android:layout_height="165dp"
+            android:layout_marginStart="35dp"
+            android:layout_marginTop="50dp"
+            android:background="@drawable/food_state"
+            android:scaleType="fitCenter"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
 
-    <androidx.appcompat.widget.SearchView
-        android:id="@+id/autoCompleteTextView"
-        android:layout_width="0dp"
-        android:layout_height="40dp"
-        android:layout_marginStart="35dp"
-        android:layout_marginTop="6dp"
-        android:layout_marginEnd="35dp"
-        android:background="@color/white"
-        android:gravity="start"
-        android:textSize="14sp"
-        app:iconifiedByDefault="false"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/meetingTitle"
-        app:queryBackground="@null"
-        app:queryHint="search"
-        app:searchHintIcon="@null"
-        app:searchIcon="@drawable/ic_baseline_search_24" />
-
-
-    <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/searchRecycler"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:background="@color/white"
-        android:visibility="gone"
-        app:layout_constraintEnd_toEndOf="@+id/autoCompleteTextView"
-        app:layout_constraintStart_toStartOf="@+id/autoCompleteTextView"
-        app:layout_constraintTop_toBottomOf="@+id/autoCompleteTextView" />
-
-    <ImageView
-        android:id="@+id/food"
-        android:layout_width="165dp"
-        android:layout_height="165dp"
-        android:layout_marginStart="35dp"
-        android:layout_marginTop="15dp"
-        android:background="@drawable/food_state"
-        android:scaleType="fitCenter"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/autoCompleteTextView" />
-
-
-    <ImageButton
-        android:id="@+id/drink"
-        android:layout_width="165dp"
-        android:layout_height="165dp"
-        android:layout_marginStart="13dp"
-        android:layout_marginTop="15dp"
-        android:background="@drawable/drink_state"
-        app:layout_constraintStart_toEndOf="@+id/food"
-        app:layout_constraintTop_toBottomOf="@+id/autoCompleteTextView" />
+        <ImageButton
+            android:id="@+id/drink"
+            android:layout_width="165dp"
+            android:layout_height="165dp"
+            android:layout_marginStart="13dp"
+            android:layout_marginTop="50dp"
+            android:background="@drawable/drink_state"
+            app:layout_constraintStart_toEndOf="@+id/food"
+            app:layout_constraintTop_toTopOf="parent" />
 
     <ImageButton
         android:id="@+id/favorite"
@@ -107,7 +62,7 @@
             android:layout_marginStart="35dp"
             android:layout_marginTop="15dp"
             android:layout_marginEnd="35dp"
-            android:layout_marginBottom="60dp"
+            android:layout_marginBottom="150dp"
             android:background="@color/white"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"

@@ -19,45 +19,24 @@ class TeaBoyRepoImpl @Inject constructor(
 
     override fun getRefreshment(category: Int): MutableList<RefreshmentModel> {
 
-        refreshment.clear()
-        refreshment.add(Refreshment(0,2,"Special Coffee","https://bayanbox.ir/view/3467016343917373981/chamomile-tea-thumb-1-732x549.jpg",false,0,150,"5-10min"))
-        refreshment.add(Refreshment(1,2,"Special Tea","https://www.illy.com/content/dam/channels/website/consumer/italy/landing/milk-frother/750x500-Cappuccino.jpg",false,0,150,"5-10min"))
-
-        return when(category){
-
-            3->{
-                likeModel.map { it.toDomain() }.toMutableList()
-            }
-
-            4->{
-                orderModel.map { it.toDomain() }.toMutableList()
-            }
-
-            else-> refreshment.map { it.toDomain() }.toMutableList()
-        }
+        return refreshment.map { it.toDomain() }.toMutableList()
 
     }
 
     override fun getCard(id: Int): MutableList<RefreshmentModel> {
-        card.clear()
-        card.add(refreshment[id])
-        return card.map { it.toDomain() }.toMutableList()
+
+        return refreshment.map { it.toDomain() }.toMutableList()
+
     }
 
 
     override fun like(refreshmentModel: RefreshmentModel) {
 
-        likeModel.add(Refreshment(refreshmentModel.id,refreshmentModel.category,refreshmentModel.name,refreshmentModel.image,refreshmentModel.favorit,refreshmentModel.number,refreshmentModel.calorie,refreshmentModel.time))
     }
 
 
     override fun order(refreshmentModel: MutableList<RefreshmentModel>) {
 
-        refreshmentModel.map {
-
-            orderModel.add((Refreshment(it.id,it.category,it.name,it.image,it.favorit,it.number,it.calorie,it.time)))
-
-        }
 
     }
 
@@ -68,7 +47,6 @@ class TeaBoyRepoImpl @Inject constructor(
 
     override fun cancel(refreshmentModel: RefreshmentModel) {
 
-        orderModel.remove(Refreshment(refreshmentModel.id,refreshmentModel.category,refreshmentModel.name,refreshmentModel.image,refreshmentModel.favorit,refreshmentModel.number,refreshmentModel.calorie,refreshmentModel.time))
 
     }
 

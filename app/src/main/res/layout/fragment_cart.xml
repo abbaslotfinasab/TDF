@@ -1,156 +1,144 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.core.widget.NestedScrollView
+<androidx.constraintlayout.widget.ConstraintLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:fillViewport="true"
     android:background="#E5E5E5"
-    tools:context=".refreshment.CartFragment">
-
-    <androidx.constraintlayout.widget.ConstraintLayout
-        android:layout_width="match_parent"
-        android:layout_height="match_parent">
+    tools:context=".order.OrderFragment">
 
     <TextView
-        android:id="@+id/textView"
+        android:id="@+id/title"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="40dp"
-        android:text="Cart"
+        android:layout_marginTop="32dp"
+        android:layout_marginEnd="20dp"
+        android:fontFamily="@font/poppins"
+        android:gravity="center"
+        android:text="Delivered"
         android:textColor="@color/black"
-        android:textSize="22dp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
+        android:textSize="18sp"
+        android:visibility="visible"
+        app:layout_constraintEnd_toStartOf="@+id/subtitle"
         app:layout_constraintTop_toTopOf="parent" />
 
-    <ImageView
-        android:id="@+id/image"
-        android:layout_width="260dp"
-        android:layout_height="225dp"
-        android:layout_marginStart="30dp"
-        android:layout_marginTop="10dp"
-        android:layout_marginEnd="30dp"
-        android:background="@color/white"
-        android:scaleType="centerInside"
-        android:src="@mipmap/image1"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textView" />
-
-    <androidx.constraintlayout.widget.ConstraintLayout
-        android:id="@+id/number"
-        android:layout_width="100dp"
-        android:layout_height="50dp"
-        android:layout_marginTop="23dp"
-        android:background="#335DE0"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/image">
-
-        <TextView
-            android:id="@+id/minusNumber"
-            android:layout_width="25dp"
-            android:layout_height="25dp"
-            android:layout_marginStart="2dp"
-            android:background="@drawable/ic_rectangle_4177"
-            android:gravity="center"
-            android:text="-"
-            android:textColor="@color/white"
-            android:textSize="16sp"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
-
-
-        <TextView
-            android:id="@+id/numberText"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center"
-            android:layout_marginTop="5dp"
-            android:gravity="center"
-            android:text="0"
-            android:textColor="@color/white"
-            android:textSize="16sp"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toStartOf="@+id/plusNumber"
-            app:layout_constraintStart_toEndOf="@+id/minusNumber"
-            app:layout_constraintTop_toTopOf="parent" />
-
-        <TextView
-            android:id="@+id/plusNumber"
-            android:layout_width="25dp"
-            android:layout_height="25dp"
-            android:layout_gravity="end"
-            android:layout_marginEnd="2dp"
-            android:background="@drawable/ic_rectangle_4177"
-            android:gravity="center"
-            android:text="+"
-            android:textColor="@color/white"
-            android:textSize="16sp"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
-
-
-    </androidx.constraintlayout.widget.ConstraintLayout>
+    <View
+        android:id="@+id/titleLine"
+        android:layout_width="0dp"
+        android:layout_height="1dp"
+        android:background="@color/black"
+        app:layout_constraintBottom_toBottomOf="@+id/title"
+        app:layout_constraintEnd_toEndOf="@+id/title"
+        app:layout_constraintStart_toStartOf="@+id/title"
+        app:layout_constraintTop_toBottomOf="@+id/title" />
 
     <TextView
-        android:id="@+id/name"
+        android:id="@+id/subtitle"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="25dp"
-        android:text="Special Tea"
-        android:textColor="@color/black"
-        android:textSize="16sp"
+        android:layout_marginTop="32dp"
+        android:layout_marginEnd="20dp"
+        android:fontFamily="@font/poppins"
+        android:gravity="center"
+        android:text="Pending"
+        android:textColor="#9D9D9D"
+        android:textSize="18sp"
+        android:visibility="visible"
+        app:layout_constraintEnd_toStartOf="@+id/sub"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <View
+        android:id="@+id/subLine"
+        android:layout_width="0dp"
+        android:layout_height="1dp"
+        android:background="@color/black"
+        android:visibility="gone"
+        app:layout_constraintBottom_toBottomOf="@+id/subtitle"
+        app:layout_constraintEnd_toEndOf="@+id/subtitle"
+        app:layout_constraintStart_toStartOf="@+id/subtitle" />
+
+    <TextView
+        android:id="@+id/sub"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="32dp"
+        android:layout_marginEnd="50dp"
+        android:fontFamily="@font/poppins"
+        android:gravity="center"
+        android:text="Cancelled"
+        android:textColor="#9D9D9D"
+        android:textSize="18sp"
+        android:visibility="visible"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <View
+        android:id="@+id/line"
+        android:layout_width="0dp"
+        android:layout_height="1dp"
+        android:background="@color/black"
+        android:visibility="gone"
+        app:layout_constraintBottom_toBottomOf="@+id/sub"
+        app:layout_constraintEnd_toEndOf="@+id/sub"
+        app:layout_constraintStart_toStartOf="@+id/sub" />
+
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/recyclerView"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_marginTop="20dp"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/number" />
-
-    <TextView
-        android:id="@+id/cal"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="130dp"
-        android:layout_marginTop="15dp"
-        android:text="🔥300cal"
-        android:textColor="@color/black"
-        android:textSize="12sp"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/name" />
-
-    <TextView
-        android:id="@+id/time"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="45dp"
-        android:text="⏰5-10min"
-        android:textColor="@color/black"
-        android:textSize="12sp"
-        app:layout_constraintBottom_toBottomOf="@+id/cal"
-        app:layout_constraintStart_toEndOf="@+id/cal"
-        app:layout_constraintTop_toTopOf="@+id/cal" />
-
+        app:layout_constraintTop_toBottomOf="@+id/subtitle" />
 
     <androidx.appcompat.widget.AppCompatButton
         android:id="@+id/appCompatButton"
         android:layout_width="0dp"
         android:layout_height="60dp"
         android:layout_marginStart="40dp"
-        android:layout_marginTop="20dp"
         android:layout_marginEnd="40dp"
+        android:layout_marginBottom="60dp"
         android:background="#3360DD"
-        android:text="Order"
+        android:text="CheckOut"
         android:textAllCaps="false"
         android:textColor="@color/white"
         android:textSize="16sp"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent" />
+
+    <androidx.cardview.widget.CardView
+        android:id="@+id/prg"
+        android:layout_width="72dp"
+        android:layout_height="72dp"
+        app:cardElevation="6dp"
+        app:cardCornerRadius="36dp"
+        android:visibility="gone"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:cardPreventCornerOverlap="true"
+        app:layout_constraintCircleRadius="36dp"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/cal" />
+        app:layout_constraintTop_toTopOf="parent">
 
-    </androidx.constraintlayout.widget.ConstraintLayout>
+        <com.agrawalsuneet.dotsloader.loaders.LazyLoader
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:layout_gravity="center"
+            app:lazyloader_animDur="800"
+            app:lazyloader_dotsDist="5dp"
+            app:lazyloader_dotsRadius="8dp"
+            app:lazyloader_firstDelayDur="150"
+            app:lazyloader_firstDotColor="#3360DD"
+            app:lazyloader_interpolator="@android:anim/decelerate_interpolator"
+            app:lazyloader_secondDelayDur="300"
+            app:lazyloader_secondDotColor="#3360DD"
+            app:lazyloader_thirdDotColor="#3360DD" />
 
+    </androidx.cardview.widget.CardView>
 
-</androidx.core.widget.NestedScrollView>
+</androidx.constraintlayout.widget.ConstraintLayout>

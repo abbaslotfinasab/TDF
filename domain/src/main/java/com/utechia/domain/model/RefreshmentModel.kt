@@ -2,20 +2,22 @@ package com.utechia.domain.model
 
 data class RefreshmentModel(
 
-    var id :Int?,
+    val category: String?,
 
-    var category:Int?,
+    val createdAt: String?,
 
-    var name:String?,
+    val id: Int?,
 
-    var image:String?,
+    val imageName: String?,
 
-    var favorit:Boolean?,
+    val imagePath: String?,
 
-    var number:Int?,
+    val rating: Int?,
 
-    var calorie:Int?,
+    val status: Boolean?,
 
-    var time:String?,
+    val title: String?,
+
+    val updatedAt: String?
 
     )

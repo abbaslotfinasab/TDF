@@ -51,7 +51,7 @@ class FavoriteAdapter(private val favoriteFragment: FavoriteFragment): RecyclerV
                 .centerCrop()
                 .into(image)
 
-            title.text = favorite[position].name
+            title.text = favorite[position].title
 
             remove.setOnClickListener {
                 favoriteFragment.refreshmentViewModel.delete(favorite[position].id!!)

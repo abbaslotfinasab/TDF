@@ -1,16 +1,16 @@
 package com.utechia.data.entity
 
 import android.os.Parcelable
-import com.squareup.moshi.JsonClass
 
 import kotlinx.parcelize.Parcelize
-import kotlinx.parcelize.RawValue
+import kotlinx.serialization.Contextual
+import kotlinx.serialization.Serializable
 
 @Parcelize
-@JsonClass(generateAdapter = true)
+@Serializable
 data class Verify(
 
-    val data :@RawValue VerifyData?,
-    val error:@RawValue VerifyError?
+    val data :@Contextual VerifyData?,
+    val error:@Contextual VerifyError?
 
 ):Parcelable

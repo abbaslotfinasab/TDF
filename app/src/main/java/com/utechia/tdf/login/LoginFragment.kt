@@ -10,7 +10,10 @@ import android.widget.Toast
 import androidx.core.content.ContextCompat
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
+import androidx.navigation.fragment.findNavController
 import com.utechia.domain.utile.Result
+import com.utechia.tdf.R
+import com.utechia.tdf.activity.MainActivity
 import com.utechia.tdf.databinding.FragmentLoginBinding
 import dagger.hilt.android.AndroidEntryPoint
 
@@ -19,8 +22,10 @@ class LoginFragment : Fragment() {
 
     private lateinit var binding: FragmentLoginBinding
     private val loginViewModel: LoginViewModel by viewModels()
+    private val verifyViewModel: VerifyViewModel by viewModels()
 
     private var uri = ""
+    private var code = ""
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -33,6 +38,10 @@ class LoginFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
+
+        if (arguments != null)
+            code = requireArguments().getString("code", "")
+
         binding.appCompatButton.setOnClickListener {
 
             if (uri != "") {
@@ -43,7 +52,46 @@ class LoginFragment : Fragment() {
 
         }
 
+        if (code != ""){
+            verifyViewModel.verify(code)
+            verifyObserver()
+
+        }
+
         observer()
+
+    }
+
+    private fun verifyObserver() {
+
+        verifyViewModel.verifyModel.observe(viewLifecycleOwner){
+
+            when(it){
+
+                is Result.Success ->{
+                    binding.prg.visibility = View.GONE
+
+                    if (it.data.isTeaBoy == false) {
+                        (activity as MainActivity).setupUser()
+                        findNavController().navigate(R.id.action_loginFragment_to_userhomeFragment)
+                    }
+
+                    else {
+                        (activity as MainActivity).setupTeaBoy()
+                        findNavController().navigate(R.id.action_loginFragment_to_teaBoyHomeFragment)
+                    }
+
+                }
+
+                is Result.Loading ->{
+                    binding.prg.visibility = View.VISIBLE
+                }
+
+                is Result.Error ->{
+                    findNavController().navigate(R.id.action_loginFragment_to_authenticationFragment)
+                }
+            }
+        }
 
     }
 

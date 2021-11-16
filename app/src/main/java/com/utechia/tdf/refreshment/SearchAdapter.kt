@@ -8,14 +8,15 @@ import androidx.constraintlayout.widget.ConstraintLayout
 import androidx.core.os.bundleOf
 import androidx.navigation.findNavController
 import androidx.recyclerview.widget.RecyclerView
+import com.utechia.domain.model.RefreshmentModel
 import com.utechia.domain.model.SearchModel
 import com.utechia.tdf.R
 
 class SearchAdapter(private val kind:Int):RecyclerView.Adapter<RecyclerView.ViewHolder>() {
 
-    val searchList:MutableList<SearchModel> = mutableListOf()
+    val searchList:MutableList<RefreshmentModel> = mutableListOf()
 
-    fun addData(_searchList:MutableList<SearchModel>){
+    fun addData(_searchList:MutableList<RefreshmentModel>){
 
         searchList.clear()
         searchList.addAll(_searchList)
@@ -47,7 +48,7 @@ class SearchAdapter(private val kind:Int):RecyclerView.Adapter<RecyclerView.View
 
         fun bind0(position: Int) {
 
-            title.text = searchList[position].name
+            title.text = searchList[position].title
 
             layout.setOnClickListener {
 

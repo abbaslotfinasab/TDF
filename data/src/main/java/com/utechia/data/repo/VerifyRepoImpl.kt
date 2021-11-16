@@ -30,7 +30,8 @@ class VerifyRepoImpl @Inject constructor(
 
                     sessionManager.saveAuthToken(
                         result.body()!!.data!!.token!!,
-                        result.body()!!.data!!.userHomeId!!
+                        result.body()!!.data!!.userHomeId!!,
+                        result.body()!!.data!!.isTeaBoy!!,
                     )
                     return result.body()!!.data?.toDomain()!!
                 }

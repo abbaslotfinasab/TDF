@@ -31,8 +31,8 @@ class FavoriteFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        refreshmentViewModel.getRefreshment(3)
-        observer()
+      /*  refreshmentViewModel.getRefreshment(3)
+        observer()*/
 
         binding.favoriteRecycler.apply {
             adapter=favoriteAdapter
@@ -44,7 +44,7 @@ class FavoriteFragment : Fragment() {
 
     private fun observer() {
 
-        refreshmentViewModel.teaBoyModel.observe(viewLifecycleOwner) {
+      /*  refreshmentViewModel.teaBoyModel.observe(viewLifecycleOwner) {
 
             when (it) {
                 is Result.Success -> {
@@ -57,6 +57,6 @@ class FavoriteFragment : Fragment() {
                     Toast.makeText(context, it.message, Toast.LENGTH_SHORT).show()
                 }
             }
-        }
+        }*/
     }
 }

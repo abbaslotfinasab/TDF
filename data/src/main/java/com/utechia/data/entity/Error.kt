@@ -1,12 +1,12 @@
 package com.utechia.data.entity
 
 import android.os.Parcelable
-import com.squareup.moshi.JsonClass
 import kotlinx.parcelize.Parcelize
+import kotlinx.serialization.Serializable
 
 
 @Parcelize
-@JsonClass(generateAdapter = true)
+@Serializable
 data class Error(
 
     val message: List<String>?,

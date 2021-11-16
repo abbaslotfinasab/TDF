@@ -13,38 +13,25 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent">
 
-    <TextView
-        android:id="@+id/meetingTitle"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="25dp"
-        android:fontFamily="@font/poppins"
-        android:gravity="center"
-        android:text="Refreshments"
-        android:textColor="@color/black"
-        android:textSize="22sp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
 
-    <androidx.appcompat.widget.SearchView
-        android:id="@+id/autoCompleteTextView"
-        android:layout_width="0dp"
-        android:layout_height="40dp"
-        android:layout_marginStart="35dp"
-        android:layout_marginTop="6dp"
-        android:layout_marginEnd="35dp"
-        android:background="@color/white"
-        android:gravity="start"
-        android:textSize="14sp"
-        app:iconifiedByDefault="false"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/meetingTitle"
-        app:queryBackground="@null"
-        app:queryHint="search"
-        app:searchHintIcon="@null"
-        app:searchIcon="@drawable/ic_baseline_search_24" />
+        <androidx.appcompat.widget.SearchView
+            android:id="@+id/autoCompleteTextView"
+            android:layout_width="0dp"
+            android:layout_height="40dp"
+            android:layout_marginStart="35dp"
+            android:layout_marginTop="50dp"
+            android:layout_marginEnd="35dp"
+            android:background="@color/white"
+            android:gravity="start"
+            android:textSize="14sp"
+            app:iconifiedByDefault="false"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:queryBackground="@null"
+            app:queryHint="search"
+            app:searchHintIcon="@null"
+            app:searchIcon="@drawable/ic_baseline_search_24" />
 
 
     <androidx.recyclerview.widget.RecyclerView
@@ -57,161 +44,161 @@
         app:layout_constraintStart_toStartOf="@+id/autoCompleteTextView"
         app:layout_constraintTop_toBottomOf="@+id/autoCompleteTextView" />
 
-    <androidx.constraintlayout.widget.ConstraintLayout
-        android:id="@+id/food"
-        android:layout_width="73dp"
-        android:layout_height="113dp"
-        android:layout_marginStart="30dp"
-        android:layout_marginTop="20dp"
-        android:background="#FCFCFD"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/autoCompleteTextView">
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/food"
+            android:layout_width="73dp"
+            android:layout_height="113dp"
+            android:layout_marginTop="20dp"
+            android:background="#FCFCFD"
+            app:layout_constraintStart_toStartOf="@+id/autoCompleteTextView"
+            app:layout_constraintTop_toBottomOf="@+id/autoCompleteTextView">
 
-        <ImageView
-            android:id="@+id/imageView7"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="9dp"
-            android:background="@drawable/ic_teaboy_back"
-            android:scaleType="centerInside"
-            android:src="@drawable/ic_berger"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
+            <ImageView
+                android:id="@+id/imageView7"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="9dp"
+                android:background="@drawable/ic_teaboy_back"
+                android:scaleType="centerInside"
+                android:src="@drawable/ic_berger"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+
+            <TextView
+                android:id="@+id/foodText"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="20dp"
+                android:gravity="center"
+                android:text="Snacks"
+                android:textColor="@color/black"
+                android:textSize="12sp"
+                app:layout_constraintBottom_toBottomOf="parent" />
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/drink"
+            android:layout_width="73dp"
+            android:layout_height="113dp"
+            android:layout_marginStart="18dp"
+            android:layout_marginTop="20dp"
+            android:background="#FCFCFD"
+            app:layout_constraintStart_toEndOf="@+id/food"
+            app:layout_constraintTop_toBottomOf="@+id/autoCompleteTextView">
+
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="9dp"
+                android:background="@drawable/ic_teaboy_back"
+                android:scaleType="centerInside"
+                android:src="@drawable/ic_coffee_cup_2"
+                android:textColor="@color/black"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <TextView
+                android:id="@+id/drinkText"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="20dp"
+                android:gravity="center"
+                android:text="Drinks"
+                android:textColor="@color/black"
+                android:textSize="12sp"
+                app:layout_constraintBottom_toBottomOf="parent" />
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/order"
+            android:layout_width="73dp"
+            android:layout_height="113dp"
+            android:layout_marginStart="18dp"
+            android:layout_marginTop="20dp"
+            android:background="#FCFCFD"
+            app:layout_constraintStart_toEndOf="@+id/drink"
+            app:layout_constraintTop_toBottomOf="@+id/autoCompleteTextView">
+
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="9dp"
+                android:background="@drawable/ic_teaboy_back"
+                android:scaleType="centerInside"
+                android:src="@drawable/ic_menu_board"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <TextView
+                android:id="@+id/orderText"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="20dp"
+                android:gravity="center"
+                android:text="Orders"
+                android:textColor="@color/black"
+                android:textSize="12sp"
+                app:layout_constraintBottom_toBottomOf="parent" />
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/favorite"
+            android:layout_width="73dp"
+            android:layout_height="113dp"
+            android:layout_marginStart="18dp"
+            android:layout_marginTop="20dp"
+            android:background="#FCFCFD"
+            app:layout_constraintEnd_toEndOf="@+id/autoCompleteTextView"
+            app:layout_constraintStart_toEndOf="@+id/order"
+            app:layout_constraintTop_toBottomOf="@+id/autoCompleteTextView">
+
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="9dp"
+                android:background="@drawable/ic_teaboy_back"
+                android:scaleType="centerInside"
+                android:src="@drawable/ic_start"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <TextView
+                android:id="@+id/favoriteText"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="20dp"
+                android:gravity="center"
+                android:text="Favorites"
+                android:textColor="@color/black"
+                android:textSize="12sp"
+                app:layout_constraintBottom_toBottomOf="parent" />
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
 
 
         <TextView
-            android:id="@+id/foodText"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginBottom="20dp"
-            android:gravity="center"
-            android:text="Snacks"
-            android:textColor="@color/black"
-            android:textSize="12sp"
-            app:layout_constraintBottom_toBottomOf="parent" />
-
-    </androidx.constraintlayout.widget.ConstraintLayout>
-
-
-    <androidx.constraintlayout.widget.ConstraintLayout
-        android:id="@+id/drink"
-        android:layout_width="73dp"
-        android:layout_height="113dp"
-        android:layout_marginStart="25dp"
-        android:layout_marginTop="20dp"
-        android:background="#FCFCFD"
-        app:layout_constraintStart_toEndOf="@+id/food"
-        app:layout_constraintTop_toBottomOf="@+id/autoCompleteTextView">
-
-        <ImageView
+            android:id="@+id/title"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginTop="9dp"
-            android:background="@drawable/ic_teaboy_back"
-            android:scaleType="centerInside"
-            android:src="@drawable/ic_coffee_cup_2"
-            android:textColor="@color/black"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
-
-        <TextView
-            android:id="@+id/drinkText"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginBottom="20dp"
+            android:layout_marginStart="109dp"
+            android:layout_marginTop="30dp"
+            android:fontFamily="@font/poppins"
             android:gravity="center"
-            android:text="Drinks"
+            android:text="Hot Drinks"
             android:textColor="@color/black"
-            android:textSize="12sp"
-            app:layout_constraintBottom_toBottomOf="parent" />
-
-    </androidx.constraintlayout.widget.ConstraintLayout>
-
-    <androidx.constraintlayout.widget.ConstraintLayout
-        android:id="@+id/order"
-        android:layout_width="73dp"
-        android:layout_height="113dp"
-        android:layout_marginStart="27dp"
-        android:layout_marginTop="20dp"
-        android:background="#FCFCFD"
-        app:layout_constraintStart_toEndOf="@+id/drink"
-        app:layout_constraintTop_toBottomOf="@+id/autoCompleteTextView">
-
-        <ImageView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="9dp"
-            android:background="@drawable/ic_teaboy_back"
-            android:scaleType="centerInside"
-            android:src="@drawable/ic_menu_board"
-            app:layout_constraintEnd_toEndOf="parent"
+            android:textSize="18sp"
+            android:visibility="visible"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
-
-        <TextView
-            android:id="@+id/orderText"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginBottom="20dp"
-            android:gravity="center"
-            android:text="Orders"
-            android:textColor="@color/black"
-            android:textSize="12sp"
-            app:layout_constraintBottom_toBottomOf="parent" />
-
-    </androidx.constraintlayout.widget.ConstraintLayout>
-
-    <androidx.constraintlayout.widget.ConstraintLayout
-        android:id="@+id/favorite"
-        android:layout_width="73dp"
-        android:layout_height="113dp"
-        android:layout_marginStart="27dp"
-        android:layout_marginTop="20dp"
-        android:background="#FCFCFD"
-        app:layout_constraintStart_toEndOf="@+id/order"
-        app:layout_constraintTop_toBottomOf="@+id/autoCompleteTextView">
-
-        <ImageView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="9dp"
-            android:background="@drawable/ic_teaboy_back"
-            android:scaleType="centerInside"
-            android:src="@drawable/ic_start"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
-
-        <TextView
-            android:id="@+id/favoriteText"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginBottom="20dp"
-            android:gravity="center"
-            android:text="Favorites"
-            android:textColor="@color/black"
-            android:textSize="12sp"
-            app:layout_constraintBottom_toBottomOf="parent" />
-
-    </androidx.constraintlayout.widget.ConstraintLayout>
-
-
-    <TextView
-        android:id="@+id/title"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="110dp"
-        android:layout_marginTop="30dp"
-        android:fontFamily="@font/poppins"
-        android:gravity="center"
-        android:text="Hot Drinks"
-        android:textColor="@color/black"
-        android:textSize="18sp"
-        android:visibility="visible"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/drink" />
+            app:layout_constraintTop_toBottomOf="@+id/drink" />
 
     <View
         android:id="@+id/titleLine"
@@ -274,6 +261,37 @@
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/recyclerView" />
+
+        <androidx.cardview.widget.CardView
+            android:id="@+id/prg"
+            android:layout_width="72dp"
+            android:layout_height="72dp"
+            app:cardElevation="6dp"
+            app:cardCornerRadius="36dp"
+            android:visibility="gone"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:cardPreventCornerOverlap="true"
+            app:layout_constraintCircleRadius="36dp"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent">
+
+            <com.agrawalsuneet.dotsloader.loaders.LazyLoader
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:gravity="center"
+                android:layout_gravity="center"
+                app:lazyloader_animDur="800"
+                app:lazyloader_dotsDist="5dp"
+                app:lazyloader_dotsRadius="8dp"
+                app:lazyloader_firstDelayDur="150"
+                app:lazyloader_firstDotColor="#3360DD"
+                app:lazyloader_interpolator="@android:anim/decelerate_interpolator"
+                app:lazyloader_secondDelayDur="300"
+                app:lazyloader_secondDotColor="#3360DD"
+                app:lazyloader_thirdDotColor="#3360DD" />
+
+        </androidx.cardview.widget.CardView>
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 

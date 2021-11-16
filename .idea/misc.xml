@@ -4,7 +4,24 @@
     <option name="filePathToZoomLevelMap">
       <map>
         <entry key="..\:/Users/Abbas/StudioProjects/tdf_oms_android_application_kotlin_v1/app/src/main/res/drawable/back_progress.xml" value="0.18958333333333333" />
+        <entry key="..\:/Users/Abbas/StudioProjects/tdf_oms_android_application_kotlin_v1/app/src/main/res/layout/activity_main.xml" value="0.1" />
+        <entry key="..\:/Users/Abbas/StudioProjects/tdf_oms_android_application_kotlin_v1/app/src/main/res/layout/fragment_cancel.xml" value="0.1" />
+        <entry key="..\:/Users/Abbas/StudioProjects/tdf_oms_android_application_kotlin_v1/app/src/main/res/layout/fragment_cart.xml" value="0.25" />
+        <entry key="..\:/Users/Abbas/StudioProjects/tdf_oms_android_application_kotlin_v1/app/src/main/res/layout/fragment_create_refreshment.xml" value="0.20253164556962025" />
+        <entry key="..\:/Users/Abbas/StudioProjects/tdf_oms_android_application_kotlin_v1/app/src/main/res/layout/fragment_delete.xml" value="0.1" />
+        <entry key="..\:/Users/Abbas/StudioProjects/tdf_oms_android_application_kotlin_v1/app/src/main/res/layout/fragment_home_user.xml" value="0.1" />
         <entry key="..\:/Users/Abbas/StudioProjects/tdf_oms_android_application_kotlin_v1/app/src/main/res/layout/fragment_login.xml" value="0.18" />
+        <entry key="..\:/Users/Abbas/StudioProjects/tdf_oms_android_application_kotlin_v1/app/src/main/res/layout/fragment_order.xml" value="0.1" />
+        <entry key="..\:/Users/Abbas/StudioProjects/tdf_oms_android_application_kotlin_v1/app/src/main/res/layout/fragment_tea_boy.xml" value="0.1" />
+        <entry key="..\:/Users/Abbas/StudioProjects/tdf_oms_android_application_kotlin_v1/app/src/main/res/layout/fragment_tea_boy_home.xml" value="0.1" />
+        <entry key="..\:/Users/Abbas/StudioProjects/tdf_oms_android_application_kotlin_v1/app/src/main/res/layout/fragment_tea_boy_orders.xml" value="0.1" />
+        <entry key="..\:/Users/Abbas/StudioProjects/tdf_oms_android_application_kotlin_v1/app/src/main/res/layout/fragment_tea_boy_profile.xml" value="0.1" />
+        <entry key="..\:/Users/Abbas/StudioProjects/tdf_oms_android_application_kotlin_v1/app/src/main/res/layout/fragment_tea_boy_statistics.xml" value="0.1" />
+        <entry key="..\:/Users/Abbas/StudioProjects/tdf_oms_android_application_kotlin_v1/app/src/main/res/layout/fragment_waiting.xml" value="0.1" />
+        <entry key="..\:/Users/Abbas/StudioProjects/tdf_oms_android_application_kotlin_v1/app/src/main/res/menu/teaboy_bottom_nav_menu.xml" value="0.1" />
+        <entry key="..\:/Users/Abbas/StudioProjects/tdf_oms_android_application_kotlin_v1/app/src/main/res/menu/teaboy_navigation_drawer.xml" value="0.1" />
+        <entry key="..\:/Users/Abbas/StudioProjects/tdf_oms_android_application_kotlin_v1/app/src/main/res/menu/user_bottom_nav_menu.xml" value="0.1" />
+        <entry key="..\:/Users/Abbas/StudioProjects/tdf_oms_android_application_kotlin_v1/app/src/main/res/menu/user_navigation_drawer.xml" value="0.1" />
         <entry key="..\:/Users/Dr Computer/AndroidStudioProjects/TDF/app/src/main/res/drawable/back_booked.xml" value="0.2203125" />
         <entry key="..\:/Users/Dr Computer/AndroidStudioProjects/TDF/app/src/main/res/drawable/banner.xml" value="0.2203125" />
         <entry key="..\:/Users/Dr Computer/AndroidStudioProjects/TDF/app/src/main/res/drawable/border.xml" value="0.2203125" />

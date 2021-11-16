@@ -41,7 +41,7 @@ class PreviousOrderAdapter(private val previousOrder: PreviousOrdersFragment): R
 
         fun bind0(position: Int) {
 
-            name.text = orders[position].name
+            name.text = orders[position].title
 
             Glide.with(itemView.context)
                 .load(
@@ -54,12 +54,9 @@ class PreviousOrderAdapter(private val previousOrder: PreviousOrdersFragment): R
                 .into(image)
 
             remove.setOnClickListener {
-                previousOrder.refreshmentViewModel.cancel(orders[position])
-                orders.removeAt(position)
-                notifyItemChanged(position)
+
             }
             again.setOnClickListener {
-                previousOrder.refreshmentViewModel.order(orders)
             }
 
         }

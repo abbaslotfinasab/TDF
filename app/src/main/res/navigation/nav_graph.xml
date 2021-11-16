@@ -2,15 +2,16 @@
 <navigation xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    android:id="@+id/nav_graph">
+    android:id="@+id/nav_graph"
+    app:startDestination="@id/teaBoyHomeFragment">
 
     <fragment
-        android:id="@+id/homeFragment"
-        android:name="com.utechia.tdf.home.HomeFragment"
+        android:id="@+id/userhomeFragment"
+        android:name="com.utechia.tdf.home.UserHomeFragment"
         android:label="fragment_home"
-        tools:layout="@layout/fragment_home" />
+        tools:layout="@layout/fragment_home_user" />
     <fragment
-        android:id="@+id/teaBoyFragment"
+        android:id="@+id/refreshmentFragment"
         android:name="com.utechia.tdf.refreshment.RefreshmentsFragment"
         android:label="fragment_tea_boy"
         tools:layout="@layout/fragment_tea_boy" >
@@ -43,8 +44,8 @@
             app:destination="@id/reservationFragment" />
     </fragment>
     <fragment
-        android:id="@+id/profileFragment"
-        android:name="com.utechia.tdf.profile.ProfileFragment"
+        android:id="@+id/userprofileFragment"
+        android:name="com.utechia.tdf.profile.UserProfileFragment"
         android:label="fragment_profile"
         tools:layout="@layout/fragment_profile" />
     <fragment
@@ -224,17 +225,12 @@
         android:name="com.utechia.tdf.order.PreviousOrdersFragment"
         android:label="fragment_previous_orders"
         tools:layout="@layout/fragment_previous_orders" />
+
     <fragment
         android:id="@+id/loginFragment"
         android:name="com.utechia.tdf.login.LoginFragment"
         android:label="fragment_login"
-        tools:layout="@layout/fragment_login"/>
-
-    <fragment
-        android:id="@+id/waitingFragment"
-        android:name="com.utechia.tdf.login.WaitingFragment"
-        android:label="fragment_waiting"
-        tools:layout="@layout/fragment_waiting" >
+        tools:layout="@layout/fragment_login">
 
         <deepLink
             android:id="@+id/deepLink"
@@ -244,13 +240,17 @@
             android:name="code"
             app:argType="string"
             app:nullable="true" />
+        <action
+            android:id="@+id/action_loginFragment_to_authenticationFragment"
+            app:destination="@id/authenticationFragment" />
 
         <action
-            android:id="@+id/action_waitingFragment_to_homeFragment"
-            app:destination="@id/homeFragment" />
+            android:id="@+id/action_loginFragment_to_userhomeFragment"
+            app:destination="@id/userhomeFragment" />
+
         <action
-            android:id="@+id/action_waitingFragment_to_authenticationFragment"
-            app:destination="@id/authenticationFragment" />
+            android:id="@+id/action_loginFragment_to_teaBoyHomeFragment"
+            app:destination="@id/teaBoyHomeFragment" />
 
     </fragment>
 
@@ -265,5 +265,25 @@
             app:destination="@id/loginFragment" />
 
     </dialog>
+    <fragment
+        android:id="@+id/teaBoyHomeFragment"
+        android:name="com.utechia.tdf.home.TeaBoyHomeFragment"
+        android:label="fragment_tea_boy_home"
+        tools:layout="@layout/fragment_tea_boy_home" />
+    <fragment
+        android:id="@+id/teaBoyOrdersFragment"
+        android:name="com.utechia.tdf.order.TeaBoyOrdersFragment"
+        android:label="fragment_tea_boy_orders"
+        tools:layout="@layout/fragment_tea_boy_orders" />
+    <fragment
+        android:id="@+id/deleteFragment"
+        android:name="com.utechia.tdf.refreshment.DeleteFragment"
+        android:label="fragment_delete"
+        tools:layout="@layout/fragment_delete" />
+    <fragment
+        android:id="@+id/cancelFragment"
+        android:name="com.utechia.tdf.refreshment.CancelFragment"
+        android:label="fragment_cancel"
+        tools:layout="@layout/fragment_cancel" />
 
 </navigation>

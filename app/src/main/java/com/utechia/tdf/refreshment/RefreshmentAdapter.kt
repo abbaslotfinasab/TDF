@@ -13,14 +13,12 @@ import com.bumptech.glide.Glide
 import com.utechia.domain.model.RefreshmentModel
 import com.utechia.tdf.R
 
-class RefreshmentAdapter(private val teaBoyFragment: CreateRefreshmentFragment): RecyclerView.Adapter<RecyclerView.ViewHolder>()  {
+class RefreshmentAdapter : RecyclerView.Adapter<RecyclerView.ViewHolder>()  {
 
     var refreshment:MutableList<RefreshmentModel> = mutableListOf()
-    var orders:MutableList<RefreshmentModel> = mutableListOf()
 
     fun addData(_refreshmentModel: MutableList<RefreshmentModel>){
         refreshment.clear()
-        orders.clear()
         refreshment.addAll(_refreshmentModel)
         notifyDataSetChanged()
 
@@ -54,33 +52,22 @@ class RefreshmentAdapter(private val teaBoyFragment: CreateRefreshmentFragment):
 
         fun bind0(position: Int) {
 
-            name.text = refreshment[position].name
+            name.text = refreshment[position].title
             layout.visibility = View.GONE
             add.visibility = View.VISIBLE
-            number.text = refreshment[position].number.toString()
             dislike.visibility = View.GONE
             like.visibility = View.VISIBLE
 
-            if (refreshment[position].favorit==true){
-
-                dislike.visibility = View.VISIBLE
-                like.visibility = View.GONE
-
-            }
 
             like.setOnClickListener {
                 it.visibility = View.GONE
                 dislike.visibility = View.VISIBLE
-                refreshment[position].favorit=true
-                teaBoyFragment.refreshmentViewModel.like(refreshment[position])
                 itemView.findNavController().navigate(R.id.action_createRefreshmentFragment_to_favoriteResultFragment)
             }
 
             dislike.setOnClickListener {
                 it.visibility = View.GONE
                 like.visibility = View.VISIBLE
-                refreshment[position].favorit=false
-                teaBoyFragment.refreshmentViewModel.delete(position)
 
             }
 
@@ -97,7 +84,7 @@ class RefreshmentAdapter(private val teaBoyFragment: CreateRefreshmentFragment):
             image.setOnClickListener {
 
                 val bundle = bundleOf(
-                    "mId" to position,
+                    "mId" to refreshment[position].id,
                 )
 
                 itemView.findNavController().navigate(R.id.action_createRefreshmentFragment_to_cartFragment,bundle)
@@ -109,10 +96,6 @@ class RefreshmentAdapter(private val teaBoyFragment: CreateRefreshmentFragment):
                 layout.visibility = View.VISIBLE
             }
             plus.setOnClickListener {
-                orders.clear()
-                refreshment[position].number = refreshment[position].number?.plus(1)
-                number.text = refreshment[position].number .toString()
-                orders.add(refreshment[position])
 
             }
 
@@ -123,16 +106,7 @@ class RefreshmentAdapter(private val teaBoyFragment: CreateRefreshmentFragment):
 
             minus.setOnClickListener {
 
-                if (refreshment[position].number!! >1) {
-                    refreshment[position].number = refreshment[position].number?.minus(1)
-                    number.text = refreshment[position].number.toString()
-                    orders[refreshment[position].id!!] = refreshment[position]
-                }
-                else {
-                    if (orders.size>0)
-                    orders.removeAt(refreshment[position].id!!)
-                    number.text = "0"
-                }
+
             }
         }
     }

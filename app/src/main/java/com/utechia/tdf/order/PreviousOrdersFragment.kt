@@ -17,7 +17,7 @@ import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
 class PreviousOrdersFragment : Fragment() {
-
+/*
     private lateinit var binding: FragmentPreviousOrdersBinding
     val refreshmentViewModel: RefreshmentViewModel by viewModels()
     private val previousOrderAdapter: PreviousOrderAdapter = PreviousOrderAdapter(this)
@@ -78,6 +78,6 @@ class PreviousOrdersFragment : Fragment() {
                 }
             }
         }
-    }
+    }*/
 
 }

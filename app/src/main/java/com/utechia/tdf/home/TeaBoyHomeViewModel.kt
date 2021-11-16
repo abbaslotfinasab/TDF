@@ -1,4 +1,4 @@
 package com.utechia.tdf.home
 
-class HomeViewModel {
+class TeaBoyHomeViewModel {
 }

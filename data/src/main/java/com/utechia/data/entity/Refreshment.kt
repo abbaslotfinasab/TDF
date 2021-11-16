@@ -1,34 +1,36 @@
 package com.utechia.data.entity
 
 import android.os.Parcelable
-import com.squareup.moshi.JsonClass
 import com.utechia.data.base.ResponseObject
 import com.utechia.domain.model.RefreshmentModel
 import kotlinx.parcelize.Parcelize
+import kotlinx.serialization.Serializable
 
 
 @Parcelize
-@JsonClass(generateAdapter = true)
+@Serializable
 data class Refreshment(
 
-    var id :Int?,
+    val category: String?,
 
-    var category:Int?,
+    val createdAt: String?,
 
-    var name:String?,
+    val id: Int?,
 
-    var image:String?,
+    val imageName: String?,
 
-    var favorit:Boolean?,
+    val imagePath: String?,
 
-    var number:Int?,
+    val rating: Int?,
 
-    var calorie:Int?,
+    val status: Boolean?,
 
-    var time:String?,
+    val title: String?,
+
+    val updatedAt: String?
 
 ): Parcelable, ResponseObject<RefreshmentModel> {
     override fun toDomain(): RefreshmentModel {
-        return RefreshmentModel(id,category,name,image,favorit,number,calorie,time)
+        return RefreshmentModel(category,createdAt,id,imageName,imagePath,rating,status,title,updatedAt)
     }
 }

@@ -1,4 +1,4 @@
 package com.utechia.tdf.profile
 
-class ProfileViewModel {
+class UserProfileViewModel {
 }

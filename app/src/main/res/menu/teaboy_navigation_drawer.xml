@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <item
+        android:id="@+id/calendarFragment"
+        android:icon="@drawable/ic_stickynote"
+        android:title="Calendar" />
+
+    <item
+        android:id="@+id/eventSystemFragment"
+        android:icon="@drawable/ic_people"
+        android:title="Events" />
+
+
+    <item
+        android:id="@+id/surveySystemFragment"
+        android:icon="@drawable/ic_layer"
+        android:title="Surveys"/>
+
+
+    <item
+        android:id="@+id/ticketSystemFragment"
+        android:icon="@drawable/ic_document_normal"
+        android:title="Support Ticket" />
+
+
+    <item
+        android:id="@+id/permissionFragment"
+        android:icon="@drawable/ic_permission"
+        android:title="Request Permission" />
+
+</menu>

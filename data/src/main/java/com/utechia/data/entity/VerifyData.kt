@@ -1,20 +1,22 @@
 package com.utechia.data.entity
 
 import android.os.Parcelable
-import com.squareup.moshi.JsonClass
 import com.utechia.data.base.ResponseObject
 import com.utechia.domain.model.VerifyModel
 import kotlinx.parcelize.Parcelize
+import kotlinx.serialization.Serializable
 
 @Parcelize
-@JsonClass(generateAdapter = true)
+@Serializable
 data class VerifyData(
 
     val token: String?,
-    val userHomeId: String?
+    val userHomeId: String?,
+    val isTeaBoy :Boolean?,
+    val floor : Int?,
 
 ):Parcelable, ResponseObject<VerifyModel> {
     override fun toDomain(): VerifyModel {
-        return VerifyModel(token, userHomeId)
+        return VerifyModel(token, userHomeId,isTeaBoy,floor)
     }
 }
