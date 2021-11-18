@@ -22,6 +22,6 @@ data class RefreshmentData(
 
 ):Parcelable , ResponseObject<RefreshmentModel> {
     override fun toDomain(): RefreshmentModel {
-        return RefreshmentModel(category,createdAt,id,imageName,imagePath,rating,status,title,updatedAt)
+        return RefreshmentModel(category,createdAt,id,imageName,imagePath,rating,status,title,updatedAt,false)
     }
 }

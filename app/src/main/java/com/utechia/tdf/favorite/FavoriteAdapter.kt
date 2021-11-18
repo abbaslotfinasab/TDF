@@ -20,7 +20,6 @@ class FavoriteAdapter(private val favoriteFragment: FavoriteFragment): RecyclerV
         notifyDataSetChanged()
     }
 
-
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): RecyclerView.ViewHolder =
         ViewHolder(
             LayoutInflater.from(parent.context)

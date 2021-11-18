@@ -71,26 +71,6 @@ class RefreshmentViewModel @Inject constructor(
 
     }
 
-    fun like(id:Int){
-
-        viewModelScope.launch(Dispatchers.IO+handler) {
-
-            refreshmentUseCaseImpl.like(id)
-
-        }
-
-    }
-
-    fun dislike(id:Int){
-
-        viewModelScope.launch(Dispatchers.IO+handler) {
-
-            refreshmentUseCaseImpl.dislike(id)
-
-        }
-
-    }
-
     fun delete(id:Int){
 
 

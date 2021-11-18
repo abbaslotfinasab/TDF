@@ -19,4 +19,8 @@ class FavoriteUseCaseImpl @Inject constructor(private val favoriteRepo: Favorite
     override suspend fun dislike(id: Int) {
         return favoriteRepo.dislike(id)
     }
+
+    override suspend fun exist(title:String): MutableList<FavoriteModel> {
+        return favoriteRepo.getExist(title)
+    }
 }

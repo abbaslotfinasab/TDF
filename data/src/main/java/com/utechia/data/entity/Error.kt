@@ -8,10 +8,5 @@ import kotlinx.serialization.Serializable
 @Parcelize
 @Serializable
 data class Error(
-
-    val message: List<String>?,
-    val path: String?,
-    val statusCode: Int?,
-    val timestamp: String?
-
+    val message: Message?,
 ):Parcelable

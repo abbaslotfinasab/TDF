@@ -44,6 +44,21 @@ class FavoriteViewModel @Inject constructor(
         }
     }
 
+    fun getExist(title:String){
+
+        viewModelScope.launch(Dispatchers.IO+handler) {
+
+            _favoriteModel.postValue(Result.Loading)
+
+            favoriteUseCaseImpl.exist(title).let {
+
+                _favoriteModel.postValue(Result.Success(it))
+
+            }
+
+        }
+    }
+
     fun like(id:Int){
 
         viewModelScope.launch(Dispatchers.IO+handler) {

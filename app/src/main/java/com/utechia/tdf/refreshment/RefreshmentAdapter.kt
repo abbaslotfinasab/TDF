@@ -61,13 +61,13 @@ class RefreshmentAdapter(private val createRefreshmentFragment: CreateRefreshmen
             like.setOnClickListener {
                 it.visibility = View.GONE
                 dislike.visibility = View.VISIBLE
-                createRefreshmentFragment.refreshmentViewModel.like(refreshment[position].id!!)
+                createRefreshmentFragment.favoriteViewModel.like(refreshment[position].id!!)
             }
 
             dislike.setOnClickListener {
                 it.visibility = View.GONE
                 like.visibility = View.VISIBLE
-                createRefreshmentFragment.refreshmentViewModel.dislike(refreshment[position].id!!)
+                createRefreshmentFragment.favoriteViewModel.dislike(refreshment[position].id!!)
 
             }
 
@@ -85,7 +85,6 @@ class RefreshmentAdapter(private val createRefreshmentFragment: CreateRefreshmen
                 number += 1
                 numberText.text = number.toString()
 
-
             }
 
             minus.setOnClickListener {
@@ -100,7 +99,6 @@ class RefreshmentAdapter(private val createRefreshmentFragment: CreateRefreshmen
                 layout.visibility = View.GONE
                 add.visibility = View.VISIBLE
             }
-
         }
     }
 }

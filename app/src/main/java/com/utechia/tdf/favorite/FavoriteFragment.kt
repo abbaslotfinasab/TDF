@@ -11,7 +11,6 @@ import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.utechia.domain.utile.Result
 import com.utechia.tdf.databinding.FragmentFavoriteBinding
-import com.utechia.tdf.refreshment.RefreshmentViewModel
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
@@ -54,9 +53,14 @@ class FavoriteFragment : Fragment() {
             when (it) {
                 is Result.Success -> {
                     binding.prg.visibility = View.GONE
-                    binding.favoriteRecycler.visibility = View.VISIBLE
-                    binding.emptyLayout.visibility = View.GONE
-                    favoriteAdapter.addData(it.data)
+
+                    if (it.data.size!=0){
+                        binding.favoriteRecycler.visibility = View.VISIBLE
+                        favoriteAdapter.addData(it.data)
+                    }else {
+                        binding.favoriteRecycler.visibility = View.GONE
+                        binding.emptyLayout.visibility = View.VISIBLE
+                    }
 
                 }
 
@@ -69,7 +73,9 @@ class FavoriteFragment : Fragment() {
                 is Result.Error -> {
                     binding.favoriteRecycler.visibility = View.GONE
                     binding.prg.visibility = View.GONE
-                    binding.emptyLayout.visibility = View.VISIBLE
+                    binding.emptyLayout.visibility = View.GONE
+                    Toast.makeText(context,it.message,Toast.LENGTH_LONG).show()
+
                 }
             }
         }

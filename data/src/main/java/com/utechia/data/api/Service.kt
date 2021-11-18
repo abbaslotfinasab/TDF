@@ -1,9 +1,6 @@
 package com.utechia.data.api
 
-import com.utechia.data.entity.Favorite
-import com.utechia.data.entity.Login
-import com.utechia.data.entity.Refreshment
-import com.utechia.data.entity.Verify
+import com.utechia.data.entity.*
 import retrofit2.Response
 import retrofit2.http.*
 
@@ -11,6 +8,10 @@ interface Service {
 
     @GET("auth/login")
     suspend fun getLoginUrl(): Response<Login>
+
+    @Headers("Content-Type: application/json")
+    @POST("auth/refresh-token")
+    suspend fun refresh(@Body body:RefreshToken)
 
     @POST("auth/verify-login")
     @FormUrlEncoded
@@ -29,9 +30,12 @@ interface Service {
     @GET("user/favorite")
     suspend fun getFavorite():Response<Favorite>
 
+    @GET("user/favorite")
+    suspend fun exist(@Query("food")title:String):Response<Favorite>
+
+    @Headers("Content-Type: application/json")
     @POST("user/favorite")
-    @FormUrlEncoded
-    suspend fun like(@Field("id") id:Int)
+    suspend fun like(@Body body:FavoriteBody):Response<Like>
 
     @DELETE("user/favorite/{id}")
     suspend fun dislike(@Path("id")id:Int)

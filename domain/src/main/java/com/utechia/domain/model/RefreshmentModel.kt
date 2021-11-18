@@ -18,6 +18,8 @@ data class RefreshmentModel(
 
     val title: String?,
 
-    val updatedAt: String?
+    val updatedAt: String?,
+
+    var like:Boolean?,
 
     )

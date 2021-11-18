@@ -17,6 +17,12 @@ class SessionManager @Inject constructor(@ApplicationContext private val context
         const val is_TeaBoy = "isTeaBoy"
     }
 
+    fun updateAuthToken(token: String) {
+        val editor = prefs.edit()
+        editor.putString(USER_TOKEN, token)
+        editor.apply()
+    }
+
     fun saveAuthToken(token: String, userHomeId:String,isTeaBoy:Boolean) {
         val editor = prefs.edit()
         editor.putString(USER_TOKEN, token)
@@ -27,5 +33,9 @@ class SessionManager @Inject constructor(@ApplicationContext private val context
 
     fun fetchAuthToken(): String? {
         return prefs.getString(USER_TOKEN, null)
+    }
+
+    fun fetchHomeId(): String? {
+        return prefs.getString(USER_ID, null)
     }
 }

@@ -14,13 +14,15 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import com.utechia.domain.utile.Result
 import com.utechia.tdf.R
 import com.utechia.tdf.databinding.FragmentCreateRefreshmentBinding
+import com.utechia.tdf.favorite.FavoriteViewModel
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
 class CreateRefreshmentFragment : Fragment() {
 
     private lateinit var binding: FragmentCreateRefreshmentBinding
-    val refreshmentViewModel: RefreshmentViewModel by viewModels()
+    private val refreshmentViewModel: RefreshmentViewModel by viewModels()
+    val favoriteViewModel: FavoriteViewModel by viewModels()
     private val refreshmentAdapter: RefreshmentAdapter = RefreshmentAdapter(this)
     private var category = ""
 
@@ -76,6 +78,7 @@ class CreateRefreshmentFragment : Fragment() {
         observer()
 
         binding.food.setOnClickListener {
+
             category = "food"
             unselect()
             select("food")
