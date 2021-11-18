@@ -6,6 +6,7 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.findNavController
+import com.utechia.tdf.R
 import com.utechia.tdf.activity.MainActivity
 import com.utechia.tdf.databinding.FragmentHomeUserBinding
 import dagger.hilt.android.AndroidEntryPoint
@@ -25,7 +26,6 @@ class UserHomeFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-
 
 
 

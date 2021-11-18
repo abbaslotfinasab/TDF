@@ -117,6 +117,7 @@ class MainActivity : AppCompatActivity() {
                 when (destination.id){
 
                     R.id.userhomeFragment ->{
+                        navController.clearBackStack(R.id.loginFragment)
                         design("home")
 
                     }
@@ -502,5 +503,4 @@ class MainActivity : AppCompatActivity() {
 
         }
     }
-
 }

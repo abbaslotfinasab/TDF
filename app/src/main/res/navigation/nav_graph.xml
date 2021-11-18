@@ -232,7 +232,9 @@
 
         <action
             android:id="@+id/action_loginFragment_to_userhomeFragment"
-            app:destination="@id/userhomeFragment" />
+            app:destination="@id/userhomeFragment"
+            app:launchSingleTop="true"
+            app:popUpTo="@id/nav_graph"/>
 
         <action
             android:id="@+id/action_loginFragment_to_teaBoyHomeFragment"
