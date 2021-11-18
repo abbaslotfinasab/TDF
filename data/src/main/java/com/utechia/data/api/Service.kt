@@ -11,7 +11,7 @@ interface Service {
 
     @Headers("Content-Type: application/json")
     @POST("auth/refresh-token")
-    suspend fun refresh(@Body body:RefreshToken)
+    suspend fun refresh(@Body body:RefreshToken):Response<Token>
 
     @POST("auth/verify-login")
     @FormUrlEncoded

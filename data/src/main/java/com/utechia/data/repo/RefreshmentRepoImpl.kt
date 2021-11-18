@@ -1,5 +1,6 @@
 package com.utechia.data.repo
 
+import android.util.Log
 import com.utechia.data.api.Service
 import com.utechia.data.entity.RefreshToken
 import com.utechia.data.utile.NetworkHelper
@@ -34,7 +35,7 @@ class RefreshmentRepoImpl @Inject constructor(
                             sessionManager.fetchHomeId()
                                 .toString()
                         )
-                    ).toString()
+                    ).body()?.data.toString()
                 )
                 result = service.getRefreshment(type)
             }
@@ -68,11 +69,11 @@ class RefreshmentRepoImpl @Inject constructor(
                                 sessionManager.fetchHomeId()
                                     .toString()
                             )
-                        ).toString()
+                        ).body()?.data.toString()
                     )
                     result = service.search(search, type)
-
                 }
+
                 return when (result.code()) {
 
                     200 -> {
@@ -95,15 +96,17 @@ class RefreshmentRepoImpl @Inject constructor(
         if (networkHelper.isNetworkConnected()) {
 
             var result = service.getCart(id)
-
-            if (result.code()==401){
+            if (result.code() == 401) {
 
                 sessionManager.updateAuthToken(
-                    service.refresh(RefreshToken(sessionManager.fetchHomeId()
-                        .toString())).toString()
+                    service.refresh(
+                        RefreshToken(
+                            sessionManager.fetchHomeId()
+                                .toString()
+                        )
+                    ).body()?.data.toString()
                 )
                 result = service.getCart(id)
-
             }
 
             return when(result.code()){

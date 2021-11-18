@@ -32,7 +32,7 @@ class FavoriteRepoImpl @Inject constructor(
                             sessionManager.fetchHomeId()
                                 .toString()
                         )
-                    ).toString()
+                    ).body()?.data.toString()
                 )
                 result = service.getFavorite()
             }
@@ -69,7 +69,7 @@ class FavoriteRepoImpl @Inject constructor(
                             sessionManager.fetchHomeId()
                                 .toString()
                         )
-                    ).toString()
+                    ).body()?.data.toString()
                 )
                 result = service.exist(title)
             }
@@ -92,7 +92,21 @@ class FavoriteRepoImpl @Inject constructor(
 
     override suspend fun like(id: Int){
 
-        val result = service.like(FavoriteBody(id))
+        var result = service.like(FavoriteBody(id))
+
+        if (result.code() == 401) {
+
+            sessionManager.updateAuthToken(
+                service.refresh(
+                    RefreshToken(
+                        sessionManager.fetchHomeId()
+                            .toString()
+                    )
+                ).body()?.data.toString()
+            )
+            result = service.like(FavoriteBody(id))
+        }
+
         if (result.code()==400)
             throw IOException("This item already exist ")
     }
