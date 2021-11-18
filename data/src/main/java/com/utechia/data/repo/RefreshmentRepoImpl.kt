@@ -1,6 +1,5 @@
 package com.utechia.data.repo
 
-import android.util.Log
 import com.utechia.data.api.Service
 import com.utechia.data.utile.NetworkHelper
 import com.utechia.domain.model.RefreshmentModel
@@ -23,30 +22,44 @@ class RefreshmentRepoImpl @Inject constructor(
 
             val result = service.getRefreshment(type)
 
-            if (result.isSuccessful && result.body() != null)
-                return result.body()!!.map { it.toDomain() }.toMutableList()
-            else
-                throw IOException("Server is not Responding")
+            when {
 
-        }
-        else throw IOException ("No Internet Connection")
+                result.isSuccessful && result.body()?.data != null ->
+                    return result.body()!!.data?.map { it.toDomain() }!!.toMutableList()
+
+                result.body()?.data == null ->
+                    throw IOException(result.errorBody().toString())
+
+
+                else ->
+                    throw IOException("Server is Not Responding")
+
+            }
+
+        } else throw IOException("No Internet Connection")
 
     }
 
     @Throws(IOException::class)
-    override suspend fun search(search: String): MutableList<RefreshmentModel> {
+    override suspend fun search(search: String, type: String): MutableList<RefreshmentModel> {
+
         if (networkHelper.isNetworkConnected()) {
 
-            val result = service.search(search)
+            val result = service.search(search, type)
 
-            if (result.isSuccessful && result.body() != null)
-                return result.body()!!.map { it.toDomain() }.toMutableList()
-            else
-                throw IOException("Server is not Responding")
+            when {
 
-        }
-        else throw IOException ("No Internet Connection")
+                result.isSuccessful && result.body()?.data != null ->
+                    return result.body()!!.data?.map { it.toDomain() }!!.toMutableList()
 
+                result.body()?.data == null ->
+                    throw IOException(result.errorBody().toString())
+
+
+                else ->
+                    throw IOException("Server is Not Responding")
+            }
+        } else throw IOException("No Internet Connection")
     }
 
     @Throws(IOException::class)
@@ -55,17 +68,47 @@ class RefreshmentRepoImpl @Inject constructor(
 
             val result = service.getCart(id)
 
+            when {
 
-            Log.d("code",result.code().toString())
+                result.isSuccessful && result.body()?.data != null ->
+                    return result.body()!!.data?.map { it.toDomain() }!!.toMutableList()
 
-            if (result.isSuccessful && result.body() != null)
-                return result.body()!!.map { it.toDomain() }.toMutableList()
-            else
-                throw IOException("Server is not Responding")
+                result.body()?.data == null ->
+                    throw IOException(result.errorBody().toString())
 
-        }
-        else throw IOException ("No Internet Connection")
+                else ->
+                    throw IOException("Server is Not Responding")
+            }
+        } else throw IOException("No Internet Connection")
 
     }
+
+    override suspend fun like(id: Int) {
+
+        if (networkHelper.isNetworkConnected()) {
+
+            val result = service.like(id)
+
+          /*  if (!result.isSuccessful){
+                throw IOException (result.errorBody().toString())
+            }*/
+        }
+
+
+    }
+
+
+    override suspend fun dislike(id: Int){
+
+        if (networkHelper.isNetworkConnected()) {
+
+            val result = service.dislike(id)
+
+          /*  if (!result.isSuccessful){
+                throw IOException (result.errorBody().toString())
+            }*/
+        }
+    }
+
 
 }

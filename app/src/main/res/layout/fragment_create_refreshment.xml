@@ -247,10 +247,10 @@
         <androidx.appcompat.widget.AppCompatButton
             android:id="@+id/appCompatButton"
             android:layout_width="0dp"
-            android:layout_height="48dp"
-            android:layout_marginStart="110dp"
+            android:layout_height="60dp"
+            android:layout_marginStart="40dp"
             android:layout_marginTop="35dp"
-            android:layout_marginEnd="110dp"
+            android:layout_marginEnd="40dp"
             android:layout_marginBottom="60dp"
             android:background="#3360DD"
             android:text="go to cart"

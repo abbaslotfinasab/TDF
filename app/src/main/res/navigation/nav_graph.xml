@@ -13,21 +13,21 @@
     <fragment
         android:id="@+id/refreshmentFragment"
         android:name="com.utechia.tdf.refreshment.RefreshmentsFragment"
-        android:label="fragment_tea_boy"
-        tools:layout="@layout/fragment_tea_boy" >
+        android:label="fragment_refreshment"
+        tools:layout="@layout/fragment_refreshment" >
         <action
-            android:id="@+id/action_teaBoyFragment_to_createRefreshmentFragment"
+            android:id="@+id/action_refreshmentFragment_to_createRefreshmentFragment"
             app:destination="@id/createRefreshmentFragment" />
+
         <action
-            android:id="@+id/action_teaBoyFragment_to_cartFragment"
-            app:destination="@id/cartFragment" />
-        <action
-            android:id="@+id/action_teaBoyFragment_to_favoriteFragment"
+            android:id="@+id/action_refreshmentFragment_to_favoriteFragment"
             app:destination="@id/favoriteFragment" />
+
         <action
-            android:id="@+id/action_teaBoyFragment_to_previousOrdersFragment"
-            app:destination="@id/previousOrdersFragment" />
+            android:id="@+id/action_refreshmentFragment_to_orderFragment"
+            app:destination="@id/orderFragment" />
     </fragment>
+
     <fragment
         android:id="@+id/reservationFragment"
         android:name="com.utechia.tdf.reservation.ReservationFragment"
@@ -154,30 +154,29 @@
             android:id="@+id/action_resultFragment_to_reservationFragment"
             app:destination="@id/reservationFragment" />
     </dialog>
+
     <fragment
         android:id="@+id/createRefreshmentFragment"
         android:name="com.utechia.tdf.refreshment.CreateRefreshmentFragment"
         android:label="fragment_create_refreshment"
         tools:layout="@layout/fragment_create_refreshment" >
         <argument
-            android:name="kind"
-            app:argType="integer" />
+            android:name="category"
+            app:argType="string"
+            app:nullable="true" />
         <action
             android:id="@+id/action_createRefreshmentFragment_to_cartFragment"
             app:destination="@id/cartFragment" />
         <action
             android:id="@+id/action_createRefreshmentFragment_to_orderFragment"
             app:destination="@id/orderFragment" />
-        <action
-            android:id="@+id/action_createRefreshmentFragment_to_favoriteResultFragment"
-            app:destination="@id/favoriteResultFragment" />
+
         <action
             android:id="@+id/action_createRefreshmentFragment_to_favoriteFragment"
             app:destination="@id/favoriteFragment" />
-        <action
-            android:id="@+id/action_createRefreshmentFragment_to_previousOrdersFragment"
-            app:destination="@id/previousOrdersFragment" />
+
     </fragment>
+
     <fragment
         android:id="@+id/cartFragment"
         android:name="com.utechia.tdf.refreshment.CartFragment"
@@ -203,28 +202,15 @@
         android:label="fragment_order_result"
         tools:layout="@layout/fragment_order_result" >
         <action
-            android:id="@+id/action_orderResultFragment_to_previousOrdersFragment"
-            app:destination="@id/previousOrdersFragment" />
+            android:id="@+id/action_orderResultFragment_to_orderFragment"
+            app:destination="@id/orderFragment" />
     </dialog>
-    <dialog
-        android:id="@+id/favoriteResultFragment"
-        android:name="com.utechia.tdf.favorite.FavoriteResultFragment"
-        android:label="fragment_favorite_result"
-        tools:layout="@layout/fragment_favorite_result" >
-        <action
-            android:id="@+id/action_favoriteResultFragment_to_favoriteFragment"
-            app:destination="@id/favoriteFragment" />
-    </dialog>
+
     <fragment
         android:id="@+id/favoriteFragment"
         android:name="com.utechia.tdf.favorite.FavoriteFragment"
         android:label="fragment_favorite"
         tools:layout="@layout/fragment_favorite" />
-    <fragment
-        android:id="@+id/previousOrdersFragment"
-        android:name="com.utechia.tdf.order.PreviousOrdersFragment"
-        android:label="fragment_previous_orders"
-        tools:layout="@layout/fragment_previous_orders" />
 
     <fragment
         android:id="@+id/loginFragment"
@@ -280,6 +266,7 @@
         android:name="com.utechia.tdf.refreshment.DeleteFragment"
         android:label="fragment_delete"
         tools:layout="@layout/fragment_delete" />
+
     <fragment
         android:id="@+id/cancelFragment"
         android:name="com.utechia.tdf.refreshment.CancelFragment"

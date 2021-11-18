@@ -63,6 +63,12 @@ class MainActivity : AppCompatActivity() {
             }
         }
 
+        binding.backArrow.setOnClickListener{
+
+            navController.popBackStack()
+
+        }
+
         binding.menu.setOnClickListener {
 
             binding.drawerLayout.openDrawer(GravityCompat.END)
@@ -118,10 +124,31 @@ class MainActivity : AppCompatActivity() {
                         design("refreshment")
 
                     }
+
+                    R.id.createRefreshmentFragment ->{
+                        design("menu")
+
+                    }
+
+                    R.id.orderFragment ->{
+                        design("orders")
+
+                    }
                     R.id.reservationFragment ->{
                         design("reservation")
 
                     }
+
+                    R.id.favoriteFragment ->{
+                        design("favorites")
+
+                    }
+
+                    R.id.cartFragment ->{
+                        design("cart")
+
+                    }
+
                     R.id.userprofileFragment ->{
                         design("profile")
 
@@ -129,6 +156,11 @@ class MainActivity : AppCompatActivity() {
                     R.id.qrCodeFragment -> {
                         design("qrcode")
                     }
+
+                    R.id.createReservationFragment -> {
+                        design("createReservationFragment")
+                    }
+
                     R.id.loginFragment ->{
                         design("login")
 
@@ -160,6 +192,8 @@ class MainActivity : AppCompatActivity() {
 
                         }, 50)
 
+                        binding.drawerLayout.closeDrawer(GravityCompat.END)
+
                         true
                     }
                     R.id.eventSystemFragment -> {
@@ -170,6 +204,8 @@ class MainActivity : AppCompatActivity() {
                             navController.navigate(R.id.eventSystemFragment)
 
                         }, 50)
+
+                        binding.drawerLayout.closeDrawer(GravityCompat.END)
 
                         true
                     }
@@ -182,6 +218,7 @@ class MainActivity : AppCompatActivity() {
 
                         }, 50)
 
+                        binding.drawerLayout.closeDrawer(GravityCompat.END)
 
                         true
                     }
@@ -193,8 +230,9 @@ class MainActivity : AppCompatActivity() {
                             navController.navigateUp()
                             navController.navigate(R.id.calendarFragment)
 
-                        }, 50)
+                        }, 100)
 
+                        binding.drawerLayout.closeDrawer(GravityCompat.END)
 
                         true
                     }
@@ -207,6 +245,9 @@ class MainActivity : AppCompatActivity() {
                             navController.navigate(R.id.permissionFragment)
 
                         }, 50)
+
+                        binding.drawerLayout.closeDrawer(GravityCompat.END)
+
 
                         true
                     }
@@ -347,6 +388,7 @@ class MainActivity : AppCompatActivity() {
                 window.statusBarColor = ContextCompat.getColor(this,R.color.white)
                 binding.toolbar.visibility = View.GONE
                 binding.customButton.visibility = View.GONE
+                binding.customToolbar.visibility = View.GONE
                 binding.bottomNavigation.visibility = View.GONE
                 binding.drawerLayout.setDrawerLockMode(DrawerLayout.LOCK_MODE_LOCKED_CLOSED)
 
@@ -355,6 +397,7 @@ class MainActivity : AppCompatActivity() {
             "home" ->{
                 window.statusBarColor = ContextCompat.getColor(this,R.color.status)
                 binding.toolbar.visibility = View.VISIBLE
+                binding.customToolbar.visibility = View.GONE
                 binding.customButton.visibility = View.VISIBLE
                 binding.bottomNavigation.visibility = View.VISIBLE
                 binding.drawerLayout.setDrawerLockMode(DrawerLayout.LOCK_MODE_UNLOCKED)
@@ -364,6 +407,7 @@ class MainActivity : AppCompatActivity() {
             "refreshment" ->{
                 window.statusBarColor = ContextCompat.getColor(this, R.color.status)
                 binding.toolbar.visibility = View.VISIBLE
+                binding.customToolbar.visibility = View.GONE
                 binding.customButton.visibility = View.VISIBLE
                 binding.bottomNavigation.visibility = View.VISIBLE
                 binding.drawerLayout.setDrawerLockMode(DrawerLayout.LOCK_MODE_UNLOCKED)
@@ -371,10 +415,56 @@ class MainActivity : AppCompatActivity() {
 
             }
 
+            "menu" ->{
+                window.statusBarColor = ContextCompat.getColor(this, R.color.status)
+                binding.customToolbar.visibility = View.VISIBLE
+                binding.toolbar.visibility = View.INVISIBLE
+                binding.customButton.visibility = View.GONE
+                binding.customTitle.text = "Menu"
+                binding.bottomNavigation.visibility = View.GONE
+                binding.drawerLayout.setDrawerLockMode(DrawerLayout.LOCK_MODE_LOCKED_CLOSED)
+
+
+            }
+
+            "orders" ->{
+                window.statusBarColor = ContextCompat.getColor(this, R.color.status)
+                binding.customToolbar.visibility = View.VISIBLE
+                binding.toolbar.visibility = View.INVISIBLE
+                binding.customButton.visibility = View.GONE
+                binding.customTitle.text = "Orders"
+                binding.bottomNavigation.visibility = View.GONE
+                binding.drawerLayout.setDrawerLockMode(DrawerLayout.LOCK_MODE_LOCKED_CLOSED)
+
+            }
+
+            "favorites" ->{
+                window.statusBarColor = ContextCompat.getColor(this, R.color.status)
+                binding.customToolbar.visibility = View.VISIBLE
+                binding.toolbar.visibility = View.INVISIBLE
+                binding.customButton.visibility = View.GONE
+                binding.customTitle.text = "Favorites"
+                binding.bottomNavigation.visibility = View.GONE
+                binding.drawerLayout.setDrawerLockMode(DrawerLayout.LOCK_MODE_LOCKED_CLOSED)
+
+            }
+
+            "cart" ->{
+                window.statusBarColor = ContextCompat.getColor(this, R.color.status)
+                binding.customToolbar.visibility = View.VISIBLE
+                binding.toolbar.visibility = View.INVISIBLE
+                binding.customButton.visibility = View.GONE
+                binding.customTitle.text = "Cart"
+                binding.bottomNavigation.visibility = View.GONE
+                binding.drawerLayout.setDrawerLockMode(DrawerLayout.LOCK_MODE_LOCKED_CLOSED)
+
+            }
+
             "qrcode"->{
                 window.statusBarColor = ContextCompat.getColor(this,R.color.status)
                 binding.toolbar.visibility = View.VISIBLE
                 binding.customButton.visibility = View.VISIBLE
+                binding.customToolbar.visibility = View.GONE
                 binding.bottomNavigation.visibility = View.VISIBLE
                 binding.drawerLayout.setDrawerLockMode(DrawerLayout.LOCK_MODE_UNLOCKED)
 
@@ -383,15 +473,27 @@ class MainActivity : AppCompatActivity() {
             "reservation"->{
                 window.statusBarColor = ContextCompat.getColor(this,R.color.status)
                 binding.toolbar.visibility = View.VISIBLE
+                binding.customToolbar.visibility = View.GONE
                 binding.customButton.visibility = View.VISIBLE
                 binding.bottomNavigation.visibility = View.VISIBLE
                 binding.drawerLayout.setDrawerLockMode(DrawerLayout.LOCK_MODE_UNLOCKED)
 
             }
 
+            "createReservationFragment"->{
+                window.statusBarColor = ContextCompat.getColor(this, R.color.status)
+                binding.customToolbar.visibility = View.VISIBLE
+                binding.toolbar.visibility = View.INVISIBLE
+                binding.customButton.visibility = View.GONE
+                binding.customTitle.text = "Reservation"
+                binding.bottomNavigation.visibility = View.GONE
+                binding.drawerLayout.setDrawerLockMode(DrawerLayout.LOCK_MODE_LOCKED_CLOSED)
+            }
+
             "profile"->{
                 window.statusBarColor = ContextCompat.getColor(this,R.color.status)
                 binding.toolbar.visibility = View.VISIBLE
+                binding.customToolbar.visibility = View.GONE
                 binding.customButton.visibility = View.VISIBLE
                 binding.bottomNavigation.visibility = View.VISIBLE
                 binding.drawerLayout.setDrawerLockMode(DrawerLayout.LOCK_MODE_UNLOCKED)

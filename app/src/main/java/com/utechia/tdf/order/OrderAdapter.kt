@@ -1,6 +1,5 @@
 package com.utechia.tdf.order
 
-/*
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -38,17 +37,18 @@ class OrderAdapter: RecyclerView.Adapter<RecyclerView.ViewHolder>() {
         private val image: ImageView = itemView.findViewById(R.id.image)
         private val name: TextView = itemView.findViewById(R.id.name)
         private val plus: TextView = itemView.findViewById(R.id.plusNumber)
-        private val number: TextView = itemView.findViewById(R.id.numberText)
+        private val numberText: TextView = itemView.findViewById(R.id.numberText)
         private val minus: TextView = itemView.findViewById(R.id.minusNumber)
 
         fun bind0(position: Int) {
+            var number = 1
 
-            name.text = orders[position].name
-            number.text = orders[position].number.toString()
+            name.text = orders[position].title
+            numberText.text = number.toString()
 
             Glide.with(itemView.context)
                 .load(
-                    if (orders[position].id==0)
+                    if (orders[position].id == 0)
                         R.mipmap.image1
                     else
                         R.mipmap.image2
@@ -58,23 +58,20 @@ class OrderAdapter: RecyclerView.Adapter<RecyclerView.ViewHolder>() {
 
             plus.setOnClickListener {
 
-                orders[position].number = orders[position].number?.plus(1)
-                number.text = orders[position].number .toString()
+                number += 1
+                numberText.text = number.toString()
+
+
             }
 
             minus.setOnClickListener {
+                if (number>1)
+                number -= 1
 
-                if (orders[position].number!! >1) {
-                    orders[position].number = orders[position].number?.minus(1)
-                    number.text = orders[position].number.toString()
-                    orders[orders[position].id!!] = orders[position]
-                }
-                else {
-                    if (orders.size>0)
-                        orders.removeAt(orders[position].id!!)
-                    number.text = "0"
-                }
+
+                numberText.text = number.toString()
             }
         }
     }
-*/
+}
+

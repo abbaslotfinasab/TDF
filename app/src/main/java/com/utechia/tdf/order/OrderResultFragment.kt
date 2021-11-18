@@ -37,7 +37,7 @@ class OrderResultFragment : DialogFragment() {
 
         binding.appCompatButton.setOnClickListener {
             dialog?.dismiss()
-            findNavController().navigate(R.id.action_orderResultFragment_to_previousOrdersFragment)
+            findNavController().navigate(R.id.action_orderResultFragment_to_orderFragment)
         }
 
 

@@ -21,17 +21,11 @@ abstract class RepositoryModule {
         reservationRepoImpl: ReservationRepoImpl
     ): ReservationRepo
 
-    @Binds
+   /* @Binds
     abstract fun bindTeaBoyRepositoryService(
         teaBoyRepoImpl: TeaBoyRepoImpl
     ): TeaBoyRepo
-
-    @Binds
-    abstract fun bindSearchRepositoryService(
-        searchRepoImpl: SearchRepoImpl
-    ): SearchRepo
-
-
+*/
     @Binds
     abstract fun bindLoginRepositoryService(
         loginRepoImpl: LoginRepoImpl
@@ -46,5 +40,11 @@ abstract class RepositoryModule {
     abstract fun bindRefreshmentRepositoryService(
         refreshmentRepoImpl: RefreshmentRepoImpl
     ): RefreshmentRepo
+
+
+    @Binds
+    abstract fun bindFavoriteRepositoryService(
+        favoriteRepoImpl: FavoriteRepoImpl
+    ): FavoriteRepo
 
 }

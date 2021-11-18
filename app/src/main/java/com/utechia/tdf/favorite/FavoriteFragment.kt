@@ -7,6 +7,7 @@ import android.view.ViewGroup
 import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
+import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.utechia.domain.utile.Result
 import com.utechia.tdf.databinding.FragmentFavoriteBinding
@@ -17,7 +18,7 @@ import dagger.hilt.android.AndroidEntryPoint
 class FavoriteFragment : Fragment() {
 
     private lateinit var binding: FragmentFavoriteBinding
-    val refreshmentViewModel: RefreshmentViewModel by viewModels()
+    val favoriteViewModel: FavoriteViewModel by viewModels()
     private val favoriteAdapter: FavoriteAdapter = FavoriteAdapter(this)
 
     override fun onCreateView(
@@ -31,8 +32,8 @@ class FavoriteFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-      /*  refreshmentViewModel.getRefreshment(3)
-        observer()*/
+        favoriteViewModel.getFavorite()
+        observer()
 
         binding.favoriteRecycler.apply {
             adapter=favoriteAdapter
@@ -40,23 +41,37 @@ class FavoriteFragment : Fragment() {
             addItemDecoration(ItemDecorationFavorite())
         }
 
+        binding.appBackButton.setOnClickListener {
+            findNavController().popBackStack()
+        }
+
     }
 
     private fun observer() {
 
-      /*  refreshmentViewModel.teaBoyModel.observe(viewLifecycleOwner) {
+        favoriteViewModel.favoriteModel.observe(viewLifecycleOwner) {
 
             when (it) {
                 is Result.Success -> {
+                    binding.prg.visibility = View.GONE
+                    binding.favoriteRecycler.visibility = View.VISIBLE
+                    binding.emptyLayout.visibility = View.GONE
                     favoriteAdapter.addData(it.data)
+
                 }
 
-                is Result.Loading -> {}
+                is Result.Loading -> {
+                    binding.favoriteRecycler.visibility = View.GONE
+                    binding.emptyLayout.visibility = View.GONE
+                    binding.prg.visibility = View.VISIBLE
+                }
 
                 is Result.Error -> {
-                    Toast.makeText(context, it.message, Toast.LENGTH_SHORT).show()
+                    binding.favoriteRecycler.visibility = View.GONE
+                    binding.prg.visibility = View.GONE
+                    binding.emptyLayout.visibility = View.VISIBLE
                 }
             }
-        }*/
+        }
     }
 }

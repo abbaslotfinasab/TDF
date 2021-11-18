@@ -31,6 +31,8 @@ class RefreshmentViewModel @Inject constructor(
 
         viewModelScope.launch(Dispatchers.IO+handler) {
 
+            _refreshmentModel.postValue(Result.Loading)
+
             refreshmentUseCaseImpl.get(category).let {
 
                 _refreshmentModel.postValue(Result.Success(it))
@@ -41,11 +43,11 @@ class RefreshmentViewModel @Inject constructor(
 
     }
 
-    fun search(search:String){
+    fun search(search:String,category: String){
 
         viewModelScope.launch(Dispatchers.IO+handler) {
 
-            refreshmentUseCaseImpl.search(search).let {
+            refreshmentUseCaseImpl.search(search,category).let {
 
                 _refreshmentModel.postValue(Result.Success(it))
 
@@ -69,8 +71,23 @@ class RefreshmentViewModel @Inject constructor(
 
     }
 
-    fun like(refreshmentModel: RefreshmentModel){
+    fun like(id:Int){
 
+        viewModelScope.launch(Dispatchers.IO+handler) {
+
+            refreshmentUseCaseImpl.like(id)
+
+        }
+
+    }
+
+    fun dislike(id:Int){
+
+        viewModelScope.launch(Dispatchers.IO+handler) {
+
+            refreshmentUseCaseImpl.dislike(id)
+
+        }
 
     }
 

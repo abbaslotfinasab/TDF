@@ -11,12 +11,20 @@ class RefreshmentUseCaseImpl @Inject constructor(private val refreshmentRepo: Re
         return refreshmentRepo.getRefreshment(type)
     }
 
-    override suspend fun search(search: String): MutableList<RefreshmentModel> {
-        return refreshmentRepo.search(search)
+    override suspend fun search(search: String,type:String): MutableList<RefreshmentModel> {
+        return refreshmentRepo.search(search,type)
 
     }
 
     override suspend fun cart(id: Int): MutableList<RefreshmentModel> {
         return refreshmentRepo.getCart(id)
+    }
+
+    override suspend fun like(id: Int) {
+        return refreshmentRepo.like(id)
+    }
+
+    override suspend fun dislike(id: Int) {
+        return refreshmentRepo.dislike(id)
     }
 }

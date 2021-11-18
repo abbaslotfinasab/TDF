@@ -8,7 +8,7 @@ import kotlinx.serialization.Serializable
 
 @Parcelize
 @Serializable
-data class Refreshment(
-    val data: @Contextual @RawValue MutableList<RefreshmentData>?,
-    val error:  @Contextual @RawValue Any?
+data class Favorite(
+    val data: @Contextual @RawValue MutableList<FavoriteData>?,
+    val error:  @Contextual @RawValue Error?
 ) : Parcelable

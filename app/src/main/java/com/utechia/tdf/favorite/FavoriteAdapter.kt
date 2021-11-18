@@ -7,14 +7,14 @@ import android.widget.ImageView
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
-import com.utechia.domain.model.RefreshmentModel
+import com.utechia.domain.model.FavoriteModel
 import com.utechia.tdf.R
 
 class FavoriteAdapter(private val favoriteFragment: FavoriteFragment): RecyclerView.Adapter<RecyclerView.ViewHolder>() {
 
-    var favorite: MutableList<RefreshmentModel> = mutableListOf()
+    var favorite: MutableList<FavoriteModel> = mutableListOf()
 
-    fun addData(_favorite: MutableList<RefreshmentModel>) {
+    fun addData(_favorite: MutableList<FavoriteModel>) {
         favorite.clear()
         favorite.addAll(_favorite)
         notifyDataSetChanged()
@@ -36,28 +36,37 @@ class FavoriteAdapter(private val favoriteFragment: FavoriteFragment): RecyclerV
     inner class ViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
         private val image:ImageView = itemView.findViewById(R.id.image)
         private val title:TextView = itemView.findViewById(R.id.title)
-        private val remove:ImageView = itemView.findViewById(R.id.remove)
+        private val subTitle:TextView = itemView.findViewById(R.id.subTitle)
+        private val like: ImageView = itemView.findViewById(R.id.like)
+        private val dislike: ImageView = itemView.findViewById(R.id.dislike)
 
 
         fun bind0(position: Int) {
 
+            title.text = favorite[position].food?.title
+            subTitle.text = "Ordered 12 times in total"
+            dislike.visibility = View.VISIBLE
+            like.visibility = View.GONE
+
+
+            like.setOnClickListener {
+                it.visibility = View.GONE
+                dislike.visibility = View.VISIBLE
+                favoriteFragment.favoriteViewModel.like(favorite[position].food?.id!!)
+            }
+
+            dislike.setOnClickListener {
+                it.visibility = View.GONE
+                like.visibility = View.VISIBLE
+                favoriteFragment.favoriteViewModel.dislike(favorite[position].food?.id!!)
+
+            }
+
             Glide.with(itemView.context)
-                .load(
-                    if (favorite[position].id==0)
-                        R.mipmap.image1
-                    else
-                        R.mipmap.image2
-                )
+                .load("http://3.66.226.231/api/cafeteria/image/${favorite[position].food?.imageName}")
                 .centerCrop()
                 .into(image)
 
-            title.text = favorite[position].title
-
-            remove.setOnClickListener {
-                favoriteFragment.refreshmentViewModel.delete(favorite[position].id!!)
-                favorite.removeAt(position)
-                notifyItemChanged(position)
-            }
         }
     }
 }
