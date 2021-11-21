@@ -41,10 +41,14 @@ class MainActivity : AppCompatActivity() {
         }
 
         else if (teaBoy()){
+            binding.title.text = pref.getString("User_Name","")
+            binding.subTitle.text = "${pref.getInt("Floor",0)}th Floor TeaBoy"
             graph.setStartDestination(R.id.teaBoyHomeFragment)
             setupTeaBoy()
         }
         else {
+            binding.title.text = pref.getString("User_Name","")
+            binding.subTitle.text = pref.getString("role","")
             graph.setStartDestination(R.id.userhomeFragment)
             setupUser()
 

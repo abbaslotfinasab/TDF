@@ -40,4 +40,25 @@ interface Service {
     @DELETE("user/favorite/{id}")
     suspend fun dislike(@Path("id")id:Int)
 
+    @GET("cafeteria/cart")
+    suspend fun getCart():Response<Cart>
+
+    @Headers("Content-Type: application/json")
+    @POST("cafeteria/cart")
+    suspend fun postCart(@Body body:CartBody):Response<Like>
+
+    @Headers("Content-Type: application/json")
+    @PATCH("cafeteria/cart")
+    suspend fun updateCart(@Body body:CartBody):Response<Like>
+
+    @DELETE("user/favorite/{id}")
+    suspend fun deleteCart(@Path("id")id:Int)
+
+    @POST("survey/avgteaboy")
+    suspend fun getStar():Response<Star>
+
+    @Headers("Content-Type: application/json")
+    @PATCH("cafeteria/cart")
+    suspend fun updateStatus(@Body body:CartBody):Response<Like>
+
 }

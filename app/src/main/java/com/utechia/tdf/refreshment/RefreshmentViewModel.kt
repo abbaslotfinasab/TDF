@@ -56,37 +56,4 @@ class RefreshmentViewModel @Inject constructor(
         }
 
     }
-
-    fun getCard(id:Int){
-
-        viewModelScope.launch(Dispatchers.IO+handler) {
-
-            refreshmentUseCaseImpl.cart(id).let {
-
-                _refreshmentModel.postValue(Result.Success(it))
-
-            }
-
-        }
-
-    }
-
-    fun delete(id:Int){
-
-
-    }
-
-
-    fun cancel(refreshmentModel: RefreshmentModel){
-
-
-
-    }
-
-    fun order(refreshmentModel: MutableList<RefreshmentModel>){
-
-
-
-    }
-
 }

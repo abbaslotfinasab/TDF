@@ -23,6 +23,7 @@ class CreateRefreshmentFragment : Fragment() {
     private lateinit var binding: FragmentCreateRefreshmentBinding
     private val refreshmentViewModel: RefreshmentViewModel by viewModels()
     val favoriteViewModel: FavoriteViewModel by viewModels()
+    val cartViewModel:CartViewModel by viewModels()
     private val refreshmentAdapter: RefreshmentAdapter = RefreshmentAdapter(this)
     private var category = ""
 

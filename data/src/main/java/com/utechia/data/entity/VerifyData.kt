@@ -14,9 +14,10 @@ data class VerifyData(
     val userHomeId: String?,
     val isTeaBoy :Boolean?,
     val floor : Int?,
+    val name: String?,
 
 ):Parcelable, ResponseObject<VerifyModel> {
     override fun toDomain(): VerifyModel {
-        return VerifyModel(token, userHomeId,isTeaBoy,floor)
+        return VerifyModel(token, userHomeId,isTeaBoy,floor,name)
     }
 }

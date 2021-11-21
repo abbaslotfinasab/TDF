@@ -4,7 +4,9 @@ import android.os.Parcelable
 import kotlinx.parcelize.Parcelize
 
 @Parcelize
-data class FavoriteBody(
-    val id:Int
+data class CartBody(
 
-): Parcelable
+    val foodId :Int,
+    val quantity : Int,
+
+):Parcelable

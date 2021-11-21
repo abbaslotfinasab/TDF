@@ -6,5 +6,6 @@ data class VerifyModel(
     val userHomeId: String?,
     val isTeaBoy :Boolean?,
     val floor : Int?,
+    val name: String?,
 
-)
+    )

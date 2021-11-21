@@ -9,9 +9,7 @@ import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
-import com.bumptech.glide.Glide
 import com.utechia.domain.utile.Result
-import com.utechia.tdf.R
 import com.utechia.tdf.databinding.FragmentCartBinding
 import dagger.hilt.android.AndroidEntryPoint
 
@@ -19,7 +17,8 @@ import dagger.hilt.android.AndroidEntryPoint
 class CartFragment : Fragment() {
 
     private lateinit var binding: FragmentCartBinding
-    private val refreshmentViewModel: RefreshmentViewModel by viewModels()
+    val cartViewModel:CartViewModel by viewModels()
+    private val cartAdapter:CartAdapter = CartAdapter(this)
 
 
     override fun onCreateView(
@@ -37,17 +36,37 @@ class CartFragment : Fragment() {
             findNavController().popBackStack()
         }
 
+        binding.recyclerView.apply {
+
+        }
+
+
+        observer()
+
     }
 
     private fun observer() {
 
-        refreshmentViewModel.refreshmentModel.observe(viewLifecycleOwner) {
+        cartViewModel.cartModel.observe(viewLifecycleOwner) {
 
             when (it) {
                 is Result.Success -> {
+                    binding.prg.visibility = View.GONE
+                    if (it.data.size==0){
+                        binding.recyclerView.visibility = View.GONE
+                        binding.emptyLayout.visibility = View.VISIBLE
+                    }
+                    else{
+                        binding.recyclerView.visibility = View.VISIBLE
+                        binding.emptyLayout.visibility = View.GONE
+                        cartAdapter.addData(it.data)
+                    }
+
                 }
 
-                is Result.Loading -> {}
+                is Result.Loading -> {
+                    binding.prg.visibility = View.VISIBLE
+                }
 
                 is Result.Error -> {
                     Toast.makeText(context, it.message, Toast.LENGTH_SHORT).show()

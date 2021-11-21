@@ -79,25 +79,28 @@ class RefreshmentAdapter(private val createRefreshmentFragment: CreateRefreshmen
             add.setOnClickListener {
                 it.visibility = View.GONE
                 layout.visibility = View.VISIBLE
+                createRefreshmentFragment.cartViewModel.postCart(refreshment[position].id!!,number)
             }
             plus.setOnClickListener {
 
                 number += 1
                 numberText.text = number.toString()
+                createRefreshmentFragment.cartViewModel.updateCart(refreshment[position].id!!,number)
 
             }
 
             minus.setOnClickListener {
-                if (number>1)
+                if (number>1) {
                     number -= 1
-
+                    createRefreshmentFragment.cartViewModel.updateCart(
+                        refreshment[position].id!!,
+                        number
+                    )
+                }
+                else
+                    createRefreshmentFragment.cartViewModel.deleteCart(refreshment[position].id!!)
 
                 numberText.text = number.toString()
-            }
-
-            numberText.setOnClickListener {
-                layout.visibility = View.GONE
-                add.visibility = View.VISIBLE
             }
         }
     }
