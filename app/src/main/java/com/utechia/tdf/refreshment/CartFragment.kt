@@ -9,6 +9,7 @@ import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
+import androidx.recyclerview.widget.LinearLayoutManager
 import com.utechia.domain.utile.Result
 import com.utechia.tdf.databinding.FragmentCartBinding
 import dagger.hilt.android.AndroidEntryPoint
@@ -32,12 +33,15 @@ class CartFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
+        cartViewModel.getCart()
+
         binding.appBackButton.setOnClickListener {
             findNavController().popBackStack()
         }
 
         binding.recyclerView.apply {
-
+            adapter = cartAdapter
+            layoutManager = LinearLayoutManager(context, LinearLayoutManager.VERTICAL,false)
         }
 
 
@@ -52,6 +56,7 @@ class CartFragment : Fragment() {
             when (it) {
                 is Result.Success -> {
                     binding.prg.visibility = View.GONE
+
                     if (it.data.size==0){
                         binding.recyclerView.visibility = View.GONE
                         binding.emptyLayout.visibility = View.VISIBLE
@@ -59,7 +64,7 @@ class CartFragment : Fragment() {
                     else{
                         binding.recyclerView.visibility = View.VISIBLE
                         binding.emptyLayout.visibility = View.GONE
-                        cartAdapter.addData(it.data)
+                        cartAdapter.addData(it.data[0].items)
                     }
 
                 }

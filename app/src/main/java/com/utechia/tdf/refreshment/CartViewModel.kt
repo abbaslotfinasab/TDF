@@ -4,6 +4,7 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
+import com.utechia.domain.model.CartDataModel
 import com.utechia.domain.model.ItemModel
 import com.utechia.domain.usecases.CartUseCaseImpl
 import com.utechia.domain.utile.Result
@@ -18,8 +19,8 @@ class CartViewModel @Inject constructor(
     private val cartUseCaseImpl: CartUseCaseImpl
 ):ViewModel() {
 
-    private val _cartModel = MutableLiveData<Result<MutableList<ItemModel>>>()
-    val cartModel: LiveData<Result<MutableList<ItemModel>>>
+    private val _cartModel = MutableLiveData<Result<MutableList<CartDataModel>>>()
+    val cartModel: LiveData<Result<MutableList<CartDataModel>>>
         get() = _cartModel
 
     private val handler = CoroutineExceptionHandler {
@@ -35,12 +36,9 @@ class CartViewModel @Inject constructor(
 
             cartUseCaseImpl.getCart().let {
 
-
-
+                _cartModel.postValue(Result.Success(it))
             }
-
         }
-
     }
 
     fun postCart(id:Int,quantity:Int){
@@ -52,7 +50,6 @@ class CartViewModel @Inject constructor(
             cartUseCaseImpl.postCart(id,quantity)
 
         }
-
     }
 
     fun updateCart(id:Int,quantity:Int){
@@ -64,9 +61,7 @@ class CartViewModel @Inject constructor(
             cartUseCaseImpl.updateCart(id,quantity)
 
         }
-
     }
-
 
     fun deleteCart(id:Int){
 
@@ -79,21 +74,5 @@ class CartViewModel @Inject constructor(
         }
 
     }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 }

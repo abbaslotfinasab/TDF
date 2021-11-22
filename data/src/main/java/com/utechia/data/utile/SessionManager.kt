@@ -3,6 +3,7 @@ package com.utechia.data.utile
 
 import android.content.Context
 import android.content.SharedPreferences
+import com.utechia.data.entity.VerifyData
 import dagger.hilt.android.qualifiers.ApplicationContext
 import javax.inject.Inject
 
@@ -15,9 +16,8 @@ class SessionManager @Inject constructor(@ApplicationContext private val context
         const val USER_TOKEN = "user_token"
         const val USER_ID = "user_id"
         const val is_TeaBoy = "isTeaBoy"
-        const val User_Name = "user_name"
-        const val Floor = "floor"
     }
+
 
     fun updateAuthToken(token: String) {
         val editor = prefs.edit()
@@ -25,13 +25,11 @@ class SessionManager @Inject constructor(@ApplicationContext private val context
         editor.apply()
     }
 
-    fun saveAuthToken(token: String, userHomeId:String,isTeaBoy:Boolean,floor:Int,name:String) {
+    fun saveAuthToken(verify: VerifyData) {
         val editor = prefs.edit()
-        editor.putString(USER_TOKEN, token)
-        editor.putString(USER_ID, userHomeId)
-        editor.putBoolean(is_TeaBoy, isTeaBoy)
-        editor.putString(User_Name, name)
-        editor.putInt(Floor, floor)
+        editor.putString(USER_TOKEN, verify.token)
+        editor.putString(USER_ID, verify.userHomeId)
+        editor.putBoolean(is_TeaBoy, verify.isTeaBoy!!)
         editor.apply()
     }
 

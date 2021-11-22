@@ -1,5 +1,6 @@
 package com.utechia.domain.usecases
 
+import com.utechia.domain.model.CartDataModel
 import com.utechia.domain.model.CartModel
 import com.utechia.domain.model.ItemModel
 import com.utechia.domain.repository.CartRepo
@@ -7,8 +8,8 @@ import javax.inject.Inject
 import javax.inject.Singleton
 
 @Singleton
-class CartUseCaseImpl @Inject constructor(private val cartRepo: CartRepo):CartUseCase<CartModel> {
-    override suspend fun getCart(): MutableList<CartModel> {
+class CartUseCaseImpl @Inject constructor(private val cartRepo: CartRepo):CartUseCase<CartDataModel> {
+    override suspend fun getCart(): MutableList<CartDataModel> {
         return cartRepo.getCart()
     }
 

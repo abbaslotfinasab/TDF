@@ -6,7 +6,7 @@ import kotlinx.parcelize.Parcelize
 @Parcelize
 data class CartBody(
 
-    val foodId :Int,
-    val quantity : Int,
+    val foodId:Int?,
+    val quantity:Int?
 
 ):Parcelable

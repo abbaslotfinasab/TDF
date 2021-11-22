@@ -36,8 +36,6 @@ class VerifyViewModel @Inject constructor(
 
             _verifyModel.postValue(Result.Loading)
 
-            delay(2000)
-
             verifyUseCaseImpl.verify(code).let {
 
                 _verifyModel.postValue(Result.Success(it))

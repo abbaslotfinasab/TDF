@@ -11,6 +11,6 @@ import kotlinx.serialization.Serializable
 data class Verify(
 
     val data :@Contextual VerifyData?,
-    val error:@Contextual VerifyError?
+    val error:@Contextual Error?
 
 ):Parcelable

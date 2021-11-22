@@ -47,4 +47,9 @@ abstract class RepositoryModule {
         favoriteRepoImpl: FavoriteRepoImpl
     ): FavoriteRepo
 
+    @Binds
+    abstract fun bindCartsRepositoryService(
+        cartRepoImpl: CartRepoImpl
+    ): CartRepo
+
 }

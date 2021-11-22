@@ -7,9 +7,7 @@ import android.widget.ImageView
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
-import com.utechia.domain.model.CartModel
 import com.utechia.domain.model.ItemModel
-import com.utechia.domain.model.RefreshmentModel
 import com.utechia.tdf.R
 
 class CartAdapter(private val cartFragment: CartFragment): RecyclerView.Adapter<RecyclerView.ViewHolder>() {
@@ -46,16 +44,12 @@ class CartAdapter(private val cartFragment: CartFragment): RecyclerView.Adapter<
         fun bind0(position: Int) {
             var number = 1
 
-            title.text = "tea"
-            numberText.text = number.toString()
+            title.text = carts[position].food.title
+            subtitle.text = carts[position].food.category
+            numberText.text = carts[position].quantity.toString()
 
             Glide.with(itemView.context)
-                .load(
-                    if (carts[position].id == 0)
-                        R.mipmap.image1
-                    else
-                        R.mipmap.image2
-                )
+                .load("http://3.66.226.231/api/cafeteria/image/${carts[position].food.imageName}")
                 .centerCrop()
                 .into(image)
 

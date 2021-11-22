@@ -5,6 +5,7 @@ data class ItemModel(
     val createdAt: String?,
     val foodId: String?,
     val id: Int?,
+    val food: RefreshmentModel,
     val quantity: Int?,
     val updatedAt: String?
 )

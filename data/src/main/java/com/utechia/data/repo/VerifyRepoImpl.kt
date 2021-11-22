@@ -28,14 +28,9 @@ class VerifyRepoImpl @Inject constructor(
 
                 result.isSuccessful && result.body()?.data != null -> {
 
-                    sessionManager.saveAuthToken(
-                        result.body()!!.data!!.token!!,
-                        result.body()!!.data!!.userHomeId!!,
-                        result.body()!!.data!!.isTeaBoy!!,
-                        result.body()!!.data!!.floor!!,
-                        result.body()!!.data!!.name!!,
-                    )
-                    return result.body()!!.data?.toDomain()!!
+                    sessionManager.saveAuthToken(result.body()!!.data!!)
+
+                    return result.body()!!.data!!.toDomain()
                 }
 
                 result.body()?.error == null -> {

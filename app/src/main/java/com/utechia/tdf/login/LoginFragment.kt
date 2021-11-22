@@ -72,12 +72,12 @@ class LoginFragment : Fragment() {
                     binding.prg.visibility = View.GONE
 
                     if (it.data.isTeaBoy == false) {
-                        (activity as MainActivity).setupUser()
+                        (activity as MainActivity).setupUser(it.data.name!!, it.data.jobTitle!!)
                         findNavController().navigate(R.id.action_loginFragment_to_userhomeFragment)
                     }
 
                     else {
-                        (activity as MainActivity).setupTeaBoy()
+                        (activity as MainActivity).setupTeaBoy(it.data.name!!, it.data.floor!!)
                         findNavController().navigate(R.id.action_loginFragment_to_teaBoyHomeFragment)
                     }
 
@@ -85,6 +85,7 @@ class LoginFragment : Fragment() {
 
                 is Result.Loading ->{
                     binding.prg.visibility = View.VISIBLE
+                    binding.appCompatButton.isEnabled = false
                 }
 
                 is Result.Error ->{
@@ -92,7 +93,6 @@ class LoginFragment : Fragment() {
                 }
             }
         }
-
     }
 
     private fun observer() {

@@ -7,5 +7,7 @@ data class VerifyModel(
     val isTeaBoy :Boolean?,
     val floor : Int?,
     val name: String?,
+    val jobTitle:String?
 
-    )
+
+)

@@ -38,20 +38,19 @@ class MainActivity : AppCompatActivity() {
 
         if (!checkOutUser()){
             graph.setStartDestination(R.id.loginFragment)
+            binding.drawerLayout.setDrawerLockMode(DrawerLayout.LOCK_MODE_LOCKED_CLOSED)
         }
-
         else if (teaBoy()){
-            binding.title.text = pref.getString("User_Name","")
-            binding.subTitle.text = "${pref.getInt("Floor",0)}th Floor TeaBoy"
+            val name = pref.getString("User_Name","")
+            val floor = pref.getInt("Floor",0)
             graph.setStartDestination(R.id.teaBoyHomeFragment)
-            setupTeaBoy()
+            setupTeaBoy(name!!, floor)
         }
         else {
-            binding.title.text = pref.getString("User_Name","")
-            binding.subTitle.text = pref.getString("role","")
+            val name = pref.getString("User_Name","")
+            val job = pref.getString("JobTitle","")
             graph.setStartDestination(R.id.userhomeFragment)
-            setupUser()
-
+            setupUser(name!!, job!!)
         }
 
         navHostFragment.navController.graph = graph
@@ -103,7 +102,10 @@ class MainActivity : AppCompatActivity() {
 
     }
 
-    fun setupUser() {
+    fun setupUser(name: String, job:String) {
+
+        binding.title.text = name
+        binding.subTitle.text = job
 
         binding.bottomNavigation.apply {
             menu.clear()
@@ -265,7 +267,10 @@ class MainActivity : AppCompatActivity() {
             }
         }
 
-    fun setupTeaBoy() {
+    fun setupTeaBoy(name: String, floor:Int) {
+
+        binding.title.text = name
+        binding.title .text = floor.toString()
 
         binding.bottomNavigation.apply {
             menu.clear()

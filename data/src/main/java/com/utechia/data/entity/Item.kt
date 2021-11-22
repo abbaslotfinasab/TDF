@@ -13,10 +13,11 @@ data class Item(
     val createdAt: String?,
     val foodId: String?,
     val id: Int?,
+    val food:RefreshmentData,
     val quantity: Int?,
     val updatedAt: String?
 ):Parcelable,ResponseObject<ItemModel> {
     override fun toDomain(): ItemModel {
-        return ItemModel(cartId,createdAt,foodId,id,quantity,updatedAt)
+        return ItemModel(cartId,createdAt,foodId,id,food.toDomain(),quantity,updatedAt)
     }
 }

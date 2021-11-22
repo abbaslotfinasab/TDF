@@ -40,16 +40,16 @@ interface Service {
     @DELETE("user/favorite/{id}")
     suspend fun dislike(@Path("id")id:Int)
 
-    @GET("cafeteria/cart")
+    @GET("user/cart")
     suspend fun getCart():Response<Cart>
 
     @Headers("Content-Type: application/json")
     @POST("cafeteria/cart")
-    suspend fun postCart(@Body body:CartBody):Response<Like>
+    suspend fun postCart(@Body body:CartBody):Response<CartBody>
 
     @Headers("Content-Type: application/json")
     @PATCH("cafeteria/cart")
-    suspend fun updateCart(@Body body:CartBody):Response<Like>
+    suspend fun updateCart(@Body body:CartBody):Response<CartBody>
 
     @DELETE("user/favorite/{id}")
     suspend fun deleteCart(@Path("id")id:Int)

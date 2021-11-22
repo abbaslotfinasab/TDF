@@ -262,11 +262,13 @@
             android:id="@+id/action_teaBoyHomeFragment_to_statusFragment"
             app:destination="@id/statusFragment" />
     </fragment>
+
     <fragment
         android:id="@+id/teaBoyOrdersFragment"
         android:name="com.utechia.tdf.order.TeaBoyOrdersFragment"
         android:label="fragment_tea_boy_orders"
         tools:layout="@layout/fragment_tea_boy_orders" />
+
     <fragment
         android:id="@+id/deleteFragment"
         android:name="com.utechia.tdf.refreshment.DeleteFragment"
@@ -278,6 +280,7 @@
         android:name="com.utechia.tdf.refreshment.CancelFragment"
         android:label="fragment_cancel"
         tools:layout="@layout/fragment_cancel" />
+
     <dialog
         android:id="@+id/statusFragment"
         android:name="com.utechia.tdf.StatusFragment"
