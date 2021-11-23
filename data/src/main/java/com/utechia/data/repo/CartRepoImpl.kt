@@ -2,12 +2,10 @@ package com.utechia.data.repo
 
 import com.utechia.data.api.Service
 import com.utechia.data.entity.CartBody
-import com.utechia.data.entity.CartData
 import com.utechia.data.entity.RefreshToken
 import com.utechia.data.utile.NetworkHelper
 import com.utechia.data.utile.SessionManager
 import com.utechia.domain.model.CartDataModel
-import com.utechia.domain.model.ItemModel
 import com.utechia.domain.repository.CartRepo
 import java.io.IOException
 import javax.inject.Inject

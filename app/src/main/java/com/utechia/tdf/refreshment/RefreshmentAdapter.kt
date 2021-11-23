@@ -108,7 +108,6 @@ class RefreshmentAdapter(private val createRefreshmentFragment: CreateRefreshmen
             numberText.setOnClickListener {
                 layout.visibility = View.GONE
                 add.visibility = View.VISIBLE
-                createRefreshmentFragment.cartViewModel.deleteCart(refreshment[position].id!!)
             }
         }
     }
