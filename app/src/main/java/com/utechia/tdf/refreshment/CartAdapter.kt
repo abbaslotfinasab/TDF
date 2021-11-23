@@ -42,7 +42,8 @@ class CartAdapter(private val cartFragment: CartFragment): RecyclerView.Adapter<
         private val minus: TextView = itemView.findViewById(R.id.minusNumber)
 
         fun bind0(position: Int) {
-            var number = 1
+
+            var number = carts[position].quantity!!.toInt()
 
             title.text = carts[position].food.title
             subtitle.text = carts[position].food.category
@@ -53,24 +54,26 @@ class CartAdapter(private val cartFragment: CartFragment): RecyclerView.Adapter<
                 .centerCrop()
                 .into(image)
 
-            plus.setOnClickListener {
+                plus.setOnClickListener {
 
-                number += 1
-                numberText.text = number.toString()
-                cartFragment.cartViewModel.updateCart(carts[position].id!!,number)
+                    number += 1
+                    numberText.text = number.toString()
+                    cartFragment.cartViewModel.updateCart(carts[position].food.id!!, number)
 
-            }
+                }
 
             minus.setOnClickListener {
-                if (number>1) {
+                if (number >1) {
                     number -= 1
                     cartFragment.cartViewModel.updateCart(
-                        carts[position].id!!,
+                        carts[position].food.id!!,
                         number
                     )
                 }
-                else
-                    cartFragment.cartViewModel.deleteCart(carts[position].id!!)
+                else {
+                    number=0
+                    cartFragment.cartViewModel.deleteCart(carts[position].food.id!!)
+                }
 
                 numberText.text = number.toString()
             }

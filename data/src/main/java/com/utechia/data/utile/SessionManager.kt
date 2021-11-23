@@ -15,7 +15,10 @@ class SessionManager @Inject constructor(@ApplicationContext private val context
     companion object {
         const val USER_TOKEN = "user_token"
         const val USER_ID = "user_id"
-        const val is_TeaBoy = "isTeaBoy"
+        const val is_TeaBoy = "is_teaBoy"
+        const val Floor = "floor"
+        const val Name = "name"
+        const val Job_Title = "job_title"
     }
 
 
@@ -30,6 +33,9 @@ class SessionManager @Inject constructor(@ApplicationContext private val context
         editor.putString(USER_TOKEN, verify.token)
         editor.putString(USER_ID, verify.userHomeId)
         editor.putBoolean(is_TeaBoy, verify.isTeaBoy!!)
+        editor.putString(Floor, verify.isTeaBoy.toString())
+        editor.putString(Name, verify.name)
+        editor.putString(Job_Title, verify.jobTitle)
         editor.apply()
     }
 

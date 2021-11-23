@@ -49,7 +49,7 @@ class RefreshmentAdapter(private val createRefreshmentFragment: CreateRefreshmen
 
         fun bind0(position: Int) {
 
-            var number = 1
+            var number = 0
 
             name.text = refreshment[position].title
             layout.visibility = View.GONE
@@ -77,12 +77,12 @@ class RefreshmentAdapter(private val createRefreshmentFragment: CreateRefreshmen
                 .into(image)
 
             add.setOnClickListener {
+                number += 1
                 it.visibility = View.GONE
                 layout.visibility = View.VISIBLE
                 createRefreshmentFragment.cartViewModel.postCart(refreshment[position].id!!,number)
             }
             plus.setOnClickListener {
-
                 number += 1
                 numberText.text = number.toString()
                 createRefreshmentFragment.cartViewModel.updateCart(refreshment[position].id!!,number)
@@ -97,10 +97,18 @@ class RefreshmentAdapter(private val createRefreshmentFragment: CreateRefreshmen
                         number
                     )
                 }
-                else
+                else {
+                    number=0
                     createRefreshmentFragment.cartViewModel.deleteCart(refreshment[position].id!!)
+                }
 
                 numberText.text = number.toString()
+            }
+
+            numberText.setOnClickListener {
+                layout.visibility = View.GONE
+                add.visibility = View.VISIBLE
+                createRefreshmentFragment.cartViewModel.deleteCart(refreshment[position].id!!)
             }
         }
     }

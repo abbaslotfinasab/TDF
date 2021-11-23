@@ -8,14 +8,19 @@ import android.view.View
 import android.view.ViewGroup
 import android.view.Window
 import androidx.fragment.app.DialogFragment
+import androidx.fragment.app.viewModels
+import androidx.navigation.fragment.findNavController
+import com.utechia.tdf.R
 import com.utechia.tdf.databinding.FragmentDeleteBinding
-import com.utechia.tdf.databinding.FragmentResultBinding
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
 class DeleteFragment : DialogFragment() {
 
     private lateinit var binding: FragmentDeleteBinding
+    private val cartViewModel:CartViewModel by viewModels()
+    private var foodId = 0
+
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -33,7 +38,30 @@ class DeleteFragment : DialogFragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
+        if (arguments != null)
+            foodId = requireArguments().getInt("foodId", 0)
 
+        binding.btnDelete.setOnClickListener {
+            cartViewModel.deleteCart(foodId)
+            findNavController().clearBackStack(R.id.deleteFragment)
+           findNavController().navigate(R.id.action_deleteFragment_to_cartFragment)
+            dialog?.dismiss()
+
+        }
+
+        binding.btnCancel.setOnClickListener {
+            findNavController().clearBackStack(R.id.deleteFragment)
+            findNavController().navigate(R.id.action_deleteFragment_to_cartFragment)
+            dialog?.dismiss()
+
+        }
+
+        binding.exit.setOnClickListener {
+            findNavController().clearBackStack(R.id.deleteFragment)
+            findNavController().navigate(R.id.action_deleteFragment_to_cartFragment)
+            dialog?.dismiss()
+
+        }
 
     }
 

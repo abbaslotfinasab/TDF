@@ -1,5 +1,6 @@
 package com.utechia.data.repo
 
+import android.util.Log
 import com.utechia.data.api.Service
 import com.utechia.data.utile.NetworkHelper
 import com.utechia.data.utile.SessionManager

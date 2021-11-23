@@ -183,6 +183,9 @@
         android:label="fragment_cart"
         tools:layout="@layout/fragment_cart" >
         <action
+            android:id="@+id/action_cartFragment_to_deleteFragment"
+            app:destination="@id/deleteFragment" />
+        <action
             android:id="@+id/action_cartFragment_to_orderResultFragment"
             app:destination="@id/orderResultFragment" />
     </fragment>
@@ -232,7 +235,7 @@
 
         <action
             android:id="@+id/action_loginFragment_to_userhomeFragment"
-            app:destination="@id/userhomeFragment"
+            app:destination="@id/refreshmentFragment"
             app:launchSingleTop="true"
             app:popUpTo="@id/nav_graph"/>
 
@@ -269,11 +272,21 @@
         android:label="fragment_tea_boy_orders"
         tools:layout="@layout/fragment_tea_boy_orders" />
 
-    <fragment
+    <dialog
         android:id="@+id/deleteFragment"
         android:name="com.utechia.tdf.refreshment.DeleteFragment"
         android:label="fragment_delete"
-        tools:layout="@layout/fragment_delete" />
+        tools:layout="@layout/fragment_delete" >
+
+        <argument
+            android:name="foodId"
+            app:argType="integer" />
+        <action
+            android:id="@+id/action_deleteFragment_to_cartFragment"
+            app:launchSingleTop="true"
+            app:destination="@id/cartFragment" />
+
+    </dialog>
 
     <fragment
         android:id="@+id/cancelFragment"
@@ -283,7 +296,7 @@
 
     <dialog
         android:id="@+id/statusFragment"
-        android:name="com.utechia.tdf.StatusFragment"
+        android:name="com.utechia.tdf.home.StatusFragment"
         android:label="fragment_status"
         tools:layout="@layout/fragment_status" />
 

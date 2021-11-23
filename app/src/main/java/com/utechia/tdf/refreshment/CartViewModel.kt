@@ -45,8 +45,6 @@ class CartViewModel @Inject constructor(
 
         viewModelScope.launch(Dispatchers.IO+handler) {
 
-            _cartModel.postValue(Result.Loading)
-
             cartUseCaseImpl.postCart(id,quantity)
 
         }
@@ -56,8 +54,6 @@ class CartViewModel @Inject constructor(
 
         viewModelScope.launch(Dispatchers.IO+handler) {
 
-            _cartModel.postValue(Result.Loading)
-
             cartUseCaseImpl.updateCart(id,quantity)
 
         }
@@ -66,8 +62,6 @@ class CartViewModel @Inject constructor(
     fun deleteCart(id:Int){
 
         viewModelScope.launch(Dispatchers.IO+handler) {
-
-            _cartModel.postValue(Result.Loading)
 
             cartUseCaseImpl.deleteCart(id)
 

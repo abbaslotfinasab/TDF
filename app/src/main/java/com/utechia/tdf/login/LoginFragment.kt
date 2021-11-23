@@ -89,6 +89,8 @@ class LoginFragment : Fragment() {
                 }
 
                 is Result.Error ->{
+                    binding.prg.visibility = View.GONE
+                    binding.appCompatButton.isEnabled = true
                     findNavController().navigate(R.id.action_loginFragment_to_authenticationFragment)
                 }
             }

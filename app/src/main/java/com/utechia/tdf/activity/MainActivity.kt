@@ -41,15 +41,15 @@ class MainActivity : AppCompatActivity() {
             binding.drawerLayout.setDrawerLockMode(DrawerLayout.LOCK_MODE_LOCKED_CLOSED)
         }
         else if (teaBoy()){
-            val name = pref.getString("User_Name","")
+            val name = pref.getString("Name","")
             val floor = pref.getInt("Floor",0)
             graph.setStartDestination(R.id.teaBoyHomeFragment)
             setupTeaBoy(name!!, floor)
         }
         else {
-            val name = pref.getString("User_Name","")
-            val job = pref.getString("JobTitle","")
-            graph.setStartDestination(R.id.userhomeFragment)
+            val name = pref.getString("Name","")
+            val job = pref.getString("Job_Title","")
+            graph.setStartDestination(R.id.refreshmentFragment)
             setupUser(name!!, job!!)
         }
 
@@ -78,7 +78,6 @@ class MainActivity : AppCompatActivity() {
 
         }
 
-
         binding.exit.setOnClickListener {
 
             pref.edit().clear().apply()
@@ -94,7 +93,6 @@ class MainActivity : AppCompatActivity() {
         return pref.getString("user_id",null) != null
 
     }
-
 
     private fun teaBoy(): Boolean {
 
