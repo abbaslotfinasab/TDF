@@ -1,6 +1,8 @@
 package com.utechia.tdf.login
 
+import android.content.Context
 import android.content.Intent
+import android.content.SharedPreferences
 import android.net.Uri
 import android.os.Bundle
 import android.view.LayoutInflater
@@ -23,7 +25,7 @@ class LoginFragment : Fragment() {
     private lateinit var binding: FragmentLoginBinding
     private val loginViewModel: LoginViewModel by viewModels()
     private val verifyViewModel: VerifyViewModel by viewModels()
-
+    private lateinit var prefs: SharedPreferences
     private var uri = ""
     private var code = ""
 
@@ -37,10 +39,14 @@ class LoginFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+        prefs = requireContext().getSharedPreferences("tdf", Context.MODE_PRIVATE)
 
 
-        if (arguments != null)
+
+        if (arguments != null) {
             code = requireArguments().getString("code", "")
+            arguments?.clear()
+        }
 
         binding.appCompatButton.setOnClickListener {
 
@@ -55,6 +61,7 @@ class LoginFragment : Fragment() {
         if (code != ""){
             verifyViewModel.verify(code)
             verifyObserver()
+            code = ""
 
         }
 
@@ -66,18 +73,30 @@ class LoginFragment : Fragment() {
 
         verifyViewModel.verifyModel.observe(viewLifecycleOwner){
 
+            val editor = prefs.edit()
+
             when(it){
 
                 is Result.Success ->{
                     binding.prg.visibility = View.GONE
 
                     if (it.data.isTeaBoy == false) {
+
+                        editor.putString("name",it.data.name)
+                        editor.putString("job",it.data.jobTitle)
+                            .apply()
+
                         (activity as MainActivity).setupUser(it.data.name!!, it.data.jobTitle!!)
                         findNavController().navigate(R.id.action_loginFragment_to_userhomeFragment)
                     }
 
                     else {
-                        (activity as MainActivity).setupTeaBoy(it.data.name!!, it.data.floor!!)
+
+                        editor.putString("name",it.data.name)
+                        editor.putString("floor",it.data.floor.toString())
+                            .apply()
+
+                        (activity as MainActivity).setupTeaBoy(it.data.name!!, it.data.floor.toString())
                         findNavController().navigate(R.id.action_loginFragment_to_teaBoyHomeFragment)
                     }
 

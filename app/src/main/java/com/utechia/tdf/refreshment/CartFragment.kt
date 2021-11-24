@@ -1,6 +1,5 @@
 package com.utechia.tdf.refreshment
 
-
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -44,6 +43,10 @@ class CartFragment : Fragment() {
             findNavController().popBackStack()
         }
 
+        binding.appCompatButton.setOnClickListener {
+            cartViewModel.acceptCart()
+        }
+
         binding.recyclerView.apply {
             adapter = cartAdapter
             layoutManager = LinearLayoutManager(context, LinearLayoutManager.VERTICAL,false)
@@ -76,12 +79,12 @@ class CartFragment : Fragment() {
                 is Result.Success -> {
                     binding.prg.visibility = View.GONE
 
-                    if (it.data[0].items.size!=0){
+                    if (it.data[0].items?.size !=0){
                         binding.appCompatButton.visibility = View.VISIBLE
                         binding.recyclerView.visibility = View.VISIBLE
                         binding.emptyLayout.visibility = View.GONE
-                        cartAdapter.addData(it.data[0].items)
-                        food.addAll(it.data[0].items)
+                        cartAdapter.addData(it.data[0].items!!)
+                        food.addAll(it.data[0].items!!)
 
                     }
                     else{
@@ -97,7 +100,8 @@ class CartFragment : Fragment() {
                 }
 
                 is Result.Error -> {
-                   /* Toast.makeText(context, it.message, Toast.LENGTH_SHORT).show()*/
+                    binding.prg.visibility = View.GONE
+                    /*Toast.makeText(context, it.message, Toast.LENGTH_SHORT).show()*/
                 }
             }
         }

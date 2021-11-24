@@ -9,4 +9,6 @@
     <color name="white">#FFFFFFFF</color>
     <color name="status">#011232</color>
     <color name="gray">#E5E5E5</color>
+    <color name="waiting">#F5A62E</color>
+    <color name="prepare">#335DE0</color>
 </resources>

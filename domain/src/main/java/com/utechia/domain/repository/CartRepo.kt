@@ -1,12 +1,14 @@
 package com.utechia.domain.repository
 
-import com.utechia.domain.model.CartDataModel
+import com.utechia.domain.model.CartModel
+import com.utechia.domain.model.OrderBodyModel
 
 interface CartRepo {
 
-    suspend fun getCart():MutableList<CartDataModel>
+    suspend fun getCart():MutableList<CartModel>
     suspend fun postCart(id:Int,quantity:Int)
     suspend fun updateCart(id:Int,quantity:Int)
     suspend fun deleteCart(id:Int)
+    suspend fun acceptCart():OrderBodyModel
 
 }

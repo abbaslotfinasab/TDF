@@ -1,15 +1,14 @@
 package com.utechia.domain.usecases
 
-import com.utechia.domain.model.CartDataModel
 import com.utechia.domain.model.CartModel
-import com.utechia.domain.model.ItemModel
+import com.utechia.domain.model.OrderBodyModel
 import com.utechia.domain.repository.CartRepo
 import javax.inject.Inject
 import javax.inject.Singleton
 
 @Singleton
-class CartUseCaseImpl @Inject constructor(private val cartRepo: CartRepo):CartUseCase<CartDataModel> {
-    override suspend fun getCart(): MutableList<CartDataModel> {
+class CartUseCaseImpl @Inject constructor(private val cartRepo: CartRepo):CartUseCase {
+    override suspend fun getCart(): MutableList<CartModel> {
         return cartRepo.getCart()
     }
 
@@ -23,5 +22,9 @@ class CartUseCaseImpl @Inject constructor(private val cartRepo: CartRepo):CartUs
 
     override suspend fun deleteCart(id: Int) {
         return cartRepo.deleteCart(id)
+    }
+
+    override suspend fun acceptCart(): OrderBodyModel {
+        return cartRepo.acceptCart()
     }
 }

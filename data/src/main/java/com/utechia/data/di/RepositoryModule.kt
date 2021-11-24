@@ -52,4 +52,9 @@ abstract class RepositoryModule {
         cartRepoImpl: CartRepoImpl
     ): CartRepo
 
+    @Binds
+    abstract fun bindOrderRepositoryService(
+        orderRepoImpl: OrderRepoImpl
+    ): OrderRepo
+
 }

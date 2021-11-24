@@ -73,7 +73,7 @@ class FavoriteFragment : Fragment() {
                 is Result.Error -> {
                     binding.favoriteRecycler.visibility = View.GONE
                     binding.prg.visibility = View.GONE
-                    binding.emptyLayout.visibility = View.GONE
+                    binding.emptyLayout.visibility = View.VISIBLE
                     Toast.makeText(context,it.message,Toast.LENGTH_LONG).show()
 
                 }

@@ -1,11 +1,14 @@
 package com.utechia.data.repo
 
+import android.util.Log
 import com.utechia.data.api.Service
 import com.utechia.data.entity.CartBody
 import com.utechia.data.entity.RefreshToken
 import com.utechia.data.utile.NetworkHelper
 import com.utechia.data.utile.SessionManager
-import com.utechia.domain.model.CartDataModel
+import com.utechia.domain.model.CartModel
+import com.utechia.domain.model.ItemModel
+import com.utechia.domain.model.OrderBodyModel
 import com.utechia.domain.repository.CartRepo
 import java.io.IOException
 import javax.inject.Inject
@@ -18,7 +21,7 @@ class CartRepoImpl @Inject constructor(
     private val sessionManager: SessionManager,
 
     ):CartRepo {
-    override suspend fun getCart(): MutableList<CartDataModel> {
+    override suspend fun getCart(): MutableList<CartModel> {
 
         if (networkHelper.isNetworkConnected()) {
 
@@ -39,17 +42,18 @@ class CartRepoImpl @Inject constructor(
 
             return when (result.code()) {
 
-                200 ->
-                    result.body()?.data?.map { it.toDomain() }!!.toMutableList()
+                200 -> {
+                        result.body()?.data?.map { it.toDomain()}!!.toMutableList()
+                }
 
-                404 ->
-                     emptyList<CartDataModel>().toMutableList()
+
                 else ->
                     throw IOException("Server is Not Responding")
             }
 
         } else throw IOException("No Internet Connection")
     }
+
 
     override suspend fun postCart(id: Int, quantity: Int) {
 
@@ -72,9 +76,7 @@ class CartRepoImpl @Inject constructor(
 
             return when (result.code()) {
 
-                200 -> {
-
-                }
+                200 -> {}
 
                 else ->
                     throw IOException("Server is Not Responding")
@@ -116,5 +118,45 @@ class CartRepoImpl @Inject constructor(
     }
 
     override suspend fun deleteCart(id: Int) = service.deleteCart(id)
+
+    override suspend fun acceptCart(): OrderBodyModel {
+
+        if (networkHelper.isNetworkConnected()) {
+
+            var result = service.postOrder()
+
+            if (result.code() == 401) {
+
+                sessionManager.updateAuthToken(
+                    service.refresh(
+                        RefreshToken(
+                            sessionManager.fetchHomeId()
+                                .toString()
+                        )
+                    ).body()?.data.toString()
+                )
+                result = service.postOrder()
+            }
+            Log.d("code", result.code().toString())
+
+            return when (result.code()) {
+
+                200 -> {
+                    Log.d("code", "ok")
+                    result.body()!!.toDomain()
+                }
+                400 -> {
+                    throw IOException("Cart is empty")
+                }
+
+                else -> {
+                    Log.d("code", result.errorBody()!!.string())
+                    throw IOException("Server is Not Responding")
+                }
+            }
+
+        } else throw IOException("No Internet Connection")
+
+    }
 
 }

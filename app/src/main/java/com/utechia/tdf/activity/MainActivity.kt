@@ -41,11 +41,12 @@ class MainActivity : AppCompatActivity() {
             binding.drawerLayout.setDrawerLockMode(DrawerLayout.LOCK_MODE_LOCKED_CLOSED)
         }
         else if (teaBoy()){
-            val name = pref.getString("Name","")
-            val floor = pref.getInt("Floor",0)
+            val name = pref.getString("name","")
+            val floor = pref.getString("floor","")
             graph.setStartDestination(R.id.teaBoyHomeFragment)
-            setupTeaBoy(name!!, floor)
+            setupTeaBoy(name!!, floor!!)
         }
+
         else {
             val name = pref.getString("Name","")
             val job = pref.getString("Job_Title","")
@@ -265,10 +266,10 @@ class MainActivity : AppCompatActivity() {
             }
         }
 
-    fun setupTeaBoy(name: String, floor:Int) {
+    fun setupTeaBoy(name: String, floor:String) {
 
         binding.title.text = name
-        binding.title .text = floor.toString()
+        binding.title .text = floor
 
         binding.bottomNavigation.apply {
             menu.clear()

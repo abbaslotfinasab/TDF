@@ -55,8 +55,15 @@ interface Service {
     suspend fun deleteCart(@Path("id")id:Int)
 
     @Headers("Content-Type: application/json")
-    @POST("cafeteria/cart")
-    suspend fun postOrder():Response<CartBody>
+    @POST("cafeteria")
+    suspend fun postOrder():Response<OrderBody>
+
+    @GET("user/orders")
+    suspend fun getOrder(@Query("status") status:String):Response<Order>
+
+    @Headers("Content-Type: application/json")
+    @PATCH("cafeteria/cart/{id}")
+    suspend fun cancelOrder(@Path("id")id:Int ):Response<CancelOrder>
 
     @POST("survey/avgteaboy")
     suspend fun getStar():Response<Star>

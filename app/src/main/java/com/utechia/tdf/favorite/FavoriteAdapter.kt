@@ -62,7 +62,7 @@ class FavoriteAdapter(private val favoriteFragment: FavoriteFragment): RecyclerV
             }
 
             Glide.with(itemView.context)
-                .load("http://3.66.226.231/api/cafeteria/image/${favorite[position].food?.imageName}")
+                .load("https://sandbox.tdf.gov.sa/api/cafeteria/image/${favorite[position].food?.imageName}")
                 .centerCrop()
                 .into(image)
 

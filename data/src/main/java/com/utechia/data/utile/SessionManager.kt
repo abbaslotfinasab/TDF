@@ -32,10 +32,10 @@ class SessionManager @Inject constructor(@ApplicationContext private val context
         val editor = prefs.edit()
         editor.putString(USER_TOKEN, verify.token)
         editor.putString(USER_ID, verify.userHomeId)
-        editor.putBoolean(is_TeaBoy, verify.isTeaBoy!!)
+     /*   editor.putBoolean(is_TeaBoy, verify.isTeaBoy!!)
         editor.putString(Floor, verify.isTeaBoy.toString())
         editor.putString(Name, verify.name)
-        editor.putString(Job_Title, verify.jobTitle)
+        editor.putString(Job_Title, verify.jobTitle)*/
         editor.apply()
     }
 

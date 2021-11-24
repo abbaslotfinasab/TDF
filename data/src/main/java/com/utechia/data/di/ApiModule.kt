@@ -33,7 +33,7 @@ class ApiModule {
     @Singleton
     fun provideRetrofit(okHttpClient: OkHttpClient): Retrofit {
         return Retrofit.Builder()
-            .baseUrl("http://3.66.226.231/api/")
+            .baseUrl("https://sandbox.tdf.gov.sa/api/")
             .addConverterFactory(MoshiConverterFactory.create())
             .client(okHttpClient)
             .build()

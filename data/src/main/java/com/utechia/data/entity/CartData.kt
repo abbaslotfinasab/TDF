@@ -2,7 +2,7 @@ package com.utechia.data.entity
 
 import android.os.Parcelable
 import com.utechia.data.base.ResponseObject
-import com.utechia.domain.model.CartDataModel
+import com.utechia.domain.model.CartModel
 import kotlinx.parcelize.Parcelize
 import kotlinx.parcelize.RawValue
 import kotlinx.serialization.Contextual
@@ -17,9 +17,9 @@ data class CartData(
     val items: @Contextual @RawValue MutableList<Item>,
     val status: Boolean,
     val updatedAt: String
-):Parcelable, ResponseObject<CartDataModel> {
-    override fun toDomain(): CartDataModel {
-        return CartDataModel(
+):Parcelable, ResponseObject<CartModel> {
+    override fun toDomain(): CartModel {
+        return CartModel(
             createdAt,
             id,
             items.map { it.toDomain() }.toMutableList(),

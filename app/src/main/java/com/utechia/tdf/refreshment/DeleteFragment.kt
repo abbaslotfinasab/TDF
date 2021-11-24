@@ -31,6 +31,7 @@ class DeleteFragment : DialogFragment() {
         if(dialog !=null && dialog?.window !=null){
             dialog?.window?.setBackgroundDrawable(ColorDrawable(Color.TRANSPARENT))
             dialog?.window?.requestFeature(Window.FEATURE_NO_TITLE)
+            dialog?.setCancelable(false)
         }
         return binding.root
     }

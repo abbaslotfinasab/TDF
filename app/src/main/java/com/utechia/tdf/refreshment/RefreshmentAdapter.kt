@@ -72,7 +72,7 @@ class RefreshmentAdapter(private val createRefreshmentFragment: CreateRefreshmen
             }
 
             Glide.with(itemView.context)
-                .load("http://3.66.226.231/api/cafeteria/image/${refreshment[position].imageName}")
+                .load("https://sandbox.tdf.gov.sa/api/cafeteria/image/${refreshment[position].imageName}")
                 .centerCrop()
                 .into(image)
 

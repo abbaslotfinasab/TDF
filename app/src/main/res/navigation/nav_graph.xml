@@ -197,6 +197,12 @@
         <action
             android:id="@+id/action_orderFragment_to_orderResultFragment"
             app:destination="@id/orderResultFragment" />
+        <action
+            android:id="@+id/action_orderFragment_to_cancelFragment"
+            app:destination="@id/cancelFragment" />
+        <action
+            android:id="@+id/action_orderFragment_to_orderDetailsFragment"
+            app:destination="@id/orderDetailsFragment" />
     </fragment>
 
     <dialog
@@ -288,16 +294,35 @@
 
     </dialog>
 
-    <fragment
+    <dialog
         android:id="@+id/cancelFragment"
-        android:name="com.utechia.tdf.refreshment.CancelFragment"
+        android:name="com.utechia.tdf.order.CancelFragment"
         android:label="fragment_cancel"
-        tools:layout="@layout/fragment_cancel" />
+        tools:layout="@layout/fragment_cancel" >
+        <argument
+            android:name="orderId"
+            app:argType="integer"
+            android:defaultValue="0" />
+        <action
+            android:id="@+id/action_cancelFragment_to_orderFragment"
+            app:launchSingleTop="true"
+            app:destination="@id/orderFragment" />
+    </dialog>
 
     <dialog
         android:id="@+id/statusFragment"
         android:name="com.utechia.tdf.home.StatusFragment"
         android:label="fragment_status"
         tools:layout="@layout/fragment_status" />
+    <dialog
+        android:id="@+id/orderDetailsFragment"
+        android:name="com.utechia.tdf.order.OrderDetailsFragment"
+        android:label="fragment_order_details"
+        tools:layout="@layout/fragment_order_details" >
+        <argument
+            android:name="cartId"
+            app:argType="integer"
+            android:defaultValue="0" />
+    </dialog>
 
 </navigation>
