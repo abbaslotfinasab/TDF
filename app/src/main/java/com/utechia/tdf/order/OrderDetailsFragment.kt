@@ -81,7 +81,7 @@ class OrderDetailsFragment : DialogFragment() {
 
                 is Result.Loading -> {
                     binding.prg.visibility = View.VISIBLE
-                    binding.recyclerView.visibility = View.GONE
+                    binding.recyclerView.visibility = View.VISIBLE
                 }
 
                 is Result.Error -> {

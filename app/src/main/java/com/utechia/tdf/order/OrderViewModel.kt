@@ -54,6 +54,8 @@ class OrderViewModel @Inject constructor(
 
         viewModelScope.launch(Dispatchers.IO+handler) {
 
+            _orderModel.postValue(Result.Loading)
+
             orderUseCaseImpl.singleOrder(id).let {
 
                 _orderModel.postValue(Result.Success(it))
