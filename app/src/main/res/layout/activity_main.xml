@@ -140,8 +140,8 @@
             android:layout_height="70dp"
             android:elevation="5dp"
             android:background="#305CE0"
-            android:visibility="gone"
             app:itemIconTint="@drawable/nav_item"
+            android:visibility="gone"
             app:labelVisibilityMode='labeled'
             app:itemTextAppearanceActive="@style/MenuItems"
             app:itemTextAppearanceInactive="@style/MenuItems"

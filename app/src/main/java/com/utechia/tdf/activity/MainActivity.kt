@@ -1,5 +1,4 @@
 package com.utechia.tdf.activity
-
 import android.content.Context
 import android.content.SharedPreferences
 import androidx.appcompat.app.AppCompatActivity
@@ -21,39 +20,43 @@ import dagger.hilt.android.AndroidEntryPoint
 class MainActivity : AppCompatActivity() {
 
     private lateinit var binding:ActivityMainBinding
-    private lateinit var pref: SharedPreferences
     private var navHostFragment : NavHostFragment = NavHostFragment()
     private var navController : NavController = NavController(this)
+    private lateinit var prefs: SharedPreferences
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
-
-        pref = getSharedPreferences("tdf", Context.MODE_PRIVATE)
+        prefs = getSharedPreferences("tdf", Context.MODE_PRIVATE)
 
         navHostFragment = supportFragmentManager.findFragmentById(R.id.nav_host_fragment) as NavHostFragment
         navController = navHostFragment.navController
         val graph = navController.navInflater.inflate(R.navigation.nav_graph)
 
-        if (!checkOutUser()){
-            graph.setStartDestination(R.id.loginFragment)
-            binding.drawerLayout.setDrawerLockMode(DrawerLayout.LOCK_MODE_LOCKED_CLOSED)
-        }
-        else if (teaBoy()){
-            val name = pref.getString("name","")
-            val floor = pref.getString("floor","")
-            graph.setStartDestination(R.id.teaBoyHomeFragment)
-            setupTeaBoy(name!!, floor!!)
-        }
+        when {
 
-        else {
-            val name = pref.getString("Name","TestFN TestLN")
-            val job = pref.getString("Job_Title","Test User Specialist")
-            graph.setStartDestination(R.id.refreshmentFragment)
-            setupUser(name!!, job!!)
-        }
+            !checkOutUser() -> {
+                graph.setStartDestination(R.id.loginFragment)
+                binding.drawerLayout.setDrawerLockMode(DrawerLayout.LOCK_MODE_LOCKED_CLOSED)
 
+            }
+            teaBoy() -> {
+                graph.setStartDestination(R.id.teaBoyHomeFragment)
+                val name = prefs.getString("name","").toString()
+                val floor = prefs.getString("floor","").toString()
+                setupTeaBoy(name,floor)
+            }
+            !teaBoy() -> {
+                graph.setStartDestination(R.id.refreshmentFragment)
+                val name = prefs.getString("name","").toString()
+                val job = prefs.getString("job","").toString()
+                setupUser(name,job)
+
+            }
+            else ->
+                graph.setStartDestination(R.id.loginFragment)
+        }
         navHostFragment.navController.graph = graph
 
         binding.customButton.apply {
@@ -81,7 +84,7 @@ class MainActivity : AppCompatActivity() {
 
         binding.exit.setOnClickListener {
 
-            pref.edit().clear().apply()
+            prefs.edit().clear().apply()
             navController.navigateUp()
             navController.navigate(R.id.loginFragment)
 
@@ -89,15 +92,15 @@ class MainActivity : AppCompatActivity() {
 
     }
 
-    private fun checkOutUser():Boolean {
+    private fun checkOutUser(): Boolean {
 
-        return pref.getString("user_id",null) != null
+        return prefs.getString("USER_ID",null) !=null
 
     }
 
     private fun teaBoy(): Boolean {
 
-        return pref.getBoolean("isTeaBoy",false)
+        return prefs.getBoolean("isTeaBoy",false)
 
     }
 
@@ -137,6 +140,7 @@ class MainActivity : AppCompatActivity() {
                     }
 
                     R.id.orderFragment ->{
+                        navController.clearBackStack(R.id.cartFragment)
                         design("orders")
 
                     }
@@ -269,7 +273,7 @@ class MainActivity : AppCompatActivity() {
     fun setupTeaBoy(name: String, floor:String) {
 
         binding.title.text = name
-        binding.subTitle .text = floor
+        binding.subTitle .text = floor+"th Floor TeaBoy"
 
         binding.bottomNavigation.apply {
             menu.clear()
@@ -287,6 +291,7 @@ class MainActivity : AppCompatActivity() {
             when (destination.id){
 
                 R.id.teaBoyHomeFragment ->{
+                    navController.clearBackStack(R.id.loginFragment)
                     design("home")
 
                 }

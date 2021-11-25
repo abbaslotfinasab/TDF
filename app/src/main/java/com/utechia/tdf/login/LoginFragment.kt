@@ -39,7 +39,7 @@ class LoginFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        prefs = requireContext().getSharedPreferences("tdf", Context.MODE_PRIVATE)
+        prefs = requireActivity().getSharedPreferences("tdf", Context.MODE_PRIVATE)
 
 
 
@@ -73,8 +73,6 @@ class LoginFragment : Fragment() {
 
         verifyViewModel.verifyModel.observe(viewLifecycleOwner){
 
-            val editor = prefs.edit()
-
             when(it){
 
                 is Result.Success ->{
@@ -82,22 +80,27 @@ class LoginFragment : Fragment() {
 
                     if (it.data.isTeaBoy == false) {
 
-                        editor.putString("name",it.data.name)
-                        editor.putString("job",it.data.jobTitle)
-                            .apply()
-
+                        with(prefs.edit()){
+                            putString("name",it.data.name)
+                            putString("job",it.data.jobTitle)
+                            putString("USER_ID",it.data.userHomeId)
+                        }.apply()
                         (activity as MainActivity).setupUser(it.data.name!!, it.data.jobTitle!!)
                         findNavController().navigate(R.id.action_loginFragment_to_userhomeFragment)
+
                     }
 
                     else {
-
-                        editor.putString("name",it.data.name)
-                        editor.putString("floor",it.data.floor.toString())
-                            .apply()
-
+                        with(prefs.edit()){
+                            putString("name",it.data.name)
+                            putString("floor", it.data.floor.toString())
+                            putBoolean("isTeaBoy", it.data.isTeaBoy == true)
+                            putString("USER_ID",it.data.userHomeId)
+                        }.apply()
                         (activity as MainActivity).setupTeaBoy(it.data.name!!, it.data.floor.toString())
                         findNavController().navigate(R.id.action_loginFragment_to_teaBoyHomeFragment)
+
+
                     }
 
                 }

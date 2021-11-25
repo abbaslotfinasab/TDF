@@ -146,7 +146,6 @@ class CreateRefreshmentFragment : Fragment() {
         }
 
         binding.appCompatButton.setOnClickListener {
-
             findNavController().navigate(R.id.action_createRefreshmentFragment_to_cartFragment)
 
         }

@@ -2,8 +2,7 @@
 <navigation xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    android:id="@+id/nav_graph"
-    app:startDestination="@id/teaBoyHomeFragment">
+    android:id="@+id/nav_graph">
 
     <fragment
         android:id="@+id/userhomeFragment"
@@ -251,6 +250,7 @@
 
         <action
             android:id="@+id/action_loginFragment_to_teaBoyHomeFragment"
+            app:launchSingleTop="true"
             app:destination="@id/teaBoyHomeFragment" />
 
     </fragment>
