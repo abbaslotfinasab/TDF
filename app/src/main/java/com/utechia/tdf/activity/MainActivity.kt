@@ -269,7 +269,7 @@ class MainActivity : AppCompatActivity() {
     fun setupTeaBoy(name: String, floor:String) {
 
         binding.title.text = name
-        binding.title .text = floor
+        binding.subTitle .text = floor
 
         binding.bottomNavigation.apply {
             menu.clear()
@@ -291,7 +291,7 @@ class MainActivity : AppCompatActivity() {
 
                 }
                 R.id.teaBoyOrdersFragment ->{
-                    design("orders")
+                    design("tOrders")
 
                 }
                 R.id.qrCodeFragment -> {
@@ -444,6 +444,16 @@ class MainActivity : AppCompatActivity() {
                 binding.customTitle.text = "Orders"
                 binding.bottomNavigation.visibility = View.GONE
                 binding.drawerLayout.setDrawerLockMode(DrawerLayout.LOCK_MODE_LOCKED_CLOSED)
+
+            }
+
+            "tOrders" ->{
+                window.statusBarColor = ContextCompat.getColor(this, R.color.status)
+                binding.customToolbar.visibility = View.INVISIBLE
+                binding.toolbar.visibility = View.VISIBLE
+                binding.customButton.visibility = View.VISIBLE
+                binding.bottomNavigation.visibility = View.VISIBLE
+                binding.drawerLayout.setDrawerLockMode(DrawerLayout.LOCK_MODE_UNLOCKED)
 
             }
 

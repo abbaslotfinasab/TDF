@@ -38,6 +38,7 @@ class OrderAdapter: RecyclerView.Adapter<RecyclerView.ViewHolder>() {
     inner class ViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
         private val date: TextView = itemView.findViewById(R.id.date)
         private val number: TextView = itemView.findViewById(R.id.numberText)
+        private val title: TextView = itemView.findViewById(R.id.title)
         private val oderId: TextView = itemView.findViewById(R.id.subtitle)
         private val status: TextView = itemView.findViewById(R.id.status)
         private val details: TextView = itemView.findViewById(R.id.btnDetails)
@@ -47,14 +48,23 @@ class OrderAdapter: RecyclerView.Adapter<RecyclerView.ViewHolder>() {
         fun bind0(position: Int) {
 
             date.text = orders[position].createdAt
+
             number.text = "${orders[position].cart.items?.size}x"
             oderId.text = "Order ID:675867468048609"
+
+            if (orders[position].cart.items?.size!! >1){
+                title.text = orders[position].cart.items!![0].food.title+"..."
+            }
+            else
+                title.text = orders[position].cart.items!![0].food.title
+
 
             when (orders[position].status){
 
                 "waiting" -> {
 
                     status.apply {
+                        visibility = View.VISIBLE
                         text = "Waiting"
                         setBackgroundColor(ContextCompat.getColor(itemView.context, R.color.waiting))
                     }
@@ -63,8 +73,8 @@ class OrderAdapter: RecyclerView.Adapter<RecyclerView.ViewHolder>() {
 
                 }
                 "preparing" ->{
-
                     status.apply {
+                        visibility = View.VISIBLE
                         text = "preparing"
                         setBackgroundColor(ContextCompat.getColor(itemView.context, R.color.waiting))
                     }

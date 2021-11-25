@@ -91,7 +91,7 @@
             android:layout_gravity="center"
             app:lazyloader_animDur="800"
             app:lazyloader_dotsDist="5dp"
-            app:lazyloader_dotsRadius="8dp"
+            app:lazyloader_dotsRadius="5dp"
             app:lazyloader_firstDelayDur="150"
             app:lazyloader_firstDotColor="#3360DD"
             app:lazyloader_interpolator="@android:anim/decelerate_interpolator"
@@ -100,6 +100,7 @@
             app:lazyloader_thirdDotColor="#3360DD" />
 
     </androidx.cardview.widget.CardView>
+
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>
