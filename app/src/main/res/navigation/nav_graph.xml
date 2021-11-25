@@ -188,6 +188,10 @@
         <action
             android:id="@+id/action_cartFragment_to_orderResultFragment"
             app:destination="@id/orderResultFragment" />
+        <action
+            android:id="@+id/action_cartFragment_to_orderFragment"
+            app:launchSingleTop="true"
+            app:destination="@id/orderFragment" />
     </fragment>
     <fragment
         android:id="@+id/orderFragment"

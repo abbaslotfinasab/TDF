@@ -6,4 +6,5 @@ interface OrderRepo {
 
     suspend fun getOrder(status:String):MutableList<OrderDataModel>
     suspend fun cancelOrder(id:Int)
+    suspend fun singleOrder(id:Int):MutableList<OrderDataModel>
 }

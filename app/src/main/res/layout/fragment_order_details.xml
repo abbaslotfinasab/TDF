@@ -12,33 +12,34 @@
         android:id="@+id/exit"
         android:layout_width="36dp"
         android:layout_height="36dp"
-        android:layout_marginTop="28dp"
-        android:layout_marginEnd="21dp"
+        android:layout_marginTop="10dp"
+        android:layout_marginEnd="10dp"
         android:scaleType="centerInside"
         android:src="@drawable/ic_exit"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
     <TextView
+        android:id="@+id/textView21"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="38dp"
         android:text="Order Details"
-        android:textSize="18sp"
         android:textColor="@color/black"
-        app:layout_constraintEnd_toStartOf="@+id/exit"
+        android:textSize="18sp"
+        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/recyclerView"
         android:layout_width="match_parent"
-        android:layout_height="0dp"
-        android:layout_marginTop="5dp"
+        android:layout_height="300dp"
+        android:layout_marginTop="3dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/exit" />
+        app:layout_constraintTop_toBottomOf="@+id/textView21" />
 
 
     <androidx.appcompat.widget.AppCompatButton
@@ -58,6 +59,37 @@
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent" />
+
+    <androidx.cardview.widget.CardView
+        android:id="@+id/prg"
+        android:layout_width="72dp"
+        android:layout_height="72dp"
+        app:cardElevation="6dp"
+        app:cardCornerRadius="36dp"
+        android:visibility="gone"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:cardPreventCornerOverlap="true"
+        app:layout_constraintCircleRadius="36dp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <com.agrawalsuneet.dotsloader.loaders.LazyLoader
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:layout_gravity="center"
+            app:lazyloader_animDur="800"
+            app:lazyloader_dotsDist="5dp"
+            app:lazyloader_dotsRadius="8dp"
+            app:lazyloader_firstDelayDur="150"
+            app:lazyloader_firstDotColor="#3360DD"
+            app:lazyloader_interpolator="@android:anim/decelerate_interpolator"
+            app:lazyloader_secondDelayDur="300"
+            app:lazyloader_secondDotColor="#3360DD"
+            app:lazyloader_thirdDotColor="#3360DD" />
+
+    </androidx.cardview.widget.CardView>
 
 </androidx.constraintlayout.widget.ConstraintLayout>
 

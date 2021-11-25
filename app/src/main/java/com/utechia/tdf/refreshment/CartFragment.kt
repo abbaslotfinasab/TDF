@@ -35,7 +35,6 @@ class CartFragment : Fragment() {
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
-        super.onViewCreated(view, savedInstanceState)
 
         cartViewModel.getCart()
 
@@ -45,6 +44,7 @@ class CartFragment : Fragment() {
 
         binding.appCompatButton.setOnClickListener {
             cartViewModel.acceptCart()
+            findNavController().navigate(R.id.action_cartFragment_to_orderFragment)
         }
 
         binding.recyclerView.apply {
@@ -79,7 +79,7 @@ class CartFragment : Fragment() {
                 is Result.Success -> {
                     binding.prg.visibility = View.GONE
 
-                    if (it.data[0].items?.size !=0){
+                    if (it.data.size!=0){
                         binding.appCompatButton.visibility = View.VISIBLE
                         binding.recyclerView.visibility = View.VISIBLE
                         binding.emptyLayout.visibility = View.GONE

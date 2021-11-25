@@ -10,6 +10,7 @@ import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.utechia.domain.utile.Result
+import com.utechia.tdf.R
 import com.utechia.tdf.databinding.FragmentOrderBinding
 import dagger.hilt.android.AndroidEntryPoint
 
@@ -31,8 +32,9 @@ class OrderFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+        findNavController().clearBackStack(R.id.cartFragment)
 
-        orderViewModel.getOrder("waiting")
+        orderViewModel.getOrder("pending")
 
         binding.recyclerView.apply {
             adapter = orderAdapter
@@ -108,6 +110,8 @@ class OrderFragment : Fragment() {
 
                 is Result.Loading -> {
                    binding.prg.visibility = View.VISIBLE
+                    binding.recyclerView.visibility = View.GONE
+                    binding.emptyLayout.visibility = View.GONE
                 }
 
                 is Result.Error -> {

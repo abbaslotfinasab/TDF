@@ -61,9 +61,12 @@ interface Service {
     @GET("user/orders")
     suspend fun getOrder(@Query("status") status:String):Response<Order>
 
+    @GET("user/orders")
+    suspend fun getSingleOrder(@Query("cartId") id: Int):Response<Order>
+
     @Headers("Content-Type: application/json")
-    @PATCH("cafeteria/cart/{id}")
-    suspend fun cancelOrder(@Path("id")id:Int ):Response<CancelOrder>
+    @PATCH("cafeteria/cancel-order")
+    suspend fun cancelOrder(@Body favoriteBody: FavoriteBody ):Response<CancelOrder>
 
     @POST("survey/avgteaboy")
     suspend fun getStar():Response<Star>

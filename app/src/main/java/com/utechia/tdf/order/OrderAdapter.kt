@@ -3,6 +3,7 @@ package com.utechia.tdf.order
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.RatingBar
 import android.widget.TextView
 import androidx.core.content.ContextCompat
 import androidx.core.os.bundleOf
@@ -25,7 +26,7 @@ class OrderAdapter: RecyclerView.Adapter<RecyclerView.ViewHolder>() {
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): RecyclerView.ViewHolder =
         ViewHolder(
             LayoutInflater.from(parent.context)
-                .inflate(R.layout.item_pending, parent, false)
+                .inflate(R.layout.order_item, parent, false)
         )
 
     override fun onBindViewHolder(holder: RecyclerView.ViewHolder, position: Int) {
@@ -41,6 +42,7 @@ class OrderAdapter: RecyclerView.Adapter<RecyclerView.ViewHolder>() {
         private val status: TextView = itemView.findViewById(R.id.status)
         private val details: TextView = itemView.findViewById(R.id.btnDetails)
         private val cancel: TextView = itemView.findViewById(R.id.btnCancel)
+        private val rating: RatingBar = itemView.findViewById(R.id.rating)
 
         fun bind0(position: Int) {
 
@@ -48,24 +50,55 @@ class OrderAdapter: RecyclerView.Adapter<RecyclerView.ViewHolder>() {
             number.text = "${orders[position].cart.items?.size}x"
             oderId.text = "Order ID:675867468048609"
 
-            if (orders[position].status == "waiting") {
-                status.apply {
-                    text = "Waiting"
-                    setBackgroundColor(ContextCompat.getColor(itemView.context, R.color.waiting))
+            when (orders[position].status){
+
+                "waiting" -> {
+
+                    status.apply {
+                        text = "Waiting"
+                        setBackgroundColor(ContextCompat.getColor(itemView.context, R.color.waiting))
+                    }
+                    cancel.visibility = View.VISIBLE
+                    rating.visibility = View.GONE
+
                 }
-                cancel.visibility = View.VISIBLE
-            } else {
-                status.apply {
-                    text = "Preparing"
-                    setBackgroundColor(
-                        ContextCompat.getColor(
-                            itemView.context,
-                            R.color.prepare
-                        )
-                    )
+                "preparing" ->{
+
+                    status.apply {
+                        text = "preparing"
+                        setBackgroundColor(ContextCompat.getColor(itemView.context, R.color.waiting))
+                    }
+                    cancel.visibility = View.VISIBLE
+                    rating.visibility = View.GONE
+
+
                 }
-                cancel.visibility = View.GONE
+                "cancelled_by_user" ->{
+                    cancel.visibility = View.GONE
+                    rating.visibility = View.GONE
+                    status.visibility = View.GONE
+
+
+                }
+
+                "cancelled_by_teaboy" ->{
+                    cancel.visibility = View.GONE
+                    rating.visibility = View.GONE
+                    status.visibility = View.GONE
+
+
+                }
+
+                "delivered" ->{
+                    status.visibility = View.GONE
+                    cancel.visibility = View.GONE
+                    rating.visibility = View.VISIBLE
+
+
+                }
+
             }
+
             cancel.setOnClickListener {
                 val bundle = bundleOf("orderId" to orders[position].id)
                 itemView.findNavController().navigate(R.id.action_orderFragment_to_cancelFragment,bundle)

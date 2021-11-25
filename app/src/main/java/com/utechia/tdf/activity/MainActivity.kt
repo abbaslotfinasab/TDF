@@ -48,8 +48,8 @@ class MainActivity : AppCompatActivity() {
         }
 
         else {
-            val name = pref.getString("Name","")
-            val job = pref.getString("Job_Title","")
+            val name = pref.getString("Name","TestFN TestLN")
+            val job = pref.getString("Job_Title","Test User Specialist")
             graph.setStartDestination(R.id.refreshmentFragment)
             setupUser(name!!, job!!)
         }

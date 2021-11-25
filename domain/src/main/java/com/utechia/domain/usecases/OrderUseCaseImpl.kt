@@ -15,4 +15,8 @@ class OrderUseCaseImpl @Inject constructor(private val orderRepo: OrderRepo):Ord
     override suspend fun cancel(id:Int) {
         return orderRepo.cancelOrder(id)
     }
+
+    override suspend fun singleOrder(id: Int): MutableList<OrderDataModel> {
+        return orderRepo.singleOrder(id)
+    }
 }

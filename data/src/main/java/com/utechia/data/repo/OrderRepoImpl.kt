@@ -2,6 +2,7 @@ package com.utechia.data.repo
 
 import android.util.Log
 import com.utechia.data.api.Service
+import com.utechia.data.entity.FavoriteBody
 import com.utechia.data.entity.RefreshToken
 import com.utechia.data.utile.NetworkHelper
 import com.utechia.data.utile.SessionManager
@@ -18,7 +19,7 @@ class OrderRepoImpl @Inject constructor(
     private val sessionManager: SessionManager,
 
 ):OrderRepo {
-    override suspend fun getOrder(status:String): MutableList<OrderDataModel> {
+    override suspend fun getOrder(status: String): MutableList<OrderDataModel> {
 
         if (networkHelper.isNetworkConnected()) {
 
@@ -36,7 +37,6 @@ class OrderRepoImpl @Inject constructor(
                 )
                 result = service.getOrder(status)
             }
-            Log.d("code", result.body()?.data!![0].cart.status.toString())
             return when (result.code()) {
 
                 200 -> {
@@ -51,11 +51,11 @@ class OrderRepoImpl @Inject constructor(
 
     }
 
-    override suspend fun cancelOrder(id:Int) {
+    override suspend fun cancelOrder(id: Int) {
 
         if (networkHelper.isNetworkConnected()) {
 
-            var result = service.cancelOrder(id)
+            var result = service.cancelOrder(FavoriteBody(id))
 
             if (result.code() == 401) {
 
@@ -67,12 +67,12 @@ class OrderRepoImpl @Inject constructor(
                         )
                     ).body()?.data.toString()
                 )
-                result = service.cancelOrder(id)
+                result = service.cancelOrder(FavoriteBody(id))
             }
 
             return when (result.code()) {
 
-                200 ->{}
+                200 -> {}
 
                 404 ->
                     throw IOException("Not found")
@@ -82,5 +82,38 @@ class OrderRepoImpl @Inject constructor(
             }
 
         } else throw IOException("No Internet Connection")
+    }
+
+    override suspend fun singleOrder(id: Int): MutableList<OrderDataModel> {
+
+        if (networkHelper.isNetworkConnected()) {
+
+            var result = service.getSingleOrder(id)
+
+            if (result.code() == 401) {
+
+                sessionManager.updateAuthToken(
+                    service.refresh(
+                        RefreshToken(
+                            sessionManager.fetchHomeId()
+                                .toString()
+                        )
+                    ).body()?.data.toString()
+                )
+                result = service.getSingleOrder(id)
+            }
+
+            return when (result.code()) {
+
+                200 -> {
+                    result.body()?.data!!.map { it.toDomain() }.toMutableList()
+                }
+
+                else ->
+                    throw IOException("Server is Not Responding")
+            }
+
+        } else
+            throw IOException("No Internet Connection")
     }
 }

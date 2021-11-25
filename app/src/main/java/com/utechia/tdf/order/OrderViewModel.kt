@@ -50,4 +50,15 @@ class OrderViewModel @Inject constructor(
         }
     }
 
+    fun singleOrder(id:Int){
+
+        viewModelScope.launch(Dispatchers.IO+handler) {
+
+            orderUseCaseImpl.singleOrder(id).let {
+
+                _orderModel.postValue(Result.Success(it))
+            }
+        }
+    }
+
 }
