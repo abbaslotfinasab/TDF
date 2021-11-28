@@ -21,11 +21,6 @@ abstract class RepositoryModule {
         reservationRepoImpl: ReservationRepoImpl
     ): ReservationRepo
 
-   /* @Binds
-    abstract fun bindTeaBoyRepositoryService(
-        teaBoyRepoImpl: TeaBoyRepoImpl
-    ): TeaBoyRepo
-*/
     @Binds
     abstract fun bindLoginRepositoryService(
         loginRepoImpl: LoginRepoImpl
@@ -56,5 +51,10 @@ abstract class RepositoryModule {
     abstract fun bindOrderRepositoryService(
         orderRepoImpl: OrderRepoImpl
     ): OrderRepo
+
+    @Binds
+    abstract fun bindOrderCountRepositoryService(
+        orderRepoImpl: OrderCountRepoImpl
+    ): OrderCountRepo
 
 }

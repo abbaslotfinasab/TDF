@@ -1,5 +1,7 @@
 package com.utechia.tdf.order
 
+import android.content.Context
+import android.content.SharedPreferences
 import android.graphics.Color
 import android.graphics.drawable.ColorDrawable
 import android.os.Bundle
@@ -23,6 +25,7 @@ class OrderDetailsFragment : DialogFragment() {
     private lateinit var binding: FragmentOrderDetailsBinding
     private val orderViewModel:OrderViewModel by viewModels()
     private val orderAdapter:OrderDetailsAdapter = OrderDetailsAdapter()
+    private lateinit var prefs: SharedPreferences
     private var cartId = 0
 
     override fun onCreateView(
@@ -42,10 +45,17 @@ class OrderDetailsFragment : DialogFragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+        prefs = requireActivity().getSharedPreferences("tdf", Context.MODE_PRIVATE)
+
 
         if (arguments !=null){
             cartId = requireArguments().getInt("cartId")
         }
+
+        if (prefs.getBoolean("isTeaBoy",true))
+            orderViewModel.singleOrderTeaBoy(cartId)
+        else
+        orderViewModel.singleOrder(cartId)
 
         binding.recyclerView.apply {
             adapter = orderAdapter
@@ -53,7 +63,6 @@ class OrderDetailsFragment : DialogFragment() {
             addItemDecoration(ItemDecorationOrderDetails())
         }
 
-        orderViewModel.singleOrder(cartId)
 
         binding.exit.setOnClickListener {
             dialog?.dismiss()
@@ -75,7 +84,6 @@ class OrderDetailsFragment : DialogFragment() {
                 is Result.Success -> {
                     binding.prg.visibility = View.GONE
                     binding.recyclerView.visibility = View.VISIBLE
-                    Log.d("result","ok")
                     orderAdapter.addData(it.data[0].cart.items!!)
                 }
 

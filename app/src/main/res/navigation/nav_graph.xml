@@ -2,7 +2,8 @@
 <navigation xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    android:id="@+id/nav_graph">
+    android:id="@+id/nav_graph"
+    app:startDestination="@id/acceptFragment">
 
     <fragment
         android:id="@+id/userhomeFragment"
@@ -280,7 +281,19 @@
         android:id="@+id/teaBoyOrdersFragment"
         android:name="com.utechia.tdf.order.TeaBoyOrdersFragment"
         android:label="fragment_tea_boy_orders"
-        tools:layout="@layout/fragment_tea_boy_orders" />
+        tools:layout="@layout/fragment_tea_boy_orders" >
+        <action
+            android:id="@+id/action_teaBoyOrdersFragment_to_acceptFragment"
+            app:destination="@id/acceptFragment" />
+        <action
+            android:id="@+id/action_teaBoyOrdersFragment_to_rejectFragment"
+            app:destination="@id/rejectFragment" />
+
+        <action
+            android:id="@+id/action_orderFragment_to_orderDetailsFragment"
+            app:destination="@id/orderDetailsFragment" />
+
+    </fragment>
 
     <dialog
         android:id="@+id/deleteFragment"
@@ -328,5 +341,45 @@
             app:argType="integer"
             android:defaultValue="0" />
     </dialog>
+    <fragment
+        android:id="@+id/acceptFragment"
+        android:name="com.utechia.tdf.order.AcceptFragment"
+        android:label="fragment_accept"
+        tools:layout="@layout/fragment_accept" >
+
+        <argument
+            android:name="orderId"
+            app:argType="integer"
+            android:defaultValue="0" />
+        <action
+            android:id="@+id/action_acceptFragment_to_teaBoyOrdersFragment"
+            app:launchSingleTop="true"
+            app:destination="@id/teaBoyOrdersFragment" />
+
+    </fragment>
+    <fragment
+        android:id="@+id/rejectFragment"
+        android:name="com.utechia.tdf.order.RejectFragment"
+        android:label="fragment_reject"
+        tools:layout="@layout/fragment_reject" >
+
+        <argument
+            android:name="orderId"
+            app:argType="integer"
+            android:defaultValue="0" />
+        <action
+            android:id="@+id/action_rejectFragment_to_teaBoyOrdersFragment"
+            app:launchSingleTop="true"
+            app:destination="@id/teaBoyOrdersFragment" />
+
+    </fragment>
+    <fragment
+        android:id="@+id/confirmFragment"
+        android:name="com.utechia.tdf.order.ConfirmFragment"
+        android:label="fragment_confirm"
+        tools:layout="@layout/fragment_confirm" >
+
+
+    </fragment>
 
 </navigation>

@@ -19,4 +19,24 @@ class OrderUseCaseImpl @Inject constructor(private val orderRepo: OrderRepo):Ord
     override suspend fun singleOrder(id: Int): MutableList<OrderDataModel> {
         return orderRepo.singleOrder(id)
     }
+
+    override suspend fun getOrder(status:String): MutableList<OrderDataModel> {
+        return orderRepo.getTeaBoyOrder(status)
+    }
+
+    override suspend fun acceptOrder(id: Int) {
+        return orderRepo.acceptOrder(id)
+    }
+
+    override suspend fun rejectOrder(id: Int) {
+        return orderRepo.rejectOrder(id)
+    }
+
+    override suspend fun deliveredOrder(id: Int) {
+        return orderRepo.deliveredOrder(id)
+    }
+
+    override suspend fun singleOrderTeaBoy(id: Int): MutableList<OrderDataModel> {
+        return orderRepo.singleOrderTeaBoy(id)
+    }
 }

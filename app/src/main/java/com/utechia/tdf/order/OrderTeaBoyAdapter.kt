@@ -12,7 +12,7 @@ import androidx.recyclerview.widget.RecyclerView
 import com.utechia.domain.model.OrderDataModel
 import com.utechia.tdf.R
 
-class OrderAdapter: RecyclerView.Adapter<RecyclerView.ViewHolder>() {
+class OrderTeaBoyAdapter: RecyclerView.Adapter<RecyclerView.ViewHolder>() {
 
     var orders: MutableList<OrderDataModel> = mutableListOf()
 
@@ -26,7 +26,7 @@ class OrderAdapter: RecyclerView.Adapter<RecyclerView.ViewHolder>() {
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): RecyclerView.ViewHolder =
         ViewHolder(
             LayoutInflater.from(parent.context)
-                .inflate(R.layout.order_item, parent, false)
+                .inflate(R.layout.order_teaboy_item, parent, false)
         )
 
     override fun onBindViewHolder(holder: RecyclerView.ViewHolder, position: Int) {
@@ -40,10 +40,12 @@ class OrderAdapter: RecyclerView.Adapter<RecyclerView.ViewHolder>() {
         private val number: TextView = itemView.findViewById(R.id.numberText)
         private val title: TextView = itemView.findViewById(R.id.title)
         private val oderId: TextView = itemView.findViewById(R.id.subtitle)
-        private val status: TextView = itemView.findViewById(R.id.status)
         private val details: TextView = itemView.findViewById(R.id.btnDetails)
-        private val cancel: TextView = itemView.findViewById(R.id.btnCancel)
-        private val rating: RatingBar = itemView.findViewById(R.id.rating)
+        private val user: TextView = itemView.findViewById(R.id.username)
+        private val location: TextView = itemView.findViewById(R.id.location)
+        private val reject: TextView = itemView.findViewById(R.id.btnReject)
+        private val accept: TextView = itemView.findViewById(R.id.btnAccept)
+        private val confirm: TextView = itemView.findViewById(R.id.btnConfirm)
 
         fun bind0(position: Int) {
 
@@ -51,6 +53,8 @@ class OrderAdapter: RecyclerView.Adapter<RecyclerView.ViewHolder>() {
 
             number.text = "${orders[position].cart.items?.size}x"
             oderId.text = "ID:675867468048609"
+            user.text = "John Doe"
+            location.text = orders[position].floor
 
             if (orders[position].cart.items?.size!! >1){
                 title.text = orders[position].cart.items!![0].food.title+"..."
@@ -62,60 +66,53 @@ class OrderAdapter: RecyclerView.Adapter<RecyclerView.ViewHolder>() {
             when (orders[position].status){
 
                 "waiting" -> {
-
-                    status.apply {
-                        visibility = View.VISIBLE
-                        text = "Waiting"
-                        setBackgroundColor(ContextCompat.getColor(itemView.context, R.color.waiting))
-                    }
-                    cancel.visibility = View.VISIBLE
-                    rating.visibility = View.GONE
+                    reject.visibility = View.VISIBLE
+                    accept.visibility = View.VISIBLE
+                    confirm.visibility = View.VISIBLE
 
                 }
                 "preparing" ->{
-                    status.apply {
-                        visibility = View.VISIBLE
-                        text = "preparing"
-                        setBackgroundColor(ContextCompat.getColor(itemView.context, R.color.waiting))
-                    }
-                    cancel.visibility = View.VISIBLE
-                    rating.visibility = View.GONE
-
+                    reject.visibility = View.GONE
+                    accept.visibility = View.GONE
+                    confirm.visibility = View.VISIBLE
 
                 }
                 "cancelled_by_user" ->{
-                    cancel.visibility = View.GONE
-                    rating.visibility = View.GONE
-                    status.visibility = View.GONE
 
+                    reject.visibility = View.GONE
+                    accept.visibility = View.GONE
+                    confirm.visibility = View.INVISIBLE
 
                 }
 
                 "cancelled_by_teaboy" ->{
-                    cancel.visibility = View.GONE
-                    rating.visibility = View.GONE
-                    status.visibility = View.GONE
-
+                    reject.visibility = View.GONE
+                    accept.visibility = View.GONE
+                    confirm.visibility = View.INVISIBLE
 
                 }
 
                 "delivered" ->{
-                    status.visibility = View.GONE
-                    cancel.visibility = View.GONE
-                    rating.visibility = View.VISIBLE
-
+                    reject.visibility = View.GONE
+                    accept.visibility = View.GONE
+                    confirm.visibility = View.INVISIBLE
 
                 }
 
             }
 
-            cancel.setOnClickListener {
+            reject.setOnClickListener {
                 val bundle = bundleOf("orderId" to orders[position].id)
-                itemView.findNavController().navigate(R.id.action_orderFragment_to_cancelFragment,bundle)
+                itemView.findNavController().navigate(R.id.action_teaBoyOrdersFragment_to_rejectFragment,bundle)
+            }
+
+            accept.setOnClickListener {
+                val bundle = bundleOf("orderId" to orders[position].id)
+                itemView.findNavController().navigate(R.id.action_teaBoyOrdersFragment_to_acceptFragment,bundle)
             }
 
             details.setOnClickListener {
-                val bundle = bundleOf("cartId" to orders[position].cart.id)
+                val bundle = bundleOf("orderId" to orders[position].cart.id)
                 itemView.findNavController().navigate(R.id.action_orderFragment_to_orderDetailsFragment,bundle)
             }
 

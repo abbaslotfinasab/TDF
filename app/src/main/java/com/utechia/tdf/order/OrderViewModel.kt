@@ -63,4 +63,59 @@ class OrderViewModel @Inject constructor(
         }
     }
 
+    fun getOrderTeaBoy(status:String){
+
+        viewModelScope.launch(Dispatchers.IO+handler) {
+
+            _orderModel.postValue(Result.Loading)
+
+            orderUseCaseImpl.getOrder(status).let {
+
+                _orderModel.postValue(Result.Success(it))
+            }
+        }
+    }
+    fun singleOrderTeaBoy(id:Int){
+
+        viewModelScope.launch(Dispatchers.IO+handler) {
+
+            _orderModel.postValue(Result.Loading)
+
+            orderUseCaseImpl.singleOrderTeaBoy(id).let {
+
+                _orderModel.postValue(Result.Success(it))
+            }
+        }
+    }
+
+
+    fun acceptOrder(id:Int){
+
+        viewModelScope.launch(Dispatchers.IO+handler) {
+
+            orderUseCaseImpl.acceptOrder(id)
+        }
+    }
+
+
+
+    fun rejectOrder(id:Int){
+
+        viewModelScope.launch(Dispatchers.IO+handler) {
+
+            orderUseCaseImpl.rejectOrder(id)
+        }
+    }
+
+
+
+    fun deliverOrder(id:Int){
+
+        viewModelScope.launch(Dispatchers.IO+handler) {
+
+            orderUseCaseImpl.deliveredOrder(id)
+        }
+    }
+
+
 }

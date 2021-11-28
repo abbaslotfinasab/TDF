@@ -95,6 +95,7 @@ class LoginFragment : Fragment() {
                             putString("name",it.data.name)
                             putString("floor", it.data.floor.toString())
                             putBoolean("isTeaBoy", it.data.isTeaBoy == true)
+                            putBoolean("isTeaBoyActive", it.data.isTeaBoyActive == true)
                             putString("USER_ID",it.data.userHomeId)
                         }.apply()
                         (activity as MainActivity).setupTeaBoy(it.data.name!!, it.data.floor.toString())

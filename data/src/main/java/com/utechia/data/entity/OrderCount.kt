@@ -8,7 +8,9 @@ import kotlinx.serialization.Serializable
 
 @Parcelize
 @Serializable
-data class CancelOrder(
-    val `data`: @Contextual @RawValue Data,
-    val error:@Contextual @RawValue Error?
+data class OrderCount(
+
+    val data: @Contextual @RawValue MutableList<OrderCountData>?,
+    val error:  @Contextual @RawValue Error?
+
 ):Parcelable

@@ -1,18 +1,25 @@
 package com.utechia.tdf.home
 
+import android.content.Context
+import android.content.SharedPreferences
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Toast
 import androidx.fragment.app.Fragment
-import com.utechia.tdf.activity.MainActivity
+import androidx.fragment.app.viewModels
+import com.utechia.domain.utile.Result
 import com.utechia.tdf.databinding.FragmentTeaBoyHomeBinding
+import com.utechia.tdf.order.OrderCountViewModel
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
 class TeaBoyHomeFragment : Fragment() {
 
     private lateinit var binding: FragmentTeaBoyHomeBinding
+    private val orderViewModel: OrderCountViewModel by viewModels()
+    private lateinit var prefs: SharedPreferences
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -24,9 +31,45 @@ class TeaBoyHomeFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+        prefs = requireActivity().getSharedPreferences("tdf", Context.MODE_PRIVATE)
+        orderViewModel.getOrder()
 
+        binding.switchCompat.isChecked = prefs.getBoolean("isTeaBoyActive",true)
 
+        binding.switchCompat.setOnCheckedChangeListener { _, isChecked ->
+            orderViewModel.setStatus(
+                isChecked
+            )
+            with(prefs.edit()){
+                putBoolean("isTeaBoyActive",isChecked)
+            }
+        }
+        observer()
+    }
 
+    private fun observer() {
+        orderViewModel.orderModel.observe(viewLifecycleOwner){
+
+            when (it) {
+                is Result.Success -> {
+                    binding.prg.visibility = View.GONE
+                    binding.active.text = it.data[0].delivered
+                    binding.pending.text = it.data[0].pending
+                    binding.cancelled.text = it.data[0].cancelled
+
+                }
+
+                is Result.Loading -> {
+                    binding.prg.visibility = View.VISIBLE
+
+                }
+
+                is Result.Error -> {
+                    binding.prg.visibility = View.GONE
+                    Toast.makeText(context, it.message, Toast.LENGTH_SHORT).show()
+                }
+            }
+        }
     }
 
 }
