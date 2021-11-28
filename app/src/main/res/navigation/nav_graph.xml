@@ -275,6 +275,12 @@
         <action
             android:id="@+id/action_teaBoyHomeFragment_to_statusFragment"
             app:destination="@id/statusFragment" />
+        <action
+            android:id="@+id/action_teaBoyHomeFragment_to_deactivationFragment"
+            app:destination="@id/deactivationFragment" />
+        <action
+            android:id="@+id/action_teaBoyHomeFragment_to_activationFragment"
+            app:destination="@id/activationFragment" />
     </fragment>
 
     <fragment
@@ -292,6 +298,9 @@
         <action
             android:id="@+id/action_orderFragment_to_orderDetailsFragment"
             app:destination="@id/orderDetailsFragment" />
+        <action
+            android:id="@+id/action_teaBoyOrdersFragment_self"
+            app:destination="@id/teaBoyOrdersFragment" />
 
     </fragment>
 
@@ -341,7 +350,7 @@
             app:argType="integer"
             android:defaultValue="0" />
     </dialog>
-    <fragment
+    <dialog
         android:id="@+id/acceptFragment"
         android:name="com.utechia.tdf.order.AcceptFragment"
         android:label="fragment_accept"
@@ -356,8 +365,8 @@
             app:launchSingleTop="true"
             app:destination="@id/teaBoyOrdersFragment" />
 
-    </fragment>
-    <fragment
+    </dialog>
+    <dialog
         android:id="@+id/rejectFragment"
         android:name="com.utechia.tdf.order.RejectFragment"
         android:label="fragment_reject"
@@ -372,14 +381,32 @@
             app:launchSingleTop="true"
             app:destination="@id/teaBoyOrdersFragment" />
 
-    </fragment>
-    <fragment
+    </dialog>
+    <dialog
         android:id="@+id/confirmFragment"
         android:name="com.utechia.tdf.order.ConfirmFragment"
         android:label="fragment_confirm"
         tools:layout="@layout/fragment_confirm" >
 
 
-    </fragment>
+    </dialog>
+    <dialog
+        android:id="@+id/activationFragment"
+        android:name="com.utechia.tdf.home.ActivationFragment"
+        android:label="fragment_activation"
+        tools:layout="@layout/fragment_activation" >
+        <action
+            android:id="@+id/action_activationFragment_to_teaBoyHomeFragment"
+            app:destination="@id/teaBoyHomeFragment" />
+    </dialog>
+    <dialog
+        android:id="@+id/deactivationFragment"
+        android:name="com.utechia.tdf.home.DeactivationFragment"
+        android:label="fragment_deactivation"
+        tools:layout="@layout/fragment_deactivation" >
+        <action
+            android:id="@+id/action_deactivationFragment_to_teaBoyHomeFragment"
+            app:destination="@id/teaBoyHomeFragment" />
+    </dialog>
 
 </navigation>

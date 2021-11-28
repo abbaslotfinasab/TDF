@@ -8,6 +8,7 @@ import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.recyclerview.widget.LinearLayoutManager
+import com.google.android.material.tabs.TabLayout
 import com.utechia.domain.utile.Result
 import com.utechia.tdf.databinding.FragmentTeaBoyOrdersBinding
 import dagger.hilt.android.AndroidEntryPoint
@@ -16,8 +17,8 @@ import dagger.hilt.android.AndroidEntryPoint
 class TeaBoyOrdersFragment : Fragment() {
 
     private lateinit var binding: FragmentTeaBoyOrdersBinding
-    private val orderViewModel: OrderViewModel by viewModels()
-    private val orderAdapter: OrderTeaBoyAdapter = OrderTeaBoyAdapter()
+    val orderViewModel: OrderViewModel by viewModels()
+    private val orderAdapter: OrderTeaBoyAdapter = OrderTeaBoyAdapter(this)
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -29,8 +30,69 @@ class TeaBoyOrdersFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+        orderViewModel.getOrderTeaBoy("delivered")
 
-        orderViewModel.getOrderTeaBoy("pending")
+        binding.tabLayout.addOnTabSelectedListener(object :TabLayout.OnTabSelectedListener{
+            override fun onTabSelected(tab: TabLayout.Tab?) {
+
+                when(tab?.position){
+
+                    0 -> {
+                        orderViewModel.getOrderTeaBoy("delivered")
+                        observer()
+                    }
+                    1 -> {
+                        orderViewModel.getOrderTeaBoy("pending")
+                        observer()
+                    }
+                    2 -> {
+                        orderViewModel.getOrderTeaBoy("cancelled")
+                        observer()
+                    }
+                }
+
+
+            }
+
+            override fun onTabUnselected(tab: TabLayout.Tab?) {
+
+               /* when(tab?.position){
+
+                    0 -> {
+                        orderViewModel.getOrderTeaBoy("delivered")
+                        observer()
+                    }
+                    1 -> {
+                        orderViewModel.getOrderTeaBoy("pending")
+                        observer()
+                    }
+                    2 -> {
+                        orderViewModel.getOrderTeaBoy("cancelled")
+                        observer()
+                    }
+                }*/
+            }
+
+            override fun onTabReselected(tab: TabLayout.Tab?) {
+
+              /*  when(tab?.position){
+
+                    0 -> {
+                        orderViewModel.getOrderTeaBoy("delivered")
+                        observer()
+                    }
+                    1 -> {
+                        orderViewModel.getOrderTeaBoy("pending")
+                        observer()
+                    }
+                    2 -> {
+                        orderViewModel.getOrderTeaBoy("cancelled")
+                        observer()
+                    }
+                }*/
+            }
+
+        })
 
         binding.recyclerView.apply {
             adapter = orderAdapter
@@ -38,43 +100,6 @@ class TeaBoyOrdersFragment : Fragment() {
             addItemDecoration(ItemDecorationOrder())
         }
 
-
-        binding.title.setOnClickListener {
-            binding.title.setTextColor(Color.BLACK)
-            binding.subtitle.setTextColor(Color.parseColor("#9D9D9D"))
-            binding.sub.setTextColor(Color.parseColor("#9D9D9D"))
-            binding.line.visibility = View.GONE
-            binding.subLine.visibility = View.GONE
-            binding.titleLine.visibility = View.VISIBLE
-            orderViewModel.getOrder("delivered")
-            observer()
-
-
-        }
-
-        binding.subtitle.setOnClickListener {
-            binding.subtitle.setTextColor(Color.BLACK)
-            binding.title.setTextColor(Color.parseColor("#9D9D9D"))
-            binding.sub.setTextColor(Color.parseColor("#9D9D9D"))
-            binding.line.visibility = View.GONE
-            binding.subLine.visibility = View.VISIBLE
-            binding.titleLine.visibility = View.GONE
-            orderViewModel.getOrder("waiting")
-            observer()
-
-        }
-
-        binding.sub.setOnClickListener {
-            binding.sub.setTextColor(Color.BLACK)
-            binding.title.setTextColor(Color.parseColor("#9D9D9D"))
-            binding.subtitle.setTextColor(Color.parseColor("#9D9D9D"))
-            binding.line.visibility = View.VISIBLE
-            binding.subLine.visibility = View.GONE
-            binding.titleLine.visibility = View.GONE
-            orderViewModel.getOrder("cancelled")
-            observer()
-
-        }
 
         observer()
 

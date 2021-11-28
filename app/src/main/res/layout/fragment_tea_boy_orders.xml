@@ -8,81 +8,32 @@
     android:background="#E5E5E5"
     tools:context=".order.OrderFragment">
 
-    <TextView
-        android:id="@+id/title"
-        android:layout_width="wrap_content"
+    <com.google.android.material.tabs.TabLayout
+        android:id="@+id/tabLayout"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="32dp"
-        android:layout_marginEnd="20dp"
-        android:fontFamily="@font/poppins"
-        android:gravity="center"
-        android:text="Delivered"
-        android:textColor="#9D9D9D"
-        android:textSize="18sp"
-        android:visibility="visible"
-        app:layout_constraintEnd_toStartOf="@+id/subtitle"
-        app:layout_constraintTop_toTopOf="parent" />
-
-    <View
-        android:id="@+id/titleLine"
-        android:layout_width="0dp"
-        android:layout_height="1dp"
-        android:background="@color/black"
-        android:visibility="gone"
-        app:layout_constraintBottom_toBottomOf="@+id/title"
-        app:layout_constraintEnd_toEndOf="@+id/title"
-        app:layout_constraintStart_toStartOf="@+id/title"
-        app:layout_constraintTop_toBottomOf="@+id/title" />
-
-    <TextView
-        android:id="@+id/subtitle"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="32dp"
-        android:layout_marginEnd="20dp"
-        android:fontFamily="@font/poppins"
-        android:gravity="center"
-        android:text="Pending"
-        android:textColor="@color/black"
-        android:textSize="18sp"
-        android:visibility="visible"
-        app:layout_constraintEnd_toStartOf="@+id/sub"
-        app:layout_constraintTop_toTopOf="parent" />
-
-    <View
-        android:id="@+id/subLine"
-        android:layout_width="0dp"
-        android:layout_height="1dp"
-        android:background="@color/black"
-        android:visibility="visible"
-        app:layout_constraintBottom_toBottomOf="@+id/subtitle"
-        app:layout_constraintEnd_toEndOf="@+id/subtitle"
-        app:layout_constraintStart_toStartOf="@+id/subtitle" />
-
-    <TextView
-        android:id="@+id/sub"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="32dp"
-        android:layout_marginEnd="50dp"
-        android:fontFamily="@font/poppins"
-        android:gravity="center"
-        android:text="Cancelled"
-        android:textColor="#9D9D9D"
-        android:textSize="18sp"
-        android:visibility="visible"
+        android:background="#E5E5E5"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
 
-    <View
-        android:id="@+id/line"
-        android:layout_width="0dp"
-        android:layout_height="1dp"
-        android:background="@color/black"
-        android:visibility="gone"
-        app:layout_constraintBottom_toBottomOf="@+id/sub"
-        app:layout_constraintEnd_toEndOf="@+id/sub"
-        app:layout_constraintStart_toStartOf="@+id/sub" />
+        <com.google.android.material.tabs.TabItem
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:text="Delivered" />
+
+
+        <com.google.android.material.tabs.TabItem
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:text="Pending" />
+
+        <com.google.android.material.tabs.TabItem
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:text="Cancelled" />
+
+    </com.google.android.material.tabs.TabLayout>
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:id="@+id/emptyLayout"
@@ -119,23 +70,6 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
 
-        <androidx.appcompat.widget.AppCompatButton
-            android:id="@+id/appBackButton"
-            android:layout_width="0dp"
-            android:layout_height="60dp"
-            android:layout_marginStart="40dp"
-            android:layout_marginTop="30dp"
-            android:layout_marginEnd="40dp"
-            android:background="#3360DD"
-            android:text="Back to menu"
-            android:textAllCaps="false"
-            android:textColor="@color/white"
-            android:textSize="16sp"
-            android:visibility="visible"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/textView" />
-
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 
@@ -149,7 +83,7 @@
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/subtitle" />
+        app:layout_constraintTop_toBottomOf="@+id/tabLayout" />
 
     <androidx.cardview.widget.CardView
         android:id="@+id/prg"

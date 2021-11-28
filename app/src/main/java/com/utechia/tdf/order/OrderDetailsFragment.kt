@@ -47,12 +47,11 @@ class OrderDetailsFragment : DialogFragment() {
         super.onViewCreated(view, savedInstanceState)
         prefs = requireActivity().getSharedPreferences("tdf", Context.MODE_PRIVATE)
 
-
         if (arguments !=null){
             cartId = requireArguments().getInt("cartId")
         }
 
-        if (prefs.getBoolean("isTeaBoy",true))
+        if (prefs.getBoolean("isTeaBoy",false))
             orderViewModel.singleOrderTeaBoy(cartId)
         else
         orderViewModel.singleOrder(cartId)

@@ -6,6 +6,7 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.utechia.data.repo.OrderCountRepoImpl
 import com.utechia.domain.model.OrderCountModel
+import com.utechia.domain.usecases.OrderCountUseCaseImpl
 import com.utechia.domain.utile.Result
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.CoroutineExceptionHandler
@@ -16,7 +17,7 @@ import javax.inject.Inject
 @HiltViewModel
 class OrderCountViewModel @Inject constructor(
 
-    private val orderCountRepoImpl: OrderCountRepoImpl
+    private val orderCountUseCaseImpl: OrderCountUseCaseImpl
 
     ):ViewModel() {
 
@@ -36,7 +37,7 @@ class OrderCountViewModel @Inject constructor(
 
             _orderModel.postValue(Result.Loading)
 
-            orderCountRepoImpl.getOrderCount().let {
+            orderCountUseCaseImpl.getOrderCount().let {
 
                 _orderModel.postValue(Result.Success(it))
             }
@@ -47,7 +48,7 @@ class OrderCountViewModel @Inject constructor(
 
         viewModelScope.launch(Dispatchers.IO+handler) {
 
-            orderCountRepoImpl.setStatus(status)
+            orderCountUseCaseImpl.setStatus(status)
         }
     }
 }

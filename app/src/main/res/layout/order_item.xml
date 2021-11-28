@@ -30,8 +30,8 @@
 
     <TextView
         android:id="@+id/status"
-        android:layout_width="69dp"
-        android:layout_height="17dp"
+        android:layout_width="75dp"
+        android:layout_height="20dp"
         android:layout_marginStart="15dp"
         android:layout_marginBottom="20dp"
         android:gravity="center"
@@ -49,12 +49,26 @@
         android:layout_marginBottom="20dp"
         android:visibility="gone"
         android:isIndicator="true"
-        android:numStars="5"
+        android:numStars="0"
         android:progressTint="#FFCB45"
         android:rating="5"
         android:stepSize="0.1"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toStartOf="parent" />
+
+    <TextView
+        android:id="@+id/ratingNum"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="10dp"
+        android:visibility="gone"
+        android:text="5"
+        android:gravity="center"
+        android:textColor="#929292"
+        android:textSize="14sp"
+        app:layout_constraintBottom_toBottomOf="@+id/rating"
+        app:layout_constraintStart_toEndOf="@+id/rating"
+        app:layout_constraintTop_toTopOf="@+id/rating" />
 
 
     <TextView

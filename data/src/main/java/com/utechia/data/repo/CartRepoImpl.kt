@@ -40,10 +40,14 @@ class CartRepoImpl @Inject constructor(
                 result = service.getCart()
             }
 
-            return when (result.code()) {
+            return when (result.isSuccessful) {
 
-                200 -> {
+                true -> {
+
+                    if(result.body()?.data!=null)
                         result.body()?.data?.map { it.toDomain()}!!.toMutableList()
+                    else
+                        emptyList<CartModel>().toMutableList()
                 }
 
                 else ->

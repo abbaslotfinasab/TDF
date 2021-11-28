@@ -11,6 +11,7 @@ import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
+import com.google.android.material.tabs.TabLayout
 import com.utechia.domain.utile.Result
 import com.utechia.tdf.R
 import com.utechia.tdf.databinding.FragmentCreateRefreshmentBinding
@@ -116,28 +117,65 @@ class CreateRefreshmentFragment : Fragment() {
             findNavController().navigate(R.id.action_createRefreshmentFragment_to_orderFragment)
         }
 
+        binding.tabLayout.addOnTabSelectedListener(object : TabLayout.OnTabSelectedListener{
+            override fun onTabSelected(tab: TabLayout.Tab?) {
 
-        binding.title.setOnClickListener {
-            category = "hot_drink"
-            binding.title.setTextColor(Color.BLACK)
-            binding.subtitle.setTextColor(Color.parseColor("#9D9D9D"))
-            binding.subLine.visibility = View.GONE
-            binding.titleLine.visibility = View.VISIBLE
-            refreshmentViewModel.getRefreshment(category)
-            observer()
-        }
+                when(tab?.position){
 
-        binding.subtitle.setOnClickListener {
-            category = "cold_drink"
-            binding.subtitle.setTextColor(Color.BLACK)
-            binding.title.setTextColor(Color.parseColor("#9D9D9D"))
-            binding.subLine.visibility = View.VISIBLE
-            binding.titleLine.visibility = View.GONE
-            refreshmentViewModel.getRefreshment(category)
-            observer()
+                    0 -> {
+                        category = "hot_drink"
+                        refreshmentViewModel.getRefreshment(category)
+                        observer()
+                    }
+                    1 -> {
+                        category = "cold_drink"
+                        refreshmentViewModel.getRefreshment(category)
+                        observer()
+                    }
 
+                }
 
-        }
+            }
+
+            override fun onTabUnselected(tab: TabLayout.Tab?) {
+
+                /* when(tab?.position){
+
+                     0 -> {
+                         orderViewModel.getOrderTeaBoy("delivered")
+                         observer()
+                     }
+                     1 -> {
+                         orderViewModel.getOrderTeaBoy("pending")
+                         observer()
+                     }
+                     2 -> {
+                         orderViewModel.getOrderTeaBoy("cancelled")
+                         observer()
+                     }
+                 }*/
+            }
+
+            override fun onTabReselected(tab: TabLayout.Tab?) {
+
+                /*  when(tab?.position){
+
+                      0 -> {
+                          orderViewModel.getOrderTeaBoy("delivered")
+                          observer()
+                      }
+                      1 -> {
+                          orderViewModel.getOrderTeaBoy("pending")
+                          observer()
+                      }
+                      2 -> {
+                          orderViewModel.getOrderTeaBoy("cancelled")
+                          observer()
+                      }
+                  }*/
+            }
+
+        })
 
         binding.recyclerView.apply {
             adapter = refreshmentAdapter
@@ -160,8 +198,7 @@ class CreateRefreshmentFragment : Fragment() {
                 unselect()
                 binding.food.setBackgroundColor(Color.parseColor("#335DE0"))
                 binding.foodText.setTextColor(Color.WHITE)
-                binding.title.visibility = View.GONE
-                binding.subtitle.visibility = View.GONE
+                binding.tabLayout.visibility = View.GONE
 
             }
 
@@ -169,23 +206,23 @@ class CreateRefreshmentFragment : Fragment() {
                 unselect()
                 binding.drink.setBackgroundColor(Color.parseColor("#335DE0"))
                 binding.drinkText.setTextColor(Color.WHITE)
-                binding.title.visibility = View.VISIBLE
-                binding.subtitle.visibility = View.VISIBLE            }
+                binding.tabLayout.visibility = View.VISIBLE
+            }
 
             "Orders" -> {
                 unselect()
                 binding.order.setBackgroundColor(Color.parseColor("#335DE0"))
                 binding.orderText.setTextColor(Color.WHITE)
-                binding.title.visibility = View.GONE
-                binding.subtitle.visibility = View.GONE
+                binding.tabLayout.visibility = View.GONE
+
             }
 
             "Favorites" -> {
                 unselect()
                 binding.favorite.setBackgroundColor(Color.parseColor("#335DE0"))
                 binding.favoriteText.setTextColor(Color.WHITE)
-                binding.title.visibility = View.GONE
-                binding.subtitle.visibility = View.GONE
+                binding.tabLayout.visibility = View.GONE
+
             }
         }
     }

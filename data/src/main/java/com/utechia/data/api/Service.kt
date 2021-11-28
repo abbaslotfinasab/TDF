@@ -71,8 +71,8 @@ interface Service {
     @POST("survey/avgteaboy")
     suspend fun getStar():Response<Star>
 
-    @PATCH("cafeteria/cart")
-    suspend fun updateStatus(@Query ("status ") status: Boolean)
+    @PATCH("teaboy/status")
+    suspend fun updateStatus(@Query("status") status: Boolean)
 
     @GET("teaboy/order-count")
     suspend fun getOrderCount():Response<OrderCount>

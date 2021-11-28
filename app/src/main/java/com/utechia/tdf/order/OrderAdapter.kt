@@ -44,6 +44,7 @@ class OrderAdapter: RecyclerView.Adapter<RecyclerView.ViewHolder>() {
         private val details: TextView = itemView.findViewById(R.id.btnDetails)
         private val cancel: TextView = itemView.findViewById(R.id.btnCancel)
         private val rating: RatingBar = itemView.findViewById(R.id.rating)
+        private val rateNumber: TextView = itemView.findViewById(R.id.ratingNum)
 
         fun bind0(position: Int) {
 
@@ -70,16 +71,19 @@ class OrderAdapter: RecyclerView.Adapter<RecyclerView.ViewHolder>() {
                     }
                     cancel.visibility = View.VISIBLE
                     rating.visibility = View.GONE
+                    rateNumber.visibility = View.GONE
+
 
                 }
                 "preparing" ->{
                     status.apply {
                         visibility = View.VISIBLE
                         text = "preparing"
-                        setBackgroundColor(ContextCompat.getColor(itemView.context, R.color.waiting))
+                        setBackgroundColor(ContextCompat.getColor(itemView.context, R.color.prepare))
                     }
-                    cancel.visibility = View.VISIBLE
+                    cancel.visibility = View.GONE
                     rating.visibility = View.GONE
+                    rateNumber.visibility = View.GONE
 
 
                 }
@@ -87,6 +91,8 @@ class OrderAdapter: RecyclerView.Adapter<RecyclerView.ViewHolder>() {
                     cancel.visibility = View.GONE
                     rating.visibility = View.GONE
                     status.visibility = View.GONE
+                    rateNumber.visibility = View.GONE
+
 
 
                 }
@@ -100,9 +106,11 @@ class OrderAdapter: RecyclerView.Adapter<RecyclerView.ViewHolder>() {
                 }
 
                 "delivered" ->{
-                    status.visibility = View.GONE
-                    cancel.visibility = View.GONE
+                    status.visibility = View.INVISIBLE
+                    cancel.visibility = View.INVISIBLE
                     rating.visibility = View.VISIBLE
+                    rateNumber.visibility = View.VISIBLE
+
 
 
                 }

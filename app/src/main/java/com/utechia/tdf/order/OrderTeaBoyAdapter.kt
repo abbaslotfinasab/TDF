@@ -12,7 +12,7 @@ import androidx.recyclerview.widget.RecyclerView
 import com.utechia.domain.model.OrderDataModel
 import com.utechia.tdf.R
 
-class OrderTeaBoyAdapter: RecyclerView.Adapter<RecyclerView.ViewHolder>() {
+class OrderTeaBoyAdapter(private val teaBoyOrdersFragment: TeaBoyOrdersFragment): RecyclerView.Adapter<RecyclerView.ViewHolder>() {
 
     var orders: MutableList<OrderDataModel> = mutableListOf()
 
@@ -68,7 +68,7 @@ class OrderTeaBoyAdapter: RecyclerView.Adapter<RecyclerView.ViewHolder>() {
                 "waiting" -> {
                     reject.visibility = View.VISIBLE
                     accept.visibility = View.VISIBLE
-                    confirm.visibility = View.VISIBLE
+                    confirm.visibility = View.INVISIBLE
 
                 }
                 "preparing" ->{
@@ -81,21 +81,21 @@ class OrderTeaBoyAdapter: RecyclerView.Adapter<RecyclerView.ViewHolder>() {
 
                     reject.visibility = View.GONE
                     accept.visibility = View.GONE
-                    confirm.visibility = View.INVISIBLE
+                    confirm.visibility = View.GONE
 
                 }
 
                 "cancelled_by_teaboy" ->{
                     reject.visibility = View.GONE
                     accept.visibility = View.GONE
-                    confirm.visibility = View.INVISIBLE
+                    confirm.visibility = View.GONE
 
                 }
 
                 "delivered" ->{
                     reject.visibility = View.GONE
                     accept.visibility = View.GONE
-                    confirm.visibility = View.INVISIBLE
+                    confirm.visibility = View.GONE
 
                 }
 
@@ -109,6 +109,11 @@ class OrderTeaBoyAdapter: RecyclerView.Adapter<RecyclerView.ViewHolder>() {
             accept.setOnClickListener {
                 val bundle = bundleOf("orderId" to orders[position].id)
                 itemView.findNavController().navigate(R.id.action_teaBoyOrdersFragment_to_acceptFragment,bundle)
+            }
+
+            confirm.setOnClickListener {
+                teaBoyOrdersFragment.orderViewModel.deliverOrder(orders[position].id!!)
+                itemView.findNavController().navigate(R.id.action_teaBoyOrdersFragment_self)
             }
 
             details.setOnClickListener {
