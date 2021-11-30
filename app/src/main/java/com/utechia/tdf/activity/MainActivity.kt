@@ -1,5 +1,5 @@
 package com.utechia.tdf.activity
-import android.content.Context
+
 import android.content.SharedPreferences
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
@@ -12,6 +12,10 @@ import androidx.drawerlayout.widget.DrawerLayout
 import androidx.navigation.NavController
 import androidx.navigation.fragment.NavHostFragment
 import androidx.navigation.ui.setupWithNavController
+import com.google.android.gms.tasks.OnCompleteListener
+import com.google.android.gms.tasks.Task
+import com.google.firebase.installations.FirebaseInstallations
+import com.google.firebase.installations.InstallationTokenResult
 import com.utechia.tdf.R
 import com.utechia.tdf.databinding.ActivityMainBinding
 import dagger.hilt.android.AndroidEntryPoint
@@ -28,7 +32,23 @@ class MainActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
-        prefs = getSharedPreferences("tdf", Context.MODE_PRIVATE)
+        prefs = getSharedPreferences("tdf", MODE_PRIVATE)
+
+
+        FirebaseInstallations.getInstance().getToken(false).addOnCompleteListener(object :OnCompleteListener<InstallationTokenResult>{
+            override fun onComplete(task: Task<InstallationTokenResult>) {
+
+                if (!task.isSuccessful)
+                    return
+                else {
+                    with(prefs.edit()) {
+                        putString("fcm", task.result.token)
+                    }.apply()
+                }
+            }
+
+        })
+
 
         navHostFragment = supportFragmentManager.findFragmentById(R.id.nav_host_fragment) as NavHostFragment
         navController = navHostFragment.navController
@@ -43,6 +63,7 @@ class MainActivity : AppCompatActivity() {
             }
             teaBoy() -> {
                 graph.setStartDestination(R.id.teaBoyHomeFragment)
+
                 val name = prefs.getString("name","").toString()
                 val floor = prefs.getString("floor","").toString()
                 setupTeaBoy(name,floor)

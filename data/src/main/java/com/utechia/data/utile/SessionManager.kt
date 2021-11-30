@@ -40,4 +40,8 @@ class SessionManager @Inject constructor(@ApplicationContext private val context
         return prefs.getString(USER_ID, null)
     }
 
+    fun fetchFireBaeToken(): String? {
+        return prefs.getString("fcm", null)
+    }
+
 }

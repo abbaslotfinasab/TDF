@@ -1,11 +1,17 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.core.widget.NestedScrollView
+    xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:fillViewport="true"
     android:background="#E5E5E5"
     tools:context=".home.TeaBoyHomeFragment">
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
 
     <TextView
         android:id="@+id/textView7"
@@ -27,18 +33,6 @@
         android:layout_marginTop="32dp"
         android:layout_marginEnd="41dp"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
-
-    <TextView
-        android:id="@+id/textView6"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="32dp"
-        android:layout_marginEnd="14dp"
-        android:text="active"
-        android:textColor="#929292"
-        android:textSize="18sp"
-        app:layout_constraintEnd_toStartOf="@+id/switchCompat"
         app:layout_constraintTop_toTopOf="parent" />
 
     <TextView
@@ -84,7 +78,8 @@
         android:id="@+id/ratingNum"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="10dp"
+        android:layout_marginStart="5dp"
+        android:layout_marginTop="3dp"
         android:gravity="center"
         android:text="(5)"
         android:textColor="#929292"
@@ -106,50 +101,13 @@
         app:layout_constraintTop_toBottomOf="@+id/rating" />
 
     <androidx.constraintlayout.widget.ConstraintLayout
-        android:id="@+id/constraintLayout5"
-        android:layout_width="115dp"
+        android:id="@+id/constraintLayout4"
+        android:layout_width="105dp"
         android:layout_height="100dp"
-        android:layout_marginStart="42dp"
+        android:layout_marginStart="41dp"
         android:layout_marginTop="18dp"
         android:background="@color/white"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textView11">
-
-        <TextView
-            android:id="@+id/textView18"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="13dp"
-            android:layout_marginTop="13dp"
-            android:text="Cancelled \n Orders"
-            android:textColor="#61598B"
-            android:textSize="12sp"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
-
-        <TextView
-            android:id="@+id/cancelled"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="13dp"
-            android:layout_marginBottom="10dp"
-            android:textColor="#403572"
-            android:textSize="24sp"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/textView18" />
-
-    </androidx.constraintlayout.widget.ConstraintLayout>
-
-    <androidx.constraintlayout.widget.ConstraintLayout
-        android:id="@+id/constraintLayout7"
-        android:layout_width="105dp"
-        android:layout_height="95dp"
-        android:layout_marginStart="12dp"
-        android:layout_marginTop="18dp"
-        android:background="@color/white"
-        app:layout_constraintEnd_toStartOf="@+id/constraintLayout6"
-        app:layout_constraintStart_toEndOf="@+id/constraintLayout5"
         app:layout_constraintTop_toBottomOf="@+id/textView11">
 
         <TextView
@@ -179,13 +137,13 @@
     </androidx.constraintlayout.widget.ConstraintLayout>
 
     <androidx.constraintlayout.widget.ConstraintLayout
-        android:id="@+id/constraintLayout6"
+        android:id="@+id/constraintLayout5"
         android:layout_width="105dp"
-        android:layout_height="95dp"
+        android:layout_height="100dp"
         android:layout_marginStart="12dp"
         android:layout_marginTop="18dp"
         android:background="@color/white"
-        app:layout_constraintStart_toEndOf="@+id/constraintLayout7"
+        app:layout_constraintStart_toEndOf="@id/constraintLayout4"
         app:layout_constraintTop_toBottomOf="@+id/textView11">
 
         <TextView
@@ -209,10 +167,47 @@
             android:textColor="#479696"
             android:textSize="24sp"
             app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintStart_toStartOf="@id/constraintLayout5"
             app:layout_constraintTop_toBottomOf="@+id/textView20" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/constraintLayout6"
+        android:layout_width="115dp"
+        android:layout_height="100dp"
+        android:layout_marginStart="12dp"
+        android:layout_marginTop="18dp"
+        android:background="@color/white"
+        app:layout_constraintStart_toEndOf="@id/constraintLayout5"
+        app:layout_constraintTop_toBottomOf="@+id/textView11">
+
+        <TextView
+            android:id="@+id/textView18"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="13dp"
+            android:layout_marginTop="13dp"
+            android:text="Cancelled \n Orders"
+            android:textColor="#61598B"
+            android:textSize="12sp"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <TextView
+            android:id="@+id/cancelled"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="13dp"
+            android:layout_marginBottom="10dp"
+            android:textColor="#403572"
+            android:textSize="24sp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/textView18" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
 
     <androidx.cardview.widget.CardView
         android:id="@+id/prg"
@@ -245,5 +240,6 @@
 
     </androidx.cardview.widget.CardView>
 
+    </androidx.constraintlayout.widget.ConstraintLayout>
 
-</androidx.constraintlayout.widget.ConstraintLayout>
+</androidx.core.widget.NestedScrollView>

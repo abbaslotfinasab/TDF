@@ -1,7 +1,7 @@
 package com.utechia.data.repo
 
-import android.util.Log
 import com.utechia.data.api.Service
+import com.utechia.data.entity.NotificationToken
 import com.utechia.data.utile.NetworkHelper
 import com.utechia.data.utile.SessionManager
 import com.utechia.domain.model.VerifyModel
@@ -31,6 +31,8 @@ class VerifyRepoImpl @Inject constructor(
 
                     sessionManager.saveAuthToken(result.body()!!.data!!)
 
+                    service.notification(NotificationToken(sessionManager.fetchFireBaeToken()!!))
+
                     return result.body()!!.data!!.toDomain()
                 }
 
@@ -43,6 +45,7 @@ class VerifyRepoImpl @Inject constructor(
                 }
             }
         }
+
         else
             throw IOException("No Internet Connection")
     }

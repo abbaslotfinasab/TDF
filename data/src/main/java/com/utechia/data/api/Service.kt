@@ -95,5 +95,9 @@ interface Service {
     @PATCH("teaboy/delivered-order")
     suspend fun deliverOrder(@Body favoriteBody: FavoriteBody ):Response<CancelOrder>
 
+    @Headers("Content-Type: application/json")
+    @PATCH("user/firebase")
+    suspend fun notification(@Body token: NotificationToken)
+
 
 }

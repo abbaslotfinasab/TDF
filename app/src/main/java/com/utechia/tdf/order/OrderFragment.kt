@@ -31,7 +31,7 @@ class OrderFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        orderViewModel.getOrder("delivered")
+        orderViewModel.getOrder("pending")
 
         binding.tabLayout.addOnTabSelectedListener(object : TabLayout.OnTabSelectedListener{
             override fun onTabSelected(tab: TabLayout.Tab?) {
@@ -39,11 +39,12 @@ class OrderFragment : Fragment() {
                 when(tab?.position){
 
                     0 -> {
-                        orderViewModel.getOrder("delivered")
+                        orderViewModel.getOrder("pending")
                         observer()
+
                     }
                     1 -> {
-                        orderViewModel.getOrder("pending")
+                        orderViewModel.getOrder("delivered")
                         observer()
                     }
                     2 -> {
@@ -58,18 +59,19 @@ class OrderFragment : Fragment() {
 
                 /* when(tab?.position){
 
-                     0 -> {
-                         orderViewModel.getOrderTeaBoy("delivered")
-                         observer()
-                     }
-                     1 -> {
-                         orderViewModel.getOrderTeaBoy("pending")
-                         observer()
-                     }
-                     2 -> {
-                         orderViewModel.getOrderTeaBoy("cancelled")
-                         observer()
-                     }
+                    0 -> {
+                        orderViewModel.getOrder("pending")
+                        observer()
+
+                    }
+                    1 -> {
+                        orderViewModel.getOrder("delivered")
+                        observer()
+                    }
+                    2 -> {
+                        orderViewModel.getOrder("cancelled")
+                        observer()
+                    }
                  }*/
             }
 
@@ -77,18 +79,19 @@ class OrderFragment : Fragment() {
 
                 /*  when(tab?.position){
 
-                      0 -> {
-                          orderViewModel.getOrderTeaBoy("delivered")
-                          observer()
-                      }
-                      1 -> {
-                          orderViewModel.getOrderTeaBoy("pending")
-                          observer()
-                      }
-                      2 -> {
-                          orderViewModel.getOrderTeaBoy("cancelled")
-                          observer()
-                      }
+                     0 -> {
+                        orderViewModel.getOrder("pending")
+                        observer()
+
+                    }
+                    1 -> {
+                        orderViewModel.getOrder("delivered")
+                        observer()
+                    }
+                    2 -> {
+                        orderViewModel.getOrder("cancelled")
+                        observer()
+                    }
                   }*/
             }
 

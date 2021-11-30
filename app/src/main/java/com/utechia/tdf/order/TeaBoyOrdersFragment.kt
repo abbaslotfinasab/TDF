@@ -30,7 +30,7 @@ class TeaBoyOrdersFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        orderViewModel.getOrderTeaBoy("delivered")
+        orderViewModel.getOrderTeaBoy("pending")
 
         binding.tabLayout.addOnTabSelectedListener(object :TabLayout.OnTabSelectedListener{
             override fun onTabSelected(tab: TabLayout.Tab?) {
@@ -38,11 +38,11 @@ class TeaBoyOrdersFragment : Fragment() {
                 when(tab?.position){
 
                     0 -> {
-                        orderViewModel.getOrderTeaBoy("delivered")
+                        orderViewModel.getOrderTeaBoy("pending")
                         observer()
                     }
                     1 -> {
-                        orderViewModel.getOrderTeaBoy("pending")
+                        orderViewModel.getOrderTeaBoy("delivered")
                         observer()
                     }
                     2 -> {
@@ -58,12 +58,11 @@ class TeaBoyOrdersFragment : Fragment() {
 
                /* when(tab?.position){
 
-                    0 -> {
-                        orderViewModel.getOrderTeaBoy("delivered")
+                        orderViewModel.getOrderTeaBoy("pending")
                         observer()
                     }
                     1 -> {
-                        orderViewModel.getOrderTeaBoy("pending")
+                        orderViewModel.getOrderTeaBoy("delivered")
                         observer()
                     }
                     2 -> {
@@ -78,11 +77,11 @@ class TeaBoyOrdersFragment : Fragment() {
               /*  when(tab?.position){
 
                     0 -> {
-                        orderViewModel.getOrderTeaBoy("delivered")
+                        orderViewModel.getOrderTeaBoy("pending")
                         observer()
                     }
                     1 -> {
-                        orderViewModel.getOrderTeaBoy("pending")
+                        orderViewModel.getOrderTeaBoy("delivered")
                         observer()
                     }
                     2 -> {

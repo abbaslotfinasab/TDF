@@ -409,4 +409,16 @@
             app:destination="@id/teaBoyHomeFragment" />
     </dialog>
 
+    <dialog
+        android:id="@+id/teaBoyNotificationFragment"
+        android:name="com.utechia.tdf.order.TeaBoyNotificationFragment"
+        android:label="fragment_notification_teaboy"
+        tools:layout="@layout/fragment_notification_teaboy" >
+
+    <action
+        android:id="@+id/action_teaBoyNotificationFragment_to_teaBoyOrdersFragment"
+        app:destination="@id/teaBoyOrdersFragment" />
+
+    </dialog>
+
 </navigation>
