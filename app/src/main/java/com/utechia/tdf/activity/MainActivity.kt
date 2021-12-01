@@ -200,6 +200,11 @@ class MainActivity : AppCompatActivity() {
                         design("error")
                     }
 
+                    R.id.permissionFragment -> {
+                        design("permission")
+
+                    }
+
                     else -> {
                         design("drawer")
                     }
@@ -331,6 +336,11 @@ class MainActivity : AppCompatActivity() {
                     design("error")
                 }
 
+                R.id.permissionFragment -> {
+                    design("permission")
+
+                }
+
                 else -> {
                     design("drawer")
                 }
@@ -353,6 +363,8 @@ class MainActivity : AppCompatActivity() {
 
                     }, 50)
 
+                    binding.drawerLayout.closeDrawer(GravityCompat.END)
+
                     true
                 }
                 R.id.eventSystemFragment -> {
@@ -363,6 +375,8 @@ class MainActivity : AppCompatActivity() {
                         navController.navigate(R.id.eventSystemFragment)
 
                     }, 50)
+
+                    binding.drawerLayout.closeDrawer(GravityCompat.END)
 
                     true
                 }
@@ -375,6 +389,7 @@ class MainActivity : AppCompatActivity() {
 
                     }, 50)
 
+                    binding.drawerLayout.closeDrawer(GravityCompat.END)
 
                     true
                 }
@@ -388,6 +403,7 @@ class MainActivity : AppCompatActivity() {
 
                     }, 50)
 
+                    binding.drawerLayout.closeDrawer(GravityCompat.END)
 
                     true
                 }
@@ -400,6 +416,8 @@ class MainActivity : AppCompatActivity() {
                         navController.navigate(R.id.permissionFragment)
 
                     }, 50)
+
+                    binding.drawerLayout.closeDrawer(GravityCompat.END)
 
                     true
                 }
@@ -542,6 +560,17 @@ class MainActivity : AppCompatActivity() {
                 binding.customButton.visibility = View.VISIBLE
                 binding.bottomNavigation.visibility = View.VISIBLE
                 binding.drawerLayout.setDrawerLockMode(DrawerLayout.LOCK_MODE_UNLOCKED)
+
+            }
+
+            "permission" ->{
+                window.statusBarColor = ContextCompat.getColor(this, R.color.status)
+                binding.customToolbar.visibility = View.VISIBLE
+                binding.toolbar.visibility = View.INVISIBLE
+                binding.customButton.visibility = View.GONE
+                binding.customTitle.text = "Leave Requests"
+                binding.bottomNavigation.visibility = View.GONE
+                binding.drawerLayout.setDrawerLockMode(DrawerLayout.LOCK_MODE_LOCKED_CLOSED)
 
             }
 

@@ -1,4 +1,4 @@
-package com.utechia.tdf.more
+package com.utechia.tdf.permission
 
 import android.os.Bundle
 import android.view.LayoutInflater

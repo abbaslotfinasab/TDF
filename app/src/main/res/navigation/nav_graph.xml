@@ -142,7 +142,7 @@
         tools:layout="@layout/fragment_create_ticket" />
     <fragment
         android:id="@+id/permissionFragment"
-        android:name="com.utechia.tdf.more.PermissionFragment"
+        android:name="com.utechia.tdf.permission.PermissionFragment"
         android:label="fragment_permission"
         tools:layout="@layout/fragment_permission" />
     <dialog
@@ -420,5 +420,30 @@
         app:destination="@id/teaBoyOrdersFragment" />
 
     </dialog>
+    <fragment
+        android:id="@+id/cancelRequestFragment"
+        android:name="com.utechia.tdf.permission.CancelRequestFragment"
+        android:label="fragment_cancel_request"
+        tools:layout="@layout/fragment_cancel_request" />
+    <fragment
+        android:id="@+id/requestDetailsFragment"
+        android:name="com.utechia.tdf.permission.RequestDetailsFragment"
+        android:label="fragment_request_details"
+        tools:layout="@layout/fragment_request_details" />
+    <fragment
+        android:id="@+id/createRequestFragment"
+        android:name="com.utechia.tdf.permission.CreateRequestFragment"
+        android:label="fragment_create_request"
+        tools:layout="@layout/fragment_create_request" />
+    <fragment
+        android:id="@+id/calendarRequestFragment"
+        android:name="com.utechia.tdf.permission.CalendarRequestFragment"
+        android:label="fragment_calendar_request"
+        tools:layout="@layout/fragment_calendar_request" />
+    <fragment
+        android:id="@+id/confirmRequestFragment"
+        android:name="com.utechia.tdf.permission.ConfirmRequestFragment"
+        android:label="fragment_confirm_request"
+        tools:layout="@layout/fragment_confirm_request" />
 
 </navigation>
