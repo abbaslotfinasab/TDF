@@ -20,7 +20,6 @@ const val channel_Name = "com.utechia.tdf"
 
 class MyFirebaseMessagingService : FirebaseMessagingService() {
 
-
     override fun onMessageReceived(remoteMessage: RemoteMessage) {
         super.onMessageReceived(remoteMessage)
         generateNotification(remoteMessage.data["cartId"])
