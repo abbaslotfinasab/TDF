@@ -33,6 +33,7 @@ class TeaBoyHomeFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+        findNavController().clearBackStack(R.id.loginFragment)
         prefs = requireActivity().getSharedPreferences("tdf", Context.MODE_PRIVATE)
         orderViewModel.getOrder()
 

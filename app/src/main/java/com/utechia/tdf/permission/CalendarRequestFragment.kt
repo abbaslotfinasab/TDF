@@ -11,53 +11,29 @@ import androidx.fragment.app.DialogFragment
 import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
 import com.utechia.tdf.R
+import com.utechia.tdf.databinding.FragmentCalendarRequestBinding
 import com.utechia.tdf.databinding.FragmentCancelBinding
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
 class CalendarRequestFragment : DialogFragment() {
 
-    private lateinit var binding: FragmentCancelBinding
-    private var orderId = 0
+    private lateinit var binding: FragmentCalendarRequestBinding
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
-        binding = FragmentCancelBinding.inflate(inflater, container, false)
-
-        if(dialog !=null && dialog?.window !=null){
-            dialog?.window?.setBackgroundDrawable(ColorDrawable(Color.TRANSPARENT))
-            dialog?.window?.requestFeature(Window.FEATURE_NO_TITLE)
-            dialog?.setCancelable(false)
-
-        }
+        binding = FragmentCalendarRequestBinding.inflate(inflater, container, false)
         return binding.root
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        if (arguments !=null){
-            orderId = requireArguments().getInt("orderId")
-
-        }
-
-        binding.btnKeep.setOnClickListener {
-            dialog?.dismiss()
-        }
-
-        binding.exit.setOnClickListener {
-            dialog?.dismiss()
-        }
-
         binding.btnCancel.setOnClickListener {
-            findNavController().clearBackStack(R.id.orderFragment)
-            findNavController().navigate(R.id.action_cancelFragment_to_orderFragment)
-            dialog?.dismiss()
+            findNavController().navigate(R.id.calendarRequestFragment_to_createRequestFragment)
         }
-
-
 
     }
 

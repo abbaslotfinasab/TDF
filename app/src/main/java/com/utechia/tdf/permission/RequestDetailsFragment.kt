@@ -8,23 +8,20 @@ import android.view.View
 import android.view.ViewGroup
 import android.view.Window
 import androidx.fragment.app.DialogFragment
-import androidx.fragment.app.viewModels
-import androidx.navigation.fragment.findNavController
-import com.utechia.tdf.R
-import com.utechia.tdf.databinding.FragmentCancelBinding
+import com.utechia.tdf.databinding.FragmentRequestDetailsBinding
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
 class RequestDetailsFragment : DialogFragment() {
 
-    private lateinit var binding: FragmentCancelBinding
-    private var orderId = 0
+    private lateinit var binding: FragmentRequestDetailsBinding
+    private var permissionId = 0
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
-        binding = FragmentCancelBinding.inflate(inflater, container, false)
+        binding = FragmentRequestDetailsBinding.inflate(inflater, container, false)
 
         if(dialog !=null && dialog?.window !=null){
             dialog?.window?.setBackgroundDrawable(ColorDrawable(Color.TRANSPARENT))
@@ -39,12 +36,8 @@ class RequestDetailsFragment : DialogFragment() {
         super.onViewCreated(view, savedInstanceState)
 
         if (arguments !=null){
-            orderId = requireArguments().getInt("orderId")
+            permissionId = requireArguments().getInt("permissionId")
 
-        }
-
-        binding.btnKeep.setOnClickListener {
-            dialog?.dismiss()
         }
 
         binding.exit.setOnClickListener {
@@ -52,8 +45,6 @@ class RequestDetailsFragment : DialogFragment() {
         }
 
         binding.btnCancel.setOnClickListener {
-            findNavController().clearBackStack(R.id.orderFragment)
-            findNavController().navigate(R.id.action_cancelFragment_to_orderFragment)
             dialog?.dismiss()
         }
 

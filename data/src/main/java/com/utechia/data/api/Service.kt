@@ -99,5 +99,18 @@ interface Service {
     @PATCH("user/firebase")
     suspend fun notification(@Body token: NotificationToken)
 
+    @GET("accessmanagement/permissions")
+    suspend fun getPermission(@Query("status") status:String):Response<Permission>
+
+    @GET("accessmanagement/permissions")
+    suspend fun getSinglePermission(@Query("id") id:Int):Response<Permission>
+
+    @Headers("Content-Type: application/json")
+    @POST("accessmanagement/permissions")
+    suspend fun postPermission(@Body permissionPostBody: PermissionPostBody):Response<Permission>
+
+    @Headers("Content-Type: application/json")
+    @PATCH("accessmanagement/permissions/updatestatus")
+    suspend fun updatePermission(@Body permissionUpdateBody: PermissionUpdateBody):Response<Permission>
 
 }

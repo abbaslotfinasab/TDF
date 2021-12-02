@@ -57,4 +57,9 @@ abstract class RepositoryModule {
         orderRepoImpl: OrderCountRepoImpl
     ): OrderCountRepo
 
+    @Binds
+    abstract fun bindPermissionRepositoryService(
+        permissionRepoImpl: PermissionRepoImpl
+    ): PermissionRepo
+
 }

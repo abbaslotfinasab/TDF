@@ -26,6 +26,8 @@ class UserHomeFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+        findNavController().clearBackStack(R.id.loginFragment)
+
 
 
 

@@ -12,19 +12,21 @@ import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
 import com.utechia.tdf.R
 import com.utechia.tdf.databinding.FragmentCancelBinding
+import com.utechia.tdf.databinding.FragmentCancelRequestBinding
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
 class CancelRequestFragment : DialogFragment() {
 
-    private lateinit var binding: FragmentCancelBinding
-    private var orderId = 0
+    private lateinit var binding: FragmentCancelRequestBinding
+    private val permissionViewModel:PermissionViewModel by viewModels()
+    private var permissionId = 0
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
-        binding = FragmentCancelBinding.inflate(inflater, container, false)
+        binding = FragmentCancelRequestBinding.inflate(inflater, container, false)
 
         if(dialog !=null && dialog?.window !=null){
             dialog?.window?.setBackgroundDrawable(ColorDrawable(Color.TRANSPARENT))
@@ -39,7 +41,7 @@ class CancelRequestFragment : DialogFragment() {
         super.onViewCreated(view, savedInstanceState)
 
         if (arguments !=null){
-            orderId = requireArguments().getInt("orderId")
+            permissionId = requireArguments().getInt("permissionId")
 
         }
 
@@ -52,8 +54,9 @@ class CancelRequestFragment : DialogFragment() {
         }
 
         binding.btnCancel.setOnClickListener {
-            findNavController().clearBackStack(R.id.orderFragment)
-            findNavController().navigate(R.id.action_cancelFragment_to_orderFragment)
+            permissionViewModel.updatePermission(permissionId,"cancelled")
+            findNavController().clearBackStack(R.id.permissionFragment)
+            findNavController().navigate(R.id.cancelRequestFragment_to_permissionFragment)
             dialog?.dismiss()
         }
 
