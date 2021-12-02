@@ -110,7 +110,7 @@ interface Service {
     suspend fun postPermission(@Body permissionPostBody: PermissionPostBody):Response<Permission>
 
     @Headers("Content-Type: application/json")
-    @PATCH("accessmanagement/permissions/updatestatus")
+    @PATCH("accessmanagement/permissions")
     suspend fun updatePermission(@Body permissionUpdateBody: PermissionUpdateBody):Response<Permission>
 
 }

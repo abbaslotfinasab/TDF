@@ -93,7 +93,7 @@ class MainActivity : AppCompatActivity() {
 
         binding.backArrow.setOnClickListener{
 
-            navController.popBackStack()
+            navController.navigateUp()
 
         }
 
@@ -106,7 +106,7 @@ class MainActivity : AppCompatActivity() {
         binding.exit.setOnClickListener {
 
             prefs.edit().clear().apply()
-            navController.navigateUp()
+            navController.popBackStack(R.id.nav_graph,true)
             navController.navigate(R.id.loginFragment)
 
         }
@@ -223,7 +223,6 @@ class MainActivity : AppCompatActivity() {
 
                         Handler(Looper.getMainLooper()).postDelayed({
 
-                            navController.navigateUp()
                             navController.navigate(R.id.surveySystemFragment)
 
                         }, 50)
@@ -236,7 +235,6 @@ class MainActivity : AppCompatActivity() {
 
                         Handler(Looper.getMainLooper()).postDelayed({
 
-                            navController.navigateUp()
                             navController.navigate(R.id.eventSystemFragment)
 
                         }, 50)
@@ -249,7 +247,6 @@ class MainActivity : AppCompatActivity() {
 
                         Handler(Looper.getMainLooper()).postDelayed({
 
-                            navController.navigateUp()
                             navController.navigate(R.id.ticketSystemFragment)
 
                         }, 50)
@@ -263,7 +260,6 @@ class MainActivity : AppCompatActivity() {
 
                         Handler(Looper.getMainLooper()).postDelayed({
 
-                            navController.navigateUp()
                             navController.navigate(R.id.calendarFragment)
 
                         }, 100)
@@ -277,13 +273,11 @@ class MainActivity : AppCompatActivity() {
 
                         Handler(Looper.getMainLooper()).postDelayed({
 
-                            navController.navigateUp()
                             navController.navigate(R.id.permissionFragment)
 
                         }, 50)
 
                         binding.drawerLayout.closeDrawer(GravityCompat.END)
-
 
                         true
                     }
@@ -358,7 +352,6 @@ class MainActivity : AppCompatActivity() {
 
                     Handler(Looper.getMainLooper()).postDelayed({
 
-                        navController.navigateUp()
                         navController.navigate(R.id.surveySystemFragment)
 
                     }, 50)
@@ -384,7 +377,6 @@ class MainActivity : AppCompatActivity() {
 
                     Handler(Looper.getMainLooper()).postDelayed({
 
-                        navController.navigateUp()
                         navController.navigate(R.id.ticketSystemFragment)
 
                     }, 50)
@@ -398,7 +390,6 @@ class MainActivity : AppCompatActivity() {
 
                     Handler(Looper.getMainLooper()).postDelayed({
 
-                        navController.navigateUp()
                         navController.navigate(R.id.calendarFragment)
 
                     }, 50)
@@ -412,7 +403,6 @@ class MainActivity : AppCompatActivity() {
 
                     Handler(Looper.getMainLooper()).postDelayed({
 
-                        navController.navigateUp()
                         navController.navigate(R.id.permissionFragment)
 
                     }, 50)

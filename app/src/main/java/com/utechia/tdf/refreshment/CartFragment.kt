@@ -44,7 +44,7 @@ class CartFragment : Fragment() {
 
         binding.appCompatButton.setOnClickListener {
             cartViewModel.acceptCart()
-            findNavController().navigate(R.id.action_cartFragment_to_orderFragment)
+            findNavController().navigate(R.id.action_cartFragment_to_orderFragment,null)
         }
 
         binding.recyclerView.apply {

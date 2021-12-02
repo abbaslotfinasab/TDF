@@ -187,6 +187,8 @@
         <action
             android:id="@+id/action_cartFragment_to_orderFragment"
             app:launchSingleTop="true"
+            app:popUpTo="@id/createRefreshmentFragment"
+            app:popUpToInclusive="true"
             app:destination="@id/orderFragment" />
     </fragment>
     <fragment
@@ -498,6 +500,7 @@
 
         <action
             android:id="@+id/confirmRequestFragment_to_permissionFragment"
+            app:popUpToInclusive="true"
             app:destination="@id/permissionFragment" />
 
     </dialog>

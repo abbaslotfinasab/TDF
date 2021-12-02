@@ -1,5 +1,6 @@
 package com.utechia.data.repo
 
+import android.util.Log
 import com.utechia.data.api.Service
 import com.utechia.data.entity.PermissionPostBody
 import com.utechia.data.entity.PermissionUpdateBody
@@ -73,6 +74,7 @@ class PermissionRepoImpl @Inject constructor(
             return when (result.code()) {
 
                 200 -> {
+                    Log.d("aslan", result.body()?.data?.get(0)?.type!!)
                     result.body()?.data!!.map { it.toDomain() }.toMutableList()
                 }
 
