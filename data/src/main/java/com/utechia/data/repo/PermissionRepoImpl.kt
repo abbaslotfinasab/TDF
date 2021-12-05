@@ -87,10 +87,16 @@ class PermissionRepoImpl @Inject constructor(
 
     }
 
-    override suspend fun post(type: String, description: String):MutableList<PermissionModel> {
+    override suspend fun post(type: String, description: String,start:String,end:String):MutableList<PermissionModel> {
         if (networkHelper.isNetworkConnected()) {
 
-            var result = service.postPermission(PermissionPostBody(type,description))
+            Log.d("startTime",start)
+            Log.d("endtTime",end)
+
+
+            var result = service.postPermission(PermissionPostBody(type,description,start,end))
+
+            Log.d("statusCode", result.code().toString())
 
             if (result.code() == 401) {
 
@@ -102,12 +108,14 @@ class PermissionRepoImpl @Inject constructor(
                         )
                     ).body()?.data.toString()
                 )
-                result = service.postPermission(PermissionPostBody(type,description))
+                result = service.postPermission(PermissionPostBody(type,description,"",""))
+
             }
             return when (result.code()) {
 
                 200 -> {
                     result.body()?.data!!.map { it.toDomain() }.toMutableList()
+
                 }
 
                 else ->

@@ -14,8 +14,8 @@ class PermissionUseCaseImpl @Inject constructor(private val permissionRepo: Perm
         return permissionRepo.get(id)
     }
 
-    override suspend fun post(type: String, description:String ):MutableList<PermissionModel> {
-        return permissionRepo.post(type,description)
+    override suspend fun post(type: String, description:String,start:String,end:String):MutableList<PermissionModel> {
+        return permissionRepo.post(type,description,start,end)
     }
 
     override suspend fun update(id: Int,status: String):MutableList<PermissionModel> {

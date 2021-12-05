@@ -113,4 +113,7 @@ interface Service {
     @PATCH("accessmanagement/permissions")
     suspend fun updatePermission(@Body permissionUpdateBody: PermissionUpdateBody):Response<Permission>
 
+    @GET("accessmanagement/permissions/permissiontypes")
+    suspend fun getPermissionType():Response<PermissionType>
+
 }

@@ -62,4 +62,9 @@ abstract class RepositoryModule {
         permissionRepoImpl: PermissionRepoImpl
     ): PermissionRepo
 
+    @Binds
+    abstract fun bindPermissionTypeRepositoryService(
+        permissionRepoImpl: PermissionTypeRepoImpl
+    ): PermissionTypeRepo
+
 }

@@ -7,11 +7,12 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.view.Window
+import android.widget.Toast
 import androidx.fragment.app.DialogFragment
 import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
+import com.utechia.domain.utile.Result
 import com.utechia.tdf.R
-import com.utechia.tdf.databinding.FragmentCancelBinding
 import com.utechia.tdf.databinding.FragmentConfirmRequestBinding
 import dagger.hilt.android.AndroidEntryPoint
 
@@ -19,7 +20,12 @@ import dagger.hilt.android.AndroidEntryPoint
 class ConfirmRequestFragment : DialogFragment() {
 
     private lateinit var binding: FragmentConfirmRequestBinding
-    private var orderId = 0
+    private val permissionViewModel: PermissionViewModel by viewModels()
+
+    private var start = ""
+    private var end = ""
+    private var type = ""
+    private var description = ""
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -27,7 +33,7 @@ class ConfirmRequestFragment : DialogFragment() {
     ): View {
         binding = FragmentConfirmRequestBinding.inflate(inflater, container, false)
 
-        if(dialog !=null && dialog?.window !=null){
+        if (dialog != null && dialog?.window != null) {
             dialog?.window?.setBackgroundDrawable(ColorDrawable(Color.TRANSPARENT))
             dialog?.window?.requestFeature(Window.FEATURE_NO_TITLE)
             dialog?.setCancelable(false)
@@ -39,8 +45,13 @@ class ConfirmRequestFragment : DialogFragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        if (arguments !=null){
-            orderId = requireArguments().getInt("orderId")
+        if (arguments != null) {
+
+            start = requireArguments().getString("start").toString()
+            end = requireArguments().getString("end").toString()
+            type = requireArguments().getString("type").toString()
+            description = requireArguments().getString("description").toString()
+
 
         }
 
@@ -53,10 +64,34 @@ class ConfirmRequestFragment : DialogFragment() {
         }
 
         binding.btnAccept.setOnClickListener {
-            findNavController().navigate(R.id.confirmRequestFragment_to_permissionFragment)
+            permissionViewModel.postPermission(type, description, start, end)
+            observer()
         }
 
 
     }
 
+    private fun observer() {
+        permissionViewModel.permissionModel.observe(viewLifecycleOwner) {
+
+            when (it) {
+                is Result.Success -> {
+                    binding.prg.visibility = View.GONE
+                    findNavController().navigate(R.id.confirmRequestFragment_to_permissionFragment)
+
+                }
+
+                is Result.Loading -> {
+                    binding.prg.visibility = View.VISIBLE
+
+                }
+
+                is Result.Error -> {
+                    binding.prg.visibility = View.GONE
+                    findNavController().navigate(R.id.confirmRequestFragment_to_permissionFragment)
+                    Toast.makeText(context, it.message, Toast.LENGTH_SHORT).show()
+                }
+            }
+        }
+    }
 }

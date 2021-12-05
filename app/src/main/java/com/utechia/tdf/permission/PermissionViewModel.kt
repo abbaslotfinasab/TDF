@@ -53,11 +53,11 @@ class PermissionViewModel @Inject constructor(
         }
     }
 
-    fun postPermission(type:String,description:String){
+    fun postPermission(type:String,description:String,start:String,end:String){
 
         viewModelScope.launch(Dispatchers.IO+handler) {
 
-            permissionUseCaseImpl.post(type,description)
+            permissionUseCaseImpl.post(type,description,start,end)
 
         }
     }

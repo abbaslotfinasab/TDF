@@ -23,7 +23,12 @@ class CalendarRequestFragment : DialogFragment() {
     private var endTime = ""
     private var first = ""
     private var last = ""
-
+    private var hh = ""
+    private var mm = ""
+    private var fMonth = ""
+    private var lMonth = ""
+    private var fdd = ""
+    private var ldd = ""
 
 
     override fun onCreateView(
@@ -49,6 +54,12 @@ class CalendarRequestFragment : DialogFragment() {
                 endTime = ""
                 first = ""
                 last = ""
+                hh = ""
+                mm = ""
+                fMonth = ""
+                lMonth = ""
+                fdd = ""
+                ldd = ""
             }else {
                 Toast.makeText(context,"Please select your request date",Toast.LENGTH_SHORT).show()
             }
@@ -57,12 +68,47 @@ class CalendarRequestFragment : DialogFragment() {
         binding.calendar.setCalendarListener(object :CalendarListener{
             override fun onDateRangeSelected(startDate: Calendar, endDate: Calendar) {
                 selectTime(2)
-                startTime = "${startDate.get(Calendar.MONTH)+1}.${startDate.get(Calendar.DAY_OF_MONTH)}.${startDate.get(Calendar.YEAR)}"
-                endTime= "${endDate.get(Calendar.MONTH)+1}.${endDate.get(Calendar.DAY_OF_MONTH)}.${endDate.get(Calendar.YEAR)}"
+                fMonth = "${startDate.get(Calendar.MONTH)+1}"
+                fMonth = if(fMonth.length<2)
+                    "0${startDate.get(Calendar.MONTH)+1}"
+                else
+                    "${startDate.get(Calendar.MONTH)+1}"
+
+                lMonth = "${endDate.get(Calendar.MONTH)+1}"
+                lMonth = if(lMonth.length<2)
+                    "0${startDate.get(Calendar.MONTH)+1}"
+                else
+                    "${startDate.get(Calendar.MONTH)+1}"
+
+                fdd = "${startDate.get(Calendar.DAY_OF_MONTH)}"
+                fdd= if (fdd.length<2)
+                    "0${startDate.get(Calendar.DAY_OF_MONTH)}"
+                else
+                    "${startDate.get(Calendar.DAY_OF_MONTH)}"
+
+                ldd = "${endDate.get(Calendar.DAY_OF_MONTH)}"
+                ldd = if (ldd.length<2)
+                    "0${endDate.get(Calendar.DAY_OF_MONTH)}"
+                else
+                    "${endDate.get(Calendar.DAY_OF_MONTH)}"
+
+                startTime = "${startDate.get(Calendar.YEAR)}-$fMonth-$fdd"
+                endTime= "${endDate.get(Calendar.YEAR)}-$lMonth-$ldd"
             }
             override fun onFirstDateSelected(startDate: Calendar) {
                 selectTime(1)
-                startTime = "${startDate.get(Calendar.MONTH)+1}.${startDate.get(Calendar.DAY_OF_MONTH)}.${startDate.get(Calendar.YEAR)}"
+                fMonth = "${startDate.get(Calendar.MONTH)+1}"
+                fMonth = if(fMonth.length<2)
+                    "0${startDate.get(Calendar.MONTH)+1}"
+                else
+                    "${startDate.get(Calendar.MONTH)+1}"
+
+                fdd = "${startDate.get(Calendar.DAY_OF_MONTH)}"
+                fdd = if (fdd.length<2)
+                    "0${startDate.get(Calendar.DAY_OF_MONTH)}"
+                else
+                    "${startDate.get(Calendar.DAY_OF_MONTH)}"
+                startTime = "${startDate.get(Calendar.YEAR)}-$fMonth-$fdd"
                 binding.end.text = ""
             }
 
@@ -82,19 +128,41 @@ class CalendarRequestFragment : DialogFragment() {
             setListener{hour, minute ->
                 when(kind){
                     1->{
-                        first = "$hour:$minute"
-                        startTime = "From: $startTime - $first"
-                        binding.start.text = startTime
+                        hh = hour.toString()
+                        mm = minute.toString()
+
+                        first = if (hh.length<2 && mm.length<2)
+                            "0$hour:0$minute"
+                        else if (hh.length<2)
+                            "0$hour:$minute"
+                        else if (mm.length<2)
+                            "$hour:0$minute"
+                        else
+                            "$hour:$minute"
+
+                        binding.start.text = "From: $startTime-$first"
+                        startTime = "${startTime}T$first:00.000Z"
                         binding.end.text = ""
                     }
                     2->{
-                        last = "$hour:$minute"
-                        endTime = "To: $endTime - $last"
-                        binding.end.text = endTime
+                        hh = hour.toString()
+                        mm = minute.toString()
+
+                        last = if (hh.length<2 && mm.length<2)
+                            "0$hour:0$minute"
+                        else if (hh.length<2)
+                            "0$hour:$minute"
+                        else if (mm.length<2)
+                            "$hour:0$minute"
+                        else
+                            "$hour:$minute"
+
+                        startTime = "${startTime}T$first:00.000Z"
+                        binding.end.text = "To: $endTime-$last"
+                        endTime = "${endTime}T$last:00.000Z"
 
                     }
                 }
-
             }
         }
         dialog.show(parentFragmentManager, tag)
