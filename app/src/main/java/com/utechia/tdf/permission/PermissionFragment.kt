@@ -131,12 +131,14 @@ class PermissionFragment : Fragment() {
                     if (it.data.size!=0){
                         binding.recyclerView.visibility = View.VISIBLE
                         binding.createLayout.visibility = View.GONE
+                        binding.more.visibility = View.VISIBLE
                         permissionAdapter.addData(it.data)
 
                     }
                     else{
                         binding.recyclerView.visibility = View.GONE
                         binding.createLayout.visibility = View.VISIBLE
+                        binding.more.visibility = View.GONE
                     }
 
                 }
@@ -145,12 +147,15 @@ class PermissionFragment : Fragment() {
                     binding.prg.visibility = View.VISIBLE
                     binding.recyclerView.visibility = View.GONE
                     binding.createLayout.visibility = View.GONE
+                    binding.more.visibility = View.GONE
+
                 }
 
                 is Result.Error -> {
                     binding.prg.visibility = View.GONE
                     binding.recyclerView.visibility = View.GONE
                     binding.createLayout.visibility = View.VISIBLE
+                    binding.more.visibility = View.GONE
                     Toast.makeText(context, it.message, Toast.LENGTH_SHORT).show()
                 }
             }

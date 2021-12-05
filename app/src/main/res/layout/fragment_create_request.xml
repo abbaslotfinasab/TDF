@@ -83,7 +83,7 @@
             app:layout_constraintTop_toBottomOf="@+id/radioGroup" />
 
         <EditText
-            android:id="@+id/description"
+            android:id="@+id/start"
             android:layout_width="0dp"
             android:layout_height="115dp"
             android:layout_marginStart="35dp"
@@ -116,7 +116,7 @@
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/description" />
+            app:layout_constraintTop_toBottomOf="@+id/start" />
 
 
     </androidx.constraintlayout.widget.ConstraintLayout>
