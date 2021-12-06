@@ -10,6 +10,7 @@ import android.view.Window
 import android.widget.Toast
 import androidx.fragment.app.DialogFragment
 import androidx.fragment.app.viewModels
+import androidx.navigation.NavOptions
 import androidx.navigation.fragment.findNavController
 import com.utechia.domain.utile.Result
 import com.utechia.tdf.R
@@ -78,6 +79,7 @@ class ConfirmRequestFragment : DialogFragment() {
                 is Result.Success -> {
                     binding.prg.visibility = View.GONE
                     findNavController().navigate(R.id.confirmRequestFragment_to_permissionFragment)
+
 
                 }
 

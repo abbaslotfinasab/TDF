@@ -500,7 +500,9 @@
 
         <action
             android:id="@+id/confirmRequestFragment_to_permissionFragment"
+            app:launchSingleTop="true"
             app:popUpToInclusive="true"
+            app:popUpTo="@id/nav_graph"
             app:destination="@id/permissionFragment" />
 
     </dialog>
