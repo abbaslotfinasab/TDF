@@ -55,7 +55,7 @@ class OrderTeaBoyAdapter(private val teaBoyOrdersFragment: TeaBoyOrdersFragment)
 
         fun bind0(position: Int) {
 
-            dateFormat = sdf.parse(orders[position].createdAt)
+            dateFormat = sdf.parse(orders[position].updatedAt)
             simple = SimpleDateFormat("yyyy-MM-dd-HH:mm").format(dateFormat)
             date.text = "$simple"
 
