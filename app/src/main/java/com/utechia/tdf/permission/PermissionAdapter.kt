@@ -12,10 +12,15 @@ import androidx.recyclerview.widget.RecyclerView
 import com.utechia.domain.model.OrderDataModel
 import com.utechia.domain.model.PermissionModel
 import com.utechia.tdf.R
+import java.text.SimpleDateFormat
+import java.util.*
 
 class PermissionAdapter: RecyclerView.Adapter<RecyclerView.ViewHolder>() {
 
     var permission: MutableList<PermissionModel> = mutableListOf()
+    var sdf:SimpleDateFormat = SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss.SSS'Z'")
+    private lateinit var dateFormat:Date
+    private var simple = ""
 
     fun addData(_permission: MutableList<PermissionModel>) {
         permission.clear()
@@ -48,9 +53,15 @@ class PermissionAdapter: RecyclerView.Adapter<RecyclerView.ViewHolder>() {
 
         fun bind0(position: Int) {
 
+            dateFormat = sdf.parse(permission[position].datestarts)
+            simple = SimpleDateFormat("yyyy-MM-dd-HH:mm").format(dateFormat)
+            from.text = "From:${simple}"
+
+            dateFormat = sdf.parse(permission[position].dateends)
+            simple = SimpleDateFormat("yyyy-MM-dd-HH:mm").format(dateFormat)
+            date.text = "To:${simple}"
+
             title.text = permission[position].type
-            from.text = permission[position].datestarts
-            date.text = permission[position].dateends
             number.text = permission[position].timeLength
 
 

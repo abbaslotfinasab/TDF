@@ -11,10 +11,15 @@ import androidx.navigation.findNavController
 import androidx.recyclerview.widget.RecyclerView
 import com.utechia.domain.model.OrderDataModel
 import com.utechia.tdf.R
+import java.text.SimpleDateFormat
+import java.util.*
 
 class OrderAdapter: RecyclerView.Adapter<RecyclerView.ViewHolder>() {
 
     var orders: MutableList<OrderDataModel> = mutableListOf()
+    var sdf: SimpleDateFormat = SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss.SSS'Z'")
+    private lateinit var dateFormat: Date
+    private var simple = ""
 
     fun addData(_orders: MutableList<OrderDataModel>) {
         orders.clear()
@@ -48,7 +53,9 @@ class OrderAdapter: RecyclerView.Adapter<RecyclerView.ViewHolder>() {
 
         fun bind0(position: Int) {
 
-            date.text = orders[position].createdAt
+            dateFormat = sdf.parse(orders[position].createdAt)
+            simple = SimpleDateFormat("yyyy-MM-dd-HH:mm").format(dateFormat)
+            date.text = "$simple"
 
             number.text = "${orders[position].cart.items?.size}x"
             oderId.text = "ID:675867468048609"
