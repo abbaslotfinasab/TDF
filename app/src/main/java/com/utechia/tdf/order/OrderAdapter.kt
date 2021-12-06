@@ -85,7 +85,7 @@ class OrderAdapter: RecyclerView.Adapter<RecyclerView.ViewHolder>() {
                 "preparing" ->{
                     status.apply {
                         visibility = View.VISIBLE
-                        text = "preparing"
+                        text = "Preparing"
                         setBackgroundColor(ContextCompat.getColor(itemView.context, R.color.prepare))
                     }
                     cancel.visibility = View.GONE

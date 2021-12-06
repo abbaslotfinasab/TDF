@@ -80,7 +80,7 @@ class PermissionAdapter: RecyclerView.Adapter<RecyclerView.ViewHolder>() {
                 "accepted" ->{
                     status.apply {
                         visibility = View.VISIBLE
-                        text = "accepted"
+                        text = "Accepted"
                         setBackgroundColor(ContextCompat.getColor(itemView.context,R.color.accepted ))
                     }
                     cancel.visibility = View.VISIBLE
