@@ -76,16 +76,15 @@ class LoginFragment : Fragment() {
             when(it){
 
                 is Result.Success ->{
-                    binding.prg.visibility = View.GONE
-
                     if (it.data.isTeaBoy == false) {
 
                         with(prefs.edit()){
                             putString("name",it.data.name)
                             putString("job",it.data.jobTitle)
                             putString("USER_ID",it.data.userHomeId)
+                            putBoolean("Start",true)
+
                         }.apply()
-                        (activity as MainActivity).setupUser(it.data.name!!, it.data.jobTitle!!)
                         findNavController().navigate(R.id.action_loginFragment_to_userhomeFragment)
 
                     }
@@ -97,8 +96,9 @@ class LoginFragment : Fragment() {
                             putBoolean("isTeaBoy", it.data.isTeaBoy == true)
                             putBoolean("isTeaBoyActive", it.data.isTeaBoyActive == true)
                             putString("USER_ID",it.data.userHomeId)
+                            putBoolean("Start",true)
+
                         }.apply()
-                        (activity as MainActivity).setupTeaBoy(it.data.name!!, it.data.floor.toString())
                         findNavController().navigate(R.id.action_loginFragment_to_teaBoyHomeFragment)
 
 

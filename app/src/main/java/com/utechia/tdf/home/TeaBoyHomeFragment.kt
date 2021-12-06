@@ -12,6 +12,7 @@ import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
 import com.utechia.domain.utile.Result
 import com.utechia.tdf.R
+import com.utechia.tdf.activity.MainActivity
 import com.utechia.tdf.databinding.FragmentTeaBoyHomeBinding
 import com.utechia.tdf.order.OrderCountViewModel
 import dagger.hilt.android.AndroidEntryPoint
@@ -22,6 +23,8 @@ class TeaBoyHomeFragment : Fragment() {
     private lateinit var binding: FragmentTeaBoyHomeBinding
     private val orderViewModel: OrderCountViewModel by viewModels()
     private lateinit var prefs: SharedPreferences
+    private var name = ""
+    private var floor = ""
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -34,6 +37,21 @@ class TeaBoyHomeFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         prefs = requireActivity().getSharedPreferences("tdf", Context.MODE_PRIVATE)
+
+        if (prefs.getBoolean("Start",false)) {
+
+            name = prefs.getString("name", "").toString()
+            floor = prefs.getString("floor", "").toString()
+            (activity as MainActivity).setupTeaBoy(name,floor)
+
+            with(prefs.edit()){
+
+                putBoolean("Start",false)
+
+            }.apply()
+
+        }
+
         orderViewModel.getOrder()
 
         binding.switchCompat.isChecked = prefs.getBoolean("isTeaBoyActive",true)

@@ -100,7 +100,6 @@ class PermissionAdapter: RecyclerView.Adapter<RecyclerView.ViewHolder>() {
                         setBackgroundColor(ContextCompat.getColor(itemView.context, R.color.waiting))
                     }
 
-
                 }
 
                 "cancelled" ->{

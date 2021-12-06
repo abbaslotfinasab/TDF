@@ -2,8 +2,7 @@
 <navigation xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    android:id="@+id/nav_graph"
-    app:startDestination="@id/acceptFragment">
+    android:id="@+id/nav_graph">
 
     <fragment
         android:id="@+id/userhomeFragment"
@@ -243,7 +242,7 @@
 
         <action
             android:id="@+id/action_loginFragment_to_userhomeFragment"
-            app:destination="@id/refreshmentFragment"
+            app:destination="@id/userhomeFragment"
             app:launchSingleTop="true"
             app:popUpTo="@id/nav_graph"/>
 

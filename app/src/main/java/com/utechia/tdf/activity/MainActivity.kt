@@ -69,7 +69,7 @@ class MainActivity : AppCompatActivity() {
                 setupTeaBoy(name,floor)
             }
             !teaBoy() -> {
-                graph.setStartDestination(R.id.refreshmentFragment)
+                graph.setStartDestination(R.id.userhomeFragment)
                 val name = prefs.getString("name","").toString()
                 val job = prefs.getString("job","").toString()
                 setupUser(name,job)
