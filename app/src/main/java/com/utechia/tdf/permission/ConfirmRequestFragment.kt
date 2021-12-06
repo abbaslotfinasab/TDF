@@ -10,7 +10,6 @@ import android.view.Window
 import android.widget.Toast
 import androidx.fragment.app.DialogFragment
 import androidx.fragment.app.viewModels
-import androidx.navigation.NavOptions
 import androidx.navigation.fragment.findNavController
 import com.utechia.domain.utile.Result
 import com.utechia.tdf.R
@@ -67,6 +66,7 @@ class ConfirmRequestFragment : DialogFragment() {
         binding.btnAccept.setOnClickListener {
             permissionViewModel.postPermission(type, description, start, end)
             observer()
+            findNavController().navigate(R.id.confirmRequestFragment_to_permissionFragment)
         }
 
 
@@ -78,8 +78,6 @@ class ConfirmRequestFragment : DialogFragment() {
             when (it) {
                 is Result.Success -> {
                     binding.prg.visibility = View.GONE
-                    findNavController().navigate(R.id.confirmRequestFragment_to_permissionFragment)
-
 
                 }
 
@@ -90,7 +88,6 @@ class ConfirmRequestFragment : DialogFragment() {
 
                 is Result.Error -> {
                     binding.prg.visibility = View.GONE
-                    findNavController().navigate(R.id.confirmRequestFragment_to_permissionFragment)
                     Toast.makeText(context, it.message, Toast.LENGTH_SHORT).show()
                 }
             }

@@ -87,42 +87,25 @@ class PermissionRepoImpl @Inject constructor(
 
     }
 
-    override suspend fun post(type: String, description: String,start:String,end:String):MutableList<PermissionModel> {
+    override suspend fun post(
+        type: String,
+        description: String,
+        start: String,
+        end: String
+    ): MutableList<PermissionModel> {
         if (networkHelper.isNetworkConnected()) {
 
-            Log.d("startTime",start)
-            Log.d("endtTime",end)
+            val result = service.postPermission(PermissionPostBody(type, description, start, end))
 
+            if (result.isSuccessful) {
 
-            var result = service.postPermission(PermissionPostBody(type,description,start,end))
+                return result.body()?.data!!.map { it.toDomain() }.toMutableList()
 
-            Log.d("statusCode", result.code().toString())
-
-            if (result.code() == 401) {
-
-                sessionManager.updateAuthToken(
-                    service.refresh(
-                        RefreshToken(
-                            sessionManager.fetchHomeId()
-                                .toString()
-                        )
-                    ).body()?.data.toString()
-                )
-                result = service.postPermission(PermissionPostBody(type,description,"",""))
-
-            }
-            return when (result.code()) {
-
-                200 -> {
-                    result.body()?.data!!.map { it.toDomain() }.toMutableList()
-
-                }
-
-                else ->
-                    throw IOException("Server is Not Responding")
-            }
+            } else
+                throw IOException("Server is Not Responding")
 
         } else throw IOException("No Internet Connection")
+
     }
 
     override suspend fun update(id: Int, status: String):MutableList<PermissionModel> {
