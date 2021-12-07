@@ -93,16 +93,27 @@ class PermissionRepoImpl @Inject constructor(
         start: String,
         end: String
     ): MutableList<PermissionModel> {
+
         if (networkHelper.isNetworkConnected()) {
 
             val result = service.postPermission(PermissionPostBody(type, description, start, end))
 
-            if (result.isSuccessful) {
+            return when(result.code()){
 
-                return result.body()?.data!!.map { it.toDomain() }.toMutableList()
+                200 ->{
+                    result.body()?.data!!.map { it.toDomain() }.toMutableList()
+                }
 
-            } else
-                throw IOException("Server is Not Responding")
+                201 ->{
+                    result.body()?.data!!.map { it.toDomain() }.toMutableList()
+                }
+
+                406 -> {
+                    throw IOException("Permission already exist")
+                }
+
+                else -> throw IOException("Server is Not Responding")
+            }
 
         } else throw IOException("No Internet Connection")
 

@@ -57,7 +57,11 @@ class PermissionViewModel @Inject constructor(
 
         viewModelScope.launch(Dispatchers.IO+handler) {
 
-            permissionUseCaseImpl.post(type,description,start,end)
+            permissionUseCaseImpl.post(type,description,start,end).let {
+
+                _permissionModel.postValue(Result.Success(it))
+
+            }
 
         }
     }

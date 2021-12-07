@@ -19,6 +19,7 @@ import java.util.*
 class CalendarRequestFragment : DialogFragment() {
 
     private lateinit var binding: FragmentCalendarRequestBinding
+    private var calendar:Calendar = Calendar.getInstance()
     private var startTime = ""
     private var endTime = ""
     private var first = ""
@@ -41,6 +42,7 @@ class CalendarRequestFragment : DialogFragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+        calendar.set(calendar.get(Calendar.YEAR)+3,5,29,calendar.get(Calendar.HOUR),calendar.get(Calendar.MINUTE),calendar.get(Calendar.SECOND))
 
         binding.btnCancel.setOnClickListener {
 
@@ -64,6 +66,7 @@ class CalendarRequestFragment : DialogFragment() {
                 Toast.makeText(context,"Please select your request date",Toast.LENGTH_SHORT).show()
             }
         }
+        binding.calendar.setSelectableDateRange(Calendar.getInstance(),calendar)
 
         binding.calendar.setCalendarListener(object :CalendarListener{
             override fun onDateRangeSelected(startDate: Calendar, endDate: Calendar) {
@@ -96,6 +99,9 @@ class CalendarRequestFragment : DialogFragment() {
                 endTime= "${endDate.get(Calendar.YEAR)}-$lMonth-$ldd"
             }
             override fun onFirstDateSelected(startDate: Calendar) {
+                binding.start.text = ""
+                binding.end.text = ""
+
                 selectTime(1)
                 fMonth = "${startDate.get(Calendar.MONTH)+1}"
                 fMonth = if(fMonth.length<2)

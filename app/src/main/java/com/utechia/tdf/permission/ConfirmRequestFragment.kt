@@ -66,7 +66,6 @@ class ConfirmRequestFragment : DialogFragment() {
         binding.btnAccept.setOnClickListener {
             permissionViewModel.postPermission(type, description, start, end)
             observer()
-            findNavController().navigate(R.id.confirmRequestFragment_to_permissionFragment)
         }
 
 
@@ -78,6 +77,8 @@ class ConfirmRequestFragment : DialogFragment() {
             when (it) {
                 is Result.Success -> {
                     binding.prg.visibility = View.GONE
+                    findNavController().navigate(R.id.confirmRequestFragment_to_permissionFragment)
+
 
                 }
 
@@ -89,6 +90,8 @@ class ConfirmRequestFragment : DialogFragment() {
                 is Result.Error -> {
                     binding.prg.visibility = View.GONE
                     Toast.makeText(context, it.message, Toast.LENGTH_SHORT).show()
+                    findNavController().navigate(R.id.confirmRequestFragment_to_permissionFragment)
+
                 }
             }
         }

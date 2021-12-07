@@ -15,7 +15,6 @@ import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
 import com.utechia.domain.utile.Result
 import com.utechia.tdf.R
-import com.utechia.tdf.activity.MainActivity
 import com.utechia.tdf.databinding.FragmentLoginBinding
 import dagger.hilt.android.AndroidEntryPoint
 
@@ -127,15 +126,20 @@ class LoginFragment : Fragment() {
             when (it) {
 
                 is Result.Success -> {
-
+                    binding.prg.visibility = View.GONE
+                    binding.appCompatButton.isEnabled = true
                     uri = it.data.url.toString()
 
                 }
 
-                is Result.Loading -> {}
+                is Result.Loading -> {
+                    binding.appCompatButton.isEnabled = false
+                    binding.prg.visibility = View.VISIBLE
+
+                }
 
                 is Result.Error -> {
-
+                    binding.appCompatButton.isEnabled = true
                     Toast.makeText(context, it.message, Toast.LENGTH_SHORT).show()
 
                 }
