@@ -24,18 +24,15 @@ class LoginRepoImpl @Inject constructor(
 
             val result = service.getLoginUrl()
 
-            when {
+            return when(result.isSuccessful){
 
-                result.isSuccessful && result.body()?.data != null ->
-                    return result.body()!!.data!!.toDomain()
+                true ->{
 
-                result.body()?.data == null ->
-                    throw IOException("Login failed please try later")
+                    result.body()!!.data!!.toDomain()
 
-
+                }
                 else ->
-                    throw IOException("Server is Not Responding")
-
+                    throw IOException("Server is not responding")
             }
         }
         else

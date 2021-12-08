@@ -67,7 +67,7 @@ class OrderTeaBoyAdapter(private val teaBoyOrdersFragment: TeaBoyOrdersFragment)
             if (orders[position].cart.items?.size!! >1){
                 title.text = orders[position].cart.items!![0].food.title+"..."
             }
-            else
+            else if (orders[position].cart.items?.size!! !=0)
                 title.text = orders[position].cart.items!![0].food.title
 
 

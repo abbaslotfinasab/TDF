@@ -1,10 +1,7 @@
 package com.utechia.data.repo
 
-import android.util.Log
 import com.utechia.data.api.Service
-import com.utechia.data.entity.RefreshToken
 import com.utechia.data.utile.NetworkHelper
-import com.utechia.data.utile.SessionManager
 import com.utechia.domain.model.RefreshmentModel
 import com.utechia.domain.repository.RefreshmentRepo
 import java.io.IOException
@@ -16,7 +13,6 @@ class RefreshmentRepoImpl @Inject constructor(
 
     private val service:Service,
     private val networkHelper: NetworkHelper,
-    private val sessionManager: SessionManager,
 
     ):RefreshmentRepo {
 
@@ -25,24 +21,11 @@ class RefreshmentRepoImpl @Inject constructor(
 
         if (networkHelper.isNetworkConnected()) {
 
-            var result = service.getRefreshment(type)
+            val result = service.getRefreshment(type)
 
-            if (result.code() == 401) {
+                return when (result.isSuccessful) {
 
-                sessionManager.updateAuthToken(
-                    service.refresh(
-                        RefreshToken(
-                            sessionManager.fetchHomeId()
-                                .toString()
-                        )
-                    ).body()?.data.toString()
-                )
-                result = service.getRefreshment(type)
-            }
-
-                return when (result.code()) {
-
-                    200 -> {
+                    true -> {
                         result.body()?.data?.map { it.toDomain() }!!.toMutableList()
                     }
 
@@ -59,29 +42,12 @@ class RefreshmentRepoImpl @Inject constructor(
 
             if (networkHelper.isNetworkConnected()) {
 
-                var result = service.search(search, type)
+                val result = service.search(search, type)
 
-                if (result.code() == 401) {
+                return when (result.isSuccessful) {
 
-                    sessionManager.updateAuthToken(
-                        service.refresh(
-                            RefreshToken(
-                                sessionManager.fetchHomeId()
-                                    .toString()
-                            )
-                        ).body()?.data.toString()
-                    )
-                    result = service.search(search, type)
-                }
-
-                return when (result.code()) {
-
-                    200 -> {
+                    true -> {
                         result.body()?.data?.map { it.toDomain() }!!.toMutableList()
-                    }
-
-                    404 -> {
-                        emptyList<RefreshmentModel>().toMutableList()
                     }
 
                     else ->
@@ -95,34 +61,17 @@ class RefreshmentRepoImpl @Inject constructor(
     override suspend fun getCart(id: Int): MutableList<RefreshmentModel> {
         if (networkHelper.isNetworkConnected()) {
 
-            var result = service.getCart(id)
-            if (result.code() == 401) {
+            val result = service.getCart(id)
 
-                sessionManager.updateAuthToken(
-                    service.refresh(
-                        RefreshToken(
-                            sessionManager.fetchHomeId()
-                                .toString()
-                        )
-                    ).body()?.data.toString()
-                )
-                result = service.getCart(id)
-            }
+            return when(result.isSuccessful){
 
-            return when(result.code()){
-
-                200 ->{
+                true ->{
                     result.body()?.data?.map { it.toDomain() }!!.toMutableList()
-                }
-
-                404 ->{
-                    emptyList<RefreshmentModel>().toMutableList()
                 }
 
                 else ->
                     throw IOException("Server is Not Responding")
             }
-
 
         } else throw IOException("No Internet Connection")
 

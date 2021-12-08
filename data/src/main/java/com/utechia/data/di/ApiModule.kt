@@ -9,6 +9,7 @@ import dagger.hilt.InstallIn
 import dagger.hilt.android.qualifiers.ApplicationContext
 import dagger.hilt.components.SingletonComponent
 import okhttp3.OkHttpClient
+import okhttp3.logging.HttpLoggingInterceptor
 import retrofit2.Retrofit
 import retrofit2.converter.moshi.MoshiConverterFactory
 import java.util.concurrent.TimeUnit
@@ -21,11 +22,13 @@ class ApiModule {
 
     @Provides
     @Singleton
-    fun provideOkHttpClient(@ApplicationContext context:Context): OkHttpClient {
+    fun provideOkHttpClient(@ApplicationContext context:Context,service: dagger.Lazy<Service>): OkHttpClient {
         return OkHttpClient.Builder()
-            .addInterceptor(AuthInterceptor(context))
+            .addInterceptor(HttpLoggingInterceptor())
+            .authenticator(AuthInterceptor(context,service))
             .connectTimeout(30,TimeUnit.SECONDS)
             .readTimeout(30, TimeUnit.SECONDS)
+            .writeTimeout(30, TimeUnit.SECONDS)
             .build()
     }
 
@@ -44,5 +47,4 @@ class ApiModule {
     fun bindApiService(retrofit: Retrofit):Service {
         return retrofit.create(Service::class.java)
     }
-
 }

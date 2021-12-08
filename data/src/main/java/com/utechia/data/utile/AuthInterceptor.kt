@@ -1,23 +1,38 @@
 package com.utechia.data.utile
 
 import android.content.Context
+import com.utechia.data.api.Service
+import com.utechia.data.entity.RefreshToken
 import dagger.hilt.android.qualifiers.ApplicationContext
-import okhttp3.Interceptor
-import okhttp3.Response
+import kotlinx.coroutines.runBlocking
+import okhttp3.*
 import javax.inject.Inject
 
-class AuthInterceptor @Inject constructor(@ApplicationContext context: Context) : Interceptor {
+class AuthInterceptor @Inject constructor(@ApplicationContext context: Context,private val service: dagger.Lazy<Service>) : Authenticator {
 
     private val sessionManager = SessionManager(context)
 
-    override fun intercept(chain: Interceptor.Chain): Response {
-        val requestBuilder = chain.request().newBuilder()
+    override fun authenticate(route: Route?, response: Response): Request?{
 
-        sessionManager.fetchAuthToken()?.let {
-            requestBuilder.addHeader("Authorization", "Bearer $it")
+        return runBlocking{
+
+            updateToken()
+
+            sessionManager.fetchAuthToken()?.let {
+                response.request.newBuilder().header("Authorization", "Bearer $it")
+                    .build()
+            }
         }
-
-        return chain.proceed(requestBuilder.build())
     }
+    private suspend fun updateToken(){
 
+        sessionManager.updateAuthToken(
+            service.get().refresh(
+                RefreshToken(
+                    sessionManager.fetchHomeId()
+                        .toString()
+                )
+            ).body()?.data.toString()
+        )
+    }
 }

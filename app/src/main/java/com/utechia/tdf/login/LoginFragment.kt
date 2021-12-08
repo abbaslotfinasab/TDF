@@ -75,8 +75,8 @@ class LoginFragment : Fragment() {
             when(it){
 
                 is Result.Success ->{
+                    binding.prg.visibility = View.GONE
                     if (it.data.isTeaBoy == false) {
-
                         with(prefs.edit()){
                             putString("name",it.data.name)
                             putString("job",it.data.jobTitle)
@@ -140,6 +140,7 @@ class LoginFragment : Fragment() {
 
                 is Result.Error -> {
                     binding.appCompatButton.isEnabled = true
+                    binding.prg.visibility = View.GONE
                     Toast.makeText(context, it.message, Toast.LENGTH_SHORT).show()
 
                 }

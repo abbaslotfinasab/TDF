@@ -35,7 +35,7 @@ interface Service {
 
     @Headers("Content-Type: application/json")
     @POST("user/favorite")
-    suspend fun like(@Body body:FavoriteBody):Response<Like>
+    suspend fun like(@Body body:FavoriteBody)
 
     @DELETE("user/favorite/{id}")
     suspend fun dislike(@Path("id")id:Int)

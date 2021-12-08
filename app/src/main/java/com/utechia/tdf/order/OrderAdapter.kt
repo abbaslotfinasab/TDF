@@ -17,7 +17,7 @@ import java.util.*
 class OrderAdapter: RecyclerView.Adapter<RecyclerView.ViewHolder>() {
 
     var orders: MutableList<OrderDataModel> = mutableListOf()
-    var sdf: SimpleDateFormat = SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss.SSS'Z'")
+    var sdf: SimpleDateFormat = SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss.SSS'Z'", Locale.getDefault())
     private lateinit var dateFormat: Date
     private var simple = ""
 
@@ -54,7 +54,7 @@ class OrderAdapter: RecyclerView.Adapter<RecyclerView.ViewHolder>() {
         fun bind0(position: Int) {
 
             dateFormat = sdf.parse(orders[position].updatedAt)
-            simple = SimpleDateFormat("yyyy-MM-dd-HH:mm").format(dateFormat)
+            simple = SimpleDateFormat("yyyy-MM-dd-HH:mm", Locale.getDefault()).format(dateFormat)
             date.text = "$simple"
 
             number.text = "${orders[position].cart.items?.size}x"
@@ -63,7 +63,7 @@ class OrderAdapter: RecyclerView.Adapter<RecyclerView.ViewHolder>() {
             if (orders[position].cart.items?.size!! >1){
                 title.text = orders[position].cart.items!![0].food.title+"..."
             }
-            else
+            else if (orders[position].cart.items?.size!! !=0)
                 title.text = orders[position].cart.items!![0].food.title
 
 

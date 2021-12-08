@@ -17,30 +17,17 @@ import javax.inject.Singleton
 class PermissionRepoImpl @Inject constructor(
     private val service: Service,
     private val networkHelper: NetworkHelper,
-    private val sessionManager: SessionManager,
 ):PermissionRepo {
 
     override suspend fun getPermission(status: String): MutableList<PermissionModel> {
 
         if (networkHelper.isNetworkConnected()) {
 
-            var result = service.getPermission(status)
+            val result = service.getPermission(status)
 
-            if (result.code() == 401) {
+            return when (result.isSuccessful) {
 
-                sessionManager.updateAuthToken(
-                    service.refresh(
-                        RefreshToken(
-                            sessionManager.fetchHomeId()
-                                .toString()
-                        )
-                    ).body()?.data.toString()
-                )
-                result = service.getPermission(status)
-            }
-            return when (result.code()) {
-
-                200 -> {
+                true -> {
                     result.body()?.data!!.map { it.toDomain() }.toMutableList()
                 }
 
@@ -57,24 +44,11 @@ class PermissionRepoImpl @Inject constructor(
 
         if (networkHelper.isNetworkConnected()) {
 
-            var result = service.getSinglePermission(id)
+            val result = service.getSinglePermission(id)
 
-            if (result.code() == 401) {
+            return when (result.isSuccessful) {
 
-                sessionManager.updateAuthToken(
-                    service.refresh(
-                        RefreshToken(
-                            sessionManager.fetchHomeId()
-                                .toString()
-                        )
-                    ).body()?.data.toString()
-                )
-                result = service.getSinglePermission(id)
-            }
-            return when (result.code()) {
-
-                200 -> {
-                    Log.d("aslan", result.body()?.data?.get(0)?.type!!)
+                true -> {
                     result.body()?.data!!.map { it.toDomain() }.toMutableList()
                 }
 
@@ -122,23 +96,11 @@ class PermissionRepoImpl @Inject constructor(
     override suspend fun update(id: Int, status: String):MutableList<PermissionModel> {
         if (networkHelper.isNetworkConnected()) {
 
-            var result = service.updatePermission(PermissionUpdateBody(id,status))
+            val result = service.updatePermission(PermissionUpdateBody(id,status))
 
-            if (result.code() == 401) {
+            return when (result.isSuccessful) {
 
-                sessionManager.updateAuthToken(
-                    service.refresh(
-                        RefreshToken(
-                            sessionManager.fetchHomeId()
-                                .toString()
-                        )
-                    ).body()?.data.toString()
-                )
-                result = service.updatePermission(PermissionUpdateBody(id,status))
-            }
-            return when (result.code()) {
-
-                200 -> {
+                true -> {
                     result.body()?.data!!.map { it.toDomain() }.toMutableList()
                 }
 

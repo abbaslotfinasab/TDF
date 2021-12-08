@@ -1,6 +1,5 @@
 package com.utechia.data.repo
 
-import android.util.Log
 import com.utechia.data.api.Service
 import com.utechia.data.entity.NotificationToken
 import com.utechia.data.utile.NetworkHelper
@@ -26,28 +25,21 @@ class VerifyRepoImpl @Inject constructor(
 
             val result = service.verifyLogin(code)
 
-            when {
+            return when(result.isSuccessful){
 
-                result.isSuccessful && result.body()?.data != null -> {
+                true ->{
 
                     sessionManager.saveAuthToken(result.body()!!.data!!)
 
-                    Log.d("fcmToken",sessionManager.fetchFireBaeToken()!!)
                     service.notification(NotificationToken(sessionManager.fetchFireBaeToken()!!))
 
-                    return result.body()!!.data!!.toDomain()
-                }
+                    result.body()!!.data!!.toDomain()
 
-                result.body()?.error == null -> {
-                    throw IOException("Login failed please try later")
                 }
-
-                else -> {
-                    throw IOException("Server is Not Responding")
-                }
+                else ->
+                    throw IOException("Server is not responding")
             }
         }
-
         else
             throw IOException("No Internet Connection")
     }
