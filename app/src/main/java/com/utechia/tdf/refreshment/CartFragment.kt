@@ -4,6 +4,7 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Toast
 import androidx.core.os.bundleOf
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
@@ -22,6 +23,7 @@ class CartFragment : Fragment() {
 
     private lateinit var binding: FragmentCartBinding
     val cartViewModel:CartViewModel by viewModels()
+    private val checkOutViewModel:CheckOutViewModel by viewModels()
     private val cartAdapter:CartAdapter = CartAdapter(this)
     private var food: MutableList<ItemModel> = mutableListOf()
 
@@ -43,8 +45,8 @@ class CartFragment : Fragment() {
         }
 
         binding.appCompatButton.setOnClickListener {
-            cartViewModel.acceptCart()
-            findNavController().navigate(R.id.action_cartFragment_to_orderFragment,null)
+            checkOutViewModel.checkoutCart()
+            checkObserver()
         }
 
         binding.recyclerView.apply {
@@ -69,6 +71,33 @@ class CartFragment : Fragment() {
 
         observer()
 
+    }
+
+    private fun checkObserver() {
+        checkOutViewModel.orderModel.observe(viewLifecycleOwner) {
+
+            when (it) {
+                is Result.Success -> {
+
+                    binding.prg.visibility = View.GONE
+                    binding.appCompatButton.visibility = View.VISIBLE
+                    binding.recyclerView.visibility = View.VISIBLE
+                    binding.emptyLayout.visibility = View.GONE
+                    findNavController().navigate(R.id.action_cartFragment_to_orderFragment,null)
+
+
+                }
+
+                is Result.Loading -> {
+                    binding.prg.visibility = View.VISIBLE
+                }
+
+                is Result.Error -> {
+                    binding.prg.visibility = View.GONE
+                    Toast.makeText(context, it.message, Toast.LENGTH_SHORT).show()
+                }
+            }
+        }
     }
 
     private fun observer() {
@@ -101,7 +130,7 @@ class CartFragment : Fragment() {
 
                 is Result.Error -> {
                     binding.prg.visibility = View.GONE
-                    /*Toast.makeText(context, it.message, Toast.LENGTH_SHORT).show()*/
+                    Toast.makeText(context, it.message, Toast.LENGTH_SHORT).show()
                 }
             }
         }

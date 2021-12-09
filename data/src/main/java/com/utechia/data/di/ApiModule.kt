@@ -32,6 +32,8 @@ class ApiModule {
             .build()
     }
 
+
+
     @Provides
     @Singleton
     fun provideRetrofit(okHttpClient: OkHttpClient): Retrofit {

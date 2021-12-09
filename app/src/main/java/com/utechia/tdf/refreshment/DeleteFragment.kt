@@ -3,6 +3,8 @@ package com.utechia.tdf.refreshment
 import android.graphics.Color
 import android.graphics.drawable.ColorDrawable
 import android.os.Bundle
+import android.os.Handler
+import android.os.Looper
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -43,10 +45,18 @@ class DeleteFragment : DialogFragment() {
             foodId = requireArguments().getInt("foodId", 0)
 
         binding.btnDelete.setOnClickListener {
+
             cartViewModel.deleteCart(foodId)
-            findNavController().clearBackStack(R.id.deleteFragment)
-           findNavController().navigate(R.id.action_deleteFragment_to_cartFragment)
-            dialog?.dismiss()
+
+            binding.prg.visibility = View.VISIBLE
+
+            Handler(Looper.getMainLooper()).postDelayed({
+
+                findNavController().clearBackStack(R.id.deleteFragment)
+                findNavController().navigate(R.id.action_deleteFragment_to_cartFragment)
+                dialog?.dismiss()
+
+            }, 500)
 
         }
 

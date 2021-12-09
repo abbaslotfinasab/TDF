@@ -67,4 +67,9 @@ abstract class RepositoryModule {
         permissionRepoImpl: PermissionTypeRepoImpl
     ): PermissionTypeRepo
 
+    @Binds
+    abstract fun bindCheckOutRepositoryService(
+        checkOutRepoImpl: CheckOutRepoImpl
+    ): CheckOutRepo
+
 }

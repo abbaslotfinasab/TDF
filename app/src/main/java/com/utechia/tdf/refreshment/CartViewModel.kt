@@ -68,14 +68,5 @@ class CartViewModel @Inject constructor(
 
     }
 
-    fun acceptCart(){
-
-        viewModelScope.launch(Dispatchers.IO+handler) {
-
-            cartUseCaseImpl.acceptCart()
-
-        }
-
-    }
 
 }

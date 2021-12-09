@@ -45,11 +45,11 @@ interface Service {
 
     @Headers("Content-Type: application/json")
     @POST("cafeteria/cart")
-    suspend fun postCart(@Body body:CartBody):Response<CartBody>
+    suspend fun postCart(@Body body:CartBody)
 
     @Headers("Content-Type: application/json")
     @PATCH("cafeteria/cart")
-    suspend fun updateCart(@Body body:CartBody):Response<CartBody>
+    suspend fun updateCart(@Body body:CartBody)
 
     @DELETE("cafeteria/cart/{id}")
     suspend fun deleteCart(@Path("id")id:Int)

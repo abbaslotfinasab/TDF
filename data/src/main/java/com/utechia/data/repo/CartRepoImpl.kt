@@ -4,7 +4,6 @@ import com.utechia.data.api.Service
 import com.utechia.data.entity.CartBody
 import com.utechia.data.utile.NetworkHelper
 import com.utechia.domain.model.CartModel
-import com.utechia.domain.model.OrderBodyModel
 import com.utechia.domain.repository.CartRepo
 import java.io.IOException
 import javax.inject.Inject
@@ -37,60 +36,10 @@ class CartRepoImpl @Inject constructor(
     }
 
 
-    override suspend fun postCart(id: Int, quantity: Int) {
+    override suspend fun postCart(id: Int, quantity: Int) = service.postCart(CartBody(id,quantity))
 
-        if (networkHelper.isNetworkConnected()) {
-
-            val result = service.postCart(CartBody(id,quantity))
-
-            return when (result.isSuccessful) {
-
-                true -> {}
-
-                else ->
-                    throw IOException("Server is Not Responding")
-            }
-
-        } else throw IOException("No Internet Connection")
-
-    }
-
-    override suspend fun updateCart(id: Int, quantity: Int) {
-
-        if (networkHelper.isNetworkConnected()) {
-
-            val result = service.updateCart(CartBody(id,quantity))
-
-            return when (result.isSuccessful) {
-
-                true -> {}
-
-                else ->
-                    throw IOException("Server is Not Responding")
-            }
-
-        } else throw IOException("No Internet Connection")
-
-    }
+    override suspend fun updateCart(id: Int, quantity: Int) = service.updateCart(CartBody(id,quantity))
 
     override suspend fun deleteCart(id: Int) = service.deleteCart(id)
 
-    override suspend fun acceptCart(): OrderBodyModel {
-
-        if (networkHelper.isNetworkConnected()) {
-
-            val result = service.postOrder()
-
-            return when (result.isSuccessful) {
-
-                true -> {
-                    result.body()!!.toDomain()
-                }
-                else -> {
-                    throw IOException("Server is Not Responding")
-                }
-            }
-
-        } else throw IOException("No Internet Connection")
-    }
 }
