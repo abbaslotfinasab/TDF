@@ -4,9 +4,9 @@ import android.graphics.Rect
 import android.view.View
 import androidx.annotation.NonNull
 import androidx.recyclerview.widget.RecyclerView
+import com.utechia.tdf.R
 
 class ItemDecorationOrder: RecyclerView.ItemDecoration(){
-
 
     override fun getItemOffsets(
         @NonNull outRect: Rect,
@@ -18,8 +18,5 @@ class ItemDecorationOrder: RecyclerView.ItemDecoration(){
         outRect.right = 35
         outRect.top = 20
         outRect.bottom = 20
-
-
     }
-
 }

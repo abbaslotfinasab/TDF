@@ -17,10 +17,10 @@
         <androidx.appcompat.widget.SearchView
             android:id="@+id/autoCompleteTextView"
             android:layout_width="0dp"
-            android:layout_height="40dp"
-            android:layout_marginStart="35dp"
-            android:layout_marginTop="50dp"
-            android:layout_marginEnd="35dp"
+            android:layout_height="@dimen/_30sdp"
+            android:layout_marginStart="@dimen/_25sdp"
+            android:layout_marginTop="@dimen/_20sdp"
+            android:layout_marginEnd="@dimen/_25sdp"
             android:background="@color/white"
             android:gravity="start"
             android:textSize="14sp"
@@ -46,11 +46,12 @@
 
         <androidx.constraintlayout.widget.ConstraintLayout
             android:id="@+id/food"
-            android:layout_width="73dp"
-            android:layout_height="113dp"
-            android:layout_marginTop="20dp"
+            android:layout_width="@dimen/_55sdp"
+            android:layout_height="@dimen/_95sdp"
+            android:layout_marginStart="@dimen/_25sdp"
+            android:layout_marginTop="@dimen/_10sdp"
             android:background="#FCFCFD"
-            app:layout_constraintStart_toStartOf="@+id/autoCompleteTextView"
+            app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/autoCompleteTextView">
 
             <ImageView
@@ -75,17 +76,19 @@
                 android:text="Snacks"
                 android:textColor="@color/black"
                 android:textSize="12sp"
-                app:layout_constraintBottom_toBottomOf="parent" />
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent" />
 
         </androidx.constraintlayout.widget.ConstraintLayout>
 
 
         <androidx.constraintlayout.widget.ConstraintLayout
             android:id="@+id/drink"
-            android:layout_width="73dp"
-            android:layout_height="113dp"
-            android:layout_marginStart="18dp"
-            android:layout_marginTop="20dp"
+            android:layout_width="@dimen/_55sdp"
+            android:layout_height="@dimen/_95sdp"
+            android:layout_marginStart="@dimen/_14sdp"
+            android:layout_marginTop="@dimen/_10sdp"
             android:background="#FCFCFD"
             app:layout_constraintStart_toEndOf="@+id/food"
             app:layout_constraintTop_toBottomOf="@+id/autoCompleteTextView">
@@ -117,10 +120,10 @@
 
         <androidx.constraintlayout.widget.ConstraintLayout
             android:id="@+id/order"
-            android:layout_width="73dp"
-            android:layout_height="113dp"
-            android:layout_marginStart="18dp"
-            android:layout_marginTop="20dp"
+            android:layout_width="@dimen/_55sdp"
+            android:layout_height="@dimen/_95sdp"
+            android:layout_marginStart="@dimen/_14sdp"
+            android:layout_marginTop="@dimen/_10sdp"
             android:background="#FCFCFD"
             app:layout_constraintStart_toEndOf="@+id/drink"
             app:layout_constraintTop_toBottomOf="@+id/autoCompleteTextView">
@@ -138,25 +141,26 @@
 
             <TextView
                 android:id="@+id/orderText"
-                android:layout_width="match_parent"
+                android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_marginBottom="20dp"
                 android:gravity="center"
                 android:text="Orders"
                 android:textColor="@color/black"
                 android:textSize="12sp"
-                app:layout_constraintBottom_toBottomOf="parent" />
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent" />
 
         </androidx.constraintlayout.widget.ConstraintLayout>
 
         <androidx.constraintlayout.widget.ConstraintLayout
             android:id="@+id/favorite"
-            android:layout_width="73dp"
-            android:layout_height="113dp"
-            android:layout_marginStart="18dp"
-            android:layout_marginTop="20dp"
+            android:layout_width="@dimen/_55sdp"
+            android:layout_height="@dimen/_95sdp"
+            android:layout_marginStart="@dimen/_14sdp"
+            android:layout_marginTop="@dimen/_10sdp"
             android:background="#FCFCFD"
-            app:layout_constraintEnd_toEndOf="@+id/autoCompleteTextView"
             app:layout_constraintStart_toEndOf="@+id/order"
             app:layout_constraintTop_toBottomOf="@+id/autoCompleteTextView">
 
@@ -180,7 +184,9 @@
                 android:text="Favorites"
                 android:textColor="@color/black"
                 android:textSize="12sp"
-                app:layout_constraintBottom_toBottomOf="parent" />
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent" />
 
         </androidx.constraintlayout.widget.ConstraintLayout>
 

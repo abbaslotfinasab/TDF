@@ -34,8 +34,8 @@
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:id="@+id/scanCode"
-        android:layout_width="295dp"
-        android:layout_height="297dp"
+        android:layout_width="@dimen/_200sdp"
+        android:layout_height="@dimen/_200sdp"
         android:layout_marginTop="30dp"
         android:background="@drawable/ic_qr_border"
         app:layout_constraintEnd_toEndOf="parent"

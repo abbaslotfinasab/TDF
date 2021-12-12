@@ -17,7 +17,7 @@
         <androidx.constraintlayout.widget.ConstraintLayout
             android:id="@+id/toolbar"
             android:layout_width="match_parent"
-            android:layout_height="70dp"
+            android:layout_height="@dimen/_50sdp"
             android:visibility="gone"
             android:background="#001133"
             app:layout_constraintEnd_toEndOf="parent"
@@ -26,8 +26,8 @@
 
             <ImageView
                 android:id="@+id/profilePicture"
-                android:layout_width="51dp"
-                android:layout_height="51dp"
+                android:layout_width="@dimen/_41sdp"
+                android:layout_height="@dimen/_41sdp"
                 android:layout_marginStart="20dp"
                 android:src="@drawable/ic_baseline_person_24"
                 android:background="@drawable/profilebackground"
@@ -87,7 +87,7 @@
         <androidx.constraintlayout.widget.ConstraintLayout
             android:id="@+id/customToolbar"
             android:layout_width="match_parent"
-            android:layout_height="70dp"
+            android:layout_height="@dimen/_50sdp"
             android:visibility="gone"
             android:background="#001133"
             app:layout_constraintEnd_toEndOf="parent"
@@ -137,7 +137,7 @@
         <com.google.android.material.bottomnavigation.BottomNavigationView
             android:id="@+id/bottom_navigation"
             android:layout_width="match_parent"
-            android:layout_height="70dp"
+            android:layout_height="@dimen/_50sdp"
             android:elevation="5dp"
             android:background="#305CE0"
             app:itemIconTint="@drawable/nav_item"
@@ -150,8 +150,8 @@
 
         <ImageButton
             android:id="@+id/customButton"
-            android:layout_width="80dp"
-            android:layout_height="80dp"
+            android:layout_width="@dimen/_60sdp"
+            android:layout_height="@dimen/_60sdp"
             android:background="@null"
             android:src="@mipmap/btn"
             android:scaleType="centerCrop"

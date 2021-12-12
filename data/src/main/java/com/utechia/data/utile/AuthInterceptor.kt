@@ -12,27 +12,22 @@ class AuthInterceptor @Inject constructor(@ApplicationContext context: Context,p
 
     private val sessionManager = SessionManager(context)
 
-    override fun authenticate(route: Route?, response: Response): Request?{
+    override fun authenticate(route: Route?, response: Response): Request {
 
         return runBlocking{
 
-            updateToken()
-
-            sessionManager.fetchAuthToken()?.let {
+            updateToken().let {
                 response.request.newBuilder().header("Authorization", "Bearer $it")
                     .build()
             }
         }
     }
-    private suspend fun updateToken(){
 
-        sessionManager.updateAuthToken(
-            service.get().refresh(
-                RefreshToken(
-                    sessionManager.fetchHomeId()
-                        .toString()
-                )
-            ).body()?.data.toString()
-        )
+    private suspend fun updateToken():String{
+
+        return service.get().refresh( RefreshToken(
+            sessionManager.fetchHomeId()
+                .toString()
+        )).body()?.data.toString()
     }
 }

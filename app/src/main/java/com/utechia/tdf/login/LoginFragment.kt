@@ -75,7 +75,7 @@ class LoginFragment : Fragment() {
             when(it){
 
                 is Result.Success ->{
-                    binding.prg.visibility = View.GONE
+                    binding.prg.visibility = View.VISIBLE
                     if (it.data.isTeaBoy == false) {
                         with(prefs.edit()){
                             putString("name",it.data.name)
