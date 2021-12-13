@@ -116,4 +116,10 @@ interface Service {
     @GET("accessmanagement/permissions/permissiontypes")
     suspend fun getPermissionType():Response<PermissionType>
 
+    @GET("survey/listactive")
+    suspend fun getSurveyList():Response<Survey>
+
+    @GET("survey/getarray")
+    suspend fun getSurvey(@Query("id")id: Int):Response<Survey>
+
 }

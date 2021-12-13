@@ -72,4 +72,9 @@ abstract class RepositoryModule {
         checkOutRepoImpl: CheckOutRepoImpl
     ): CheckOutRepo
 
+    @Binds
+    abstract fun bindSurveyRepositoryService(
+        surveyRepoImpl: SurveyRepoImpl
+    ): SurveyRepo
+
 }
