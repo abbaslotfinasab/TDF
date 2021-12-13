@@ -10,12 +10,16 @@ import kotlinx.serialization.Serializable
 @Parcelize
 @Serializable
 data class Answer(
+
     val id: Int?,
     val option: String?,
     val rate: Int?,
-    val text: String?
-):Parcelable,ResponseObject<AnswerModel> {
+    val text: String?,
+    val question:Int?
+
+    ):Parcelable,ResponseObject<AnswerModel> {
     override fun toDomain(): AnswerModel {
-        return AnswerModel(id,option,rate,text)
+        return AnswerModel(id,option,rate,text,0)
     }
+
 }

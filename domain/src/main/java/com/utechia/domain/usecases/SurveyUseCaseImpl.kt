@@ -14,4 +14,8 @@ class SurveyUseCaseImpl @Inject constructor(private val surveyRepo: SurveyRepo):
     override suspend fun getSurvey(id: Int): MutableList<SurveyModel> {
         return surveyRepo.getSurvey(id)
     }
+
+    override suspend fun getEvaluate(): MutableList<SurveyModel> {
+        return surveyRepo.getEvaluate()
+    }
 }

@@ -205,6 +205,11 @@ class MainActivity : AppCompatActivity() {
 
                     }
 
+                    R.id.surveySystemFragment -> {
+                        design("survey")
+
+                    }
+
                     else -> {
                         design("drawer")
                     }
@@ -332,6 +337,11 @@ class MainActivity : AppCompatActivity() {
 
                 R.id.permissionFragment -> {
                     design("permission")
+
+                }
+
+                R.id.surveySystemFragment -> {
+                    design("survey")
 
                 }
 
@@ -559,6 +569,17 @@ class MainActivity : AppCompatActivity() {
                 binding.toolbar.visibility = View.INVISIBLE
                 binding.customButton.visibility = View.GONE
                 binding.customTitle.text = "Leave Requests"
+                binding.bottomNavigation.visibility = View.GONE
+                binding.drawerLayout.setDrawerLockMode(DrawerLayout.LOCK_MODE_LOCKED_CLOSED)
+
+            }
+
+            "survey" ->{
+                window.statusBarColor = ContextCompat.getColor(this, R.color.status)
+                binding.customToolbar.visibility = View.VISIBLE
+                binding.toolbar.visibility = View.INVISIBLE
+                binding.customButton.visibility = View.GONE
+                binding.customTitle.text = "Survey System"
                 binding.bottomNavigation.visibility = View.GONE
                 binding.drawerLayout.setDrawerLockMode(DrawerLayout.LOCK_MODE_LOCKED_CLOSED)
 

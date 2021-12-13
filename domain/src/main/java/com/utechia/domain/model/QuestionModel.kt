@@ -1,6 +1,5 @@
 package com.utechia.domain.model
 
-import kotlinx.parcelize.RawValue
 
 data class QuestionModel(
 
@@ -8,7 +7,7 @@ data class QuestionModel(
     val id: Int?,
     val options: MutableList<String>?,
     val rate: Any?,
-    val ratestars: Int?,
+    val ratestars: Any?,
     val text:Any?,
     val title: String?,
     val type: String?

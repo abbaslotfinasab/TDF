@@ -68,9 +68,6 @@ interface Service {
     @PATCH("cafeteria/cancel-order")
     suspend fun cancelOrder(@Body favoriteBody: FavoriteBody ):Response<CancelOrder>
 
-    @POST("survey/avgteaboy")
-    suspend fun getStar():Response<Star>
-
     @PATCH("teaboy/status")
     suspend fun updateStatus(@Query("status") status: Boolean)
 
@@ -121,5 +118,12 @@ interface Service {
 
     @GET("survey/getarray")
     suspend fun getSurvey(@Query("id")id: Int):Response<Survey>
+
+    @POST("survey/evaluted")
+    suspend fun getEvaluate():Response<Survey>
+
+    @Headers("Content-Type: application/json")
+    @POST("survey/evaluted")
+    suspend fun postAnswer(@Body answer: MutableList<Answer>):Response<Survey>
 
 }

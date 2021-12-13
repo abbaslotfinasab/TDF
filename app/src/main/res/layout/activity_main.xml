@@ -150,8 +150,8 @@
 
         <ImageButton
             android:id="@+id/customButton"
-            android:layout_width="@dimen/_60sdp"
-            android:layout_height="@dimen/_60sdp"
+            android:layout_width="@dimen/_55sdp"
+            android:layout_height="@dimen/_55sdp"
             android:background="@null"
             android:src="@mipmap/btn"
             android:scaleType="centerCrop"

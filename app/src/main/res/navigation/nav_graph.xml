@@ -2,7 +2,8 @@
 <navigation xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    android:id="@+id/nav_graph">
+    android:id="@+id/nav_graph"
+    app:startDestination="@id/createSurveyFragment">
 
     <fragment
         android:id="@+id/userhomeFragment"
@@ -110,9 +111,13 @@
         tools:layout="@layout/fragment_qr_code" />
     <fragment
         android:id="@+id/surveySystemFragment"
-        android:name="com.utechia.tdf.more.SurveySystemFragment"
+        android:name="com.utechia.tdf.survey.SurveySystemFragment"
         android:label="fragment_survey_system"
-        tools:layout="@layout/fragment_survey_system" />
+        tools:layout="@layout/fragment_survey_system" >
+        <action
+            android:id="@+id/action_surveySystemFragment_to_createSurveyFragment"
+            app:destination="@id/createSurveyFragment" />
+    </fragment>
     <fragment
         android:id="@+id/eventSystemFragment"
         android:name="com.utechia.tdf.more.EventSystemFragment"
@@ -505,5 +510,14 @@
             app:destination="@id/permissionFragment" />
 
     </dialog>
+    <fragment
+        android:id="@+id/createSurveyFragment"
+        android:name="com.utechia.tdf.survey.CreateSurveyFragment"
+        android:label="fragment_create_survey"
+        tools:layout="@layout/fragment_create_survey" >
+        <argument
+            android:name="id"
+            app:argType="integer" />
+    </fragment>
 
 </navigation>

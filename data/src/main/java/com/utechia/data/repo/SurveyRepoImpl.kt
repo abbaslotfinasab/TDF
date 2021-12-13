@@ -1,5 +1,6 @@
 package com.utechia.data.repo
 
+import android.util.Log
 import com.utechia.data.api.Service
 import com.utechia.data.utile.NetworkHelper
 import com.utechia.domain.model.SurveyModel
@@ -19,6 +20,7 @@ class SurveyRepoImpl @Inject constructor(
         if (networkHelper.isNetworkConnected()) {
 
             val result = service.getSurveyList()
+            Log.d("statusCode",result.code().toString())
 
             return when (result.isSuccessful) {
 
@@ -38,6 +40,26 @@ class SurveyRepoImpl @Inject constructor(
         if (networkHelper.isNetworkConnected()) {
 
             val result = service.getSurvey(id)
+
+            return when (result.isSuccessful) {
+
+                true -> {
+                    result.body()?.data!!.map { it.toDomain() }.toMutableList()
+                }
+
+                else ->
+                    throw IOException("Server is Not Responding")
+            }
+
+        } else throw IOException("No Internet Connection")
+
+    }
+
+    override suspend fun getEvaluate(): MutableList<SurveyModel> {
+
+        if (networkHelper.isNetworkConnected()) {
+
+            val result = service.getEvaluate()
 
             return when (result.isSuccessful) {
 

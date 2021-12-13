@@ -11,16 +11,16 @@ import kotlinx.serialization.Serializable
 @Parcelize
 @Serializable
 data class Question(
-    val answers: @Contextual @RawValue List<Answer>,
-    val id: Int,
-    val options: MutableList<String>,
-    val rate: @Contextual @RawValue  Any,
-    val ratestars: Int,
-    val text: @Contextual @RawValue  Any,
-    val title: String,
-    val type: String
+    val answers: @Contextual @RawValue MutableList<Answer>?,
+    val id: Int?,
+    val options: MutableList<String>?,
+    val rate: @Contextual @RawValue  Any?,
+    val ratestars: @Contextual @RawValue  Any?,
+    val text: @Contextual @RawValue  Any?,
+    val title: String?,
+    val type: String?
 ):Parcelable,ResponseObject<QuestionModel> {
     override fun toDomain(): QuestionModel {
-        return QuestionModel(answers.map { it.toDomain() }.toMutableList(),id,options,rate,ratestars,text,title,type)
+        return QuestionModel(answers?.map { it.toDomain() }!!.toMutableList(),id,options,rate,ratestars,text,title,type)
     }
 }
