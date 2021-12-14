@@ -116,8 +116,8 @@ interface Service {
     @GET("survey/listactive")
     suspend fun getSurveyList():Response<Survey>
 
-    @GET("survey/getarray")
-    suspend fun getSurvey(@Query("id")id: Int):Response<Survey>
+    @GET("survey/getarray/{id}")
+    suspend fun getSurvey(@Path("id")id: Int):Response<Survey>
 
     @POST("survey/evaluted")
     suspend fun getEvaluate():Response<Survey>

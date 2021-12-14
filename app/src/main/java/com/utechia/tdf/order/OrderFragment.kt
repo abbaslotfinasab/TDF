@@ -53,7 +53,6 @@ class OrderFragment : Fragment() {
                         observer()
                     }
                 }
-
             }
 
             override fun onTabUnselected(tab: TabLayout.Tab?) {
@@ -126,7 +125,6 @@ class OrderFragment : Fragment() {
                         binding.emptyLayout.visibility = View.GONE
                         orderAdapter.addData(it.data)
 
-
                     }
                     else{
                         binding.recyclerView.visibility = View.GONE
@@ -136,7 +134,7 @@ class OrderFragment : Fragment() {
                 }
 
                 is Result.Loading -> {
-                   binding.prg.visibility = View.VISIBLE
+                    binding.prg.visibility = View.VISIBLE
                     binding.recyclerView.visibility = View.GONE
                     binding.emptyLayout.visibility = View.GONE
                 }

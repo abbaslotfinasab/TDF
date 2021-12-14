@@ -47,7 +47,6 @@ class SurveySystemFragment : Fragment() {
 
                     }
                     else -> {
-                        Toast.makeText(context,"worked",Toast.LENGTH_SHORT).show()
                         surveyViewModel.getEvaluate()
                         observer()
                     }
@@ -134,8 +133,5 @@ class SurveySystemFragment : Fragment() {
                 }
             }
         }
-
-
     }
-
 }

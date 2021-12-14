@@ -116,6 +116,4 @@ class OrderViewModel @Inject constructor(
             orderUseCaseImpl.deliveredOrder(id)
         }
     }
-
-
 }
