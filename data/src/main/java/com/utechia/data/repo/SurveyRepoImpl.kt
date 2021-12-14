@@ -1,6 +1,5 @@
 package com.utechia.data.repo
 
-import android.util.Log
 import com.utechia.data.api.Service
 import com.utechia.data.utile.NetworkHelper
 import com.utechia.domain.model.SurveyModel
@@ -20,7 +19,6 @@ class SurveyRepoImpl @Inject constructor(
         if (networkHelper.isNetworkConnected()) {
 
             val result = service.getSurveyList()
-            Log.d("statusCode",result.code().toString())
 
             return when (result.isSuccessful) {
 

@@ -5,7 +5,7 @@
     <item
         android:id="@+id/teaBoyHomeFragment"
         android:icon="@drawable/ic_home"
-        android:title="HOME"/>
+        android:title="Home"/>
 
     <item
         android:id="@+id/navigation_qrcode"
@@ -16,6 +16,6 @@
     <item
         android:id="@+id/teaBoyOrdersFragment"
         android:icon="@drawable/ic_refreshment"
-        android:title="ORDERS"/>
+        android:title="Orders"/>
 
 </menu>

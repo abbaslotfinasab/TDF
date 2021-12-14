@@ -20,7 +20,7 @@ data class SurveyData(
     val isexpierd: Boolean?,
     val isinprogress: Boolean?,
     val iswatting: Boolean?,
-    val questions: @Contextual @RawValue MutableList<Question>?=null,
+    val questions: @Contextual @RawValue List<Question>?= emptyList(),
     val surveystatus: String?,
     val surveytype: String?,
     val systemtype: String?,

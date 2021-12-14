@@ -1,6 +1,5 @@
 package com.utechia.domain.model
 
-import kotlinx.parcelize.RawValue
 
 data class SurveyModel(
 
@@ -13,7 +12,7 @@ data class SurveyModel(
     val isexpierd: Boolean?,
     val isinprogress: Boolean?,
     val iswatting: Boolean?,
-    val questions: MutableList<QuestionModel>?,
+    val questions: List<QuestionModel>?,
     val surveystatus: String?,
     val surveytype: String?,
     val systemtype: String?,

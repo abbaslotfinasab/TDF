@@ -10,8 +10,8 @@
 
         <ImageButton
             android:id="@+id/food"
-            android:layout_width="@dimen/_130sdp"
-            android:layout_height="@dimen/_130sdp"
+            android:layout_width="@dimen/_125sdp"
+            android:layout_height="@dimen/_125sdp"
             android:layout_marginStart="@dimen/_18sdp"
             android:layout_marginTop="@dimen/_20sdp"
             android:background="@drawable/food_state"
@@ -21,8 +21,8 @@
 
     <ImageButton
         android:id="@+id/drink"
-        android:layout_width="@dimen/_130sdp"
-        android:layout_height="@dimen/_130sdp"
+        android:layout_width="@dimen/_125sdp"
+        android:layout_height="@dimen/_125sdp"
         android:layout_marginStart="@dimen/_10sdp"
         android:layout_marginTop="@dimen/_20sdp"
         android:background="@drawable/drink_state"
@@ -31,8 +31,8 @@
 
     <ImageButton
         android:id="@+id/favorite"
-        android:layout_width="@dimen/_130sdp"
-        android:layout_height="@dimen/_130sdp"
+        android:layout_width="@dimen/_125sdp"
+        android:layout_height="@dimen/_125sdp"
         android:layout_marginStart="@dimen/_10sdp"
         android:layout_marginTop="@dimen/_10sdp"
         android:background="@drawable/favorite_state"
@@ -41,8 +41,8 @@
 
     <ImageButton
         android:id="@+id/order"
-        android:layout_width="@dimen/_130sdp"
-        android:layout_height="@dimen/_130sdp"
+        android:layout_width="@dimen/_125sdp"
+        android:layout_height="@dimen/_125sdp"
         android:layout_marginStart="@dimen/_18sdp"
         android:layout_marginTop="@dimen/_10sdp"
         android:background="@drawable/order_state"
@@ -64,7 +64,7 @@
             android:id="@+id/imageView8"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginStart="25dp"
+            android:layout_marginStart="10dp"
             android:src="@drawable/ic_group_33749"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintStart_toStartOf="parent"

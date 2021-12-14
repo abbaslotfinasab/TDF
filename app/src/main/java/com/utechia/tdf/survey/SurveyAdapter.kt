@@ -3,14 +3,10 @@ package com.utechia.tdf.survey
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.RatingBar
 import android.widget.TextView
 import androidx.appcompat.widget.AppCompatButton
-import androidx.core.content.ContextCompat
-import androidx.core.os.bundleOf
 import androidx.navigation.findNavController
 import androidx.recyclerview.widget.RecyclerView
-import com.utechia.domain.model.OrderDataModel
 import com.utechia.domain.model.SurveyModel
 import com.utechia.tdf.R
 import java.text.SimpleDateFormat
@@ -58,23 +54,21 @@ class SurveyAdapter: RecyclerView.Adapter<RecyclerView.ViewHolder>() {
 
             dateFormat = sdf.parse(survey[position].datestart)
             simple = SimpleDateFormat("yyyy-MM-dd-HH:mm", Locale.getDefault()).format(dateFormat)
-            startDate.text = "$simple"
+            startDate.text = "From:$simple"
 
             dateFormat = sdf.parse(survey[position].dateend)
             simple = SimpleDateFormat("yyyy-MM-dd-HH:mm", Locale.getDefault()).format(dateFormat)
-            endDate.text = "$simple"
+            endDate.text = "To:$simple"
 
             result.text = "Evaluate"
 
             result.setOnClickListener {
+
                 itemView.findNavController().navigate(R.id.action_surveySystemFragment_to_createSurveyFragment)
+
             }
-
-
         }
-
     }
-
 }
 
 

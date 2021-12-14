@@ -46,7 +46,8 @@ class SurveySystemFragment : Fragment() {
                         observer()
 
                     }
-                    1 -> {
+                    else -> {
+                        Toast.makeText(context,"worked",Toast.LENGTH_SHORT).show()
                         surveyViewModel.getEvaluate()
                         observer()
                     }
