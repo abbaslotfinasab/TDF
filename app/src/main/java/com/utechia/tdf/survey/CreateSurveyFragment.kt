@@ -9,6 +9,7 @@ import android.widget.RatingBar
 import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
+import androidx.navigation.fragment.findNavController
 import com.utechia.domain.model.SurveyModel
 import com.utechia.domain.utile.Result
 import com.utechia.tdf.R
@@ -51,14 +52,20 @@ class CreateSurveyFragment : Fragment() {
 
             if (number<survey[0].questions!!.size-1)
                 number += 1
+
             askQuestion()
+
+
 
         }
 
         binding.btnPrevious.setOnClickListener {
+
             if (number>0)
                 number -= 1
+
             askQuestion()
+
         }
 
         observer()
@@ -88,13 +95,21 @@ class CreateSurveyFragment : Fragment() {
         }
     }
 
-    fun askQuestion(){
+    private fun askQuestion(){
 
         binding.textView22.text = "${number+1}/${survey[0].questions!!.size}"
         binding.questionTitle.text = survey[0].questions!![number].title
 
-        if (number == survey[0].questions!!.size-1)
+        if (number == survey[0].questions!!.size-1){
             binding.btnNext.text = "Evaluate"
+            binding.btnNext.setOnClickListener {
+
+                findNavController().navigate(R.id.createSurveyFragment_to_confirmSurveyFragment)
+
+            }
+
+        }
+
         else
             binding.btnNext.text = "Next"
 

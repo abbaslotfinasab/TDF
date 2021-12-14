@@ -114,9 +114,14 @@
         android:name="com.utechia.tdf.survey.SurveySystemFragment"
         android:label="fragment_survey_system"
         tools:layout="@layout/fragment_survey_system" >
+
         <action
             android:id="@+id/action_surveySystemFragment_to_createSurveyFragment"
             app:destination="@id/createSurveyFragment" />
+
+        <action
+            android:id="@+id/action_surveySystemFragment_to_ratingSurveyFragment"
+            app:destination="@id/ratingSurveyFragment" />
     </fragment>
     <fragment
         android:id="@+id/eventSystemFragment"
@@ -519,6 +524,61 @@
             android:name="id"
             app:argType="integer"
             android:defaultValue="0" />
+
+        <action
+            android:id="@+id/createSurveyFragment_to_confirmSurveyFragment"
+            app:destination="@id/confirmSurveyFragment" />
     </fragment>
+
+    <dialog
+        android:id="@+id/confirmSurveyFragment"
+        android:name="com.utechia.tdf.survey.ConfirmSurveyFragment"
+        android:label="fragment_confirm_survey"
+        tools:layout="@layout/fragment_confirm_survey" >
+
+        <action
+            android:id="@+id/confirmSurveyFragment_to_resultSurveyFragment"
+            app:launchSingleTop="true"
+            app:popUpToInclusive="true"
+            app:popUpTo="@id/nav_graph"
+            app:destination="@id/resultSurveyFragment" />
+
+        <action
+            android:id="@+id/confirmSurveyFragment_to_surveySystemFragment"
+            app:launchSingleTop="true"
+            app:popUpToInclusive="true"
+            app:popUpTo="@id/nav_graph"
+            app:destination="@id/surveySystemFragment" />
+
+    </dialog>
+
+    <fragment
+        android:id="@+id/resultSurveyFragment"
+        android:name="com.utechia.tdf.survey.ResultSurveyFragment"
+        android:label="fragment_result_survey"
+        tools:layout="@layout/fragment_result_survey" >
+
+        <action
+            android:id="@+id/resultSurveyFragment_to_surveySystemFragment"
+            app:launchSingleTop="true"
+            app:popUpToInclusive="true"
+            app:popUpTo="@id/nav_graph"
+            app:destination="@id/surveySystemFragment" />
+
+    </fragment>
+    <dialog
+        android:id="@+id/ratingSurveyFragment"
+        android:name="com.utechia.tdf.survey.RatingSurveyFragment"
+        android:label="fragment_rating_survey"
+        tools:layout="@layout/fragment_rating_survey">
+
+    <argument
+        android:name="id"
+        app:argType="integer"
+        android:defaultValue="0" />
+
+    </dialog>
+
+
 
 </navigation>

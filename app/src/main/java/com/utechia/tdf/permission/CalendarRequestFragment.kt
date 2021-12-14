@@ -63,6 +63,7 @@ class CalendarRequestFragment : DialogFragment() {
                 lMonth = ""
                 fdd = ""
                 ldd = ""
+                calendar.clear()
             }else {
                 Toast.makeText(context,"Please select your request date",Toast.LENGTH_SHORT).show()
             }

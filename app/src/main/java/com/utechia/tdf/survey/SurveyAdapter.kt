@@ -67,6 +67,11 @@ class SurveyAdapter: RecyclerView.Adapter<RecyclerView.ViewHolder>() {
                 val bundle = bundleOf("surveyId" to survey[position].id)
                 itemView.findNavController().navigate(R.id.action_surveySystemFragment_to_createSurveyFragment,bundle)
             }
+
+            rate.setOnClickListener {
+                val bundle = bundleOf("surveyId" to survey[position].id)
+                itemView.findNavController().navigate(R.id.action_surveySystemFragment_to_ratingSurveyFragment,bundle)
+            }
         }
     }
 }

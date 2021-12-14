@@ -71,7 +71,7 @@
             android:progressTint="#FFCB45"
             android:progressBackgroundTint="@color/gray"
             android:secondaryProgressTint="@color/gray"
-            android:rating="0"
+            android:rating="5"
             android:stepSize="0.5"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/questionTitle" />
