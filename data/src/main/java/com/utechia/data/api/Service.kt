@@ -1,6 +1,7 @@
 package com.utechia.data.api
 
 import com.utechia.data.entity.*
+import org.json.JSONArray
 import retrofit2.Response
 import retrofit2.http.*
 
@@ -123,7 +124,7 @@ interface Service {
     suspend fun getEvaluate():Response<Survey>
 
     @Headers("Content-Type: application/json")
-    @POST("survey/evaluted")
-    suspend fun postAnswer(@Body answer: MutableList<Answer>):Response<Survey>
+    @POST("survey/answer")
+    suspend fun postAnswer(@Body answer: JSONArray)
 
 }

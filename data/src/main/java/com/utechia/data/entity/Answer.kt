@@ -15,11 +15,10 @@ data class Answer(
     val option: String?,
     val rate: Int?,
     val text: String?,
-    val question:Int?
 
     ):Parcelable,ResponseObject<AnswerModel> {
     override fun toDomain(): AnswerModel {
-        return AnswerModel(id,option,rate,text,0)
+        return AnswerModel(id,option,rate,text)
     }
 
 }

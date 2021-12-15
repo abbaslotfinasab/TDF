@@ -6,6 +6,5 @@ data class AnswerModel(
     val option: String?,
     val rate: Int?,
     val text: String?,
-    val question: Int?,
 
 )

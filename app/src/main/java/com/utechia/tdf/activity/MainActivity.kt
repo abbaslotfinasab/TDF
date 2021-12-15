@@ -230,7 +230,7 @@ class MainActivity : AppCompatActivity() {
 
                             navController.navigate(R.id.surveySystemFragment)
 
-                        }, 50)
+                        }, 300)
 
                         binding.drawerLayout.closeDrawer(GravityCompat.END)
 
@@ -242,7 +242,7 @@ class MainActivity : AppCompatActivity() {
 
                             navController.navigate(R.id.eventSystemFragment)
 
-                        }, 50)
+                        }, 300)
 
                         binding.drawerLayout.closeDrawer(GravityCompat.END)
 
@@ -254,7 +254,7 @@ class MainActivity : AppCompatActivity() {
 
                             navController.navigate(R.id.ticketSystemFragment)
 
-                        }, 50)
+                        }, 300)
 
                         binding.drawerLayout.closeDrawer(GravityCompat.END)
 
@@ -267,7 +267,7 @@ class MainActivity : AppCompatActivity() {
 
                             navController.navigate(R.id.calendarFragment)
 
-                        }, 100)
+                        }, 300)
 
                         binding.drawerLayout.closeDrawer(GravityCompat.END)
 
@@ -280,7 +280,7 @@ class MainActivity : AppCompatActivity() {
 
                             navController.navigate(R.id.permissionFragment)
 
-                        }, 50)
+                        }, 300)
 
                         binding.drawerLayout.closeDrawer(GravityCompat.END)
 
@@ -364,7 +364,7 @@ class MainActivity : AppCompatActivity() {
 
                         navController.navigate(R.id.surveySystemFragment)
 
-                    }, 50)
+                    }, 300)
 
                     binding.drawerLayout.closeDrawer(GravityCompat.END)
 
@@ -377,7 +377,7 @@ class MainActivity : AppCompatActivity() {
                         navController.navigateUp()
                         navController.navigate(R.id.eventSystemFragment)
 
-                    }, 50)
+                    }, 300)
 
                     binding.drawerLayout.closeDrawer(GravityCompat.END)
 
@@ -389,7 +389,7 @@ class MainActivity : AppCompatActivity() {
 
                         navController.navigate(R.id.ticketSystemFragment)
 
-                    }, 50)
+                    }, 300)
 
                     binding.drawerLayout.closeDrawer(GravityCompat.END)
 
@@ -402,7 +402,7 @@ class MainActivity : AppCompatActivity() {
 
                         navController.navigate(R.id.calendarFragment)
 
-                    }, 50)
+                    }, 300)
 
                     binding.drawerLayout.closeDrawer(GravityCompat.END)
 
@@ -415,7 +415,7 @@ class MainActivity : AppCompatActivity() {
 
                         navController.navigate(R.id.permissionFragment)
 
-                    }, 50)
+                    }, 300)
 
                     binding.drawerLayout.closeDrawer(GravityCompat.END)
 

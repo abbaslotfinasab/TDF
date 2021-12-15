@@ -7,16 +7,25 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.view.Window
+import android.widget.Toast
 import androidx.fragment.app.DialogFragment
+import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
 import com.utechia.tdf.R
 import com.utechia.tdf.databinding.FragmentConfirmSurveyBinding
 import dagger.hilt.android.AndroidEntryPoint
+import java.util.ArrayList
+import org.json.JSONArray
+
 
 @AndroidEntryPoint
 class ConfirmSurveyFragment : DialogFragment() {
 
     private lateinit var binding: FragmentConfirmSurveyBinding
+    private var answer:ArrayList<HashMap<String,Any>> = ArrayList()
+    private val surveyViewModel:SurveyViewModel by viewModels()
+    private lateinit var jsonArray: JSONArray
+
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -36,8 +45,18 @@ class ConfirmSurveyFragment : DialogFragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
+        if (arguments != null) {
+            answer =
+                (requireArguments().getSerializable("answer") as ArrayList<HashMap<String, Any>>?)!!
+        }
+        jsonArray = JSONArray(answer)
+
+        Toast.makeText(context,jsonArray.toString(),Toast.LENGTH_SHORT).show()
+
+
 
         binding.btnKeep.setOnClickListener {
+
             findNavController().navigate(R.id.confirmSurveyFragment_to_resultSurveyFragment)
             dialog?.dismiss()
 
@@ -51,10 +70,6 @@ class ConfirmSurveyFragment : DialogFragment() {
             findNavController().navigate(R.id.confirmSurveyFragment_to_surveySystemFragment)
             dialog?.dismiss()
 
-
         }
-
-
     }
-
 }

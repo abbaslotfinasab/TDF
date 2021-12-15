@@ -1,6 +1,7 @@
 package com.utechia.tdf.survey
 
 import android.os.Bundle
+import java.util.ArrayList
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -23,6 +24,7 @@ class CreateSurveyFragment : Fragment() {
     private val surveyViewModel:SurveyViewModel by viewModels()
     private val survey:MutableList<SurveyModel> = mutableListOf()
     private lateinit var radioButton:RadioButton
+    private val answer:ArrayList<HashMap<String,Any>> = ArrayList()
     private var surveyId = 0
     private var number = 0
 
@@ -44,27 +46,65 @@ class CreateSurveyFragment : Fragment() {
         surveyViewModel.getSurvey(surveyId)
 
         binding.rating.onRatingBarChangeListener =
-            RatingBar.OnRatingBarChangeListener { ratingBar, rating, fromUser ->
+            RatingBar.OnRatingBarChangeListener { _, rating, _ ->
+                if (answer.size>number) {
+                    if (answer[number].isNotEmpty())
+                        answer.removeAt(number)
+                    answer.add(number, hashMapOf("rate" to rating.toInt()))
+                }
+                else
+                    answer.add(number, hashMapOf("rate" to rating.toInt()))
+
+
 
             }
 
+        binding.radioGroup.setOnCheckedChangeListener { group, checkedId ->
+            group.findViewById<RadioButton>(checkedId)?.let {
+
+                if (answer.size>number) {
+                    if (answer[number].isNotEmpty())
+                        answer.removeAt(number)
+                    answer.add(number, hashMapOf("option" to it.text.toString()))
+                }
+                else
+                    answer.add(number, hashMapOf("option" to it.text.toString()))
+            }
+        }
+
+
         binding.btnNext.setOnClickListener {
 
-            if (number<survey[0].questions!!.size-1)
-                number += 1
+            if (binding.description.text.toString() != "")
+            answer.add(number, hashMapOf("text" to binding.description.text.toString()))
 
-            askQuestion()
-
-
+            when {
+                number<survey[0].questions!!.size-1 -> {
+                    number += 1
+                    askQuestion()
+                }
+                answer.size!=0 -> {
+                    val bundle = Bundle()
+                    bundle.putSerializable("answer", answer)
+                    findNavController().navigate(
+                        R.id.createSurveyFragment_to_confirmSurveyFragment,
+                        bundle
+                    )
+                }
+                else -> Toast.makeText(context,"No value for evaluate",Toast.LENGTH_SHORT).show()
+            }
 
         }
 
         binding.btnPrevious.setOnClickListener {
 
-            if (number>0)
-                number -= 1
+            if (binding.description.text.toString() != "")
+            answer.add(number, hashMapOf("text" to binding.description.text.toString()))
 
-            askQuestion()
+            if (number>0) {
+                number -= 1
+                askQuestion()
+            }
 
         }
 
@@ -97,22 +137,13 @@ class CreateSurveyFragment : Fragment() {
 
     private fun askQuestion(){
 
-        binding.textView22.text = "${number+1}/${survey[0].questions!!.size}"
-        binding.questionTitle.text = survey[0].questions!![number].title
-
-        if (number == survey[0].questions!!.size-1){
+        if(number==survey[0].questions?.size!!-1)
             binding.btnNext.text = "Evaluate"
-            binding.btnNext.setOnClickListener {
-
-                findNavController().navigate(R.id.createSurveyFragment_to_confirmSurveyFragment)
-
-            }
-
-        }
-
         else
             binding.btnNext.text = "Next"
 
+        binding.textView22.text = "${number+1}/${survey[0].questions!!.size}"
+        binding.questionTitle.text = survey[0].questions!![number].title
 
         when(survey[0].surveytype){
 
@@ -127,6 +158,7 @@ class CreateSurveyFragment : Fragment() {
                 binding.description.visibility = View.GONE
                 binding.radioGroup.visibility = View.VISIBLE
                 binding.rating.visibility = View.GONE
+
 
                 binding.radioGroup.clearCheck()
                 binding.radioGroup.removeAllViews()
@@ -146,8 +178,8 @@ class CreateSurveyFragment : Fragment() {
                 binding.radioGroup.visibility = View.GONE
                 binding.rating.visibility = View.GONE
 
+
             }
         }
-
     }
 }
