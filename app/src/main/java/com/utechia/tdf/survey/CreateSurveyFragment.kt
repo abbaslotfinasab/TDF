@@ -128,6 +128,7 @@ class CreateSurveyFragment : Fragment() {
                 binding.radioGroup.visibility = View.VISIBLE
                 binding.rating.visibility = View.GONE
 
+                binding.radioGroup.clearCheck()
                 binding.radioGroup.removeAllViews()
 
                 for (i in 0 until survey[0].questions!![number].options!!.size){

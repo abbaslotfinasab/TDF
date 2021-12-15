@@ -55,11 +55,11 @@ class SurveyAdapter: RecyclerView.Adapter<RecyclerView.ViewHolder>() {
 
             dateFormat = sdf.parse(survey[position].datestart)
             simple = SimpleDateFormat("yyyy-MM-dd-HH:mm", Locale.getDefault()).format(dateFormat)
-            startDate.text = "From:$simple"
+            startDate.text = "$simple"
 
             dateFormat = sdf.parse(survey[position].dateend)
             simple = SimpleDateFormat("yyyy-MM-dd-HH:mm", Locale.getDefault()).format(dateFormat)
-            endDate.text = "To:$simple"
+            endDate.text = "$simple"
 
             result.text = "Evaluate"
 
@@ -68,10 +68,7 @@ class SurveyAdapter: RecyclerView.Adapter<RecyclerView.ViewHolder>() {
                 itemView.findNavController().navigate(R.id.action_surveySystemFragment_to_createSurveyFragment,bundle)
             }
 
-            rate.setOnClickListener {
-                val bundle = bundleOf("surveyId" to survey[position].id)
-                itemView.findNavController().navigate(R.id.action_surveySystemFragment_to_ratingSurveyFragment,bundle)
-            }
+            rate.text = survey[position].surveytype
         }
     }
 }

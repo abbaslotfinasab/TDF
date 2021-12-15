@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:background="@color/white"
     android:layout_height="117dp">
@@ -18,14 +19,25 @@
         app:layout_constraintTop_toTopOf="parent" />
 
     <TextView
-        android:id="@+id/startDate"
+        android:id="@+id/from"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="15dp"
-        android:textColor="@color/black"
+        android:text="From:"
+        android:textColor="#828282"
         android:textSize="11sp"
         app:layout_constraintBottom_toTopOf="@+id/status"
         app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/title" />
+
+    <TextView
+        android:id="@+id/startDate"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textColor="@color/black"
+        android:textSize="11sp"
+        app:layout_constraintBottom_toTopOf="@+id/status"
+        app:layout_constraintStart_toEndOf="@+id/from"
         app:layout_constraintTop_toBottomOf="@+id/title" />
 
     <TextView
@@ -72,10 +84,12 @@
 
     <androidx.appcompat.widget.AppCompatButton
         android:id="@+id/btnRate"
-        android:layout_width="62dp"
-        android:layout_height="18dp"
+        android:layout_width="wrap_content"
+        android:layout_height="20dp"
         android:layout_marginTop="15dp"
         android:layout_marginEnd="15dp"
+        android:paddingEnd="5dp"
+        android:paddingStart="5dp"
         android:background="@drawable/rating_back"
         android:gravity="center"
         android:text="Rating"
@@ -85,6 +99,18 @@
         android:visibility="visible"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/to"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="15dp"
+        android:text="To:"
+        android:textColor="#828282"
+        android:textSize="11sp"
+        app:layout_constraintBottom_toTopOf="@+id/btnResult"
+        app:layout_constraintEnd_toStartOf="@id/endDate"
+        app:layout_constraintTop_toBottomOf="@+id/btnRate" />
 
     <TextView
         android:id="@+id/endDate"
