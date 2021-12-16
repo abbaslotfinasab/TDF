@@ -11,6 +11,8 @@ import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.CoroutineExceptionHandler
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
+import kotlinx.serialization.json.JsonArray
+import org.json.JSONArray
 import javax.inject.Inject
 
 @HiltViewModel
@@ -63,6 +65,17 @@ class SurveyViewModel @Inject constructor(
 
                 _survey.postValue(Result.Success(it))
             }
+        }
+    }
+
+    fun postAnswer(answer:JSONArray){
+
+        viewModelScope.launch(Dispatchers.IO+handler) {
+
+            _survey.postValue(Result.Loading)
+
+            surveyUseCaseImpl.postAnswer(answer)
+
         }
     }
 }

@@ -3,6 +3,8 @@ package com.utechia.tdf.survey
 import android.graphics.Color
 import android.graphics.drawable.ColorDrawable
 import android.os.Bundle
+import android.os.Handler
+import android.os.Looper
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -53,9 +55,16 @@ class ConfirmSurveyFragment : DialogFragment() {
 
         binding.btnKeep.setOnClickListener {
 
+            surveyViewModel.postAnswer(jsonArray)
+
+            binding.prg.visibility = View.VISIBLE
+
+            Handler(Looper.getMainLooper()).postDelayed({
+
             findNavController().navigate(R.id.confirmSurveyFragment_to_resultSurveyFragment)
             dialog?.dismiss()
 
+            }, 300)
         }
 
         binding.exit.setOnClickListener {

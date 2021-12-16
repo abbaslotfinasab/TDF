@@ -69,6 +69,8 @@ class RequestDetailsFragment : DialogFragment() {
 
             when (it) {
                 is Result.Success -> {
+                    binding.from.visibility = View.VISIBLE
+                    binding.to.visibility = View.VISIBLE
                     binding.prg.visibility = View.GONE
                     binding.title.text = it.data[0].type
                     binding.description.text = it.data[0].description
@@ -85,11 +87,16 @@ class RequestDetailsFragment : DialogFragment() {
 
                 is Result.Loading -> {
                     binding.prg.visibility = View.VISIBLE
+                    binding.from.visibility = View.GONE
+                    binding.to.visibility = View.GONE
+
 
                 }
 
                 is Result.Error -> {
                     binding.prg.visibility = View.GONE
+                    binding.from.visibility = View.GONE
+                    binding.to.visibility = View.GONE
                     Toast.makeText(context, it.message, Toast.LENGTH_SHORT).show()
                 }
             }

@@ -19,7 +19,8 @@ import java.util.*
 class CalendarRequestFragment : DialogFragment() {
 
     private lateinit var binding: FragmentCalendarRequestBinding
-    private var calendar:Calendar = Calendar.getInstance()
+    private var startCalendar:Calendar = Calendar.getInstance()
+    private var endCalendar:Calendar = Calendar.getInstance()
     private var startTime = ""
     private var endTime = ""
     private var first = ""
@@ -43,32 +44,23 @@ class CalendarRequestFragment : DialogFragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        calendar.set(calendar.get(Calendar.YEAR)+3,5,29,calendar.get(Calendar.HOUR),calendar.get(Calendar.MINUTE),calendar.get(Calendar.SECOND))
+        endCalendar.set(Calendar.YEAR,2024)
+        startCalendar.set(endCalendar.get(Calendar.YEAR),5,29,endCalendar.get(Calendar.HOUR),endCalendar.get(Calendar.MINUTE),endCalendar.get(Calendar.SECOND))
 
         binding.btnCancel.setOnClickListener {
 
             if (startTime !="" && endTime !="" && first!="" && last !="") {
+
                 val bundle = bundleOf("start" to startTime, "end" to endTime)
                 findNavController().navigate(
                     R.id.calendarRequestFragment_to_createRequestFragment,
                     bundle
                 )
-                startTime = ""
-                endTime = ""
-                first = ""
-                last = ""
-                hh = ""
-                mm = ""
-                fMonth = ""
-                lMonth = ""
-                fdd = ""
-                ldd = ""
-                calendar.clear()
             }else {
                 Toast.makeText(context,"Please select your request date",Toast.LENGTH_SHORT).show()
             }
         }
-        binding.calendar.setSelectableDateRange(Calendar.getInstance(),calendar)
+        binding.calendar.setSelectableDateRange(Calendar.getInstance(),startCalendar)
 
         binding.calendar.setCalendarListener(object :CalendarListener{
             override fun onDateRangeSelected(startDate: Calendar, endDate: Calendar) {
@@ -103,6 +95,10 @@ class CalendarRequestFragment : DialogFragment() {
             override fun onFirstDateSelected(startDate: Calendar) {
                 binding.start.text = ""
                 binding.end.text = ""
+                binding.start.visibility = View.GONE
+                binding.end.visibility = View.GONE
+                binding.from.visibility = View.GONE
+                binding.to.visibility = View.GONE
 
                 selectTime(1)
                 fMonth = "${startDate.get(Calendar.MONTH)+1}"
@@ -147,10 +143,13 @@ class CalendarRequestFragment : DialogFragment() {
                             "$hour:0$minute"
                         else
                             "$hour:$minute"
-
+                        binding.from.visibility = View.VISIBLE
                         binding.start.text = "$startTime-$first"
                         startTime = "${startTime}T$first:00.000Z"
                         binding.end.text = ""
+                        binding.to.visibility = View.GONE
+                        binding.start.visibility = View.VISIBLE
+                        binding.end.visibility = View.GONE
                     }
                     2->{
                         hh = hour.toString()
@@ -165,9 +164,13 @@ class CalendarRequestFragment : DialogFragment() {
                         else
                             "$hour:$minute"
 
+                        binding.from.visibility = View.VISIBLE
+                        binding.to.visibility = View.VISIBLE
                         startTime = "${startTime}T$first:00.000Z"
                         binding.end.text = "$endTime-$last"
                         endTime = "${endTime}T$last:00.000Z"
+                        binding.start.visibility = View.VISIBLE
+                        binding.end.visibility = View.VISIBLE
 
                     }
                 }

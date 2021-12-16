@@ -64,7 +64,7 @@ class RejectFragment : DialogFragment() {
                 findNavController().navigate(R.id.action_rejectFragment_to_teaBoyOrdersFragment)
                 dialog?.dismiss()
 
-            }, 300)
+            }, 1000)
 
         }
 

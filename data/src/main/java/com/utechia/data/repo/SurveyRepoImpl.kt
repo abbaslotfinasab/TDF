@@ -4,6 +4,7 @@ import com.utechia.data.api.Service
 import com.utechia.data.utile.NetworkHelper
 import com.utechia.domain.model.SurveyModel
 import com.utechia.domain.repository.SurveyRepo
+import org.json.JSONArray
 import java.io.IOException
 import javax.inject.Inject
 import javax.inject.Singleton
@@ -71,6 +72,10 @@ class SurveyRepoImpl @Inject constructor(
 
         } else throw IOException("No Internet Connection")
 
+    }
+
+    override suspend fun postAnswer(answer: JSONArray) {
+        service.postAnswer(answer)
     }
 
 }

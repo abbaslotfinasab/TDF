@@ -50,12 +50,10 @@ class CreateSurveyFragment : Fragment() {
                 if (answer.size>number) {
                     if (answer[number].isNotEmpty())
                         answer.removeAt(number)
-                    answer.add(number, hashMapOf("rate" to rating.toInt()))
+                    answer.add(number, hashMapOf("rate" to rating.toInt(),"question" to survey[0].questions!![number].id!!))
                 }
                 else
-                    answer.add(number, hashMapOf("rate" to rating.toInt()))
-
-
+                    answer.add(number, hashMapOf("rate" to rating.toInt(),"question" to survey[0].questions!![number].id!!))
 
             }
 
@@ -65,10 +63,10 @@ class CreateSurveyFragment : Fragment() {
                 if (answer.size>number) {
                     if (answer[number].isNotEmpty())
                         answer.removeAt(number)
-                    answer.add(number, hashMapOf("option" to it.text.toString()))
+                    answer.add(number, hashMapOf("option" to it.text.toString(),"question" to survey[0].questions!![number].id!!))
                 }
                 else
-                    answer.add(number, hashMapOf("option" to it.text.toString()))
+                    answer.add(number, hashMapOf("option" to it.text.toString(),"question" to survey[0].questions!![number].id!!))
             }
         }
 
@@ -76,7 +74,7 @@ class CreateSurveyFragment : Fragment() {
         binding.btnNext.setOnClickListener {
 
             if (binding.description.text.toString() != "")
-            answer.add(number, hashMapOf("text" to binding.description.text.toString()))
+            answer.add(number, hashMapOf("text" to binding.description.text.toString(), "question" to survey[0].questions!![number].id!!))
 
             when {
                 number<survey[0].questions!!.size-1 -> {

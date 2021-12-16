@@ -91,7 +91,7 @@ class CartFragment : Fragment() {
                             icon.setBounds(left,top,right,bottom)
                         }
                         else if (dX > 0){
-                            icon.setBounds(top,top,top,bottom)
+                            icon.setBounds(left,top,top,bottom)
 
                         }
                         icon.draw(c)

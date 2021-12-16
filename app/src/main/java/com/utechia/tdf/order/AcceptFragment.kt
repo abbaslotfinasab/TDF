@@ -3,6 +3,8 @@ package com.utechia.tdf.order
 import android.graphics.Color
 import android.graphics.drawable.ColorDrawable
 import android.os.Bundle
+import android.os.Handler
+import android.os.Looper
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -52,9 +54,14 @@ class AcceptFragment : DialogFragment() {
 
         binding.btnAccept.setOnClickListener {
             orderViewModel.acceptOrder(orderId)
+
+            binding.prg.visibility = View.VISIBLE
+
+            Handler(Looper.getMainLooper()).postDelayed({
             findNavController().clearBackStack(R.id.teaBoyOrdersFragment)
             findNavController().navigate(R.id.action_acceptFragment_to_teaBoyOrdersFragment)
             dialog?.dismiss()
+            }, 300)
         }
 
 
