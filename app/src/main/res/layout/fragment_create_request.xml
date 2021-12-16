@@ -17,6 +17,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="50dp"
+            android:visibility="gone"
             android:src="@drawable/ic_group_48281"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
@@ -28,6 +29,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="45dp"
+            android:visibility="gone"
             android:layout_marginTop="40dp"
             android:text="Type of Permission"
             android:textColor="@color/black"
@@ -39,17 +41,19 @@
             android:id="@+id/radioGroup"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:visibility="gone"
             android:layout_marginStart="45dp"
             android:layout_marginTop="30dp"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/textView6"/>
 
         <TextView
-            android:id="@+id/textView7"
+            android:id="@+id/title"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="45dp"
             android:layout_marginTop="37dp"
+            android:visibility="gone"
             android:text="Description"
             android:textColor="#9999A7"
             android:textSize="14sp"
@@ -65,12 +69,13 @@
             android:gravity="top"
             android:padding="10dp"
             android:layout_marginEnd="35dp"
+            android:visibility="gone"
             android:background="@drawable/description_back"
             android:textColor="@color/black"
             android:textSize="13sp"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/textView7" />
+            app:layout_constraintTop_toBottomOf="@+id/title" />
 
 
         <androidx.appcompat.widget.AppCompatButton
@@ -87,7 +92,7 @@
             android:textAllCaps="false"
             android:textColor="@color/white"
             android:textSize="12sp"
-            android:visibility="visible"
+            android:visibility="gone"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"

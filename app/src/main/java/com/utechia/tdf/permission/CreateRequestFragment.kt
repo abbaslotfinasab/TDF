@@ -81,6 +81,13 @@ class CreateRequestFragment : DialogFragment() {
             when (it) {
                 is Result.Success -> {
                     binding.prg.visibility = View.GONE
+                    binding.imageView15.visibility = View.VISIBLE
+                    binding.textView6.visibility = View.VISIBLE
+                    binding.radioGroup.visibility = View.VISIBLE
+                    binding.title.visibility = View.VISIBLE
+                    binding.description.visibility = View.VISIBLE
+                    binding.btnRequest.visibility = View.VISIBLE
+
                     for (i in 0 until it.data.size){
 
                         radioButton = RadioButton(context,null,0,R.style.Widget_AppCompat_CompoundButton_CheckBox)
@@ -94,11 +101,23 @@ class CreateRequestFragment : DialogFragment() {
 
                 is Result.Loading -> {
                     binding.prg.visibility = View.VISIBLE
+                    binding.imageView15.visibility = View.GONE
+                    binding.textView6.visibility = View.GONE
+                    binding.radioGroup.visibility = View.GONE
+                    binding.title.visibility = View.GONE
+                    binding.description.visibility = View.GONE
+                    binding.btnRequest.visibility = View.GONE
 
                 }
 
                 is Result.Error -> {
                     binding.prg.visibility = View.GONE
+                    binding.imageView15.visibility = View.GONE
+                    binding.textView6.visibility = View.GONE
+                    binding.radioGroup.visibility = View.GONE
+                    binding.title.visibility = View.GONE
+                    binding.description.visibility = View.GONE
+                    binding.btnRequest.visibility = View.GONE
                     Toast.makeText(context, it.message, Toast.LENGTH_SHORT).show()
                 }
             }
