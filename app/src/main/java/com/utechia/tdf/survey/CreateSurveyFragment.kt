@@ -164,7 +164,7 @@ class CreateSurveyFragment : Fragment() {
                 binding.radioGroup.removeAllViews()
 
                 for (i in 0 until survey[0].questions!![number].options!!.size){
-                    radioButton = RadioButton(context,null,0, R.style.Widget_AppCompat_CompoundButton_CheckBox)
+                    radioButton = RadioButton(context,null,0, R.style.CheckBox)
                     radioButton.text = survey[0].questions!![number].options!![i]
                     radioButton.id = i
                     binding.radioGroup.addView(radioButton)

@@ -37,4 +37,10 @@
         <item name="textAllCaps">false</item>
     </style>
 
+    <style name="CheckBox" parent="Base.Widget.AppCompat.CompoundButton.CheckBox">
+        <item name="colorAccent">#59B48D</item>
+        <item name="android:buttonTint">#59B48D</item>
+        <item name="android:textColorSecondary">#EAEAEA</item>
+    </style>
+
 </resources>

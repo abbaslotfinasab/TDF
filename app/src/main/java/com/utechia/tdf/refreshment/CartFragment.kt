@@ -1,10 +1,13 @@
 package com.utechia.tdf.refreshment
 
+import android.graphics.Canvas
+import android.graphics.drawable.Drawable
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
+import androidx.core.content.ContextCompat
 import androidx.core.os.bundleOf
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
@@ -64,6 +67,44 @@ class CartFragment : Fragment() {
                 override fun onSwiped(viewHolder: RecyclerView.ViewHolder, direction: Int) {
                     val bundle = bundleOf("foodId" to food[viewHolder.layoutPosition].food.id)
                     findNavController().navigate(R.id.action_cartFragment_to_deleteFragment,bundle)
+                }
+
+                override fun onChildDraw(
+                    c: Canvas,
+                    recyclerView: RecyclerView,
+                    viewHolder: RecyclerView.ViewHolder,
+                    dX: Float,
+                    dY: Float,
+                    actionState: Int,
+                    isCurrentlyActive: Boolean
+                ) {
+                    if (actionState == ItemTouchHelper.ACTION_STATE_SWIPE) {
+                        val itemView : View = viewHolder.itemView
+                        val icon : Drawable =
+                            ContextCompat.getDrawable(context,R.drawable.ic_delete_icon)!!
+                        val top = itemView.top + (itemView.height - icon.intrinsicHeight) / 2
+                        val left = itemView.width - icon.intrinsicWidth - (itemView.height - icon.intrinsicHeight) / 2
+                        val right = left + icon.intrinsicHeight
+                        val bottom = top + icon.intrinsicHeight
+
+                        if (dX < 0){
+                            icon.setBounds(left,top,right,bottom)
+                        }
+                        else if (dX > 0){
+                            icon.setBounds(top,top,top,bottom)
+
+                        }
+                        icon.draw(c)
+                    }
+                    super.onChildDraw(
+                        c,
+                        recyclerView,
+                        viewHolder,
+                        dX,
+                        dY,
+                        actionState,
+                        isCurrentlyActive
+                    )
                 }
             }).attachToRecyclerView(binding.recyclerView)
         }

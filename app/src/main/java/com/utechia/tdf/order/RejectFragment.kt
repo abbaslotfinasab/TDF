@@ -3,6 +3,8 @@ package com.utechia.tdf.order
 import android.graphics.Color
 import android.graphics.drawable.ColorDrawable
 import android.os.Bundle
+import android.os.Handler
+import android.os.Looper
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -51,15 +53,20 @@ class RejectFragment : DialogFragment() {
         }
 
         binding.btnDelete.setOnClickListener {
+
             orderViewModel.rejectOrder(orderId)
-            findNavController().clearBackStack(R.id.teaBoyOrdersFragment)
-            findNavController().navigate(R.id.action_rejectFragment_to_teaBoyOrdersFragment)
-            dialog?.dismiss()
+
+            binding.prg.visibility = View.VISIBLE
+
+            Handler(Looper.getMainLooper()).postDelayed({
+
+                findNavController().clearBackStack(R.id.teaBoyOrdersFragment)
+                findNavController().navigate(R.id.action_rejectFragment_to_teaBoyOrdersFragment)
+                dialog?.dismiss()
+
+            }, 300)
+
         }
-
-
-
-
 
     }
 

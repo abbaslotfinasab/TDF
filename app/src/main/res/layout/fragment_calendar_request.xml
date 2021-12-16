@@ -26,6 +26,7 @@
             android:layout_width="@dimen/_250sdp"
             android:layout_height="@dimen/_250sdp"
             android:layout_marginTop="@dimen/_30sdp"
+            app:selected_date_circle_color="#59B48D"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/imageView15" />

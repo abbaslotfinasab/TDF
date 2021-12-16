@@ -90,7 +90,7 @@ class CreateRequestFragment : DialogFragment() {
 
                     for (i in 0 until it.data.size){
 
-                        radioButton = RadioButton(context,null,0,R.style.Widget_AppCompat_CompoundButton_CheckBox)
+                        radioButton = RadioButton(context,null,0,R.style.CheckBox)
                         radioButton.text = it.data[i]
                         radioButton.id = i
                         binding.radioGroup.addView(radioButton)

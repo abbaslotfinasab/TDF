@@ -56,7 +56,7 @@ class DeleteFragment : DialogFragment() {
                 findNavController().navigate(R.id.action_deleteFragment_to_cartFragment)
                 dialog?.dismiss()
 
-            }, 500)
+            }, 300)
 
         }
 

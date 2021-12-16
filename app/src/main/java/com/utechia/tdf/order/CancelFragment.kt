@@ -3,6 +3,8 @@ package com.utechia.tdf.order
 import android.graphics.Color
 import android.graphics.drawable.ColorDrawable
 import android.os.Bundle
+import android.os.Handler
+import android.os.Looper
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -39,8 +41,8 @@ class CancelFragment : DialogFragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        if (arguments !=null){
-           orderId = requireArguments().getInt("orderId")
+        if (arguments != null) {
+            orderId = requireArguments().getInt("orderId")
 
         }
 
@@ -53,14 +55,16 @@ class CancelFragment : DialogFragment() {
         }
 
         binding.btnCancel.setOnClickListener {
+
             orderViewModel.cancelOrder(orderId)
-            findNavController().clearBackStack(R.id.orderFragment)
-            findNavController().navigate(R.id.action_cancelFragment_to_orderFragment)
-            dialog?.dismiss()
+
+            binding.prg.visibility = View.VISIBLE
+
+            Handler(Looper.getMainLooper()).postDelayed({
+                findNavController().clearBackStack(R.id.orderFragment)
+                findNavController().navigate(R.id.action_cancelFragment_to_orderFragment)
+                dialog?.dismiss()
+            }, 300)
         }
-
-
-
     }
-
 }
