@@ -42,10 +42,10 @@ class PermissionAdapter: RecyclerView.Adapter<RecyclerView.ViewHolder>() {
     override fun getItemCount(): Int = permission.size
 
     inner class ViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
-        private val date: TextView = itemView.findViewById(R.id.date)
+        private val date: TextView = itemView.findViewById(R.id.endDate)
         private val number: TextView = itemView.findViewById(R.id.numberText)
         private val title: TextView = itemView.findViewById(R.id.title)
-        private val from: TextView = itemView.findViewById(R.id.subtitle)
+        private val from: TextView = itemView.findViewById(R.id.startDate)
         private val status: TextView = itemView.findViewById(R.id.status)
         private val details: TextView = itemView.findViewById(R.id.btnDetails)
         private val cancel: TextView = itemView.findViewById(R.id.btnCancel)
@@ -55,11 +55,11 @@ class PermissionAdapter: RecyclerView.Adapter<RecyclerView.ViewHolder>() {
 
             dateFormat = sdf.parse(permission[position].datestarts)
             simple = SimpleDateFormat("yyyy-MM-dd-HH:mm").format(dateFormat)
-            from.text = "From:${simple}"
+            from.text = "${simple}"
 
             dateFormat = sdf.parse(permission[position].dateends)
             simple = SimpleDateFormat("yyyy-MM-dd-HH:mm").format(dateFormat)
-            date.text = "To:${simple}"
+            date.text = "${simple}"
 
             title.text = permission[position].type
             number.text = permission[position].timeLength

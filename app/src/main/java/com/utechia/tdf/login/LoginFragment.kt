@@ -111,7 +111,6 @@ class LoginFragment : Fragment() {
                 }
 
                 is Result.Error ->{
-                    binding.prg.visibility = View.GONE
                     binding.appCompatButton.isEnabled = true
                     findNavController().navigate(R.id.action_loginFragment_to_authenticationFragment)
                 }
@@ -139,8 +138,8 @@ class LoginFragment : Fragment() {
                 }
 
                 is Result.Error -> {
-                    binding.appCompatButton.isEnabled = true
                     binding.prg.visibility = View.GONE
+                    binding.appCompatButton.isEnabled = true
                     Toast.makeText(context, it.message, Toast.LENGTH_SHORT).show()
 
                 }

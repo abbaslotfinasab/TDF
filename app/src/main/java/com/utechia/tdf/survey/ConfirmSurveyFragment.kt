@@ -51,10 +51,6 @@ class ConfirmSurveyFragment : DialogFragment() {
         }
         jsonArray = JSONArray(answer)
 
-        Toast.makeText(context,jsonArray.toString(),Toast.LENGTH_SHORT).show()
-
-
-
         binding.btnKeep.setOnClickListener {
 
             findNavController().navigate(R.id.confirmSurveyFragment_to_resultSurveyFragment)

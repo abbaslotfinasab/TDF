@@ -6,7 +6,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:fillViewport="true"
-    android:background="#E5E5E5"
+    android:background="#EDEDF3"
     tools:context=".refreshment.CreateRefreshmentFragment">
 
     <androidx.constraintlayout.widget.ConstraintLayout
@@ -192,10 +192,11 @@
 
         <com.google.android.material.tabs.TabLayout
             android:id="@+id/tabLayout"
-            android:layout_width="match_parent"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             app:tabTextAppearance="@style/MyCustomTextAppearance"
-            android:background="#E5E5E5"
+            android:background="#EDEDF3"
+            android:padding="5dp"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/drink">

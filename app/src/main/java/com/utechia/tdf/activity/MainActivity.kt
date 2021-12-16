@@ -104,10 +104,16 @@ class MainActivity : AppCompatActivity() {
         }
 
         binding.exit.setOnClickListener {
-
             prefs.edit().clear().apply()
-            navController.popBackStack(R.id.nav_graph,true)
-            navController.navigate(R.id.loginFragment)
+
+            Handler(Looper.getMainLooper()).postDelayed({
+
+                navController.popBackStack(R.id.nav_graph,true)
+                navController.navigate(R.id.loginFragment)
+
+            }, 300)
+
+            binding.drawerLayout.closeDrawer(GravityCompat.END)
 
         }
 

@@ -140,6 +140,7 @@ class CreateReservationFragment : Fragment() {
 
         binding.appCompatButton.setOnClickListener {
 
+            /*
             val bundle = bundleOf(
 
                 "day" to day,
@@ -154,6 +155,7 @@ class CreateReservationFragment : Fragment() {
             )
 
             findNavController().navigate(R.id.action_createReservationFragment_to_reservationDetails,bundle)
+*/
         }
 
         roomObserver()

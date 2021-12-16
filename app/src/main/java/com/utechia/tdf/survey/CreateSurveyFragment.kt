@@ -170,14 +170,12 @@ class CreateSurveyFragment : Fragment() {
                     binding.radioGroup.addView(radioButton)
 
                 }
-
             }
 
             "open_end" ->{
                 binding.description.visibility = View.VISIBLE
                 binding.radioGroup.visibility = View.GONE
                 binding.rating.visibility = View.GONE
-
 
             }
         }

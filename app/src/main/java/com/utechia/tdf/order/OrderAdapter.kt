@@ -58,7 +58,7 @@ class OrderAdapter: RecyclerView.Adapter<RecyclerView.ViewHolder>() {
             date.text = "$simple"
 
             number.text = "${orders[position].cart.items?.size}x"
-            oderId.text = "ID:675867468048609"
+            oderId.text = "Order ID:675867468048609"
 
             if (orders[position].cart.items?.size!! >1){
                 title.text = orders[position].cart.items!![0].food.title+"..."
@@ -108,6 +108,8 @@ class OrderAdapter: RecyclerView.Adapter<RecyclerView.ViewHolder>() {
                     cancel.visibility = View.GONE
                     rating.visibility = View.GONE
                     status.visibility = View.GONE
+                    rateNumber.visibility = View.GONE
+
 
 
                 }
@@ -123,6 +125,11 @@ class OrderAdapter: RecyclerView.Adapter<RecyclerView.ViewHolder>() {
                 }
 
             }
+
+            rating.onRatingBarChangeListener =
+                RatingBar.OnRatingBarChangeListener { _, rating, _ ->
+                    rateNumber.text = rating.toString()
+                }
 
             cancel.setOnClickListener {
                 val bundle = bundleOf("orderId" to orders[position].id)

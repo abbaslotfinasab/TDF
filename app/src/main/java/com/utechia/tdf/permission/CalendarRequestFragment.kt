@@ -148,7 +148,7 @@ class CalendarRequestFragment : DialogFragment() {
                         else
                             "$hour:$minute"
 
-                        binding.start.text = "From: $startTime-$first"
+                        binding.start.text = "$startTime-$first"
                         startTime = "${startTime}T$first:00.000Z"
                         binding.end.text = ""
                     }
@@ -166,7 +166,7 @@ class CalendarRequestFragment : DialogFragment() {
                             "$hour:$minute"
 
                         startTime = "${startTime}T$first:00.000Z"
-                        binding.end.text = "To: $endTime-$last"
+                        binding.end.text = "$endTime-$last"
                         endTime = "${endTime}T$last:00.000Z"
 
                     }

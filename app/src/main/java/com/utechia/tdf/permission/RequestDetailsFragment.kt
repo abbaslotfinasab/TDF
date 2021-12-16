@@ -75,11 +75,11 @@ class RequestDetailsFragment : DialogFragment() {
 
                     dateFormat = sdf.parse(it.data[0].datestarts)
                     simple = SimpleDateFormat("yyyy-MM-dd-HH:mm").format(dateFormat)
-                    binding.date.text = "From:${simple}"
+                    binding.startDate.text = "${simple}"
 
                     dateFormat = sdf.parse(it.data[0].dateends)
                     simple = SimpleDateFormat("yyyy-MM-dd-HH:mm").format(dateFormat)
-                    binding.endDate.text = "To:${simple}"
+                    binding.endDate.text = "${simple}"
 
                 }
 

@@ -6,6 +6,7 @@ import android.view.ViewGroup
 import android.widget.ImageView
 import android.widget.LinearLayout
 import android.widget.TextView
+import androidx.cardview.widget.CardView
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.utechia.domain.model.RefreshmentModel
@@ -41,7 +42,7 @@ class RefreshmentAdapter(private val createRefreshmentFragment: CreateRefreshmen
         private val dislike: ImageView = itemView.findViewById(R.id.dislike)
         private val add: TextView = itemView.findViewById(R.id.plus)
         private val name: TextView = itemView.findViewById(R.id.name)
-        private val layout: LinearLayout = itemView.findViewById(R.id.number)
+        private val layout: CardView = itemView.findViewById(R.id.number)
         private val plus: TextView = itemView.findViewById(R.id.plusNumber)
         private val numberText: TextView = itemView.findViewById(R.id.numberText)
         private val minus: TextView = itemView.findViewById(R.id.minusNumber)
@@ -78,6 +79,7 @@ class RefreshmentAdapter(private val createRefreshmentFragment: CreateRefreshmen
 
             add.setOnClickListener {
                 number += 1
+                numberText.text = number.toString()
                 it.visibility = View.GONE
                 layout.visibility = View.VISIBLE
                 createRefreshmentFragment.cartViewModel.postCart(refreshment[position].id!!,number)
@@ -99,6 +101,8 @@ class RefreshmentAdapter(private val createRefreshmentFragment: CreateRefreshmen
                 }
                 else {
                     number=0
+                    layout.visibility = View.GONE
+                    add.visibility = View.VISIBLE
                     createRefreshmentFragment.cartViewModel.deleteCart(refreshment[position].id!!)
                 }
 
