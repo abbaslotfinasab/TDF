@@ -11,10 +11,11 @@
         android:id="@+id/profilePicture"
         android:layout_width="120dp"
         android:layout_height="120dp"
+        android:background="#D2D9EB"
         app:shapeAppearanceOverlay="@style/roundedImageViewRounded"
         app:layout_constraintBottom_toTopOf="@+id/constraintLayout9"
         app:layout_constraintEnd_toEndOf="@+id/constraintLayout9"
-        android:src="@mipmap/profile"
+        android:src="@drawable/ic_baseline_person_24"
         app:layout_constraintStart_toStartOf="@+id/constraintLayout9"
         app:layout_constraintTop_toTopOf="@+id/constraintLayout9" />
 
