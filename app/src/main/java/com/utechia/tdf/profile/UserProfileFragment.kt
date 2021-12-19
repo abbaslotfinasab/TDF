@@ -1,5 +1,7 @@
 package com.utechia.tdf.profile
 
+import android.content.Context
+import android.content.SharedPreferences
 import android.os.Bundle
 import com.utechia.tdf.databinding.FragmentProfileBinding
 import android.view.LayoutInflater
@@ -12,6 +14,8 @@ import dagger.hilt.android.AndroidEntryPoint
 class UserProfileFragment : Fragment() {
 
     private lateinit var binding: FragmentProfileBinding
+    private lateinit var prefs: SharedPreferences
+
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -24,6 +28,13 @@ class UserProfileFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         binding.profilePicture.bringToFront()
+        prefs = requireActivity().getSharedPreferences("tdf", Context.MODE_PRIVATE)
+
+        binding.name.text = prefs.getString("name","")
+        binding.email.text = prefs.getString("mail","")
+        binding.job.text = prefs.getString("job","")
+
+
 
     }
 

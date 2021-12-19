@@ -81,6 +81,7 @@ class LoginFragment : Fragment() {
                             putString("name",it.data.name)
                             putString("job",it.data.jobTitle)
                             putString("USER_ID",it.data.userHomeId)
+                            putString("mail",it.data.mail)
                             putBoolean("Start",true)
 
                         }.apply()

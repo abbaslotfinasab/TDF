@@ -8,7 +8,10 @@ data class VerifyModel(
     val isTeaBoyActive :Boolean?,
     val floor : Int?,
     val name: String?,
-    val jobTitle:String?
+    val jobTitle:String?,
+    val mail:String?
+
+
 
 
 )
