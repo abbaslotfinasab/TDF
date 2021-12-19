@@ -13,4 +13,13 @@
     <color name="prepare">#335DE0</color>
     <color name="cancel">#FF5A61</color>
     <color name="accepted">#59B48D</color>
+
+    <color name="switchBack">
+
+        <selector xmlns:android="http://schemas.android.com/apk/res/android">
+            <item android:color="#335DE0" android:state_checked="true"/>
+        </selector>
+
+    </color>
+
 </resources>

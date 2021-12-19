@@ -32,6 +32,8 @@
         android:layout_height="20dp"
         android:layout_marginTop="@dimen/_25sdp"
         android:layout_marginEnd="41dp"
+        app:trackTint="@drawable/switch_back"
+        app:thumbTint="@color/white"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
