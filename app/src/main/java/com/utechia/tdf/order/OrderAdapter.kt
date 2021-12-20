@@ -119,6 +119,10 @@ class OrderAdapter: RecyclerView.Adapter<RecyclerView.ViewHolder>() {
                     cancel.visibility = View.INVISIBLE
                     rating.visibility = View.VISIBLE
                     rateNumber.visibility = View.VISIBLE
+                    if (orders[position].orderrate.isNotEmpty()) {
+                        rateNumber.text = orders[position].orderrate[0].rate!!.toFloat().toString()
+                        rating.rating = orders[position].orderrate[0].rate!!.toFloat()
+                    }
 
 
 

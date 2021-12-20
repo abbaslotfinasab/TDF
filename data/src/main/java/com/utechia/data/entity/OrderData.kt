@@ -14,7 +14,7 @@ data class OrderData(
 
     val id: Int?,
     val status: String?,
-    val rating: Int?,
+    val orderrate: @Contextual @RawValue MutableList<Rating>?,
     val floor: String?,
     val createdAt: String?,
     val updatedAt: String?,
@@ -23,6 +23,6 @@ data class OrderData(
 
 ):Parcelable,ResponseObject<OrderDataModel>{
     override fun toDomain(): OrderDataModel {
-        return OrderDataModel(id,status,rating,floor,createdAt,updatedAt,cart.toDomain())
+        return OrderDataModel(id,status,orderrate?.map { it.toDomain() }!!.toMutableList(),floor,createdAt,updatedAt,cart.toDomain())
     }
 }

@@ -100,7 +100,7 @@ class CartFragment : Fragment() {
                         c,
                         recyclerView,
                         viewHolder,
-                        dX,
+                        dX/3,
                         dY,
                         actionState,
                         isCurrentlyActive
