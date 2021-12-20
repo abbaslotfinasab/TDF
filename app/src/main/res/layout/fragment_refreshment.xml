@@ -9,11 +9,10 @@
 
     <ImageButton
         android:id="@+id/food"
-        android:layout_width="@dimen/_120sdp"
-        android:layout_height="@dimen/_120sdp"
-        android:layout_marginStart="@dimen/_25sdp"
-        android:layout_marginTop="@dimen/_20sdp"
-        android:layout_marginBottom="@dimen/_5sdp"
+        android:layout_width="160dp"
+        android:layout_height="160dp"
+        android:layout_marginStart="25dp"
+        android:layout_marginTop="30dp"
         android:background="@drawable/food_state"
         android:scaleType="fitCenter"
         app:layout_constraintStart_toStartOf="parent"
@@ -21,30 +20,32 @@
 
     <ImageButton
         android:id="@+id/drink"
-        android:layout_width="@dimen/_120sdp"
-        android:layout_height="@dimen/_120sdp"
-        android:layout_marginStart="@dimen/_10sdp"
-        android:layout_marginTop="@dimen/_20sdp"
+        android:layout_width="160dp"
+        android:layout_height="160dp"
+        android:layout_marginStart="10dp"
+        android:layout_marginTop="30dp"
+        android:layout_marginBottom="10dp"
         android:background="@drawable/drink_state"
         app:layout_constraintStart_toEndOf="@+id/food"
         app:layout_constraintTop_toTopOf="parent" />
 
     <ImageButton
         android:id="@+id/favorite"
-        android:layout_width="@dimen/_120sdp"
-        android:layout_height="@dimen/_120sdp"
-        android:layout_marginStart="@dimen/_10sdp"
-        android:layout_marginTop="@dimen/_10sdp"
+        android:layout_width="160dp"
+        android:layout_height="160dp"
+        android:layout_marginStart="10dp"
+        android:layout_marginTop="10dp"
+        android:layout_marginBottom="10dp"
         android:background="@drawable/favorite_state"
         app:layout_constraintStart_toEndOf="@+id/order"
         app:layout_constraintTop_toBottomOf="@+id/drink" />
 
     <ImageButton
         android:id="@+id/order"
-        android:layout_width="@dimen/_120sdp"
-        android:layout_height="@dimen/_120sdp"
-        android:layout_marginStart="@dimen/_25sdp"
-        android:layout_marginTop="@dimen/_10sdp"
+        android:layout_width="160dp"
+        android:layout_height="160dp"
+        android:layout_marginStart="25dp"
+        android:layout_marginTop="10dp"
         android:background="@drawable/order_state"
         android:scaleType="fitCenter"
         app:layout_constraintStart_toStartOf="parent"
@@ -54,8 +55,8 @@
     <androidx.constraintlayout.widget.ConstraintLayout
         android:id="@+id/constraintLayout8"
         android:layout_width="0dp"
-        android:layout_height="@dimen/_45sdp"
-        android:layout_marginTop="@dimen/_10sdp"
+        android:layout_height="55dp"
+        android:layout_marginTop="10dp"
         android:background="@color/white"
         app:layout_constraintEnd_toEndOf="@+id/favorite"
         app:layout_constraintStart_toStartOf="@+id/order"

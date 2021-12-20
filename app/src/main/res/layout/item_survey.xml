@@ -127,8 +127,8 @@
 
     <androidx.appcompat.widget.AppCompatButton
         android:id="@+id/btnResult"
-        android:layout_width="@dimen/_60sdp"
-        android:layout_height="@dimen/_20sdp"
+        android:layout_width="70dp"
+        android:layout_height="25dp"
         android:layout_marginEnd="15dp"
         android:layout_marginBottom="15dp"
         android:background="#335DE0"

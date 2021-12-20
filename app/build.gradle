@@ -116,7 +116,4 @@ dependencies {
     implementation 'com.archit.calendar:awesome-calendar:2.0.0'
     implementation 'com.akexorcist:snap-time-picker:1.0.3'
 
-    implementation 'com.intuit.ssp:ssp-android:1.0.6'
-    implementation 'com.intuit.sdp:sdp-android:1.0.6'
-
 }
