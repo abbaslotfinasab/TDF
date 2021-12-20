@@ -121,7 +121,7 @@ class OrderAdapter: RecyclerView.Adapter<RecyclerView.ViewHolder>() {
                     rateNumber.visibility = View.VISIBLE
                     if (orders[position].orderrate.isNotEmpty()) {
                         rateNumber.text = orders[position].orderrate[0].rate!!.toFloat().toString()
-                        rating.rating = orders[position].orderrate[0].rate!!.toFloat()
+                       /* rating.rating = orders[position].orderrate[0].rate!!.toFloat()*/
                     }
 
 
@@ -132,7 +132,8 @@ class OrderAdapter: RecyclerView.Adapter<RecyclerView.ViewHolder>() {
 
             rating.onRatingBarChangeListener =
                 RatingBar.OnRatingBarChangeListener { _, rating, _ ->
-                    rateNumber.text = rating.toString()
+                    val bundle = bundleOf("orderId" to orders[position].id,"rate" to rating)
+                    itemView.findNavController().navigate(R.id.orderFragment_to_rateConfirmationFragment,bundle)
                 }
 
             cancel.setOnClickListener {
