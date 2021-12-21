@@ -127,4 +127,8 @@ interface Service {
     @POST("survey/answer")
     suspend fun postAnswer(@Body answer: JSONArray)
 
+    @Headers("Content-Type: application/json")
+    @POST("survey/rateorder")
+    suspend fun rateOrder(@Body rateOrderBody: OrderRateBody):Response<OrderRate>
+
 }

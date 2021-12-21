@@ -588,7 +588,16 @@
         android:id="@+id/rateConfirmationFragment"
         android:name="com.utechia.tdf.order.RateConfirmationFragment"
         android:label="fragment_rate_confirmation"
-        tools:layout="@layout/fragment_rate_confirmation" />
+        tools:layout="@layout/fragment_rate_confirmation" >
+
+        <action
+            android:id="@+id/rateConfirmationFragment_to_OrderFragment"
+            app:launchSingleTop="true"
+            app:popUpToInclusive="true"
+            app:popUpTo="@id/refreshmentFragment"
+            app:destination="@id/orderFragment" />
+
+    </dialog>
 
 
 </navigation>
