@@ -124,11 +124,13 @@ class OrderAdapter: RecyclerView.Adapter<RecyclerView.ViewHolder>() {
                         rateNumber.text = orders[position].orderrate[0].rate!!.toFloat().toString()
                         ratingBar.rating = orders[position].orderrate[0].rate!!.toFloat()
                     }
+                    else
+                        ratingBar.setIsIndicator(false)
                 }
             }
             ratingBar.onRatingBarChangeListener =
                 RatingBar.OnRatingBarChangeListener { _, rating, _ ->
-                    if (!indicate) {
+                    if (!indicate && orders[position].orderrate.isEmpty()) {
                         rateNumber.text = "${rating.toInt()}.0"
 
                         Handler(Looper.getMainLooper()).postDelayed({
