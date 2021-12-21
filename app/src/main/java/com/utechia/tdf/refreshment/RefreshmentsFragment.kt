@@ -78,7 +78,7 @@ class RefreshmentsFragment : Fragment() {
                     binding.prg.visibility = View.GONE
 
                     if (it.data.size!=0){
-                       binding.status.text = "Your order is ready for delivery."
+                       binding.status.text = "Your order is ready."
 
                     }
                     else{

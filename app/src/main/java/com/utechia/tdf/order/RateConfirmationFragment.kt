@@ -56,6 +56,7 @@ class RateConfirmationFragment : DialogFragment() {
 
         binding.btnKeep.setOnClickListener {
 
+
         }
 
         binding.exit.setOnClickListener {

@@ -1,5 +1,7 @@
 package com.utechia.tdf.order
 
+import android.os.Handler
+import android.os.Looper
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -48,7 +50,7 @@ class OrderAdapter: RecyclerView.Adapter<RecyclerView.ViewHolder>() {
         private val status: TextView = itemView.findViewById(R.id.status)
         private val details: TextView = itemView.findViewById(R.id.btnDetails)
         private val cancel: TextView = itemView.findViewById(R.id.btnCancel)
-        private val rating: RatingBar = itemView.findViewById(R.id.rating)
+        private var ratingBar: RatingBar = itemView.findViewById(R.id.rating)
         private val rateNumber: TextView = itemView.findViewById(R.id.ratingNum)
 
         fun bind0(position: Int) {
@@ -77,7 +79,7 @@ class OrderAdapter: RecyclerView.Adapter<RecyclerView.ViewHolder>() {
                         setBackgroundColor(ContextCompat.getColor(itemView.context, R.color.waiting))
                     }
                     cancel.visibility = View.VISIBLE
-                    rating.visibility = View.GONE
+                    ratingBar.visibility = View.GONE
                     rateNumber.visibility = View.GONE
 
 
@@ -89,51 +91,54 @@ class OrderAdapter: RecyclerView.Adapter<RecyclerView.ViewHolder>() {
                         setBackgroundColor(ContextCompat.getColor(itemView.context, R.color.prepare))
                     }
                     cancel.visibility = View.GONE
-                    rating.visibility = View.GONE
+                    ratingBar.visibility = View.GONE
                     rateNumber.visibility = View.GONE
 
 
                 }
                 "cancelled_by_user" ->{
                     cancel.visibility = View.GONE
-                    rating.visibility = View.GONE
+                    ratingBar.visibility = View.GONE
                     status.visibility = View.GONE
                     rateNumber.visibility = View.GONE
-
-
 
                 }
 
                 "cancelled_by_teaboy" ->{
                     cancel.visibility = View.GONE
-                    rating.visibility = View.GONE
+                    ratingBar.visibility = View.GONE
                     status.visibility = View.GONE
                     rateNumber.visibility = View.GONE
-
-
 
                 }
 
                 "delivered" ->{
                     status.visibility = View.INVISIBLE
                     cancel.visibility = View.INVISIBLE
-                    rating.visibility = View.VISIBLE
+                    ratingBar.visibility = View.VISIBLE
                     rateNumber.visibility = View.VISIBLE
                     if (orders[position].orderrate.isNotEmpty()) {
                         rateNumber.text = orders[position].orderrate[0].rate!!.toFloat().toString()
-                       /* rating.rating = orders[position].orderrate[0].rate!!.toFloat()*/
+                        ratingBar.rating = orders[position].orderrate[0].rate!!.toFloat()
                     }
-
-
-
                 }
-
             }
-
-            rating.onRatingBarChangeListener =
+            ratingBar.onRatingBarChangeListener =
                 RatingBar.OnRatingBarChangeListener { _, rating, _ ->
-                    val bundle = bundleOf("orderId" to orders[position].id,"rate" to rating)
-                    itemView.findNavController().navigate(R.id.orderFragment_to_rateConfirmationFragment,bundle)
+                    if (orders[position].orderrate.size==0) {
+                        rateNumber.text = "${rating.toInt()}.0"
+
+                        Handler(Looper.getMainLooper()).postDelayed({
+
+                            val bundle = bundleOf("orderId" to orders[position].id, "rate" to rating.toInt())
+                            itemView.findNavController().navigate(R.id.orderFragment_to_rateConfirmationFragment, bundle)
+
+                        }, 300)
+
+                    }
+                    else
+                        ratingBar.setIsIndicator(true)
+
                 }
 
             cancel.setOnClickListener {
@@ -145,11 +150,8 @@ class OrderAdapter: RecyclerView.Adapter<RecyclerView.ViewHolder>() {
                 val bundle = bundleOf("cartId" to orders[position].cart.id)
                 itemView.findNavController().navigate(R.id.action_orderFragment_to_orderDetailsFragment,bundle)
             }
-
         }
-
     }
-
 }
 
 
