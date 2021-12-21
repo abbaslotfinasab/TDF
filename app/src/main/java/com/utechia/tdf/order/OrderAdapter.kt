@@ -52,8 +52,10 @@ class OrderAdapter: RecyclerView.Adapter<RecyclerView.ViewHolder>() {
         private val cancel: TextView = itemView.findViewById(R.id.btnCancel)
         private var ratingBar: RatingBar = itemView.findViewById(R.id.rating)
         private val rateNumber: TextView = itemView.findViewById(R.id.ratingNum)
+        private var indicate = false
 
         fun bind0(position: Int) {
+            indicate = false
 
             dateFormat = sdf.parse(orders[position].updatedAt)
             simple = SimpleDateFormat("yyyy-MM-dd-HH:mm", Locale.getDefault()).format(dateFormat)
@@ -118,6 +120,7 @@ class OrderAdapter: RecyclerView.Adapter<RecyclerView.ViewHolder>() {
                     ratingBar.visibility = View.VISIBLE
                     rateNumber.visibility = View.VISIBLE
                     if (orders[position].orderrate.isNotEmpty()) {
+                        indicate = true
                         rateNumber.text = orders[position].orderrate[0].rate!!.toFloat().toString()
                         ratingBar.rating = orders[position].orderrate[0].rate!!.toFloat()
                     }
@@ -125,7 +128,7 @@ class OrderAdapter: RecyclerView.Adapter<RecyclerView.ViewHolder>() {
             }
             ratingBar.onRatingBarChangeListener =
                 RatingBar.OnRatingBarChangeListener { _, rating, _ ->
-                    if (orders[position].orderrate.size==0) {
+                    if (!indicate) {
                         rateNumber.text = "${rating.toInt()}.0"
 
                         Handler(Looper.getMainLooper()).postDelayed({
@@ -138,7 +141,6 @@ class OrderAdapter: RecyclerView.Adapter<RecyclerView.ViewHolder>() {
                     }
                     else
                         ratingBar.setIsIndicator(true)
-
                 }
 
             cancel.setOnClickListener {
