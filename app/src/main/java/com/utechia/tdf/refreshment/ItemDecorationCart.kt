@@ -22,7 +22,7 @@ class ItemDecorationCart: RecyclerView.ItemDecoration(){
         if (parent.getChildAdapterPosition(view) != parent.adapter!!.itemCount-1)
         outRect.bottom = 20
         else
-            outRect.bottom = 230
+            outRect.bottom = 350
 
     }
 
