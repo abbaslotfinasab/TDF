@@ -83,7 +83,7 @@ class CartFragment : Fragment() {
                         val icon : Drawable =
                             ContextCompat.getDrawable(context,R.drawable.ic_delete_icon)!!
                         val top = itemView.top + (itemView.height - icon.intrinsicHeight) / 2
-                        val left = itemView.width - icon.intrinsicWidth - (itemView.height - icon.intrinsicHeight) / 2
+                        val left = itemView.width - icon.intrinsicWidth - (itemView.height - icon.intrinsicHeight) / 6
                         val right = left + icon.intrinsicHeight
                         val bottom = top + icon.intrinsicHeight
 
