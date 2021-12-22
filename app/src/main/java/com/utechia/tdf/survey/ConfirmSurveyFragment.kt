@@ -3,8 +3,6 @@ package com.utechia.tdf.survey
 import android.graphics.Color
 import android.graphics.drawable.ColorDrawable
 import android.os.Bundle
-import android.os.Handler
-import android.os.Looper
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -13,6 +11,7 @@ import android.widget.Toast
 import androidx.fragment.app.DialogFragment
 import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
+import com.utechia.domain.utile.Result
 import com.utechia.tdf.R
 import com.utechia.tdf.databinding.FragmentConfirmSurveyBinding
 import dagger.hilt.android.AndroidEntryPoint
@@ -25,7 +24,7 @@ class ConfirmSurveyFragment : DialogFragment() {
 
     private lateinit var binding: FragmentConfirmSurveyBinding
     private var answer:ArrayList<HashMap<String,Any>> = ArrayList()
-    private val surveyViewModel:SurveyViewModel by viewModels()
+    private val surveyViewModel:SurveyAnswerViewModel by viewModels()
     private lateinit var jsonArray: JSONArray
 
 
@@ -56,15 +55,7 @@ class ConfirmSurveyFragment : DialogFragment() {
         binding.btnKeep.setOnClickListener {
 
             surveyViewModel.postAnswer(jsonArray)
-
-            binding.prg.visibility = View.VISIBLE
-
-            Handler(Looper.getMainLooper()).postDelayed({
-
-            findNavController().navigate(R.id.confirmSurveyFragment_to_resultSurveyFragment)
-            dialog?.dismiss()
-
-            }, 300)
+            observer()
         }
 
         binding.exit.setOnClickListener {
@@ -75,6 +66,34 @@ class ConfirmSurveyFragment : DialogFragment() {
             findNavController().navigate(R.id.confirmSurveyFragment_to_surveySystemFragment)
             dialog?.dismiss()
 
+        }
+    }
+
+    private fun observer() {
+        surveyViewModel.survey.observe(viewLifecycleOwner){
+
+            when (it) {
+                is Result.Success -> {
+                    binding.prg.visibility = View.GONE
+                    findNavController().navigate(R.id.confirmSurveyFragment_to_surveySystemFragment)
+
+
+                }
+
+                is Result.Loading -> {
+                    binding.prg.visibility = View.VISIBLE
+
+                }
+
+                is Result.Error -> {
+                    binding.prg.visibility = View.GONE
+                    Toast.makeText(context, it.message, Toast.LENGTH_SHORT).show()
+/*
+                    findNavController().navigate(R.id.confirmSurveyFragment_to_surveySystemFragment)
+*/
+
+                }
+            }
         }
     }
 }

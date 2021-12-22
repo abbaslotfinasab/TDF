@@ -82,5 +82,10 @@ abstract class RepositoryModule {
         orderRateRepoImpl: OrderRateRepoImpl
     ): OrderRateRepo
 
+    @Binds
+    abstract fun bindSurveyAnswerRepositoryService(
+        surveyAnswerRepoImpl: SurveyAnswerRepoImpl
+    ): SurveyAnswerRepo
+
 
 }

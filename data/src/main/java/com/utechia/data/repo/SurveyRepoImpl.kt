@@ -73,9 +73,4 @@ class SurveyRepoImpl @Inject constructor(
         } else throw IOException("No Internet Connection")
 
     }
-
-    override suspend fun postAnswer(answer: JSONArray) {
-        service.postAnswer(answer)
-    }
-
 }
