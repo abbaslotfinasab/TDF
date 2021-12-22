@@ -139,39 +139,39 @@ class CreateRefreshmentFragment : Fragment() {
 
             override fun onTabUnselected(tab: TabLayout.Tab?) {
 
-                /* when(tab?.position){
+              /*   when(tab?.position){
 
                      0 -> {
-                         orderViewModel.getOrderTeaBoy("delivered")
+                         category = "hot_drink"
+                         refreshmentViewModel.getRefreshment(category)
                          observer()
                      }
                      1 -> {
-                         orderViewModel.getOrderTeaBoy("pending")
+                         category = "cold_drink"
+                         refreshmentViewModel.getRefreshment(category)
                          observer()
                      }
-                     2 -> {
-                         orderViewModel.getOrderTeaBoy("cancelled")
-                         observer()
-                     }
+
+
                  }*/
             }
 
             override fun onTabReselected(tab: TabLayout.Tab?) {
 
-                /*  when(tab?.position){
+              /*    when(tab?.position){
 
                       0 -> {
-                          orderViewModel.getOrderTeaBoy("delivered")
+                          category = "hot_drink"
+                          refreshmentViewModel.getRefreshment(category)
                           observer()
                       }
                       1 -> {
-                          orderViewModel.getOrderTeaBoy("pending")
+                          category = "cold_drink"
+                          refreshmentViewModel.getRefreshment(category)
                           observer()
                       }
-                      2 -> {
-                          orderViewModel.getOrderTeaBoy("cancelled")
-                          observer()
-                      }
+
+
                   }*/
             }
 
