@@ -83,7 +83,7 @@ class OrderDetailsFragment : DialogFragment() {
                 is Result.Success -> {
                     binding.prg.visibility = View.GONE
                     binding.recyclerView.visibility = View.VISIBLE
-                    orderAdapter.addData(it.data[0].cart.items!!)
+                    orderAdapter.addData(it.data[0].cart?.items!!)
                 }
 
                 is Result.Loading -> {

@@ -74,7 +74,7 @@ class TeaBoyNotificationFragment : DialogFragment() {
                 is Result.Success -> {
                     binding.prg.visibility = View.GONE
                     binding.notificationRecycler.visibility = View.VISIBLE
-                    orderAdapter.addData(it.data[0].cart.items!!)
+                    orderAdapter.addData(it.data[0].cart?.items!!)
                 }
 
                 is Result.Loading -> {

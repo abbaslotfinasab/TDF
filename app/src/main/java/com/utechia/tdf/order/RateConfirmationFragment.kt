@@ -82,6 +82,7 @@ class RateConfirmationFragment : DialogFragment() {
                 is Result.Success -> {
                     binding.prg.visibility = View.GONE
                     findNavController().navigate(R.id.rateConfirmationFragment_to_OrderFragment)
+                    dialog?.dismiss()
 
 
                 }
@@ -94,6 +95,8 @@ class RateConfirmationFragment : DialogFragment() {
                     binding.prg.visibility = View.GONE
                     Toast.makeText(context, it.message, Toast.LENGTH_SHORT).show()
                     findNavController().navigate(R.id.rateConfirmationFragment_to_OrderFragment)
+                    dialog?.dismiss()
+
 
                 }
             }

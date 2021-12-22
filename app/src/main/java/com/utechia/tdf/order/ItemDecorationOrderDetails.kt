@@ -20,7 +20,7 @@ class ItemDecorationOrderDetails: RecyclerView.ItemDecoration(){
         if (parent.getChildAdapterPosition(view) != parent.adapter!!.itemCount-1)
             outRect.bottom = 5
         else
-            outRect.bottom = 150
+            outRect.bottom = 220
 
 
     }

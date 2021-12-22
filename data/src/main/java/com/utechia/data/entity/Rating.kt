@@ -11,8 +11,8 @@ import kotlinx.serialization.Serializable
 @Serializable
 data class Rating(
 
-    val id:Int?,
-    val rate:Int?
+    var id:Int?,
+    var rate:Int?
 
 ): Parcelable,ResponseObject<RatingModel> {
     override fun toDomain(): RatingModel {

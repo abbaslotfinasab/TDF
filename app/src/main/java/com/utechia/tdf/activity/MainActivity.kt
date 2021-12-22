@@ -218,6 +218,21 @@ class MainActivity : AppCompatActivity() {
 
                     }
 
+                    R.id.calendarFragment -> {
+                        design("calendar")
+
+                    }
+
+                    R.id.ticketSystemFragment -> {
+                        design("ticket")
+
+                    }
+
+                    R.id.eventSystemFragment -> {
+                        design("event")
+
+                    }
+
                     else -> {
                         design("drawer")
                     }
@@ -350,6 +365,22 @@ class MainActivity : AppCompatActivity() {
 
                 R.id.surveySystemFragment -> {
                     design("survey")
+
+                }
+
+                R.id.calendarFragment -> {
+                    design("calendar")
+
+                }
+
+
+                R.id.ticketSystemFragment -> {
+                    design("ticket")
+
+                }
+
+                R.id.eventSystemFragment -> {
+                    design("event")
 
                 }
 
@@ -588,6 +619,39 @@ class MainActivity : AppCompatActivity() {
                 binding.toolbar.visibility = View.INVISIBLE
                 binding.customButton.visibility = View.GONE
                 binding.customTitle.text = "Survey System"
+                binding.bottomNavigation.visibility = View.GONE
+                binding.drawerLayout.setDrawerLockMode(DrawerLayout.LOCK_MODE_LOCKED_CLOSED)
+
+            }
+
+            "calendar" ->{
+                window.statusBarColor = ContextCompat.getColor(this, R.color.status)
+                binding.customToolbar.visibility = View.VISIBLE
+                binding.toolbar.visibility = View.INVISIBLE
+                binding.customButton.visibility = View.GONE
+                binding.customTitle.text = "Calendar"
+                binding.bottomNavigation.visibility = View.GONE
+                binding.drawerLayout.setDrawerLockMode(DrawerLayout.LOCK_MODE_LOCKED_CLOSED)
+
+            }
+
+            "ticket" ->{
+                window.statusBarColor = ContextCompat.getColor(this, R.color.status)
+                binding.customToolbar.visibility = View.VISIBLE
+                binding.toolbar.visibility = View.INVISIBLE
+                binding.customButton.visibility = View.GONE
+                binding.customTitle.text = "Ticket System"
+                binding.bottomNavigation.visibility = View.GONE
+                binding.drawerLayout.setDrawerLockMode(DrawerLayout.LOCK_MODE_LOCKED_CLOSED)
+
+            }
+
+            "event" ->{
+                window.statusBarColor = ContextCompat.getColor(this, R.color.status)
+                binding.customToolbar.visibility = View.VISIBLE
+                binding.toolbar.visibility = View.INVISIBLE
+                binding.customButton.visibility = View.GONE
+                binding.customTitle.text = "Event System"
                 binding.bottomNavigation.visibility = View.GONE
                 binding.drawerLayout.setDrawerLockMode(DrawerLayout.LOCK_MODE_LOCKED_CLOSED)
 

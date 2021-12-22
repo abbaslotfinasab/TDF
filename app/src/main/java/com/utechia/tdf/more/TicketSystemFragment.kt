@@ -27,7 +27,7 @@ class TicketSystemFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
 
 
-        binding.plusT.setOnClickListener {
+        binding.plus.setOnClickListener {
 
             findNavController().navigate(R.id.action_ticketSystemFragment_to_createTicketFragment)
 

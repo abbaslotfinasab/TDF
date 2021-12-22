@@ -2,6 +2,6 @@ package com.utechia.domain.model
 
 data class RatingModel(
 
-    val id:Int?,
-    val rate:Int?
+    var id:Int?,
+    var rate:Int?
 )

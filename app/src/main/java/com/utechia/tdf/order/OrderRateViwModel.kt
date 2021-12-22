@@ -4,7 +4,6 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.utechia.domain.usecases.OrderCountUseCaseImpl
 import com.utechia.domain.usecases.OrderRateUseCaseImpl
 import com.utechia.domain.utile.Result
 import dagger.hilt.android.lifecycle.HiltViewModel
@@ -34,7 +33,12 @@ class OrderRateViwModel @Inject constructor(
 
         viewModelScope.launch(Dispatchers.IO+handler) {
 
-            orderRateUseCaseImpl.execute(order,rate)
+            _orderModel.postValue(Result.Loading)
+
+            orderRateUseCaseImpl.execute(order,rate).let {
+
+                _orderModel.postValue(Result.Success(it))
+            }
         }
     }
 }

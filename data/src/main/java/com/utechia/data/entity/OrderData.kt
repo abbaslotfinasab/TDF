@@ -18,11 +18,11 @@ data class OrderData(
     val floor: String?,
     val createdAt: String?,
     val updatedAt: String?,
-    val cart: @Contextual @RawValue CartData,
+    val cart: @Contextual @RawValue CartData?,
 
 
-):Parcelable,ResponseObject<OrderDataModel>{
+    ):Parcelable,ResponseObject<OrderDataModel>{
     override fun toDomain(): OrderDataModel {
-        return OrderDataModel(id,status,orderrate?.map { it.toDomain() }!!.toMutableList(),floor,createdAt,updatedAt,cart.toDomain())
+        return OrderDataModel(id,status,orderrate?.map { it.toDomain() }!!.toMutableList(),floor,createdAt,updatedAt,cart?.toDomain())
     }
 }

@@ -59,16 +59,16 @@ class OrderTeaBoyAdapter(private val teaBoyOrdersFragment: TeaBoyOrdersFragment)
             simple = SimpleDateFormat("yyyy-MM-dd-HH:mm").format(dateFormat)
             date.text = "$simple"
 
-            number.text = "${orders[position].cart.items?.size}x"
+            number.text = "${orders[position].cart?.items?.size}x"
             oderId.text = "ID:675867468048609"
             user.text = "John Doe"
             location.text = orders[position].floor
 
-            if (orders[position].cart.items?.size!! >1){
-                title.text = orders[position].cart.items!![0].food.title+"..."
+            if (orders[position].cart?.items?.size!! >1){
+                title.text = orders[position].cart?.items!![0].food.title+"..."
             }
-            else if (orders[position].cart.items?.size!! !=0)
-                title.text = orders[position].cart.items!![0].food.title
+            else if (orders[position].cart?.items?.size!! !=0)
+                title.text = orders[position].cart?.items!![0].food.title
 
 
             when (orders[position].status){
@@ -125,7 +125,7 @@ class OrderTeaBoyAdapter(private val teaBoyOrdersFragment: TeaBoyOrdersFragment)
             }
 
             details.setOnClickListener {
-                val bundle = bundleOf("orderId" to orders[position].cart.id)
+                val bundle = bundleOf("orderId" to orders[position].cart?.id)
                 itemView.findNavController().navigate(R.id.action_orderFragment_to_orderDetailsFragment,bundle)
             }
 

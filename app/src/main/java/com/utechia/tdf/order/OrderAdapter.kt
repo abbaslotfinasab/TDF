@@ -61,14 +61,14 @@ class OrderAdapter: RecyclerView.Adapter<RecyclerView.ViewHolder>() {
             simple = SimpleDateFormat("yyyy-MM-dd-HH:mm", Locale.getDefault()).format(dateFormat)
             date.text = "$simple"
 
-            number.text = "${orders[position].cart.items?.size}x"
+            number.text = "${orders[position].cart?.items?.size}x"
             oderId.text = "Order ID:675867468048609"
 
-            if (orders[position].cart.items?.size!! >1){
-                title.text = orders[position].cart.items!![0].food.title+"..."
+            if (orders[position].cart?.items?.size!! >1){
+                title.text = orders[position].cart?.items!![0].food.title+"..."
             }
-            else if (orders[position].cart.items?.size!! !=0)
-                title.text = orders[position].cart.items!![0].food.title
+            else if (orders[position].cart?.items?.size!! !=0)
+                title.text = orders[position].cart?.items!![0].food.title
 
 
             when (orders[position].status){
@@ -119,10 +119,10 @@ class OrderAdapter: RecyclerView.Adapter<RecyclerView.ViewHolder>() {
                     cancel.visibility = View.INVISIBLE
                     ratingBar.visibility = View.VISIBLE
                     rateNumber.visibility = View.VISIBLE
-                    if (orders[position].orderrate.isNotEmpty()) {
+                    if (orders[position].orderrate?.isNotEmpty()!!) {
                         indicate = true
-                        rateNumber.text = orders[position].orderrate[0].rate!!.toFloat().toString()
-                        ratingBar.rating = orders[position].orderrate[0].rate!!.toFloat()
+                        rateNumber.text = orders[position].orderrate!![0].rate!!.toFloat().toString()
+                        ratingBar.rating = orders[position].orderrate!![0].rate!!.toFloat()
                     }
                     else
                         ratingBar.setIsIndicator(false)
@@ -130,7 +130,7 @@ class OrderAdapter: RecyclerView.Adapter<RecyclerView.ViewHolder>() {
             }
             ratingBar.onRatingBarChangeListener =
                 RatingBar.OnRatingBarChangeListener { _, rating, _ ->
-                    if (!indicate && orders[position].orderrate.isEmpty()) {
+                    if (!indicate && orders[position].orderrate!!?.isEmpty()) {
                         rateNumber.text = "${rating.toInt()}.0"
 
                         Handler(Looper.getMainLooper()).postDelayed({
@@ -151,7 +151,7 @@ class OrderAdapter: RecyclerView.Adapter<RecyclerView.ViewHolder>() {
             }
 
             details.setOnClickListener {
-                val bundle = bundleOf("cartId" to orders[position].cart.id)
+                val bundle = bundleOf("cartId" to orders[position].cart?.id)
                 itemView.findNavController().navigate(R.id.action_orderFragment_to_orderDetailsFragment,bundle)
             }
         }
