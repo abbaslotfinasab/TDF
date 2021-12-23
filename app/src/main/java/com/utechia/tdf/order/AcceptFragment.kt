@@ -70,7 +70,7 @@ class AcceptFragment : DialogFragment() {
                 is Result.Success -> {
                     binding.prg.visibility = View.GONE
                     findNavController().clearBackStack(R.id.orderFragment)
-                    findNavController().navigate(R.id.action_cancelFragment_to_orderFragment)
+                    findNavController().navigate(R.id.action_acceptFragment_to_teaBoyOrdersFragment)
                     dialog?.dismiss()
                 }
 
@@ -86,7 +86,7 @@ class AcceptFragment : DialogFragment() {
                     binding.prg.visibility = View.GONE
                     Toast.makeText(context, it.message, Toast.LENGTH_SHORT).show()
                     findNavController().clearBackStack(R.id.orderFragment)
-                    findNavController().navigate(R.id.action_cancelFragment_to_orderFragment)
+                    findNavController().navigate(R.id.action_acceptFragment_to_teaBoyOrdersFragment)
                     dialog?.dismiss()
                 }
             }
