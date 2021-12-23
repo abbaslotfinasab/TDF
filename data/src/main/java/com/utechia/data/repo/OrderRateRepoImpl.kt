@@ -1,6 +1,5 @@
 package com.utechia.data.repo
 
-import android.util.Log
 import com.utechia.data.api.Service
 import com.utechia.data.entity.OrderRateBody
 import com.utechia.data.utile.NetworkHelper
@@ -15,8 +14,6 @@ class OrderRateRepoImpl @Inject constructor(
     private val networkHelper: NetworkHelper,
 ):OrderRateRepo {
     override suspend fun rate(order: Int, rate: Int): Boolean {
-
-        Log.d("working" , "ok")
 
         if (networkHelper.isNetworkConnected()) {
 

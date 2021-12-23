@@ -44,9 +44,15 @@ class OrderViewModel @Inject constructor(
 
     fun cancelOrder(id:Int){
 
+
         viewModelScope.launch(Dispatchers.IO+handler) {
 
-            orderUseCaseImpl.cancel(id)
+            _orderModel.postValue(Result.Loading)
+
+            orderUseCaseImpl.cancel(id).let {
+
+                _orderModel.postValue(Result.Success(it))
+            }
         }
     }
 

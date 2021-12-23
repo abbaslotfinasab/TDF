@@ -1,6 +1,5 @@
 package com.utechia.data.repo
 
-import android.util.Log
 import com.utechia.data.api.Service
 import com.utechia.data.entity.FavoriteBody
 import com.utechia.data.utile.NetworkHelper
@@ -35,7 +34,7 @@ class OrderRepoImpl @Inject constructor(
 
     }
 
-    override suspend fun cancelOrder(id: Int) {
+    override suspend fun cancelOrder(id: Int): MutableList<OrderDataModel> {
 
         if (networkHelper.isNetworkConnected()) {
 
@@ -43,7 +42,9 @@ class OrderRepoImpl @Inject constructor(
 
             return when (result.isSuccessful) {
 
-                true -> {}
+                true -> {
+                    emptyList<OrderDataModel>().toMutableList()
+                }
 
                 else ->
                     throw IOException("Server is Not Responding")

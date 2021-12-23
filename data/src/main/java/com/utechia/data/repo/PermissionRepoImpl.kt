@@ -1,12 +1,9 @@
 package com.utechia.data.repo
 
-import android.util.Log
 import com.utechia.data.api.Service
 import com.utechia.data.entity.PermissionPostBody
 import com.utechia.data.entity.PermissionUpdateBody
-import com.utechia.data.entity.RefreshToken
 import com.utechia.data.utile.NetworkHelper
-import com.utechia.data.utile.SessionManager
 import com.utechia.domain.model.PermissionModel
 import com.utechia.domain.repository.PermissionRepo
 import java.io.IOException
@@ -101,7 +98,7 @@ class PermissionRepoImpl @Inject constructor(
             return when (result.isSuccessful) {
 
                 true -> {
-                    result.body()?.data!!.map { it.toDomain() }.toMutableList()
+                     emptyList<PermissionModel>().toMutableList()
                 }
 
                 else ->

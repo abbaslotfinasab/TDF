@@ -9,9 +9,11 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.view.Window
+import android.widget.Toast
 import androidx.fragment.app.DialogFragment
 import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
+import com.utechia.domain.utile.Result
 import com.utechia.tdf.R
 import com.utechia.tdf.databinding.FragmentCancelBinding
 import dagger.hilt.android.AndroidEntryPoint
@@ -57,14 +59,39 @@ class CancelFragment : DialogFragment() {
         binding.btnCancel.setOnClickListener {
 
             orderViewModel.cancelOrder(orderId)
+            observer()
 
-            binding.prg.visibility = View.VISIBLE
-
-            Handler(Looper.getMainLooper()).postDelayed({
-                findNavController().clearBackStack(R.id.orderFragment)
-                findNavController().navigate(R.id.action_cancelFragment_to_orderFragment)
-                dialog?.dismiss()
-            }, 300)
         }
+    }
+
+    private fun observer() {
+
+        orderViewModel.orderModel.observe(viewLifecycleOwner){
+
+
+            when (it) {
+                is Result.Success -> {
+                    binding.prg.visibility = View.GONE
+                    findNavController().clearBackStack(R.id.orderFragment)
+                    findNavController().navigate(R.id.action_cancelFragment_to_orderFragment)
+                    dialog?.dismiss()
+
+                }
+
+                is Result.Loading -> {
+                    binding.prg.visibility = View.VISIBLE
+
+                }
+
+                is Result.Error -> {
+                    binding.prg.visibility = View.GONE
+                    Toast.makeText(context, it.message, Toast.LENGTH_SHORT).show()
+                    findNavController().clearBackStack(R.id.orderFragment)
+                    findNavController().navigate(R.id.action_cancelFragment_to_orderFragment)
+                    dialog?.dismiss()
+                }
+            }
+        }
+
     }
 }

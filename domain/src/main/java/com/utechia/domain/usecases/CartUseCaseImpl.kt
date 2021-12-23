@@ -19,7 +19,7 @@ class CartUseCaseImpl @Inject constructor(private val cartRepo: CartRepo):CartUs
         return cartRepo.updateCart(id,quantity)
     }
 
-    override suspend fun deleteCart(id: Int) {
+    override suspend fun deleteCart(id: Int):MutableList<CartModel> {
         return cartRepo.deleteCart(id)
     }
 }

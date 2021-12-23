@@ -23,7 +23,7 @@ class SurveyAnswerRepoImpl @Inject constructor(
             return when (result.isSuccessful) {
 
                 true -> {
-                    result.body()?.data!!.success
+                    true
                 }
 
                 else ->

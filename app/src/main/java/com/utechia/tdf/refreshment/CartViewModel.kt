@@ -62,7 +62,12 @@ class CartViewModel @Inject constructor(
 
         viewModelScope.launch(Dispatchers.IO+handler) {
 
-            cartUseCaseImpl.deleteCart(id)
+            _cartModel.postValue(Result.Loading)
+
+            cartUseCaseImpl.deleteCart(id).let {
+
+                _cartModel.postValue(Result.Success(it))
+            }
 
         }
 

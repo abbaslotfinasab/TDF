@@ -7,11 +7,12 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.view.Window
+import android.widget.Toast
 import androidx.fragment.app.DialogFragment
 import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
+import com.utechia.domain.utile.Result
 import com.utechia.tdf.R
-import com.utechia.tdf.databinding.FragmentCancelBinding
 import com.utechia.tdf.databinding.FragmentCancelRequestBinding
 import dagger.hilt.android.AndroidEntryPoint
 
@@ -55,13 +56,42 @@ class CancelRequestFragment : DialogFragment() {
 
         binding.btnCancel.setOnClickListener {
             permissionViewModel.updatePermission(permissionId,"cancelled")
-            findNavController().clearBackStack(R.id.permissionFragment)
-            findNavController().navigate(R.id.cancelRequestFragment_to_permissionFragment)
-            dialog?.dismiss()
+            observer()
         }
 
+    }
+
+    private fun observer() {
+
+        permissionViewModel.permissionModel.observe(viewLifecycleOwner) {
+
+            when (it) {
+                is Result.Success -> {
+                    binding.prg.visibility = View.GONE
+                    findNavController().clearBackStack(R.id.permissionFragment)
+                    findNavController().navigate(R.id.cancelRequestFragment_to_permissionFragment)
+                    dialog?.dismiss()
 
 
+
+                }
+
+                is Result.Loading -> {
+                    binding.prg.visibility = View.VISIBLE
+
+                }
+
+                is Result.Error -> {
+                    binding.prg.visibility = View.GONE
+                    Toast.makeText(context, it.message, Toast.LENGTH_SHORT).show()
+                    findNavController().clearBackStack(R.id.permissionFragment)
+                    findNavController().navigate(R.id.cancelRequestFragment_to_permissionFragment)
+                    dialog?.dismiss()
+
+
+                }
+            }
+        }
     }
 
 }

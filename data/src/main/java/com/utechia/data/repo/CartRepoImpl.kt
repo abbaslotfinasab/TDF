@@ -1,7 +1,5 @@
 package com.utechia.data.repo
 
-import android.os.Build
-import androidx.annotation.RequiresApi
 import com.utechia.data.api.Service
 import com.utechia.data.entity.CartBody
 import com.utechia.data.utile.NetworkHelper
@@ -42,6 +40,23 @@ class CartRepoImpl @Inject constructor(
 
     override suspend fun updateCart(id: Int, quantity: Int) = service.updateCart(CartBody(id,quantity))
 
-    override suspend fun deleteCart(id: Int) = service.deleteCart(id)
+    override suspend fun deleteCart(id: Int):MutableList<CartModel>{
+
+        if (networkHelper.isNetworkConnected()) {
+
+            val result = service.deleteCart(id)
+
+            return when (result.isSuccessful) {
+
+                true -> {
+                    emptyList<CartModel>().toMutableList()
+                }
+                else ->
+                    throw IOException("Server is Not Responding")
+            }
+
+        } else throw IOException("No Internet Connection")
+
+    }
 
 }

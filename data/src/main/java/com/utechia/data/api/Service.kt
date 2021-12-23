@@ -53,7 +53,7 @@ interface Service {
     suspend fun updateCart(@Body body:CartBody)
 
     @DELETE("cafeteria/cart/{id}")
-    suspend fun deleteCart(@Path("id")id:Int)
+    suspend fun deleteCart(@Path("id")id:Int):Response<Void>
 
     @Headers("Content-Type: application/json")
     @POST("cafeteria")
@@ -109,7 +109,7 @@ interface Service {
 
     @Headers("Content-Type: application/json")
     @PATCH("accessmanagement/permissions")
-    suspend fun updatePermission(@Body permissionUpdateBody: PermissionUpdateBody):Response<Permission>
+    suspend fun updatePermission(@Body permissionUpdateBody: PermissionUpdateBody):Response<Void>
 
     @GET("accessmanagement/permissions/permissiontypes")
     suspend fun getPermissionType():Response<PermissionType>
@@ -125,7 +125,7 @@ interface Service {
 
     @Headers("Content-Type: application/json")
     @POST("survey/answer")
-    suspend fun postAnswer(@Body answer: JSONArray):Response<OrderRate>
+    suspend fun postAnswer(@Body answer: JSONArray):Response<Void>
 
     @Headers("Content-Type: application/json")
     @POST("survey/rateorder")

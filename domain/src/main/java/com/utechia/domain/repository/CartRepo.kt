@@ -8,6 +8,6 @@ interface CartRepo {
     suspend fun getCart():MutableList<CartModel>
     suspend fun postCart(id:Int,quantity:Int)
     suspend fun updateCart(id:Int,quantity:Int)
-    suspend fun deleteCart(id:Int)
+    suspend fun deleteCart(id:Int):MutableList<CartModel>
 
 }

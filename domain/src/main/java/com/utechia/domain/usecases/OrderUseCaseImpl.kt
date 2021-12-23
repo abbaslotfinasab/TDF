@@ -1,6 +1,5 @@
 package com.utechia.domain.usecases
 
-import android.util.Log
 import com.utechia.domain.model.OrderDataModel
 import com.utechia.domain.repository.OrderRepo
 import javax.inject.Inject
@@ -13,7 +12,7 @@ class OrderUseCaseImpl @Inject constructor(private val orderRepo: OrderRepo):Ord
         return orderRepo.getOrder(status)
     }
 
-    override suspend fun cancel(id:Int) {
+    override suspend fun cancel(id:Int): MutableList<OrderDataModel>  {
         return orderRepo.cancelOrder(id)
     }
 
