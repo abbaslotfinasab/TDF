@@ -1,16 +1,12 @@
 package com.utechia.tdf.order
 
-import android.content.Context
-import android.content.SharedPreferences
 import android.graphics.Color
 import android.graphics.drawable.ColorDrawable
 import android.os.Bundle
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.view.Window
-import android.widget.LinearLayout
 import android.widget.Toast
 import androidx.fragment.app.DialogFragment
 import androidx.fragment.app.viewModels
@@ -23,9 +19,8 @@ import dagger.hilt.android.AndroidEntryPoint
 class OrderDetailsFragment : DialogFragment() {
 
     private lateinit var binding: FragmentOrderDetailsBinding
-    private val orderViewModel:OrderViewModel by viewModels()
+    private val userOrderViewModel:UserOrderViewModel by viewModels()
     private val orderAdapter:OrderDetailsAdapter = OrderDetailsAdapter()
-    private lateinit var prefs: SharedPreferences
     private var cartId = 0
 
     override fun onCreateView(
@@ -45,16 +40,12 @@ class OrderDetailsFragment : DialogFragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        prefs = requireActivity().getSharedPreferences("tdf", Context.MODE_PRIVATE)
 
         if (arguments !=null){
             cartId = requireArguments().getInt("cartId")
         }
 
-        if (prefs.getBoolean("isTeaBoy",false))
-            orderViewModel.singleOrderTeaBoy(cartId)
-        else
-        orderViewModel.singleOrder(cartId)
+        userOrderViewModel.singleOrder(cartId)
 
         binding.recyclerView.apply {
             adapter = orderAdapter
@@ -76,7 +67,7 @@ class OrderDetailsFragment : DialogFragment() {
     }
 
     private fun observer() {
-        orderViewModel.orderModel.observe(viewLifecycleOwner){
+        userOrderViewModel.userOrderModel.observe(viewLifecycleOwner){
 
 
             when (it) {

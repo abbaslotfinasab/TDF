@@ -4,7 +4,6 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.utechia.data.repo.OrderCountRepoImpl
 import com.utechia.domain.model.OrderCountModel
 import com.utechia.domain.usecases.OrderCountUseCaseImpl
 import com.utechia.domain.utile.Result
@@ -45,10 +44,14 @@ class OrderCountViewModel @Inject constructor(
     }
 
     fun setStatus(status:Boolean){
-
         viewModelScope.launch(Dispatchers.IO+handler) {
 
-            orderCountUseCaseImpl.setStatus(status)
+            _orderModel.postValue(Result.Loading)
+
+            orderCountUseCaseImpl.setStatus(status).let {
+
+                _orderModel.postValue(Result.Success(it))
+            }
         }
     }
 }

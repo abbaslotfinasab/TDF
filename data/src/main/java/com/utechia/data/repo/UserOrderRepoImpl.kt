@@ -3,7 +3,7 @@ package com.utechia.data.repo
 import com.utechia.data.api.Service
 import com.utechia.data.entity.FavoriteBody
 import com.utechia.data.utile.NetworkHelper
-import com.utechia.domain.model.OrderDataModel
+import com.utechia.domain.model.UserOrderDataModel
 import com.utechia.domain.repository.UserOrderRepo
 import java.io.IOException
 import javax.inject.Inject
@@ -14,7 +14,7 @@ class UserOrderRepoImpl @Inject constructor(
     private val service: Service,
     private val networkHelper: NetworkHelper,
 ):UserOrderRepo {
-    override suspend fun getOrder(status: String): MutableList<OrderDataModel> {
+    override suspend fun getOrder(status: String): MutableList<UserOrderDataModel> {
 
         if (networkHelper.isNetworkConnected()) {
 
@@ -34,7 +34,7 @@ class UserOrderRepoImpl @Inject constructor(
 
     }
 
-    override suspend fun cancelOrder(id: Int): MutableList<OrderDataModel> {
+    override suspend fun cancelOrder(id: Int): MutableList<UserOrderDataModel> {
 
         if (networkHelper.isNetworkConnected()) {
 
@@ -43,7 +43,7 @@ class UserOrderRepoImpl @Inject constructor(
             return when (result.isSuccessful) {
 
                 true -> {
-                    emptyList<OrderDataModel>().toMutableList()
+                    emptyList<UserOrderDataModel>().toMutableList()
                 }
 
                 else ->
@@ -53,7 +53,7 @@ class UserOrderRepoImpl @Inject constructor(
         } else throw IOException("No Internet Connection")
     }
 
-    override suspend fun singleOrder(id: Int): MutableList<OrderDataModel> {
+    override suspend fun singleOrder(id: Int): MutableList<UserOrderDataModel> {
 
         if (networkHelper.isNetworkConnected()) {
 

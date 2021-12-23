@@ -34,5 +34,24 @@ class OrderCountRepoImpl @Inject constructor(
 
     }
 
-    override suspend fun setStatus(status: Boolean) = service.updateStatus(status)
+    override suspend fun setStatus(status: Boolean):MutableList<OrderCountModel>{
+
+        if (networkHelper.isNetworkConnected()) {
+
+            val result = service.updateStatus(status)
+
+            return when (result.isSuccessful) {
+
+                true -> {
+                    emptyList<OrderCountModel>().toMutableList()
+                }
+
+                else ->
+                    throw IOException("Server is Not Responding")
+            }
+
+        } else throw IOException("No Internet Connection")
+
+
+    }
 }

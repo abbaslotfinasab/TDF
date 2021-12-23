@@ -6,6 +6,6 @@ interface OrderCountUseCase<R> {
 
     suspend fun getOrderCount(): MutableList<R>
 
-    suspend fun setStatus(status:Boolean)
+    suspend fun setStatus(status:Boolean): MutableList<R>
 
 }

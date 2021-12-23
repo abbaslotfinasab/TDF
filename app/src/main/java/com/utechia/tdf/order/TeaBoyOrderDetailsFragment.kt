@@ -10,32 +10,30 @@ import android.view.Window
 import android.widget.Toast
 import androidx.fragment.app.DialogFragment
 import androidx.fragment.app.viewModels
-import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.utechia.domain.utile.Result
-import com.utechia.tdf.R
-import com.utechia.tdf.databinding.FragmentNotificationTeaboyBinding
+import com.utechia.tdf.databinding.FragmentOrderDetailsBinding
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
-class TeaBoyNotificationFragment : DialogFragment() {
+class TeaBoyOrderDetailsFragment : DialogFragment() {
 
-    private lateinit var binding: FragmentNotificationTeaboyBinding
-    private val orderAdapter:NotificationAdapter = NotificationAdapter()
-    private val userOrderViewModel:UserOrderViewModel by viewModels()
+    private lateinit var binding: FragmentOrderDetailsBinding
+    private val userOrderViewModel:TeaBoyOrderViewModel by viewModels()
+    private val orderAdapter:OrderDetailsAdapter = OrderDetailsAdapter()
     private var cartId = 0
-
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
-        binding = FragmentNotificationTeaboyBinding.inflate(inflater, container, false)
+        binding = FragmentOrderDetailsBinding.inflate(inflater, container, false)
 
         if(dialog !=null && dialog?.window !=null){
             dialog?.window?.setBackgroundDrawable(ColorDrawable(Color.TRANSPARENT))
             dialog?.window?.requestFeature(Window.FEATURE_NO_TITLE)
             dialog?.setCancelable(false)
+
         }
         return binding.root
     }
@@ -43,23 +41,26 @@ class TeaBoyNotificationFragment : DialogFragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        if (arguments != null)
-            cartId = requireArguments().getString("cartId", "").toInt()
-
-        userOrderViewModel.singleOrder(cartId)
-
-        binding.notificationRecycler.apply {
-            adapter = orderAdapter
-            layoutManager = LinearLayoutManager(context, LinearLayoutManager.HORIZONTAL,false)
+        if (arguments !=null){
+            cartId = requireArguments().getInt("cartId")
         }
+
+        userOrderViewModel.singleOrderTeaBoy(cartId)
+
+
+        binding.recyclerView.apply {
+            adapter = orderAdapter
+            layoutManager = LinearLayoutManager(context,LinearLayoutManager.VERTICAL,false)
+            addItemDecoration(ItemDecorationOrderDetails())
+        }
+
 
         binding.exit.setOnClickListener {
             dialog?.dismiss()
-
         }
 
-        binding.btnAccept.setOnClickListener {
-            findNavController().navigate(R.id.action_teaBoyNotificationFragment_to_teaBoyOrdersFragment)
+        binding.btnCancel.setOnClickListener {
+            dialog?.dismiss()
         }
 
         observer()
@@ -73,20 +74,21 @@ class TeaBoyNotificationFragment : DialogFragment() {
             when (it) {
                 is Result.Success -> {
                     binding.prg.visibility = View.GONE
-                    binding.notificationRecycler.visibility = View.VISIBLE
+                    binding.recyclerView.visibility = View.VISIBLE
                     orderAdapter.addData(it.data[0].cart?.items!!)
                 }
 
                 is Result.Loading -> {
                     binding.prg.visibility = View.VISIBLE
+                    binding.recyclerView.visibility = View.VISIBLE
                 }
 
                 is Result.Error -> {
                     binding.prg.visibility = View.GONE
+                    binding.recyclerView.visibility = View.GONE
                     Toast.makeText(context, it.message, Toast.LENGTH_SHORT).show()
                 }
             }
         }
     }
-
 }

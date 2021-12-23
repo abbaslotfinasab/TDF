@@ -3,28 +3,27 @@ package com.utechia.tdf.order
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.RatingBar
 import android.widget.TextView
-import androidx.core.content.ContextCompat
 import androidx.core.os.bundleOf
 import androidx.navigation.findNavController
 import androidx.recyclerview.widget.RecyclerView
-import com.utechia.domain.model.OrderDataModel
+import com.utechia.domain.model.TeaBoyOrderDataModel
+import com.utechia.domain.model.UserOrderDataModel
 import com.utechia.tdf.R
 import java.text.SimpleDateFormat
 import java.util.*
 
 class OrderTeaBoyAdapter(private val teaBoyOrdersFragment: TeaBoyOrdersFragment): RecyclerView.Adapter<RecyclerView.ViewHolder>() {
 
-    var orders: MutableList<OrderDataModel> = mutableListOf()
+    var userOrders: MutableList<TeaBoyOrderDataModel> = mutableListOf()
     var sdf: SimpleDateFormat = SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss.SSS'Z'")
     private lateinit var dateFormat: Date
     private var simple = ""
 
 
-    fun addData(_orders: MutableList<OrderDataModel>) {
-        orders.clear()
-        orders.addAll(_orders)
+    fun addData(_teaBoyOrders: MutableList<TeaBoyOrderDataModel>) {
+        userOrders.clear()
+        userOrders.addAll(_teaBoyOrders)
         notifyDataSetChanged()
     }
 
@@ -39,7 +38,7 @@ class OrderTeaBoyAdapter(private val teaBoyOrdersFragment: TeaBoyOrdersFragment)
         (holder as ViewHolder).bind0(position)
     }
 
-    override fun getItemCount(): Int = orders.size
+    override fun getItemCount(): Int = userOrders.size
 
     inner class ViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
         private val date: TextView = itemView.findViewById(R.id.date)
@@ -55,23 +54,23 @@ class OrderTeaBoyAdapter(private val teaBoyOrdersFragment: TeaBoyOrdersFragment)
 
         fun bind0(position: Int) {
 
-            dateFormat = sdf.parse(orders[position].updatedAt)
+            dateFormat = sdf.parse(userOrders[position].updatedAt)
             simple = SimpleDateFormat("yyyy-MM-dd-HH:mm").format(dateFormat)
             date.text = "$simple"
 
-            number.text = "${orders[position].cart?.items?.size}x"
+            number.text = "${userOrders[position].cart?.items?.size}x"
             oderId.text = "ID:675867468048609"
             user.text = "John Doe"
-            location.text = orders[position].floor
+            location.text = userOrders[position].floor
 
-            if (orders[position].cart?.items?.size!! >1){
-                title.text = orders[position].cart?.items!![0].food.title+"..."
+            if (userOrders[position].cart?.items?.size!! >1){
+                title.text = userOrders[position].cart?.items!![0].food.title+"..."
             }
-            else if (orders[position].cart?.items?.size!! !=0)
-                title.text = orders[position].cart?.items!![0].food.title
+            else if (userOrders[position].cart?.items?.size!! !=0)
+                title.text = userOrders[position].cart?.items!![0].food.title
 
 
-            when (orders[position].status){
+            when (userOrders[position].status){
 
                 "waiting" -> {
                     reject.visibility = View.VISIBLE
@@ -110,22 +109,22 @@ class OrderTeaBoyAdapter(private val teaBoyOrdersFragment: TeaBoyOrdersFragment)
             }
 
             reject.setOnClickListener {
-                val bundle = bundleOf("orderId" to orders[position].id)
+                val bundle = bundleOf("orderId" to userOrders[position].id)
                 itemView.findNavController().navigate(R.id.action_teaBoyOrdersFragment_to_rejectFragment,bundle)
             }
 
             accept.setOnClickListener {
-                val bundle = bundleOf("orderId" to orders[position].id)
+                val bundle = bundleOf("orderId" to userOrders[position].id)
                 itemView.findNavController().navigate(R.id.action_teaBoyOrdersFragment_to_acceptFragment,bundle)
             }
 
             confirm.setOnClickListener {
-                teaBoyOrdersFragment.orderViewModel.deliverOrder(orders[position].id!!)
+                teaBoyOrdersFragment.userOrderViewModel.deliverOrder(userOrders[position].id!!)
                 itemView.findNavController().navigate(R.id.action_teaBoyOrdersFragment_self)
             }
 
             details.setOnClickListener {
-                val bundle = bundleOf("orderId" to orders[position].cart?.id)
+                val bundle = bundleOf("orderId" to userOrders[position].cart?.id)
                 itemView.findNavController().navigate(R.id.action_orderFragment_to_orderDetailsFragment,bundle)
             }
 

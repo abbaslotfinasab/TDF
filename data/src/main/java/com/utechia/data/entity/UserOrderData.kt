@@ -2,7 +2,7 @@ package com.utechia.data.entity
 
 import android.os.Parcelable
 import com.utechia.data.base.ResponseObject
-import com.utechia.domain.model.OrderDataModel
+import com.utechia.domain.model.UserOrderDataModel
 import kotlinx.parcelize.Parcelize
 import kotlinx.parcelize.RawValue
 import kotlinx.serialization.Contextual
@@ -10,7 +10,7 @@ import kotlinx.serialization.Serializable
 
 @Parcelize
 @Serializable
-data class OrderData(
+data class UserOrderData(
 
     val id: Int?,
     val status: String?,
@@ -21,8 +21,8 @@ data class OrderData(
     val cart: @Contextual @RawValue CartData?,
 
 
-    ):Parcelable,ResponseObject<OrderDataModel>{
-    override fun toDomain(): OrderDataModel {
-        return OrderDataModel(id,status,orderrate?.map { it.toDomain() }!!.toMutableList(),floor,createdAt,updatedAt,cart?.toDomain())
+    ):Parcelable,ResponseObject<UserOrderDataModel>{
+    override fun toDomain(): UserOrderDataModel {
+        return UserOrderDataModel(id,status,orderrate?.map { it.toDomain() }!!.toMutableList(),floor,createdAt,updatedAt,cart?.toDomain())
     }
 }

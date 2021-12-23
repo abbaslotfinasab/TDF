@@ -3,7 +3,7 @@ package com.utechia.data.repo
 import com.utechia.data.api.Service
 import com.utechia.data.entity.FavoriteBody
 import com.utechia.data.utile.NetworkHelper
-import com.utechia.domain.model.OrderDataModel
+import com.utechia.domain.model.TeaBoyOrderDataModel
 import com.utechia.domain.repository.TeaBoyOrderRepo
 import java.io.IOException
 import javax.inject.Inject
@@ -15,7 +15,7 @@ class TeaBoyOrderRepoImpl @Inject constructor(
     private val networkHelper: NetworkHelper,
     ):TeaBoyOrderRepo {
 
-    override suspend fun acceptOrder(id: Int): MutableList<OrderDataModel> {
+    override suspend fun acceptOrder(id: Int): MutableList<TeaBoyOrderDataModel> {
 
         if (networkHelper.isNetworkConnected()) {
 
@@ -24,7 +24,7 @@ class TeaBoyOrderRepoImpl @Inject constructor(
             return when (result.isSuccessful) {
 
                 true -> {
-                    emptyList<OrderDataModel>().toMutableList()
+                    emptyList<TeaBoyOrderDataModel>().toMutableList()
                 }
 
                 else ->
@@ -34,7 +34,7 @@ class TeaBoyOrderRepoImpl @Inject constructor(
         } else throw IOException("No Internet Connection")
     }
 
-    override suspend fun rejectOrder(id: Int): MutableList<OrderDataModel> {
+    override suspend fun rejectOrder(id: Int): MutableList<TeaBoyOrderDataModel> {
 
         if (networkHelper.isNetworkConnected()) {
 
@@ -43,7 +43,7 @@ class TeaBoyOrderRepoImpl @Inject constructor(
             return when (result.isSuccessful) {
 
                 true -> {
-                    emptyList<OrderDataModel>().toMutableList()
+                    emptyList<TeaBoyOrderDataModel>().toMutableList()
                 }
 
                 else ->
@@ -72,7 +72,7 @@ class TeaBoyOrderRepoImpl @Inject constructor(
 
     }
 
-    override suspend fun getTeaBoyOrder(status:String): MutableList<OrderDataModel> {
+    override suspend fun getTeaBoyOrder(status:String): MutableList<TeaBoyOrderDataModel> {
 
         if (networkHelper.isNetworkConnected()) {
 
@@ -92,7 +92,7 @@ class TeaBoyOrderRepoImpl @Inject constructor(
         } else throw IOException("No Internet Connection")
     }
 
-    override suspend fun singleOrderTeaBoy(id: Int): MutableList<OrderDataModel> {
+    override suspend fun singleOrderTeaBoy(id: Int): MutableList<TeaBoyOrderDataModel> {
 
         if (networkHelper.isNetworkConnected()) {
 

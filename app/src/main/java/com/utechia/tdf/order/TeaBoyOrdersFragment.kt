@@ -1,6 +1,5 @@
 package com.utechia.tdf.order
 
-import android.graphics.Color
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -17,7 +16,7 @@ import dagger.hilt.android.AndroidEntryPoint
 class TeaBoyOrdersFragment : Fragment() {
 
     private lateinit var binding: FragmentTeaBoyOrdersBinding
-    val orderViewModel: OrderViewModel by viewModels()
+    val userOrderViewModel: TeaBoyOrderViewModel by viewModels()
     private val orderAdapter: OrderTeaBoyAdapter = OrderTeaBoyAdapter(this)
 
     override fun onCreateView(
@@ -30,7 +29,7 @@ class TeaBoyOrdersFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        orderViewModel.getOrderTeaBoy("pending")
+        userOrderViewModel.getOrderTeaBoy("pending")
 
         binding.tabLayout.addOnTabSelectedListener(object :TabLayout.OnTabSelectedListener{
             override fun onTabSelected(tab: TabLayout.Tab?) {
@@ -38,15 +37,15 @@ class TeaBoyOrdersFragment : Fragment() {
                 when(tab?.position){
 
                     0 -> {
-                        orderViewModel.getOrderTeaBoy("pending")
+                        userOrderViewModel.getOrderTeaBoy("pending")
                         observer()
                     }
                     1 -> {
-                        orderViewModel.getOrderTeaBoy("delivered")
+                        userOrderViewModel.getOrderTeaBoy("delivered")
                         observer()
                     }
                     2 -> {
-                        orderViewModel.getOrderTeaBoy("cancelled")
+                        userOrderViewModel.getOrderTeaBoy("cancelled")
                         observer()
                     }
                 }
@@ -105,7 +104,7 @@ class TeaBoyOrdersFragment : Fragment() {
     }
 
     private fun observer() {
-        orderViewModel.orderModel.observe(viewLifecycleOwner){
+        userOrderViewModel.userOrderModel.observe(viewLifecycleOwner){
 
 
             when (it) {

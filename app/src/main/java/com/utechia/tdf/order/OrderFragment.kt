@@ -18,7 +18,7 @@ import dagger.hilt.android.AndroidEntryPoint
 class OrderFragment : Fragment() {
 
     private lateinit var binding: FragmentOrderBinding
-    private val orderViewModel: OrderViewModel by viewModels()
+    private val userOrderViewModel: UserOrderViewModel by viewModels()
     private val orderAdapter: OrderAdapter = OrderAdapter()
 
 
@@ -32,7 +32,7 @@ class OrderFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        orderViewModel.getOrder("pending")
+        userOrderViewModel.getOrder("pending")
 
         binding.tabLayout.addOnTabSelectedListener(object : TabLayout.OnTabSelectedListener{
             override fun onTabSelected(tab: TabLayout.Tab?) {
@@ -40,16 +40,16 @@ class OrderFragment : Fragment() {
                 when(tab?.position){
 
                     0 -> {
-                        orderViewModel.getOrder("pending")
+                        userOrderViewModel.getOrder("pending")
                         observer()
 
                     }
                     1 -> {
-                        orderViewModel.getOrder("delivered")
+                        userOrderViewModel.getOrder("delivered")
                         observer()
                     }
                     2 -> {
-                        orderViewModel.getOrder("cancelled")
+                        userOrderViewModel.getOrder("cancelled")
                         observer()
                     }
                 }
@@ -113,7 +113,7 @@ class OrderFragment : Fragment() {
     }
 
     private fun observer() {
-        orderViewModel.orderModel.observe(viewLifecycleOwner){
+        userOrderViewModel.userOrderModel.observe(viewLifecycleOwner){
 
 
             when (it) {

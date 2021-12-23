@@ -60,38 +60,38 @@ interface Service {
     suspend fun postOrder():Response<OrderBody>
 
     @GET("user/orders")
-    suspend fun getOrder(@Query("status") status:String):Response<Order>
+    suspend fun getOrder(@Query("status") status:String):Response<UserOrder>
 
     @GET("user/orders")
-    suspend fun getSingleOrder(@Query("cartId") id: Int):Response<Order>
+    suspend fun getSingleOrder(@Query("cartId") id: Int):Response<UserOrder>
 
     @Headers("Content-Type: application/json")
     @PATCH("cafeteria/cancel-order")
     suspend fun cancelOrder(@Body favoriteBody: FavoriteBody ):Response<CancelOrder>
 
     @PATCH("teaboy/status")
-    suspend fun updateStatus(@Query("status") status: Boolean)
+    suspend fun updateStatus(@Query("status") status: Boolean):Response<Void>
 
     @GET("teaboy/order-count")
     suspend fun getOrderCount():Response<OrderCount>
 
     @GET("teaboy/orders")
-    suspend fun getTeaBoyOrder(@Query("status") status:String):Response<Order>
+    suspend fun getTeaBoyOrder(@Query("status") status:String):Response<TeaBoyOrder>
 
     @GET("teaboy/orders")
-    suspend fun getSingleOrderTeaBoy(@Query("cartId") id: Int):Response<Order>
+    suspend fun getSingleOrderTeaBoy(@Query("cartId") id: Int):Response<TeaBoyOrder>
 
     @Headers("Content-Type: application/json")
     @PATCH("teaboy/reject-order")
-    suspend fun rejectOrder(@Body favoriteBody: FavoriteBody ):Response<CancelOrder>
+    suspend fun rejectOrder(@Body favoriteBody: FavoriteBody ):Response<Void>
 
     @Headers("Content-Type: application/json")
     @PATCH("teaboy/accept-order")
-    suspend fun acceptOrder(@Body favoriteBody: FavoriteBody ):Response<CancelOrder>
+    suspend fun acceptOrder(@Body favoriteBody: FavoriteBody ):Response<Void>
 
     @Headers("Content-Type: application/json")
     @PATCH("teaboy/delivered-order")
-    suspend fun deliverOrder(@Body favoriteBody: FavoriteBody ):Response<CancelOrder>
+    suspend fun deliverOrder(@Body favoriteBody: FavoriteBody ):Response<Void>
 
     @Headers("Content-Type: application/json")
     @PATCH("user/firebase")

@@ -309,7 +309,7 @@
 
         <action
             android:id="@+id/action_orderFragment_to_orderDetailsFragment"
-            app:destination="@id/orderDetailsFragment" />
+            app:destination="@id/teaBoyOrderDetailsFragment" />
         <action
             android:id="@+id/action_teaBoyOrdersFragment_self"
             app:destination="@id/teaBoyOrdersFragment" />
@@ -596,6 +596,18 @@
             app:popUpToInclusive="true"
             app:popUpTo="@id/refreshmentFragment"
             app:destination="@id/orderFragment" />
+
+    </dialog>
+    <dialog
+        android:id="@+id/teaBoyOrderDetailsFragment"
+        android:name="com.utechia.tdf.TeaBoyOrderDetailsFragment"
+        android:label="fragment_tea_boy_order_details"
+        tools:layout="@layout/fragment_tea_boy_order_details" >
+
+        <argument
+            android:name="cartId"
+            app:argType="integer"
+            android:defaultValue="0" />
 
     </dialog>
 

@@ -12,7 +12,7 @@ class OrderCountUseCaseImpl @Inject constructor(private val orderCountRepo: Orde
         return orderCountRepo.getOrderCount()
     }
 
-    override suspend fun setStatus(status: Boolean) {
+    override suspend fun setStatus(status: Boolean): MutableList<OrderCountModel> {
         return orderCountRepo.setStatus(status)
     }
 }

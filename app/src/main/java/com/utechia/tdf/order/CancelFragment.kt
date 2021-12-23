@@ -3,8 +3,6 @@ package com.utechia.tdf.order
 import android.graphics.Color
 import android.graphics.drawable.ColorDrawable
 import android.os.Bundle
-import android.os.Handler
-import android.os.Looper
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -22,7 +20,7 @@ import dagger.hilt.android.AndroidEntryPoint
 class CancelFragment : DialogFragment() {
 
     private lateinit var binding: FragmentCancelBinding
-    private val orderViewModel:OrderViewModel by viewModels()
+    private val userOrderViewModel:UserOrderViewModel by viewModels()
     private var orderId = 0
 
     override fun onCreateView(
@@ -58,7 +56,7 @@ class CancelFragment : DialogFragment() {
 
         binding.btnCancel.setOnClickListener {
 
-            orderViewModel.cancelOrder(orderId)
+            userOrderViewModel.cancelOrder(orderId)
             observer()
 
         }
@@ -66,7 +64,7 @@ class CancelFragment : DialogFragment() {
 
     private fun observer() {
 
-        orderViewModel.orderModel.observe(viewLifecycleOwner){
+        userOrderViewModel.userOrderModel.observe(viewLifecycleOwner){
 
 
             when (it) {

@@ -12,14 +12,14 @@ import androidx.navigation.fragment.findNavController
 import com.utechia.domain.utile.Result
 import com.utechia.tdf.R
 import com.utechia.tdf.databinding.FragmentRefreshmentBinding
-import com.utechia.tdf.order.OrderViewModel
+import com.utechia.tdf.order.UserOrderViewModel
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
 class RefreshmentsFragment : Fragment() {
 
     private lateinit var binding: FragmentRefreshmentBinding
-    private val orderViewModel: OrderViewModel by viewModels()
+    private val userOrderViewModel: UserOrderViewModel by viewModels()
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -31,7 +31,7 @@ class RefreshmentsFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        orderViewModel.getOrder("preparing")
+        userOrderViewModel.getOrder("preparing")
         observer()
 
         binding.food.setOnClickListener {
@@ -71,7 +71,7 @@ class RefreshmentsFragment : Fragment() {
     }
 
     fun observer(){
-        orderViewModel.orderModel.observe(viewLifecycleOwner){
+        userOrderViewModel.userOrderModel.observe(viewLifecycleOwner){
 
             when (it) {
                 is Result.Success -> {
