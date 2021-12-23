@@ -81,6 +81,10 @@ class DeleteFragment : DialogFragment() {
 
                 is Result.Loading -> {
                     binding.prg.visibility = View.VISIBLE
+                    binding.btnDelete.isEnabled = false
+                    binding.btnCancel.isEnabled = false
+                    binding.exit.isEnabled = false
+
                 }
 
                 is Result.Error -> {

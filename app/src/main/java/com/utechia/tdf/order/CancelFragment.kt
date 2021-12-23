@@ -80,6 +80,11 @@ class CancelFragment : DialogFragment() {
 
                 is Result.Loading -> {
                     binding.prg.visibility = View.VISIBLE
+                    binding.btnKeep.isEnabled = false
+                    binding.btnCancel.isEnabled = false
+                    binding.exit.isEnabled = false
+
+
 
                 }
 

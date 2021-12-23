@@ -49,8 +49,8 @@ abstract class RepositoryModule {
 
     @Binds
     abstract fun bindOrderRepositoryService(
-        orderRepoImpl: OrderRepoImpl
-    ): OrderRepo
+        orderRepoImpl: UserOrderRepoImpl
+    ): UserOrderRepo
 
     @Binds
     abstract fun bindOrderCountRepositoryService(
@@ -86,6 +86,11 @@ abstract class RepositoryModule {
     abstract fun bindSurveyAnswerRepositoryService(
         surveyAnswerRepoImpl: SurveyAnswerRepoImpl
     ): SurveyAnswerRepo
+
+    @Binds
+    abstract fun bindTeaBoyOrderRepositoryService(
+        teaBoyOrderRepoImpl: TeaBoyOrderRepoImpl
+    ): TeaBoyOrderRepo
 
 
 }

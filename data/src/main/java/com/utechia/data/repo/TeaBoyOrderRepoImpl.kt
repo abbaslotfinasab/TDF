@@ -4,41 +4,22 @@ import com.utechia.data.api.Service
 import com.utechia.data.entity.FavoriteBody
 import com.utechia.data.utile.NetworkHelper
 import com.utechia.domain.model.OrderDataModel
-import com.utechia.domain.repository.OrderRepo
+import com.utechia.domain.repository.TeaBoyOrderRepo
 import java.io.IOException
 import javax.inject.Inject
 import javax.inject.Singleton
 
 @Singleton
-class OrderRepoImpl @Inject constructor(
+class TeaBoyOrderRepoImpl @Inject constructor(
     private val service: Service,
     private val networkHelper: NetworkHelper,
-):OrderRepo {
-    override suspend fun getOrder(status: String): MutableList<OrderDataModel> {
+    ):TeaBoyOrderRepo {
+
+    override suspend fun acceptOrder(id: Int): MutableList<OrderDataModel> {
 
         if (networkHelper.isNetworkConnected()) {
 
-            val result = service.getOrder(status)
-
-            return when (result.isSuccessful) {
-
-                true -> {
-                    result.body()?.data!!.map { it.toDomain() }.toMutableList()
-                }
-
-                else ->
-                    throw IOException("Server is Not Responding")
-            }
-
-        } else throw IOException("No Internet Connection")
-
-    }
-
-    override suspend fun cancelOrder(id: Int): MutableList<OrderDataModel> {
-
-        if (networkHelper.isNetworkConnected()) {
-
-            val result = service.cancelOrder(FavoriteBody(id))
+            val result = service.acceptOrder(FavoriteBody(id))
 
             return when (result.isSuccessful) {
 
@@ -53,44 +34,7 @@ class OrderRepoImpl @Inject constructor(
         } else throw IOException("No Internet Connection")
     }
 
-    override suspend fun singleOrder(id: Int): MutableList<OrderDataModel> {
-
-        if (networkHelper.isNetworkConnected()) {
-
-            val result = service.getSingleOrder(id)
-
-            return when (result.isSuccessful) {
-
-                true -> {
-                    result.body()?.data!!.map { it.toDomain() }.toMutableList()
-                }
-
-                else ->
-                    throw IOException("Server is Not Responding")
-            }
-
-        } else
-            throw IOException("No Internet Connection")
-    }
-
-    override suspend fun acceptOrder(id: Int) {
-
-        if (networkHelper.isNetworkConnected()) {
-
-            val result = service.acceptOrder(FavoriteBody(id))
-
-            return when (result.isSuccessful) {
-
-                true -> {}
-
-                else ->
-                    throw IOException("Server is Not Responding")
-            }
-
-        } else throw IOException("No Internet Connection")
-    }
-
-    override suspend fun rejectOrder(id: Int) {
+    override suspend fun rejectOrder(id: Int): MutableList<OrderDataModel> {
 
         if (networkHelper.isNetworkConnected()) {
 
@@ -98,7 +42,9 @@ class OrderRepoImpl @Inject constructor(
 
             return when (result.isSuccessful) {
 
-                true -> {}
+                true -> {
+                    emptyList<OrderDataModel>().toMutableList()
+                }
 
                 else ->
                     throw IOException("Server is Not Responding")
