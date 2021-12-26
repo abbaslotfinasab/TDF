@@ -21,7 +21,7 @@ class CreateTicketFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View {
         binding = FragmentCreateTicketBinding.inflate(inflater, container, false)
-        val floor = resources.getStringArray(R.array.month_array)
+        val floor = resources.getStringArray(R.array.floor_array)
         val arrayAdapter = ArrayAdapter(requireContext(),R.layout.dropdown_item,floor)
         binding.autoCompleteTextView.setAdapter(arrayAdapter)
 

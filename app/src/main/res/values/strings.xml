@@ -20,4 +20,11 @@
         <item>December</item>
     </string-array>
 
+    <string-array name="floor_array">
+        <item>1</item>
+        <item>2</item>
+        <item>3</item>
+        <item>Complaint</item>
+    </string-array>
+
 </resources>
