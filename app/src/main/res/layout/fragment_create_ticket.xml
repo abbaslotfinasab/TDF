@@ -42,6 +42,7 @@
                 android:layout_marginEnd="30dp"
                 android:background="@color/white"
                 android:gravity="center"
+                android:maxLines="1"
                 android:hint="Type Title"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
@@ -91,11 +92,11 @@
                     android:layout_height="wrap_content"
                     android:layout_gravity="center"
                     android:gravity="center"
-                    android:textSize="16dp"
                     android:text="Select One"
                     android:textColor="@color/black"
+                    android:textSize="16dp"
                     app:layout_constraintBottom_toBottomOf="parent"
-                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintEnd_toStartOf="@+id/imageView16"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toTopOf="parent" />
 
@@ -104,7 +105,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_gravity="end"
-                    android:layout_marginEnd="15dp"
+                    android:layout_marginEnd="10dp"
                     android:src="@drawable/ic_baseline_keyboard_arrow_down_24"
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintEnd_toEndOf="parent"
@@ -190,7 +191,8 @@
 
             <com.google.android.material.textfield.TextInputLayout
                 android:id="@+id/selectFloor"
-                style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox.ExposedDropdownMenu"
+                app:boxStrokeColor="@color/white"
+                app:boxStrokeWidth="0dp"
                 android:layout_width="0dp"
                 android:layout_height="60dp"
                 android:layout_gravity="center"
@@ -202,6 +204,7 @@
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
+                style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox.Dense.ExposedDropdownMenu"
                 app:layout_constraintTop_toBottomOf="@+id/textView27">
 
                 <AutoCompleteTextView
@@ -209,9 +212,10 @@
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:fontFamily="@font/poppins"
-                    android:layout_weight="1"
-                    android:textSize="16dp"
-                    android:gravity="center"
+                    android:textSize="15dp"
+                    android:background="@color/white"
+                    android:gravity="center_horizontal"
+                    android:padding="16dp"
                     android:inputType="none"
                     android:text="Select One"
                     android:textColor="@color/black" />
