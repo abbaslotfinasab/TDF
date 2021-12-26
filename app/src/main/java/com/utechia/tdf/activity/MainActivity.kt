@@ -228,6 +228,11 @@ class MainActivity : AppCompatActivity() {
 
                     }
 
+                    R.id.createTicketFragment -> {
+                        design("createTicket")
+
+                    }
+
                     R.id.eventSystemFragment -> {
                         design("event")
 
@@ -376,6 +381,11 @@ class MainActivity : AppCompatActivity() {
 
                 R.id.ticketSystemFragment -> {
                     design("ticket")
+
+                }
+
+                R.id.createTicketFragment -> {
+                    design("createTicket")
 
                 }
 
@@ -640,7 +650,7 @@ class MainActivity : AppCompatActivity() {
                 binding.customToolbar.visibility = View.VISIBLE
                 binding.toolbar.visibility = View.INVISIBLE
                 binding.customButton.visibility = View.GONE
-                binding.customTitle.text = "Ticket System"
+                binding.customTitle.text = "Ticket"
                 binding.bottomNavigation.visibility = View.GONE
                 binding.drawerLayout.setDrawerLockMode(DrawerLayout.LOCK_MODE_LOCKED_CLOSED)
 
@@ -652,6 +662,17 @@ class MainActivity : AppCompatActivity() {
                 binding.toolbar.visibility = View.INVISIBLE
                 binding.customButton.visibility = View.GONE
                 binding.customTitle.text = "Event System"
+                binding.bottomNavigation.visibility = View.GONE
+                binding.drawerLayout.setDrawerLockMode(DrawerLayout.LOCK_MODE_LOCKED_CLOSED)
+
+            }
+
+            "createTicket"->{
+                window.statusBarColor = ContextCompat.getColor(this, R.color.status)
+                binding.customToolbar.visibility = View.VISIBLE
+                binding.toolbar.visibility = View.INVISIBLE
+                binding.customButton.visibility = View.GONE
+                binding.customTitle.text = "Add Ticket"
                 binding.bottomNavigation.visibility = View.GONE
                 binding.drawerLayout.setDrawerLockMode(DrawerLayout.LOCK_MODE_LOCKED_CLOSED)
 

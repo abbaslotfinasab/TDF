@@ -22,6 +22,17 @@
         <item name="android:textAllCaps">false</item>
     </style>
 
+    <style name="AppBottomSheetDialogTheme"
+        parent="Theme.MaterialComponents.Light.BottomSheetDialog">
+
+        <item name="bottomSheetStyle">@style/CustomeBottomSheeteStyle</item>
+    </style>
+
+    <style name="CustomeBottomSheeteStyle"
+        parent="Widget.Design.BottomSheet.Modal">
+        <item name="android:background">@drawable/category_back</item>
+    </style>
+
     <style name="ProgressBar" parent="Theme.AppCompat.Light">
         <item name="colorAccent">#557EF2</item>
     </style>

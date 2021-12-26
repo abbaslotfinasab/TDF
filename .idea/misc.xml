@@ -8,9 +8,11 @@
         <entry key="..\:/Users/Abbas/StudioProjects/tdf_oms_android_application_kotlin_v1/app/src/main/res/drawable/button_border.xml" value="0.18958333333333333" />
         <entry key="..\:/Users/Abbas/StudioProjects/tdf_oms_android_application_kotlin_v1/app/src/main/res/drawable/cancel_btn.xml" value="0.18958333333333333" />
         <entry key="..\:/Users/Abbas/StudioProjects/tdf_oms_android_application_kotlin_v1/app/src/main/res/drawable/cancel_button.xml" value="0.18958333333333333" />
+        <entry key="..\:/Users/Abbas/StudioProjects/tdf_oms_android_application_kotlin_v1/app/src/main/res/drawable/category_back.xml" value="0.11973684210526316" />
         <entry key="..\:/Users/Abbas/StudioProjects/tdf_oms_android_application_kotlin_v1/app/src/main/res/drawable/delivered_btn.xml" value="0.18958333333333333" />
         <entry key="..\:/Users/Abbas/StudioProjects/tdf_oms_android_application_kotlin_v1/app/src/main/res/drawable/description_back.xml" value="0.18958333333333333" />
         <entry key="..\:/Users/Abbas/StudioProjects/tdf_oms_android_application_kotlin_v1/app/src/main/res/drawable/food_state.xml" value="0.15555555555555556" />
+        <entry key="..\:/Users/Abbas/StudioProjects/tdf_oms_android_application_kotlin_v1/app/src/main/res/drawable/ic_baseline_keyboard_arrow_down_24.xml" value="0.11973684210526316" />
         <entry key="..\:/Users/Abbas/StudioProjects/tdf_oms_android_application_kotlin_v1/app/src/main/res/drawable/ic_document_text.xml" value="0.18958333333333333" />
         <entry key="..\:/Users/Abbas/StudioProjects/tdf_oms_android_application_kotlin_v1/app/src/main/res/drawable/ic_exit.xml" value="0.18958333333333333" />
         <entry key="..\:/Users/Abbas/StudioProjects/tdf_oms_android_application_kotlin_v1/app/src/main/res/drawable/ic_group_20338.xml" value="0.18958333333333333" />
@@ -36,6 +38,7 @@
         <entry key="..\:/Users/Abbas/StudioProjects/tdf_oms_android_application_kotlin_v1/app/src/main/res/layout/fragment_cancel.xml" value="0.22" />
         <entry key="..\:/Users/Abbas/StudioProjects/tdf_oms_android_application_kotlin_v1/app/src/main/res/layout/fragment_cancel_request.xml" value="0.10416666666666667" />
         <entry key="..\:/Users/Abbas/StudioProjects/tdf_oms_android_application_kotlin_v1/app/src/main/res/layout/fragment_cart.xml" value="0.1" />
+        <entry key="..\:/Users/Abbas/StudioProjects/tdf_oms_android_application_kotlin_v1/app/src/main/res/layout/fragment_category_fragment.xml" value="0.18" />
         <entry key="..\:/Users/Abbas/StudioProjects/tdf_oms_android_application_kotlin_v1/app/src/main/res/layout/fragment_confirm.xml" value="0.1" />
         <entry key="..\:/Users/Abbas/StudioProjects/tdf_oms_android_application_kotlin_v1/app/src/main/res/layout/fragment_confirm_request.xml" value="0.22" />
         <entry key="..\:/Users/Abbas/StudioProjects/tdf_oms_android_application_kotlin_v1/app/src/main/res/layout/fragment_confirm_survey.xml" value="0.1" />
@@ -43,7 +46,7 @@
         <entry key="..\:/Users/Abbas/StudioProjects/tdf_oms_android_application_kotlin_v1/app/src/main/res/layout/fragment_create_request.xml" value="0.1" />
         <entry key="..\:/Users/Abbas/StudioProjects/tdf_oms_android_application_kotlin_v1/app/src/main/res/layout/fragment_create_reservation.xml" value="0.10507246376811594" />
         <entry key="..\:/Users/Abbas/StudioProjects/tdf_oms_android_application_kotlin_v1/app/src/main/res/layout/fragment_create_survey.xml" value="0.1" />
-        <entry key="..\:/Users/Abbas/StudioProjects/tdf_oms_android_application_kotlin_v1/app/src/main/res/layout/fragment_create_ticket.xml" value="0.21" />
+        <entry key="..\:/Users/Abbas/StudioProjects/tdf_oms_android_application_kotlin_v1/app/src/main/res/layout/fragment_create_ticket.xml" value="0.1" />
         <entry key="..\:/Users/Abbas/StudioProjects/tdf_oms_android_application_kotlin_v1/app/src/main/res/layout/fragment_deactivation.xml" value="0.22" />
         <entry key="..\:/Users/Abbas/StudioProjects/tdf_oms_android_application_kotlin_v1/app/src/main/res/layout/fragment_delete.xml" value="0.18" />
         <entry key="..\:/Users/Abbas/StudioProjects/tdf_oms_android_application_kotlin_v1/app/src/main/res/layout/fragment_favorite.xml" value="0.1" />

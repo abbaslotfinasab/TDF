@@ -1,4 +1,4 @@
-package com.utechia.tdf.more
+package com.utechia.tdf.ticket
 
 import android.os.Bundle
 import android.view.LayoutInflater
@@ -7,32 +7,28 @@ import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.findNavController
 import com.utechia.tdf.R
-import com.utechia.tdf.databinding.FragmentTicketSystemBinding
+import com.utechia.tdf.databinding.FragmentCreateTicketBinding
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
-class TicketSystemFragment : Fragment() {
+class CreateTicketFragment : Fragment() {
 
-    private lateinit var binding: FragmentTicketSystemBinding
+    private lateinit var binding: FragmentCreateTicketBinding
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
-        binding = FragmentTicketSystemBinding.inflate(inflater, container, false)
+        binding = FragmentCreateTicketBinding.inflate(inflater, container, false)
         return binding.root
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-
-        binding.plus.setOnClickListener {
-
-            findNavController().navigate(R.id.action_ticketSystemFragment_to_createTicketFragment)
-
+        binding.category.setOnClickListener {
+            findNavController().navigate(R.id.action_createTicketFragment_to_categoryFragment)
         }
-
 
     }
 
