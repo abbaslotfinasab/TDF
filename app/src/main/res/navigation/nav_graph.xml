@@ -586,7 +586,7 @@
     <dialog
         android:id="@+id/ratingSurveyFragment"
         android:name="com.utechia.tdf.order.RatingSurveyFragment"
-        android:label="fragment_rating_survey"
+        android:label="fragment_rating_ticket"
         tools:layout="@layout/fragment_rating_ticket">
 
     <argument

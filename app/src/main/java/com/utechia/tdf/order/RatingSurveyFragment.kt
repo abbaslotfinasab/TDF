@@ -8,24 +8,20 @@ import android.view.View
 import android.view.ViewGroup
 import android.view.Window
 import androidx.fragment.app.DialogFragment
-import androidx.fragment.app.viewModels
-import androidx.navigation.fragment.findNavController
-import com.utechia.tdf.R
-import com.utechia.tdf.databinding.FragmentCancelBinding
-import com.utechia.tdf.databinding.FragmentRatingSurveyBinding
+import com.utechia.tdf.databinding.FragmentRatingTicketBinding
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
 class RatingSurveyFragment : DialogFragment() {
 
-    private lateinit var binding: FragmentRatingSurveyBinding
+    private lateinit var binding: FragmentRatingTicketBinding
     private var orderId = 0
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
-        binding = FragmentRatingSurveyBinding.inflate(inflater, container, false)
+        binding = FragmentRatingTicketBinding.inflate(inflater, container, false)
 
         if(dialog !=null && dialog?.window !=null){
             dialog?.window?.setBackgroundDrawable(ColorDrawable(Color.TRANSPARENT))

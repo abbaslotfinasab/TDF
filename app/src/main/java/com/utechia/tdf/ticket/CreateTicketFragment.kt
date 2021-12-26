@@ -4,6 +4,7 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.ArrayAdapter
 import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.findNavController
 import com.utechia.tdf.R
@@ -20,6 +21,10 @@ class CreateTicketFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View {
         binding = FragmentCreateTicketBinding.inflate(inflater, container, false)
+        val floor = resources.getStringArray(R.array.month_array)
+        val arrayAdapter = ArrayAdapter(requireContext(),R.layout.dropdown_item,floor)
+        binding.autoCompleteTextView.setAdapter(arrayAdapter)
+
         return binding.root
     }
 
