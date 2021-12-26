@@ -154,6 +154,11 @@
             android:id="@+id/action_createTicketFragment_to_categoryFragment"
             app:destination="@id/categoryFragmentFragment" />
 
+        <action
+            android:id="@+id/action_createTicketFragment_to_ticketConfirmationFragment"
+            app:destination="@id/ticketConfirmationFragment" />
+
+
     </fragment>
 
     <dialog
@@ -582,7 +587,7 @@
         android:id="@+id/ratingSurveyFragment"
         android:name="com.utechia.tdf.order.RatingSurveyFragment"
         android:label="fragment_rating_survey"
-        tools:layout="@layout/fragment_rating_survey">
+        tools:layout="@layout/fragment_rating_ticket">
 
     <argument
         android:name="id"
@@ -623,6 +628,21 @@
         android:name="com.utechia.tdf.ticket.CategoryFragment"
         android:label="fragment_category_fragment"
         tools:layout="@layout/fragment_category_fragment" />
+
+    <dialog
+        android:id="@+id/ticketConfirmationFragment"
+        android:name="com.utechia.tdf.ticket.TicketConfirmationFragment"
+        android:label="fragment_ticket_confirmation"
+        tools:layout="@layout/fragment_ticket_confirmation" >
+
+        <action
+            android:id="@+id/ticketConfirmationFragment_to_TicketFragment"
+            app:launchSingleTop="true"
+            app:popUpToInclusive="true"
+            app:popUpTo="@id/nav_graph"
+            app:destination="@id/ticketSystemFragment" />
+
+    </dialog>
 
 
 </navigation>

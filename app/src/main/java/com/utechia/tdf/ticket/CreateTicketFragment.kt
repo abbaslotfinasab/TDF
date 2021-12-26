@@ -30,6 +30,10 @@ class CreateTicketFragment : Fragment() {
             findNavController().navigate(R.id.action_createTicketFragment_to_categoryFragment)
         }
 
+        binding.appCompatButton.setOnClickListener {
+            findNavController().navigate(R.id.action_createTicketFragment_to_ticketConfirmationFragment)
+        }
+
     }
 
 }
