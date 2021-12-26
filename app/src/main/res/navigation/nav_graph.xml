@@ -264,7 +264,8 @@
         <action
             android:id="@+id/action_loginFragment_to_teaBoyHomeFragment"
             app:launchSingleTop="true"
-            app:destination="@id/teaBoyHomeFragment" />
+            app:destination="@id/teaBoyHomeFragment"
+            app:popUpTo="@id/nav_graph"/>
 
     </fragment>
 
@@ -600,7 +601,7 @@
     </dialog>
     <dialog
         android:id="@+id/teaBoyOrderDetailsFragment"
-        android:name="com.utechia.tdf.TeaBoyOrderDetailsFragment"
+        android:name="com.utechia.tdf.order.TeaBoyOrderDetailsFragment"
         android:label="fragment_tea_boy_order_details"
         tools:layout="@layout/fragment_tea_boy_order_details" >
 
