@@ -162,6 +162,9 @@
         <action
             android:id="@+id/action_createTicketFragment_to_uploadFragment"
             app:destination="@id/uploadFragment" />
+        <action
+            android:id="@+id/action_createTicketFragment_to_blankFragment"
+            app:destination="@id/blankFragment" />
 
 
     </fragment>
@@ -654,6 +657,15 @@
         android:name="com.utechia.tdf.ticket.UploadFragment"
         android:label="fragment_upload"
         tools:layout="@layout/fragment_upload" />
+    <fragment
+        android:id="@+id/blankFragment"
+        android:name="com.utechia.tdf.ticket.BlankFragment"
+        android:label="fragment_blank"
+        tools:layout="@layout/fragment_blank" >
+        <argument
+            android:name="uri"
+            app:argType="string" />
+    </fragment>
 
 
 </navigation>

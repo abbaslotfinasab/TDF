@@ -1,6 +1,7 @@
 package com.utechia.tdf.activity
 
 import android.content.SharedPreferences
+import android.graphics.drawable.Drawable
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.os.Handler
@@ -238,6 +239,11 @@ class MainActivity : AppCompatActivity() {
 
                     }
 
+                    R.id.blankFragment -> {
+                        design("blank")
+
+                    }
+
                     else -> {
                         design("drawer")
                     }
@@ -391,6 +397,11 @@ class MainActivity : AppCompatActivity() {
 
                 R.id.eventSystemFragment -> {
                     design("event")
+
+                }
+
+                R.id.blankFragment -> {
+                    design("blank")
 
                 }
 
@@ -673,6 +684,18 @@ class MainActivity : AppCompatActivity() {
                 binding.toolbar.visibility = View.INVISIBLE
                 binding.customButton.visibility = View.GONE
                 binding.customTitle.text = "Add Ticket"
+                binding.bottomNavigation.visibility = View.GONE
+                binding.drawerLayout.setDrawerLockMode(DrawerLayout.LOCK_MODE_LOCKED_CLOSED)
+
+            }
+
+            "blank"->{
+                window.statusBarColor = ContextCompat.getColor(this, R.color.black)
+                binding.customToolbar.background = ContextCompat.getDrawable(this,R.color.black)
+                binding.customToolbar.visibility = View.VISIBLE
+                binding.toolbar.visibility = View.INVISIBLE
+                binding.customButton.visibility = View.GONE
+                binding.customTitle.text = ""
                 binding.bottomNavigation.visibility = View.GONE
                 binding.drawerLayout.setDrawerLockMode(DrawerLayout.LOCK_MODE_LOCKED_CLOSED)
 

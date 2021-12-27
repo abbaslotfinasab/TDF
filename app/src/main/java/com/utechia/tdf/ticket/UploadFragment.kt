@@ -52,6 +52,5 @@ class UploadFragment : BottomSheetDialogFragment() {
             parent.openGallery()
             dialog?.dismiss()
         }
-
     }
 }
