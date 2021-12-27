@@ -658,6 +658,7 @@ class MainActivity : AppCompatActivity() {
 
             "ticket" ->{
                 window.statusBarColor = ContextCompat.getColor(this, R.color.status)
+                binding.customToolbar.background = ContextCompat.getDrawable(this,R.color.status)
                 binding.customToolbar.visibility = View.VISIBLE
                 binding.toolbar.visibility = View.INVISIBLE
                 binding.customButton.visibility = View.GONE
@@ -669,6 +670,7 @@ class MainActivity : AppCompatActivity() {
 
             "event" ->{
                 window.statusBarColor = ContextCompat.getColor(this, R.color.status)
+                binding.customToolbar.background = ContextCompat.getDrawable(this,R.color.status)
                 binding.customToolbar.visibility = View.VISIBLE
                 binding.toolbar.visibility = View.INVISIBLE
                 binding.customButton.visibility = View.GONE
@@ -680,6 +682,7 @@ class MainActivity : AppCompatActivity() {
 
             "createTicket"->{
                 window.statusBarColor = ContextCompat.getColor(this, R.color.status)
+                binding.customToolbar.background = ContextCompat.getDrawable(this,R.color.status)
                 binding.customToolbar.visibility = View.VISIBLE
                 binding.toolbar.visibility = View.INVISIBLE
                 binding.customButton.visibility = View.GONE
