@@ -10,6 +10,7 @@
         android:name="com.utechia.tdf.home.UserHomeFragment"
         android:label="fragment_home"
         tools:layout="@layout/fragment_home_user" />
+
     <fragment
         android:id="@+id/refreshmentFragment"
         android:name="com.utechia.tdf.refreshment.RefreshmentsFragment"
@@ -157,6 +158,10 @@
         <action
             android:id="@+id/action_createTicketFragment_to_ticketConfirmationFragment"
             app:destination="@id/ticketConfirmationFragment" />
+
+        <action
+            android:id="@+id/action_createTicketFragment_to_uploadFragment"
+            app:destination="@id/uploadFragment" />
 
 
     </fragment>
@@ -643,6 +648,12 @@
             app:destination="@id/ticketSystemFragment" />
 
     </dialog>
+
+    <dialog
+        android:id="@+id/uploadFragment"
+        android:name="com.utechia.tdf.ticket.UploadFragment"
+        android:label="fragment_upload"
+        tools:layout="@layout/fragment_upload" />
 
 
 </navigation>
