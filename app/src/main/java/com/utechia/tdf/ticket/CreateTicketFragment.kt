@@ -18,6 +18,13 @@ import com.github.dhaval2404.imagepicker.ImagePicker
 import com.utechia.tdf.R
 import com.utechia.tdf.databinding.FragmentCreateTicketBinding
 import dagger.hilt.android.AndroidEntryPoint
+import androidx.core.app.ActivityCompat.startActivityForResult
+import androidx.core.app.ActivityCompat.startActivityForResult
+import droidninja.filepicker.FilePickerActivity
+import androidx.core.app.ActivityCompat.startActivityForResult
+
+
+
 
 
 @AndroidEntryPoint
@@ -25,6 +32,7 @@ class CreateTicketFragment : Fragment() {
 
     private lateinit var binding: FragmentCreateTicketBinding
     private val uploadOrder:UploadAdapter = UploadAdapter(this)
+    private val FILE_REQUEST_CODE = 3
 
 
     override fun onCreateView(
@@ -97,6 +105,16 @@ class CreateTicketFragment : Fragment() {
             .maxResultSize(1080, 1080) //Final image resolution will be less than 1080 x 1080(Optional)
             .cameraOnly()
             .start()
+
+    }
+
+    fun openFile(){
+
+        val intent: Intent
+        val chooseFile = Intent(Intent.ACTION_GET_CONTENT)
+        chooseFile.type = "application/pdf"
+        intent = Intent.createChooser(chooseFile, "Choose a file")
+        startActivityForResult(intent, Activity.RESULT_OK)
 
     }
 

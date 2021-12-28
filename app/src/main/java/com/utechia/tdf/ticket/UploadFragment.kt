@@ -52,5 +52,11 @@ class UploadFragment : BottomSheetDialogFragment() {
             parent.openGallery()
             dialog?.dismiss()
         }
+
+        binding.file.setOnClickListener {
+            parent.openFile()
+            dialog?.dismiss()
+        }
+
     }
 }
