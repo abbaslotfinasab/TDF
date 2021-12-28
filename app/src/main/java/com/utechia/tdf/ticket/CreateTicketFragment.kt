@@ -18,10 +18,6 @@ import com.github.dhaval2404.imagepicker.ImagePicker
 import com.utechia.tdf.R
 import com.utechia.tdf.databinding.FragmentCreateTicketBinding
 import dagger.hilt.android.AndroidEntryPoint
-import androidx.core.app.ActivityCompat.startActivityForResult
-import androidx.core.app.ActivityCompat.startActivityForResult
-import droidninja.filepicker.FilePickerActivity
-import androidx.core.app.ActivityCompat.startActivityForResult
 
 
 
@@ -32,7 +28,6 @@ class CreateTicketFragment : Fragment() {
 
     private lateinit var binding: FragmentCreateTicketBinding
     private val uploadOrder:UploadAdapter = UploadAdapter(this)
-    private val FILE_REQUEST_CODE = 3
 
 
     override fun onCreateView(
