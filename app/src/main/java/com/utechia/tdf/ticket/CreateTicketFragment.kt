@@ -11,6 +11,7 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.ArrayAdapter
 import android.widget.Toast
+import androidx.core.view.get
 import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.GridLayoutManager
@@ -44,6 +45,13 @@ class CreateTicketFragment : Fragment() {
         val floor = resources.getStringArray(R.array.floor_array)
         val arrayAdapter = ArrayAdapter(requireContext(),R.layout.dropdown_item,floor)
         binding.autoCompleteTextView.setAdapter(arrayAdapter)
+
+        binding.segmented.apply{
+            this.check(R.id.checkbox)
+            onSegmentChecked {
+            }
+        }
+
 
         if (uploadOrder.file.size !=0){
             binding.uploadLayout0.visibility = View.GONE
@@ -79,6 +87,7 @@ class CreateTicketFragment : Fragment() {
 
 
         }
+
     }
 
     fun openGallery(){
@@ -113,10 +122,19 @@ class CreateTicketFragment : Fragment() {
 
     }
 
-    fun replacement(){
+    private fun replacement(){
         binding.uploadLayout0.visibility = View.VISIBLE
         binding.recyclerView.visibility = View.GONE
 
+    }
+
+    fun deleteItem(position:Int){
+        uploadOrder.file.removeAt(position)
+        uploadOrder.notifyItemRemoved(position)
+
+        if(uploadOrder.file.isEmpty()){
+            replacement()
+        }
     }
 
     private fun calculateNoOfColumns(

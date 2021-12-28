@@ -165,6 +165,9 @@
         <action
             android:id="@+id/action_createTicketFragment_to_blankFragment"
             app:destination="@id/blankFragment" />
+        <action
+            android:id="@+id/action_createTicketFragment_to_uploadDeleteFragment"
+            app:destination="@id/uploadDeleteFragment" />
 
 
     </fragment>
@@ -667,5 +670,17 @@
             app:argType="string" />
     </fragment>
 
+    <dialog
+        android:id="@+id/uploadDeleteFragment"
+        android:name="com.utechia.tdf.ticket.UploadDeleteFragment"
+        android:label="fragment_upload_delete"
+        tools:layout="@layout/fragment_upload_delete" >
+
+        <argument
+            android:name="position"
+            app:argType="integer"
+            android:defaultValue="0"  />
+
+    </dialog>
 
 </navigation>

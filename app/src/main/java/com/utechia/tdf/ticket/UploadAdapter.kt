@@ -55,12 +55,8 @@ class UploadAdapter(private val createTicketFragment: CreateTicketFragment): Rec
                 }
 
                 deleteIcon.setOnClickListener {
-                    file.removeAt(position)
-                    notifyItemRemoved(position)
-
-                    if (file.isEmpty()) {
-                        createTicketFragment.replacement()
-                    }
+                    val bundle = bundleOf("position" to position)
+                    itemView.findNavController().navigate(R.id.action_createTicketFragment_to_uploadDeleteFragment,bundle)
                 }
             }
 
@@ -70,6 +66,7 @@ class UploadAdapter(private val createTicketFragment: CreateTicketFragment): Rec
                 Glide.with(itemView.context)
                     .load(R.drawable.addicon)
                     .error(R.drawable.ic_empty_upload)
+                    .centerCrop()
                     .into(image)
 
                 image.setOnClickListener {
