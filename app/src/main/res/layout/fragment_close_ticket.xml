@@ -6,7 +6,7 @@
     android:layout_height="372dp"
     android:background="@color/white"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    tools:context=".ticket.TicketConfirmationFragment">
+    tools:context=".survey.ConfirmSurveyFragment">
 
     <ImageView
         android:id="@+id/exit"
@@ -21,8 +21,8 @@
 
     <ImageView
         android:id="@+id/imageView4"
-        android:layout_width="75dp"
-        android:layout_height="75dp"
+        android:layout_width="74dp"
+        android:layout_height="74dp"
         android:layout_marginTop="72dp"
         android:src="@drawable/ic_ticket"
         app:layout_constraintEnd_toEndOf="parent"
@@ -37,7 +37,7 @@
         android:layout_marginTop="15dp"
         android:layout_marginEnd="10dp"
         android:gravity="center"
-        android:text="Congratulation"
+        android:text="Close Ticket"
         android:textColor="@color/black"
         android:textSize="22sp"
         app:layout_constraintEnd_toEndOf="parent"
@@ -52,7 +52,7 @@
         android:layout_marginTop="16dp"
         android:layout_marginEnd="10dp"
         android:gravity="center"
-        android:text="Your ticket is submitted. You will \n be notified when the proper action \n is taken place."
+        android:text="Are you sure you want to close ticket?"
         android:textColor="@color/black"
         android:textSize="12sp"
         app:layout_constraintEnd_toEndOf="parent"
@@ -61,9 +61,9 @@
 
     <androidx.appcompat.widget.AppCompatButton
         android:id="@+id/btnKeep"
-        android:layout_width="0dp"
+        android:layout_width="140dp"
         android:layout_height="60dp"
-        android:layout_marginStart="20dp"
+        android:layout_marginStart="25dp"
         android:layout_marginTop="30dp"
         android:layout_marginEnd="20dp"
         android:layout_marginBottom="30dp"
@@ -76,9 +76,26 @@
         android:visibility="visible"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/btnCancel"
         app:layout_constraintTop_toBottomOf="@+id/textview2" />
 
+    <androidx.appcompat.widget.AppCompatButton
+        android:id="@+id/btnCancel"
+        android:layout_width="140dp"
+        android:layout_height="60dp"
+        android:layout_marginStart="20dp"
+        android:layout_marginTop="30dp"
+        android:layout_marginBottom="30dp"
+        android:padding="3dp"
+        android:background="#FF6464"
+        android:text="Cancel"
+        android:textAllCaps="false"
+        android:textColor="@color/white"
+        android:textSize="12sp"
+        android:visibility="visible"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/textview2" />
 
     <androidx.cardview.widget.CardView
         android:id="@+id/prg"
