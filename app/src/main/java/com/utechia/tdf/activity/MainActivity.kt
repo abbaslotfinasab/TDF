@@ -1,7 +1,6 @@
 package com.utechia.tdf.activity
 
 import android.content.SharedPreferences
-import android.graphics.drawable.Drawable
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.os.Handler
@@ -16,8 +15,11 @@ import androidx.navigation.fragment.NavHostFragment
 import androidx.navigation.ui.setupWithNavController
 import com.google.android.gms.tasks.OnCompleteListener
 import com.google.android.gms.tasks.Task
+import com.google.firebase.analytics.FirebaseAnalytics
+import com.google.firebase.analytics.ktx.analytics
 import com.google.firebase.installations.FirebaseInstallations
 import com.google.firebase.installations.InstallationTokenResult
+import com.google.firebase.ktx.Firebase
 import com.utechia.tdf.R
 import com.utechia.tdf.databinding.ActivityMainBinding
 import dagger.hilt.android.AndroidEntryPoint
@@ -29,9 +31,11 @@ class MainActivity : AppCompatActivity() {
     private var navHostFragment : NavHostFragment = NavHostFragment()
     private var navController : NavController = NavController(this)
     private lateinit var prefs: SharedPreferences
+    private lateinit var analytics: FirebaseAnalytics
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+        analytics = Firebase.analytics
         AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO)
         binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)

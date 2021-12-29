@@ -7,6 +7,7 @@
     tools:context=".ticket.TicketDetailsFragment">
 
     <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/recyclerView"
         android:layout_width="0dp"
         android:layout_height="0dp"
         app:layout_constraintBottom_toBottomOf="parent"
@@ -27,8 +28,8 @@
         android:textColor="@color/white"
         android:textSize="12sp"
         android:visibility="visible"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent" />
+        app:layout_constraintBottom_toBottomOf="@+id/recyclerView"
+        app:layout_constraintEnd_toEndOf="@id/recyclerView" />
 
     <androidx.appcompat.widget.AppCompatButton
         android:id="@+id/btnAccept"
@@ -43,8 +44,8 @@
         android:textColor="@color/white"
         android:textSize="12sp"
         android:visibility="visible"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintStart_toStartOf="parent" />
+        app:layout_constraintBottom_toBottomOf="@id/recyclerView"
+        app:layout_constraintStart_toStartOf="@id/recyclerView" />
 
 
 
