@@ -9,6 +9,8 @@ import android.view.View
 import androidx.appcompat.app.AppCompatDelegate
 import androidx.core.content.ContextCompat
 import androidx.core.view.GravityCompat
+import androidx.core.view.children
+import androidx.core.view.forEach
 import androidx.drawerlayout.widget.DrawerLayout
 import androidx.navigation.NavController
 import androidx.navigation.fragment.NavHostFragment
@@ -92,6 +94,14 @@ class MainActivity : AppCompatActivity() {
             this.bringToFront()
 
             setOnClickListener {
+
+                binding.bottomNavigation.apply {
+                    menu.setGroupCheckable(0,true,false)
+                    menu.forEach {
+                        it.isChecked = false
+                    }
+                    menu.setGroupCheckable(0,true,true)
+                }
 
                 navController.navigate(R.id.qrCodeFragment)
 
