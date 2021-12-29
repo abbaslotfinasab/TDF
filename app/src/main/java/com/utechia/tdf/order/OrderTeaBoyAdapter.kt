@@ -108,6 +108,10 @@ class OrderTeaBoyAdapter(private val teaBoyOrdersFragment: TeaBoyOrdersFragment)
 
             }
 
+            user.text = userOrders[position].user?.displayName
+            location.text = userOrders[position].user?.officeFloor
+
+
             reject.setOnClickListener {
                 val bundle = bundleOf("orderId" to userOrders[position].id)
                 itemView.findNavController().navigate(R.id.action_teaBoyOrdersFragment_to_rejectFragment,bundle)

@@ -122,6 +122,12 @@ class MainActivity : AppCompatActivity() {
 
     }
 
+    override fun onBackPressed() {
+        super.onBackPressed()
+        binding.drawerLayout.closeDrawer(GravityCompat.END)
+
+    }
+
     private fun checkOutUser(): Boolean {
 
         return prefs.getString("USER_ID",null) !=null
