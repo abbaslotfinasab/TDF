@@ -23,8 +23,8 @@
 
         <com.archit.calendardaterangepicker.customviews.DateRangeCalendarView
             android:id="@+id/calendar"
-            android:layout_width="280dp"
-            android:layout_height="280dp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
             android:layout_marginTop="40dp"
             app:selected_date_circle_color="#59B48D"
             app:layout_constraintEnd_toEndOf="parent"
