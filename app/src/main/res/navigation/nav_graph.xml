@@ -2,8 +2,7 @@
 <navigation xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    android:id="@+id/nav_graph"
-    app:startDestination="@id/createSurveyFragment">
+    android:id="@+id/nav_graph">
 
     <fragment
         android:id="@+id/userhomeFragment"
@@ -685,23 +684,27 @@
             android:defaultValue="0"  />
 
     </dialog>
-    <fragment
+    <dialog
         android:id="@+id/closeTicketFragment"
-        android:name="com.utechia.tdf.CloseTicketFragment"
+        android:name="com.utechia.tdf.ticket.CloseTicketFragment"
         android:label="fragment_close_ticket"
         tools:layout="@layout/fragment_close_ticket" />
     <fragment
         android:id="@+id/ticketDetailsFragment"
-        android:name="com.utechia.tdf.TicketDetailsFragment"
+        android:name="com.utechia.tdf.ticket.TicketDetailsFragment"
         android:label="fragment_ticket_details"
         tools:layout="@layout/fragment_ticket_details" >
         <action
             android:id="@+id/action_ticketDetailsFragment_to_messageFragment"
             app:destination="@id/messageFragment" />
+
+        <action
+            android:id="@+id/action_ticketDetailsFragment_to_closeTicketFragment"
+            app:destination="@id/closeTicketFragment" />
     </fragment>
     <dialog
         android:id="@+id/messageFragment"
-        android:name="com.utechia.tdf.MessageFragment"
+        android:name="com.utechia.tdf.ticket.MessageFragment"
         android:label="fragment_message"
         tools:layout="@layout/fragment_message" />
 

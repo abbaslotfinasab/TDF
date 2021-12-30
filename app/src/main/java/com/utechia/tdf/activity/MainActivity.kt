@@ -9,7 +9,6 @@ import android.view.View
 import androidx.appcompat.app.AppCompatDelegate
 import androidx.core.content.ContextCompat
 import androidx.core.view.GravityCompat
-import androidx.core.view.children
 import androidx.core.view.forEach
 import androidx.drawerlayout.widget.DrawerLayout
 import androidx.navigation.NavController
@@ -70,6 +69,7 @@ class MainActivity : AppCompatActivity() {
                 binding.drawerLayout.setDrawerLockMode(DrawerLayout.LOCK_MODE_LOCKED_CLOSED)
 
             }
+
             teaBoy() -> {
                 graph.setStartDestination(R.id.teaBoyHomeFragment)
 
@@ -82,7 +82,6 @@ class MainActivity : AppCompatActivity() {
                 val name = prefs.getString("name","").toString()
                 val job = prefs.getString("job","").toString()
                 setupUser(name,job)
-
             }
             else ->
                 graph.setStartDestination(R.id.loginFragment)
