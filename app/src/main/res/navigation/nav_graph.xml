@@ -688,7 +688,17 @@
         android:id="@+id/closeTicketFragment"
         android:name="com.utechia.tdf.ticket.CloseTicketFragment"
         android:label="fragment_close_ticket"
-        tools:layout="@layout/fragment_close_ticket" />
+        tools:layout="@layout/fragment_close_ticket" >
+
+        <action
+            android:id="@+id/action_closeTicketFragment_to_ticketDetailsFragment"
+            app:destination="@id/ticketDetailsFragment" />
+
+        <action
+            android:id="@+id/action_closeTicketFragment_to_ticketSystemFragment"
+            app:destination="@id/ticketSystemFragment" />
+
+    </dialog>
     <fragment
         android:id="@+id/ticketDetailsFragment"
         android:name="com.utechia.tdf.ticket.TicketDetailsFragment"
@@ -706,6 +716,12 @@
         android:id="@+id/messageFragment"
         android:name="com.utechia.tdf.ticket.MessageFragment"
         android:label="fragment_message"
-        tools:layout="@layout/fragment_message" />
+        tools:layout="@layout/fragment_message">
+
+        <action
+            android:id="@+id/action_messageFragment_to_ticketDetailsFragment"
+            app:destination="@id/ticketDetailsFragment" />
+
+    </dialog>
 
 </navigation>

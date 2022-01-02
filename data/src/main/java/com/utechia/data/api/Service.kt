@@ -131,4 +131,15 @@ interface Service {
     @POST("survey/rateorder")
     suspend fun rateOrder(@Body rateOrderBody: OrderRateBody):Response<OrderRate>
 
+    @GET("ticket/getalluserticket")
+    suspend fun getTicketList():Response<Ticket>
+
+    @Headers("Content-Type: application/json")
+    @POST("ticket")
+    suspend fun postTicket(@Body ticketBody: TicketBody):Response<Void>
+
+    @GET("ticket/close/{id}")
+    suspend fun closeTicket(@Path("id")id: Int):Response<Void>
+
+
 }

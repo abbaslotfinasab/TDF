@@ -33,14 +33,13 @@
         app:layout_constraintTop_toTopOf="@+id/profilePicture" />
 
     <TextView
-        android:id="@+id/textView33"
         android:layout_width="96dp"
         android:layout_height="29dp"
         android:layout_marginStart="10dp"
-        android:background="@drawable/supporter_back"
-        android:gravity="center"
         android:text="Supporter"
+        android:background="@drawable/supporter_back"
         android:textColor="#59B48C"
+        android:gravity="center"
         android:textSize="13sp"
         app:layout_constraintBottom_toBottomOf="@+id/textView32"
         app:layout_constraintStart_toEndOf="@+id/textView32"
@@ -49,17 +48,17 @@
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="0dp"
         android:layout_height="0dp"
-        android:layout_marginStart="45dp"
-        android:layout_marginTop="18dp"
-        android:layout_marginEnd="15dp"
         android:background="@color/white"
+        android:layout_marginStart="15dp"
+        android:layout_marginTop="18dp"
+        android:layout_marginEnd="45dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/profilePicture">
 
         <TextView
-            android:id="@+id/description"
+            android:id="@+id/textView31"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginStart="25dp"

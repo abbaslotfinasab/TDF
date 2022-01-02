@@ -3,7 +3,10 @@
   <component name="DesignSurface">
     <option name="filePathToZoomLevelMap">
       <map>
+        <entry key="..\:/Users/Abbas/StudioProjects/tdf_oms_android_application_kotlin_v1/app/src/main/res/drawable/back_low.xml" value="0.11973684210526316" />
+        <entry key="..\:/Users/Abbas/StudioProjects/tdf_oms_android_application_kotlin_v1/app/src/main/res/drawable/back_medium.xml" value="0.11973684210526316" />
         <entry key="..\:/Users/Abbas/StudioProjects/tdf_oms_android_application_kotlin_v1/app/src/main/res/drawable/back_progress.xml" value="0.18958333333333333" />
+        <entry key="..\:/Users/Abbas/StudioProjects/tdf_oms_android_application_kotlin_v1/app/src/main/res/drawable/back_requester.xml" value="0.11973684210526316" />
         <entry key="..\:/Users/Abbas/StudioProjects/tdf_oms_android_application_kotlin_v1/app/src/main/res/drawable/btn_segmented_left.xml" value="0.11973684210526316" />
         <entry key="..\:/Users/Abbas/StudioProjects/tdf_oms_android_application_kotlin_v1/app/src/main/res/drawable/button_border.xml" value="0.18958333333333333" />
         <entry key="..\:/Users/Abbas/StudioProjects/tdf_oms_android_application_kotlin_v1/app/src/main/res/drawable/cancel_btn.xml" value="0.18958333333333333" />
@@ -23,12 +26,16 @@
         <entry key="..\:/Users/Abbas/StudioProjects/tdf_oms_android_application_kotlin_v1/app/src/main/res/drawable/ic_location.xml" value="0.18958333333333333" />
         <entry key="..\:/Users/Abbas/StudioProjects/tdf_oms_android_application_kotlin_v1/app/src/main/res/drawable/ic_note.xml" value="0.18958333333333333" />
         <entry key="..\:/Users/Abbas/StudioProjects/tdf_oms_android_application_kotlin_v1/app/src/main/res/drawable/ic_rectangle_4177.xml" value="0.18958333333333333" />
+        <entry key="..\:/Users/Abbas/StudioProjects/tdf_oms_android_application_kotlin_v1/app/src/main/res/drawable/ic_reject.xml" value="0.11973684210526316" />
+        <entry key="..\:/Users/Abbas/StudioProjects/tdf_oms_android_application_kotlin_v1/app/src/main/res/drawable/ic_status.xml" value="0.11973684210526316" />
         <entry key="..\:/Users/Abbas/StudioProjects/tdf_oms_android_application_kotlin_v1/app/src/main/res/drawable/notification_back.xml" value="0.1685185185185185" />
         <entry key="..\:/Users/Abbas/StudioProjects/tdf_oms_android_application_kotlin_v1/app/src/main/res/drawable/profile_back.xml" value="0.18958333333333333" />
         <entry key="..\:/Users/Abbas/StudioProjects/tdf_oms_android_application_kotlin_v1/app/src/main/res/drawable/question_back.xml" value="0.18958333333333333" />
         <entry key="..\:/Users/Abbas/StudioProjects/tdf_oms_android_application_kotlin_v1/app/src/main/res/drawable/radio_back.xml" value="0.11825860948667966" />
         <entry key="..\:/Users/Abbas/StudioProjects/tdf_oms_android_application_kotlin_v1/app/src/main/res/drawable/rating_back.xml" value="0.1685185185185185" />
         <entry key="..\:/Users/Abbas/StudioProjects/tdf_oms_android_application_kotlin_v1/app/src/main/res/drawable/scan_button.xml" value="0.18958333333333333" />
+        <entry key="..\:/Users/Abbas/StudioProjects/tdf_oms_android_application_kotlin_v1/app/src/main/res/drawable/spinner_back.xml" value="0.11973684210526316" />
+        <entry key="..\:/Users/Abbas/StudioProjects/tdf_oms_android_application_kotlin_v1/app/src/main/res/drawable/supporter_back.xml" value="0.11973684210526316" />
         <entry key="..\:/Users/Abbas/StudioProjects/tdf_oms_android_application_kotlin_v1/app/src/main/res/drawable/switch_back.xml" value="0.15555555555555556" />
         <entry key="..\:/Users/Abbas/StudioProjects/tdf_oms_android_application_kotlin_v1/app/src/main/res/layout/activity_main.xml" value="0.1" />
         <entry key="..\:/Users/Abbas/StudioProjects/tdf_oms_android_application_kotlin_v1/app/src/main/res/layout/calendar_day_layout.xml" value="0.1" />
@@ -94,7 +101,7 @@
         <entry key="..\:/Users/Abbas/StudioProjects/tdf_oms_android_application_kotlin_v1/app/src/main/res/layout/fragment_waiting.xml" value="0.1" />
         <entry key="..\:/Users/Abbas/StudioProjects/tdf_oms_android_application_kotlin_v1/app/src/main/res/layout/header_navigation_drawer.xml" value="0.15" />
         <entry key="..\:/Users/Abbas/StudioProjects/tdf_oms_android_application_kotlin_v1/app/src/main/res/layout/item_cancel.xml" value="0.11639492753623189" />
-        <entry key="..\:/Users/Abbas/StudioProjects/tdf_oms_android_application_kotlin_v1/app/src/main/res/layout/item_chat_admin.xml" value="0.1069078947368421" />
+        <entry key="..\:/Users/Abbas/StudioProjects/tdf_oms_android_application_kotlin_v1/app/src/main/res/layout/item_chat_admin.xml" value="0.21" />
         <entry key="..\:/Users/Abbas/StudioProjects/tdf_oms_android_application_kotlin_v1/app/src/main/res/layout/item_chat_user.xml" value="0.1069078947368421" />
         <entry key="..\:/Users/Abbas/StudioProjects/tdf_oms_android_application_kotlin_v1/app/src/main/res/layout/item_delivered.xml" value="0.33" />
         <entry key="..\:/Users/Abbas/StudioProjects/tdf_oms_android_application_kotlin_v1/app/src/main/res/layout/item_notification.xml" value="0.75" />
@@ -103,6 +110,8 @@
         <entry key="..\:/Users/Abbas/StudioProjects/tdf_oms_android_application_kotlin_v1/app/src/main/res/layout/item_permission.xml" value="0.2" />
         <entry key="..\:/Users/Abbas/StudioProjects/tdf_oms_android_application_kotlin_v1/app/src/main/res/layout/item_reservation_room.xml" value="0.10371376811594203" />
         <entry key="..\:/Users/Abbas/StudioProjects/tdf_oms_android_application_kotlin_v1/app/src/main/res/layout/item_survey.xml" value="0.1" />
+        <entry key="..\:/Users/Abbas/StudioProjects/tdf_oms_android_application_kotlin_v1/app/src/main/res/layout/item_ticket_admin.xml" value="0.33" />
+        <entry key="..\:/Users/Abbas/StudioProjects/tdf_oms_android_application_kotlin_v1/app/src/main/res/layout/item_ticket_client.xml" value="0.17" />
         <entry key="..\:/Users/Abbas/StudioProjects/tdf_oms_android_application_kotlin_v1/app/src/main/res/layout/item_upload.xml" value="0.67" />
         <entry key="..\:/Users/Abbas/StudioProjects/tdf_oms_android_application_kotlin_v1/app/src/main/res/layout/notification.xml" value="0.1" />
         <entry key="..\:/Users/Abbas/StudioProjects/tdf_oms_android_application_kotlin_v1/app/src/main/res/layout/order_details_item.xml" value="0.15" />

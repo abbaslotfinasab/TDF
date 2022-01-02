@@ -95,6 +95,5 @@ class CancelFragment : DialogFragment() {
                 }
             }
         }
-
     }
 }

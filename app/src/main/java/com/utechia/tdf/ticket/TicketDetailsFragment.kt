@@ -1,6 +1,7 @@
 package com.utechia.tdf.ticket
 
 import android.os.Bundle
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -9,11 +10,12 @@ import android.widget.Toast
 import androidx.core.os.bundleOf
 import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.findNavController
+import androidx.recyclerview.widget.LinearLayoutManager
 import com.google.firebase.database.*
 import com.google.firebase.database.ktx.database
 import com.google.firebase.database.ktx.getValue
 import com.google.firebase.ktx.Firebase
-import com.utechia.data.entity.Ticket
+import com.utechia.data.entity.Chat
 import com.utechia.tdf.databinding.FragmentTicketDetailsBinding
 import dagger.hilt.android.AndroidEntryPoint
 
@@ -23,7 +25,8 @@ class TicketDetailsFragment : Fragment() {
     private lateinit var binding: FragmentTicketDetailsBinding
     private lateinit var database: DatabaseReference
     private val chatAdapter :ChatAdapter = ChatAdapter()
-    private var ticketId:String = "17377663707449043"
+    private var ticketId:String = ""
+    private var k = 0
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -41,30 +44,39 @@ class TicketDetailsFragment : Fragment() {
         binding.btnReply.bringToFront()
         binding.btnClose.bringToFront()
 
-        val ticketListener = database.child("Ticket").child(ticketId)
+        if (arguments != null) {
+            ticketId = requireArguments().getString("fid","")
+        }
 
-        ticketListener.addChildEventListener(object :ChildEventListener{
-            override fun onChildAdded(snapshot: DataSnapshot, previousChildName: String?) {
-                val ticket = snapshot.getValue<Ticket>()
-                chatAdapter.addData(ticket!!)
+        val ticketListener = database.child("Ticketmessage").child("Ticket-$ticketId")
+
+        ticketListener.addListenerForSingleValueEvent(object:ValueEventListener{
+            override fun onDataChange(snapshot: DataSnapshot) {
+                snapshot.children.forEach {
+                    chatAdapter.addData(it.getValue<Chat>()!!)
+                    binding.prg.visibility = View.GONE
+                }
             }
 
-            override fun onChildChanged(snapshot: DataSnapshot, previousChildName: String?) {}
-
-            override fun onChildRemoved(snapshot: DataSnapshot) {}
-
-            override fun onChildMoved(snapshot: DataSnapshot, previousChildName: String?) {}
 
             override fun onCancelled(error: DatabaseError) {
-                Toast.makeText(context,error.message,Toast.LENGTH_SHORT).show()
-            }
 
+                Log.e("error", error.message)
+
+
+            }
         })
+
+        binding.recyclerView.apply {
+            adapter = chatAdapter
+            layoutManager = LinearLayoutManager(context,LinearLayoutManager.VERTICAL,false)
+        }
 
         binding.btnReply.setOnClickListener {
             val bundle = bundleOf("ticketId" to ticketId)
             findNavController().navigate(R.id.action_ticketDetailsFragment_to_messageFragment,bundle)
         }
+
         binding.btnClose.setOnClickListener {
             val bundle = bundleOf("ticketId" to ticketId)
             findNavController().navigate(R.id.action_ticketDetailsFragment_to_closeTicketFragment,bundle)

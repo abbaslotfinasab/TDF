@@ -92,5 +92,10 @@ abstract class RepositoryModule {
         teaBoyOrderRepoImpl: TeaBoyOrderRepoImpl
     ): TeaBoyOrderRepo
 
+    @Binds
+    abstract fun bindTicketRepositoryService(
+        ticketRepoImpl: TicketRepoImpl
+    ): TicketRepo
+
 
 }

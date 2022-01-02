@@ -8,6 +8,8 @@ import android.view.View
 import android.view.ViewGroup
 import android.view.Window
 import androidx.fragment.app.DialogFragment
+import androidx.navigation.fragment.findNavController
+import com.utechia.tdf.R
 import com.utechia.tdf.databinding.FragmentCloseTicketBinding
 import dagger.hilt.android.AndroidEntryPoint
 
@@ -16,9 +18,6 @@ class CloseTicketFragment : DialogFragment() {
 
     private lateinit var binding: FragmentCloseTicketBinding
     private var ticketId = 0
-
-
-
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -42,9 +41,7 @@ class CloseTicketFragment : DialogFragment() {
             ticketId = requireArguments().getInt("ticketId", 0)
 
         binding.btnKeep.setOnClickListener {
-            dialog?.dismiss()
-
-
+            findNavController().navigate(R.id.action_closeTicketFragment_to_ticketSystemFragment)
         }
 
         binding.btnCancel.setOnClickListener {
@@ -54,9 +51,6 @@ class CloseTicketFragment : DialogFragment() {
 
         binding.exit.setOnClickListener {
             dialog?.dismiss()
-
         }
-
     }
-
 }
