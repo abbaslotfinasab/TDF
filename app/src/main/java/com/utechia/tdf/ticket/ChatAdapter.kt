@@ -51,9 +51,19 @@ class ChatAdapter: RecyclerView.Adapter<RecyclerView.ViewHolder>() {
 
     inner class ViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
         private val description: TextView = itemView.findViewById(R.id.description)
+        private val user: TextView = itemView.findViewById(R.id.username)
+        private val date: TextView = itemView.findViewById(R.id.date)
+
 
         fun bind0(position: Int) {
+
+            dateFormat = sdf.parse(chat[position].datetime)
+            simple = SimpleDateFormat("yyyy-MM-dd | HH:mm", Locale.getDefault()).format(dateFormat)
+            date.text = "$simple"
+
             description.text = chat[position].text
+            user.text = chat[position].username
+
 
 
 

@@ -55,16 +55,17 @@ class TicketAdapter: RecyclerView.Adapter<RecyclerView.ViewHolder>() {
         fun bind0(position: Int) {
 
             layout.setOnClickListener {
-                val bundle = bundleOf("fid" to ticket[position].fid)
+                val bundle = bundleOf("fid" to ticket[position].fid , "ticketId" to ticket[position].id)
                 itemView.findNavController().navigate(R.id.action_ticketSystemFragment_to_ticketDetailsFragment,bundle)
+
             }
 
             dateFormat = sdf.parse(ticket[position].datetime)
-            simple = SimpleDateFormat("yyyy-MM-dd-HH:mm", Locale.getDefault()).format(dateFormat)
+            simple = SimpleDateFormat("yyyy-MM-dd | HH:mm", Locale.getDefault()).format(dateFormat)
             date.text = "$simple"
 
             title.text = ticket[position].title
-            subTitle.text = ticket[position].fid
+            subTitle.text = ticket[position].id.toString()
             category.text = ticket[position].category.title
 
             when (ticket[position].Priority) {

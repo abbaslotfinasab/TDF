@@ -59,10 +59,10 @@
         android:text="Category:"
         android:textColor="#9F9F9F"
         android:textSize="14sp"
-        app:layout_constraintBottom_toBottomOf="@+id/title0"
+        app:layout_constraintBottom_toBottomOf="@+id/subtitle0"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toEndOf="@+id/title0"
-        app:layout_constraintTop_toTopOf="@+id/title0" />
+        app:layout_constraintStart_toEndOf="@+id/subtitle0"
+        app:layout_constraintTop_toTopOf="@+id/subtitle0" />
 
     <TextView
         android:id="@+id/category"

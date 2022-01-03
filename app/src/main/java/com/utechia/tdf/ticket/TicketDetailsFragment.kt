@@ -26,6 +26,7 @@ class TicketDetailsFragment : Fragment() {
     private lateinit var database: DatabaseReference
     private val chatAdapter :ChatAdapter = ChatAdapter()
     private var ticketId:String = ""
+    private var mId:Int = 0
     private var k = 0
 
     override fun onCreateView(
@@ -46,12 +47,15 @@ class TicketDetailsFragment : Fragment() {
 
         if (arguments != null) {
             ticketId = requireArguments().getString("fid","")
+            mId = requireArguments().getInt("ticketId",0)
+
         }
 
         val ticketListener = database.child("Ticketmessage").child("Ticket-$ticketId")
 
         ticketListener.addListenerForSingleValueEvent(object:ValueEventListener{
             override fun onDataChange(snapshot: DataSnapshot) {
+                chatAdapter.chat.clear()
                 snapshot.children.forEach {
                     chatAdapter.addData(it.getValue<Chat>()!!)
                     binding.prg.visibility = View.GONE
@@ -60,10 +64,7 @@ class TicketDetailsFragment : Fragment() {
 
 
             override fun onCancelled(error: DatabaseError) {
-
-                Log.e("error", error.message)
-
-
+                Toast.makeText(context,error.message,Toast.LENGTH_SHORT).show()
             }
         })
 
@@ -78,7 +79,7 @@ class TicketDetailsFragment : Fragment() {
         }
 
         binding.btnClose.setOnClickListener {
-            val bundle = bundleOf("ticketId" to ticketId)
+            val bundle = bundleOf("ticketId" to mId)
             findNavController().navigate(R.id.action_ticketDetailsFragment_to_closeTicketFragment,bundle)
 
         }

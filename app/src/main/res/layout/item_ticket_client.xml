@@ -2,7 +2,7 @@
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:background="#EDEDF3"
-    android:layout_height="250dp"
+    android:layout_height="wrap_content"
     xmlns:app="http://schemas.android.com/apk/res-auto">
 
     <com.google.android.material.imageview.ShapeableImageView
@@ -20,11 +20,10 @@
 
 
     <TextView
-        android:id="@+id/textView32"
+        android:id="@+id/username"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginEnd="15dp"
-        android:text="John Doe"
         android:textColor="@color/black"
         android:textSize="16sp"
         app:layout_constraintBottom_toBottomOf="@+id/profilePicture"
@@ -41,13 +40,13 @@
         android:text="Requester"
         android:textColor="#335DE0"
         android:textSize="13sp"
-        app:layout_constraintBottom_toBottomOf="@+id/textView32"
-        app:layout_constraintEnd_toStartOf="@+id/textView32"
-        app:layout_constraintTop_toTopOf="@+id/textView32" />
+        app:layout_constraintBottom_toBottomOf="@+id/username"
+        app:layout_constraintEnd_toStartOf="@+id/username"
+        app:layout_constraintTop_toTopOf="@+id/username" />
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="0dp"
-        android:layout_height="0dp"
+        android:layout_height="wrap_content"
         android:layout_marginStart="45dp"
         android:layout_marginTop="18dp"
         android:layout_marginEnd="15dp"
@@ -62,9 +61,8 @@
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginStart="25dp"
-            android:layout_marginTop="30dp"
+            android:layout_marginTop="20dp"
             android:layout_marginEnd="30dp"
-            android:text="Lorem ipsum dolor sit amet, consectetur \n adipiscing elit. Eget mi at egestas sapien \n gravida. Nunc, eget nunc ornare semper \n neque mauris lorem. Morbi."
             android:textColor="@color/black"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
@@ -75,18 +73,20 @@
             android:layout_width="0dp"
             android:layout_height="2dp"
             android:layout_marginStart="30dp"
+            android:layout_marginTop="20dp"
             android:layout_marginEnd="30dp"
             android:background="@drawable/line"
-            app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/description" />
 
 
         <TextView
+            android:id="@+id/date"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="11.09.2021"
+            android:layout_marginTop="10dp"
+            android:layout_marginBottom="10dp"
             android:textColor="@color/black"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="@+id/view6"
