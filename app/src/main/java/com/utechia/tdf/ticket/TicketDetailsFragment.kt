@@ -1,7 +1,6 @@
 package com.utechia.tdf.ticket
 
 import android.os.Bundle
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -27,7 +26,6 @@ class TicketDetailsFragment : Fragment() {
     private val chatAdapter :ChatAdapter = ChatAdapter()
     private var ticketId:String = ""
     private var mId:Int = 0
-    private var k = 0
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -71,6 +69,7 @@ class TicketDetailsFragment : Fragment() {
         binding.recyclerView.apply {
             adapter = chatAdapter
             layoutManager = LinearLayoutManager(context,LinearLayoutManager.VERTICAL,false)
+            addItemDecoration(ChatItemDecoration())
         }
 
         binding.btnReply.setOnClickListener {
