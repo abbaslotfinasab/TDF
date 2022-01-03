@@ -70,7 +70,7 @@ class TicketDetailsFragment : Fragment() {
             }
         })
 
-        if (status == "close"){
+        if (status == "Close"){
             binding.btnClose.isEnabled = false
             binding.btnReply.isEnabled = false
             binding.btnClose.isClickable = false
