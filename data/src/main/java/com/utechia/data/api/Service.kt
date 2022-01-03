@@ -138,7 +138,7 @@ interface Service {
     @POST("ticket")
     suspend fun postTicket(@Body ticketBody: TicketBody):Response<Void>
 
-    @GET("ticket/close/{id}")
+    @POST("ticket/close/{id}")
     suspend fun closeTicket(@Path("id")id: Int):Response<Void>
 
 

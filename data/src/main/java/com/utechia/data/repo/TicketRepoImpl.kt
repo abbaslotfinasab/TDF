@@ -1,5 +1,6 @@
 package com.utechia.data.repo
 
+import android.util.Log
 import com.utechia.data.api.Service
 import com.utechia.data.entity.TicketBody
 import com.utechia.data.utile.NetworkHelper
@@ -66,9 +67,11 @@ class TicketRepoImpl @Inject constructor(
     }
 
     override suspend fun closeTicket(fid: Int): MutableList<TicketModel> {
+
         if (networkHelper.isNetworkConnected()) {
 
             val result = service.closeTicket(fid)
+
 
             return when (result.isSuccessful) {
 
