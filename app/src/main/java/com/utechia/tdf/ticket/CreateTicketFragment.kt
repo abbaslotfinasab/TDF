@@ -11,6 +11,7 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.ArrayAdapter
 import android.widget.Toast
+import androidx.core.os.bundleOf
 import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.GridLayoutManager
@@ -82,8 +83,8 @@ class CreateTicketFragment : Fragment() {
 
         binding.btnUpload.setOnClickListener {
 
-            findNavController().navigate(R.id.action_createTicketFragment_to_uploadFragment)
-
+            val bundle = bundleOf("kind" to 1)
+            findNavController().navigate(R.id.action_createTicketFragment_to_uploadFragment,bundle)
 
         }
 

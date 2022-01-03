@@ -722,6 +722,11 @@
             android:id="@+id/action_messageFragment_to_ticketDetailsFragment"
             app:destination="@id/ticketDetailsFragment" />
 
+        <action
+            android:id="@+id/action_messageFragment_to_uploadFragment"
+            app:destination="@id/uploadFragment" />
+
+
     </dialog>
 
 </navigation>
