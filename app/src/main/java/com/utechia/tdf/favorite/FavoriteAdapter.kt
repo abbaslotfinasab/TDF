@@ -9,6 +9,7 @@ import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.utechia.domain.model.FavoriteModel
 import com.utechia.tdf.R
+import java.util.*
 
 class FavoriteAdapter(private val favoriteFragment: FavoriteFragment): RecyclerView.Adapter<RecyclerView.ViewHolder>() {
 
@@ -43,7 +44,8 @@ class FavoriteAdapter(private val favoriteFragment: FavoriteFragment): RecyclerV
         fun bind0(position: Int) {
 
             title.text = favorite[position].food?.title
-            subTitle.text = "Ordered 12 times in total"
+            val number = (0..20).random()
+            subTitle.text = "Ordered $number times in total"
             dislike.visibility = View.VISIBLE
             like.visibility = View.GONE
 

@@ -59,9 +59,9 @@ class OrderTeaBoyAdapter(private val teaBoyOrdersFragment: TeaBoyOrdersFragment)
             date.text = "$simple"
 
             number.text = "${userOrders[position].cart?.items?.size}x"
-            oderId.text = "ID:675867468048609"
-            user.text = "John Doe"
-            location.text = userOrders[position].floor
+            oderId.text = "Order ID:${userOrders[position].id}"
+            user.text = userOrders[position].user?.displayName
+            location.text = userOrders[position].user?.officeFloor
 
             if (userOrders[position].cart?.items?.size!! >1){
                 title.text = userOrders[position].cart?.items!![0].food.title+"..."

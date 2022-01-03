@@ -62,7 +62,7 @@ class OrderAdapter: RecyclerView.Adapter<RecyclerView.ViewHolder>() {
             date.text = "$simple"
 
             number.text = "${userOrders[position].cart?.items?.size}x"
-            oderId.text = "Order ID:675867468048609"
+            oderId.text = "Order ID:${userOrders[position].id}"
 
             if (userOrders[position].cart?.items?.size!! >1){
                 title.text = userOrders[position].cart?.items!![0].food.title+"..."
