@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/ticket"
     android:layout_width="match_parent"
     android:background="@color/white"
@@ -73,6 +74,27 @@
         app:layout_constraintStart_toStartOf="@+id/category0"
         app:layout_constraintTop_toBottomOf="@+id/category0" />
 
+    <TextView
+        android:id="@+id/status0"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Status:"
+        android:textColor="#9F9F9F"
+        android:textSize="14sp"
+        app:layout_constraintBottom_toBottomOf="@+id/title0"
+        app:layout_constraintStart_toStartOf="@+id/category0"
+        app:layout_constraintTop_toTopOf="@+id/title0" />
+
+    <TextView
+        android:id="@+id/status"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textColor="@color/black"
+        android:textSize="16sp"
+        app:layout_constraintStart_toStartOf="@+id/status0"
+        app:layout_constraintTop_toBottomOf="@+id/status0" />
+
+
     <View
         android:id="@+id/view5"
         android:layout_width="0dp"
@@ -86,7 +108,7 @@
         app:layout_constraintTop_toBottomOf="@+id/subTitle" />
 
     <TextView
-        android:id="@+id/status"
+        android:id="@+id/priority"
         android:layout_width="75dp"
         android:layout_height="20dp"
         android:layout_marginStart="15dp"

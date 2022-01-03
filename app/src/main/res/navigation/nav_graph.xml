@@ -2,7 +2,8 @@
 <navigation xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    android:id="@+id/nav_graph">
+    android:id="@+id/nav_graph"
+    app:startDestination="@id/uploadReplyFragment">
 
     <fragment
         android:id="@+id/userhomeFragment"
@@ -724,8 +725,30 @@
 
         <action
             android:id="@+id/action_messageFragment_to_uploadFragment"
-            app:destination="@id/uploadFragment" />
+            app:destination="@id/uploadReplyFragment" />
 
+        <action
+            android:id="@+id/action_messageFragment_to_uploadReplyDeleteFragment"
+            app:destination="@id/uploadReplyDeleteFragment" />
+
+
+
+    </dialog>
+
+    <dialog
+        android:id="@+id/uploadReplyFragment"
+        android:name="com.utechia.tdf.ticket.UploadReplyFragment"
+        android:label="UploadReplyFragment" />
+
+    <dialog
+        android:id="@+id/uploadReplyDeleteFragment"
+        android:name="com.utechia.tdf.ticket.UploadReplyDeleteFragment"
+        android:label="UploadReplyDeleteFragment">
+
+        <argument
+            android:name="position"
+            app:argType="integer"
+            android:defaultValue="0"  />
 
     </dialog>
 

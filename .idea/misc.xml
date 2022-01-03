@@ -277,6 +277,8 @@
         <entry key="..\:/Users/Dr Computer/AndroidStudioProjects/tdf_oms_android_application_kotlin_v1/app/src/main/res/layout/search_item.xml" value="0.25" />
         <entry key="..\:/Users/Dr Computer/AndroidStudioProjects/tdf_oms_android_application_kotlin_v1/app/src/main/res/menu/bottom_nav_menu.xml" value="0.20416666666666666" />
         <entry key="..\:/Users/Dr Computer/AndroidStudioProjects/tdf_oms_android_application_kotlin_v1/app/src/main/res/menu/navigation_drawer.xml" value="0.20416666666666666" />
+        <entry key="app/src/main/res/layout/fragment_ticket_details.xml" value="0.10144927536231885" />
+        <entry key="app/src/main/res/layout/ticket_item.xml" value="0.22" />
       </map>
     </option>
   </component>
@@ -288,7 +290,7 @@
       <item index="3" class="java.lang.String" itemvalue="dagger.hilt.InstallIn" />
     </list>
   </component>
-  <component name="ProjectRootManager" version="2" languageLevel="JDK_11" project-jdk-name="17" project-jdk-type="JavaSDK">
+  <component name="ProjectRootManager" version="2" languageLevel="JDK_11" default="true" project-jdk-name="11" project-jdk-type="JavaSDK">
     <output url="file://$PROJECT_DIR$/out" />
   </component>
 </project>

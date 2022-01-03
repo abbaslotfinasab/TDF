@@ -48,6 +48,7 @@ class TicketAdapter: RecyclerView.Adapter<RecyclerView.ViewHolder>() {
         private val subTitle: TextView = itemView.findViewById(R.id.subTitle)
         private val category: TextView = itemView.findViewById(R.id.category)
         private val status: TextView = itemView.findViewById(R.id.status)
+        private val priority: TextView = itemView.findViewById(R.id.priority)
         private val date: TextView = itemView.findViewById(R.id.date)
         private val layout: ConstraintLayout = itemView.findViewById(R.id.ticket)
 
@@ -55,7 +56,7 @@ class TicketAdapter: RecyclerView.Adapter<RecyclerView.ViewHolder>() {
         fun bind0(position: Int) {
 
             layout.setOnClickListener {
-                val bundle = bundleOf("fid" to ticket[position].fid , "ticketId" to ticket[position].id)
+                val bundle = bundleOf("fid" to ticket[position].fid , "ticketId" to ticket[position].id, "status" to ticket[position].status)
                 itemView.findNavController().navigate(R.id.action_ticketSystemFragment_to_ticketDetailsFragment,bundle)
 
             }
@@ -67,11 +68,13 @@ class TicketAdapter: RecyclerView.Adapter<RecyclerView.ViewHolder>() {
             title.text = ticket[position].title
             subTitle.text = ticket[position].id.toString()
             category.text = ticket[position].category.title
+            status.text = ticket[position].status
+
 
             when (ticket[position].Priority) {
 
                 "High" -> {
-                    status.apply {
+                    priority.apply {
                         visibility = View.VISIBLE
                         text = "High"
                         setTextColor(Color.parseColor("#FF6464"))
@@ -80,7 +83,7 @@ class TicketAdapter: RecyclerView.Adapter<RecyclerView.ViewHolder>() {
                     }
                 }
                 "Medium" -> {
-                    status.apply {
+                    priority.apply {
                         visibility = View.VISIBLE
                         text = "Medium"
                         setTextColor(Color.parseColor("#F5A62E"))
@@ -90,7 +93,7 @@ class TicketAdapter: RecyclerView.Adapter<RecyclerView.ViewHolder>() {
                 }
 
                 "Low" -> {
-                    status.apply {
+                    priority.apply {
                         visibility = View.VISIBLE
                         text = "Low"
                         setTextColor(Color.parseColor("#59B48D"))

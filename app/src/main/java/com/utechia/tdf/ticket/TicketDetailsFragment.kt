@@ -1,11 +1,13 @@
 package com.utechia.tdf.ticket
 
+import android.graphics.Color
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import com.utechia.tdf.R
 import android.widget.Toast
+import androidx.core.content.ContextCompat
 import androidx.core.os.bundleOf
 import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.findNavController
@@ -25,6 +27,7 @@ class TicketDetailsFragment : Fragment() {
     private lateinit var database: DatabaseReference
     private val chatAdapter :ChatAdapter = ChatAdapter()
     private var ticketId:String = ""
+    private var status:String = ""
     private var mId:Int = 0
 
     override fun onCreateView(
@@ -46,6 +49,7 @@ class TicketDetailsFragment : Fragment() {
         if (arguments != null) {
             ticketId = requireArguments().getString("fid","")
             mId = requireArguments().getInt("ticketId",0)
+            status = requireArguments().getString("status","")
 
         }
 
@@ -65,6 +69,24 @@ class TicketDetailsFragment : Fragment() {
                 Toast.makeText(context,error.message,Toast.LENGTH_SHORT).show()
             }
         })
+
+        if (status == "close"){
+            binding.btnClose.isEnabled = false
+            binding.btnReply.isEnabled = false
+            binding.btnClose.isClickable = false
+            binding.btnReply.isClickable = false
+            binding.btnClose.setBackgroundColor(ContextCompat.getColor(requireActivity(),R.color.gray))
+            binding.btnReply.setBackgroundColor(ContextCompat.getColor(requireActivity(),R.color.gray))
+
+        }else{
+            binding.btnClose.isEnabled = true
+            binding.btnReply.isEnabled = true
+            binding.btnClose.isClickable = true
+            binding.btnReply.isClickable = true
+            binding.btnClose.setBackgroundColor(Color.parseColor("#FF6464"))
+            binding.btnReply.setBackgroundColor(Color.parseColor("#3360DD"))
+
+        }
 
         binding.recyclerView.apply {
             adapter = chatAdapter

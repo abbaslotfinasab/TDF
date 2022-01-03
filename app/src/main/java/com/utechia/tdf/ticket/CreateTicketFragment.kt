@@ -28,7 +28,7 @@ import dagger.hilt.android.AndroidEntryPoint
 class CreateTicketFragment : Fragment() {
 
     private lateinit var binding: FragmentCreateTicketBinding
-    private val uploadOrder:UploadAdapter = UploadAdapter(this)
+    private val uploadOrder:UploadAdapter = UploadAdapter()
 
 
     override fun onCreateView(
@@ -82,9 +82,7 @@ class CreateTicketFragment : Fragment() {
         }
 
         binding.btnUpload.setOnClickListener {
-
-            val bundle = bundleOf("kind" to 1)
-            findNavController().navigate(R.id.action_createTicketFragment_to_uploadFragment,bundle)
+            findNavController().navigate(R.id.action_createTicketFragment_to_uploadFragment)
 
         }
 

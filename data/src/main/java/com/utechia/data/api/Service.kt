@@ -142,4 +142,9 @@ interface Service {
     suspend fun closeTicket(@Path("id")id: Int):Response<Void>
 
 
+    @POST("ticket/baseneeds")
+    suspend fun closeTicket():Response<BaseNeeds>
+
+
+
 }

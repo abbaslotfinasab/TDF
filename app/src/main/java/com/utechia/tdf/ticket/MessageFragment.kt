@@ -13,7 +13,6 @@ import android.view.View
 import android.view.ViewGroup
 import android.view.Window
 import android.widget.Toast
-import androidx.core.os.bundleOf
 import androidx.navigation.fragment.findNavController
 import com.github.dhaval2404.imagepicker.ImagePicker
 import com.google.android.material.bottomsheet.BottomSheetDialogFragment
@@ -27,6 +26,8 @@ import dagger.hilt.android.AndroidEntryPoint
 class MessageFragment : BottomSheetDialogFragment() {
 
     private lateinit var binding: FragmentMessageBinding
+    private val uploadOrder:UploadReplyAdapter = UploadReplyAdapter()
+
 
 
     override fun onCreateView(
@@ -52,9 +53,7 @@ class MessageFragment : BottomSheetDialogFragment() {
         }
 
         binding.btnUpload.setOnClickListener {
-
-            val bundle = bundleOf("kind" to 2)
-            findNavController().navigate(R.id.action_messageFragment_to_uploadFragment,bundle)
+            findNavController().navigate(R.id.action_messageFragment_to_uploadFragment)
 
         }
     }
@@ -82,7 +81,6 @@ class MessageFragment : BottomSheetDialogFragment() {
     }
 
     fun openFile(){
-
         val intent: Intent
         val chooseFile = Intent(Intent.ACTION_GET_CONTENT)
         chooseFile.type = "application/pdf"

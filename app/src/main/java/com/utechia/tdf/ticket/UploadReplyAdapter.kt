@@ -11,7 +11,7 @@ import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.utechia.tdf.R
 
-class UploadAdapter : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
+class UploadReplyAdapter : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
 
     var file: MutableList<Uri> = mutableListOf()
 
@@ -56,7 +56,7 @@ class UploadAdapter : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
 
                 deleteIcon.setOnClickListener {
                     val bundle = bundleOf("position" to position)
-                    itemView.findNavController().navigate(R.id.action_createTicketFragment_to_uploadDeleteFragment,bundle)
+                    itemView.findNavController().navigate(R.id.action_messageFragment_to_uploadReplyDeleteFragment,bundle)
                 }
             }
 
