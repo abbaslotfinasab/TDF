@@ -41,7 +41,7 @@ class UploadReplyFragment : BottomSheetDialogFragment() {
         super.onViewCreated(view, savedInstanceState)
 
         navHostFragment = requireActivity().supportFragmentManager.fragments[0] as NavHostFragment
-        val parent = navHostFragment.childFragmentManager.primaryNavigationFragment as MessageFragment
+        val parent = navHostFragment.childFragmentManager.primaryNavigationFragment as TicketDetailsFragment
 
         binding.camera.setOnClickListener {
             parent.openCamera()

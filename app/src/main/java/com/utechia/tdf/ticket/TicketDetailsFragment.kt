@@ -1,6 +1,9 @@
 package com.utechia.tdf.ticket
 
+import android.app.Activity
+import android.content.Intent
 import android.graphics.Color
+import android.net.Uri
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -10,8 +13,10 @@ import android.widget.Toast
 import androidx.core.content.ContextCompat
 import androidx.core.os.bundleOf
 import androidx.fragment.app.Fragment
+import androidx.navigation.fragment.NavHostFragment
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
+import com.github.dhaval2404.imagepicker.ImagePicker
 import com.google.firebase.database.*
 import com.google.firebase.database.ktx.database
 import com.google.firebase.database.ktx.getValue
@@ -25,7 +30,10 @@ class TicketDetailsFragment : Fragment() {
 
     private lateinit var binding: FragmentTicketDetailsBinding
     private lateinit var database: DatabaseReference
+    private lateinit var navHostFragment: NavHostFragment
+    private val fragment: MessageFragment = MessageFragment()
     private val chatAdapter :ChatAdapter = ChatAdapter()
+    private val uploadOrder:UploadReplyAdapter = UploadReplyAdapter()
     private var ticketId:String = ""
     private var status:String = ""
     private var mId:Int = 0
@@ -41,6 +49,11 @@ class TicketDetailsFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         database = Firebase.database("https://tdf-oms-default-rtdb.asia-southeast1.firebasedatabase.app/").reference
+
+        navHostFragment = requireActivity().supportFragmentManager.fragments[0] as NavHostFragment
+
+
+
 
 
         binding.btnReply.bringToFront()
@@ -96,13 +109,77 @@ class TicketDetailsFragment : Fragment() {
 
         binding.btnReply.setOnClickListener {
             val bundle = bundleOf("ticketId" to ticketId)
-            findNavController().navigate(R.id.action_ticketDetailsFragment_to_messageFragment,bundle)
+            fragment.arguments = bundle
+            fragment.show(parentFragmentManager,"Tag")
+
         }
 
         binding.btnClose.setOnClickListener {
             val bundle = bundleOf("ticketId" to mId)
             findNavController().navigate(R.id.action_ticketDetailsFragment_to_closeTicketFragment,bundle)
 
+        }
+    }
+
+    fun openGallery(){
+
+        ImagePicker.with(this)
+            .crop()	    			//Crop image(Optional), Check Customization for more option
+            .compress(2048)			//Final image size will be less than 1 MB(Optional)
+            .maxResultSize(1080, 1080) //Final image resolution will be less than 1080 x 1080(Optional)
+            .galleryOnly()
+            .start()
+
+    }
+
+    fun openCamera(){
+
+        ImagePicker.with(this)
+            .crop()	    			//Crop image(Optional), Check Customization for more option
+            .compress(2048)			//Final image size will be less than 1 MB(Optional)
+            .maxResultSize(1080, 1080) //Final image resolution will be less than 1080 x 1080(Optional)
+            .cameraOnly()
+            .start()
+
+    }
+
+    fun openFile(){
+        val intent: Intent
+        val chooseFile = Intent(Intent.ACTION_GET_CONTENT)
+        chooseFile.type = "application/pdf"
+        intent = Intent.createChooser(chooseFile, "Choose a file")
+        startActivityForResult(intent, Activity.RESULT_OK)
+
+    }
+
+    private fun replacement(){
+       fragment.replacement0()
+    }
+
+    fun deleteItem(position:Int){
+        uploadOrder.file.removeAt(position)
+        uploadOrder.notifyItemRemoved(position)
+
+        if(uploadOrder.file.isEmpty()){
+            replacement()
+        }
+    }
+    override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
+        super.onActivityResult(requestCode, resultCode, data)
+        when (resultCode) {
+            Activity.RESULT_OK -> {
+                //Image Uri will not be null for RESULT_OK
+                val uri: Uri = data?.data!!
+
+                // Use Uri object instead of File to avoid storage permissions
+                fragment.replacement1()
+                uploadOrder.addData(uri)
+
+            }
+
+            ImagePicker.RESULT_ERROR -> {
+                Toast.makeText(context, ImagePicker.getError(data), Toast.LENGTH_SHORT).show()
+            }
         }
     }
 }

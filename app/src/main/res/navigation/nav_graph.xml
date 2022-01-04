@@ -712,12 +712,6 @@
         <action
             android:id="@+id/action_ticketDetailsFragment_to_closeTicketFragment"
             app:destination="@id/closeTicketFragment" />
-    </fragment>
-    <dialog
-        android:id="@+id/messageFragment"
-        android:name="com.utechia.tdf.ticket.MessageFragment"
-        android:label="fragment_message"
-        tools:layout="@layout/fragment_message">
 
         <action
             android:id="@+id/action_messageFragment_to_ticketDetailsFragment"
@@ -732,6 +726,12 @@
             app:destination="@id/uploadReplyDeleteFragment" />
 
 
+    </fragment>
+    <dialog
+        android:id="@+id/messageFragment"
+        android:name="com.utechia.tdf.ticket.MessageFragment"
+        android:label="fragment_message"
+        tools:layout="@layout/fragment_message">
 
     </dialog>
 

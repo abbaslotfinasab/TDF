@@ -42,13 +42,15 @@ class UploadReplyDeleteFragment : DialogFragment() {
         super.onViewCreated(view, savedInstanceState)
 
         navHostFragment = requireActivity().supportFragmentManager.fragments[0] as NavHostFragment
-        val parent = navHostFragment.childFragmentManager.primaryNavigationFragment as MessageFragment
+        val parent = navHostFragment.childFragmentManager.primaryNavigationFragment as TicketDetailsFragment
 
         if (arguments != null)
             positionId = requireArguments().getInt("position", 0)
 
         binding.btnDelete.setOnClickListener {
+
             parent.deleteItem(positionId)
+
             dialog?.dismiss()
 
         }
@@ -63,4 +65,5 @@ class UploadReplyDeleteFragment : DialogFragment() {
 
         }
     }
+
 }
