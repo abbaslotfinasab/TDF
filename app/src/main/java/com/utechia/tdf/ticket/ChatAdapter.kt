@@ -6,7 +6,6 @@ import android.view.ViewGroup
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import com.utechia.data.entity.Chat
-import com.utechia.data.entity.TicketData
 import com.utechia.tdf.R
 import java.text.SimpleDateFormat
 import java.util.*
@@ -29,13 +28,13 @@ class ChatAdapter: RecyclerView.Adapter<RecyclerView.ViewHolder>() {
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): RecyclerView.ViewHolder {
         return when (chat[viewType].UserRol){
             "Requester" -> {
-                ViewHolder(
+                ViewHolder0(
                     LayoutInflater.from(parent.context)
                         .inflate(R.layout.item_ticket_client, parent, false)
                 )
             }
                 else -> {
-                    ViewHolder(
+                    ViewHolder1(
                         LayoutInflater.from(parent.context)
                             .inflate(R.layout.item_chat_admin, parent, false)
                     )
@@ -44,12 +43,44 @@ class ChatAdapter: RecyclerView.Adapter<RecyclerView.ViewHolder>() {
         }
 
     override fun onBindViewHolder(holder: RecyclerView.ViewHolder, position: Int) {
-        (holder as ViewHolder).bind0(position)
+        return when (chat[position].UserRol) {
+            "Requester" -> {
+                (holder as ViewHolder0).bind0(position)
+            }
+            else -> {
+                (holder as ViewHolder1).bind0(position)
+
+            }
+        }
     }
 
     override fun getItemCount(): Int = chat.size
 
-    inner class ViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
+    override fun getItemViewType(position: Int): Int = position
+
+
+    inner class ViewHolder0(itemView: View) : RecyclerView.ViewHolder(itemView) {
+        private val description: TextView = itemView.findViewById(R.id.description)
+        private val user: TextView = itemView.findViewById(R.id.username)
+        private val date: TextView = itemView.findViewById(R.id.date)
+
+
+        fun bind0(position: Int) {
+
+            dateFormat = sdf.parse(chat[position].datetime)
+            simple = SimpleDateFormat("yyyy.MM.dd | HH:mm", Locale.getDefault()).format(dateFormat)
+            date.text = "$simple"
+
+            description.text = chat[position].text
+            user.text = chat[position].username
+
+
+
+
+        }
+    }
+
+    inner class ViewHolder1(itemView: View) : RecyclerView.ViewHolder(itemView) {
         private val description: TextView = itemView.findViewById(R.id.description)
         private val user: TextView = itemView.findViewById(R.id.username)
         private val date: TextView = itemView.findViewById(R.id.date)

@@ -9,6 +9,7 @@ import android.util.DisplayMetrics
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.AdapterView
 import android.widget.ArrayAdapter
 import android.widget.Toast
 import androidx.fragment.app.Fragment
@@ -30,7 +31,14 @@ class CreateTicketFragment : Fragment() {
 
     private lateinit var binding: FragmentCreateTicketBinding
     private val ticketViewModel:TicketViewModel by viewModels()
+    private val baseNeedsViewModel:BaseNeedsViewModel by viewModels()
     private val uploadOrder:UploadAdapter = UploadAdapter()
+    private val floor:MutableList<String> = mutableListOf()
+    private var selectedFloor = "Floor11"
+    private var priority = "Low"
+    private var category = 1
+
+
 
 
     override fun onCreateView(
@@ -44,16 +52,12 @@ class CreateTicketFragment : Fragment() {
     override fun onResume() {
         super.onResume()
 
-        val floor = resources.getStringArray(R.array.floor_array)
         val arrayAdapter = ArrayAdapter(requireContext(),R.layout.dropdown_item,floor)
         binding.autoCompleteTextView.setAdapter(arrayAdapter)
 
         binding.segmented.apply{
             this.check(R.id.checkbox)
-            onSegmentChecked {
-            }
         }
-
 
         if (uploadOrder.file.size !=0){
             binding.uploadLayout0.visibility = View.GONE
@@ -64,16 +68,31 @@ class CreateTicketFragment : Fragment() {
             binding.recyclerView.visibility = View.GONE
         }
 
-
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+        baseNeedsViewModel.getNeeds()
 
         binding.recyclerView.apply {
             adapter = uploadOrder
             layoutManager = GridLayoutManager(context,calculateNoOfColumns(context, 100.0F))
         }
+
+        binding.segmented.onSegmentChecked {
+
+            when(this.checkedRadioButtonId){
+                1 -> priority = "High"
+                2 -> priority = "Normal"
+                R.id.checkbox -> priority = "Low"
+            }
+        }
+
+        binding.autoCompleteTextView.onItemClickListener =
+            AdapterView.OnItemClickListener { parent, view, position, id -> selectedFloor = floor[position]
+            }
+
+
 
         binding.category.setOnClickListener {
             findNavController().navigate(R.id.action_createTicketFragment_to_categoryFragment)
@@ -84,9 +103,9 @@ class CreateTicketFragment : Fragment() {
             ticketViewModel.postTicket(
                 binding.description.text.toString(),
                 binding.title.text.toString(),
-                1,
-                "Low",
-                "Floor 11",
+                category,
+                priority,
+                selectedFloor,
                 uploadOrder.file,
 
                 )
@@ -98,6 +117,55 @@ class CreateTicketFragment : Fragment() {
 
         }
 
+        needsObserver()
+
+    }
+
+    private fun needsObserver() {
+        baseNeedsViewModel.baseNeedsModel.observe(viewLifecycleOwner){
+
+            when (it) {
+                is Result.Success -> {
+                    binding.prg.visibility = View.GONE
+                    binding.categoryLayout.visibility = View.VISIBLE
+                    binding.titleLayout.visibility= View.VISIBLE
+                    binding.priorityLayout.visibility= View.VISIBLE
+                    binding.floorLayout.visibility= View.VISIBLE
+                    binding.descriptionLayout.visibility= View.VISIBLE
+                    binding.uploadLayout.visibility= View.VISIBLE
+                    binding.appCompatButton.visibility= View.VISIBLE
+                    floor.addAll(it.data.ListFloor!!)
+
+                }
+
+                is Result.Loading -> {
+                    binding.prg.visibility = View.VISIBLE
+                    binding.categoryLayout.visibility = View.GONE
+                    binding.titleLayout.visibility= View.GONE
+                    binding.priorityLayout.visibility= View.GONE
+                    binding.floorLayout.visibility= View.GONE
+                    binding.descriptionLayout.visibility= View.GONE
+                    binding.uploadLayout.visibility= View.GONE
+                    binding.appCompatButton.visibility= View.GONE
+
+                }
+
+                is Result.Error -> {
+                    binding.prg.visibility = View.GONE
+                    binding.categoryLayout.visibility = View.GONE
+                    binding.titleLayout.visibility= View.GONE
+                    binding.priorityLayout.visibility= View.GONE
+                    binding.floorLayout.visibility= View.GONE
+                    binding.descriptionLayout.visibility= View.GONE
+                    binding.uploadLayout.visibility= View.GONE
+                    binding.appCompatButton.visibility= View.GONE
+                    Toast.makeText(context, it.message, Toast.LENGTH_SHORT).show()
+                    findNavController().navigate(R.id.action_createTicketFragment_to_ticketConfirmationFragment)
+
+
+                }
+            }
+        }
     }
 
     private fun observer() {
@@ -189,6 +257,7 @@ class CreateTicketFragment : Fragment() {
             Activity.RESULT_OK -> {
                 //Image Uri will not be null for RESULT_OK
                 val uri: Uri = data?.data!!
+
 
                 // Use Uri object instead of File to avoid storage permissions
                 binding.uploadLayout0.visibility = View.GONE

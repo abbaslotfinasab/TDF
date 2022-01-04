@@ -708,6 +708,10 @@
         <action
             android:id="@+id/action_ticketDetailsFragment_to_messageFragment"
             app:destination="@id/messageFragment" />
+        
+        <action
+            android:id="@+id/action_messageFragment_to_blankFragment"
+            app:destination="@id/blankFragment" />
 
         <action
             android:id="@+id/action_ticketDetailsFragment_to_closeTicketFragment"
@@ -732,6 +736,14 @@
         android:name="com.utechia.tdf.ticket.MessageFragment"
         android:label="fragment_message"
         tools:layout="@layout/fragment_message">
+
+        <action
+            android:id="@+id/action_messageFragment_to_uploadReplyDeleteFragment"
+            app:destination="@id/uploadReplyDeleteFragment" />
+
+        <action
+            android:id="@+id/action_messageFragment_to_blankFragment"
+            app:destination="@id/blankFragment" />
 
     </dialog>
 

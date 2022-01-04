@@ -277,8 +277,11 @@
         <entry key="..\:/Users/Dr Computer/AndroidStudioProjects/tdf_oms_android_application_kotlin_v1/app/src/main/res/layout/search_item.xml" value="0.25" />
         <entry key="..\:/Users/Dr Computer/AndroidStudioProjects/tdf_oms_android_application_kotlin_v1/app/src/main/res/menu/bottom_nav_menu.xml" value="0.20416666666666666" />
         <entry key="..\:/Users/Dr Computer/AndroidStudioProjects/tdf_oms_android_application_kotlin_v1/app/src/main/res/menu/navigation_drawer.xml" value="0.20416666666666666" />
+        <entry key="app/src/main/res/layout/fragment_create_ticket.xml" value="0.1" />
         <entry key="app/src/main/res/layout/fragment_ticket_confirmation.xml" value="0.1" />
         <entry key="app/src/main/res/layout/fragment_ticket_details.xml" value="0.10144927536231885" />
+        <entry key="app/src/main/res/layout/item_chat_admin.xml" value="0.25" />
+        <entry key="app/src/main/res/layout/item_ticket_client.xml" value="0.1" />
         <entry key="app/src/main/res/layout/ticket_item.xml" value="0.22" />
         <entry key="app/src/main/res/mipmap-anydpi-v26/ic_launcher.xml" value="0.11944444444444445" />
       </map>

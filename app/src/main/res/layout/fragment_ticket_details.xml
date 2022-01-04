@@ -28,7 +28,7 @@
         android:textAllCaps="false"
         android:textColor="@color/white"
         android:textSize="12sp"
-        android:visibility="visible"
+        android:visibility="gone"
         app:layout_constraintBottom_toBottomOf="@+id/recyclerView"
         app:layout_constraintEnd_toEndOf="@id/recyclerView" />
 
@@ -40,11 +40,11 @@
         android:layout_marginBottom="30dp"
         android:background="#FF6464"
         android:padding="3dp"
-        android:text="Close"
+        android:text="Close Ticket"
         android:textAllCaps="false"
         android:textColor="@color/white"
         android:textSize="12sp"
-        android:visibility="visible"
+        android:visibility="gone"
         app:layout_constraintBottom_toBottomOf="@id/recyclerView"
         app:layout_constraintStart_toStartOf="@id/recyclerView" />
 

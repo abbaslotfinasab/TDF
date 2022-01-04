@@ -9,6 +9,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.view.Window
+import androidx.navigation.findNavController
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.GridLayoutManager
 import com.google.android.material.bottomsheet.BottomSheetDialogFragment
@@ -22,7 +23,7 @@ import dagger.hilt.android.AndroidEntryPoint
 class MessageFragment : BottomSheetDialogFragment() {
 
     private lateinit var binding: FragmentMessageBinding
-    private val uploadOrder:UploadReplyAdapter = UploadReplyAdapter()
+    val uploadOrder:UploadReplyAdapter = UploadReplyAdapter(this)
 
 
 
@@ -41,6 +42,18 @@ class MessageFragment : BottomSheetDialogFragment() {
 
     override fun getTheme(): Int = R.style.AppBottomSheetDialogTheme
 
+    override fun onResume() {
+        super.onResume()
+        if (uploadOrder.file.size !=0){
+            binding.uploadLayout0.visibility = View.GONE
+            binding.recyclerView.visibility = View.VISIBLE
+        }
+        else{
+            binding.uploadLayout0.visibility = View.VISIBLE
+            binding.recyclerView.visibility = View.GONE
+        }
+    }
+
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
@@ -51,11 +64,11 @@ class MessageFragment : BottomSheetDialogFragment() {
 
         binding.appCompatButton.setOnClickListener {
             dialog?.dismiss()
+            uploadOrder.file.clear()
         }
 
         binding.btnUpload.setOnClickListener {
-            findNavController().navigate(R.id.action_messageFragment_to_uploadFragment)
-
+            showUpload()
         }
     }
 
@@ -76,6 +89,18 @@ class MessageFragment : BottomSheetDialogFragment() {
      fun replacement1(){
         binding.uploadLayout0.visibility = View.GONE
         binding.recyclerView.visibility = View.VISIBLE
+    }
+
+    fun showDelete(bundle: Bundle){
+        findNavController().navigate(R.id.action_messageFragment_to_uploadReplyDeleteFragment,bundle)
+    }
+    fun showUpload() {
+        findNavController().navigate(R.id.action_messageFragment_to_uploadFragment)
+
+    }
+    fun showImage(bundle: Bundle){
+        findNavController().navigate(R.id.action_messageFragment_to_blankFragment,bundle)
+        dialog?.dismiss()
     }
 
 }

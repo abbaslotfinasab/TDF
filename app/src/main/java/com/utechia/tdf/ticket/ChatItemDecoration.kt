@@ -17,6 +17,8 @@ class ChatItemDecoration: RecyclerView.ItemDecoration(){
         outRect.left = 20
         outRect.right = 20
         outRect.top = 20
-        outRect.bottom = 20
-    }
+        if (parent.getChildAdapterPosition(view) != parent.adapter!!.itemCount-1)
+            outRect.bottom = 20
+        else
+            outRect.bottom = 300    }
 }

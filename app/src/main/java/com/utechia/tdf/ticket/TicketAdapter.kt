@@ -61,14 +61,20 @@ class TicketAdapter: RecyclerView.Adapter<RecyclerView.ViewHolder>() {
 
             }
 
+            if (ticket[position].status == "Close"){
+                status.visibility = View.VISIBLE
+            }else{
+                status.visibility = View.GONE
+
+            }
+
             dateFormat = sdf.parse(ticket[position].datetime)
-            simple = SimpleDateFormat("yyyy-MM-dd | HH:mm", Locale.getDefault()).format(dateFormat)
+            simple = SimpleDateFormat("yyyy.MM.dd | HH:mm", Locale.getDefault()).format(dateFormat)
             date.text = "$simple"
 
             title.text = ticket[position].title
             subTitle.text = ticket[position].id.toString()
             category.text = ticket[position].category.title
-            status.text = ticket[position].status
 
 
             when (ticket[position].Priority) {
@@ -82,15 +88,6 @@ class TicketAdapter: RecyclerView.Adapter<RecyclerView.ViewHolder>() {
 
                     }
                 }
-                "Medium" -> {
-                    priority.apply {
-                        visibility = View.VISIBLE
-                        text = "Medium"
-                        setTextColor(Color.parseColor("#F5A62E"))
-                        background = ContextCompat.getDrawable(context,R.drawable.back_medium)
-
-                    }
-                }
 
                 "Low" -> {
                     priority.apply {
@@ -98,6 +95,16 @@ class TicketAdapter: RecyclerView.Adapter<RecyclerView.ViewHolder>() {
                         text = "Low"
                         setTextColor(Color.parseColor("#59B48D"))
                         background = ContextCompat.getDrawable(context,R.drawable.supporter_back)
+                    }
+                }
+
+                else -> {
+                    priority.apply {
+                        visibility = View.VISIBLE
+                        text = "Medium"
+                        setTextColor(Color.parseColor("#F5A62E"))
+                        background = ContextCompat.getDrawable(context,R.drawable.back_medium)
+
                     }
                 }
             }

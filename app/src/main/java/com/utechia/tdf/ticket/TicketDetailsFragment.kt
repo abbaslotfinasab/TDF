@@ -33,7 +33,6 @@ class TicketDetailsFragment : Fragment() {
     private lateinit var navHostFragment: NavHostFragment
     private val fragment: MessageFragment = MessageFragment()
     private val chatAdapter :ChatAdapter = ChatAdapter()
-    private val uploadOrder:UploadReplyAdapter = UploadReplyAdapter()
     private var ticketId:String = ""
     private var status:String = ""
     private var mId:Int = 0
@@ -71,9 +70,12 @@ class TicketDetailsFragment : Fragment() {
         ticketListener.addListenerForSingleValueEvent(object:ValueEventListener{
             override fun onDataChange(snapshot: DataSnapshot) {
                 chatAdapter.chat.clear()
+                binding.prg.visibility = View.GONE
+                binding.btnReply.visibility = View.VISIBLE
+                binding.btnClose.visibility = View.VISIBLE
+
                 snapshot.children.forEach {
                     chatAdapter.addData(it.getValue<Chat>()!!)
-                    binding.prg.visibility = View.GONE
                 }
             }
 
@@ -108,10 +110,7 @@ class TicketDetailsFragment : Fragment() {
         }
 
         binding.btnReply.setOnClickListener {
-            val bundle = bundleOf("ticketId" to ticketId)
-            fragment.arguments = bundle
-            fragment.show(parentFragmentManager,"Tag")
-
+            showDialog()
         }
 
         binding.btnClose.setOnClickListener {
@@ -119,6 +118,12 @@ class TicketDetailsFragment : Fragment() {
             findNavController().navigate(R.id.action_ticketDetailsFragment_to_closeTicketFragment,bundle)
 
         }
+    }
+
+    private fun showDialog() {
+        val bundle = bundleOf("ticketId" to ticketId)
+        fragment.arguments = bundle
+        fragment.show(parentFragmentManager,"Tag")
     }
 
     fun openGallery(){
@@ -157,10 +162,10 @@ class TicketDetailsFragment : Fragment() {
     }
 
     fun deleteItem(position:Int){
-        uploadOrder.file.removeAt(position)
-        uploadOrder.notifyItemRemoved(position)
+        fragment.uploadOrder.file.removeAt(position)
+        fragment.uploadOrder.notifyItemRemoved(position)
 
-        if(uploadOrder.file.isEmpty()){
+        if(fragment.uploadOrder.file.isEmpty()){
             replacement()
         }
     }
@@ -170,10 +175,9 @@ class TicketDetailsFragment : Fragment() {
             Activity.RESULT_OK -> {
                 //Image Uri will not be null for RESULT_OK
                 val uri: Uri = data?.data!!
-
                 // Use Uri object instead of File to avoid storage permissions
+                fragment.uploadOrder.addData(uri)
                 fragment.replacement1()
-                uploadOrder.addData(uri)
 
             }
 

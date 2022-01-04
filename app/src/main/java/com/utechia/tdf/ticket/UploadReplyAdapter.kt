@@ -11,7 +11,7 @@ import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.utechia.tdf.R
 
-class UploadReplyAdapter : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
+class UploadReplyAdapter(val messageFragment: MessageFragment) : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
 
     var file: MutableList<Uri> = mutableListOf()
 
@@ -49,14 +49,16 @@ class UploadReplyAdapter : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
                     .error(R.drawable.ic_empty_upload)
                     .centerCrop()
                     .into(image)
+
                 image.setOnClickListener {
                     val bundle = bundleOf("uri" to file[position].toString())
-                    itemView.findNavController().navigate(R.id.action_createTicketFragment_to_blankFragment,bundle)
+                    messageFragment.showImage(bundle)
+
                 }
 
                 deleteIcon.setOnClickListener {
                     val bundle = bundleOf("position" to position)
-                    itemView.findNavController().navigate(R.id.action_messageFragment_to_uploadReplyDeleteFragment,bundle)
+                    messageFragment.showDelete(bundle)
                 }
             }
 
@@ -70,7 +72,7 @@ class UploadReplyAdapter : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
                     .into(image)
 
                 image.setOnClickListener {
-                    itemView.findNavController().navigate(R.id.action_createTicketFragment_to_uploadFragment)
+                    messageFragment.showUpload()
                 }
             }
         }
