@@ -80,12 +80,13 @@ class CreateTicketFragment : Fragment() {
         }
 
         binding.appCompatButton.setOnClickListener {
+
             ticketViewModel.postTicket(
                 binding.description.text.toString(),
                 binding.title.text.toString(),
-                0,
-                "",
-                "",
+                1,
+                "Low",
+                "Floor 11",
                 uploadOrder.file,
 
                 )
@@ -119,6 +120,7 @@ class CreateTicketFragment : Fragment() {
                     binding.prg.visibility = View.GONE
                     Toast.makeText(context, it.message, Toast.LENGTH_SHORT).show()
                     findNavController().navigate(R.id.action_createTicketFragment_to_ticketConfirmationFragment)
+
 
                 }
             }
