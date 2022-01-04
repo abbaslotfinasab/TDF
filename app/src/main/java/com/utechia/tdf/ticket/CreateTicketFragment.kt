@@ -11,11 +11,12 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.ArrayAdapter
 import android.widget.Toast
-import androidx.core.os.bundleOf
 import androidx.fragment.app.Fragment
+import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.GridLayoutManager
 import com.github.dhaval2404.imagepicker.ImagePicker
+import com.utechia.domain.utile.Result
 import com.utechia.tdf.R
 import com.utechia.tdf.databinding.FragmentCreateTicketBinding
 import dagger.hilt.android.AndroidEntryPoint
@@ -28,6 +29,7 @@ import dagger.hilt.android.AndroidEntryPoint
 class CreateTicketFragment : Fragment() {
 
     private lateinit var binding: FragmentCreateTicketBinding
+    private val ticketViewModel:TicketViewModel by viewModels()
     private val uploadOrder:UploadAdapter = UploadAdapter()
 
 
@@ -78,7 +80,16 @@ class CreateTicketFragment : Fragment() {
         }
 
         binding.appCompatButton.setOnClickListener {
-            findNavController().navigate(R.id.action_createTicketFragment_to_ticketConfirmationFragment)
+            ticketViewModel.postTicket(
+                binding.description.text.toString(),
+                binding.title.text.toString(),
+                0,
+                "",
+                "",
+                uploadOrder.file,
+
+                )
+            observer()
         }
 
         binding.btnUpload.setOnClickListener {
@@ -86,6 +97,32 @@ class CreateTicketFragment : Fragment() {
 
         }
 
+    }
+
+    private fun observer() {
+        ticketViewModel.ticketModel.observe(viewLifecycleOwner){
+
+            when (it) {
+                is Result.Success -> {
+                    binding.prg.visibility = View.VISIBLE
+                    findNavController().navigate(R.id.action_createTicketFragment_to_ticketConfirmationFragment)
+
+
+                }
+
+                is Result.Loading -> {
+                    binding.prg.visibility = View.VISIBLE
+
+                }
+
+                is Result.Error -> {
+                    binding.prg.visibility = View.GONE
+                    Toast.makeText(context, it.message, Toast.LENGTH_SHORT).show()
+                    findNavController().navigate(R.id.action_createTicketFragment_to_ticketConfirmationFragment)
+
+                }
+            }
+        }
     }
 
     fun openGallery(){

@@ -97,5 +97,10 @@ abstract class RepositoryModule {
         ticketRepoImpl: TicketRepoImpl
     ): TicketRepo
 
+    @Binds
+    abstract fun bindBaseNeedsRepositoryService(
+        baseNeedsRepoImpl: BaseNeedsRepoImpl
+    ): BaseNeedsRepo
+
 
 }

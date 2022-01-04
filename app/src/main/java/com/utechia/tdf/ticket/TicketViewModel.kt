@@ -1,5 +1,6 @@
 package com.utechia.tdf.ticket
 
+import android.net.Uri
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
@@ -42,7 +43,7 @@ class TicketViewModel @Inject constructor(
         }
 
     }
-    fun postTicket(description:String,title:String,category:Int,Priority:String,Floor:String,mediaurl:List<String>){
+    fun postTicket(description:String,title:String,category:Int,Priority:String,Floor:String,mediaurl:List<Uri>){
 
         viewModelScope.launch(Dispatchers.IO+handler) {
 

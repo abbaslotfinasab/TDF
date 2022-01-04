@@ -1,7 +1,8 @@
 package com.utechia.data.repo
 
-import android.util.Log
+import android.net.Uri
 import com.utechia.data.api.Service
+import com.utechia.data.entity.ReplyBody
 import com.utechia.data.entity.TicketBody
 import com.utechia.data.utile.NetworkHelper
 import com.utechia.domain.model.TicketModel
@@ -42,7 +43,7 @@ class TicketRepoImpl @Inject constructor(
         category: Int,
         Priority: String,
         Floor: String,
-        mediaurl: List<String>
+        mediaurl: List<Uri>
     ): MutableList<TicketModel> {
 
         if (networkHelper.isNetworkConnected()) {
@@ -72,6 +73,34 @@ class TicketRepoImpl @Inject constructor(
 
             val result = service.closeTicket(fid)
 
+
+            return when (result.isSuccessful) {
+
+                true -> {
+                    emptyList<TicketModel>().toMutableList()
+                }
+
+                else ->
+                    throw IOException("Server is Not Responding")
+            }
+
+        } else throw IOException("No Internet Connection")
+    }
+
+    override suspend fun replyTicket(
+        id: Int,
+        mediaurl: List<Uri>,
+        text: String
+    ): MutableList<TicketModel> {
+        if (networkHelper.isNetworkConnected()) {
+
+            val result = service.reply(
+                ReplyBody(
+                    id,
+                    mediaurl,
+                    text
+                )
+            )
 
             return when (result.isSuccessful) {
 

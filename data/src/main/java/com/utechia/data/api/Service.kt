@@ -143,7 +143,11 @@ interface Service {
 
 
     @POST("ticket/baseneeds")
-    suspend fun closeTicket():Response<BaseNeeds>
+    suspend fun getNeeds():Response<BaseNeeds>
+
+    @Headers("Content-Type: application/json")
+    @POST("ticket/replymessagefromuser")
+    suspend fun reply(@Body replyBody:ReplyBody):Response<Void>
 
 
 

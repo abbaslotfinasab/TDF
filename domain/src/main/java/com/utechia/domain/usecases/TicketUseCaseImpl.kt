@@ -1,5 +1,6 @@
 package com.utechia.domain.usecases
 
+import android.net.Uri
 import com.utechia.domain.model.TicketModel
 import com.utechia.domain.repository.TicketRepo
 import javax.inject.Inject
@@ -17,12 +18,20 @@ class TicketUseCaseImpl @Inject constructor(private val ticketRepo: TicketRepo):
         category: Int,
         Priority: String,
         Floor: String,
-        mediaurl: List<String>
+        mediaurl: List<Uri>
     ): MutableList<TicketModel> {
         return ticketRepo.postTicket(description,title,category,Priority,Floor,mediaurl)
     }
 
     override suspend fun closeTicket(fid: Int): MutableList<TicketModel> {
         return ticketRepo.closeTicket(fid)
+    }
+
+    override suspend fun replyTicket(
+        id: Int,
+        mediaurl: List<Uri>,
+        text: String
+    ): MutableList<TicketModel> {
+        return ticketRepo.replyTicket(id,mediaurl,text)
     }
 }

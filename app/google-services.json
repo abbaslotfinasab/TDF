@@ -1,0 +1,47 @@
+{
+  "project_info": {
+    "project_number": "41078452361",
+    "firebase_url": "https://tdf-oms-default-rtdb.asia-southeast1.firebasedatabase.app",
+    "project_id": "tdf-oms",
+    "storage_bucket": "tdf-oms.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:41078452361:android:f40ac5d9280e3b8de19658",
+        "android_client_info": {
+          "package_name": "com.utechia.tdf"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "41078452361-2p2lljpmj79t5o7jr780io10p5glbssu.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDHy96XW_el0AIusVfz-IMfRLAvTEgvhNo"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "41078452361-2p2lljpmj79t5o7jr780io10p5glbssu.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "41078452361-51veh1iraefbii3ec2dk54dj8sopgi15.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "com.utechia.TDF"
+              }
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
