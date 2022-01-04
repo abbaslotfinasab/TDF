@@ -65,6 +65,7 @@ class MessageFragment : BottomSheetDialogFragment() {
         binding.appCompatButton.setOnClickListener {
             dialog?.dismiss()
             uploadOrder.file.clear()
+            binding.description.setText("")
         }
 
         binding.btnUpload.setOnClickListener {

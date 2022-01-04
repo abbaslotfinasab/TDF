@@ -17,6 +17,7 @@ import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.GridLayoutManager
 import com.github.dhaval2404.imagepicker.ImagePicker
+import com.utechia.domain.model.CategoryModel
 import com.utechia.domain.utile.Result
 import com.utechia.tdf.R
 import com.utechia.tdf.databinding.FragmentCreateTicketBinding
@@ -34,9 +35,10 @@ class CreateTicketFragment : Fragment() {
     private val baseNeedsViewModel:BaseNeedsViewModel by viewModels()
     private val uploadOrder:UploadAdapter = UploadAdapter()
     private val floor:MutableList<String> = mutableListOf()
+    private val categoryList:ArrayList<CategoryModel> = arrayListOf()
     private var selectedFloor = "Floor11"
     private var priority = "Low"
-    private var category = 1
+    var category = 1
 
 
 
@@ -95,7 +97,9 @@ class CreateTicketFragment : Fragment() {
 
 
         binding.category.setOnClickListener {
-            findNavController().navigate(R.id.action_createTicketFragment_to_categoryFragment)
+            val bundle = Bundle()
+            bundle.putSerializable("category", categoryList)
+            findNavController().navigate(R.id.action_createTicketFragment_to_categoryFragment,bundle)
         }
 
         binding.appCompatButton.setOnClickListener {
@@ -135,6 +139,7 @@ class CreateTicketFragment : Fragment() {
                     binding.uploadLayout.visibility= View.VISIBLE
                     binding.appCompatButton.visibility= View.VISIBLE
                     floor.addAll(it.data.ListFloor!!)
+                    categoryList.addAll(it.data.category!!)
 
                 }
 
@@ -231,6 +236,11 @@ class CreateTicketFragment : Fragment() {
         binding.uploadLayout0.visibility = View.VISIBLE
         binding.recyclerView.visibility = View.GONE
 
+    }
+
+    fun selectCategory(title:String,mId:Int){
+        binding.selectCategory.text = title
+        category = mId
     }
 
     fun deleteItem(position:Int){
