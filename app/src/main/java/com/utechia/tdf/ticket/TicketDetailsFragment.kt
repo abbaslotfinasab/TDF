@@ -76,7 +76,7 @@ class TicketDetailsFragment : Fragment() {
                 snapshot.children.forEach {
                     chatAdapter.addData(it.getValue<Chat>()!!)
                 }
-                binding.recyclerView.scrollToPosition(chatAdapter.chat.size-1)
+                binding.recyclerView.scrollToPosition(chatAdapter.chat.size)
             }
 
 

@@ -13,53 +13,96 @@ import java.util.*
 class ChatAdapter: RecyclerView.Adapter<RecyclerView.ViewHolder>() {
 
     var chat: MutableList<Chat> = mutableListOf()
+    var title = ""
+    var mID = ""
+    var category = ""
+    var priority = ""
+    var statusCode = ""
 
-    var sdf: SimpleDateFormat = SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss.SSS'Z'", Locale.getDefault())
+
+
+
+    var sdf: SimpleDateFormat =
+        SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss.SSS'Z'", Locale.getDefault())
     private lateinit var dateFormat: Date
     private var simple = ""
 
     fun addData(_chat: Chat) {
 
         chat.add(_chat)
-        notifyItemChanged(chat.size-1)
+        notifyItemChanged(chat.size - 1)
 
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): RecyclerView.ViewHolder {
-        return when (chat[viewType].UserRol){
-            "Requester" -> {
-                ViewHolder0(
-                    LayoutInflater.from(parent.context)
-                        .inflate(R.layout.item_ticket_client, parent, false)
-                )
-            }
-                else -> {
+
+        if (viewType == 0)
+            return ViewHolder0(
+                LayoutInflater.from(parent.context)
+                    .inflate(R.layout.item_chat_details, parent, false)
+            )
+        else
+            return when (chat[viewType-1].UserRol) {
+                "Requester" -> {
                     ViewHolder1(
+                        LayoutInflater.from(parent.context)
+                            .inflate(R.layout.item_chat_client, parent, false)
+                    )
+                }
+                else -> {
+                    ViewHolder2(
                         LayoutInflater.from(parent.context)
                             .inflate(R.layout.item_chat_admin, parent, false)
                     )
                 }
             }
-        }
+    }
 
     override fun onBindViewHolder(holder: RecyclerView.ViewHolder, position: Int) {
-        return when (chat[position].UserRol) {
-            "Requester" -> {
-                (holder as ViewHolder0).bind0(position)
-            }
-            else -> {
-                (holder as ViewHolder1).bind0(position)
-
+        if (position==0) {
+            (holder as ViewHolder0).bind0(0)
+        }
+        else {
+            return when (chat[position - 1].UserRol) {
+                "Requester" -> {
+                    (holder as ViewHolder1).bind0(position - 1)
+                }
+                else -> {
+                    (holder as ViewHolder2).bind0(position - 1)
+                }
             }
         }
     }
 
-    override fun getItemCount(): Int = chat.size
+    override fun getItemCount(): Int = chat.size+1
 
     override fun getItemViewType(position: Int): Int = position
 
-
     inner class ViewHolder0(itemView: View) : RecyclerView.ViewHolder(itemView) {
+        private val description: TextView = itemView.findViewById(R.id.title)
+        private val user: TextView = itemView.findViewById(R.id.category)
+        private val date: TextView = itemView.findViewById(R.id.priority)
+        private val subTitle: TextView = itemView.findViewById(R.id.subTitle)
+        private val status: TextView = itemView.findViewById(R.id.status)
+
+        fun bind0(position: Int) {
+            description.text = title
+            user.text = category
+            date.text = priority
+            subTitle.text = mID
+
+            if (statusCode == "Close"){
+                status.visibility = View.VISIBLE
+            }else{
+                status.visibility = View.GONE
+            }
+
+
+        }
+    }
+
+
+    inner class ViewHolder1(itemView: View) : RecyclerView.ViewHolder(itemView) {
         private val description: TextView = itemView.findViewById(R.id.description)
         private val user: TextView = itemView.findViewById(R.id.username)
         private val date: TextView = itemView.findViewById(R.id.date)
@@ -74,13 +117,10 @@ class ChatAdapter: RecyclerView.Adapter<RecyclerView.ViewHolder>() {
             description.text = chat[position].text
             user.text = chat[position].username
 
-
-
-
         }
     }
 
-    inner class ViewHolder1(itemView: View) : RecyclerView.ViewHolder(itemView) {
+    inner class ViewHolder2(itemView: View) : RecyclerView.ViewHolder(itemView) {
         private val description: TextView = itemView.findViewById(R.id.description)
         private val user: TextView = itemView.findViewById(R.id.username)
         private val date: TextView = itemView.findViewById(R.id.date)
@@ -94,9 +134,6 @@ class ChatAdapter: RecyclerView.Adapter<RecyclerView.ViewHolder>() {
 
             description.text = chat[position].text
             user.text = chat[position].username
-
-
-
 
         }
     }

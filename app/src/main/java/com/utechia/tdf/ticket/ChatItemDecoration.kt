@@ -14,11 +14,22 @@ class ChatItemDecoration: RecyclerView.ItemDecoration(){
         @NonNull parent: RecyclerView,
         @NonNull state: RecyclerView.State
     ) {
-        outRect.left = 20
-        outRect.right = 20
-        outRect.top = 20
-        if (parent.getChildAdapterPosition(view) != parent.adapter!!.itemCount-1)
-            outRect.bottom = 20
-        else
-            outRect.bottom = 300    }
+
+        if (parent.getChildAdapterPosition(view) == 0) {
+            outRect.left = 50
+            outRect.right = 50
+            outRect.top = 50
+            outRect.bottom = 50
+
+        }
+        else {
+            outRect.left = 20
+            outRect.right = 20
+            outRect.top = 20
+            if (parent.getChildAdapterPosition(view) != parent.adapter!!.itemCount - 1)
+                outRect.bottom = 20
+            else
+                outRect.bottom = 320
+        }
+    }
 }
