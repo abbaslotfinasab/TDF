@@ -12,6 +12,8 @@ import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.CoroutineExceptionHandler
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
+import kotlinx.serialization.json.JsonArray
+import org.json.JSONArray
 import javax.inject.Inject
 
 @HiltViewModel
@@ -43,7 +45,7 @@ class TicketViewModel @Inject constructor(
         }
 
     }
-    fun postTicket(description:String,title:String,category:Int,Priority:String,Floor:String,mediaurl:List<Uri>){
+    fun postTicket(description:String,title:String,category:Int,Priority:String,Floor:String,mediaurl:List<String>){
 
         viewModelScope.launch(Dispatchers.IO+handler) {
 
@@ -66,6 +68,20 @@ class TicketViewModel @Inject constructor(
             _ticketModel.postValue(Result.Loading)
 
             ticketUseCaseImpl.closeTicket(fid).let {
+
+                _ticketModel.postValue(Result.Success(it))
+
+            }
+        }
+    }
+
+    fun replyTicket(id:Int,mediaurl:JSONArray,text:String){
+
+        viewModelScope.launch(Dispatchers.IO+handler) {
+
+            _ticketModel.postValue(Result.Loading)
+
+            ticketUseCaseImpl.replyTicket(id,mediaurl,text).let {
 
                 _ticketModel.postValue(Result.Success(it))
 

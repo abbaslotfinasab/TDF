@@ -204,8 +204,8 @@ class CreateTicketFragment : Fragment() {
 
         ImagePicker.with(this)
             .crop()	    			//Crop image(Optional), Check Customization for more option
-            .compress(2048)			//Final image size will be less than 1 MB(Optional)
-            .maxResultSize(1080, 1080) //Final image resolution will be less than 1080 x 1080(Optional)
+            .compress(1024)			//Final image size will be less than 1 MB(Optional)
+            .maxResultSize(728, 1024) //Final image resolution will be less than 1080 x 1080(Optional)
             .galleryOnly()
             .start()
 
@@ -215,8 +215,8 @@ class CreateTicketFragment : Fragment() {
 
         ImagePicker.with(this)
             .crop()	    			//Crop image(Optional), Check Customization for more option
-            .compress(2048)			//Final image size will be less than 1 MB(Optional)
-            .maxResultSize(1080, 1080) //Final image resolution will be less than 1080 x 1080(Optional)
+            .compress(1024)			//Final image size will be less than 1 MB(Optional)
+            .maxResultSize(728, 1024) //Final image resolution will be less than 1080 x 1080(Optional)
             .cameraOnly()
             .start()
 
@@ -272,7 +272,7 @@ class CreateTicketFragment : Fragment() {
                 // Use Uri object instead of File to avoid storage permissions
                 binding.uploadLayout0.visibility = View.GONE
                 binding.recyclerView.visibility = View.VISIBLE
-                uploadOrder.addData(uri)
+                uploadOrder.addData(uri.toString())
 
             }
             ImagePicker.RESULT_ERROR -> {

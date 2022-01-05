@@ -67,16 +67,16 @@ class TicketDetailsFragment : Fragment() {
 
         val ticketListener = database.child("Ticketmessage").child("Ticket-$ticketId")
 
-        ticketListener.addListenerForSingleValueEvent(object:ValueEventListener{
+        ticketListener.addValueEventListener(object:ValueEventListener{
             override fun onDataChange(snapshot: DataSnapshot) {
                 chatAdapter.chat.clear()
                 binding.prg.visibility = View.GONE
                 binding.btnReply.visibility = View.VISIBLE
                 binding.btnClose.visibility = View.VISIBLE
-
                 snapshot.children.forEach {
                     chatAdapter.addData(it.getValue<Chat>()!!)
                 }
+                binding.recyclerView.scrollToPosition(chatAdapter.chat.size-1)
             }
 
 
@@ -84,6 +84,9 @@ class TicketDetailsFragment : Fragment() {
                 Toast.makeText(context,error.message,Toast.LENGTH_SHORT).show()
             }
         })
+
+
+
 
         if (status == "Close"){
             binding.btnClose.isEnabled = false
@@ -121,17 +124,21 @@ class TicketDetailsFragment : Fragment() {
     }
 
     private fun showDialog() {
-        val bundle = bundleOf("ticketId" to ticketId)
+        val bundle = bundleOf("ticketId" to mId)
         fragment.arguments = bundle
-        fragment.show(parentFragmentManager,"Tag")
+        if (!fragment.isAdded)
+        fragment.show(childFragmentManager,"Tag")
+        else
+            fragment.dialog?.show()
+
     }
 
     fun openGallery(){
 
         ImagePicker.with(this)
             .crop()	    			//Crop image(Optional), Check Customization for more option
-            .compress(2048)			//Final image size will be less than 1 MB(Optional)
-            .maxResultSize(1080, 1080) //Final image resolution will be less than 1080 x 1080(Optional)
+            .compress(1024)			//Final image size will be less than 1 MB(Optional)
+            .maxResultSize(728, 1024) //Final image resolution will be less than 1080 x 1080(Optional)
             .galleryOnly()
             .start()
 
@@ -141,8 +148,8 @@ class TicketDetailsFragment : Fragment() {
 
         ImagePicker.with(this)
             .crop()	    			//Crop image(Optional), Check Customization for more option
-            .compress(2048)			//Final image size will be less than 1 MB(Optional)
-            .maxResultSize(1080, 1080) //Final image resolution will be less than 1080 x 1080(Optional)
+            .compress(1024)			//Final image size will be less than 1 MB(Optional)
+            .maxResultSize(728, 1024) //Final image resolution will be less than 1080 x 1080(Optional)
             .cameraOnly()
             .start()
 
@@ -176,7 +183,7 @@ class TicketDetailsFragment : Fragment() {
                 //Image Uri will not be null for RESULT_OK
                 val uri: Uri = data?.data!!
                 // Use Uri object instead of File to avoid storage permissions
-                fragment.uploadOrder.addData(uri)
+                fragment.uploadOrder.addData(uri.toString())
                 fragment.replacement1()
 
             }

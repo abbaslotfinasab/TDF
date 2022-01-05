@@ -9,21 +9,28 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.view.Window
+import android.widget.Toast
+import androidx.fragment.app.viewModels
 import androidx.navigation.findNavController
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.GridLayoutManager
 import com.google.android.material.bottomsheet.BottomSheetDialogFragment
+import com.utechia.domain.utile.Result
 import com.utechia.tdf.R
 import com.utechia.tdf.databinding.FragmentMessageBinding
 import dagger.hilt.android.AndroidEntryPoint
-
+import kotlinx.serialization.json.JsonArray
+import org.json.JSONArray
 
 
 @AndroidEntryPoint
 class MessageFragment : BottomSheetDialogFragment() {
 
     private lateinit var binding: FragmentMessageBinding
+    private val ticketViwModel:TicketViewModel by viewModels()
     val uploadOrder:UploadReplyAdapter = UploadReplyAdapter(this)
+    private var ticketId = 0
+    private lateinit var jsonArray:JSONArray
 
 
 
@@ -57,15 +64,19 @@ class MessageFragment : BottomSheetDialogFragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
+
+        if (arguments != null)
+            ticketId = requireArguments().getInt("ticketId", 0)
+
         binding.recyclerView.apply {
             adapter = uploadOrder
             layoutManager = GridLayoutManager(context,calculateNoOfColumns(context, 100.0F))
         }
 
         binding.appCompatButton.setOnClickListener {
-            dialog?.dismiss()
-            uploadOrder.file.clear()
-            binding.description.setText("")
+            jsonArray = JSONArray(uploadOrder.file)
+            ticketViwModel.replyTicket(ticketId, jsonArray,binding.description.text.toString())
+            observer()
         }
 
         binding.btnUpload.setOnClickListener {
@@ -102,6 +113,34 @@ class MessageFragment : BottomSheetDialogFragment() {
     fun showImage(bundle: Bundle){
         findNavController().navigate(R.id.action_messageFragment_to_blankFragment,bundle)
         dialog?.dismiss()
+    }
+
+    private fun observer() {
+
+        ticketViwModel.ticketModel.observe(viewLifecycleOwner){
+
+            when (it) {
+                is Result.Success -> {
+                    binding.prg.visibility = View.GONE
+                    dialog?.hide()
+                    uploadOrder.file.clear()
+                    binding.description.setText("")
+                }
+
+                is Result.Loading -> {
+                    binding.prg.visibility = View.VISIBLE
+
+                }
+
+                is Result.Error -> {
+                    binding.prg.visibility = View.GONE
+                    Toast.makeText(context, it.message, Toast.LENGTH_SHORT).show()
+                    dialog?.hide()
+
+
+                }
+            }
+        }
     }
 
 }

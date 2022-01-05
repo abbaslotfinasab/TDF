@@ -1,12 +1,14 @@
 package com.utechia.data.repo
 
 import android.net.Uri
+import android.util.Log
 import com.utechia.data.api.Service
 import com.utechia.data.entity.ReplyBody
 import com.utechia.data.entity.TicketBody
 import com.utechia.data.utile.NetworkHelper
 import com.utechia.domain.model.TicketModel
 import com.utechia.domain.repository.TicketRepo
+import org.json.JSONArray
 import java.io.IOException
 import javax.inject.Inject
 import javax.inject.Singleton
@@ -43,7 +45,7 @@ class TicketRepoImpl @Inject constructor(
         category: Int,
         Priority: String,
         Floor: String,
-        mediaurl: List<Uri>
+        mediaurl: List<String>
     ): MutableList<TicketModel> {
 
         if (networkHelper.isNetworkConnected()) {
@@ -89,9 +91,10 @@ class TicketRepoImpl @Inject constructor(
 
     override suspend fun replyTicket(
         id: Int,
-        mediaurl: List<Uri>,
+        mediaurl: JSONArray,
         text: String
     ): MutableList<TicketModel> {
+
         if (networkHelper.isNetworkConnected()) {
 
             val result = service.reply(

@@ -62,7 +62,7 @@
             android:id="@+id/categoryLayout"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:layout_marginTop="35dp"
+            android:layout_marginTop="20dp"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@id/titleLayout">
@@ -89,7 +89,7 @@
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/textView25" >
+                app:layout_constraintTop_toBottomOf="@+id/textView25">
 
                 <TextView
                     android:id="@+id/selectCategory"
@@ -125,7 +125,7 @@
             android:id="@+id/priorityLayout"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:layout_marginTop="35dp"
+            android:layout_marginTop="20dp"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@id/categoryLayout">
@@ -147,12 +147,12 @@
                 android:layout_height="50dp"
                 android:layout_marginStart="30dp"
                 android:layout_marginEnd="30dp"
-                app:segmentColor="#3859B48D"
-                app:segmentColorChecked="#59B48D"
                 android:orientation="horizontal"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/textView26">
+                app:layout_constraintTop_toBottomOf="@+id/textView26"
+                app:segmentColor="#3859B48D"
+                app:segmentColorChecked="#59B48D">
 
                 <RadioButton
                     android:layout_width="wrap_content"
@@ -178,7 +178,7 @@
             android:id="@+id/floorLayout"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:layout_marginTop="56dp"
+            android:layout_marginTop="20dp"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="1.0"
             app:layout_constraintStart_toStartOf="parent"
@@ -197,8 +197,7 @@
 
             <com.google.android.material.textfield.TextInputLayout
                 android:id="@+id/selectFloor"
-                app:boxStrokeColor="@color/white"
-                app:boxStrokeWidth="0dp"
+                style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox.Dense.ExposedDropdownMenu"
                 android:layout_width="0dp"
                 android:layout_height="60dp"
                 android:layout_gravity="center"
@@ -207,25 +206,26 @@
                 android:background="@color/white"
                 android:text="Select One"
                 android:textColor="@color/black"
+                app:boxStrokeColor="@color/white"
+                app:boxStrokeWidth="0dp"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox.Dense.ExposedDropdownMenu"
                 app:layout_constraintTop_toBottomOf="@+id/textView27">
 
                 <AutoCompleteTextView
                     android:id="@+id/autoCompleteTextView"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
-                    android:fontFamily="@font/poppins"
-                    android:textSize="15dp"
-                    android:overScrollMode="never"
                     android:background="@color/white"
+                    android:fontFamily="@font/poppins"
                     android:gravity="center_horizontal"
-                    android:padding="16dp"
                     android:inputType="none"
+                    android:overScrollMode="never"
+                    android:padding="16dp"
                     android:text="Select One"
-                    android:textColor="@color/black" />
+                    android:textColor="@color/black"
+                    android:textSize="15dp" />
 
             </com.google.android.material.textfield.TextInputLayout>
 
@@ -235,7 +235,7 @@
             android:id="@+id/descriptionLayout"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:layout_marginTop="35dp"
+            android:layout_marginTop="20dp"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@id/floorLayout">
@@ -258,8 +258,8 @@
                 android:layout_marginStart="30dp"
                 android:layout_marginEnd="30dp"
                 android:background="@color/white"
-                android:padding="5dp"
                 android:gravity="start"
+                android:padding="5dp"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
@@ -271,7 +271,7 @@
             android:id="@+id/uploadLayout"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:layout_marginTop="35dp"
+            android:layout_marginTop="20dp"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@id/descriptionLayout">
@@ -325,11 +325,11 @@
                 android:layout_height="120dp"
                 android:layout_marginStart="30dp"
                 android:layout_marginTop="15dp"
-                android:visibility="gone"
                 android:layout_marginEnd="30dp"
+                android:visibility="gone"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/textView29"/>
+                app:layout_constraintTop_toBottomOf="@+id/textView29" />
 
 
         </androidx.constraintlayout.widget.ConstraintLayout>
@@ -339,7 +339,7 @@
             android:layout_width="0dp"
             android:layout_height="60dp"
             android:layout_marginStart="30dp"
-            android:layout_marginTop="35dp"
+            android:layout_marginTop="20dp"
             android:layout_marginEnd="30dp"
             android:layout_marginBottom="60dp"
             android:background="#3360DD"

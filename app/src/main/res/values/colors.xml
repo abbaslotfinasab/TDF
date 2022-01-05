@@ -8,7 +8,7 @@
     <color name="black">#000000</color>
     <color name="white">#FFFFFFFF</color>
     <color name="status">#011232</color>
-    <color name="gray">#E6E5E5E5</color>
+    <color name="gray">#80474747</color>
     <color name="waiting">#F5A62E</color>
     <color name="prepare">#335DE0</color>
     <color name="cancel">#FF5A61</color>

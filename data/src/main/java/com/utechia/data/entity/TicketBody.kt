@@ -12,7 +12,7 @@ data class TicketBody(
     val category: Int?,
     val description: String?,
     val floor: String?,
-    val mediaurl: List<Uri>?,
+    val mediaurl: List<String>?,
     val title: String?,
 
 ):Parcelable

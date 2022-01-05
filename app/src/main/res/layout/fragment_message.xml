@@ -126,6 +126,37 @@
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent" />
 
+            <androidx.cardview.widget.CardView
+                android:id="@+id/prg"
+                android:layout_width="72dp"
+                android:layout_height="72dp"
+                app:cardElevation="6dp"
+                app:cardCornerRadius="36dp"
+                android:visibility="gone"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:cardPreventCornerOverlap="true"
+                app:layout_constraintCircleRadius="36dp"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent">
+
+                <com.agrawalsuneet.dotsloader.loaders.LazyLoader
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:gravity="center"
+                    android:layout_gravity="center"
+                    app:lazyloader_animDur="800"
+                    app:lazyloader_dotsDist="5dp"
+                    app:lazyloader_dotsRadius="5dp"
+                    app:lazyloader_firstDelayDur="150"
+                    app:lazyloader_firstDotColor="#3360DD"
+                    app:lazyloader_interpolator="@android:anim/decelerate_interpolator"
+                    app:lazyloader_secondDelayDur="300"
+                    app:lazyloader_secondDotColor="#3360DD"
+                    app:lazyloader_thirdDotColor="#3360DD" />
+
+            </androidx.cardview.widget.CardView>
+
 
             </androidx.constraintlayout.widget.ConstraintLayout>
 
