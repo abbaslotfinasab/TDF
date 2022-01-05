@@ -52,9 +52,6 @@ class TicketDetailsFragment : Fragment() {
         navHostFragment = requireActivity().supportFragmentManager.fragments[0] as NavHostFragment
 
 
-
-
-
         binding.btnReply.bringToFront()
         binding.btnClose.bringToFront()
 
@@ -62,6 +59,11 @@ class TicketDetailsFragment : Fragment() {
             ticketId = requireArguments().getString("fid","")
             mId = requireArguments().getInt("ticketId",0)
             status = requireArguments().getString("status","")
+            chatAdapter.title = requireArguments().getString("title","")
+            chatAdapter.category  = requireArguments().getString("category","")
+            chatAdapter.priority = requireArguments().getString("priority","")
+            chatAdapter.statusCode = status
+            chatAdapter.mID = mId.toString()
 
         }
 
@@ -84,9 +86,6 @@ class TicketDetailsFragment : Fragment() {
                 Toast.makeText(context,error.message,Toast.LENGTH_SHORT).show()
             }
         })
-
-
-
 
         if (status == "Close"){
             binding.btnClose.isEnabled = false

@@ -1,5 +1,6 @@
 package com.utechia.tdf.ticket
 
+import android.graphics.Color
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -95,6 +96,34 @@ class ChatAdapter: RecyclerView.Adapter<RecyclerView.ViewHolder>() {
                 status.visibility = View.VISIBLE
             }else{
                 status.visibility = View.GONE
+            }
+
+            when (priority) {
+
+                "High" -> {
+                    date.apply {
+                        visibility = View.VISIBLE
+                        text = "High"
+                        setTextColor(Color.parseColor("#FF6464"))
+
+                    }
+                }
+
+                "Low" -> {
+                    date.apply {
+                        visibility = View.VISIBLE
+                        text = "Low"
+                        setTextColor(Color.parseColor("#59B48D"))
+                    }
+                }
+
+                else -> {
+                    date.apply {
+                        visibility = View.VISIBLE
+                        text = "Medium"
+                        setTextColor(Color.parseColor("#F5A62E"))
+                    }
+                }
             }
 
 
