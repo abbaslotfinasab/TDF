@@ -13,6 +13,7 @@ import android.widget.Toast
 import androidx.core.content.ContextCompat
 import androidx.core.os.bundleOf
 import androidx.fragment.app.Fragment
+import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.NavHostFragment
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -22,6 +23,7 @@ import com.google.firebase.database.ktx.database
 import com.google.firebase.database.ktx.getValue
 import com.google.firebase.ktx.Firebase
 import com.utechia.data.entity.Chat
+import com.utechia.domain.utile.Result
 import com.utechia.tdf.databinding.FragmentTicketDetailsBinding
 import dagger.hilt.android.AndroidEntryPoint
 
@@ -32,6 +34,7 @@ class TicketDetailsFragment : Fragment() {
     private lateinit var database: DatabaseReference
     private lateinit var navHostFragment: NavHostFragment
     private val fragment: MessageFragment = MessageFragment()
+    private val uploadViewModel:UploadViewModel by viewModels()
     private val chatAdapter :ChatAdapter = ChatAdapter()
     private var ticketId:String = ""
     private var status:String = ""
@@ -76,9 +79,11 @@ class TicketDetailsFragment : Fragment() {
                 binding.btnReply.visibility = View.VISIBLE
                 binding.btnClose.visibility = View.VISIBLE
                 snapshot.children.forEach {
+                    chatAdapter.firebaseUploadAdapter.file.clear()
                     chatAdapter.addData(it.getValue<Chat>()!!)
                 }
                 binding.recyclerView.scrollToPosition(chatAdapter.chat.size)
+
             }
 
 
@@ -168,10 +173,10 @@ class TicketDetailsFragment : Fragment() {
     }
 
     fun deleteItem(position:Int){
-        fragment.uploadOrder.file.removeAt(position)
+        fragment.uploadOrder.localFile.removeAt(position)
         fragment.uploadOrder.notifyItemRemoved(position)
 
-        if(fragment.uploadOrder.file.isEmpty()){
+        if(fragment.uploadOrder.localFile.isEmpty()){
             replacement()
         }
     }
@@ -182,13 +187,35 @@ class TicketDetailsFragment : Fragment() {
                 //Image Uri will not be null for RESULT_OK
                 val uri: Uri = data?.data!!
                 // Use Uri object instead of File to avoid storage permissions
+                uploadViewModel.uploadFile(uri)
                 fragment.uploadOrder.addData(uri.toString())
                 fragment.replacement1()
-
+                uploadObserver()
             }
 
             ImagePicker.RESULT_ERROR -> {
                 Toast.makeText(context, ImagePicker.getError(data), Toast.LENGTH_SHORT).show()
+            }
+        }
+    }
+
+    private fun uploadObserver() {
+        uploadViewModel.uploadModel.observe(viewLifecycleOwner){
+
+            when (it) {
+                is Result.Success -> {
+                    fragment.hidePrg()
+                    fragment.uploadOrder.globalFile.add(it.data.path!!)
+                }
+
+                is Result.Loading -> {
+                    fragment.showPrg()
+                }
+
+                is Result.Error -> {
+                    fragment.hidePrg()
+                    Toast.makeText(context, it.message, Toast.LENGTH_SHORT).show()
+                }
             }
         }
     }

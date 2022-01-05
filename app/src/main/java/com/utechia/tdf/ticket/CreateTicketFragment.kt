@@ -24,18 +24,17 @@ import com.utechia.tdf.databinding.FragmentCreateTicketBinding
 import dagger.hilt.android.AndroidEntryPoint
 
 
-
-
-
 @AndroidEntryPoint
 class CreateTicketFragment : Fragment() {
 
     private lateinit var binding: FragmentCreateTicketBinding
     private val ticketViewModel:TicketViewModel by viewModels()
     private val baseNeedsViewModel:BaseNeedsViewModel by viewModels()
+    private val uploadViewModel:UploadViewModel by viewModels()
     private val uploadOrder:UploadAdapter = UploadAdapter()
     private val floor:MutableList<String> = mutableListOf()
     private val categoryList:ArrayList<CategoryModel> = arrayListOf()
+    private val mediaUrl:ArrayList<String> = arrayListOf()
     private var selectedFloor = "Floor11"
     private var priority = "Low"
     var category = 1
@@ -91,7 +90,7 @@ class CreateTicketFragment : Fragment() {
         }
 
         binding.autoCompleteTextView.onItemClickListener =
-            AdapterView.OnItemClickListener { parent, view, position, id -> selectedFloor = floor[position]
+            AdapterView.OnItemClickListener { _, _, position, _ -> selectedFloor = floor[position]
             }
 
 
@@ -105,12 +104,13 @@ class CreateTicketFragment : Fragment() {
         binding.appCompatButton.setOnClickListener {
 
             ticketViewModel.postTicket(
+
                 binding.description.text.toString(),
                 binding.title.text.toString(),
                 category,
                 priority,
                 selectedFloor,
-                uploadOrder.file,
+                mediaUrl,
 
                 )
             observer()
@@ -180,7 +180,6 @@ class CreateTicketFragment : Fragment() {
                 is Result.Success -> {
                     binding.prg.visibility = View.VISIBLE
                     findNavController().navigate(R.id.action_createTicketFragment_to_ticketConfirmationFragment)
-
 
                 }
 
@@ -267,16 +266,37 @@ class CreateTicketFragment : Fragment() {
             Activity.RESULT_OK -> {
                 //Image Uri will not be null for RESULT_OK
                 val uri: Uri = data?.data!!
-
-
                 // Use Uri object instead of File to avoid storage permissions
                 binding.uploadLayout0.visibility = View.GONE
                 binding.recyclerView.visibility = View.VISIBLE
                 uploadOrder.addData(uri.toString())
+                uploadViewModel.uploadFile(uri)
+                uploadObserver()
 
             }
             ImagePicker.RESULT_ERROR -> {
                 Toast.makeText(context, ImagePicker.getError(data), Toast.LENGTH_SHORT).show()
+            }
+        }
+    }
+
+    private fun uploadObserver() {
+        uploadViewModel.uploadModel.observe(viewLifecycleOwner){
+
+            when (it) {
+                is Result.Success -> {
+                    binding.prg.visibility = View.GONE
+                    mediaUrl.add(it.data.path!!)
+                }
+
+                is Result.Loading -> {
+                    binding.prg.visibility = View.VISIBLE
+                }
+
+                is Result.Error -> {
+                    binding.prg.visibility = View.GONE
+                    Toast.makeText(context, it.message, Toast.LENGTH_SHORT).show()
+                }
             }
         }
     }

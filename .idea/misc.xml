@@ -284,10 +284,12 @@
         <entry key="app/src/main/res/layout/fragment_ticket_details.xml" value="0.10144927536231885" />
         <entry key="app/src/main/res/layout/fragment_ticket_system.xml" value="0.19322916666666667" />
         <entry key="app/src/main/res/layout/item_chat_admin.xml" value="0.25" />
+        <entry key="app/src/main/res/layout/item_chat_client.xml" value="0.22" />
         <entry key="app/src/main/res/layout/item_chat_details.xml" value="0.33" />
         <entry key="app/src/main/res/layout/item_chat_user.xml" value="0.1" />
         <entry key="app/src/main/res/layout/item_ticket_admin.xml" value="0.1" />
         <entry key="app/src/main/res/layout/item_ticket_client.xml" value="0.1" />
+        <entry key="app/src/main/res/layout/item_upload.xml" value="0.1" />
         <entry key="app/src/main/res/layout/ticket_item.xml" value="0.1613588110403397" />
         <entry key="app/src/main/res/mipmap-anydpi-v26/ic_launcher.xml" value="0.11944444444444445" />
       </map>

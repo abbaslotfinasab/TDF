@@ -30,7 +30,6 @@ class MessageFragment : BottomSheetDialogFragment() {
     private val ticketViwModel:TicketViewModel by viewModels()
     val uploadOrder:UploadReplyAdapter = UploadReplyAdapter(this)
     private var ticketId = 0
-    private lateinit var jsonArray:JSONArray
 
 
 
@@ -51,7 +50,7 @@ class MessageFragment : BottomSheetDialogFragment() {
 
     override fun onResume() {
         super.onResume()
-        if (uploadOrder.file.size !=0){
+        if (uploadOrder.localFile.size !=0){
             binding.uploadLayout0.visibility = View.GONE
             binding.recyclerView.visibility = View.VISIBLE
         }
@@ -74,8 +73,7 @@ class MessageFragment : BottomSheetDialogFragment() {
         }
 
         binding.appCompatButton.setOnClickListener {
-            jsonArray = JSONArray(uploadOrder.file)
-            ticketViwModel.replyTicket(ticketId, jsonArray,binding.description.text.toString())
+            ticketViwModel.replyTicket(ticketId, uploadOrder.globalFile,binding.description.text.toString())
             observer()
         }
 
@@ -115,6 +113,18 @@ class MessageFragment : BottomSheetDialogFragment() {
         dialog?.dismiss()
     }
 
+    fun showPrg(){
+        binding.prg.visibility = View.VISIBLE
+        binding.appCompatButton.isEnabled = false
+
+    }
+
+    fun hidePrg(){
+        binding.prg.visibility = View.GONE
+        binding.appCompatButton.isEnabled = true
+
+    }
+
     private fun observer() {
 
         ticketViwModel.ticketModel.observe(viewLifecycleOwner){
@@ -123,7 +133,10 @@ class MessageFragment : BottomSheetDialogFragment() {
                 is Result.Success -> {
                     binding.prg.visibility = View.GONE
                     dialog?.hide()
-                    uploadOrder.file.clear()
+                    uploadOrder.globalFile.clear()
+                    uploadOrder.localFile.clear()
+                    uploadOrder.notifyDataSetChanged()
+                    replacement0()
                     binding.description.setText("")
                 }
 

@@ -1,6 +1,7 @@
 package com.utechia.data.api
 
 import com.utechia.data.entity.*
+import okhttp3.MultipartBody
 import org.json.JSONArray
 import retrofit2.Response
 import retrofit2.http.*
@@ -149,6 +150,8 @@ interface Service {
     @POST("ticket/replymessagefromuser")
     suspend fun reply(@Body replyBody:ReplyBody):Response<Void>
 
-
+    @Multipart
+    @POST("ticket/upload")
+    suspend fun uploadFile(@Part file:MultipartBody.Part):Response<Upload>
 
 }

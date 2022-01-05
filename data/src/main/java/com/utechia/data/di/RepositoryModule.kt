@@ -102,5 +102,10 @@ abstract class RepositoryModule {
         baseNeedsRepoImpl: BaseNeedsRepoImpl
     ): BaseNeedsRepo
 
+    @Binds
+    abstract fun bindUploadRepositoryService(
+        uploadRepoImpl: UploadRepoImpl
+    ): UploadRepo
+
 
 }

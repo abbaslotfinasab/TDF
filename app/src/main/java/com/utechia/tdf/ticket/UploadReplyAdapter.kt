@@ -13,10 +13,17 @@ import com.utechia.tdf.R
 
 class UploadReplyAdapter(val messageFragment: MessageFragment) : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
 
-    var file: MutableList<String> = mutableListOf()
+    var localFile: ArrayList<String> = arrayListOf()
+    var globalFile: ArrayList<String> = arrayListOf()
+
 
     fun addData(uri:String) {
-        file.add(uri)
+        localFile.add(uri)
+        notifyDataSetChanged()
+    }
+
+    fun setData(uri:String) {
+        globalFile.add(uri)
         notifyDataSetChanged()
     }
 
@@ -31,7 +38,7 @@ class UploadReplyAdapter(val messageFragment: MessageFragment) : RecyclerView.Ad
         (holder as ViewHolder).bind0(position)
     }
 
-    override fun getItemCount(): Int = file.size+1
+    override fun getItemCount(): Int = localFile.size+1
 
     inner class ViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
         private val image: ImageView = itemView.findViewById(R.id.image)
@@ -39,19 +46,19 @@ class UploadReplyAdapter(val messageFragment: MessageFragment) : RecyclerView.Ad
 
         fun bind0(position: Int) {
 
-            if (position<file.size) {
+            if (position<localFile.size) {
 
                 deleteIcon.visibility = View.VISIBLE
                 deleteIcon.bringToFront()
 
                 Glide.with(itemView.context)
-                    .load(file[position])
+                    .load(localFile[position])
                     .error(R.drawable.ic_empty_upload)
                     .centerCrop()
                     .into(image)
 
                 image.setOnClickListener {
-                    val bundle = bundleOf("uri" to file[position].toString())
+                    val bundle = bundleOf("uri" to localFile[position].toString())
                     messageFragment.showImage(bundle)
 
                 }

@@ -718,6 +718,10 @@
             app:destination="@id/closeTicketFragment" />
 
         <action
+            android:id="@+id/action_createTicketFragment_to_blankFragment"
+            app:destination="@id/blankFragment" />
+
+        <action
             android:id="@+id/action_messageFragment_to_ticketDetailsFragment"
             app:destination="@id/ticketDetailsFragment" />
 

@@ -10,7 +10,7 @@ import org.json.JSONArray
 data class ReplyBody(
 
     val ticketid: Int?,
-    val mediaurl: @RawValue JSONArray,
+    val mediaurl: ArrayList<String>,
     val text: String?,
 
     ):Parcelable

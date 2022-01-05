@@ -75,7 +75,7 @@ class TicketViewModel @Inject constructor(
         }
     }
 
-    fun replyTicket(id:Int,mediaurl:JSONArray,text:String){
+    fun replyTicket(id:Int,mediaurl:ArrayList<String>,text:String){
 
         viewModelScope.launch(Dispatchers.IO+handler) {
 

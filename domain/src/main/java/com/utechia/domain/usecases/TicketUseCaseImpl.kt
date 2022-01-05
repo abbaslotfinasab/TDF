@@ -30,7 +30,7 @@ class TicketUseCaseImpl @Inject constructor(private val ticketRepo: TicketRepo):
 
     override suspend fun replyTicket(
         id: Int,
-        mediaurl: JSONArray,
+        mediaurl: ArrayList<String>,
         text: String
     ): MutableList<TicketModel> {
         return ticketRepo.replyTicket(id,mediaurl,text)

@@ -1,10 +1,13 @@
 package com.utechia.tdf.ticket
 
+import android.content.Context
 import android.graphics.Color
+import android.util.DisplayMetrics
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.TextView
+import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.utechia.data.entity.Chat
 import com.utechia.tdf.R
@@ -13,15 +16,13 @@ import java.util.*
 
 class ChatAdapter: RecyclerView.Adapter<RecyclerView.ViewHolder>() {
 
+    val firebaseUploadAdapter:FirebaseUploadAdapter = FirebaseUploadAdapter()
     var chat: MutableList<Chat> = mutableListOf()
     var title = ""
     var mID = ""
     var category = ""
     var priority = ""
     var statusCode = ""
-
-
-
 
     var sdf: SimpleDateFormat =
         SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss.SSS'Z'", Locale.getDefault())
@@ -135,6 +136,8 @@ class ChatAdapter: RecyclerView.Adapter<RecyclerView.ViewHolder>() {
         private val description: TextView = itemView.findViewById(R.id.description)
         private val user: TextView = itemView.findViewById(R.id.username)
         private val date: TextView = itemView.findViewById(R.id.date)
+        private val data:RecyclerView = itemView.findViewById(R.id.recyclerView)
+
 
 
         fun bind0(position: Int) {
@@ -146,6 +149,21 @@ class ChatAdapter: RecyclerView.Adapter<RecyclerView.ViewHolder>() {
             description.text = chat[position].text
             user.text = chat[position].username
 
+            data.apply {
+                adapter = firebaseUploadAdapter
+                layoutManager = GridLayoutManager(context, calculateNoOfColumns(context, 100.0F))
+                firebaseUploadAdapter.file.clear()
+                firebaseUploadAdapter.file.addAll(chat[position].mediaurl!!)
+
+            }
+        }
+        private fun calculateNoOfColumns(
+            context: Context,
+            columnWidthDp: Float
+        ): Int { // For example columnWidthdp=180
+            val displayMetrics: DisplayMetrics = context.resources.displayMetrics
+            val screenWidthDp = displayMetrics.widthPixels / displayMetrics.density
+            return (screenWidthDp / columnWidthDp + 0.5).toInt() // +0.5 for correct rounding to int.
         }
     }
 
@@ -153,7 +171,7 @@ class ChatAdapter: RecyclerView.Adapter<RecyclerView.ViewHolder>() {
         private val description: TextView = itemView.findViewById(R.id.description)
         private val user: TextView = itemView.findViewById(R.id.username)
         private val date: TextView = itemView.findViewById(R.id.date)
-
+        private val data:RecyclerView = itemView.findViewById(R.id.recyclerView)
 
         fun bind0(position: Int) {
 
@@ -162,9 +180,21 @@ class ChatAdapter: RecyclerView.Adapter<RecyclerView.ViewHolder>() {
             date.text = "$simple"
 
             description.text = chat[position].text
-            user.text = chat[position].username
-
+                data.apply {
+                    adapter = firebaseUploadAdapter
+                    layoutManager = GridLayoutManager(context, calculateNoOfColumns(context, 100.0F))
+                    firebaseUploadAdapter.file.addAll(chat[position].mediaurl!!)
+                }
+            }
         }
+
+        private fun calculateNoOfColumns(
+            context: Context,
+            columnWidthDp: Float
+        ): Int { // For example columnWidthdp=180
+            val displayMetrics: DisplayMetrics = context.resources.displayMetrics
+            val screenWidthDp = displayMetrics.widthPixels / displayMetrics.density
+            return (screenWidthDp / columnWidthDp + 0.5).toInt() // +0.5 for correct rounding to int.
     }
 }
 

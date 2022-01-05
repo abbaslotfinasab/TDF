@@ -50,10 +50,14 @@ class TicketRepoImpl @Inject constructor(
 
         if (networkHelper.isNetworkConnected()) {
 
+            Log.d("postChat",  TicketBody(
+                Priority,category,description,Floor,mediaurl,title
+            ).toString())
             val result = service.postTicket(
                 TicketBody(
                     Priority,category,description,Floor,mediaurl,title
                 )
+
             )
 
             return when (result.isSuccessful) {
@@ -91,7 +95,7 @@ class TicketRepoImpl @Inject constructor(
 
     override suspend fun replyTicket(
         id: Int,
-        mediaurl: JSONArray,
+        mediaurl: ArrayList<String>,
         text: String
     ): MutableList<TicketModel> {
 
