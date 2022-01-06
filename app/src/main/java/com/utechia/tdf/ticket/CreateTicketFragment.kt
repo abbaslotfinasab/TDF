@@ -34,7 +34,7 @@ class CreateTicketFragment : Fragment() {
     private val uploadOrder:UploadAdapter = UploadAdapter()
     private val floor:MutableList<String> = mutableListOf()
     private val categoryList:ArrayList<CategoryModel> = arrayListOf()
-    private val mediaUrl:ArrayList<String> = arrayListOf()
+    private val mediaUrl:MutableSet<String> = mutableSetOf()
     private var selectedFloor = "Floor11"
     private var priority = "Low"
     var category = 1

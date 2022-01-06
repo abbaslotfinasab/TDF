@@ -14,7 +14,7 @@ import com.utechia.tdf.R
 class UploadReplyAdapter(val messageFragment: MessageFragment) : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
 
     var localFile: ArrayList<String> = arrayListOf()
-    var globalFile: ArrayList<String> = arrayListOf()
+    var globalFile: MutableSet<String> = mutableSetOf()
 
 
     fun addData(uri:String) {

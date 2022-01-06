@@ -128,6 +128,8 @@ class TicketDetailsFragment : Fragment() {
     }
 
     private fun showDialog() {
+        fragment.uploadOrder.localFile.clear()
+        fragment.uploadOrder.globalFile.clear()
         val bundle = bundleOf("ticketId" to mId)
         fragment.arguments = bundle
         if (!fragment.isAdded)

@@ -45,7 +45,7 @@ class TicketViewModel @Inject constructor(
         }
 
     }
-    fun postTicket(description:String,title:String,category:Int,Priority:String,Floor:String,mediaurl:List<String>){
+    fun postTicket(description:String,title:String,category:Int,Priority:String,Floor:String,mediaurl:MutableSet<String>){
 
         viewModelScope.launch(Dispatchers.IO+handler) {
 
@@ -75,7 +75,7 @@ class TicketViewModel @Inject constructor(
         }
     }
 
-    fun replyTicket(id:Int,mediaurl:ArrayList<String>,text:String){
+    fun replyTicket(id:Int,mediaurl:MutableSet<String>,text:String){
 
         viewModelScope.launch(Dispatchers.IO+handler) {
 
