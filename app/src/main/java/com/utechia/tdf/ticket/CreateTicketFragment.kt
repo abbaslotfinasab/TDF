@@ -57,7 +57,17 @@ class CreateTicketFragment : Fragment() {
         binding.autoCompleteTextView.setAdapter(arrayAdapter)
 
         binding.segmented.apply{
-            this.check(R.id.checkbox)
+            when(priority){
+                "Low"->{
+                    this.check(R.id.lowItem)
+                }
+                "Medium"->{
+                    this.check(R.id.mediumItem)
+                }
+                "High"->{
+                    this.check(R.id.highItem)
+                }
+            }
         }
 
         if (uploadOrder.file.size !=0){
@@ -83,17 +93,15 @@ class CreateTicketFragment : Fragment() {
         binding.segmented.onSegmentChecked {
 
             when(this.checkedRadioButtonId){
-                1 -> priority = "High"
-                2 -> priority = "Normal"
-                R.id.checkbox -> priority = "Low"
+                R.id.highItem -> priority = "High"
+                R.id.mediumItem -> priority = "Normal"
+                R.id.lowItem -> priority = "Low"
             }
         }
 
         binding.autoCompleteTextView.onItemClickListener =
             AdapterView.OnItemClickListener { _, _, position, _ -> selectedFloor = floor[position]
             }
-
-
 
         binding.category.setOnClickListener {
             val bundle = Bundle()
@@ -138,6 +146,8 @@ class CreateTicketFragment : Fragment() {
                     binding.descriptionLayout.visibility= View.VISIBLE
                     binding.uploadLayout.visibility= View.VISIBLE
                     binding.appCompatButton.visibility= View.VISIBLE
+                    categoryList.clear()
+                    floor.clear()
                     floor.addAll(it.data.ListFloor!!)
                     categoryList.addAll(it.data.category!!)
 

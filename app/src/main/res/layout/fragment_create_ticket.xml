@@ -155,17 +155,19 @@
                 app:segmentColorChecked="#59B48D">
 
                 <RadioButton
+                    android:id="@+id/highItem"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="High" />
 
                 <RadioButton
+                    android:id="@+id/mediumItem"
                     android:layout_width="wrap_content"
                     android:layout_height="match_parent"
                     android:text="Medium" />
 
                 <RadioButton
-                    android:id="@+id/checkbox"
+                    android:id="@+id/lowItem"
                     android:layout_width="wrap_content"
                     android:layout_height="match_parent"
                     android:text="Low" />
