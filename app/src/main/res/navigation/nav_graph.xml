@@ -773,8 +773,8 @@
     </dialog>
     <fragment
         android:id="@+id/notificationRatingFragment"
-        android:name="com.utechia.tdf.NotificationRatingFragment"
+        android:name="com.utechia.tdf.ticket.TicketRatingFragment"
         android:label="fragment_notification_rating"
-        tools:layout="@layout/fragment_notification_rating" />
+        tools:layout="@layout/fragment_rating_ticket" />
 
 </navigation>
