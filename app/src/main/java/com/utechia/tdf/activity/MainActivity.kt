@@ -118,6 +118,10 @@ class MainActivity : AppCompatActivity() {
 
         }
 
+        binding.notification.setOnClickListener{
+            navController.navigate(R.id.notificationFragment)
+        }
+
         binding.exit.setOnClickListener {
             prefs.edit().clear().apply()
 
@@ -260,6 +264,10 @@ class MainActivity : AppCompatActivity() {
                     R.id.blankFragment -> {
                         design("blank")
 
+                    }
+
+                    R.id.notificationFragment -> {
+                        design("notification")
                     }
 
                     else -> {
@@ -421,6 +429,10 @@ class MainActivity : AppCompatActivity() {
                 R.id.blankFragment -> {
                     design("blank")
 
+                }
+
+                R.id.notificationFragment -> {
+                    design("notification")
                 }
 
                 else -> {
@@ -717,6 +729,18 @@ class MainActivity : AppCompatActivity() {
                 binding.toolbar.visibility = View.INVISIBLE
                 binding.customButton.visibility = View.GONE
                 binding.customTitle.text = ""
+                binding.bottomNavigation.visibility = View.GONE
+                binding.drawerLayout.setDrawerLockMode(DrawerLayout.LOCK_MODE_LOCKED_CLOSED)
+
+            }
+
+            "notification"->{
+                window.statusBarColor = ContextCompat.getColor(this, R.color.status)
+                binding.customToolbar.background = ContextCompat.getDrawable(this,R.color.status)
+                binding.customToolbar.visibility = View.VISIBLE
+                binding.toolbar.visibility = View.INVISIBLE
+                binding.customButton.visibility = View.GONE
+                binding.customTitle.text = "Notification"
                 binding.bottomNavigation.visibility = View.GONE
                 binding.drawerLayout.setDrawerLockMode(DrawerLayout.LOCK_MODE_LOCKED_CLOSED)
 

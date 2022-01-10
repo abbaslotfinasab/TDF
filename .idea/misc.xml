@@ -277,9 +277,11 @@
         <entry key="..\:/Users/Dr Computer/AndroidStudioProjects/tdf_oms_android_application_kotlin_v1/app/src/main/res/layout/search_item.xml" value="0.25" />
         <entry key="..\:/Users/Dr Computer/AndroidStudioProjects/tdf_oms_android_application_kotlin_v1/app/src/main/res/menu/bottom_nav_menu.xml" value="0.20416666666666666" />
         <entry key="..\:/Users/Dr Computer/AndroidStudioProjects/tdf_oms_android_application_kotlin_v1/app/src/main/res/menu/navigation_drawer.xml" value="0.20416666666666666" />
+        <entry key="app/src/main/res/layout/fragment_cart.xml" value="0.10235507246376811" />
         <entry key="app/src/main/res/layout/fragment_category_fragment.xml" value="0.1" />
         <entry key="app/src/main/res/layout/fragment_create_ticket.xml" value="0.18" />
         <entry key="app/src/main/res/layout/fragment_message.xml" value="0.1" />
+        <entry key="app/src/main/res/layout/fragment_notification.xml" value="0.10235507246376811" />
         <entry key="app/src/main/res/layout/fragment_ticket_confirmation.xml" value="0.1" />
         <entry key="app/src/main/res/layout/fragment_ticket_details.xml" value="0.10144927536231885" />
         <entry key="app/src/main/res/layout/fragment_ticket_system.xml" value="0.19322916666666667" />
@@ -287,6 +289,7 @@
         <entry key="app/src/main/res/layout/item_chat_client.xml" value="0.22" />
         <entry key="app/src/main/res/layout/item_chat_details.xml" value="0.33" />
         <entry key="app/src/main/res/layout/item_chat_user.xml" value="0.1" />
+        <entry key="app/src/main/res/layout/item_notification.xml" value="0.33" />
         <entry key="app/src/main/res/layout/item_ticket_admin.xml" value="0.1" />
         <entry key="app/src/main/res/layout/item_ticket_client.xml" value="0.1" />
         <entry key="app/src/main/res/layout/item_upload.xml" value="0.1" />
