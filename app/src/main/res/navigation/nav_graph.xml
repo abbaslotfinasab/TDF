@@ -733,6 +733,9 @@
         <action
             android:id="@+id/action_messageFragment_to_uploadReplyDeleteFragment"
             app:destination="@id/uploadReplyDeleteFragment" />
+        <action
+            android:id="@+id/action_ticketDetailsFragment_to_notificationRatingFragment"
+            app:destination="@id/notificationRatingFragment" />
 
 
     </fragment>
@@ -768,5 +771,10 @@
             android:defaultValue="0"  />
 
     </dialog>
+    <fragment
+        android:id="@+id/notificationRatingFragment"
+        android:name="com.utechia.tdf.NotificationRatingFragment"
+        android:label="fragment_notification_rating"
+        tools:layout="@layout/fragment_notification_rating" />
 
 </navigation>
