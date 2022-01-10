@@ -20,6 +20,7 @@ class TicketAdapter: RecyclerView.Adapter<RecyclerView.ViewHolder>() {
     var ticket: MutableList<TicketModel> = mutableListOf()
 
     var sdf: SimpleDateFormat = SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss.SSS'Z'", Locale.getDefault())
+    var timeZone:TimeZone = TimeZone.getTimeZone("GMT")
     private lateinit var dateFormat: Date
     private var simple = ""
 
@@ -68,7 +69,7 @@ class TicketAdapter: RecyclerView.Adapter<RecyclerView.ViewHolder>() {
 
             }
 
-            dateFormat = sdf.parse(ticket[position].datetime)
+            dateFormat = sdf.parse(ticket[position].datetime!!)!!
             simple = SimpleDateFormat("yyyy.MM.dd | HH:mm", Locale.getDefault()).format(dateFormat)
             date.text = "$simple"
 
@@ -99,6 +100,7 @@ class TicketAdapter: RecyclerView.Adapter<RecyclerView.ViewHolder>() {
                 }
 
                 else -> {
+
                     priority.apply {
                         visibility = View.VISIBLE
                         text = "Medium"

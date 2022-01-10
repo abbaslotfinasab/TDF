@@ -235,7 +235,7 @@ class CreateTicketFragment : Fragment() {
 
         val intent: Intent
         val chooseFile = Intent(Intent.ACTION_GET_CONTENT)
-        chooseFile.type = "application/pdf"
+        chooseFile.type = "image/*"
         intent = Intent.createChooser(chooseFile, "Choose a file")
         startActivityForResult(intent, Activity.RESULT_OK)
 

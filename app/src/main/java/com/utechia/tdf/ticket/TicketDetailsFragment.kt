@@ -70,7 +70,7 @@ class TicketDetailsFragment : Fragment() {
 
         }
 
-        val ticketListener = database.child("Ticketmessage").child("Ticket-$ticketId")
+        val ticketListener = database.child("Ticketmessage").child("Ticket-$ticketId").orderByValue()
 
         ticketListener.addValueEventListener(object:ValueEventListener{
             override fun onDataChange(snapshot: DataSnapshot) {
@@ -79,7 +79,6 @@ class TicketDetailsFragment : Fragment() {
                 binding.btnReply.visibility = View.VISIBLE
                 binding.btnClose.visibility = View.VISIBLE
                 snapshot.children.forEach {
-                    chatAdapter.firebaseUploadAdapter.file.clear()
                     chatAdapter.addData(it.getValue<Chat>()!!)
                 }
                 binding.recyclerView.scrollToPosition(chatAdapter.chat.size)
@@ -95,16 +94,12 @@ class TicketDetailsFragment : Fragment() {
         if (status == "Close"){
             binding.btnClose.isEnabled = false
             binding.btnReply.isEnabled = false
-            binding.btnClose.isClickable = false
-            binding.btnReply.isClickable = false
             binding.btnClose.setBackgroundColor(ContextCompat.getColor(requireActivity(),R.color.gray))
             binding.btnReply.setBackgroundColor(ContextCompat.getColor(requireActivity(),R.color.gray))
 
         }else{
             binding.btnClose.isEnabled = true
             binding.btnReply.isEnabled = true
-            binding.btnClose.isClickable = true
-            binding.btnReply.isClickable = true
             binding.btnClose.setBackgroundColor(Color.parseColor("#FF6464"))
             binding.btnReply.setBackgroundColor(Color.parseColor("#3360DD"))
 
@@ -164,7 +159,7 @@ class TicketDetailsFragment : Fragment() {
     fun openFile(){
         val intent: Intent
         val chooseFile = Intent(Intent.ACTION_GET_CONTENT)
-        chooseFile.type = "application/pdf"
+        chooseFile.type = "image/*"
         intent = Intent.createChooser(chooseFile, "Choose a file")
         startActivityForResult(intent, Activity.RESULT_OK)
 

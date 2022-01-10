@@ -16,7 +16,7 @@ import java.util.*
 
 class ChatAdapter: RecyclerView.Adapter<RecyclerView.ViewHolder>() {
 
-    val firebaseUploadAdapter:FirebaseUploadAdapter = FirebaseUploadAdapter()
+    lateinit var firebaseUploadAdapter:FirebaseUploadAdapter
     var chat: MutableList<Chat> = mutableListOf()
     var title = ""
     var mID = ""
@@ -30,7 +30,6 @@ class ChatAdapter: RecyclerView.Adapter<RecyclerView.ViewHolder>() {
     private var simple = ""
 
     fun addData(_chat: Chat) {
-
         chat.add(_chat)
         notifyItemChanged(chat.size - 1)
 
@@ -150,11 +149,9 @@ class ChatAdapter: RecyclerView.Adapter<RecyclerView.ViewHolder>() {
             user.text = chat[position].username
 
             data.apply {
+                firebaseUploadAdapter = FirebaseUploadAdapter(chat[position].mediaurl!!)
                 adapter = firebaseUploadAdapter
                 layoutManager = GridLayoutManager(context, calculateNoOfColumns(context, 100.0F))
-                firebaseUploadAdapter.file.clear()
-                firebaseUploadAdapter.file.addAll(chat[position].mediaurl!!)
-
             }
         }
         private fun calculateNoOfColumns(
@@ -181,9 +178,9 @@ class ChatAdapter: RecyclerView.Adapter<RecyclerView.ViewHolder>() {
 
             description.text = chat[position].text
                 data.apply {
+                    firebaseUploadAdapter = FirebaseUploadAdapter(chat[position].mediaurl!!)
                     adapter = firebaseUploadAdapter
                     layoutManager = GridLayoutManager(context, calculateNoOfColumns(context, 100.0F))
-                    firebaseUploadAdapter.file.addAll(chat[position].mediaurl!!)
                 }
             }
         }
