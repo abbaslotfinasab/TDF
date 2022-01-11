@@ -282,6 +282,8 @@
         <entry key="app/src/main/res/layout/fragment_category_fragment.xml" value="0.1" />
         <entry key="app/src/main/res/layout/fragment_close_ticket.xml" value="0.19322916666666667" />
         <entry key="app/src/main/res/layout/fragment_confirm.xml" value="0.19322916666666667" />
+        <entry key="app/src/main/res/layout/fragment_confirm_survey.xml" value="0.10235507246376811" />
+        <entry key="app/src/main/res/layout/fragment_create_refreshment.xml" value="0.10235507246376811" />
         <entry key="app/src/main/res/layout/fragment_create_reservation.xml" value="0.19322916666666667" />
         <entry key="app/src/main/res/layout/fragment_create_ticket.xml" value="0.18" />
         <entry key="app/src/main/res/layout/fragment_favorite.xml" value="0.19322916666666667" />
@@ -313,6 +315,7 @@
         <entry key="app/src/main/res/layout/item_chat_details.xml" value="0.33" />
         <entry key="app/src/main/res/layout/item_chat_user.xml" value="0.1" />
         <entry key="app/src/main/res/layout/item_notification.xml" value="0.33" />
+        <entry key="app/src/main/res/layout/item_push_notification.xml" value="0.25" />
         <entry key="app/src/main/res/layout/item_ticket_admin.xml" value="0.1" />
         <entry key="app/src/main/res/layout/item_ticket_client.xml" value="0.1" />
         <entry key="app/src/main/res/layout/item_upload.xml" value="0.1" />

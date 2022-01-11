@@ -7,6 +7,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.view.Window
+import androidx.fragment.app.DialogFragment
 import com.google.android.material.bottomsheet.BottomSheetDialogFragment
 import com.utechia.tdf.R
 import com.utechia.tdf.databinding.FragmentRatingTicketBinding
@@ -14,7 +15,7 @@ import dagger.hilt.android.AndroidEntryPoint
 
 
 @AndroidEntryPoint
-class TicketRatingFragment : BottomSheetDialogFragment() {
+class TicketRatingFragment : DialogFragment() {
 
     private lateinit var binding: FragmentRatingTicketBinding
 
@@ -32,10 +33,12 @@ class TicketRatingFragment : BottomSheetDialogFragment() {
         return binding.root
     }
 
-    override fun getTheme(): Int = R.style.AppBottomSheetDialogTheme
-
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+
+        binding.exit.setOnClickListener {
+            dialog?.dismiss()
+        }
 
 
     }

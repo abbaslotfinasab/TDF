@@ -15,11 +15,12 @@ import com.utechia.tdf.R
 import java.text.SimpleDateFormat
 import java.util.*
 
-class ChatAdapter: RecyclerView.Adapter<RecyclerView.ViewHolder>() {
+class ChatAdapter(private val ticketDetailsFragment: TicketDetailsFragment): RecyclerView.Adapter<RecyclerView.ViewHolder>() {
 
     lateinit var firebaseUploadAdapter:FirebaseUploadAdapter
     var chat: MutableList<Chat> = mutableListOf()
     var single = false
+    var rateable = true
     var title = ""
     var mID = ""
     var category = ""
@@ -155,9 +156,9 @@ class ChatAdapter: RecyclerView.Adapter<RecyclerView.ViewHolder>() {
                 adapter = firebaseUploadAdapter
                 layoutManager = GridLayoutManager(context, calculateNoOfColumns(context, 100.0F))
             }
-            if (chat[position].status=="Close" && !single && chat[position].rateable==true){
+            if (statusCode == "Close" && !single && rateable) {
                 single = true
-                itemView.findNavController().navigate(R.id.action_ticketDetailsFragment_to_ticketRatingFragment)
+                ticketDetailsFragment.rating()
             }
         }
         private fun calculateNoOfColumns(
@@ -191,10 +192,9 @@ class ChatAdapter: RecyclerView.Adapter<RecyclerView.ViewHolder>() {
                 layoutManager = GridLayoutManager(context, calculateNoOfColumns(context, 100.0F))
             }
 
-            if (chat[position].status == "Close" && !single && chat[position].rateable == true) {
+            if (statusCode == "Close" && !single && rateable) {
                 single = true
-                itemView.findNavController()
-                    .navigate(R.id.action_ticketDetailsFragment_to_ticketRatingFragment)
+                ticketDetailsFragment.rating()
             }
         }
     }

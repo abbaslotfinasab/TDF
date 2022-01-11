@@ -25,7 +25,7 @@
              notification message. See README(https://goo.gl/6BKBk7) for more. -->
         <meta-data
             android:name="com.google.firebase.messaging"
-            android:resource="@color/prepare"/>
+            android:resource="@color/purple_700"/>
         <activity
             android:name=".activity.MainActivity"
             android:screenOrientation="portrait"

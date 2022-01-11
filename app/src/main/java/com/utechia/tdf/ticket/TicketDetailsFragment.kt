@@ -14,6 +14,7 @@ import androidx.core.content.ContextCompat
 import androidx.core.os.bundleOf
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
+import androidx.navigation.findNavController
 import androidx.navigation.fragment.NavHostFragment
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -35,7 +36,7 @@ class TicketDetailsFragment : Fragment() {
     private lateinit var navHostFragment: NavHostFragment
     private val fragment: MessageFragment = MessageFragment()
     private val uploadViewModel:UploadViewModel by viewModels()
-    private val chatAdapter :ChatAdapter = ChatAdapter()
+    private val chatAdapter :ChatAdapter = ChatAdapter(this)
     private var ticketId:String = ""
     private var status:String = ""
     private var mId:Int = 0
@@ -65,6 +66,7 @@ class TicketDetailsFragment : Fragment() {
             chatAdapter.title = requireArguments().getString("title","")
             chatAdapter.category  = requireArguments().getString("category","")
             chatAdapter.priority = requireArguments().getString("priority","")
+            chatAdapter.rateable = requireArguments().getBoolean("rateable",true)
             chatAdapter.statusCode = status
             chatAdapter.mID = mId.toString()
 
@@ -167,6 +169,11 @@ class TicketDetailsFragment : Fragment() {
 
     private fun replacement(){
        fragment.replacement0()
+    }
+
+    fun rating(){
+        findNavController()
+            .navigate(R.id.action_ticketDetailsFragment_to_ticketRatingFragment)
     }
 
     fun deleteItem(position:Int){

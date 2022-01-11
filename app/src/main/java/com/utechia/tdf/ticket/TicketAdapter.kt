@@ -56,7 +56,7 @@ class TicketAdapter: RecyclerView.Adapter<RecyclerView.ViewHolder>() {
         fun bind0(position: Int) {
 
             layout.setOnClickListener {
-                val bundle = bundleOf("fid" to ticket[position].fid , "ticketId" to ticket[position].id, "status" to ticket[position].status,"category" to ticket[position].category.title, "priority" to ticket[position].Priority,"title" to ticket[position].title )
+                val bundle = bundleOf("fid" to ticket[position].fid , "ticketId" to ticket[position].id, "status" to ticket[position].status,"category" to ticket[position].category.title, "priority" to ticket[position].Priority,"title" to ticket[position].title, "rateable" to ticket[position].rateable )
                 itemView.findNavController().navigate(R.id.action_ticketSystemFragment_to_ticketDetailsFragment,bundle)
 
             }

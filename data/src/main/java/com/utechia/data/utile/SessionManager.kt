@@ -18,13 +18,6 @@ class SessionManager @Inject constructor(@ApplicationContext private val context
 
     }
 
-
-    fun updateAuthToken(token: String) {
-        val editor = prefs.edit()
-        editor.putString(USER_TOKEN, token)
-        editor.apply()
-    }
-
     fun saveAuthToken(verify: VerifyData) {
         val editor = prefs.edit()
         editor.putString(USER_TOKEN, verify.token)

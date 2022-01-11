@@ -1,11 +1,14 @@
 package com.utechia.tdf.fcm
 
+import android.annotation.SuppressLint
 import android.app.NotificationChannel
 import android.app.NotificationManager
 import android.app.PendingIntent
 import android.content.Context
+import android.content.SharedPreferences
 import android.os.Build
-import android.util.Log
+import android.widget.RemoteViews
+import androidx.annotation.RequiresApi
 import androidx.core.app.NotificationCompat
 import androidx.core.os.bundleOf
 import androidx.navigation.NavDeepLinkBuilder
@@ -20,23 +23,39 @@ const val channel_Name = "com.utechia.tdf"
 
 class MyFirebaseMessagingService : FirebaseMessagingService() {
 
+    private lateinit var prefs: SharedPreferences
+
+    @SuppressLint("RemoteViewLayout")
+    fun getRemoteView(title:String, message:String):RemoteViews{
+        val remoteView = RemoteViews (channel_Name,R.layout.item_push_notification)
+
+        remoteView.setTextViewText(R.id.title,title)
+        remoteView.setTextViewText(R.id.subTitle,message)
+
+        return remoteView
+
+    }
+
+    @RequiresApi(Build.VERSION_CODES.M)
     override fun onMessageReceived(remoteMessage: RemoteMessage) {
         super.onMessageReceived(remoteMessage)
-        generateNotification(remoteMessage.data["cartId"])
-
-
+        generateNotification(remoteMessage.notification?.title!!,remoteMessage.notification?.body!!)
     }
 
     override fun onNewToken(token: String) {
         super.onNewToken(token)
-        Log.d("token",token)
 
-
+        prefs = getSharedPreferences("tdf", MODE_PRIVATE)
+        with(prefs.edit()) {
+            this?.putString("fcm", token)
+        }?.apply()
 
     }
-    private fun generateNotification(id: String?) {
 
-        val  bundle = bundleOf("cartId" to id )
+    @RequiresApi(Build.VERSION_CODES.M)
+    private fun generateNotification(title: String, message: String) {
+
+        val  bundle = bundleOf("cartId" to 139 )
 
         val pendingIntent = NavDeepLinkBuilder(applicationContext)
             .setGraph(R.navigation.nav_graph)
@@ -47,12 +66,14 @@ class MyFirebaseMessagingService : FirebaseMessagingService() {
             .getPendingIntent(0,PendingIntent.FLAG_IMMUTABLE)
 
 
-        val builder : NotificationCompat.Builder = NotificationCompat.Builder(applicationContext, channel_Id)
+        var builder : NotificationCompat.Builder = NotificationCompat.Builder(applicationContext, channel_Id)
             .setSmallIcon(R.mipmap.ic_launcher)
             .setAutoCancel(true)
             .setVibrate(longArrayOf(1000,1000,1000,1000))
             .setOnlyAlertOnce(true)
             .setContentIntent(pendingIntent)
+
+        builder = builder.setContent(getRemoteView(title,message))
 
         val notificationManager = getSystemService(Context.NOTIFICATION_SERVICE) as NotificationManager
 
