@@ -9,6 +9,7 @@ import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
+import com.google.android.material.tabs.TabLayout
 import com.utechia.domain.utile.Result
 import com.utechia.tdf.R
 import com.utechia.tdf.databinding.FragmentTicketSystemBinding
@@ -31,7 +32,60 @@ class TicketSystemFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        ticketViewModel.getAllTicket()
+        ticketViewModel.getAllTicket("Open")
+
+        binding.tabLayout.addOnTabSelectedListener(object : TabLayout.OnTabSelectedListener{
+            override fun onTabSelected(tab: TabLayout.Tab?) {
+
+                when(tab?.position){
+
+                    0 -> {
+                        ticketViewModel.getAllTicket("Open")
+                        observer()
+
+                    }
+                    else -> {
+                        ticketViewModel.getAllTicket("Close")
+                        observer()
+                    }
+                }
+            }
+
+            override fun onTabUnselected(tab: TabLayout.Tab?) {
+
+               /* when(tab?.position){
+
+                    0 -> {
+                        ticketViewModel.getAllTicket("Open")
+                        observer()
+
+                    }
+                    else -> {
+                        ticketViewModel.getAllTicket("Close")
+                        observer()
+                    }
+                }*/
+
+            }
+
+            override fun onTabReselected(tab: TabLayout.Tab?) {
+
+                /* when(tab?.position){
+
+                   0 -> {
+                       ticketViewModel.getAllTicket("Open")
+                       observer()
+
+                   }
+                   else -> {
+                       ticketViewModel.getAllTicket("Close")
+                       observer()
+                   }
+               }*/
+
+            }
+
+        })
 
 
         binding.plus.setOnClickListener {
@@ -52,7 +106,6 @@ class TicketSystemFragment : Fragment() {
         }
 
         observer()
-
 
     }
 

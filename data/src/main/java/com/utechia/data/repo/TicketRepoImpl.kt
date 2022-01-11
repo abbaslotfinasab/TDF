@@ -18,11 +18,11 @@ class TicketRepoImpl @Inject constructor(
     private val networkHelper: NetworkHelper,
 
     ):TicketRepo {
-    override suspend fun getAllTicket(): MutableList<TicketModel> {
+    override suspend fun getAllTicket(status:String): MutableList<TicketModel> {
 
         if (networkHelper.isNetworkConnected()) {
 
-            val result = service.getTicketList()
+            val result = service.getTicketList(status)
 
             return when (result.isSuccessful) {
 

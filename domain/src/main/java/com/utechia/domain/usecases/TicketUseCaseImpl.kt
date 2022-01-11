@@ -9,8 +9,8 @@ import javax.inject.Singleton
 
 @Singleton
 class TicketUseCaseImpl @Inject constructor(private val ticketRepo: TicketRepo):TicketUseCase<TicketModel>{
-    override suspend fun getAllTicket(): MutableList<TicketModel> {
-        return ticketRepo.getAllTicket()
+    override suspend fun getAllTicket(status:String): MutableList<TicketModel> {
+        return ticketRepo.getAllTicket(status)
     }
 
     override suspend fun postTicket(

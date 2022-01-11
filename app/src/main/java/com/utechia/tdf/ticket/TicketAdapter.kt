@@ -48,7 +48,6 @@ class TicketAdapter: RecyclerView.Adapter<RecyclerView.ViewHolder>() {
         private val title: TextView = itemView.findViewById(R.id.title)
         private val subTitle: TextView = itemView.findViewById(R.id.subTitle)
         private val category: TextView = itemView.findViewById(R.id.category)
-        private val status: TextView = itemView.findViewById(R.id.status)
         private val priority: TextView = itemView.findViewById(R.id.priority)
         private val date: TextView = itemView.findViewById(R.id.date)
         private val layout: ConstraintLayout = itemView.findViewById(R.id.ticket)
@@ -59,13 +58,6 @@ class TicketAdapter: RecyclerView.Adapter<RecyclerView.ViewHolder>() {
             layout.setOnClickListener {
                 val bundle = bundleOf("fid" to ticket[position].fid , "ticketId" to ticket[position].id, "status" to ticket[position].status,"category" to ticket[position].category.title, "priority" to ticket[position].Priority,"title" to ticket[position].title )
                 itemView.findNavController().navigate(R.id.action_ticketSystemFragment_to_ticketDetailsFragment,bundle)
-
-            }
-
-            if (ticket[position].status == "Close"){
-                status.visibility = View.VISIBLE
-            }else{
-                status.visibility = View.GONE
 
             }
 

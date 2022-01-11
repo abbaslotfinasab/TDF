@@ -133,7 +133,7 @@ interface Service {
     suspend fun rateOrder(@Body rateOrderBody: OrderRateBody):Response<OrderRate>
 
     @GET("ticket/getalluserticket")
-    suspend fun getTicketList():Response<Ticket>
+    suspend fun getTicketList(@Query("status") status: String):Response<Ticket>
 
     @Headers("Content-Type: application/json")
     @POST("ticket")

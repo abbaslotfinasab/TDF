@@ -261,6 +261,11 @@ class MainActivity : AppCompatActivity() {
 
                     }
 
+                    R.id.ticketDetailsFragment -> {
+                        design("ticketDetails")
+
+                    }
+
                     R.id.blankFragment -> {
                         design("blank")
 
@@ -423,6 +428,11 @@ class MainActivity : AppCompatActivity() {
 
                 R.id.eventSystemFragment -> {
                     design("event")
+
+                }
+
+                R.id.ticketDetailsFragment -> {
+                    design("ticketDetails")
 
                 }
 
@@ -717,6 +727,18 @@ class MainActivity : AppCompatActivity() {
                 binding.toolbar.visibility = View.INVISIBLE
                 binding.customButton.visibility = View.GONE
                 binding.customTitle.text = "Add Ticket"
+                binding.bottomNavigation.visibility = View.GONE
+                binding.drawerLayout.setDrawerLockMode(DrawerLayout.LOCK_MODE_LOCKED_CLOSED)
+
+            }
+
+            "ticketDetails" ->{
+                window.statusBarColor = ContextCompat.getColor(this, R.color.status)
+                binding.customToolbar.background = ContextCompat.getDrawable(this,R.color.status)
+                binding.customToolbar.visibility = View.VISIBLE
+                binding.toolbar.visibility = View.INVISIBLE
+                binding.customButton.visibility = View.GONE
+                binding.customTitle.text = "Ticket Details"
                 binding.bottomNavigation.visibility = View.GONE
                 binding.drawerLayout.setDrawerLockMode(DrawerLayout.LOCK_MODE_LOCKED_CLOSED)
 

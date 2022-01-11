@@ -30,13 +30,13 @@ class TicketViewModel @Inject constructor(
         _ticketModel.postValue(exception.message?.let { Result.Error(it) })
     }
 
-    fun getAllTicket(){
+    fun getAllTicket(status:String){
 
         viewModelScope.launch(Dispatchers.IO+handler) {
 
             _ticketModel.postValue(Result.Loading)
 
-            ticketUseCaseImpl.getAllTicket().let {
+            ticketUseCaseImpl.getAllTicket(status).let {
 
                 _ticketModel.postValue(Result.Success(it))
 
