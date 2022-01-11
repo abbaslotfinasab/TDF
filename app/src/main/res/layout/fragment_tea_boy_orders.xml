@@ -5,7 +5,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="#EDEDF3"
+    android:background="#F4F3F7"
     tools:context=".order.OrderFragment">
 
     <com.google.android.material.tabs.TabLayout
@@ -16,7 +16,7 @@
         android:layout_marginTop="15dp"
         android:layout_marginEnd="40dp"
         app:tabTextAppearance="@style/MyCustomTextAppearance"
-        android:background="#EDEDF3"
+        android:background="#F4F3F7"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent">

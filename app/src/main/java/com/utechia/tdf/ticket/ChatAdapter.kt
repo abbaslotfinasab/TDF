@@ -7,6 +7,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.TextView
+import androidx.navigation.findNavController
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.utechia.data.entity.Chat
@@ -18,6 +19,7 @@ class ChatAdapter: RecyclerView.Adapter<RecyclerView.ViewHolder>() {
 
     lateinit var firebaseUploadAdapter:FirebaseUploadAdapter
     var chat: MutableList<Chat> = mutableListOf()
+    var single = false
     var title = ""
     var mID = ""
     var category = ""
@@ -153,6 +155,10 @@ class ChatAdapter: RecyclerView.Adapter<RecyclerView.ViewHolder>() {
                 adapter = firebaseUploadAdapter
                 layoutManager = GridLayoutManager(context, calculateNoOfColumns(context, 100.0F))
             }
+            if (chat[position].status=="Close" && !single && chat[position].rateable==true){
+                single = true
+                itemView.findNavController().navigate(R.id.action_ticketDetailsFragment_to_ticketRatingFragment)
+            }
         }
         private fun calculateNoOfColumns(
             context: Context,
@@ -168,22 +174,30 @@ class ChatAdapter: RecyclerView.Adapter<RecyclerView.ViewHolder>() {
         private val description: TextView = itemView.findViewById(R.id.description)
         private val user: TextView = itemView.findViewById(R.id.username)
         private val date: TextView = itemView.findViewById(R.id.date)
-        private val data:RecyclerView = itemView.findViewById(R.id.recyclerView)
+        private val data: RecyclerView = itemView.findViewById(R.id.recyclerView)
 
         fun bind0(position: Int) {
 
-            dateFormat = sdf.parse(chat[position].datetime)
+            dateFormat = sdf.parse(chat[position].datetime!!)!!
             simple = SimpleDateFormat("yyyy-MM-dd | HH:mm", Locale.getDefault()).format(dateFormat)
             date.text = "$simple"
 
+            user.text = chat[position].username
             description.text = chat[position].text
-                data.apply {
-                    firebaseUploadAdapter = FirebaseUploadAdapter(chat[position].mediaurl!!)
-                    adapter = firebaseUploadAdapter
-                    layoutManager = GridLayoutManager(context, calculateNoOfColumns(context, 100.0F))
-                }
+
+            data.apply {
+                firebaseUploadAdapter = FirebaseUploadAdapter(chat[position].mediaurl!!)
+                adapter = firebaseUploadAdapter
+                layoutManager = GridLayoutManager(context, calculateNoOfColumns(context, 100.0F))
+            }
+
+            if (chat[position].status == "Close" && !single && chat[position].rateable == true) {
+                single = true
+                itemView.findNavController()
+                    .navigate(R.id.action_ticketDetailsFragment_to_ticketRatingFragment)
             }
         }
+    }
 
         private fun calculateNoOfColumns(
             context: Context,

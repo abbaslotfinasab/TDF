@@ -69,7 +69,7 @@ class TicketAdapter: RecyclerView.Adapter<RecyclerView.ViewHolder>() {
 
             }
 
-            dateFormat = sdf.parse(ticket[position].datetime!!)!!
+            dateFormat = sdf.parse(ticket[position].dateupdate!!)!!
             simple = SimpleDateFormat("yyyy.MM.dd | HH:mm", Locale.getDefault()).format(dateFormat)
             date.text = "$simple"
 

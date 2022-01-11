@@ -19,12 +19,19 @@ data class TicketData(
     val description: String?,
     val mediaurl: List<String>?,
     val datetime: String?,
+    val dateupdate: String?,
+    val rateable: Boolean?,
     val category: Category,
+    val department: String?,
+    val requestername: String?,
+    val adminname: String?,
+
+
 
     ):Parcelable, ResponseObject<TicketModel> {
     override fun toDomain(): TicketModel {
         return TicketModel(
-            id, Priority, category.toDomain(), description, fid, status, floor, mediaurl, title, datetime
+            id,title, Priority, floor, status, fid, description , mediaurl , datetime , dateupdate , rateable, category.toDomain(), department, requestername, adminname
         )
     }
 }

@@ -8,9 +8,9 @@ import kotlinx.serialization.Serializable
 
 @Parcelize
 @Serializable
-data class Ticket(
+data class TicketPage(
 
-    val data: @Contextual @RawValue TicketPage,
-    val error:@Contextual @RawValue Error?
+    val totalPages: Int?,
+    val list:@Contextual @RawValue MutableList<TicketData>?,
 
 ): Parcelable

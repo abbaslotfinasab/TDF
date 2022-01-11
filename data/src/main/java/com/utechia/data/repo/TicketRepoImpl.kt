@@ -27,7 +27,7 @@ class TicketRepoImpl @Inject constructor(
             return when (result.isSuccessful) {
 
                 true -> {
-                    result.body()?.data!!.map { it.toDomain() }.toMutableList()
+                    result.body()?.data!!.list?.map { it.toDomain() }!!.toMutableList()
                 }
 
                 else ->

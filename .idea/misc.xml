@@ -277,17 +277,35 @@
         <entry key="..\:/Users/Dr Computer/AndroidStudioProjects/tdf_oms_android_application_kotlin_v1/app/src/main/res/layout/search_item.xml" value="0.25" />
         <entry key="..\:/Users/Dr Computer/AndroidStudioProjects/tdf_oms_android_application_kotlin_v1/app/src/main/res/menu/bottom_nav_menu.xml" value="0.20416666666666666" />
         <entry key="..\:/Users/Dr Computer/AndroidStudioProjects/tdf_oms_android_application_kotlin_v1/app/src/main/res/menu/navigation_drawer.xml" value="0.20416666666666666" />
+        <entry key="app/src/main/res/layout/fragment_accept.xml" value="0.19322916666666667" />
         <entry key="app/src/main/res/layout/fragment_cart.xml" value="0.10235507246376811" />
         <entry key="app/src/main/res/layout/fragment_category_fragment.xml" value="0.1" />
+        <entry key="app/src/main/res/layout/fragment_close_ticket.xml" value="0.19322916666666667" />
+        <entry key="app/src/main/res/layout/fragment_confirm.xml" value="0.19322916666666667" />
+        <entry key="app/src/main/res/layout/fragment_create_reservation.xml" value="0.19322916666666667" />
         <entry key="app/src/main/res/layout/fragment_create_ticket.xml" value="0.18" />
+        <entry key="app/src/main/res/layout/fragment_favorite.xml" value="0.19322916666666667" />
+        <entry key="app/src/main/res/layout/fragment_home_user.xml" value="0.19322916666666667" />
         <entry key="app/src/main/res/layout/fragment_message.xml" value="0.1" />
         <entry key="app/src/main/res/layout/fragment_notification.xml" value="0.10235507246376811" />
         <entry key="app/src/main/res/layout/fragment_notification_rating.xml" value="0.10235507246376811" />
+        <entry key="app/src/main/res/layout/fragment_notification_teaboy.xml" value="0.19322916666666667" />
+        <entry key="app/src/main/res/layout/fragment_order.xml" value="0.19322916666666667" />
+        <entry key="app/src/main/res/layout/fragment_profile.xml" value="0.11005434782608696" />
+        <entry key="app/src/main/res/layout/fragment_qr_code.xml" value="0.19322916666666667" />
         <entry key="app/src/main/res/layout/fragment_rate_confirmation.xml" value="0.22" />
         <entry key="app/src/main/res/layout/fragment_rating_ticket.xml" value="0.22" />
+        <entry key="app/src/main/res/layout/fragment_request_details.xml" value="0.19322916666666667" />
+        <entry key="app/src/main/res/layout/fragment_reservation_details.xml" value="0.19322916666666667" />
+        <entry key="app/src/main/res/layout/fragment_survey_system.xml" value="0.1" />
+        <entry key="app/src/main/res/layout/fragment_tea_boy_order_details.xml" value="0.19322916666666667" />
+        <entry key="app/src/main/res/layout/fragment_tea_boy_orders.xml" value="0.19322916666666667" />
+        <entry key="app/src/main/res/layout/fragment_tea_boy_profile.xml" value="0.11005434782608696" />
+        <entry key="app/src/main/res/layout/fragment_tea_boy_statistics.xml" value="0.19322916666666667" />
         <entry key="app/src/main/res/layout/fragment_ticket_confirmation.xml" value="0.1" />
         <entry key="app/src/main/res/layout/fragment_ticket_details.xml" value="0.10144927536231885" />
-        <entry key="app/src/main/res/layout/fragment_ticket_system.xml" value="0.19322916666666667" />
+        <entry key="app/src/main/res/layout/fragment_ticket_system.xml" value="0.25" />
+        <entry key="app/src/main/res/layout/fragment_upload.xml" value="0.19322916666666667" />
         <entry key="app/src/main/res/layout/item_chat_admin.xml" value="0.25" />
         <entry key="app/src/main/res/layout/item_chat_client.xml" value="0.22" />
         <entry key="app/src/main/res/layout/item_chat_details.xml" value="0.33" />

@@ -6,13 +6,13 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:fillViewport="true"
-    android:background="#EDEDF3"
+    android:background="#F4F3F7"
     tools:context=".ticket.CreateTicketFragment">
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:id="@+id/parentLayout"
         android:layout_width="match_parent"
-        android:background="#EDEDF3"
+        android:background="#F4F3F7"
         android:layout_height="match_parent">
 
         <androidx.constraintlayout.widget.ConstraintLayout

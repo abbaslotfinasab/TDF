@@ -734,8 +734,8 @@
             android:id="@+id/action_messageFragment_to_uploadReplyDeleteFragment"
             app:destination="@id/uploadReplyDeleteFragment" />
         <action
-            android:id="@+id/action_ticketDetailsFragment_to_notificationRatingFragment"
-            app:destination="@id/notificationRatingFragment" />
+            android:id="@+id/action_ticketDetailsFragment_to_ticketRatingFragment"
+            app:destination="@id/ticketRatingFragment" />
 
 
     </fragment>
@@ -772,7 +772,7 @@
 
     </dialog>
     <fragment
-        android:id="@+id/notificationRatingFragment"
+        android:id="@+id/ticketRatingFragment"
         android:name="com.utechia.tdf.ticket.TicketRatingFragment"
         android:label="fragment_notification_rating"
         tools:layout="@layout/fragment_rating_ticket" />
