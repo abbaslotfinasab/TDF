@@ -56,6 +56,7 @@ class TeaBoyNotificationFragment : DialogFragment() {
         binding.notificationRecycler.apply {
             adapter = orderAdapter
             layoutManager = LinearLayoutManager(context, LinearLayoutManager.HORIZONTAL,false)
+            addItemDecoration(ItemTeaBoyNotificationDecoration())
         }
 
         binding.exit.setOnClickListener {
@@ -90,7 +91,7 @@ class TeaBoyNotificationFragment : DialogFragment() {
                     binding.date.visibility = View.VISIBLE
                     binding.order.visibility = View.VISIBLE
                     binding.username.text = it.data[0].user?.displayName
-                    binding.location.text = it.data[0].user?.officeWorkStation
+                    binding.location.text = it.data[0].user?.officeFloor
                     binding.order.text = it.data[0].id.toString()
                     dateFormat = sdf.parse(it.data[0].updatedAt!!)!!
                     simple = SimpleDateFormat("yyyy.MM.dd | HH:mm", Locale.getDefault()).format(dateFormat)
