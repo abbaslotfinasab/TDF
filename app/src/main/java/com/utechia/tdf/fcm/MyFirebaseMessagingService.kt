@@ -1,6 +1,5 @@
 package com.utechia.tdf.fcm
 
-import android.annotation.SuppressLint
 import android.app.NotificationChannel
 import android.app.NotificationManager
 import android.app.PendingIntent
@@ -8,7 +7,6 @@ import android.content.Context
 import android.content.SharedPreferences
 import android.os.Build
 import android.widget.RemoteViews
-import androidx.annotation.RequiresApi
 import androidx.core.app.NotificationCompat
 import androidx.core.os.bundleOf
 import androidx.navigation.NavDeepLinkBuilder
@@ -25,18 +23,17 @@ class MyFirebaseMessagingService : FirebaseMessagingService() {
 
     private lateinit var prefs: SharedPreferences
 
-    @SuppressLint("RemoteViewLayout")
-    fun getRemoteView(title:String, message:String):RemoteViews{
+    private fun getRemoteView(title:String, message:String):RemoteViews{
         val remoteView = RemoteViews (channel_Name,R.layout.item_push_notification)
 
         remoteView.setTextViewText(R.id.title,title)
         remoteView.setTextViewText(R.id.subTitle,message)
+        remoteView.setImageViewResource(R.id.notification_logo,R.drawable.ic_baseline_person_outline_24)
 
         return remoteView
 
     }
 
-    @RequiresApi(Build.VERSION_CODES.M)
     override fun onMessageReceived(remoteMessage: RemoteMessage) {
         super.onMessageReceived(remoteMessage)
         generateNotification(remoteMessage.notification?.title!!,remoteMessage.notification?.body!!)
@@ -52,7 +49,6 @@ class MyFirebaseMessagingService : FirebaseMessagingService() {
 
     }
 
-    @RequiresApi(Build.VERSION_CODES.M)
     private fun generateNotification(title: String, message: String) {
 
         val  bundle = bundleOf("cartId" to 139 )
@@ -63,11 +59,11 @@ class MyFirebaseMessagingService : FirebaseMessagingService() {
             .setDestination(R.id.teaBoyNotificationFragment)
             .setArguments(bundle)
             .createTaskStackBuilder()
-            .getPendingIntent(0,PendingIntent.FLAG_IMMUTABLE)
+            .getPendingIntent(0,PendingIntent.FLAG_ONE_SHOT)
 
 
         var builder : NotificationCompat.Builder = NotificationCompat.Builder(applicationContext, channel_Id)
-            .setSmallIcon(R.mipmap.ic_launcher)
+            .setSmallIcon(R.drawable.ic_profile)
             .setAutoCancel(true)
             .setVibrate(longArrayOf(1000,1000,1000,1000))
             .setOnlyAlertOnce(true)
