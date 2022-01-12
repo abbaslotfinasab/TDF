@@ -44,7 +44,6 @@ class MyFirebaseMessagingService : FirebaseMessagingService() {
         with(prefs.edit()) {
             this?.putString("fcm", token)
         }?.apply()
-
     }
 
     private fun generateNotification(cartId:String,title: String, message: String) {
