@@ -28,15 +28,13 @@ class MyFirebaseMessagingService : FirebaseMessagingService() {
 
         remoteView.setTextViewText(R.id.title,title)
         remoteView.setTextViewText(R.id.subTitle,message)
-        remoteView.setImageViewResource(R.id.notification_logo,R.drawable.ic_baseline_person_outline_24)
-
         return remoteView
 
     }
 
     override fun onMessageReceived(remoteMessage: RemoteMessage) {
         super.onMessageReceived(remoteMessage)
-        generateNotification(remoteMessage.notification?.title!!,remoteMessage.notification?.body!!)
+        generateNotification(remoteMessage.data["cartId"]!!,remoteMessage.notification?.title!!,remoteMessage.notification?.body!!)
     }
 
     override fun onNewToken(token: String) {
@@ -49,9 +47,9 @@ class MyFirebaseMessagingService : FirebaseMessagingService() {
 
     }
 
-    private fun generateNotification(title: String, message: String) {
+    private fun generateNotification(cartId:String,title: String, message: String) {
 
-        val  bundle = bundleOf("cartId" to 139 )
+        val  bundle = bundleOf("cartId" to cartId.toInt() )
 
         val pendingIntent = NavDeepLinkBuilder(applicationContext)
             .setGraph(R.navigation.nav_graph)
@@ -63,7 +61,7 @@ class MyFirebaseMessagingService : FirebaseMessagingService() {
 
 
         var builder : NotificationCompat.Builder = NotificationCompat.Builder(applicationContext, channel_Id)
-            .setSmallIcon(R.drawable.ic_profile)
+            .setSmallIcon(R.drawable.ic_notification)
             .setAutoCancel(true)
             .setVibrate(longArrayOf(1000,1000,1000,1000))
             .setOnlyAlertOnce(true)

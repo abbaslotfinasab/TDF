@@ -44,7 +44,7 @@ class TeaBoyNotificationFragment : DialogFragment() {
         super.onViewCreated(view, savedInstanceState)
 
         if (arguments != null)
-            cartId = requireArguments().getString("cartId", "").toInt()
+            cartId = requireArguments().getInt("cartId", 0)
 
         userOrderViewModel.singleOrder(cartId)
 
