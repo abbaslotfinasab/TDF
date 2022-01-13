@@ -133,7 +133,7 @@ interface Service {
     suspend fun rateOrder(@Body rateOrderBody: OrderRateBody):Response<OrderRate>
 
     @GET("ticket/getalluserticket")
-    suspend fun getTicketList(@Query("status") status: String):Response<Ticket>
+    suspend fun getTicketList(@Query("status") status: String,@Query("page") page: Int,@Query("page_size") page_size: Int):Response<Ticket>
 
     @Headers("Content-Type: application/json")
     @POST("ticket")
@@ -153,5 +153,10 @@ interface Service {
     @Multipart
     @POST("ticket/upload")
     suspend fun uploadFile(@Part file:MultipartBody.Part):Response<Upload>
+
+    @Headers("Content-Type: application/json")
+    @POST("survey/rateTicket")
+    suspend fun rateTicket(@Body rateTicketBody: RateTicketBody):Response<Void>
+
 
 }

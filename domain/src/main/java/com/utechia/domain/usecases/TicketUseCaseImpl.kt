@@ -1,9 +1,7 @@
 package com.utechia.domain.usecases
 
-import android.net.Uri
 import com.utechia.domain.model.TicketModel
 import com.utechia.domain.repository.TicketRepo
-import org.json.JSONArray
 import javax.inject.Inject
 import javax.inject.Singleton
 
@@ -34,5 +32,9 @@ class TicketUseCaseImpl @Inject constructor(private val ticketRepo: TicketRepo):
         text: String
     ): MutableList<TicketModel> {
         return ticketRepo.replyTicket(id,mediaurl,text)
+    }
+
+    override suspend fun rateTicket(id: Int, rate: Int): MutableList<TicketModel> {
+        return ticketRepo.rateTicket(id,rate)
     }
 }

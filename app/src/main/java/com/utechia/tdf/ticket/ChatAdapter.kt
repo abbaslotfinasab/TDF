@@ -22,7 +22,7 @@ class ChatAdapter(private val ticketDetailsFragment: TicketDetailsFragment): Rec
     var single = false
     var rateable = true
     var title = ""
-    var mID = ""
+    var mID = 0
     var category = ""
     var priority = ""
     var statusCode = ""
@@ -93,7 +93,7 @@ class ChatAdapter(private val ticketDetailsFragment: TicketDetailsFragment): Rec
             description.text = title
             user.text = category
             date.text = priority
-            subTitle.text = mID
+            subTitle.text = mID.toString()
 
             if (statusCode == "Close"){
                 status.visibility = View.VISIBLE
@@ -158,7 +158,7 @@ class ChatAdapter(private val ticketDetailsFragment: TicketDetailsFragment): Rec
             }
             if (statusCode == "Close" && !single && rateable) {
                 single = true
-                ticketDetailsFragment.rating()
+                ticketDetailsFragment.rating(mID)
             }
         }
         private fun calculateNoOfColumns(
@@ -194,7 +194,7 @@ class ChatAdapter(private val ticketDetailsFragment: TicketDetailsFragment): Rec
 
             if (statusCode == "Close" && !single && rateable) {
                 single = true
-                ticketDetailsFragment.rating()
+                ticketDetailsFragment.rating(mID)
             }
         }
     }

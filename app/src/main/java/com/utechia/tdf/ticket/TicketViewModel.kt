@@ -88,4 +88,20 @@ class TicketViewModel @Inject constructor(
             }
         }
     }
+
+    fun rateTicket(ticket:Int,rate:Int){
+
+        viewModelScope.launch(Dispatchers.IO+handler) {
+
+            _ticketModel.postValue(Result.Loading)
+
+            ticketUseCaseImpl.rateTicket(ticket,rate).let {
+
+                _ticketModel.postValue(Result.Success(it))
+
+            }
+
+        }
+
+    }
 }

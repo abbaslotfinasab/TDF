@@ -7,9 +7,11 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.view.Window
+import android.widget.RatingBar
+import android.widget.Toast
 import androidx.fragment.app.DialogFragment
-import com.google.android.material.bottomsheet.BottomSheetDialogFragment
-import com.utechia.tdf.R
+import androidx.fragment.app.viewModels
+import com.utechia.domain.utile.Result
 import com.utechia.tdf.databinding.FragmentRatingTicketBinding
 import dagger.hilt.android.AndroidEntryPoint
 
@@ -18,6 +20,10 @@ import dagger.hilt.android.AndroidEntryPoint
 class TicketRatingFragment : DialogFragment() {
 
     private lateinit var binding: FragmentRatingTicketBinding
+    private val ticketViewModel: TicketViewModel by viewModels()
+    private var ticket = 0
+    private var rate = 0
+
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -36,10 +42,48 @@ class TicketRatingFragment : DialogFragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
+        if (arguments != null) {
+            ticket = requireArguments().getInt("ticketId", 0)
+
+        }
+
+        binding.rating.onRatingBarChangeListener =
+            RatingBar.OnRatingBarChangeListener { _, rating, _ ->
+                rate = rating.toInt()
+            }
+
         binding.exit.setOnClickListener {
             dialog?.dismiss()
         }
 
+        binding.btnAccept.setOnClickListener {
+            ticketViewModel.rateTicket(ticket, rate)
+            observer()
+        }
+    }
 
+    private fun observer() {
+        ticketViewModel.ticketModel.observe(viewLifecycleOwner) {
+
+            when (it) {
+                is Result.Success -> {
+                    binding.prg.visibility = View.VISIBLE
+                    dialog?.dismiss()
+                }
+
+                is Result.Loading -> {
+                    binding.prg.visibility = View.VISIBLE
+
+                }
+
+                is Result.Error -> {
+                    binding.prg.visibility = View.GONE
+                    Toast.makeText(context, it.message, Toast.LENGTH_SHORT).show()
+                    dialog?.dismiss()
+                }
+            }
+        }
     }
 }
+
+

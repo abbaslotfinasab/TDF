@@ -14,7 +14,6 @@ import androidx.core.content.ContextCompat
 import androidx.core.os.bundleOf
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
-import androidx.navigation.findNavController
 import androidx.navigation.fragment.NavHostFragment
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -37,7 +36,7 @@ class TicketDetailsFragment : Fragment() {
     private val fragment: MessageFragment = MessageFragment()
     private val uploadViewModel:UploadViewModel by viewModels()
     private val chatAdapter :ChatAdapter = ChatAdapter(this)
-    private var ticketId:String = ""
+    private var fId:String = ""
     private var status:String = ""
     private var mId:Int = 0
 
@@ -60,7 +59,7 @@ class TicketDetailsFragment : Fragment() {
         binding.btnClose.bringToFront()
 
         if (arguments != null) {
-            ticketId = requireArguments().getString("fid","")
+            fId = requireArguments().getString("fid","")
             mId = requireArguments().getInt("ticketId",0)
             status = requireArguments().getString("status","")
             chatAdapter.title = requireArguments().getString("title","")
@@ -68,11 +67,11 @@ class TicketDetailsFragment : Fragment() {
             chatAdapter.priority = requireArguments().getString("priority","")
             chatAdapter.rateable = requireArguments().getBoolean("rateable",true)
             chatAdapter.statusCode = status
-            chatAdapter.mID = mId.toString()
+            chatAdapter.mID = mId
 
         }
 
-        val ticketListener = database.child("Ticketmessage").child("Ticket-$ticketId").orderByValue()
+        val ticketListener = database.child("Ticketmessage").child("Ticket-$fId").orderByValue()
 
         ticketListener.addValueEventListener(object:ValueEventListener{
             override fun onDataChange(snapshot: DataSnapshot) {
@@ -171,9 +170,10 @@ class TicketDetailsFragment : Fragment() {
        fragment.replacement0()
     }
 
-    fun rating(){
+    fun rating(mId:Int){
+        val bundle = bundleOf("ticketId" to mId)
         findNavController()
-            .navigate(R.id.action_ticketDetailsFragment_to_ticketRatingFragment)
+            .navigate(R.id.action_ticketDetailsFragment_to_ticketRatingFragment,bundle)
     }
 
     fun deleteItem(position:Int){

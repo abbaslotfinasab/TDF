@@ -2,6 +2,7 @@ package com.utechia.data.repo
 
 import android.util.Log
 import com.utechia.data.api.Service
+import com.utechia.data.entity.RateTicketBody
 import com.utechia.data.entity.ReplyBody
 import com.utechia.data.entity.TicketBody
 import com.utechia.data.utile.NetworkHelper
@@ -22,7 +23,7 @@ class TicketRepoImpl @Inject constructor(
 
         if (networkHelper.isNetworkConnected()) {
 
-            val result = service.getTicketList(status)
+            val result = service.getTicketList(status,1,500)
 
             return when (result.isSuccessful) {
 
@@ -119,4 +120,27 @@ class TicketRepoImpl @Inject constructor(
 
         } else throw IOException("No Internet Connection")
     }
+
+    override suspend fun rateTicket(id: Int, rate: Int): MutableList<TicketModel> {
+
+        if (networkHelper.isNetworkConnected()) {
+
+            val result = service.rateTicket(
+                RateTicketBody(
+                    rate,
+                    id
+                )
+            )
+
+            return when (result.isSuccessful) {
+
+                true -> {
+                    emptyList<TicketModel>().toMutableList()
+                }
+
+                else ->
+                    throw IOException("Server is Not Responding")
+            }
+
+        } else throw IOException("No Internet Connection")    }
 }
