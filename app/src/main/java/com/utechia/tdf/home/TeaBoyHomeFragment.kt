@@ -1,5 +1,7 @@
 package com.utechia.tdf.home
 
+import android.content.ClipData
+import android.content.ClipboardManager
 import android.content.Context
 import android.content.SharedPreferences
 import android.os.Bundle
@@ -52,6 +54,14 @@ class TeaBoyHomeFragment : Fragment() {
 
         }
 
+        binding.token.setOnClickListener {
+
+            val clipboard = requireActivity().getSystemService(Context.CLIPBOARD_SERVICE) as ClipboardManager
+            val clip = ClipData.newPlainText("label",prefs.getString("fcm", ""))
+            clipboard.setPrimaryClip(clip)
+            Toast.makeText(context,"Copied",Toast.LENGTH_SHORT).show()
+        }
+
         orderViewModel.getOrder()
 
         binding.switchCompat.isChecked = prefs.getBoolean("isTeaBoyActive",true)
@@ -77,12 +87,10 @@ class TeaBoyHomeFragment : Fragment() {
                     binding.active.text = it.data[0].delivered
                     binding.pending.text = it.data[0].pending
                     binding.cancelled.text = it.data[0].cancelled
-
                 }
 
                 is Result.Loading -> {
                     binding.prg.visibility = View.VISIBLE
-
                 }
 
                 is Result.Error -> {
@@ -92,5 +100,4 @@ class TeaBoyHomeFragment : Fragment() {
             }
         }
     }
-
 }

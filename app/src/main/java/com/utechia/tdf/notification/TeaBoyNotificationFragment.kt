@@ -1,4 +1,4 @@
-package com.utechia.tdf.order
+package com.utechia.tdf.notification
 
 import android.graphics.Color
 import android.graphics.drawable.ColorDrawable
@@ -15,6 +15,7 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import com.utechia.domain.utile.Result
 import com.utechia.tdf.R
 import com.utechia.tdf.databinding.FragmentNotificationTeaboyBinding
+import com.utechia.tdf.order.TeaBoyOrderViewModel
 import dagger.hilt.android.AndroidEntryPoint
 import java.text.SimpleDateFormat
 import java.util.*
@@ -23,8 +24,8 @@ import java.util.*
 class TeaBoyNotificationFragment : DialogFragment() {
 
     private lateinit var binding: FragmentNotificationTeaboyBinding
-    private val orderAdapter:NotificationAdapter = NotificationAdapter()
-    private val teaOrderViewModel:TeaBoyOrderViewModel by viewModels()
+    private val orderAdapterTeaBoy: TeaBoyNotificationAdapter = TeaBoyNotificationAdapter()
+    private val teaOrderViewModel: TeaBoyOrderViewModel by viewModels()
     private var cartId = 0
     var sdf: SimpleDateFormat = SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss.SSS'Z'", Locale.getDefault())
     private lateinit var dateFormat: Date
@@ -54,7 +55,7 @@ class TeaBoyNotificationFragment : DialogFragment() {
         teaOrderViewModel.singleOrderTeaBoy(cartId)
 
         binding.notificationRecycler.apply {
-            adapter = orderAdapter
+            adapter = orderAdapterTeaBoy
             layoutManager = LinearLayoutManager(context, LinearLayoutManager.HORIZONTAL,false)
             addItemDecoration(ItemTeaBoyNotificationDecoration())
         }
@@ -96,7 +97,7 @@ class TeaBoyNotificationFragment : DialogFragment() {
                     dateFormat = sdf.parse(it.data[0].updatedAt!!)!!
                     simple = SimpleDateFormat("yyyy.MM.dd | HH:mm", Locale.getDefault()).format(dateFormat)
                     binding.date.text = "$simple"
-                    orderAdapter.addData(it.data[0].cart?.items!!)
+                    orderAdapterTeaBoy.addData(it.data[0].cart?.items!!)
                 }
 
                 is Result.Loading -> {

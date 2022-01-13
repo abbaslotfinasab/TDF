@@ -1,10 +1,9 @@
-package com.utechia.tdf.fcm
+package com.utechia.tdf.notification
 
 import android.app.NotificationChannel
 import android.app.NotificationManager
 import android.app.PendingIntent
 import android.content.Context
-import android.content.SharedPreferences
 import android.os.Build
 import android.widget.RemoteViews
 import androidx.core.app.NotificationCompat
@@ -21,8 +20,6 @@ const val channel_Name = "com.utechia.tdf"
 
 class MyFirebaseMessagingService : FirebaseMessagingService() {
 
-    private lateinit var prefs: SharedPreferences
-
     private fun getRemoteView(title:String, message:String):RemoteViews{
         val remoteView = RemoteViews (channel_Name,R.layout.item_push_notification)
 
@@ -34,21 +31,18 @@ class MyFirebaseMessagingService : FirebaseMessagingService() {
 
     override fun onMessageReceived(remoteMessage: RemoteMessage) {
         super.onMessageReceived(remoteMessage)
-        generateNotification(remoteMessage.data["cartId"]!!,remoteMessage.notification?.title!!,remoteMessage.notification?.body!!)
+        if(remoteMessage.notification!=null)
+        generateNotification(remoteMessage.notification?.title!!,remoteMessage.notification?.body!!)
     }
 
     override fun onNewToken(token: String) {
         super.onNewToken(token)
 
-        prefs = getSharedPreferences("tdf", MODE_PRIVATE)
-        with(prefs.edit()) {
-            this?.putString("fcm", token)
-        }?.apply()
     }
 
-    private fun generateNotification(cartId:String,title: String, message: String) {
+    private fun generateNotification(title: String, message: String) {
 
-        val  bundle = bundleOf("cartId" to cartId.toInt() )
+        val  bundle = bundleOf("cartId" to 148)
 
         val pendingIntent = NavDeepLinkBuilder(applicationContext)
             .setGraph(R.navigation.nav_graph)

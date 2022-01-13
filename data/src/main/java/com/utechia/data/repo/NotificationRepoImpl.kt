@@ -2,42 +2,22 @@ package com.utechia.data.repo
 
 import com.utechia.data.api.Service
 import com.utechia.data.utile.NetworkHelper
-import com.utechia.domain.model.SurveyModel
-import com.utechia.domain.repository.SurveyRepo
+import com.utechia.domain.model.NotificationModel
+import com.utechia.domain.repository.NotificationRepo
 import java.io.IOException
 import javax.inject.Inject
 import javax.inject.Singleton
 
 @Singleton
-class SurveyRepoImpl @Inject constructor(
+class NotificationRepoImpl @Inject constructor(
     private val service: Service,
     private val networkHelper: NetworkHelper,
-
-    ):SurveyRepo {
-    override suspend fun getSurveyList(): MutableList<SurveyModel> {
-
-        if (networkHelper.isNetworkConnected()) {
-
-            val result = service.getSurveyList()
-
-            return when (result.isSuccessful) {
-
-                true -> {
-                    result.body()?.data!!.map { it.toDomain() }.toMutableList()
-                }
-
-                else ->
-                    throw IOException("Server is Not Responding")
-            }
-
-        } else throw IOException("No Internet Connection")
-    }
-
-    override suspend fun getSurvey(id: Int): MutableList<SurveyModel> {
+    ):NotificationRepo {
+    override suspend fun getAll(): MutableList<NotificationModel> {
 
         if (networkHelper.isNetworkConnected()) {
 
-            val result = service.getSurvey(id)
+            val result = service.getNotification()
 
             return when (result.isSuccessful) {
 
@@ -53,16 +33,36 @@ class SurveyRepoImpl @Inject constructor(
 
     }
 
-    override suspend fun getEvaluate(): MutableList<SurveyModel> {
+    override suspend fun delete(id: Int): MutableList<NotificationModel> {
 
         if (networkHelper.isNetworkConnected()) {
 
-            val result = service.getEvaluate()
+            val result = service.deleteNotification(id)
 
             return when (result.isSuccessful) {
 
                 true -> {
-                    result.body()?.data!!.map { it.toDomain() }.toMutableList()
+                    emptyList<NotificationModel>().toMutableList()
+                }
+
+                else ->
+                    throw IOException("Server is Not Responding")
+            }
+
+        } else throw IOException("No Internet Connection")
+
+    }
+
+    override suspend fun read(id: Int): MutableList<NotificationModel> {
+
+        if (networkHelper.isNetworkConnected()) {
+
+            val result = service.readNotification(id)
+
+            return when (result.isSuccessful) {
+
+                true -> {
+                    emptyList<NotificationModel>().toMutableList()
                 }
 
                 else ->

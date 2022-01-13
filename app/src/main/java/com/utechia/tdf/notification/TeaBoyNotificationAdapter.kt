@@ -1,4 +1,4 @@
-package com.utechia.tdf.order
+package com.utechia.tdf.notification
 
 import android.view.LayoutInflater
 import android.view.View
@@ -10,7 +10,7 @@ import com.bumptech.glide.Glide
 import com.utechia.domain.model.ItemModel
 import com.utechia.tdf.R
 
-class NotificationAdapter: RecyclerView.Adapter<RecyclerView.ViewHolder>() {
+class TeaBoyNotificationAdapter: RecyclerView.Adapter<RecyclerView.ViewHolder>() {
 
     var orders: MutableList<ItemModel> = mutableListOf()
 

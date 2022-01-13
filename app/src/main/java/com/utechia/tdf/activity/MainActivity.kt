@@ -15,12 +15,10 @@ import androidx.navigation.NavController
 import androidx.navigation.fragment.NavHostFragment
 import androidx.navigation.ui.setupWithNavController
 import com.google.android.gms.tasks.OnCompleteListener
-import com.google.android.gms.tasks.Task
 import com.google.firebase.analytics.FirebaseAnalytics
 import com.google.firebase.analytics.ktx.analytics
-import com.google.firebase.installations.FirebaseInstallations
-import com.google.firebase.installations.InstallationTokenResult
 import com.google.firebase.ktx.Firebase
+import com.google.firebase.messaging.FirebaseMessaging
 import com.utechia.tdf.R
 import com.utechia.tdf.databinding.ActivityMainBinding
 import dagger.hilt.android.AndroidEntryPoint
@@ -42,19 +40,16 @@ class MainActivity : AppCompatActivity() {
         setContentView(binding.root)
         prefs = getSharedPreferences("tdf", MODE_PRIVATE)
 
-
-        FirebaseInstallations.getInstance().getToken(false).addOnCompleteListener(object :OnCompleteListener<InstallationTokenResult>{
-            override fun onComplete(task: Task<InstallationTokenResult>) {
-
+        FirebaseMessaging.getInstance().token.addOnCompleteListener(OnCompleteListener { task ->
+            if (task.isSuccessful) {
                 if (!task.isSuccessful)
-                    return
+                    return@OnCompleteListener
                 else {
                     with(prefs.edit()) {
-                        putString("fcm", task.result.token)
+                        putString("fcm", task.result)
                     }.apply()
                 }
             }
-
         })
 
         navHostFragment = supportFragmentManager.findFragmentById(R.id.nav_host_fragment) as NavHostFragment

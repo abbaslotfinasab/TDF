@@ -6,7 +6,7 @@
     android:layout_width="345dp"
     android:layout_height="425dp"
     android:background="@color/white"
-    tools:context=".order.TeaBoyNotificationFragment">
+    tools:context=".notification.TeaBoyNotificationFragment">
 
     <FrameLayout
         android:layout_width="345dp"

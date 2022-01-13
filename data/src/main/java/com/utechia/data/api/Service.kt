@@ -158,5 +158,16 @@ interface Service {
     @POST("survey/rateTicket")
     suspend fun rateTicket(@Body rateTicketBody: RateTicketBody):Response<Void>
 
+    @GET("notification")
+    suspend fun getNotification():Response<Notification>
+
+    @PATCH("notification/{id}")
+    suspend fun readNotification(@Path("id") id: Int):Response<Void>
+
+    @DELETE("notification/{id}")
+    suspend fun deleteNotification(@Path("id") id: Int):Response<Void>
+
+    @GET("notification/unread/count")
+    suspend fun countNotification():Response<Void>
 
 }

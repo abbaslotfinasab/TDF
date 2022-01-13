@@ -21,7 +21,7 @@
         android:theme="@style/Theme.TDF">
         <meta-data
             android:name="com.google.firebase.messaging.default_notification_icon"
-            android:resource="@layout/item_push_notification" />
+            android:resource="@drawable/ic_notification" />
         <!-- Set color used with incoming notification messages. This is used when no color is set for the incoming
              notification message. See README(https://goo.gl/6BKBk7) for more. -->
         <meta-data
@@ -39,8 +39,10 @@
         </activity>
 
         <service
-            android:name=".fcm.MyFirebaseMessagingService"
-            android:exported="false">
+            android:name=".notification.MyFirebaseMessagingService"
+            android:exported="false"
+            android:directBootAware="true"
+            tools:targetApi="n">
             <intent-filter>
                 <action android:name="com.google.firebase.MESSAGING_EVENT" />
             </intent-filter>

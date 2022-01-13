@@ -1,0 +1,70 @@
+package com.utechia.tdf.notification
+
+import androidx.lifecycle.LiveData
+import androidx.lifecycle.MutableLiveData
+import androidx.lifecycle.ViewModel
+import androidx.lifecycle.viewModelScope
+import com.utechia.domain.model.NotificationModel
+import com.utechia.domain.model.PermissionModel
+import com.utechia.domain.usecases.NotificationUseCaseImpl
+import com.utechia.domain.usecases.PermissionUseCaseImpl
+import com.utechia.domain.utile.Result
+import dagger.hilt.android.lifecycle.HiltViewModel
+import kotlinx.coroutines.CoroutineExceptionHandler
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.launch
+import javax.inject.Inject
+
+@HiltViewModel
+class NotificationViewModel @Inject constructor(
+    private val notificationUseCaseImpl: NotificationUseCaseImpl
+
+):ViewModel() {
+
+    private val _notificationModel = MutableLiveData<Result<MutableList<NotificationModel>>>()
+    val notificationModel: LiveData<Result<MutableList<NotificationModel>>>
+        get() = _notificationModel
+
+    private val handler = CoroutineExceptionHandler { _, exception ->
+        _notificationModel.postValue(exception.message?.let { Result.Error(it) })
+    }
+
+    fun getNotification() {
+
+        viewModelScope.launch(Dispatchers.IO + handler) {
+
+            _notificationModel.postValue(Result.Loading)
+
+            notificationUseCaseImpl.getAll().let {
+
+                _notificationModel.postValue(Result.Success(it))
+            }
+        }
+    }
+
+    fun readNotification(id: Int) {
+
+        viewModelScope.launch(Dispatchers.IO + handler) {
+
+            _notificationModel.postValue(Result.Loading)
+
+            notificationUseCaseImpl.read(id).let {
+
+                _notificationModel.postValue(Result.Success(it))
+            }
+        }
+    }
+
+    fun deleteNotification(id: Int) {
+
+        viewModelScope.launch(Dispatchers.IO + handler) {
+
+            _notificationModel.postValue(Result.Loading)
+
+            notificationUseCaseImpl.read(id).let {
+
+                _notificationModel.postValue(Result.Success(it))
+            }
+        }
+    }
+}

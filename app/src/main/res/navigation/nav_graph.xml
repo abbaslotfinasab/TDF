@@ -51,7 +51,7 @@
         tools:layout="@layout/fragment_profile" />
     <fragment
         android:id="@+id/notificationFragment"
-        android:name="com.utechia.tdf.more.NotificationFragment"
+        android:name="com.utechia.tdf.notification.NotificationFragment"
         android:label="fragment_notification"
         tools:layout="@layout/fragment_notification" />
 
@@ -450,7 +450,7 @@
 
     <dialog
         android:id="@+id/teaBoyNotificationFragment"
-        android:name="com.utechia.tdf.order.TeaBoyNotificationFragment"
+        android:name="com.utechia.tdf.notification.TeaBoyNotificationFragment"
         android:label="fragment_notification_teaboy"
         tools:layout="@layout/fragment_notification_teaboy" >
 

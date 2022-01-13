@@ -107,5 +107,9 @@ abstract class RepositoryModule {
         uploadRepoImpl: UploadRepoImpl
     ): UploadRepo
 
+    @Binds
+    abstract fun bindNotificationRepositoryService(
+        notificationRepoImpl: NotificationRepoImpl
+    ): NotificationRepo
 
 }
