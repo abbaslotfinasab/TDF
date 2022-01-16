@@ -53,7 +53,22 @@
         android:id="@+id/notificationFragment"
         android:name="com.utechia.tdf.notification.NotificationFragment"
         android:label="fragment_notification"
-        tools:layout="@layout/fragment_notification" />
+        tools:layout="@layout/fragment_notification" >
+
+        <action
+            android:id="@+id/action_notificationFragment_to_notificationDeleteFragment"
+            app:launchSingleTop="true"
+            app:destination="@id/notificationDeleteFragment" />
+
+        <action
+            android:id="@+id/action_notificationFragment_to_notificationDetailsFragment"
+            app:launchSingleTop="true"
+            app:destination="@id/notificationDetailsFragment" />
+        <action
+            android:id="@+id/action_notificationFragment_self"
+            app:destination="@id/notificationFragment" />
+
+    </fragment>
 
     <fragment
         android:id="@+id/createReservationFragment"
@@ -780,6 +795,42 @@
 
         <argument
             android:name="fId"
+            app:argType="integer"
+            android:defaultValue="0"  />
+
+    </dialog>
+
+    <dialog
+        android:id="@+id/notificationDeleteFragment"
+        android:name="com.utechia.tdf.notification.NotificationDeleteFragment"
+        android:label="fragment_notification_delete"
+        tools:layout="@layout/fragment_notification_delete" >
+
+        <action
+            android:id="@+id/action_notificationDeleteFragment_to_notificationFragment"
+            app:launchSingleTop="true"
+            app:destination="@id/notificationFragment" />
+
+        <argument
+            android:name="fId"
+            app:argType="integer"
+            android:defaultValue="0"  />
+
+    </dialog>
+
+    <dialog
+        android:id="@+id/notificationDetailsFragment"
+        android:name="com.utechia.tdf.notification.NotificationDetailsFragment"
+        android:label="fragment_notification_details"
+        tools:layout="@layout/fragment_notification_details" >
+
+        <action
+            android:id="@+id/action_notificationDetailsFragment_to_notificationFragment"
+            app:launchSingleTop="true"
+            app:destination="@id/notificationFragment" />
+
+        <argument
+            android:name="nId"
             app:argType="integer"
             android:defaultValue="0"  />
 

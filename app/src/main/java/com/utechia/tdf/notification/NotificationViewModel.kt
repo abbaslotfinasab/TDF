@@ -5,9 +5,7 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.utechia.domain.model.NotificationModel
-import com.utechia.domain.model.PermissionModel
 import com.utechia.domain.usecases.NotificationUseCaseImpl
-import com.utechia.domain.usecases.PermissionUseCaseImpl
 import com.utechia.domain.utile.Result
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.CoroutineExceptionHandler
@@ -61,7 +59,7 @@ class NotificationViewModel @Inject constructor(
 
             _notificationModel.postValue(Result.Loading)
 
-            notificationUseCaseImpl.read(id).let {
+            notificationUseCaseImpl.delete(id).let {
 
                 _notificationModel.postValue(Result.Success(it))
             }

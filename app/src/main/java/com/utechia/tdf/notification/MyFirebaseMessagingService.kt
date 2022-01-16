@@ -5,6 +5,7 @@ import android.app.NotificationManager
 import android.app.PendingIntent
 import android.content.Context
 import android.os.Build
+import android.util.Log
 import android.widget.RemoteViews
 import androidx.core.app.NotificationCompat
 import androidx.core.os.bundleOf
@@ -32,33 +33,23 @@ class MyFirebaseMessagingService : FirebaseMessagingService() {
     override fun onMessageReceived(remoteMessage: RemoteMessage) {
         super.onMessageReceived(remoteMessage)
         if(remoteMessage.notification!=null)
-        generateNotification(remoteMessage.notification?.title!!,remoteMessage.notification?.body!!)
+        generateNotification(remoteMessage.data["type"]!!,remoteMessage.data["referenceId"]!!.toLong(),remoteMessage.notification?.title!!,remoteMessage.notification?.body!!)
     }
 
     override fun onNewToken(token: String) {
         super.onNewToken(token)
+        Log.d("fcm",token)
 
     }
 
-    private fun generateNotification(title: String, message: String) {
-
-        val  bundle = bundleOf("cartId" to 148)
-
-        val pendingIntent = NavDeepLinkBuilder(applicationContext)
-            .setGraph(R.navigation.nav_graph)
-            .setComponentName(MainActivity::class.java)
-            .setDestination(R.id.teaBoyNotificationFragment)
-            .setArguments(bundle)
-            .createTaskStackBuilder()
-            .getPendingIntent(0,PendingIntent.FLAG_ONE_SHOT)
-
+    private fun generateNotification(type:String,referenceId:Long,title: String, message: String) {
 
         var builder : NotificationCompat.Builder = NotificationCompat.Builder(applicationContext, channel_Id)
             .setSmallIcon(R.drawable.ic_notification)
             .setAutoCancel(true)
             .setVibrate(longArrayOf(1000,1000,1000,1000))
             .setOnlyAlertOnce(true)
-            .setContentIntent(pendingIntent)
+            .setContentIntent(navigate(type,referenceId))
 
         builder = builder.setContent(getRemoteView(title,message))
 
@@ -70,5 +61,70 @@ class MyFirebaseMessagingService : FirebaseMessagingService() {
             notificationManager.createNotificationChannel(notificationChannel)
         }
         notificationManager.notify(0,builder.build())
+    }
+
+    private fun navigate(type: String, referenceId: Long): PendingIntent? {
+
+        when(type){
+
+            "Teaboy"->{
+
+                val bundle = bundleOf("cartId" to referenceId)
+
+                return NavDeepLinkBuilder(applicationContext)
+                    .setGraph(R.navigation.nav_graph)
+                    .setComponentName(MainActivity::class.java)
+                    .setDestination(R.id.teaBoyNotificationFragment)
+                    .setArguments(bundle)
+                    .createTaskStackBuilder()
+                    .getPendingIntent(0, PendingIntent.FLAG_ONE_SHOT)
+
+            }
+
+            "Ticket"->{
+
+                val bundle = bundleOf("fid" to referenceId)
+
+                return NavDeepLinkBuilder(applicationContext)
+                    .setGraph(R.navigation.nav_graph)
+                    .setComponentName(MainActivity::class.java)
+                    .setDestination(R.id.ticketDetailsFragment)
+                    .setArguments(bundle)
+                    .createTaskStackBuilder()
+                    .getPendingIntent(0, PendingIntent.FLAG_ONE_SHOT)
+
+            }
+
+            "Cafeteria"->{
+
+                return NavDeepLinkBuilder(applicationContext)
+                    .setGraph(R.navigation.nav_graph)
+                    .setComponentName(MainActivity::class.java)
+                    .setDestination(R.id.orderFragment)
+                    .createTaskStackBuilder()
+                    .getPendingIntent(0, PendingIntent.FLAG_ONE_SHOT)
+
+            }
+
+            "Permission"->{
+
+                return NavDeepLinkBuilder(applicationContext)
+                    .setGraph(R.navigation.nav_graph)
+                    .setComponentName(MainActivity::class.java)
+                    .setDestination(R.id.permissionFragment)
+                    .createTaskStackBuilder()
+                    .getPendingIntent(0, PendingIntent.FLAG_ONE_SHOT)
+
+            }
+            else -> {
+
+                return NavDeepLinkBuilder(applicationContext)
+                    .setGraph(R.navigation.nav_graph)
+                    .setComponentName(MainActivity::class.java)
+                    .setDestination(R.id.nav_graph)
+                    .createTaskStackBuilder()
+                    .getPendingIntent(0, PendingIntent.FLAG_ONE_SHOT)
+            }
+        }
     }
 }

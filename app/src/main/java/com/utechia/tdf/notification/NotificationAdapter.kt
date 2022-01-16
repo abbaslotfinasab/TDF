@@ -1,0 +1,80 @@
+package com.utechia.tdf.notification
+
+import android.graphics.Color
+import android.view.LayoutInflater
+import android.view.View
+import android.view.ViewGroup
+import android.widget.ImageView
+import android.widget.TextView
+import androidx.constraintlayout.widget.ConstraintLayout
+import androidx.core.content.ContextCompat
+import androidx.core.os.bundleOf
+import androidx.navigation.findNavController
+import androidx.recyclerview.widget.RecyclerView
+import com.utechia.domain.model.NotificationModel
+import com.utechia.tdf.R
+
+class NotificationAdapter: RecyclerView.Adapter<RecyclerView.ViewHolder>() {
+
+    var notification: MutableList<NotificationModel> = mutableListOf()
+
+    fun addData(_notification: MutableList<NotificationModel>) {
+        notification.clear()
+        notification.addAll(_notification)
+        notifyDataSetChanged()
+
+    }
+
+
+    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): RecyclerView.ViewHolder =
+        ViewHolder(
+            LayoutInflater.from(parent.context)
+                .inflate(R.layout.item_notification, parent, false)
+        )
+
+    override fun onBindViewHolder(holder: RecyclerView.ViewHolder, position: Int) {
+        (holder as ViewHolder).bind0(position)
+    }
+
+    override fun getItemCount(): Int = notification.size
+
+    inner class ViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
+        private val title: TextView = itemView.findViewById(R.id.title)
+        private val subTitle: TextView = itemView.findViewById(R.id.subTitle)
+        private val name: TextView = itemView.findViewById(R.id.nameApp)
+        private val layout: ConstraintLayout = itemView.findViewById(R.id.notificationLayout)
+        private val image: ImageView = itemView.findViewById(R.id.imageView17)
+
+
+        fun bind0(position: Int) {
+
+            title.text = notification[position].title
+            subTitle.text = notification[position].body
+
+            if (notification[position].isRead == true){
+                layout.setBackgroundColor(ContextCompat.getColor(itemView.context,R.color.white))
+                image.setBackgroundResource(R.drawable.ic_push_notif)
+                title.setTextColor(ContextCompat.getColor(itemView.context,R.color.black))
+                subTitle.setTextColor(ContextCompat.getColor(itemView.context,R.color.black))
+                name.setTextColor(ContextCompat.getColor(itemView.context,R.color.black))
+
+            }else{
+                layout.setBackgroundColor(Color.parseColor("#3360DD"))
+                image.setBackgroundResource(R.drawable.ic_push_notif_read)
+                title.setTextColor(ContextCompat.getColor(itemView.context,R.color.white))
+                subTitle.setTextColor(ContextCompat.getColor(itemView.context,R.color.white))
+                name.setTextColor(ContextCompat.getColor(itemView.context,R.color.white))
+
+            }
+            layout.setOnClickListener {
+
+                val bundle = bundleOf("nId" to notification[position].id,"title" to notification[position].title,"body" to notification[position].body,)
+                itemView.findNavController().navigate(R.id.action_notificationFragment_to_notificationDetailsFragment,bundle)
+            }
+
+        }
+    }
+
+}
+
+

@@ -81,7 +81,7 @@ class CartFragment : Fragment() {
                     if (actionState == ItemTouchHelper.ACTION_STATE_SWIPE) {
                         val itemView : View = viewHolder.itemView
                         val icon : Drawable =
-                            ContextCompat.getDrawable(context,R.drawable.ic_delete_icon)!!
+                            ContextCompat.getDrawable(context,R.drawable.ic_push_delete)!!
                         val top = itemView.top + (itemView.height - icon.intrinsicHeight) / 2
                         val left = itemView.width - icon.intrinsicWidth - (itemView.height - icon.intrinsicHeight) / 6
                         val right = left + icon.intrinsicHeight

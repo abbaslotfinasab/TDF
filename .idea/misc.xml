@@ -293,6 +293,8 @@
         <entry key="app/src/main/res/layout/fragment_home_user.xml" value="0.19322916666666667" />
         <entry key="app/src/main/res/layout/fragment_message.xml" value="0.1" />
         <entry key="app/src/main/res/layout/fragment_notification.xml" value="0.10235507246376811" />
+        <entry key="app/src/main/res/layout/fragment_notification_delete.xml" value="0.1" />
+        <entry key="app/src/main/res/layout/fragment_notification_details.xml" value="0.1" />
         <entry key="app/src/main/res/layout/fragment_notification_rating.xml" value="0.10235507246376811" />
         <entry key="app/src/main/res/layout/fragment_notification_teaboy.xml" value="0.2842809364548495" />
         <entry key="app/src/main/res/layout/fragment_order.xml" value="0.19322916666666667" />
@@ -319,7 +321,7 @@
         <entry key="app/src/main/res/layout/item_chat_details.xml" value="0.33" />
         <entry key="app/src/main/res/layout/item_chat_user.xml" value="0.1" />
         <entry key="app/src/main/res/layout/item_notification.xml" value="0.33" />
-        <entry key="app/src/main/res/layout/item_order_notification.xml" value="0.67" />
+        <entry key="app/src/main/res/layout/item_order_notification.xml" value="0.2" />
         <entry key="app/src/main/res/layout/item_push_notification.xml" value="0.25" />
         <entry key="app/src/main/res/layout/item_ticket_admin.xml" value="0.1" />
         <entry key="app/src/main/res/layout/item_ticket_client.xml" value="0.1" />

@@ -7,7 +7,7 @@ data class NotificationModel(
     val referenceId:Int?,
     val title:String?,
     val body:String?,
-    val isRead:String?,
+    val isRead:Boolean?,
     val createdAt:String?,
     val updatedAt:String?,
 

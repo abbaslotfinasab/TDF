@@ -1,6 +1,5 @@
 package com.utechia.data.repo
 
-import android.util.Log
 import com.utechia.data.api.Service
 import com.utechia.data.entity.NotificationToken
 import com.utechia.data.utile.NetworkHelper
@@ -33,8 +32,6 @@ class VerifyRepoImpl @Inject constructor(
                     sessionManager.saveAuthToken(result.body()!!.data!!)
 
                     service.notification(NotificationToken(sessionManager.fetchFireBaeToken()!!))
-
-                    Log.d("fcm",sessionManager.fetchFireBaeToken().toString())
 
                     result.body()!!.data!!.toDomain()
 
