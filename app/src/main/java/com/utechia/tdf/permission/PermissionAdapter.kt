@@ -11,14 +11,18 @@ import androidx.recyclerview.widget.RecyclerView
 import com.utechia.domain.model.PermissionModel
 import com.utechia.tdf.R
 import java.text.SimpleDateFormat
+import java.time.OffsetDateTime
+import java.time.ZoneId
+import java.time.format.DateTimeFormatter
 import java.util.*
 
 class PermissionAdapter: RecyclerView.Adapter<RecyclerView.ViewHolder>() {
 
     var permission: MutableList<PermissionModel> = mutableListOf()
-    var sdf:SimpleDateFormat = SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss.SSS'Z'")
-    private lateinit var dateFormat:Date
-    private var simple = ""
+    private var startTimeZone = ""
+    private var endTimeZone = ""
+
+
 
     fun addData(_permission: MutableList<PermissionModel>) {
         permission.clear()
@@ -51,13 +55,15 @@ class PermissionAdapter: RecyclerView.Adapter<RecyclerView.ViewHolder>() {
 
         fun bind0(position: Int) {
 
-            dateFormat = sdf.parse(permission[position].datestarts)
-            simple = SimpleDateFormat("yyyy-MM-dd-HH:mm").format(dateFormat)
-            from.text = "${simple}"
+            startTimeZone = OffsetDateTime.parse(permission[position].datestarts).atZoneSameInstant(
+                ZoneId.systemDefault()
+            ).toLocalDateTime().format(DateTimeFormatter.ofPattern("yyyy.MM.dd-HH:mm"))
+            from.text = "$startTimeZone"
 
-            dateFormat = sdf.parse(permission[position].dateends)
-            simple = SimpleDateFormat("yyyy-MM-dd-HH:mm").format(dateFormat)
-            date.text = "${simple}"
+            endTimeZone = OffsetDateTime.parse(permission[position].dateends).atZoneSameInstant(
+                ZoneId.systemDefault()
+            ).toLocalDateTime().format(DateTimeFormatter.ofPattern("yyyy.MM.dd-HH:mm"))
+            date.text = "$endTimeZone"
 
             title.text = permission[position].type
             number.text = permission[position].timeLength

@@ -20,12 +20,12 @@ class PermissionRepoImpl @Inject constructor(
 
         if (networkHelper.isNetworkConnected()) {
 
-            val result = service.getPermission(status)
+            val result = service.getPermission(status,1,500)
 
             return when (result.isSuccessful) {
 
                 true -> {
-                    result.body()?.data!!.map { it.toDomain() }.toMutableList()
+                    result.body()?.data!!.list?.map { it.toDomain() }!!.toMutableList()
                 }
 
                 else ->
@@ -46,7 +46,7 @@ class PermissionRepoImpl @Inject constructor(
             return when (result.isSuccessful) {
 
                 true -> {
-                    result.body()?.data!!.map { it.toDomain() }.toMutableList()
+                    result.body()?.data!!.list?.map { it.toDomain() }!!.toMutableList()
                 }
 
                 else ->
@@ -72,11 +72,11 @@ class PermissionRepoImpl @Inject constructor(
             return when(result.code()){
 
                 200 ->{
-                    result.body()?.data!!.map { it.toDomain() }.toMutableList()
+                    emptyList<PermissionModel>().toMutableList()
                 }
 
                 201 ->{
-                    result.body()?.data!!.map { it.toDomain() }.toMutableList()
+                    emptyList<PermissionModel>().toMutableList()
                 }
 
                 406 -> {

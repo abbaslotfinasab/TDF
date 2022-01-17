@@ -7,13 +7,13 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.TextView
-import androidx.navigation.findNavController
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.utechia.data.entity.Chat
 import com.utechia.tdf.R
-import java.text.SimpleDateFormat
-import java.util.*
+import java.time.OffsetDateTime
+import java.time.ZoneId
+import java.time.format.DateTimeFormatter
 
 class ChatAdapter(private val ticketDetailsFragment: TicketDetailsFragment): RecyclerView.Adapter<RecyclerView.ViewHolder>() {
 
@@ -27,10 +27,8 @@ class ChatAdapter(private val ticketDetailsFragment: TicketDetailsFragment): Rec
     var priority = ""
     var statusCode = ""
 
-    var sdf: SimpleDateFormat =
-        SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss.SSS'Z'", Locale.getDefault())
-    private lateinit var dateFormat: Date
-    private var simple = ""
+    private var timeZone = ""
+
 
     fun addData(_chat: Chat) {
         chat.add(_chat)
@@ -144,9 +142,10 @@ class ChatAdapter(private val ticketDetailsFragment: TicketDetailsFragment): Rec
 
         fun bind0(position: Int) {
 
-            dateFormat = sdf.parse(chat[position].datetime)
-            simple = SimpleDateFormat("yyyy.MM.dd | HH:mm", Locale.getDefault()).format(dateFormat)
-            date.text = "$simple"
+            timeZone = OffsetDateTime.parse(chat[position].datetime).atZoneSameInstant(
+                ZoneId.systemDefault()
+            ).toLocalDateTime().format(DateTimeFormatter.ofPattern("yyyy.MM.dd-HH:mm"))
+            date.text = "$timeZone"
 
             description.text = chat[position].text
             user.text = chat[position].username
@@ -179,9 +178,10 @@ class ChatAdapter(private val ticketDetailsFragment: TicketDetailsFragment): Rec
 
         fun bind0(position: Int) {
 
-            dateFormat = sdf.parse(chat[position].datetime!!)!!
-            simple = SimpleDateFormat("yyyy-MM-dd | HH:mm", Locale.getDefault()).format(dateFormat)
-            date.text = "$simple"
+            timeZone = OffsetDateTime.parse(chat[position].datetime).atZoneSameInstant(
+                ZoneId.systemDefault()
+            ).toLocalDateTime().format(DateTimeFormatter.ofPattern("yyyy.MM.dd-HH:mm"))
+            date.text = "$timeZone"
 
             user.text = chat[position].username
             description.text = chat[position].text

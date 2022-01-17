@@ -11,15 +11,18 @@ import androidx.recyclerview.widget.RecyclerView
 import com.utechia.domain.model.SurveyModel
 import com.utechia.tdf.R
 import java.text.SimpleDateFormat
+import java.time.OffsetDateTime
+import java.time.ZoneId
+import java.time.format.DateTimeFormatter
 import java.util.*
 
 class SurveyAdapter: RecyclerView.Adapter<RecyclerView.ViewHolder>() {
 
     var survey: MutableList<SurveyModel> = mutableListOf()
+    private var startTimeZone = ""
+    private var endTimeZone = ""
 
-    var sdf: SimpleDateFormat = SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss.SSS'Z'", Locale.getDefault())
-    private lateinit var dateFormat: Date
-    private var simple = ""
+
 
     fun addData(_survey: MutableList<SurveyModel>) {
         survey.clear()
@@ -53,13 +56,15 @@ class SurveyAdapter: RecyclerView.Adapter<RecyclerView.ViewHolder>() {
             title.text = survey[position].title
             number.text = "${survey[position].questions?.size}Questions"
 
-            dateFormat = sdf.parse(survey[position].datestart)
-            simple = SimpleDateFormat("yyyy-MM-dd-HH:mm", Locale.getDefault()).format(dateFormat)
-            startDate.text = "$simple"
+            startTimeZone = OffsetDateTime.parse(survey[position].datestart).atZoneSameInstant(
+                ZoneId.systemDefault()
+            ).toLocalDateTime().format(DateTimeFormatter.ofPattern("yyyy.MM.dd-HH:mm"))
+            startDate.text = "$startTimeZone"
 
-            dateFormat = sdf.parse(survey[position].dateend)
-            simple = SimpleDateFormat("yyyy-MM-dd-HH:mm", Locale.getDefault()).format(dateFormat)
-            endDate.text = "$simple"
+            endTimeZone = OffsetDateTime.parse(survey[position].dateend).atZoneSameInstant(
+                ZoneId.systemDefault()
+            ).toLocalDateTime().format(DateTimeFormatter.ofPattern("yyyy.MM.dd-HH:mm"))
+            endDate.text = "$endTimeZone"
 
             result.text = "Evaluate"
 

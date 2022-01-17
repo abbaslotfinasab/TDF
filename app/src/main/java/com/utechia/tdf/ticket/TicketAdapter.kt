@@ -12,17 +12,15 @@ import androidx.navigation.findNavController
 import androidx.recyclerview.widget.RecyclerView
 import com.utechia.domain.model.TicketModel
 import com.utechia.tdf.R
-import java.text.SimpleDateFormat
-import java.util.*
+import java.time.OffsetDateTime
+import java.time.ZoneId
+import java.time.format.DateTimeFormatter
 
 class TicketAdapter: RecyclerView.Adapter<RecyclerView.ViewHolder>() {
 
     var ticket: MutableList<TicketModel> = mutableListOf()
+    private var timeZone = ""
 
-    var sdf: SimpleDateFormat = SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss.SSS'Z'", Locale.getDefault())
-    var timeZone:TimeZone = TimeZone.getTimeZone("GMT")
-    private lateinit var dateFormat: Date
-    private var simple = ""
 
     fun addData(_ticket: MutableList<TicketModel>) {
         ticket.clear()
@@ -61,9 +59,10 @@ class TicketAdapter: RecyclerView.Adapter<RecyclerView.ViewHolder>() {
 
             }
 
-            dateFormat = sdf.parse(ticket[position].dateupdate!!)!!
-            simple = SimpleDateFormat("yyyy.MM.dd | HH:mm", Locale.getDefault()).format(dateFormat)
-            date.text = "$simple"
+            timeZone = OffsetDateTime.parse(ticket[position].dateupdate).atZoneSameInstant(
+                ZoneId.systemDefault()
+            ).toLocalDateTime().format(DateTimeFormatter.ofPattern("yyyy.MM.dd-HH:mm"))
+            date.text = "$timeZone"
 
             title.text = ticket[position].title
             subTitle.text = ticket[position].id.toString()

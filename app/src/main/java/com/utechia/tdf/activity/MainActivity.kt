@@ -63,10 +63,8 @@ class MainActivity : AppCompatActivity() {
                 binding.drawerLayout.setDrawerLockMode(DrawerLayout.LOCK_MODE_LOCKED_CLOSED)
 
             }
-
             teaBoy() -> {
                 graph.setStartDestination(R.id.teaBoyHomeFragment)
-
                 val name = prefs.getString("name","").toString()
                 val floor = prefs.getString("floor","").toString()
                 setupTeaBoy(name,floor)

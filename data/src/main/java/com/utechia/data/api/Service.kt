@@ -1,5 +1,6 @@
 package com.utechia.data.api
 
+import NotificationCount
 import com.utechia.data.entity.*
 import okhttp3.MultipartBody
 import org.json.JSONArray
@@ -99,14 +100,14 @@ interface Service {
     suspend fun notification(@Body token: NotificationToken)
 
     @GET("accessmanagement/permissions")
-    suspend fun getPermission(@Query("status") status:String):Response<Permission>
+    suspend fun getPermission(@Query("status") status:String,@Query("page") page: Int,@Query("page_size") page_size: Int):Response<Permission>
 
     @GET("accessmanagement/permissions")
     suspend fun getSinglePermission(@Query("id") id:Int):Response<Permission>
 
     @Headers("Content-Type: application/json")
     @POST("accessmanagement/permissions")
-    suspend fun postPermission(@Body permissionPostBody: PermissionPostBody):Response<Permission>
+    suspend fun postPermission(@Body permissionPostBody: PermissionPostBody):Response<Void>
 
     @Headers("Content-Type: application/json")
     @PATCH("accessmanagement/permissions")
@@ -159,7 +160,7 @@ interface Service {
     suspend fun rateTicket(@Body rateTicketBody: RateTicketBody):Response<Void>
 
     @GET("notification")
-    suspend fun getNotification():Response<Notification>
+    suspend fun getNotification(@Query("page") page: Int,@Query("page_size") page_size: Int):Response<Notification>
 
     @PATCH("notification/{id}")
     suspend fun readNotification(@Path("id") id: Int):Response<Void>
@@ -168,6 +169,6 @@ interface Service {
     suspend fun deleteNotification(@Path("id") id: Int):Response<Void>
 
     @GET("notification/unread/count")
-    suspend fun countNotification():Response<Void>
+    suspend fun countNotification():Response<NotificationCount>
 
 }

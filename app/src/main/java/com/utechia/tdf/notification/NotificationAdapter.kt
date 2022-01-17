@@ -1,6 +1,7 @@
 package com.utechia.tdf.notification
 
 import android.graphics.Color
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -13,16 +14,21 @@ import androidx.navigation.findNavController
 import androidx.recyclerview.widget.RecyclerView
 import com.utechia.domain.model.NotificationModel
 import com.utechia.tdf.R
+import java.time.*
 
 class NotificationAdapter: RecyclerView.Adapter<RecyclerView.ViewHolder>() {
 
     var notification: MutableList<NotificationModel> = mutableListOf()
+    private lateinit var timeZone:LocalDateTime
+    private val localTime = LocalDateTime.now()
+
+
+
 
     fun addData(_notification: MutableList<NotificationModel>) {
         notification.clear()
         notification.addAll(_notification)
-        notifyDataSetChanged()
-
+        notifyItemRangeChanged(0,_notification.size-1)
     }
 
 
@@ -51,30 +57,88 @@ class NotificationAdapter: RecyclerView.Adapter<RecyclerView.ViewHolder>() {
             title.text = notification[position].title
             subTitle.text = notification[position].body
 
-            if (notification[position].isRead == true){
-                layout.setBackgroundColor(ContextCompat.getColor(itemView.context,R.color.white))
-                image.setBackgroundResource(R.drawable.ic_push_notif)
-                title.setTextColor(ContextCompat.getColor(itemView.context,R.color.black))
-                subTitle.setTextColor(ContextCompat.getColor(itemView.context,R.color.black))
-                name.setTextColor(ContextCompat.getColor(itemView.context,R.color.black))
+            timeZone = OffsetDateTime.parse(notification[position].updatedAt).atZoneSameInstant(
+                ZoneId.systemDefault()
+            ).toLocalDateTime()
 
-            }else{
+            val duration = Duration.between(
+                timeZone.atOffset(ZoneOffset.UTC).toInstant(),
+                localTime.atOffset(ZoneOffset.UTC).toInstant()
+            )
+
+            Log.d("duration", duration.seconds.toString())
+
+            when (duration.seconds) {
+
+                in 0 until 60 -> {
+                    name.text = "${duration.seconds}s ago"
+                }
+
+                in 60 until 3600 -> {
+                    name.text = "${duration.toMinutes()}m ago"
+                }
+
+                in 3600 until 43200 -> {
+                    name.text = "${duration.toHours()}h ago"
+                }
+
+                in 43200 until 86400 -> {
+                    name.text = "yesterday"
+                }
+
+                in 86400 until 604800 -> {
+                    name.text = "${duration.toDays()}d ago"
+                }
+
+                in 604800 until 2592000 -> {
+                    name.text = "${(duration.toDays() / 7).toInt()}w ago"
+                }
+
+                in 2592000 until 31536000 -> {
+                    name.text = "${(duration.toDays() / 30).toInt()}m ago"
+                }
+
+                else -> {
+                    name.text = "${(duration.toDays() / 365).toInt()}y ago"
+                }
+            }
+
+            if (notification[position].isRead == true) {
+
+                layout.setBackgroundColor(ContextCompat.getColor(itemView.context, R.color.white))
+                image.setBackgroundResource(R.drawable.ic_push_notif)
+                title.setTextColor(ContextCompat.getColor(itemView.context, R.color.black))
+                subTitle.setTextColor(ContextCompat.getColor(itemView.context, R.color.black))
+                name.setTextColor(Color.parseColor("#335DE0"))
+
+
+            } else {
                 layout.setBackgroundColor(Color.parseColor("#3360DD"))
                 image.setBackgroundResource(R.drawable.ic_push_notif_read)
-                title.setTextColor(ContextCompat.getColor(itemView.context,R.color.white))
-                subTitle.setTextColor(ContextCompat.getColor(itemView.context,R.color.white))
-                name.setTextColor(ContextCompat.getColor(itemView.context,R.color.white))
-
+                title.setTextColor(ContextCompat.getColor(itemView.context, R.color.white))
+                subTitle.setTextColor(ContextCompat.getColor(itemView.context, R.color.white))
+                name.setTextColor(ContextCompat.getColor(itemView.context, R.color.white))
             }
             layout.setOnClickListener {
 
-                val bundle = bundleOf("nId" to notification[position].id,"title" to notification[position].title,"body" to notification[position].body,)
-                itemView.findNavController().navigate(R.id.action_notificationFragment_to_notificationDetailsFragment,bundle)
-            }
+                layout.setBackgroundColor(ContextCompat.getColor(itemView.context, R.color.white))
+                image.setBackgroundResource(R.drawable.ic_push_notif)
+                title.setTextColor(ContextCompat.getColor(itemView.context, R.color.black))
+                subTitle.setTextColor(ContextCompat.getColor(itemView.context, R.color.black))
+                name.setTextColor(Color.parseColor("#335DE0"))
 
+                val bundle = bundleOf(
+                    "nId" to notification[position].id,
+                    "title" to notification[position].title,
+                    "body" to notification[position].body
+                )
+                itemView.findNavController().navigate(
+                    R.id.action_notificationFragment_to_notificationDetailsFragment,
+                    bundle
+                )
+            }
         }
     }
-
 }
 
 

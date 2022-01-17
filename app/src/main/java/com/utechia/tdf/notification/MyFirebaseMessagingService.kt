@@ -1,5 +1,6 @@
 package com.utechia.tdf.notification
 
+import android.app.Notification
 import android.app.NotificationChannel
 import android.app.NotificationManager
 import android.app.PendingIntent
@@ -32,7 +33,7 @@ class MyFirebaseMessagingService : FirebaseMessagingService() {
 
     override fun onMessageReceived(remoteMessage: RemoteMessage) {
         super.onMessageReceived(remoteMessage)
-        if(remoteMessage.notification!=null)
+        if(remoteMessage.notification!=null && remoteMessage.data.isNotEmpty())
         generateNotification(remoteMessage.data["type"]!!,remoteMessage.data["referenceId"]!!.toLong(),remoteMessage.notification?.title!!,remoteMessage.notification?.body!!)
     }
 
@@ -42,14 +43,33 @@ class MyFirebaseMessagingService : FirebaseMessagingService() {
 
     }
 
-    private fun generateNotification(type:String,referenceId:Long,title: String, message: String) {
+    private fun generateNotification(type:String, referenceId:Long, title: String, message: String) {
 
-        var builder : NotificationCompat.Builder = NotificationCompat.Builder(applicationContext, channel_Id)
-            .setSmallIcon(R.drawable.ic_notification)
-            .setAutoCancel(true)
-            .setVibrate(longArrayOf(1000,1000,1000,1000))
-            .setOnlyAlertOnce(true)
-            .setContentIntent(navigate(type,referenceId))
+        var builder : NotificationCompat.Builder = if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.N) {
+            NotificationCompat.Builder(applicationContext, channel_Id)
+                .setSmallIcon(R.drawable.ic_notification)
+                .setContentTitle(title)
+                .setContentTitle(message)
+                .setAutoCancel(true)
+                .setVibrate(longArrayOf(1000,1000,1000,1000))
+                .setOnlyAlertOnce(true)
+                .setPriority(NotificationManager.IMPORTANCE_MAX)
+                .setDefaults(Notification.DEFAULT_ALL)
+                .setContentIntent(navigate(type,referenceId))
+                .setChannelId(channel_Id)
+        } else {
+            NotificationCompat.Builder(applicationContext, channel_Id)
+                .setSmallIcon(R.drawable.ic_notification)
+                .setAutoCancel(true)
+                .setContentTitle(title)
+                .setContentTitle(message)
+                .setVibrate(longArrayOf(1000,1000,1000,1000))
+                .setOnlyAlertOnce(true)
+                .setDefaults(Notification.DEFAULT_ALL)
+                .setContentIntent(navigate(type,referenceId))
+                .setChannelId(channel_Id)
+
+        }
 
         builder = builder.setContent(getRemoteView(title,message))
 
@@ -116,8 +136,8 @@ class MyFirebaseMessagingService : FirebaseMessagingService() {
                     .getPendingIntent(0, PendingIntent.FLAG_ONE_SHOT)
 
             }
-            else -> {
 
+            else -> {
                 return NavDeepLinkBuilder(applicationContext)
                     .setGraph(R.navigation.nav_graph)
                     .setComponentName(MainActivity::class.java)

@@ -8,9 +8,9 @@ import kotlinx.serialization.Serializable
 
 @Parcelize
 @Serializable
-data class Notification(
+data class PermissionPage(
 
-    val data :@Contextual @RawValue NotificationPage?,
-    val error:@Contextual @RawValue Error?
+    val totalPages: Int?,
+    val list:@Contextual @RawValue MutableList<PermissionData>?,
 
-): Parcelable
+    ): Parcelable

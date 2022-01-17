@@ -13,20 +13,20 @@ import androidx.navigation.findNavController
 import androidx.recyclerview.widget.RecyclerView
 import com.utechia.domain.model.UserOrderDataModel
 import com.utechia.tdf.R
-import java.text.SimpleDateFormat
-import java.util.*
+import java.time.OffsetDateTime
+import java.time.ZoneId
+import java.time.format.DateTimeFormatter
 
 class OrderAdapter: RecyclerView.Adapter<RecyclerView.ViewHolder>() {
 
     var userOrders: MutableList<UserOrderDataModel> = mutableListOf()
-    var sdf: SimpleDateFormat = SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss.SSS'Z'", Locale.getDefault())
-    private lateinit var dateFormat: Date
-    private var simple = ""
+    private var timeZone = ""
 
     fun addData(_User_orders: MutableList<UserOrderDataModel>) {
         userOrders.clear()
         userOrders.addAll(_User_orders)
-        notifyDataSetChanged()
+        notifyItemRangeChanged(0,_User_orders.size-1)
+
     }
 
 
@@ -57,9 +57,10 @@ class OrderAdapter: RecyclerView.Adapter<RecyclerView.ViewHolder>() {
         fun bind0(position: Int) {
             indicate = false
 
-            dateFormat = sdf.parse(userOrders[position].updatedAt)
-            simple = SimpleDateFormat("yyyy-MM-dd-HH:mm", Locale.getDefault()).format(dateFormat)
-            date.text = "$simple"
+            timeZone = OffsetDateTime.parse(userOrders[position].updatedAt).atZoneSameInstant(
+                ZoneId.systemDefault()
+            ).toLocalDateTime().format(DateTimeFormatter.ofPattern("yyyy.MM.dd-HH:mm"))
+            date.text = "$timeZone"
 
             number.text = "${userOrders[position].cart?.items?.size}x"
             oderId.text = "Order ID:${userOrders[position].id}"
@@ -83,7 +84,6 @@ class OrderAdapter: RecyclerView.Adapter<RecyclerView.ViewHolder>() {
                     cancel.visibility = View.VISIBLE
                     ratingBar.visibility = View.GONE
                     rateNumber.visibility = View.GONE
-
 
                 }
                 "preparing" ->{

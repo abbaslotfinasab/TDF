@@ -1,6 +1,5 @@
 package com.utechia.data.repo
 
-import android.util.Log
 import com.utechia.data.api.Service
 import com.utechia.data.utile.NetworkHelper
 import com.utechia.domain.model.NotificationModel
@@ -18,12 +17,12 @@ class NotificationRepoImpl @Inject constructor(
 
         if (networkHelper.isNetworkConnected()) {
 
-            val result = service.getNotification()
+            val result = service.getNotification(1,500)
 
             return when (result.isSuccessful) {
 
                 true -> {
-                    result.body()?.data!!.map { it.toDomain() }.toMutableList()
+                    result.body()?.data!!.list?.map{it.toDomain() }!!.toMutableList()
                 }
 
                 else ->

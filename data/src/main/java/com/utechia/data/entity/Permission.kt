@@ -10,7 +10,7 @@ import kotlinx.serialization.Serializable
 @Serializable
 data class Permission(
 
-    val data :@Contextual @RawValue MutableList<PermissionData>?,
+    val data :@Contextual @RawValue PermissionPage,
     val error:@Contextual @RawValue Error?
 
 ): Parcelable

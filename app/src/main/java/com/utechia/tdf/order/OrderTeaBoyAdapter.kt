@@ -8,23 +8,22 @@ import androidx.core.os.bundleOf
 import androidx.navigation.findNavController
 import androidx.recyclerview.widget.RecyclerView
 import com.utechia.domain.model.TeaBoyOrderDataModel
-import com.utechia.domain.model.UserOrderDataModel
 import com.utechia.tdf.R
-import java.text.SimpleDateFormat
-import java.util.*
+import java.time.OffsetDateTime
+import java.time.ZoneId
+import java.time.format.DateTimeFormatter
 
 class OrderTeaBoyAdapter(private val teaBoyOrdersFragment: TeaBoyOrdersFragment): RecyclerView.Adapter<RecyclerView.ViewHolder>() {
 
     var userOrders: MutableList<TeaBoyOrderDataModel> = mutableListOf()
-    var sdf: SimpleDateFormat = SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss.SSS'Z'")
-    private lateinit var dateFormat: Date
-    private var simple = ""
+    private var timeZone = ""
 
 
     fun addData(_teaBoyOrders: MutableList<TeaBoyOrderDataModel>) {
         userOrders.clear()
         userOrders.addAll(_teaBoyOrders)
-        notifyDataSetChanged()
+        notifyItemRangeChanged(0,_teaBoyOrders.size-1)
+
     }
 
 
@@ -54,9 +53,10 @@ class OrderTeaBoyAdapter(private val teaBoyOrdersFragment: TeaBoyOrdersFragment)
 
         fun bind0(position: Int) {
 
-            dateFormat = sdf.parse(userOrders[position].updatedAt)
-            simple = SimpleDateFormat("yyyy-MM-dd-HH:mm").format(dateFormat)
-            date.text = "$simple"
+            timeZone = OffsetDateTime.parse(userOrders[position].updatedAt).atZoneSameInstant(
+                ZoneId.systemDefault()
+            ).toLocalDateTime().format(DateTimeFormatter.ofPattern("yyyy.MM.dd-HH:mm"))
+            date.text = "$timeZone"
 
             number.text = "${userOrders[position].cart?.items?.size}x"
             oderId.text = "Order ID:${userOrders[position].id}"

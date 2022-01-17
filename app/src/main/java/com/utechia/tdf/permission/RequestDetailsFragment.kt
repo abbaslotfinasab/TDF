@@ -13,8 +13,9 @@ import androidx.fragment.app.viewModels
 import com.utechia.domain.utile.Result
 import com.utechia.tdf.databinding.FragmentRequestDetailsBinding
 import dagger.hilt.android.AndroidEntryPoint
-import java.text.SimpleDateFormat
-import java.util.*
+import java.time.OffsetDateTime
+import java.time.ZoneId
+import java.time.format.DateTimeFormatter
 
 @AndroidEntryPoint
 class RequestDetailsFragment : DialogFragment() {
@@ -22,9 +23,8 @@ class RequestDetailsFragment : DialogFragment() {
     private lateinit var binding: FragmentRequestDetailsBinding
     private val permissionViewModel:PermissionViewModel by viewModels()
     private var permissionId = 0
-    var sdf: SimpleDateFormat = SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss.SSS'Z'")
-    private lateinit var dateFormat: Date
-    private var simple = ""
+    private var startTimeZone = ""
+    private var endTimeZone = ""
 
 
     override fun onCreateView(
@@ -75,13 +75,15 @@ class RequestDetailsFragment : DialogFragment() {
                     binding.title.text = it.data[0].type
                     binding.description.text = it.data[0].description
 
-                    dateFormat = sdf.parse(it.data[0].datestarts)
-                    simple = SimpleDateFormat("yyyy-MM-dd-HH:mm").format(dateFormat)
-                    binding.startDate.text = "${simple}"
+                    startTimeZone = OffsetDateTime.parse(it.data[0].datestarts).atZoneSameInstant(
+                        ZoneId.systemDefault()
+                    ).toLocalDateTime().format(DateTimeFormatter.ofPattern("yyyy.MM.dd-HH:mm"))
+                    binding.startDate.text = "$startTimeZone"
 
-                    dateFormat = sdf.parse(it.data[0].dateends)
-                    simple = SimpleDateFormat("yyyy-MM-dd-HH:mm").format(dateFormat)
-                    binding.endDate.text = "${simple}"
+                    endTimeZone = OffsetDateTime.parse(it.data[0].dateends).atZoneSameInstant(
+                        ZoneId.systemDefault()
+                    ).toLocalDateTime().format(DateTimeFormatter.ofPattern("yyyy.MM.dd-HH:mm"))
+                    binding.endDate.text = "$endTimeZone"
 
                 }
 
