@@ -483,6 +483,8 @@
 
         <action
             android:id="@+id/action_permissionFragment_to_cancelRequestFragment"
+            app:launchSingleTop="true"
+            app:popUpTo="@id/nav_graph"
             app:destination="@id/cancelRequestFragment" />
 
         <action
@@ -713,6 +715,7 @@
 
         <action
             android:id="@+id/action_closeTicketFragment_to_ticketSystemFragment"
+            app:popUpTo="@id/nav_graph"
             app:destination="@id/ticketSystemFragment" />
 
     </dialog>
@@ -723,33 +726,41 @@
         tools:layout="@layout/fragment_ticket_details" >
         <action
             android:id="@+id/action_ticketDetailsFragment_to_messageFragment"
+            app:launchSingleTop="true"
             app:destination="@id/messageFragment" />
         
         <action
             android:id="@+id/action_messageFragment_to_blankFragment"
+            app:launchSingleTop="true"
             app:destination="@id/blankFragment" />
 
         <action
             android:id="@+id/action_ticketDetailsFragment_to_closeTicketFragment"
+            app:launchSingleTop="true"
             app:destination="@id/closeTicketFragment" />
 
         <action
             android:id="@+id/action_createTicketFragment_to_blankFragment"
+            app:launchSingleTop="true"
             app:destination="@id/blankFragment" />
 
         <action
             android:id="@+id/action_messageFragment_to_ticketDetailsFragment"
+            app:launchSingleTop="true"
             app:destination="@id/ticketDetailsFragment" />
 
         <action
             android:id="@+id/action_messageFragment_to_uploadFragment"
+            app:launchSingleTop="true"
             app:destination="@id/uploadReplyFragment" />
 
         <action
             android:id="@+id/action_messageFragment_to_uploadReplyDeleteFragment"
+            app:launchSingleTop="true"
             app:destination="@id/uploadReplyDeleteFragment" />
         <action
             android:id="@+id/action_ticketDetailsFragment_to_ticketRatingFragment"
+            app:launchSingleTop="true"
             app:destination="@id/ticketRatingFragment" />
 
 

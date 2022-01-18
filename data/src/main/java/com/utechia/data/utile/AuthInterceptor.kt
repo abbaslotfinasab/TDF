@@ -34,6 +34,6 @@ class AuthInterceptor @Inject constructor(@ApplicationContext context: Context,p
 
             result.body()?.data!!
         } else
-            sessionManager.fetchAuthToken()!!
+            sessionManager.fetchAuthToken().toString()
     }
 }

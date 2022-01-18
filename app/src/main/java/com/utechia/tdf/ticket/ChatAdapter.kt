@@ -10,6 +10,7 @@ import android.widget.TextView
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.utechia.data.entity.Chat
+import com.utechia.domain.model.TicketModel
 import com.utechia.tdf.R
 import java.time.OffsetDateTime
 import java.time.ZoneId
@@ -18,22 +19,22 @@ import java.time.format.DateTimeFormatter
 class ChatAdapter(private val ticketDetailsFragment: TicketDetailsFragment): RecyclerView.Adapter<RecyclerView.ViewHolder>() {
 
     lateinit var firebaseUploadAdapter:FirebaseUploadAdapter
-    var chat: MutableList<Chat> = mutableListOf()
-    var single = false
-    var rateable = true
-    var title = ""
-    var mID = 0
-    var category = ""
-    var priority = ""
-    var statusCode = ""
 
+    var chat: MutableList<Chat> = mutableListOf()
+    var ticket: MutableList<TicketModel> = mutableListOf()
+    private var single = false
     private var timeZone = ""
 
 
     fun addData(_chat: Chat) {
         chat.add(_chat)
-        notifyItemChanged(chat.size - 1)
+        notifyItemChanged(chat.size)
 
+    }
+
+    fun addDetails(_ticket:TicketModel) {
+        ticket.add(_ticket)
+        notifyItemChanged(0)
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): RecyclerView.ViewHolder {
@@ -88,18 +89,18 @@ class ChatAdapter(private val ticketDetailsFragment: TicketDetailsFragment): Rec
         private val status: TextView = itemView.findViewById(R.id.status)
 
         fun bind0(position: Int) {
-            description.text = title
-            user.text = category
-            date.text = priority
-            subTitle.text = mID.toString()
+            description.text = ticket[position].description
+            user.text = ticket[position].category.title
+            date.text =  ticket[position].Priority
+            subTitle.text = ticket[position].id.toString()
 
-            if (statusCode == "Close"){
+            if (ticket[position].status == "Close"){
                 status.visibility = View.VISIBLE
             }else{
                 status.visibility = View.GONE
             }
 
-            when (priority) {
+            when (ticket[position].Priority) {
 
                 "High" -> {
                     date.apply {
@@ -153,20 +154,20 @@ class ChatAdapter(private val ticketDetailsFragment: TicketDetailsFragment): Rec
             data.apply {
                 firebaseUploadAdapter = FirebaseUploadAdapter(chat[position].mediaurl!!)
                 adapter = firebaseUploadAdapter
-                layoutManager = GridLayoutManager(context, calculateNoOfColumns(context, 100.0F))
+                layoutManager = GridLayoutManager(context, calculateNoOfColumns(context))
             }
-            if (statusCode == "Close" && !single && rateable) {
+            if (ticket[0].status == "Close" && !single && ticket[0].rateable!!) {
                 single = true
-                ticketDetailsFragment.rating(mID)
+                ticketDetailsFragment.rating(ticket[0].id!!)
             }
         }
+
         private fun calculateNoOfColumns(
             context: Context,
-            columnWidthDp: Float
         ): Int { // For example columnWidthdp=180
             val displayMetrics: DisplayMetrics = context.resources.displayMetrics
             val screenWidthDp = displayMetrics.widthPixels / displayMetrics.density
-            return (screenWidthDp / columnWidthDp + 0.5).toInt() // +0.5 for correct rounding to int.
+            return (screenWidthDp / 100 + 0.5).toInt() // +0.5 for correct rounding to int.
         }
     }
 
@@ -187,25 +188,24 @@ class ChatAdapter(private val ticketDetailsFragment: TicketDetailsFragment): Rec
             description.text = chat[position].text
 
             data.apply {
-                firebaseUploadAdapter = FirebaseUploadAdapter(chat[position].mediaurl!!)
+                firebaseUploadAdapter = FirebaseUploadAdapter(chat[0].mediaurl!!)
                 adapter = firebaseUploadAdapter
-                layoutManager = GridLayoutManager(context, calculateNoOfColumns(context, 100.0F))
+                layoutManager = GridLayoutManager(context, calculateNoOfColumns(context))
             }
 
-            if (statusCode == "Close" && !single && rateable) {
+            if (ticket[0].status == "Close" && !single && ticket[0].rateable!!) {
                 single = true
-                ticketDetailsFragment.rating(mID)
+                ticketDetailsFragment.rating(ticket[0].id!!)
             }
         }
     }
 
         private fun calculateNoOfColumns(
             context: Context,
-            columnWidthDp: Float
         ): Int { // For example columnWidthdp=180
             val displayMetrics: DisplayMetrics = context.resources.displayMetrics
             val screenWidthDp = displayMetrics.widthPixels / displayMetrics.density
-            return (screenWidthDp / columnWidthDp + 0.5).toInt() // +0.5 for correct rounding to int.
+            return (screenWidthDp / 100 + 0.5).toInt() // +0.5 for correct rounding to int.
     }
 }
 

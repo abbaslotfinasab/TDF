@@ -9,6 +9,7 @@ import androidx.constraintlayout.widget.ConstraintLayout
 import androidx.core.content.ContextCompat
 import androidx.core.os.bundleOf
 import androidx.navigation.findNavController
+import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.RecyclerView
 import com.utechia.domain.model.TicketModel
 import com.utechia.tdf.R
@@ -54,7 +55,8 @@ class TicketAdapter: RecyclerView.Adapter<RecyclerView.ViewHolder>() {
         fun bind0(position: Int) {
 
             layout.setOnClickListener {
-                val bundle = bundleOf("fid" to ticket[position].fid , "ticketId" to ticket[position].id, "status" to ticket[position].status,"category" to ticket[position].category.title, "priority" to ticket[position].Priority,"title" to ticket[position].title, "rateable" to ticket[position].rateable )
+                val bundle = bundleOf("fid" to ticket[position].fid , "ticketId" to ticket[position].id)
+                itemView.findNavController().clearBackStack(R.id.ticketSystemFragment)
                 itemView.findNavController().navigate(R.id.action_ticketSystemFragment_to_ticketDetailsFragment,bundle)
 
             }

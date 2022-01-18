@@ -89,12 +89,13 @@ class TicketSystemFragment : Fragment() {
 
 
         binding.plus.setOnClickListener {
-
+            findNavController().clearBackStack(R.id.ticketSystemFragment)
             findNavController().navigate(R.id.action_ticketSystemFragment_to_createTicketFragment)
 
         }
 
         binding.more.setOnClickListener {
+            findNavController().clearBackStack(R.id.ticketSystemFragment)
             findNavController().navigate(R.id.action_ticketSystemFragment_to_createTicketFragment)
 
         }

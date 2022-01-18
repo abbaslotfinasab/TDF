@@ -117,5 +117,9 @@ abstract class RepositoryModule {
         mainRepoImpl: MainRepoImpl
     ): MainRepo
 
+    @Binds
+    abstract fun bindTicketDetailsRepositoryService(
+        ticketDetailsRepoImpl: TicketDetailsRepoImpl
+    ): TicketDetailsRepo
 
 }

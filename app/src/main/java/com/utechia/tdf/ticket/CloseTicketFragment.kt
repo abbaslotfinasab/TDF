@@ -66,6 +66,7 @@ class CloseTicketFragment : DialogFragment() {
             when (it) {
                 is Result.Success -> {
                     binding.prg.visibility = View.VISIBLE
+                    findNavController().clearBackStack(R.id.closeTicketFragment)
                     findNavController().navigate(R.id.action_closeTicketFragment_to_ticketSystemFragment)
 
 

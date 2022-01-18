@@ -1,8 +1,5 @@
 package com.utechia.domain.usecases
 
-import android.net.Uri
-import com.utechia.domain.model.TicketModel
-import org.json.JSONArray
 
 
 interface TicketUseCase<R> {

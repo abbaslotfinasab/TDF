@@ -1,8 +1,6 @@
 package com.utechia.domain.repository
 
-import android.net.Uri
 import com.utechia.domain.model.TicketModel
-import org.json.JSONArray
 
 interface TicketRepo {
 

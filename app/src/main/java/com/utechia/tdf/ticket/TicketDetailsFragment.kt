@@ -35,10 +35,12 @@ class TicketDetailsFragment : Fragment() {
     private lateinit var navHostFragment: NavHostFragment
     private val fragment: MessageFragment = MessageFragment()
     private val uploadViewModel:UploadViewModel by viewModels()
+    private val ticketViewModel:TicketDetailsViewModel by viewModels()
     private val chatAdapter :ChatAdapter = ChatAdapter(this)
-    private var fId:String = ""
-    private var status:String = ""
-    private var mId:Int = 0
+    private var mId = 0
+
+
+
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -59,58 +61,11 @@ class TicketDetailsFragment : Fragment() {
         binding.btnClose.bringToFront()
 
         if (arguments != null) {
-            fId = requireArguments().getString("fid","")
             mId = requireArguments().getInt("ticketId",0)
-            status = requireArguments().getString("status","")
-            chatAdapter.title = requireArguments().getString("title","")
-            chatAdapter.category  = requireArguments().getString("category","")
-            chatAdapter.priority = requireArguments().getString("priority","")
-            chatAdapter.rateable = requireArguments().getBoolean("rateable",true)
-            chatAdapter.statusCode = status
-            chatAdapter.mID = mId
-
         }
 
-        val ticketListener = database.child("Ticketmessage").child("Ticket-$fId").orderByValue()
-
-        ticketListener.addValueEventListener(object:ValueEventListener{
-            override fun onDataChange(snapshot: DataSnapshot) {
-                chatAdapter.chat.clear()
-                binding.prg.visibility = View.GONE
-                binding.btnReply.visibility = View.VISIBLE
-                binding.btnClose.visibility = View.VISIBLE
-                snapshot.children.forEach {
-                    chatAdapter.addData(it.getValue<Chat>()!!)
-                }
-                binding.recyclerView.scrollToPosition(chatAdapter.chat.size)
-
-            }
-
-
-            override fun onCancelled(error: DatabaseError) {
-                Toast.makeText(context,error.message,Toast.LENGTH_SHORT).show()
-            }
-        })
-
-        if (status == "Close"){
-            binding.btnClose.isEnabled = false
-            binding.btnReply.isEnabled = false
-            binding.btnClose.setBackgroundColor(ContextCompat.getColor(requireActivity(),R.color.gray))
-            binding.btnReply.setBackgroundColor(ContextCompat.getColor(requireActivity(),R.color.gray))
-
-        }else{
-            binding.btnClose.isEnabled = true
-            binding.btnReply.isEnabled = true
-            binding.btnClose.setBackgroundColor(Color.parseColor("#FF6464"))
-            binding.btnReply.setBackgroundColor(Color.parseColor("#3360DD"))
-
-        }
-
-        binding.recyclerView.apply {
-            adapter = chatAdapter
-            layoutManager = LinearLayoutManager(context,LinearLayoutManager.VERTICAL,false)
-            addItemDecoration(ChatItemDecoration())
-        }
+        ticketViewModel.getSingleTicket(mId)
+        detailsObserver()
 
         binding.btnReply.setOnClickListener {
             showDialog()
@@ -118,6 +73,7 @@ class TicketDetailsFragment : Fragment() {
 
         binding.btnClose.setOnClickListener {
             val bundle = bundleOf("ticketId" to mId)
+            findNavController().clearBackStack(R.id.ticketDetailsFragment)
             findNavController().navigate(R.id.action_ticketDetailsFragment_to_closeTicketFragment,bundle)
 
         }
@@ -172,6 +128,7 @@ class TicketDetailsFragment : Fragment() {
 
     fun rating(mId:Int){
         val bundle = bundleOf("ticketId" to mId)
+        findNavController().clearBackStack(R.id.ticketDetailsFragment)
         findNavController()
             .navigate(R.id.action_ticketDetailsFragment_to_ticketRatingFragment,bundle)
     }
@@ -219,6 +176,70 @@ class TicketDetailsFragment : Fragment() {
                 is Result.Error -> {
                     fragment.hidePrg()
                     Toast.makeText(context, it.message, Toast.LENGTH_SHORT).show()
+                }
+            }
+        }
+    }
+
+    private fun detailsObserver() {
+        ticketViewModel.ticketModel.observe(viewLifecycleOwner){ it0 ->
+
+            when (it0) {
+                is Result.Success -> {
+
+                    binding.prg.visibility = View.GONE
+                    chatAdapter.addDetails(it0.data)
+
+
+                    val ticketListener = database.child("Ticketmessage").child("Ticket-${it0.data.fid!!}").orderByValue()
+
+                    ticketListener.addValueEventListener(object:ValueEventListener{
+                        override fun onDataChange(snapshot: DataSnapshot) {
+                            chatAdapter.chat.clear()
+                            binding.prg.visibility = View.GONE
+                            binding.btnReply.visibility = View.VISIBLE
+                            binding.btnClose.visibility = View.VISIBLE
+                            snapshot.children.forEach {
+                                chatAdapter.addData(it.getValue<Chat>()!!)
+                            }
+                            binding.recyclerView.scrollToPosition(chatAdapter.chat.size)
+
+                        }
+
+                        override fun onCancelled(error: DatabaseError) {
+                            Toast.makeText(context,error.message,Toast.LENGTH_SHORT).show()
+                        }
+                    })
+
+                    binding.recyclerView.apply {
+                        adapter = chatAdapter
+                        layoutManager = LinearLayoutManager(context,LinearLayoutManager.VERTICAL,false)
+                        addItemDecoration(ChatItemDecoration())
+                    }
+
+                    if (it0.data.status == "Close"){
+                        binding.btnClose.isEnabled = false
+                        binding.btnReply.isEnabled = false
+                        binding.btnClose.setBackgroundColor(ContextCompat.getColor(requireActivity(),R.color.gray))
+                        binding.btnReply.setBackgroundColor(ContextCompat.getColor(requireActivity(),R.color.gray))
+
+                    }else{
+                        binding.btnClose.isEnabled = true
+                        binding.btnReply.isEnabled = true
+                        binding.btnClose.setBackgroundColor(Color.parseColor("#FF6464"))
+                        binding.btnReply.setBackgroundColor(Color.parseColor("#3360DD"))
+
+                    }
+                    
+                }
+
+                is Result.Loading -> {
+                    binding.prg.visibility = View.GONE
+                }
+
+                is Result.Error -> {
+                    binding.prg.visibility = View.GONE
+                    Toast.makeText(context, it0.message, Toast.LENGTH_SHORT).show()
                 }
             }
         }

@@ -136,6 +136,9 @@ interface Service {
     @GET("ticket/getalluserticket")
     suspend fun getTicketList(@Query("status") status: String,@Query("page") page: Int,@Query("page_size") page_size: Int):Response<Ticket>
 
+    @GET("ticket/{id}")
+    suspend fun getTicket(@Path("id") id: Int):Response<TicketDetails>
+
     @Headers("Content-Type: application/json")
     @POST("ticket")
     suspend fun postTicket(@Body ticketBody: TicketBody):Response<Void>
