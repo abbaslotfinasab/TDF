@@ -17,8 +17,9 @@ import com.utechia.tdf.R
 import com.utechia.tdf.databinding.FragmentNotificationTeaboyBinding
 import com.utechia.tdf.order.TeaBoyOrderViewModel
 import dagger.hilt.android.AndroidEntryPoint
-import java.text.SimpleDateFormat
-import java.util.*
+import java.time.OffsetDateTime
+import java.time.ZoneId
+import java.time.format.DateTimeFormatter
 
 @AndroidEntryPoint
 class TeaBoyNotificationFragment : DialogFragment() {
@@ -27,9 +28,10 @@ class TeaBoyNotificationFragment : DialogFragment() {
     private val orderAdapterTeaBoy: TeaBoyNotificationAdapter = TeaBoyNotificationAdapter()
     private val teaOrderViewModel: TeaBoyOrderViewModel by viewModels()
     private var cartId = 0
-    var sdf: SimpleDateFormat = SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss.SSS'Z'", Locale.getDefault())
-    private lateinit var dateFormat: Date
-    private var simple = ""
+    private var timeZone = ""
+
+
+
 
 
     override fun onCreateView(
@@ -94,9 +96,10 @@ class TeaBoyNotificationFragment : DialogFragment() {
                     binding.username.text = it.data[0].user?.displayName
                     binding.location.text = it.data[0].user?.officeFloor
                     binding.order.text = it.data[0].id.toString()
-                    dateFormat = sdf.parse(it.data[0].updatedAt!!)!!
-                    simple = SimpleDateFormat("yyyy.MM.dd | HH:mm", Locale.getDefault()).format(dateFormat)
-                    binding.date.text = "$simple"
+                    timeZone = OffsetDateTime.parse(it.data[0].updatedAt).atZoneSameInstant(
+                        ZoneId.systemDefault()
+                    ).toLocalDateTime().format(DateTimeFormatter.ofPattern("yyyy.MM.dd-HH:mm"))
+                    binding.date .text = "$timeZone"
                     orderAdapterTeaBoy.addData(it.data[0].cart?.items!!)
                 }
 

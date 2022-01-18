@@ -76,13 +76,13 @@ class TeaBoyOrderRepoImpl @Inject constructor(
 
         if (networkHelper.isNetworkConnected()) {
 
-            val result = service.getTeaBoyOrder(status)
+            val result = service.getTeaBoyOrder(status,1,500)
 
             return when (result.isSuccessful) {
 
                 true -> {
 
-                    result.body()?.data!!.map { it.toDomain() }.toMutableList()
+                    result.body()?.data!!.list?.map { it.toDomain() }!!.toMutableList()
                 }
 
                 else ->
@@ -101,7 +101,7 @@ class TeaBoyOrderRepoImpl @Inject constructor(
             return when (result.isSuccessful) {
 
                 true -> {
-                    result.body()?.data!!.map { it.toDomain() }.toMutableList()
+                    result.body()?.data!!.list?.map { it.toDomain() }!!.toMutableList()
                 }
 
                 else ->

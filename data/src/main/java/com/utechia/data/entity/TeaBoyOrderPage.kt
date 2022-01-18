@@ -8,9 +8,9 @@ import kotlinx.serialization.Serializable
 
 @Parcelize
 @Serializable
-data class UserOrder(
+data class TeaBoyOrderPage(
 
-    val data :@Contextual @RawValue UserOrderPage,
-    val error:@Contextual @RawValue Error?
+    val totalPages: Int?,
+    val list:@Contextual @RawValue MutableList<TeaBoyOrderData>?,
 
-): Parcelable
+    ): Parcelable

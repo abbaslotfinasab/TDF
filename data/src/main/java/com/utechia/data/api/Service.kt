@@ -62,7 +62,7 @@ interface Service {
     suspend fun postOrder():Response<OrderBody>
 
     @GET("user/orders")
-    suspend fun getOrder(@Query("status") status:String):Response<UserOrder>
+    suspend fun getOrder(@Query("status") status:String,@Query("page") page: Int,@Query("page_size") page_size: Int):Response<UserOrder>
 
     @GET("user/orders")
     suspend fun getSingleOrder(@Query("cartId") id: Int):Response<UserOrder>
@@ -78,7 +78,7 @@ interface Service {
     suspend fun getOrderCount():Response<OrderCount>
 
     @GET("teaboy/orders")
-    suspend fun getTeaBoyOrder(@Query("status") status:String):Response<TeaBoyOrder>
+    suspend fun getTeaBoyOrder(@Query("status") status:String,@Query("page") page: Int,@Query("page_size") page_size: Int):Response<TeaBoyOrder>
 
     @GET("teaboy/orders")
     suspend fun getSingleOrderTeaBoy(@Query("cartId") id: Int):Response<TeaBoyOrder>

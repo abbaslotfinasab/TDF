@@ -144,8 +144,8 @@ class CalendarRequestFragment : DialogFragment() {
                         else
                             "$hour:$minute"
                         binding.from.visibility = View.VISIBLE
-                        binding.start.text = "$startTime-$first"
-                        startTime = "${startTime}T$first:00.000Z"
+                        binding.start.text = "$startTime $first"
+                        startTime = "$startTime $first"
                         binding.end.text = ""
                         binding.to.visibility = View.GONE
                         binding.start.visibility = View.VISIBLE
@@ -166,9 +166,9 @@ class CalendarRequestFragment : DialogFragment() {
 
                         binding.from.visibility = View.VISIBLE
                         binding.to.visibility = View.VISIBLE
-                        startTime = "${startTime}T$first:00.000Z"
-                        binding.end.text = "$endTime-$last"
-                        endTime = "${endTime}T$last:00.000Z"
+                        startTime = "$startTime $first"
+                        binding.end.text = "$endTime $last"
+                        endTime = "$endTime $last"
                         binding.start.visibility = View.VISIBLE
                         binding.end.visibility = View.VISIBLE
 

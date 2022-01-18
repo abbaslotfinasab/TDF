@@ -10,7 +10,7 @@ import kotlinx.serialization.Serializable
 @Serializable
 data class TeaBoyOrder(
 
-    val data :@Contextual @RawValue MutableList<TeaBoyOrderData>?,
+    val data :@Contextual @RawValue TeaBoyOrderPage,
     val error:@Contextual @RawValue Error?
 
 ): Parcelable

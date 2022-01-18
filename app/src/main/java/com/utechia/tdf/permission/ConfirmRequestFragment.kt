@@ -15,6 +15,8 @@ import com.utechia.domain.utile.Result
 import com.utechia.tdf.R
 import com.utechia.tdf.databinding.FragmentConfirmRequestBinding
 import dagger.hilt.android.AndroidEntryPoint
+import java.time.*
+import java.time.format.DateTimeFormatter
 
 @AndroidEntryPoint
 class ConfirmRequestFragment : DialogFragment() {
@@ -22,10 +24,15 @@ class ConfirmRequestFragment : DialogFragment() {
     private lateinit var binding: FragmentConfirmRequestBinding
     private val permissionViewModel: PermissionViewModel by viewModels()
 
+    private val sdf:DateTimeFormatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm")
     private var start = ""
     private var end = ""
     private var type = ""
     private var description = ""
+    private var startTimeZone = ""
+    private var endTimeZone = ""
+
+
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -52,8 +59,13 @@ class ConfirmRequestFragment : DialogFragment() {
             type = requireArguments().getString("type").toString()
             description = requireArguments().getString("description").toString()
 
-
         }
+
+        startTimeZone = LocalDateTime.parse(start,sdf).atZone(ZoneId.systemDefault()).toOffsetDateTime().withOffsetSameInstant(ZoneOffset.UTC)
+            .format(DateTimeFormatter.ofPattern("yyyy-MM-dd'T'HH:mm:ss.SSS'Z'")).toString()
+
+        endTimeZone = LocalDateTime.parse(end,sdf).atZone(ZoneId.systemDefault()).toOffsetDateTime().withOffsetSameInstant(ZoneOffset.UTC)
+            .format(DateTimeFormatter.ofPattern("yyyy-MM-dd'T'HH:mm:ss.SSS'Z'")).toString()
 
         binding.exit.setOnClickListener {
             dialog?.dismiss()
@@ -64,7 +76,7 @@ class ConfirmRequestFragment : DialogFragment() {
         }
 
         binding.btnAccept.setOnClickListener {
-            permissionViewModel.postPermission(type, description, start, end)
+            permissionViewModel.postPermission(type,description,startTimeZone, endTimeZone)
             observer()
         }
 
