@@ -1,7 +1,9 @@
 package com.utechia.data.repo
 
 import com.utechia.data.api.Service
+import com.utechia.data.entity.NotificationToken
 import com.utechia.data.utile.NetworkHelper
+import com.utechia.data.utile.SessionManager
 import com.utechia.domain.model.NotificationCountModel
 import com.utechia.domain.repository.MainRepo
 import java.io.IOException
@@ -12,7 +14,9 @@ import javax.inject.Singleton
 class MainRepoImpl @Inject constructor(
     private val service: Service,
     private val networkHelper: NetworkHelper,
-):MainRepo {
+    private val sessionManager: SessionManager
+
+    ):MainRepo {
 
     override suspend fun getCountNotification(): NotificationCountModel {
 
@@ -23,11 +27,16 @@ class MainRepoImpl @Inject constructor(
             return when (result.isSuccessful) {
 
                 true -> {
+                    service.notification(NotificationToken(sessionManager.fetchFireBaeToken()!!))
+
                     result.body()?.data!!.toDomain()
                 }
 
-                else ->
+                else -> {
+                    service.notification(NotificationToken(sessionManager.fetchFireBaeToken()!!))
+
                     throw IOException("Server is Not Responding")
+                }
             }
 
         } else throw IOException("No Internet Connection")

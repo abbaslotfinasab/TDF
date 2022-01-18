@@ -25,6 +25,12 @@ class SessionManager @Inject constructor(@ApplicationContext private val context
         editor.apply()
     }
 
+    fun updateAuthToken(token:String) {
+        val editor = prefs.edit()
+        editor.putString(USER_TOKEN, token)
+        editor.apply()
+    }
+
     fun fetchAuthToken(): String? {
         return prefs.getString(USER_TOKEN, null)
     }

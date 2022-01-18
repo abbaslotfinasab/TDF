@@ -5,8 +5,8 @@ import android.app.NotificationChannel
 import android.app.NotificationManager
 import android.app.PendingIntent
 import android.content.Context
+import android.content.SharedPreferences
 import android.os.Build
-import android.util.Log
 import android.widget.RemoteViews
 import androidx.core.app.NotificationCompat
 import androidx.core.os.bundleOf
@@ -21,6 +21,9 @@ const val channel_Id = "notification_channel"
 const val channel_Name = "com.utechia.tdf"
 
 class MyFirebaseMessagingService : FirebaseMessagingService() {
+
+    private lateinit var prefs: SharedPreferences
+
 
     private fun getRemoteView(title:String, message:String):RemoteViews{
         val remoteView = RemoteViews (channel_Name,R.layout.item_push_notification)
@@ -39,7 +42,12 @@ class MyFirebaseMessagingService : FirebaseMessagingService() {
 
     override fun onNewToken(token: String) {
         super.onNewToken(token)
-        Log.d("fcm",token)
+
+        prefs = getSharedPreferences("tdf", MODE_PRIVATE)
+
+        with(prefs.edit()) {
+            putString("fcm",token)
+        }.apply()
 
     }
 
