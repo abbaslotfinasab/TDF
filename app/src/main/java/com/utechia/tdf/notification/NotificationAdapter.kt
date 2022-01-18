@@ -82,11 +82,11 @@ class NotificationAdapter: RecyclerView.Adapter<RecyclerView.ViewHolder>() {
                     name.text = "${duration.toHours()}h ago"
                 }
 
-                in 43200 until 86400 -> {
+                in 43200 until 172800 -> {
                     name.text = "yesterday"
                 }
 
-                in 86400 until 604800 -> {
+                in 172800 until 604800 -> {
                     name.text = "${duration.toDays()}d ago"
                 }
 
