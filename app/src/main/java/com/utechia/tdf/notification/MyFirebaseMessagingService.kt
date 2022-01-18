@@ -14,7 +14,7 @@ import androidx.navigation.NavDeepLinkBuilder
 import com.google.firebase.messaging.FirebaseMessagingService
 import com.google.firebase.messaging.RemoteMessage
 import com.utechia.tdf.R
-import com.utechia.tdf.activity.MainActivity
+import com.utechia.tdf.main.MainActivity
 
 
 const val channel_Id = "notification_channel"

@@ -42,7 +42,6 @@
                 android:layout_marginStart="10dp"
                 android:layout_marginTop="10dp"
                 android:layout_marginBottom="30dp"
-                android:text="Taylan Hersek"
                 android:textColor="@color/white"
                 android:textSize="14sp"
                 android:textStyle="bold"
@@ -55,11 +54,34 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="10dp"
-                android:text="Project Manager"
                 android:textColor="@color/white"
                 android:textSize="12sp"
                 app:layout_constraintStart_toEndOf="@+id/profilePicture"
                 app:layout_constraintTop_toBottomOf="@+id/title" />
+
+            <ImageView
+                android:id="@+id/bubble"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="-11dp"
+                android:layout_marginBottom="-7dp"
+                android:visibility="gone"
+                android:src="@drawable/ic_baseline_notification_bubble"
+                app:layout_constraintBottom_toTopOf="@+id/notification"
+                app:layout_constraintStart_toEndOf="@id/notification" />
+
+            <TextView
+                android:id="@+id/notificationNumber"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textColor="@color/white"
+                android:textSize="12sp"
+                android:visibility="gone"
+                app:layout_constraintBottom_toBottomOf="@id/bubble"
+                app:layout_constraintTop_toTopOf="@id/bubble"
+                app:layout_constraintStart_toStartOf="@id/bubble"
+                app:layout_constraintEnd_toEndOf="@id/bubble"/>
+
 
             <ImageView
                 android:id="@+id/notification"
@@ -171,6 +193,7 @@
         android:layout_width="wrap_content"
         android:layout_height="match_parent"
         android:layout_gravity="end"
+        android:visibility="visible"
         app:headerLayout="@layout/header_navigation_drawer">
 
         <LinearLayout

@@ -280,6 +280,7 @@
         <entry key="app/src/main/res/drawable/ic_teaboy_back.xml" value="0.209375" />
         <entry key="app/src/main/res/drawable/quantity_back.xml" value="0.12314814814814815" />
         <entry key="app/src/main/res/drawable/question_back.xml" value="0.12314814814814815" />
+        <entry key="app/src/main/res/layout/activity_main.xml" value="0.1557478368355995" />
         <entry key="app/src/main/res/layout/fragment_accept.xml" value="0.19322916666666667" />
         <entry key="app/src/main/res/layout/fragment_cart.xml" value="0.10235507246376811" />
         <entry key="app/src/main/res/layout/fragment_category_fragment.xml" value="0.1" />

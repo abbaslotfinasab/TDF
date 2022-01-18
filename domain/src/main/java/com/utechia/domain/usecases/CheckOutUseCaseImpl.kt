@@ -11,4 +11,5 @@ class CheckOutUseCaseImpl @Inject constructor(private val checkOutRepo: CheckOut
     override suspend fun execute(): OrderBodyModel {
         return checkOutRepo.checkout()
     }
+
 }

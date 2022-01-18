@@ -210,17 +210,6 @@
 
         </androidx.constraintlayout.widget.ConstraintLayout>
 
-        <androidx.appcompat.widget.AppCompatButton
-            android:id="@+id/token"
-            android:layout_width="100dp"
-            android:layout_height="50dp"
-            android:layout_marginBottom="100dp"
-            android:background="@color/prepare"
-            android:text="token"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent" />
-
     <androidx.cardview.widget.CardView
         android:id="@+id/prg"
         android:layout_width="72dp"

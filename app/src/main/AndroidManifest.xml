@@ -28,7 +28,7 @@
             android:name="com.google.firebase.messaging"
             android:resource="@color/purple_700"/>
         <activity
-            android:name=".activity.MainActivity"
+            android:name=".main.MainActivity"
             android:screenOrientation="portrait"
             android:exported="true">
             <nav-graph android:value="@navigation/nav_graph" />

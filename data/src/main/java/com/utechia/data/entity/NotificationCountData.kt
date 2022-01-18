@@ -1,16 +1,20 @@
 package com.utechia.data.entity
 
 import android.os.Parcelable
+import com.utechia.data.base.ResponseObject
+import com.utechia.domain.model.LoginModel
+import com.utechia.domain.model.NotificationCountModel
 import kotlinx.parcelize.Parcelize
-import kotlinx.parcelize.RawValue
-import kotlinx.serialization.Contextual
 import kotlinx.serialization.Serializable
 
 @Parcelize
 @Serializable
 data class NotificationCountData(
 
-    val data :@Contextual @RawValue NotificationCountData,
-    val error:@Contextual @RawValue Error?
+    val count: Int?
 
-):Parcelable
+):Parcelable , ResponseObject<NotificationCountModel> {
+    override fun toDomain(): NotificationCountModel {
+        return NotificationCountModel(count)
+    }
+}

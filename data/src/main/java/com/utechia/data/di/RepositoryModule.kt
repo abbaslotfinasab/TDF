@@ -112,4 +112,10 @@ abstract class RepositoryModule {
         notificationRepoImpl: NotificationRepoImpl
     ): NotificationRepo
 
+    @Binds
+    abstract fun bindMainRepositoryService(
+        mainRepoImpl: MainRepoImpl
+    ): MainRepo
+
+
 }

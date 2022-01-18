@@ -14,7 +14,7 @@ import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
 import com.utechia.domain.utile.Result
 import com.utechia.tdf.R
-import com.utechia.tdf.activity.MainActivity
+import com.utechia.tdf.main.MainActivity
 import com.utechia.tdf.databinding.FragmentTeaBoyHomeBinding
 import com.utechia.tdf.order.OrderCountViewModel
 import dagger.hilt.android.AndroidEntryPoint
@@ -54,14 +54,14 @@ class TeaBoyHomeFragment : Fragment() {
 
         }
 
-        binding.token.setOnClickListener {
+       /* binding.token.setOnClickListener {
 
             val clipboard = requireActivity().getSystemService(Context.CLIPBOARD_SERVICE) as ClipboardManager
             val clip = ClipData.newPlainText("label",prefs.getString("fcm", ""))
             clipboard.setPrimaryClip(clip)
             Toast.makeText(context,"Copied",Toast.LENGTH_SHORT).show()
         }
-
+*/
         orderViewModel.getOrder()
 
         binding.switchCompat.isChecked = prefs.getBoolean("isTeaBoyActive",true)
