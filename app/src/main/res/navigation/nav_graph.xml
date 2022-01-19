@@ -142,7 +142,7 @@
     </fragment>
     <fragment
         android:id="@+id/eventSystemFragment"
-        android:name="com.utechia.tdf.more.EventSystemFragment"
+        android:name="com.utechia.tdf.events.EventSystemFragment"
         android:label="fragment_event_system"
         tools:layout="@layout/fragment_event_system" />
     <fragment
@@ -846,5 +846,20 @@
             android:defaultValue="0"  />
 
     </dialog>
+    <fragment
+        android:id="@+id/eventDetailsFragment"
+        android:name="com.utechia.tdf.events.EventDetailsFragment"
+        android:label="fragment_event_details"
+        tools:layout="@layout/fragment_event_details" />
+    <fragment
+        android:id="@+id/eventRateFragment"
+        android:name="com.utechia.tdf.events.EventRateFragment"
+        android:label="fragment_event_rate"
+        tools:layout="@layout/fragment_event_rate" />
+    <fragment
+        android:id="@+id/eventResultFragment"
+        android:name="com.utechia.tdf.EventResultFragment"
+        android:label="fragment_event_result"
+        tools:layout="@layout/fragment_event_result" />
 
 </navigation>

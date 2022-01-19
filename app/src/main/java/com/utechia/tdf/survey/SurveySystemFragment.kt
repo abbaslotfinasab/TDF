@@ -7,6 +7,7 @@ import android.view.ViewGroup
 import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
+import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.google.android.material.tabs.TabLayout
 import com.utechia.domain.utile.Result
@@ -86,6 +87,12 @@ class SurveySystemFragment : Fragment() {
             }
 
         })
+
+        binding.appBackButton.setOnClickListener {
+
+            findNavController().navigateUp()
+
+        }
 
         binding.recyclerView.apply {
             adapter = surveyAdapter

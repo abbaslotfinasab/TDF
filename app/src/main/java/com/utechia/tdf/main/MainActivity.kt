@@ -65,13 +65,10 @@ class MainActivity : AppCompatActivity() {
         val graph = navController.navInflater.inflate(R.navigation.nav_graph)
 
         when {
-
             !checkOutUser() -> {
                 graph.setStartDestination(R.id.loginFragment)
                 binding.drawerLayout.setDrawerLockMode(DrawerLayout.LOCK_MODE_LOCKED_CLOSED)
-
             }
-
             teaBoy() -> {
                 mainViewModel.getCount()
                 graph.setStartDestination(R.id.teaBoyHomeFragment)
@@ -197,19 +194,18 @@ class MainActivity : AppCompatActivity() {
             navController.addOnDestinationChangedListener{_, destination, _ ->
                 binding.bottomNavigation.setupWithNavController(navController)
 
+                mainViewModel.getCount()
+                observer()
+
                 when (destination.id){
 
                     R.id.userhomeFragment ->{
-                        mainViewModel.getCount()
                         navController.clearBackStack(R.id.loginFragment)
                         design("home")
-                        observer()
 
                     }
                     R.id.refreshmentFragment ->{
-                        mainViewModel.getCount()
                         design("refreshment")
-                        observer()
 
                     }
 
@@ -223,10 +219,9 @@ class MainActivity : AppCompatActivity() {
                         design("orders")
 
                     }
+
                     R.id.reservationFragment ->{
-                        mainViewModel.getCount()
                         design("reservation")
-                        observer()
 
                     }
 
@@ -241,15 +236,11 @@ class MainActivity : AppCompatActivity() {
                     }
 
                     R.id.userprofileFragment ->{
-                        mainViewModel.getCount()
                         design("profile")
-                        observer()
 
                     }
                     R.id.qrCodeFragment -> {
-                        mainViewModel.getCount()
                         design("qrcode")
-                        observer()
                     }
 
                     R.id.createReservationFragment -> {
@@ -305,9 +296,7 @@ class MainActivity : AppCompatActivity() {
                     }
 
                     R.id.notificationFragment -> {
-                        mainViewModel.getCount()
                         design("notification")
-                        observer()
 
                     }
 
@@ -394,34 +383,6 @@ class MainActivity : AppCompatActivity() {
             }
         }
 
-    private fun observer() {
-        mainViewModel.mainModel.observe(this){
-            when (it) {
-                is Result.Success -> {
-                    if (it.data.count==0){
-                        binding.bubble.visibility = View.GONE
-                        binding.notificationNumber.visibility = View.GONE
-
-                    }else{
-                        binding.bubble.visibility = View.VISIBLE
-                        binding.notificationNumber.visibility = View.VISIBLE
-                        binding.notificationNumber.text = it.data.count.toString()
-
-
-                    }
-                }
-
-                is Result.Loading -> {}
-
-                is Result.Error -> {
-                    binding.bubble.visibility = View.GONE
-                    binding.notificationNumber.visibility = View.GONE
-                    Toast.makeText(this, it.message, Toast.LENGTH_SHORT).show()
-                }
-            }
-        }
-    }
-
     fun setupTeaBoy(name: String, floor:String) {
 
         binding.title.text = name
@@ -440,23 +401,21 @@ class MainActivity : AppCompatActivity() {
         navController.addOnDestinationChangedListener{_, destination, _ ->
             binding.bottomNavigation.setupWithNavController(navController)
 
+            mainViewModel.getCount()
+            observer()
+
             when (destination.id){
 
                 R.id.teaBoyHomeFragment ->{
-                    mainViewModel.getCount()
                     navController.clearBackStack(R.id.loginFragment)
                     design("home")
 
                 }
                 R.id.teaBoyOrdersFragment ->{
-                    mainViewModel.getCount()
                     design("tOrders")
-                    observer()
                 }
                 R.id.qrCodeFragment -> {
-                    mainViewModel.getCount()
                     design("qrcode")
-                    observer()
                 }
                 R.id.loginFragment ->{
                     design("login")
@@ -508,16 +467,13 @@ class MainActivity : AppCompatActivity() {
                 }
 
                 R.id.notificationFragment -> {
-                    mainViewModel.getCount()
                     design("notification")
-                    observer()
                 }
 
                 else -> {
                     design("drawer")
                 }
             }
-
         }
 
         binding.bottomNavigation.setupWithNavController(navController)
@@ -782,7 +738,7 @@ class MainActivity : AppCompatActivity() {
                 binding.customToolbar.visibility = View.VISIBLE
                 binding.toolbar.visibility = View.INVISIBLE
                 binding.customButton.visibility = View.GONE
-                binding.customTitle.text = "Event System"
+                binding.customTitle.text = "Events"
                 binding.bottomNavigation.visibility = View.GONE
                 binding.drawerLayout.setDrawerLockMode(DrawerLayout.LOCK_MODE_LOCKED_CLOSED)
 
@@ -836,6 +792,34 @@ class MainActivity : AppCompatActivity() {
 
             }
 
+        }
+    }
+
+    private fun observer() {
+        mainViewModel.mainModel.observe(this){
+            when (it) {
+                is Result.Success -> {
+                    if (it.data.count==0){
+                        binding.bubble.visibility = View.GONE
+                        binding.notificationNumber.visibility = View.GONE
+
+                    }else{
+                        binding.bubble.visibility = View.VISIBLE
+                        binding.notificationNumber.visibility = View.VISIBLE
+                        binding.notificationNumber.text = it.data.count.toString()
+
+
+                    }
+                }
+
+                is Result.Loading -> {}
+
+                is Result.Error -> {
+                    prefs.edit().clear().apply()
+                    logoutFromFCM()
+                    Toast.makeText(this,it.message,Toast.LENGTH_SHORT).show()
+                }
+            }
         }
     }
 }

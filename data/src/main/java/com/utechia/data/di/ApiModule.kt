@@ -27,6 +27,8 @@ class ApiModule {
         return OkHttpClient.Builder()
             .addInterceptor(HttpLoggingInterceptor())
             .authenticator(AuthInterceptor(context,service))
+            .followRedirects(false)
+            .followSslRedirects(false)
             .connectTimeout(30,TimeUnit.SECONDS)
             .readTimeout(30, TimeUnit.SECONDS)
             .writeTimeout(30, TimeUnit.SECONDS)

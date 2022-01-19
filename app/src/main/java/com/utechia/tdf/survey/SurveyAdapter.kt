@@ -3,6 +3,7 @@ package com.utechia.tdf.survey
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.RadioButton
 import android.widget.TextView
 import androidx.appcompat.widget.AppCompatButton
 import androidx.core.os.bundleOf
@@ -66,14 +67,35 @@ class SurveyAdapter: RecyclerView.Adapter<RecyclerView.ViewHolder>() {
             ).toLocalDateTime().format(DateTimeFormatter.ofPattern("yyyy.MM.dd-HH:mm"))
             endDate.text = "$endTimeZone"
 
-            result.text = "Evaluate"
+            if (survey[position].surveystatus=="expierd" || survey[position].surveystatus=="cancelled"){
+                result.visibility = View.GONE
+            }else {
+                result.visibility = View.VISIBLE
+                result.text = "Evaluate"
+            }
+
+            when(survey[position].surveytype){
+
+                "rate" ->{
+                    rate.text = "Rating"
+
+                }
+
+                "multi" ->{
+                    rate.text = "Multiple choice"
+
+                }
+
+                "open_end" ->{
+                    rate.text = "Open"
+                }
+            }
 
             result.setOnClickListener {
                 val bundle = bundleOf("surveyId" to survey[position].id)
                 itemView.findNavController().navigate(R.id.action_surveySystemFragment_to_createSurveyFragment,bundle)
             }
 
-            rate.text = survey[position].surveytype
         }
     }
 }

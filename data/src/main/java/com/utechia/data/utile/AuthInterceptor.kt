@@ -16,16 +16,20 @@ class AuthInterceptor @Inject constructor(@ApplicationContext context: Context,p
 
         return runBlocking{
 
-            updateToken(response.code).let {
+            updateToken().let {
                 response.request.newBuilder().header("Authorization", "Bearer $it")
                     .build()
             }
         }
     }
 
-    private suspend fun updateToken(code:Int):String {
+    private suspend fun updateToken():String {
 
-        return if (code==402 || code==403){
+        return sessionManager.fetchAuthToken().toString()
+
+    }
+
+     /*   return if (code==402 || code==403){
             val result = service.get().refresh( RefreshToken(
                 sessionManager.fetchHomeId()
                     .toString()
@@ -35,5 +39,5 @@ class AuthInterceptor @Inject constructor(@ApplicationContext context: Context,p
             result.body()?.data!!
         } else
             sessionManager.fetchAuthToken().toString()
-    }
+    }*/
 }

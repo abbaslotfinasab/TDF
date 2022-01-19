@@ -33,8 +33,8 @@ class ChatAdapter(private val ticketDetailsFragment: TicketDetailsFragment): Rec
     }
 
     fun addDetails(_ticket:TicketModel) {
+        ticket.clear()
         ticket.add(_ticket)
-        notifyItemChanged(0)
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): RecyclerView.ViewHolder {
