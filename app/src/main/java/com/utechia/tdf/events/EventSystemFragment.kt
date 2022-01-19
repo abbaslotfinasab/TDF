@@ -53,12 +53,10 @@ class EventSystemFragment : Fragment() {
 
         })
 
+     binding.recyclerView.apply {
 
-
-
-
+     }
 
 
     }
-
 }
