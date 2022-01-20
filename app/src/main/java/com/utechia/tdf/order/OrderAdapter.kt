@@ -24,6 +24,7 @@ class OrderAdapter: RecyclerView.Adapter<RecyclerView.ViewHolder>() {
 
     fun addData(_User_orders: MutableList<UserOrderDataModel>) {
         userOrders.clear()
+        notifyDataSetChanged()
         userOrders.addAll(_User_orders)
         notifyItemRangeChanged(0,_User_orders.size-1)
 

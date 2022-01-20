@@ -13,6 +13,7 @@ class SessionManager @Inject constructor(@ApplicationContext private val context
         context.getSharedPreferences("tdf", Context.MODE_PRIVATE)
 
     companion object {
+
         const val USER_TOKEN = "user_token"
         const val USER_ID = "user_id"
 

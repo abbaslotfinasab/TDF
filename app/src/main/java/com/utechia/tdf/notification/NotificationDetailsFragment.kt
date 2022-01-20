@@ -59,8 +59,8 @@ class NotificationDetailsFragment : DialogFragment() {
         }
 
         binding.btnAccept.setOnClickListener {
+            findNavController().navigate(R.id.action_notificationDetailsFragment_to_notificationFragment)
             dialog?.dismiss()
         }
-
     }
 }

@@ -7,15 +7,14 @@
     android:background="#F4F3F7"
     tools:context=".profile.UserProfileFragment">
 
-    <com.google.android.material.imageview.ShapeableImageView
+    <ImageView
         android:id="@+id/profilePicture"
         android:layout_width="120dp"
         android:layout_height="120dp"
-        android:background="#D2D9EB"
         app:shapeAppearanceOverlay="@style/roundedImageViewRounded"
         app:layout_constraintBottom_toTopOf="@+id/constraintLayout9"
         app:layout_constraintEnd_toEndOf="@+id/constraintLayout9"
-        android:src="@drawable/ic_baseline_person_24"
+        android:src="@drawable/ic_profile_icon"
         app:layout_constraintStart_toStartOf="@+id/constraintLayout9"
         app:layout_constraintTop_toTopOf="@+id/constraintLayout9" />
 
@@ -39,7 +38,7 @@
             android:layout_marginTop="110dp"
             android:text="Name"
             android:textColor="#5E6366"
-            android:textSize="12dp"
+            android:textSize="12sp"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
 
@@ -47,9 +46,10 @@
             android:id="@+id/name"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginStart="50dp"
-            android:text="John Doe"
+            android:layout_marginStart="23dp"
             android:textColor="@color/black"
+            android:textSize="16sp"
+            android:textStyle="bold"
             app:layout_constraintBottom_toBottomOf="@+id/textView24"
             app:layout_constraintStart_toEndOf="@+id/textView24"
             app:layout_constraintTop_toTopOf="@+id/textView24" />
@@ -81,8 +81,9 @@
             android:id="@+id/email"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginStart="50dp"
-            android:text="John Doe"
+            android:layout_marginStart="30dp"
+            android:textStyle="bold"
+            android:textSize="16sp"
             android:textColor="@color/black"
             app:layout_constraintBottom_toBottomOf="@+id/textView26"
             app:layout_constraintStart_toEndOf="@+id/textView26"
@@ -108,7 +109,7 @@
             android:layout_marginTop="23dp"
             android:text="Job"
             android:textColor="#5E6366"
-            android:textSize="12dp"
+            android:textSize="12sp"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@id/secondLine" />
 
@@ -116,9 +117,10 @@
             android:id="@+id/job"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginStart="50dp"
-            android:text="John Doe"
+            android:layout_marginStart="38dp"
             android:textColor="@color/black"
+            android:textSize="16sp"
+            android:textStyle="bold"
             app:layout_constraintBottom_toBottomOf="@+id/textView28"
             app:layout_constraintStart_toEndOf="@+id/textView28"
             app:layout_constraintTop_toTopOf="@+id/textView28" />

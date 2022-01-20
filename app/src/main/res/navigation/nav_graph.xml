@@ -18,15 +18,27 @@
         tools:layout="@layout/fragment_refreshment" >
         <action
             android:id="@+id/action_refreshmentFragment_to_createRefreshmentFragment"
-            app:destination="@id/createRefreshmentFragment" />
+            app:destination="@id/createRefreshmentFragment"
+            app:enterAnim="@android:anim/fade_in"
+            app:exitAnim="@android:anim/fade_out"
+            app:popEnterAnim="@android:anim/slide_in_left"
+            app:popExitAnim="@android:anim/slide_out_right" />
 
         <action
             android:id="@+id/action_refreshmentFragment_to_favoriteFragment"
-            app:destination="@id/favoriteFragment" />
+            app:destination="@id/favoriteFragment"
+            app:enterAnim="@android:anim/fade_in"
+            app:exitAnim="@android:anim/fade_out"
+            app:popEnterAnim="@android:anim/slide_in_left"
+            app:popExitAnim="@android:anim/slide_out_right"/>
 
         <action
             android:id="@+id/action_refreshmentFragment_to_orderFragment"
-            app:destination="@id/orderFragment" />
+            app:destination="@id/orderFragment"
+            app:enterAnim="@android:anim/fade_in"
+            app:exitAnim="@android:anim/fade_out"
+            app:popEnterAnim="@android:anim/slide_in_left"
+            app:popExitAnim="@android:anim/slide_out_right"/>
     </fragment>
 
     <fragment
@@ -36,13 +48,25 @@
         tools:layout="@layout/fragment_reservation" >
         <action
             android:id="@+id/action_reservationFragment_to_createReservationFragment"
-            app:destination="@id/createReservationFragment" />
+            app:destination="@id/createReservationFragment"
+            app:enterAnim="@android:anim/fade_in"
+            app:exitAnim="@android:anim/fade_out"
+            app:popEnterAnim="@android:anim/slide_in_left"
+            app:popExitAnim="@android:anim/slide_out_right"/>
         <action
             android:id="@+id/action_reservationFragment_to_reservationDetails"
-            app:destination="@id/reservationDetails" />
+            app:destination="@id/reservationDetails"
+            app:enterAnim="@android:anim/fade_in"
+            app:exitAnim="@android:anim/fade_out"
+            app:popEnterAnim="@android:anim/slide_in_left"
+            app:popExitAnim="@android:anim/slide_out_right"/>
         <action
             android:id="@+id/action_reservationFragment_self"
-            app:destination="@id/reservationFragment" />
+            app:destination="@id/reservationFragment"
+            app:enterAnim="@android:anim/fade_in"
+            app:exitAnim="@android:anim/fade_out"
+            app:popEnterAnim="@android:anim/slide_in_left"
+            app:popExitAnim="@android:anim/slide_out_right"/>
     </fragment>
     <fragment
         android:id="@+id/userprofileFragment"
@@ -58,15 +82,27 @@
         <action
             android:id="@+id/action_notificationFragment_to_notificationDeleteFragment"
             app:launchSingleTop="true"
-            app:destination="@id/notificationDeleteFragment" />
+            app:destination="@id/notificationDeleteFragment"
+            app:enterAnim="@android:anim/fade_in"
+            app:exitAnim="@android:anim/fade_out"
+            app:popEnterAnim="@android:anim/slide_in_left"
+            app:popExitAnim="@android:anim/slide_out_right"/>
 
         <action
             android:id="@+id/action_notificationFragment_to_notificationDetailsFragment"
             app:launchSingleTop="true"
-            app:destination="@id/notificationDetailsFragment" />
+            app:destination="@id/notificationDetailsFragment"
+            app:enterAnim="@android:anim/fade_in"
+            app:exitAnim="@android:anim/fade_out"
+            app:popEnterAnim="@android:anim/slide_in_left"
+            app:popExitAnim="@android:anim/slide_out_right"/>
         <action
             android:id="@+id/action_notificationFragment_self"
-            app:destination="@id/notificationFragment" />
+            app:destination="@id/notificationFragment"
+            app:enterAnim="@android:anim/fade_in"
+            app:exitAnim="@android:anim/fade_out"
+            app:popEnterAnim="@android:anim/slide_in_left"
+            app:popExitAnim="@android:anim/slide_out_right"/>
 
     </fragment>
 
@@ -77,7 +113,11 @@
         tools:layout="@layout/fragment_create_reservation" >
         <action
             android:id="@+id/action_createReservationFragment_self"
-            app:destination="@id/createReservationFragment" />
+            app:destination="@id/createReservationFragment"
+            app:enterAnim="@android:anim/fade_in"
+            app:exitAnim="@android:anim/fade_out"
+            app:popEnterAnim="@android:anim/slide_in_left"
+            app:popExitAnim="@android:anim/slide_out_right"/>
         <argument
             android:name="month_id"
             app:argType="integer" />
@@ -86,7 +126,11 @@
             app:argType="integer" />
         <action
             android:id="@+id/action_createReservationFragment_to_reservationDetails"
-            app:destination="@id/reservationDetails" />
+            app:destination="@id/reservationDetails"
+            app:enterAnim="@android:anim/fade_in"
+            app:exitAnim="@android:anim/fade_out"
+            app:popEnterAnim="@android:anim/slide_in_left"
+            app:popExitAnim="@android:anim/slide_out_right"/>
     </fragment>
     <fragment
         android:id="@+id/reservationDetails"
@@ -113,13 +157,21 @@
             app:argType="integer" />
         <action
             android:id="@+id/action_reservationDetails_to_resultFragment"
-            app:destination="@id/resultFragment" />
+            app:destination="@id/resultFragment"
+            app:enterAnim="@android:anim/fade_in"
+            app:exitAnim="@android:anim/fade_out"
+            app:popEnterAnim="@android:anim/slide_in_left"
+            app:popExitAnim="@android:anim/slide_out_right"/>
         <argument
             android:name="duration"
             app:argType="string" />
         <action
             android:id="@+id/action_reservationDetails_to_createReservationFragment"
-            app:destination="@id/createReservationFragment" />
+            app:destination="@id/createReservationFragment"
+            app:enterAnim="@android:anim/fade_in"
+            app:exitAnim="@android:anim/fade_out"
+            app:popEnterAnim="@android:anim/slide_in_left"
+            app:popExitAnim="@android:anim/slide_out_right"/>
     </fragment>
     <fragment
         android:id="@+id/qrCodeFragment"
@@ -134,17 +186,30 @@
 
         <action
             android:id="@+id/action_surveySystemFragment_to_createSurveyFragment"
-            app:destination="@id/createSurveyFragment" />
+            app:destination="@id/createSurveyFragment"
+            app:enterAnim="@android:anim/fade_in"
+            app:exitAnim="@android:anim/fade_out"
+            app:popEnterAnim="@android:anim/slide_in_left"
+            app:popExitAnim="@android:anim/slide_out_right"/>
 
         <action
             android:id="@+id/action_surveySystemFragment_to_ratingSurveyFragment"
-            app:destination="@id/ratingSurveyFragment" />
+            app:destination="@id/ratingSurveyFragment"
+            app:enterAnim="@android:anim/fade_in"
+            app:exitAnim="@android:anim/fade_out"
+            app:popEnterAnim="@android:anim/slide_in_left"
+            app:popExitAnim="@android:anim/slide_out_right"/>
     </fragment>
     <fragment
         android:id="@+id/eventSystemFragment"
         android:name="com.utechia.tdf.events.EventSystemFragment"
         android:label="fragment_event_system"
-        tools:layout="@layout/fragment_event_system" />
+        tools:layout="@layout/fragment_event_system"
+        app:enterAnim="@android:anim/fade_in"
+        app:exitAnim="@android:anim/fade_out"
+        app:popEnterAnim="@android:anim/slide_in_left"
+        app:popExitAnim="@android:anim/slide_out_right"/>
+
     <fragment
         android:id="@+id/ticketSystemFragment"
         android:name="com.utechia.tdf.ticket.TicketSystemFragment"
@@ -152,10 +217,20 @@
         tools:layout="@layout/fragment_ticket_system" >
         <action
             android:id="@+id/action_ticketSystemFragment_to_createTicketFragment"
-            app:destination="@id/createTicketFragment" />
+            app:destination="@id/createTicketFragment"
+            app:enterAnim="@android:anim/fade_in"
+            app:exitAnim="@android:anim/fade_out"
+            app:popEnterAnim="@android:anim/slide_in_left"
+            app:popExitAnim="@android:anim/slide_out_right"/>
+
         <action
             android:id="@+id/action_ticketSystemFragment_to_ticketDetailsFragment"
-            app:destination="@id/ticketDetailsFragment" />
+            app:destination="@id/ticketDetailsFragment"
+            app:enterAnim="@android:anim/fade_in"
+            app:exitAnim="@android:anim/fade_out"
+            app:popEnterAnim="@android:anim/slide_in_left"
+            app:popExitAnim="@android:anim/slide_out_right"/>
+
     </fragment>
 
     <fragment
@@ -172,21 +247,41 @@
 
         <action
             android:id="@+id/action_createTicketFragment_to_categoryFragment"
-            app:destination="@id/categoryFragmentFragment" />
+            app:destination="@id/categoryFragmentFragment"
+            app:enterAnim="@android:anim/fade_in"
+            app:exitAnim="@android:anim/fade_out"
+            app:popEnterAnim="@android:anim/slide_in_left"
+            app:popExitAnim="@android:anim/slide_out_right"/>
 
         <action
             android:id="@+id/action_createTicketFragment_to_ticketConfirmationFragment"
-            app:destination="@id/ticketConfirmationFragment" />
+            app:destination="@id/ticketConfirmationFragment"
+            app:enterAnim="@android:anim/fade_in"
+            app:exitAnim="@android:anim/fade_out"
+            app:popEnterAnim="@android:anim/slide_in_left"
+            app:popExitAnim="@android:anim/slide_out_right"/>
 
         <action
             android:id="@+id/action_createTicketFragment_to_uploadFragment"
-            app:destination="@id/uploadFragment" />
+            app:destination="@id/uploadFragment"
+            app:enterAnim="@android:anim/fade_in"
+            app:exitAnim="@android:anim/fade_out"
+            app:popEnterAnim="@android:anim/slide_in_left"
+            app:popExitAnim="@android:anim/slide_out_right"/>
         <action
             android:id="@+id/action_createTicketFragment_to_blankFragment"
-            app:destination="@id/blankFragment" />
+            app:destination="@id/blankFragment"
+            app:enterAnim="@android:anim/fade_in"
+            app:exitAnim="@android:anim/fade_out"
+            app:popEnterAnim="@android:anim/slide_in_left"
+            app:popExitAnim="@android:anim/slide_out_right"/>
         <action
             android:id="@+id/action_createTicketFragment_to_uploadDeleteFragment"
-            app:destination="@id/uploadDeleteFragment" />
+            app:destination="@id/uploadDeleteFragment"
+            app:enterAnim="@android:anim/fade_in"
+            app:exitAnim="@android:anim/fade_out"
+            app:popEnterAnim="@android:anim/slide_in_left"
+            app:popExitAnim="@android:anim/slide_out_right"/>
 
 
     </fragment>
@@ -198,7 +293,11 @@
         tools:layout="@layout/fragment_result" >
         <action
             android:id="@+id/action_resultFragment_to_reservationFragment"
-            app:destination="@id/reservationFragment" />
+            app:destination="@id/reservationFragment"
+            app:enterAnim="@android:anim/fade_in"
+            app:exitAnim="@android:anim/fade_out"
+            app:popEnterAnim="@android:anim/slide_in_left"
+            app:popExitAnim="@android:anim/slide_out_right"/>
     </dialog>
 
     <fragment
@@ -212,14 +311,24 @@
             app:nullable="true" />
         <action
             android:id="@+id/action_createRefreshmentFragment_to_cartFragment"
-            app:destination="@id/cartFragment" />
+            app:destination="@id/cartFragment"  app:enterAnim="@android:anim/fade_in"
+            app:exitAnim="@android:anim/fade_out"
+            app:popEnterAnim="@android:anim/slide_in_left"
+            app:popExitAnim="@android:anim/slide_out_right" />
         <action
             android:id="@+id/action_createRefreshmentFragment_to_orderFragment"
-            app:destination="@id/orderFragment" />
+            app:destination="@id/orderFragment"   app:enterAnim="@android:anim/fade_in"
+            app:exitAnim="@android:anim/fade_out"
+            app:popEnterAnim="@android:anim/slide_in_left"
+            app:popExitAnim="@android:anim/slide_out_right"/>
 
         <action
             android:id="@+id/action_createRefreshmentFragment_to_favoriteFragment"
-            app:destination="@id/favoriteFragment" />
+            app:destination="@id/favoriteFragment"
+            app:enterAnim="@android:anim/fade_in"
+            app:exitAnim="@android:anim/fade_out"
+            app:popEnterAnim="@android:anim/slide_in_left"
+            app:popExitAnim="@android:anim/slide_out_right"/>
 
     </fragment>
 
@@ -230,16 +339,28 @@
         tools:layout="@layout/fragment_cart" >
         <action
             android:id="@+id/action_cartFragment_to_deleteFragment"
-            app:destination="@id/deleteFragment" />
+            app:destination="@id/deleteFragment"
+            app:enterAnim="@android:anim/fade_in"
+            app:exitAnim="@android:anim/fade_out"
+            app:popEnterAnim="@android:anim/slide_in_left"
+            app:popExitAnim="@android:anim/slide_out_right"/>
         <action
             android:id="@+id/action_cartFragment_to_orderResultFragment"
-            app:destination="@id/orderResultFragment" />
+            app:destination="@id/orderResultFragment"
+            app:enterAnim="@android:anim/fade_in"
+            app:exitAnim="@android:anim/fade_out"
+            app:popEnterAnim="@android:anim/slide_in_left"
+            app:popExitAnim="@android:anim/slide_out_right"/>
         <action
             android:id="@+id/action_cartFragment_to_orderFragment"
             app:launchSingleTop="true"
             app:popUpTo="@id/createRefreshmentFragment"
             app:popUpToInclusive="true"
-            app:destination="@id/orderFragment" />
+            app:destination="@id/orderFragment"
+            app:enterAnim="@android:anim/fade_in"
+            app:exitAnim="@android:anim/fade_out"
+            app:popEnterAnim="@android:anim/slide_in_left"
+            app:popExitAnim="@android:anim/slide_out_right"/>
     </fragment>
     <fragment
         android:id="@+id/orderFragment"
@@ -248,17 +369,34 @@
         tools:layout="@layout/fragment_order" >
         <action
             android:id="@+id/action_orderFragment_to_orderResultFragment"
-            app:destination="@id/orderResultFragment" />
+            app:destination="@id/orderResultFragment"
+            app:enterAnim="@android:anim/fade_in"
+            app:exitAnim="@android:anim/fade_out"
+            app:popEnterAnim="@android:anim/slide_in_left"
+            app:popExitAnim="@android:anim/slide_out_right"
+            />
         <action
             android:id="@+id/action_orderFragment_to_cancelFragment"
-            app:destination="@id/cancelFragment" />
+            app:destination="@id/cancelFragment"
+            app:enterAnim="@android:anim/fade_in"
+            app:exitAnim="@android:anim/fade_out"
+            app:popEnterAnim="@android:anim/slide_in_left"
+            app:popExitAnim="@android:anim/slide_out_right"/>
         <action
             android:id="@+id/action_orderFragment_to_orderDetailsFragment"
-            app:destination="@id/orderDetailsFragment" />
+            app:destination="@id/orderDetailsFragment"
+            app:enterAnim="@android:anim/fade_in"
+            app:exitAnim="@android:anim/fade_out"
+            app:popEnterAnim="@android:anim/slide_in_left"
+            app:popExitAnim="@android:anim/slide_out_right"/>
 
         <action
             android:id="@+id/orderFragment_to_rateConfirmationFragment"
-            app:destination="@id/rateConfirmationFragment" />
+            app:destination="@id/rateConfirmationFragment"
+            app:enterAnim="@android:anim/fade_in"
+            app:exitAnim="@android:anim/fade_out"
+            app:popEnterAnim="@android:anim/slide_in_left"
+            app:popExitAnim="@android:anim/slide_out_right"/>
 
     </fragment>
 
@@ -269,7 +407,11 @@
         tools:layout="@layout/fragment_order_result" >
         <action
             android:id="@+id/action_orderResultFragment_to_orderFragment"
-            app:destination="@id/orderFragment" />
+            app:destination="@id/orderFragment"
+            app:enterAnim="@android:anim/fade_in"
+            app:exitAnim="@android:anim/fade_out"
+            app:popEnterAnim="@android:anim/slide_in_left"
+            app:popExitAnim="@android:anim/slide_out_right"/>
     </dialog>
 
     <fragment
@@ -286,7 +428,11 @@
 
         <deepLink
             android:id="@+id/deepLink"
-            app:uri="https://auth.tdf.gov.sa:4002/?code={code}" />
+            app:uri="https://auth.tdf.gov.sa:4002/?code={code}"
+            app:enterAnim="@android:anim/fade_in"
+            app:exitAnim="@android:anim/fade_out"
+            app:popEnterAnim="@android:anim/slide_in_left"
+            app:popExitAnim="@android:anim/slide_out_right"/>
 
         <argument
             android:name="code"
@@ -294,19 +440,33 @@
             app:nullable="true" />
         <action
             android:id="@+id/action_loginFragment_to_authenticationFragment"
-            app:destination="@id/authenticationFragment" />
+            app:destination="@id/authenticationFragment"
+            app:enterAnim="@android:anim/fade_in"
+            app:exitAnim="@android:anim/fade_out"
+            app:popEnterAnim="@android:anim/slide_in_left"
+            app:popExitAnim="@android:anim/slide_out_right"/>
 
         <action
             android:id="@+id/action_loginFragment_to_userhomeFragment"
             app:destination="@id/userhomeFragment"
             app:launchSingleTop="true"
-            app:popUpTo="@id/nav_graph"/>
+            app:popUpTo="@id/nav_graph"
+            app:popUpToInclusive="true"
+            app:enterAnim="@android:anim/fade_in"
+            app:exitAnim="@android:anim/fade_out"
+            app:popEnterAnim="@android:anim/slide_in_left"
+            app:popExitAnim="@android:anim/slide_out_right"/>
 
         <action
             android:id="@+id/action_loginFragment_to_teaBoyHomeFragment"
             app:launchSingleTop="true"
             app:destination="@id/teaBoyHomeFragment"
-            app:popUpTo="@id/nav_graph"/>
+            app:popUpTo="@id/nav_graph"
+            app:popUpToInclusive="true"
+            app:enterAnim="@android:anim/fade_in"
+            app:exitAnim="@android:anim/fade_out"
+            app:popEnterAnim="@android:anim/slide_in_left"
+            app:popExitAnim="@android:anim/slide_out_right"/>
 
     </fragment>
 
@@ -318,7 +478,11 @@
 
         <action
             android:id="@+id/action_authenticationFragment_to_loginFragment"
-            app:destination="@id/loginFragment" />
+            app:destination="@id/loginFragment"
+            app:enterAnim="@android:anim/fade_in"
+            app:exitAnim="@android:anim/fade_out"
+            app:popEnterAnim="@android:anim/slide_in_left"
+            app:popExitAnim="@android:anim/slide_out_right"/>
 
     </dialog>
     <fragment
@@ -328,13 +492,25 @@
         tools:layout="@layout/fragment_tea_boy_home" >
         <action
             android:id="@+id/action_teaBoyHomeFragment_to_statusFragment"
-            app:destination="@id/statusFragment" />
+            app:destination="@id/statusFragment"
+            app:enterAnim="@android:anim/fade_in"
+            app:exitAnim="@android:anim/fade_out"
+            app:popEnterAnim="@android:anim/slide_in_left"
+            app:popExitAnim="@android:anim/slide_out_right"/>
         <action
             android:id="@+id/action_teaBoyHomeFragment_to_deactivationFragment"
-            app:destination="@id/deactivationFragment" />
+            app:destination="@id/deactivationFragment"
+            app:enterAnim="@android:anim/fade_in"
+            app:exitAnim="@android:anim/fade_out"
+            app:popEnterAnim="@android:anim/slide_in_left"
+            app:popExitAnim="@android:anim/slide_out_right"/>
         <action
             android:id="@+id/action_teaBoyHomeFragment_to_activationFragment"
-            app:destination="@id/activationFragment" />
+            app:destination="@id/activationFragment"
+            app:enterAnim="@android:anim/fade_in"
+            app:exitAnim="@android:anim/fade_out"
+            app:popEnterAnim="@android:anim/slide_in_left"
+            app:popExitAnim="@android:anim/slide_out_right"/>
     </fragment>
 
     <fragment
@@ -344,17 +520,33 @@
         tools:layout="@layout/fragment_tea_boy_orders" >
         <action
             android:id="@+id/action_teaBoyOrdersFragment_to_acceptFragment"
-            app:destination="@id/acceptFragment" />
+            app:destination="@id/acceptFragment"
+            app:enterAnim="@android:anim/fade_in"
+            app:exitAnim="@android:anim/fade_out"
+            app:popEnterAnim="@android:anim/slide_in_left"
+            app:popExitAnim="@android:anim/slide_out_right"/>
         <action
             android:id="@+id/action_teaBoyOrdersFragment_to_rejectFragment"
-            app:destination="@id/rejectFragment" />
+            app:destination="@id/rejectFragment"
+            app:enterAnim="@android:anim/fade_in"
+            app:exitAnim="@android:anim/fade_out"
+            app:popEnterAnim="@android:anim/slide_in_left"
+            app:popExitAnim="@android:anim/slide_out_right"/>
 
         <action
             android:id="@+id/action_orderFragment_to_orderDetailsFragment"
-            app:destination="@id/teaBoyOrderDetailsFragment" />
+            app:destination="@id/teaBoyOrderDetailsFragment"
+            app:enterAnim="@android:anim/fade_in"
+            app:exitAnim="@android:anim/fade_out"
+            app:popEnterAnim="@android:anim/slide_in_left"
+            app:popExitAnim="@android:anim/slide_out_right"/>
         <action
             android:id="@+id/action_teaBoyOrdersFragment_self"
-            app:destination="@id/teaBoyOrdersFragment" />
+            app:destination="@id/teaBoyOrdersFragment"
+            app:enterAnim="@android:anim/fade_in"
+            app:exitAnim="@android:anim/fade_out"
+            app:popEnterAnim="@android:anim/slide_in_left"
+            app:popExitAnim="@android:anim/slide_out_right"/>
 
     </fragment>
 
@@ -370,7 +562,11 @@
         <action
             android:id="@+id/action_deleteFragment_to_cartFragment"
             app:launchSingleTop="true"
-            app:destination="@id/cartFragment" />
+            app:destination="@id/cartFragment"
+            app:enterAnim="@android:anim/fade_in"
+            app:exitAnim="@android:anim/fade_out"
+            app:popEnterAnim="@android:anim/slide_in_left"
+            app:popExitAnim="@android:anim/slide_out_right"/>
 
     </dialog>
 
@@ -386,7 +582,11 @@
         <action
             android:id="@+id/action_cancelFragment_to_orderFragment"
             app:launchSingleTop="true"
-            app:destination="@id/orderFragment" />
+            app:destination="@id/orderFragment"
+            app:enterAnim="@android:anim/fade_in"
+            app:exitAnim="@android:anim/fade_out"
+            app:popEnterAnim="@android:anim/slide_in_left"
+            app:popExitAnim="@android:anim/slide_out_right"/>
     </dialog>
 
     <dialog
@@ -417,7 +617,11 @@
         <action
             android:id="@+id/action_acceptFragment_to_teaBoyOrdersFragment"
             app:launchSingleTop="true"
-            app:destination="@id/teaBoyOrdersFragment" />
+            app:destination="@id/teaBoyOrdersFragment"
+            app:enterAnim="@android:anim/fade_in"
+            app:exitAnim="@android:anim/fade_out"
+            app:popEnterAnim="@android:anim/slide_in_left"
+            app:popExitAnim="@android:anim/slide_out_right"/>
 
     </dialog>
     <dialog
@@ -433,7 +637,11 @@
         <action
             android:id="@+id/action_rejectFragment_to_teaBoyOrdersFragment"
             app:launchSingleTop="true"
-            app:destination="@id/teaBoyOrdersFragment" />
+            app:destination="@id/teaBoyOrdersFragment"
+            app:enterAnim="@android:anim/fade_in"
+            app:exitAnim="@android:anim/fade_out"
+            app:popEnterAnim="@android:anim/slide_in_left"
+            app:popExitAnim="@android:anim/slide_out_right"/>
 
     </dialog>
     <dialog
@@ -451,7 +659,11 @@
         tools:layout="@layout/fragment_activation" >
         <action
             android:id="@+id/action_activationFragment_to_teaBoyHomeFragment"
-            app:destination="@id/teaBoyHomeFragment" />
+            app:destination="@id/teaBoyHomeFragment"
+            app:enterAnim="@android:anim/fade_in"
+            app:exitAnim="@android:anim/fade_out"
+            app:popEnterAnim="@android:anim/slide_in_left"
+            app:popExitAnim="@android:anim/slide_out_right"/>
     </dialog>
     <dialog
         android:id="@+id/deactivationFragment"
@@ -460,7 +672,11 @@
         tools:layout="@layout/fragment_deactivation" >
         <action
             android:id="@+id/action_deactivationFragment_to_teaBoyHomeFragment"
-            app:destination="@id/teaBoyHomeFragment" />
+            app:destination="@id/teaBoyHomeFragment"
+            app:enterAnim="@android:anim/fade_in"
+            app:exitAnim="@android:anim/fade_out"
+            app:popEnterAnim="@android:anim/slide_in_left"
+            app:popExitAnim="@android:anim/slide_out_right"/>
     </dialog>
 
     <dialog
@@ -471,7 +687,11 @@
 
     <action
         android:id="@+id/action_teaBoyNotificationFragment_to_teaBoyOrdersFragment"
-        app:destination="@id/teaBoyOrdersFragment" />
+        app:destination="@id/teaBoyOrdersFragment"
+        app:enterAnim="@android:anim/fade_in"
+        app:exitAnim="@android:anim/fade_out"
+        app:popEnterAnim="@android:anim/slide_in_left"
+        app:popExitAnim="@android:anim/slide_out_right"/>
 
     </dialog>
 
@@ -485,15 +705,28 @@
             android:id="@+id/action_permissionFragment_to_cancelRequestFragment"
             app:launchSingleTop="true"
             app:popUpTo="@id/nav_graph"
+            app:popUpToInclusive="true"
+            app:enterAnim="@android:anim/fade_in"
+            app:exitAnim="@android:anim/fade_out"
+            app:popEnterAnim="@android:anim/slide_in_left"
+            app:popExitAnim="@android:anim/slide_out_right"
             app:destination="@id/cancelRequestFragment" />
 
         <action
             android:id="@+id/action_permissionFragment_to_requestDetailsFragment"
-            app:destination="@id/requestDetailsFragment" />
+            app:destination="@id/requestDetailsFragment"
+            app:enterAnim="@android:anim/fade_in"
+            app:exitAnim="@android:anim/fade_out"
+            app:popEnterAnim="@android:anim/slide_in_left"
+            app:popExitAnim="@android:anim/slide_out_right"/>
 
         <action
             android:id="@+id/action_permissionFragment_to_calendarRequestFragment"
-            app:destination="@id/calendarRequestFragment" />
+            app:destination="@id/calendarRequestFragment"
+            app:enterAnim="@android:anim/fade_in"
+            app:exitAnim="@android:anim/fade_out"
+            app:popEnterAnim="@android:anim/slide_in_left"
+            app:popExitAnim="@android:anim/slide_out_right"/>
 
     </fragment>
 
@@ -510,7 +743,11 @@
 
         <action
             android:id="@+id/cancelRequestFragment_to_permissionFragment"
-            app:destination="@id/permissionFragment" />
+            app:destination="@id/permissionFragment"
+            app:enterAnim="@android:anim/fade_in"
+            app:exitAnim="@android:anim/fade_out"
+            app:popEnterAnim="@android:anim/slide_in_left"
+            app:popExitAnim="@android:anim/slide_out_right"/>
 
     </dialog>
     <dialog
@@ -534,7 +771,11 @@
 
         <action
             android:id="@+id/createRequestFragment_to_confirmRequestFragment"
-            app:destination="@id/confirmRequestFragment" />
+            app:destination="@id/confirmRequestFragment"
+            app:enterAnim="@android:anim/fade_in"
+            app:exitAnim="@android:anim/fade_out"
+            app:popEnterAnim="@android:anim/slide_in_left"
+            app:popExitAnim="@android:anim/slide_out_right"/>
 
     </fragment>
 
@@ -546,7 +787,11 @@
 
         <action
             android:id="@+id/calendarRequestFragment_to_createRequestFragment"
-            app:destination="@id/createRequestFragment" />
+            app:destination="@id/createRequestFragment"
+            app:enterAnim="@android:anim/fade_in"
+            app:exitAnim="@android:anim/fade_out"
+            app:popEnterAnim="@android:anim/slide_in_left"
+            app:popExitAnim="@android:anim/slide_out_right"/>
 
     </fragment>
 
@@ -561,7 +806,11 @@
             app:launchSingleTop="true"
             app:popUpToInclusive="true"
             app:popUpTo="@id/nav_graph"
-            app:destination="@id/permissionFragment" />
+            app:destination="@id/permissionFragment"
+            app:enterAnim="@android:anim/fade_in"
+            app:exitAnim="@android:anim/fade_out"
+            app:popEnterAnim="@android:anim/slide_in_left"
+            app:popExitAnim="@android:anim/slide_out_right"/>
 
     </dialog>
     <fragment
@@ -576,7 +825,12 @@
 
         <action
             android:id="@+id/createSurveyFragment_to_confirmSurveyFragment"
-            app:destination="@id/confirmSurveyFragment" />
+            app:destination="@id/confirmSurveyFragment"
+            app:enterAnim="@android:anim/fade_in"
+            app:exitAnim="@android:anim/fade_out"
+            app:popEnterAnim="@android:anim/slide_in_left"
+            app:popExitAnim="@android:anim/slide_out_right"
+            />
     </fragment>
 
     <dialog
@@ -590,14 +844,22 @@
             app:launchSingleTop="true"
             app:popUpToInclusive="true"
             app:popUpTo="@id/nav_graph"
-            app:destination="@id/resultSurveyFragment" />
+            app:destination="@id/resultSurveyFragment"
+            app:enterAnim="@android:anim/fade_in"
+            app:exitAnim="@android:anim/fade_out"
+            app:popEnterAnim="@android:anim/slide_in_left"
+            app:popExitAnim="@android:anim/slide_out_right"/>
 
         <action
             android:id="@+id/confirmSurveyFragment_to_surveySystemFragment"
             app:launchSingleTop="true"
             app:popUpToInclusive="true"
             app:popUpTo="@id/nav_graph"
-            app:destination="@id/surveySystemFragment" />
+            app:destination="@id/surveySystemFragment"
+            app:enterAnim="@android:anim/fade_in"
+            app:exitAnim="@android:anim/fade_out"
+            app:popEnterAnim="@android:anim/slide_in_left"
+            app:popExitAnim="@android:anim/slide_out_right"/>
 
     </dialog>
 
@@ -612,7 +874,11 @@
             app:launchSingleTop="true"
             app:popUpToInclusive="true"
             app:popUpTo="@id/nav_graph"
-            app:destination="@id/surveySystemFragment" />
+            app:destination="@id/surveySystemFragment"
+            app:enterAnim="@android:anim/fade_in"
+            app:exitAnim="@android:anim/fade_out"
+            app:popEnterAnim="@android:anim/slide_in_left"
+            app:popExitAnim="@android:anim/slide_out_right"/>
 
     </fragment>
     <dialog
@@ -639,7 +905,11 @@
             app:launchSingleTop="true"
             app:popUpToInclusive="true"
             app:popUpTo="@id/refreshmentFragment"
-            app:destination="@id/orderFragment" />
+            app:destination="@id/orderFragment"
+            app:enterAnim="@android:anim/fade_in"
+            app:exitAnim="@android:anim/fade_out"
+            app:popEnterAnim="@android:anim/slide_in_left"
+            app:popExitAnim="@android:anim/slide_out_right"/>
 
     </dialog>
     <dialog
@@ -711,7 +981,11 @@
 
         <action
             android:id="@+id/action_closeTicketFragment_to_ticketDetailsFragment"
-            app:destination="@id/ticketDetailsFragment" />
+            app:destination="@id/ticketDetailsFragment"
+            app:enterAnim="@android:anim/fade_in"
+            app:exitAnim="@android:anim/fade_out"
+            app:popEnterAnim="@android:anim/slide_in_left"
+            app:popExitAnim="@android:anim/slide_out_right"/>
 
         <action
             android:id="@+id/action_closeTicketFragment_to_ticketSystemFragment"
@@ -727,41 +1001,72 @@
         <action
             android:id="@+id/action_ticketDetailsFragment_to_messageFragment"
             app:launchSingleTop="true"
-            app:destination="@id/messageFragment" />
+            app:destination="@id/messageFragment"
+            app:enterAnim="@android:anim/fade_in"
+            app:exitAnim="@android:anim/fade_out"
+            app:popEnterAnim="@android:anim/slide_in_left"
+            app:popExitAnim="@android:anim/slide_out_right"/>
         
         <action
             android:id="@+id/action_messageFragment_to_blankFragment"
             app:launchSingleTop="true"
-            app:destination="@id/blankFragment" />
+            app:destination="@id/blankFragment"
+            app:enterAnim="@android:anim/fade_in"
+            app:exitAnim="@android:anim/fade_out"
+            app:popEnterAnim="@android:anim/slide_in_left"
+            app:popExitAnim="@android:anim/slide_out_right"/>
 
         <action
             android:id="@+id/action_ticketDetailsFragment_to_closeTicketFragment"
             app:launchSingleTop="true"
-            app:destination="@id/closeTicketFragment" />
+            app:destination="@id/closeTicketFragment"
+            app:enterAnim="@android:anim/fade_in"
+            app:exitAnim="@android:anim/fade_out"
+            app:popEnterAnim="@android:anim/slide_in_left"
+            app:popExitAnim="@android:anim/slide_out_right"/>
 
         <action
             android:id="@+id/action_createTicketFragment_to_blankFragment"
             app:launchSingleTop="true"
-            app:destination="@id/blankFragment" />
+            app:destination="@id/blankFragment"
+            app:enterAnim="@android:anim/fade_in"
+            app:exitAnim="@android:anim/fade_out"
+            app:popEnterAnim="@android:anim/slide_in_left"
+            app:popExitAnim="@android:anim/slide_out_right"/>
 
         <action
             android:id="@+id/action_messageFragment_to_ticketDetailsFragment"
             app:launchSingleTop="true"
-            app:destination="@id/ticketDetailsFragment" />
+            app:destination="@id/ticketDetailsFragment"
+            app:enterAnim="@android:anim/fade_in"
+            app:exitAnim="@android:anim/fade_out"
+            app:popEnterAnim="@android:anim/slide_in_left"
+            app:popExitAnim="@android:anim/slide_out_right"/>
 
         <action
             android:id="@+id/action_messageFragment_to_uploadFragment"
             app:launchSingleTop="true"
-            app:destination="@id/uploadReplyFragment" />
+            app:destination="@id/uploadReplyFragment"
+            app:enterAnim="@android:anim/fade_in"
+            app:exitAnim="@android:anim/fade_out"
+            app:popEnterAnim="@android:anim/slide_in_left"
+            app:popExitAnim="@android:anim/slide_out_right"/>
 
         <action
             android:id="@+id/action_messageFragment_to_uploadReplyDeleteFragment"
             app:launchSingleTop="true"
-            app:destination="@id/uploadReplyDeleteFragment" />
+            app:destination="@id/uploadReplyDeleteFragment"
+            app:enterAnim="@android:anim/fade_in"
+            app:exitAnim="@android:anim/fade_out"
+            app:popEnterAnim="@android:anim/slide_in_left"
+            app:popExitAnim="@android:anim/slide_out_right"/>
         <action
             android:id="@+id/action_ticketDetailsFragment_to_ticketRatingFragment"
             app:launchSingleTop="true"
-            app:destination="@id/ticketRatingFragment" />
+            app:destination="@id/ticketRatingFragment"  app:enterAnim="@android:anim/fade_in"
+            app:exitAnim="@android:anim/fade_out"
+            app:popEnterAnim="@android:anim/slide_in_left"
+            app:popExitAnim="@android:anim/slide_out_right" />
 
 
     </fragment>
@@ -773,11 +1078,19 @@
 
         <action
             android:id="@+id/action_messageFragment_to_uploadReplyDeleteFragment"
-            app:destination="@id/uploadReplyDeleteFragment" />
+            app:destination="@id/uploadReplyDeleteFragment"
+            app:enterAnim="@android:anim/fade_in"
+            app:exitAnim="@android:anim/fade_out"
+            app:popEnterAnim="@android:anim/slide_in_left"
+            app:popExitAnim="@android:anim/slide_out_right"/>
 
         <action
             android:id="@+id/action_messageFragment_to_blankFragment"
-            app:destination="@id/blankFragment" />
+            app:destination="@id/blankFragment"
+            app:enterAnim="@android:anim/fade_in"
+            app:exitAnim="@android:anim/fade_out"
+            app:popEnterAnim="@android:anim/slide_in_left"
+            app:popExitAnim="@android:anim/slide_out_right"/>
 
     </dialog>
 
@@ -820,7 +1133,11 @@
         <action
             android:id="@+id/action_notificationDeleteFragment_to_notificationFragment"
             app:launchSingleTop="true"
-            app:destination="@id/notificationFragment" />
+            app:destination="@id/notificationFragment"
+            app:enterAnim="@android:anim/fade_in"
+            app:exitAnim="@android:anim/fade_out"
+            app:popEnterAnim="@android:anim/slide_in_left"
+            app:popExitAnim="@android:anim/slide_out_right"/>
 
         <argument
             android:name="fId"
@@ -838,7 +1155,11 @@
         <action
             android:id="@+id/action_notificationDetailsFragment_to_notificationFragment"
             app:launchSingleTop="true"
-            app:destination="@id/notificationFragment" />
+            app:destination="@id/notificationFragment"
+            app:enterAnim="@android:anim/fade_in"
+            app:exitAnim="@android:anim/fade_out"
+            app:popEnterAnim="@android:anim/slide_in_left"
+            app:popExitAnim="@android:anim/slide_out_right"/>
 
         <argument
             android:name="nId"
@@ -858,7 +1179,7 @@
         tools:layout="@layout/fragment_event_rate" />
     <fragment
         android:id="@+id/eventResultFragment"
-        android:name="com.utechia.tdf.EventResultFragment"
+        android:name="com.utechia.tdf.events.EventResultFragment"
         android:label="fragment_event_result"
         tools:layout="@layout/fragment_event_result" />
 

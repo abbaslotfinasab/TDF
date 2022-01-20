@@ -1,12 +1,12 @@
 package com.utechia.tdf.main
 
+import android.content.Intent
 import android.content.SharedPreferences
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.os.Handler
 import android.os.Looper
 import android.view.View
-import android.widget.Toast
 import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatDelegate
 import androidx.core.content.ContextCompat
@@ -15,6 +15,7 @@ import androidx.core.view.forEach
 import androidx.drawerlayout.widget.DrawerLayout
 import androidx.lifecycle.lifecycleScope
 import androidx.navigation.NavController
+import androidx.navigation.NavOptions
 import androidx.navigation.fragment.NavHostFragment
 import androidx.navigation.ui.setupWithNavController
 import com.google.android.gms.tasks.OnCompleteListener
@@ -316,7 +317,13 @@ class MainActivity : AppCompatActivity() {
 
                         Handler(Looper.getMainLooper()).postDelayed({
 
-                            navController.navigate(R.id.surveySystemFragment)
+                            navController.navigate(it.itemId,null,NavOptions.Builder()
+                                .setEnterAnim(android.R.anim.fade_in)
+                                .setExitAnim(android.R.anim.fade_out)
+                                .setPopEnterAnim(android.R.anim.slide_out_right)
+                                .setPopEnterAnim(android.R.anim.slide_in_left)
+                                .build()
+                            )
 
                         }, 300)
 
@@ -328,8 +335,13 @@ class MainActivity : AppCompatActivity() {
 
                         Handler(Looper.getMainLooper()).postDelayed({
 
-                            navController.navigate(R.id.eventSystemFragment)
-
+                            navController.navigate(it.itemId,null,NavOptions.Builder()
+                                .setEnterAnim(android.R.anim.fade_in)
+                                .setExitAnim(android.R.anim.fade_out)
+                                .setPopEnterAnim(android.R.anim.slide_out_right)
+                                .setPopEnterAnim(android.R.anim.slide_in_left)
+                                .build()
+                            )
                         }, 300)
 
                         binding.drawerLayout.closeDrawer(GravityCompat.END)
@@ -340,8 +352,13 @@ class MainActivity : AppCompatActivity() {
 
                         Handler(Looper.getMainLooper()).postDelayed({
 
-                            navController.navigate(R.id.ticketSystemFragment)
-
+                            navController.navigate(it.itemId,null,NavOptions.Builder()
+                                .setEnterAnim(android.R.anim.fade_in)
+                                .setExitAnim(android.R.anim.fade_out)
+                                .setPopEnterAnim(android.R.anim.slide_out_right)
+                                .setPopEnterAnim(android.R.anim.slide_in_left)
+                                .build()
+                            )
                         }, 300)
 
                         binding.drawerLayout.closeDrawer(GravityCompat.END)
@@ -353,8 +370,13 @@ class MainActivity : AppCompatActivity() {
 
                         Handler(Looper.getMainLooper()).postDelayed({
 
-                            navController.navigate(R.id.calendarFragment)
-
+                            navController.navigate(it.itemId,null,NavOptions.Builder()
+                                .setEnterAnim(android.R.anim.fade_in)
+                                .setExitAnim(android.R.anim.fade_out)
+                                .setPopEnterAnim(android.R.anim.slide_out_right)
+                                .setPopEnterAnim(android.R.anim.slide_in_left)
+                                .build()
+                            )
                         }, 300)
 
                         binding.drawerLayout.closeDrawer(GravityCompat.END)
@@ -366,8 +388,13 @@ class MainActivity : AppCompatActivity() {
 
                         Handler(Looper.getMainLooper()).postDelayed({
 
-                            navController.navigate(R.id.permissionFragment)
-
+                            navController.navigate(it.itemId,null,NavOptions.Builder()
+                                .setEnterAnim(android.R.anim.fade_in)
+                                .setExitAnim(android.R.anim.fade_out)
+                                .setPopEnterAnim(android.R.anim.slide_out_right)
+                                .setPopEnterAnim(android.R.anim.slide_in_left)
+                                .build()
+                            )
                         }, 300)
 
                         binding.drawerLayout.closeDrawer(GravityCompat.END)
@@ -486,8 +513,13 @@ class MainActivity : AppCompatActivity() {
 
                     Handler(Looper.getMainLooper()).postDelayed({
 
-                        navController.navigate(R.id.surveySystemFragment)
-
+                        navController.navigate(it.itemId,null,NavOptions.Builder()
+                            .setEnterAnim(android.R.anim.fade_in)
+                            .setExitAnim(android.R.anim.fade_out)
+                            .setPopEnterAnim(android.R.anim.slide_out_right)
+                            .setPopEnterAnim(android.R.anim.slide_in_left)
+                            .build()
+                        )
                     }, 300)
 
                     binding.drawerLayout.closeDrawer(GravityCompat.END)
@@ -498,9 +530,13 @@ class MainActivity : AppCompatActivity() {
 
                     Handler(Looper.getMainLooper()).postDelayed({
 
-                        navController.navigateUp()
-                        navController.navigate(R.id.eventSystemFragment)
-
+                        navController.navigate(it.itemId,null,NavOptions.Builder()
+                            .setEnterAnim(android.R.anim.fade_in)
+                            .setExitAnim(android.R.anim.fade_out)
+                            .setPopEnterAnim(android.R.anim.slide_out_right)
+                            .setPopEnterAnim(android.R.anim.slide_in_left)
+                            .build()
+                        )
                     }, 300)
 
                     binding.drawerLayout.closeDrawer(GravityCompat.END)
@@ -511,8 +547,13 @@ class MainActivity : AppCompatActivity() {
 
                     Handler(Looper.getMainLooper()).postDelayed({
 
-                        navController.navigate(R.id.ticketSystemFragment)
-
+                        navController.navigate(it.itemId,null,NavOptions.Builder()
+                            .setEnterAnim(android.R.anim.fade_in)
+                            .setExitAnim(android.R.anim.fade_out)
+                            .setPopEnterAnim(android.R.anim.slide_out_right)
+                            .setPopEnterAnim(android.R.anim.slide_in_left)
+                            .build()
+                        )
                     }, 300)
 
                     binding.drawerLayout.closeDrawer(GravityCompat.END)
@@ -524,8 +565,13 @@ class MainActivity : AppCompatActivity() {
 
                     Handler(Looper.getMainLooper()).postDelayed({
 
-                        navController.navigate(R.id.calendarFragment)
-
+                        navController.navigate(it.itemId,null,NavOptions.Builder()
+                            .setEnterAnim(android.R.anim.fade_in)
+                            .setExitAnim(android.R.anim.fade_out)
+                            .setPopEnterAnim(android.R.anim.slide_out_right)
+                            .setPopEnterAnim(android.R.anim.slide_in_left)
+                            .build()
+                        )
                     }, 300)
 
                     binding.drawerLayout.closeDrawer(GravityCompat.END)
@@ -537,8 +583,13 @@ class MainActivity : AppCompatActivity() {
 
                     Handler(Looper.getMainLooper()).postDelayed({
 
-                        navController.navigate(R.id.permissionFragment)
-
+                        navController.navigate(it.itemId,null,NavOptions.Builder()
+                            .setEnterAnim(android.R.anim.fade_in)
+                            .setExitAnim(android.R.anim.fade_out)
+                            .setPopEnterAnim(android.R.anim.slide_out_right)
+                            .setPopEnterAnim(android.R.anim.slide_in_left)
+                            .build()
+                        )
                     }, 300)
 
                     binding.drawerLayout.closeDrawer(GravityCompat.END)
@@ -815,9 +866,14 @@ class MainActivity : AppCompatActivity() {
                 is Result.Loading -> {}
 
                 is Result.Error -> {
+
                     prefs.edit().clear().apply()
+
                     logoutFromFCM()
-                    Toast.makeText(this,it.message,Toast.LENGTH_SHORT).show()
+
+                    val i = Intent(this,MainActivity::class.java)
+                    finish()
+                    startActivity(i)
                 }
             }
         }

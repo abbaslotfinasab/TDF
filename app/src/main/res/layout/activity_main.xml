@@ -63,10 +63,10 @@
                 android:id="@+id/bubble"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginStart="-11dp"
-                android:layout_marginBottom="-7dp"
+                android:layout_marginStart="-13dp"
+                android:layout_marginBottom="-8dp"
                 android:visibility="gone"
-                android:src="@drawable/ic_baseline_notification_bubble"
+                android:src="@drawable/notification_bubble"
                 app:layout_constraintBottom_toTopOf="@+id/notification"
                 app:layout_constraintStart_toEndOf="@id/notification" />
 

@@ -4,7 +4,6 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.ImageView
-import android.widget.LinearLayout
 import android.widget.TextView
 import androidx.cardview.widget.CardView
 import androidx.recyclerview.widget.RecyclerView
@@ -19,8 +18,7 @@ class RefreshmentAdapter(private val createRefreshmentFragment: CreateRefreshmen
     fun addData(_refreshmentModel: MutableList<RefreshmentModel>){
         refreshment.clear()
         refreshment.addAll(_refreshmentModel)
-        notifyDataSetChanged()
-
+        notifyItemRangeChanged(0,_refreshmentModel.size-1)
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): RecyclerView.ViewHolder =
@@ -50,14 +48,20 @@ class RefreshmentAdapter(private val createRefreshmentFragment: CreateRefreshmen
 
         fun bind0(position: Int) {
 
-            var number = 0
-
             name.text = refreshment[position].title
             layout.visibility = View.GONE
             add.visibility = View.VISIBLE
             dislike.visibility = View.GONE
             like.visibility = View.VISIBLE
 
+
+            if (refreshment[position].like){
+                like.visibility = View.INVISIBLE
+                dislike.visibility = View.VISIBLE
+            }else{
+                like.visibility = View.VISIBLE
+                dislike.visibility = View.INVISIBLE
+            }
 
             like.setOnClickListener {
                 it.visibility = View.GONE
@@ -72,41 +76,52 @@ class RefreshmentAdapter(private val createRefreshmentFragment: CreateRefreshmen
 
             }
 
+            if (refreshment[position].open){
+
+                layout.visibility = View.VISIBLE
+                add.visibility = View.GONE
+
+            }else{
+                layout.visibility = View.GONE
+                add.visibility = View.VISIBLE
+            }
+
             Glide.with(itemView.context)
                 .load("https://sandbox.tdf.gov.sa/api/cafeteria/image/${refreshment[position].imageName}")
                 .centerCrop()
                 .into(image)
 
             add.setOnClickListener {
-                number += 1
-                numberText.text = number.toString()
+                refreshment[position].number += 1
+                numberText.text = refreshment[position].number .toString()
+                refreshment[position].open=true
                 it.visibility = View.GONE
                 layout.visibility = View.VISIBLE
-                createRefreshmentFragment.cartViewModel.postCart(refreshment[position].id!!,number)
+                createRefreshmentFragment.cartViewModel.postCart(refreshment[position].id!!,refreshment[position].number )
             }
             plus.setOnClickListener {
-                number += 1
-                numberText.text = number.toString()
-                createRefreshmentFragment.cartViewModel.updateCart(refreshment[position].id!!,number)
+                refreshment[position].number  += 1
+                numberText.text = refreshment[position].number .toString()
+                createRefreshmentFragment.cartViewModel.updateCart(refreshment[position].id!!,refreshment[position].number )
 
             }
 
             minus.setOnClickListener {
-                if (number>1) {
-                    number -= 1
+                if (refreshment[position].number >1) {
+                    refreshment[position].number  -= 1
                     createRefreshmentFragment.cartViewModel.updateCart(
                         refreshment[position].id!!,
-                        number
+                        refreshment[position].number
                     )
                 }
                 else {
-                    number=0
+                    refreshment[position].number =0
                     layout.visibility = View.GONE
                     add.visibility = View.VISIBLE
                     createRefreshmentFragment.cartViewModel.deleteCart(refreshment[position].id!!)
                 }
 
-                numberText.text = number.toString()
+                numberText.text = refreshment[position].number .toString()
             }
 
             numberText.setOnClickListener {

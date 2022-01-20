@@ -47,6 +47,11 @@
 
     <style name="MyCustomTextAppearance" parent="TextAppearance.Design.Tab">
         <item name="textAllCaps">false</item>
+        <item name="android:textStyle">bold</item>
+        <item name="singleLine">true</item>
+        <item name="textSize">16sp</item>
+        <item name="android:singleLine">true</item>
+
     </style>
 
     <style name="CheckBox" parent="Base.Widget.AppCompat.CompoundButton.CheckBox">

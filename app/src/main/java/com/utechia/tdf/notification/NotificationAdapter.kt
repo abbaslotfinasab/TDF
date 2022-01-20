@@ -120,13 +120,6 @@ class NotificationAdapter: RecyclerView.Adapter<RecyclerView.ViewHolder>() {
                 name.setTextColor(ContextCompat.getColor(itemView.context, R.color.white))
             }
             layout.setOnClickListener {
-
-                layout.setBackgroundColor(ContextCompat.getColor(itemView.context, R.color.white))
-                image.setBackgroundResource(R.drawable.ic_push_notif)
-                title.setTextColor(ContextCompat.getColor(itemView.context, R.color.black))
-                subTitle.setTextColor(ContextCompat.getColor(itemView.context, R.color.black))
-                name.setTextColor(Color.parseColor("#335DE0"))
-
                 val bundle = bundleOf(
                     "nId" to notification[position].id,
                     "title" to notification[position].title,

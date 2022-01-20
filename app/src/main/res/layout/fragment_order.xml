@@ -19,7 +19,7 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:tabTextAppearance="@style/MyCustomTextAppearance">
+        app:tabTextAppearance="@style/TextAppearance.AppCompat">
 
         <com.google.android.material.tabs.TabItem
             android:layout_width="wrap_content"
