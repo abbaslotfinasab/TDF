@@ -328,7 +328,7 @@
         <entry key="app/src/main/res/layout/fragment_tea_boy_profile.xml" value="0.11005434782608696" />
         <entry key="app/src/main/res/layout/fragment_tea_boy_statistics.xml" value="0.19322916666666667" />
         <entry key="app/src/main/res/layout/fragment_ticket_confirmation.xml" value="0.25" />
-        <entry key="app/src/main/res/layout/fragment_ticket_details.xml" value="0.10144927536231885" />
+        <entry key="app/src/main/res/layout/fragment_ticket_details.xml" value="0.15" />
         <entry key="app/src/main/res/layout/fragment_ticket_system.xml" value="0.25" />
         <entry key="app/src/main/res/layout/fragment_upload.xml" value="0.19322916666666667" />
         <entry key="app/src/main/res/layout/header_navigation_drawer.xml" value="0.1" />

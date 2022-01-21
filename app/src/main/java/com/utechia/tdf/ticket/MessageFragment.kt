@@ -9,19 +9,18 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.view.Window
+import android.widget.FrameLayout
 import android.widget.Toast
 import androidx.fragment.app.viewModels
-import androidx.navigation.findNavController
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.GridLayoutManager
+import com.google.android.material.bottomsheet.BottomSheetBehavior
+import com.google.android.material.bottomsheet.BottomSheetDialog
 import com.google.android.material.bottomsheet.BottomSheetDialogFragment
 import com.utechia.domain.utile.Result
 import com.utechia.tdf.R
 import com.utechia.tdf.databinding.FragmentMessageBinding
 import dagger.hilt.android.AndroidEntryPoint
-import kotlinx.serialization.json.JsonArray
-import org.json.JSONArray
-
 
 @AndroidEntryPoint
 class MessageFragment : BottomSheetDialogFragment() {
@@ -42,6 +41,11 @@ class MessageFragment : BottomSheetDialogFragment() {
         if(dialog !=null && dialog?.window !=null){
             dialog?.window?.setBackgroundDrawable(ColorDrawable(Color.TRANSPARENT))
             dialog?.window?.requestFeature(Window.FEATURE_NO_TITLE)
+            dialog?.setOnShowListener{dialog ->
+                val d = dialog as BottomSheetDialog
+                val bottomSheetInternal:FrameLayout? = d.findViewById(com.google.android.material.R.id.design_bottom_sheet)
+                BottomSheetBehavior.from(bottomSheetInternal!!).state = BottomSheetBehavior.STATE_EXPANDED
+            }
         }
         return binding.root
     }
@@ -150,10 +154,8 @@ class MessageFragment : BottomSheetDialogFragment() {
                     Toast.makeText(context, it.message, Toast.LENGTH_SHORT).show()
                     dialog?.hide()
 
-
                 }
             }
         }
     }
-
 }

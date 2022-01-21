@@ -701,10 +701,7 @@
 
         <action
             android:id="@+id/action_permissionFragment_to_cancelRequestFragment"
-            app:destination="@id/calendarRequestFragment"
-            app:launchSingleTop="true"
-            app:popUpTo="@id/nav_graph"
-            app:popUpToInclusive="true"
+            app:destination="@id/cancelRequestFragment"
             app:enterAnim="@android:anim/fade_in"
             app:exitAnim="@android:anim/fade_out"
             app:popEnterAnim="@android:anim/fade_in"

@@ -124,6 +124,7 @@ class PermissionAdapter: RecyclerView.Adapter<RecyclerView.ViewHolder>() {
 
             cancel.setOnClickListener {
                 val bundle = bundleOf("permissionId" to permission[position].id)
+                itemView.findNavController().clearBackStack(R.id.cancelRequestFragment)
                 itemView.findNavController().navigate(R.id.action_permissionFragment_to_cancelRequestFragment,bundle)
             }
 
