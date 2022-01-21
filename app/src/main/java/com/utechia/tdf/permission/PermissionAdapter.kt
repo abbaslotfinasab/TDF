@@ -17,7 +17,7 @@ import java.time.ZoneId
 import java.time.format.DateTimeFormatter
 import java.util.*
 
-class PermissionAdapter: RecyclerView.Adapter<RecyclerView.ViewHolder>() {
+class PermissionAdapter(private val permissionFragment: PermissionFragment): RecyclerView.Adapter<RecyclerView.ViewHolder>() {
 
     var permission: MutableList<PermissionModel> = mutableListOf()
     private var startTimeZone = ""
@@ -124,8 +124,8 @@ class PermissionAdapter: RecyclerView.Adapter<RecyclerView.ViewHolder>() {
 
             cancel.setOnClickListener {
                 val bundle = bundleOf("permissionId" to permission[position].id)
-                itemView.findNavController().clearBackStack(R.id.cancelRequestFragment)
                 itemView.findNavController().navigate(R.id.action_permissionFragment_to_cancelRequestFragment,bundle)
+                permissionFragment.onPause()
             }
 
             details.setOnClickListener {

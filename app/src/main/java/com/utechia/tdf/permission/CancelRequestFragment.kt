@@ -10,10 +10,12 @@ import android.view.Window
 import android.widget.Toast
 import androidx.fragment.app.DialogFragment
 import androidx.fragment.app.viewModels
+import androidx.navigation.fragment.NavHostFragment
 import androidx.navigation.fragment.findNavController
 import com.utechia.domain.utile.Result
 import com.utechia.tdf.R
 import com.utechia.tdf.databinding.FragmentCancelRequestBinding
+import com.utechia.tdf.ticket.CreateTicketFragment
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
@@ -22,6 +24,7 @@ class CancelRequestFragment : DialogFragment() {
     private lateinit var binding: FragmentCancelRequestBinding
     private val permissionViewModel:PermissionViewModel by viewModels()
     private var permissionId = 0
+
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -67,13 +70,9 @@ class CancelRequestFragment : DialogFragment() {
 
             when (it) {
                 is Result.Success -> {
-                    binding.prg.visibility = View.GONE
-                    findNavController().clearBackStack(R.id.permissionFragment)
+                    binding.prg.visibility = View.VISIBLE
                     findNavController().navigate(R.id.cancelRequestFragment_to_permissionFragment)
                     dialog?.dismiss()
-
-
-
                 }
 
                 is Result.Loading -> {
@@ -87,14 +86,10 @@ class CancelRequestFragment : DialogFragment() {
                 is Result.Error -> {
                     binding.prg.visibility = View.GONE
                     Toast.makeText(context, it.message, Toast.LENGTH_SHORT).show()
-                    findNavController().clearBackStack(R.id.permissionFragment)
                     findNavController().navigate(R.id.cancelRequestFragment_to_permissionFragment)
-                    dialog?.dismiss()
-
 
                 }
             }
         }
     }
-
 }

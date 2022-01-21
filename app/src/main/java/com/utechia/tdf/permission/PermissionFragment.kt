@@ -1,5 +1,6 @@
 package com.utechia.tdf.permission
 
+import android.content.Context
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -21,20 +22,29 @@ class PermissionFragment : Fragment() {
 
     private lateinit var binding:FragmentPermissionBinding
     private val permissionViewModel:PermissionViewModel by viewModels()
-    private val permissionAdapter:PermissionAdapter = PermissionAdapter()
+    private val permissionAdapter:PermissionAdapter = PermissionAdapter(this)
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
         binding = FragmentPermissionBinding.inflate(inflater, container, false)
+
         return binding.root
+    }
+
+    override fun onResume() {
+        super.onResume()
+
+        permissionViewModel.getPermission("waiting")
+        observer()
+
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        permissionViewModel.getPermission("waiting")
+        findNavController().clearBackStack(R.id.permissionFragment)
 
 
         binding.recyclerView.apply {
@@ -117,11 +127,9 @@ class PermissionFragment : Fragment() {
             findNavController().navigate(R.id.action_permissionFragment_to_calendarRequestFragment)
         }
 
-        observer()
-
     }
 
-    private fun observer() {
+    fun observer() {
         permissionViewModel.permissionModel.observe(viewLifecycleOwner){
 
             when (it) {

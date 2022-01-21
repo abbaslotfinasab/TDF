@@ -252,6 +252,7 @@
 
         <action
             android:id="@+id/action_createTicketFragment_to_ticketConfirmationFragment"
+            app:launchSingleTop="true"
             app:destination="@id/ticketConfirmationFragment"
             app:enterAnim="@android:anim/fade_in"
             app:exitAnim="@android:anim/fade_out"
@@ -702,6 +703,7 @@
         <action
             android:id="@+id/action_permissionFragment_to_cancelRequestFragment"
             app:destination="@id/cancelRequestFragment"
+            app:launchSingleTop="true"
             app:enterAnim="@android:anim/fade_in"
             app:exitAnim="@android:anim/fade_out"
             app:popEnterAnim="@android:anim/fade_in"
@@ -710,6 +712,7 @@
         <action
             android:id="@+id/action_permissionFragment_to_requestDetailsFragment"
             app:destination="@id/requestDetailsFragment"
+            app:launchSingleTop="true"
             app:enterAnim="@android:anim/fade_in"
             app:exitAnim="@android:anim/fade_out"
             app:popEnterAnim="@android:anim/fade_in"
@@ -718,6 +721,7 @@
         <action
             android:id="@+id/action_permissionFragment_to_calendarRequestFragment"
             app:destination="@id/calendarRequestFragment"
+            app:launchSingleTop="true"
             app:enterAnim="@android:anim/fade_in"
             app:exitAnim="@android:anim/fade_out"
             app:popEnterAnim="@android:anim/fade_in"
@@ -737,6 +741,7 @@
             android:defaultValue="0" />
 
         <action
+            app:launchSingleTop="true"
             android:id="@+id/cancelRequestFragment_to_permissionFragment"
             app:destination="@id/permissionFragment"
             app:enterAnim="@android:anim/fade_in"
@@ -767,6 +772,7 @@
         <action
             android:id="@+id/createRequestFragment_to_confirmRequestFragment"
             app:destination="@id/confirmRequestFragment"
+            app:launchSingleTop="true"
             app:enterAnim="@android:anim/fade_in"
             app:exitAnim="@android:anim/fade_out"
             app:popEnterAnim="@android:anim/fade_in"
@@ -782,6 +788,7 @@
 
         <action
             android:id="@+id/calendarRequestFragment_to_createRequestFragment"
+            app:launchSingleTop="true"
             app:destination="@id/createRequestFragment"
             app:enterAnim="@android:anim/fade_in"
             app:exitAnim="@android:anim/fade_out"
@@ -800,7 +807,7 @@
             android:id="@+id/confirmRequestFragment_to_permissionFragment"
             app:launchSingleTop="true"
             app:popUpToInclusive="true"
-            app:popUpTo="@id/nav_graph"
+            app:popUpTo="@id/permissionFragment"
             app:destination="@id/permissionFragment"
             app:enterAnim="@android:anim/fade_in"
             app:exitAnim="@android:anim/fade_out"
@@ -820,6 +827,8 @@
 
         <action
             android:id="@+id/createSurveyFragment_to_confirmSurveyFragment"
+            app:launchSingleTop="true"
+            app:popUpTo="@id/surveySystemFragment"
             app:destination="@id/confirmSurveyFragment"
             app:enterAnim="@android:anim/fade_in"
             app:exitAnim="@android:anim/fade_out"
@@ -848,8 +857,7 @@
         <action
             android:id="@+id/confirmSurveyFragment_to_surveySystemFragment"
             app:launchSingleTop="true"
-            app:popUpToInclusive="true"
-            app:popUpTo="@id/nav_graph"
+            app:popUpTo="@id/surveySystemFragment"
             app:destination="@id/surveySystemFragment"
             app:enterAnim="@android:anim/fade_in"
             app:exitAnim="@android:anim/fade_out"
@@ -934,8 +942,8 @@
 
         <action
             android:id="@+id/ticketConfirmationFragment_to_TicketFragment"
-            app:popUpToInclusive="true"
-            app:popUpTo="@id/nav_graph"
+            app:launchSingleTop="true"
+            app:popUpTo="@id/ticketSystemFragment"
             app:destination="@id/ticketSystemFragment"
             app:enterAnim="@android:anim/fade_in"
             app:exitAnim="@android:anim/fade_out"
@@ -980,6 +988,7 @@
         <action
             android:id="@+id/action_closeTicketFragment_to_ticketDetailsFragment"
             app:destination="@id/ticketDetailsFragment"
+            app:launchSingleTop="true"
             app:enterAnim="@android:anim/fade_in"
             app:exitAnim="@android:anim/fade_out"
             app:popEnterAnim="@android:anim/fade_in"
@@ -987,8 +996,13 @@
 
         <action
             android:id="@+id/action_closeTicketFragment_to_ticketSystemFragment"
-            app:popUpTo="@id/nav_graph"
-            app:destination="@id/ticketSystemFragment" />
+            app:launchSingleTop="true"
+            app:popUpTo="@id/ticketSystemFragment"
+            app:destination="@id/ticketSystemFragment"
+            app:enterAnim="@android:anim/fade_in"
+            app:exitAnim="@android:anim/fade_out"
+            app:popEnterAnim="@android:anim/fade_in"
+            app:popExitAnim="@android:anim/fade_out"/>
 
     </dialog>
     <fragment
