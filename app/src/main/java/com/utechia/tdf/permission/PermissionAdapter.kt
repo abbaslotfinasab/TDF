@@ -4,6 +4,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.TextView
+import androidx.constraintlayout.widget.ConstraintLayout
 import androidx.core.content.ContextCompat
 import androidx.core.os.bundleOf
 import androidx.navigation.findNavController
@@ -51,6 +52,8 @@ class PermissionAdapter: RecyclerView.Adapter<RecyclerView.ViewHolder>() {
         private val status: TextView = itemView.findViewById(R.id.status)
         private val details: TextView = itemView.findViewById(R.id.btnDetails)
         private val cancel: TextView = itemView.findViewById(R.id.btnCancel)
+        private val layout: ConstraintLayout = itemView.findViewById(R.id.permissionLayout)
+
 
 
         fun bind0(position: Int) {
@@ -125,6 +128,11 @@ class PermissionAdapter: RecyclerView.Adapter<RecyclerView.ViewHolder>() {
             }
 
             details.setOnClickListener {
+                val bundle = bundleOf("permissionId" to permission[position].id)
+                itemView.findNavController().navigate(R.id.action_permissionFragment_to_requestDetailsFragment,bundle)
+            }
+
+            layout.setOnClickListener {
                 val bundle = bundleOf("permissionId" to permission[position].id)
                 itemView.findNavController().navigate(R.id.action_permissionFragment_to_requestDetailsFragment,bundle)
             }

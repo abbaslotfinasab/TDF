@@ -7,6 +7,7 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.RatingBar
 import android.widget.TextView
+import androidx.constraintlayout.widget.ConstraintLayout
 import androidx.core.content.ContextCompat
 import androidx.core.os.bundleOf
 import androidx.navigation.findNavController
@@ -45,6 +46,7 @@ class OrderAdapter: RecyclerView.Adapter<RecyclerView.ViewHolder>() {
 
     inner class ViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
         private val date: TextView = itemView.findViewById(R.id.date)
+        private val layout: ConstraintLayout = itemView.findViewById(R.id.orderLayout)
         private val number: TextView = itemView.findViewById(R.id.numberText)
         private val title: TextView = itemView.findViewById(R.id.title)
         private val oderId: TextView = itemView.findViewById(R.id.subtitle)
@@ -152,6 +154,11 @@ class OrderAdapter: RecyclerView.Adapter<RecyclerView.ViewHolder>() {
             }
 
             details.setOnClickListener {
+                val bundle = bundleOf("cartId" to userOrders[position].cart?.id)
+                itemView.findNavController().navigate(R.id.action_orderFragment_to_orderDetailsFragment,bundle)
+            }
+
+            layout.setOnClickListener {
                 val bundle = bundleOf("cartId" to userOrders[position].cart?.id)
                 itemView.findNavController().navigate(R.id.action_orderFragment_to_orderDetailsFragment,bundle)
             }
