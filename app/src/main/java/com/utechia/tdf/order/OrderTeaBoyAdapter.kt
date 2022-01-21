@@ -4,6 +4,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.TextView
+import androidx.constraintlayout.widget.ConstraintLayout
 import androidx.core.os.bundleOf
 import androidx.navigation.findNavController
 import androidx.recyclerview.widget.RecyclerView
@@ -21,6 +22,7 @@ class OrderTeaBoyAdapter(private val teaBoyOrdersFragment: TeaBoyOrdersFragment)
 
     fun addData(_teaBoyOrders: MutableList<TeaBoyOrderDataModel>) {
         userOrders.clear()
+        notifyDataSetChanged()
         userOrders.addAll(_teaBoyOrders)
         notifyItemRangeChanged(0,_teaBoyOrders.size-1)
 
@@ -50,6 +52,7 @@ class OrderTeaBoyAdapter(private val teaBoyOrdersFragment: TeaBoyOrdersFragment)
         private val reject: TextView = itemView.findViewById(R.id.btnReject)
         private val accept: TextView = itemView.findViewById(R.id.btnAccept)
         private val confirm: TextView = itemView.findViewById(R.id.btnConfirm)
+        private val layout: ConstraintLayout = itemView.findViewById(R.id.orderLayout)
 
         fun bind0(position: Int) {
 
@@ -128,6 +131,10 @@ class OrderTeaBoyAdapter(private val teaBoyOrdersFragment: TeaBoyOrdersFragment)
             }
 
             details.setOnClickListener {
+                val bundle = bundleOf("orderId" to userOrders[position].cart?.id)
+                itemView.findNavController().navigate(R.id.action_orderFragment_to_orderDetailsFragment,bundle)
+            }
+            layout.setOnClickListener {
                 val bundle = bundleOf("orderId" to userOrders[position].cart?.id)
                 itemView.findNavController().navigate(R.id.action_orderFragment_to_orderDetailsFragment,bundle)
             }
