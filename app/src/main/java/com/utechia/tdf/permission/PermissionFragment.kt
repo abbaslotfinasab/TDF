@@ -33,18 +33,11 @@ class PermissionFragment : Fragment() {
         return binding.root
     }
 
-    override fun onResume() {
-        super.onResume()
-
-        permissionViewModel.getPermission("waiting")
-        observer()
-
-    }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        findNavController().clearBackStack(R.id.permissionFragment)
+        permissionViewModel.getPermission("waiting")
 
 
         binding.recyclerView.apply {
@@ -126,6 +119,8 @@ class PermissionFragment : Fragment() {
         binding.plus.setOnClickListener {
             findNavController().navigate(R.id.action_permissionFragment_to_calendarRequestFragment)
         }
+
+        observer()
 
     }
 

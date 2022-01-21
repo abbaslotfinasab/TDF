@@ -230,7 +230,6 @@ class TicketDetailsFragment : Fragment() {
                         binding.btnReply.setBackgroundColor(Color.parseColor("#3360DD"))
 
                     }
-                    
                 }
 
                 is Result.Loading -> {

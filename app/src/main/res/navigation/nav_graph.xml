@@ -355,7 +355,6 @@
             android:id="@+id/action_cartFragment_to_orderFragment"
             app:launchSingleTop="true"
             app:popUpTo="@id/createRefreshmentFragment"
-            app:popUpToInclusive="true"
             app:destination="@id/orderFragment"
             app:enterAnim="@android:anim/fade_in"
             app:exitAnim="@android:anim/fade_out"
@@ -828,7 +827,6 @@
         <action
             android:id="@+id/createSurveyFragment_to_confirmSurveyFragment"
             app:launchSingleTop="true"
-            app:popUpTo="@id/surveySystemFragment"
             app:destination="@id/confirmSurveyFragment"
             app:enterAnim="@android:anim/fade_in"
             app:exitAnim="@android:anim/fade_out"
@@ -846,8 +844,7 @@
         <action
             android:id="@+id/confirmSurveyFragment_to_resultSurveyFragment"
             app:launchSingleTop="true"
-            app:popUpToInclusive="true"
-            app:popUpTo="@id/nav_graph"
+            app:popUpTo="@id/surveySystemFragment"
             app:destination="@id/resultSurveyFragment"
             app:enterAnim="@android:anim/fade_in"
             app:exitAnim="@android:anim/fade_out"

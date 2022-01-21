@@ -103,6 +103,8 @@ class CreateSurveyFragment : Fragment() {
                 number -= 1
                 askQuestion()
             }
+            else
+                findNavController().navigateUp()
 
         }
 

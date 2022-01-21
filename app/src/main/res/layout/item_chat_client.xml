@@ -24,9 +24,11 @@
         android:id="@+id/username"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginEnd="5dp"
+        android:layout_marginEnd="3dp"
         android:textColor="@color/black"
         android:textSize="16sp"
+        android:gravity="end"
+        android:textAlignment="textEnd"
         app:layout_constraintBottom_toBottomOf="@+id/profilePicture"
         app:layout_constraintEnd_toStartOf="@+id/profilePicture"
         app:layout_constraintTop_toTopOf="@+id/profilePicture" />
