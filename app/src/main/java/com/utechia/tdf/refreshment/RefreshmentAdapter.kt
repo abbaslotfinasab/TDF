@@ -18,7 +18,7 @@ class RefreshmentAdapter(private val createRefreshmentFragment: CreateRefreshmen
     fun addData(_refreshmentModel: MutableList<RefreshmentModel>){
         refreshment.clear()
         refreshment.addAll(_refreshmentModel)
-        notifyItemRangeChanged(0,_refreshmentModel.size-1)
+        notifyDataSetChanged()
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): RecyclerView.ViewHolder =

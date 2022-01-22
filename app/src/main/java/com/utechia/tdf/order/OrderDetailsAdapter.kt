@@ -41,7 +41,7 @@ class OrderDetailsAdapter: RecyclerView.Adapter<RecyclerView.ViewHolder>() {
         fun bind0(position: Int) {
 
             title.text = orders[position].food.title
-            number.text = "2x"
+            number.text = "${orders[position].quantity}x"
 
             Glide.with(itemView.context)
                 .load("https://sandbox.tdf.gov.sa/api/cafeteria/image/${orders[position].food.imageName}")

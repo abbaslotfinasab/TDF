@@ -174,4 +174,7 @@ interface Service {
     @GET("notification/unread/count")
     suspend fun countNotification():Response<NotificationCount>
 
+    @GET("event")
+    suspend fun getAllEvent(@Query("page") page: Int,@Query("page_size") page_size: Int):Response<Event>
+
 }

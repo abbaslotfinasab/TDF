@@ -48,20 +48,19 @@ class DeleteFragment : DialogFragment() {
 
             cartViewModel.deleteCart(foodId)
             observer()
+
         }
 
         binding.btnCancel.setOnClickListener {
             findNavController().clearBackStack(R.id.deleteFragment)
             findNavController().navigate(R.id.action_deleteFragment_to_cartFragment)
             dialog?.dismiss()
-
         }
 
         binding.exit.setOnClickListener {
             findNavController().clearBackStack(R.id.deleteFragment)
             findNavController().navigate(R.id.action_deleteFragment_to_cartFragment)
             dialog?.dismiss()
-
         }
 
     }

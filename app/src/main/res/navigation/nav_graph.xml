@@ -205,7 +205,14 @@
         android:id="@+id/eventSystemFragment"
         android:name="com.utechia.tdf.events.EventSystemFragment"
         android:label="fragment_event_system"
-        tools:layout="@layout/fragment_event_system" />
+        tools:layout="@layout/fragment_event_system" >
+        <action
+            android:id="@+id/action_eventSystemFragment_to_eventDetailsFragment"
+            app:destination="@id/eventDetailsFragment" />
+        <action
+            android:id="@+id/action_eventSystemFragment_to_eventRateFragment"
+            app:destination="@id/eventRateFragment" />
+    </fragment>
 
     <fragment
         android:id="@+id/ticketSystemFragment"
@@ -561,6 +568,7 @@
         <action
             android:id="@+id/action_deleteFragment_to_cartFragment"
             app:launchSingleTop="true"
+            app:destination="@+id/cartFragment"
             app:enterAnim="@android:anim/fade_in"
             app:exitAnim="@android:anim/fade_out"
             app:popEnterAnim="@android:anim/fade_in"
@@ -1164,8 +1172,8 @@
 
         <action
             android:id="@+id/action_notificationDetailsFragment_to_notificationFragment"
-            app:launchSingleTop="true"
             app:destination="@id/notificationFragment"
+            app:launchSingleTop="true"
             app:enterAnim="@android:anim/fade_in"
             app:exitAnim="@android:anim/fade_out"
             app:popEnterAnim="@android:anim/fade_in"
@@ -1181,16 +1189,43 @@
         android:id="@+id/eventDetailsFragment"
         android:name="com.utechia.tdf.events.EventDetailsFragment"
         android:label="fragment_event_details"
-        tools:layout="@layout/fragment_event_details" />
-    <fragment
+        tools:layout="@layout/fragment_event_details" >
+        <action
+            android:id="@+id/action_eventDetailsFragment_to_eventRateFragment"
+            app:destination="@id/eventRateFragment"
+            app:launchSingleTop="true"
+            app:enterAnim="@android:anim/fade_in"
+            app:exitAnim="@android:anim/fade_out"
+            app:popEnterAnim="@android:anim/fade_in"
+            app:popExitAnim="@android:anim/fade_out"/>
+        <action
+            android:id="@+id/action_eventDetailsFragment_to_eventResultFragment"
+            app:destination="@id/eventResultFragment"
+            app:launchSingleTop="true"
+            app:enterAnim="@android:anim/fade_in"
+            app:exitAnim="@android:anim/fade_out"
+            app:popEnterAnim="@android:anim/fade_in"
+            app:popExitAnim="@android:anim/fade_out"/>
+    </fragment>
+    <dialog
         android:id="@+id/eventRateFragment"
         android:name="com.utechia.tdf.events.EventRateFragment"
         android:label="fragment_event_rate"
-        tools:layout="@layout/fragment_event_rate" />
-    <fragment
+        tools:layout="@layout/fragment_event_rate"
+        />
+    <dialog
         android:id="@+id/eventResultFragment"
         android:name="com.utechia.tdf.events.EventResultFragment"
         android:label="fragment_event_result"
-        tools:layout="@layout/fragment_event_result" />
+        tools:layout="@layout/fragment_event_result" >
+        <action
+            android:id="@+id/action_eventResultFragment_to_eventSystemFragment"
+            app:destination="@id/eventSystemFragment"
+            app:launchSingleTop="true"
+            app:enterAnim="@android:anim/fade_in"
+            app:exitAnim="@android:anim/fade_out"
+            app:popEnterAnim="@android:anim/fade_in"
+            app:popExitAnim="@android:anim/fade_out"/>
+    </dialog>
 
 </navigation>

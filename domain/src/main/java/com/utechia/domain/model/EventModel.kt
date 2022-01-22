@@ -1,14 +1,22 @@
 package com.utechia.domain.model
 
 data class EventModel(
-
-    val id:Int?,
-    val title: String?,
-    val image: String?,
+    val capacity: Int?,
+    val coverphoto: String?,
+    val date_endsign: String?,
+    val date_startsign: String?,
+    val datestart: String?,
+    val datetime: String?,
+    val department: String?,
+    val description: String?,
+    val duration: Int?,
+    val eventPlace: String?,
+    val guestModels: List<GuestModel>?,
+    val id: Int?,
+    val isDisable: Boolean?,
+    val joinnumbr: Int?,
+    val signstatus: String?,
     val status: String?,
-    val rating: Int?,
-    val category: String?,
-    val createdAt: String?,
-    val updatedAt: String?
-
+    val title: String?,
+    val type: String?
 )
