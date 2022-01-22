@@ -28,14 +28,19 @@ class VerifyRepoImpl @Inject constructor(
             return when(result.isSuccessful){
 
                 true ->{
+                    result.body()?.data?.let {
+                        sessionManager.saveAuthToken(it)
+                    }
+                    val fcmToken = sessionManager.fetchFireBaeToken()?:""
 
-                    sessionManager.saveAuthToken(result.body()!!.data!!)
+                    if(fcmToken.isNotEmpty())
 
-                    service.notification(NotificationToken(sessionManager.fetchFireBaeToken()!!))
+                    service.notification(NotificationToken(fcmToken))
 
-                    result.body()!!.data!!.toDomain()
+                    result.body()?.data!!.toDomain()
 
                 }
+
                 else ->
                     throw IOException("Server is not responding")
             }
