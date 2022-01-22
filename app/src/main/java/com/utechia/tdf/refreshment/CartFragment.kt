@@ -141,11 +141,6 @@ class CartFragment : Fragment() {
         }
     }
 
-    fun deleteItem(id:Int){
-
-        cartViewModel.deleteCart(id)
-        observer()
-    }
 
     private fun observer() {
 

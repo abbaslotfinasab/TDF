@@ -72,7 +72,9 @@ class CartAdapter(private val cartFragment: CartFragment): RecyclerView.Adapter<
                 }
                 else {
                     number=0
-                    cartFragment.deleteItem(carts[position].food.id!!)
+                    cartFragment.cartViewModel.deleteCart(carts[position].food.id!!)
+                    carts.removeAt(position)
+                    notifyItemRemoved(position)
                 }
                 numberText.text = number.toString()
             }

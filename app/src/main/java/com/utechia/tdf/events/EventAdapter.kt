@@ -24,7 +24,6 @@ class EventAdapter: RecyclerView.Adapter<RecyclerView.ViewHolder>() {
         notifyItemRangeChanged(0,_event.size-1)
     }
 
-
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): RecyclerView.ViewHolder =
         ViewHolder(
             LayoutInflater.from(parent.context)
