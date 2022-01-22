@@ -26,8 +26,13 @@ class MainRepoImpl @Inject constructor(
 
             return when (result.isSuccessful) {
 
-                true -> {
-                    service.notification(NotificationToken(sessionManager.fetchFireBaeToken()!!))
+                true ->{
+
+                    val fcmToken = sessionManager.fetchFireBaeToken()?:""
+
+                    if(fcmToken.isNotEmpty())
+
+                        service.notification(NotificationToken(fcmToken))
 
                     result.body()?.data!!.toDomain()
                 }
