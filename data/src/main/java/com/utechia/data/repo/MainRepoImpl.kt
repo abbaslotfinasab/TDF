@@ -24,26 +24,12 @@ class MainRepoImpl @Inject constructor(
 
             val result = service.countNotification()
 
-            return when (result.code()) {
+            return when (result.isSuccessful) {
 
-                200 -> {
+                true -> {
                     service.notification(NotificationToken(sessionManager.fetchFireBaeToken()!!))
 
                     result.body()?.data!!.toDomain()
-                }
-
-                201 -> {
-                    service.notification(NotificationToken(sessionManager.fetchFireBaeToken()!!))
-
-                    result.body()?.data!!.toDomain()
-                }
-
-                401 ->{
-                    throw IOException("unauthorized")
-                }
-
-                403 ->{
-                    throw IOException("unauthorized")
                 }
 
                 else -> {

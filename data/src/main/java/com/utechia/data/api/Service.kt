@@ -171,7 +171,7 @@ interface Service {
     @DELETE("notification/{id}")
     suspend fun deleteNotification(@Path("id") id: Int):Response<Void>
 
-    @GET("notification/unread/count")
+    @GET("user/items/count")
     suspend fun countNotification():Response<NotificationCount>
 
     @GET("event")

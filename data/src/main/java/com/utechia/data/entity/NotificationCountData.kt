@@ -11,10 +11,11 @@ import kotlinx.serialization.Serializable
 @Serializable
 data class NotificationCountData(
 
-    val count: Int?
+    val pending_orders: Int?,
+    val unread_notifications: Int?
 
 ):Parcelable , ResponseObject<NotificationCountModel> {
     override fun toDomain(): NotificationCountModel {
-        return NotificationCountModel(count)
+        return NotificationCountModel(pending_orders,unread_notifications)
     }
 }

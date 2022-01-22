@@ -2,5 +2,6 @@ package com.utechia.domain.model
 
 data class NotificationCountModel(
 
-    val count: Int?
+    val pending_orders: Int?,
+    val unread_notification: Int?
 )

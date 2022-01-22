@@ -1,25 +1,24 @@
 package com.utechia.tdf.refreshment
 
+import android.content.SharedPreferences
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.Toast
+import androidx.appcompat.app.AppCompatActivity
 import androidx.core.os.bundleOf
 import androidx.fragment.app.Fragment
-import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
-import com.utechia.domain.utile.Result
 import com.utechia.tdf.R
 import com.utechia.tdf.databinding.FragmentRefreshmentBinding
-import com.utechia.tdf.order.UserOrderViewModel
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
 class RefreshmentsFragment : Fragment() {
 
     private lateinit var binding: FragmentRefreshmentBinding
-    private val userOrderViewModel: UserOrderViewModel by viewModels()
+    private lateinit var prefs: SharedPreferences
+    private var order = 0
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -31,8 +30,22 @@ class RefreshmentsFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        userOrderViewModel.getOrder("preparing")
-        observer()
+        prefs = requireActivity().getSharedPreferences("tdf", AppCompatActivity.MODE_PRIVATE)
+
+        order = prefs.getInt("order",0)
+
+        if (order!=0){
+            binding.bubble.visibility = View.VISIBLE
+            binding.orderNumber.visibility = View.VISIBLE
+            binding.orderNumber.text = order.toString()
+            binding.status.text = "Your orders are preparing"
+        }else{
+            binding.bubble.visibility = View.GONE
+            binding.orderNumber.visibility = View.GONE
+            binding.status.text = "No active orders"
+
+        }
+
 
         binding.food.setOnClickListener {
 
@@ -65,40 +78,8 @@ class RefreshmentsFragment : Fragment() {
             findNavController().navigate(
                 R.id.action_refreshmentFragment_to_orderFragment,
 
-            )
+                )
 
         }
-    }
-
-    fun observer(){
-        userOrderViewModel.userOrderModel.observe(viewLifecycleOwner){
-
-            when (it) {
-                is Result.Success -> {
-                    binding.prg.visibility = View.GONE
-
-                    if (it.data.size!=0){
-                       binding.status.text = "Your order is ready."
-
-                    }
-                    else{
-                        binding.status.text = "No active orders "
-                    }
-
-                }
-
-                is Result.Loading -> {
-                    binding.prg.visibility = View.VISIBLE
-                }
-
-                is Result.Error -> {
-                    binding.prg.visibility = View.GONE
-                    Toast.makeText(context, it.message, Toast.LENGTH_SHORT).show()
-                }
-            }
-
-
-        }
-
     }
 }

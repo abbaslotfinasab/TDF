@@ -129,6 +129,7 @@ class MessageFragment : BottomSheetDialogFragment() {
 
     }
 
+
     private fun observer() {
 
         ticketViwModel.ticketModel.observe(viewLifecycleOwner){

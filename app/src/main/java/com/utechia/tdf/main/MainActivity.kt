@@ -2,6 +2,7 @@ package com.utechia.tdf.main
 
 import android.content.Intent
 import android.content.SharedPreferences
+import android.graphics.Color
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.os.Handler
@@ -851,7 +852,7 @@ class MainActivity : AppCompatActivity() {
         mainViewModel.mainModel.observe(this){
             when (it) {
                 is Result.Success -> {
-                    if (it.data.count==0){
+                    if (it.data.unread_notification==0){
                         binding.bubble.visibility = View.GONE
                         binding.notificationNumber.visibility = View.GONE
 
@@ -859,22 +860,29 @@ class MainActivity : AppCompatActivity() {
                         binding.bubble.visibility = View.VISIBLE
                         binding.notificationNumber.visibility = View.VISIBLE
                         binding.bubble.bringToFront()
-                        binding.notificationNumber.text = it.data.count.toString()
-
-
+                        binding.notificationNumber.bringToFront()
+                        binding.notificationNumber.text = it.data.unread_notification.toString()
                     }
+                    if(it.data.pending_orders!=0){
+                        binding.bottomNavigation.getOrCreateBadge(R.id.refreshmentFragment).backgroundColor = Color.parseColor("#FF6464")
+                        binding.bottomNavigation.getOrCreateBadge(R.id.refreshmentFragment).number = it.data.pending_orders!!
+                        with(prefs.edit()) {
+                            putInt("order",it.data.pending_orders!!)
+                        }.apply()
+                        }
+                    else
+                        binding.bottomNavigation.removeBadge(R.id.refreshmentFragment)
+
                 }
 
                 is Result.Loading -> {}
 
                 is Result.Error -> {
-                    if(it.message == "unauthorized") {
-                        prefs.edit().clear().apply()
-                        logoutFromFCM()
-                        val i = Intent(this, MainActivity::class.java)
-                        finish()
-                        startActivity(i)
-                    }
+                    prefs.edit().clear().apply()
+                    logoutFromFCM()
+                    val i = Intent(this, MainActivity::class.java)
+                    finish()
+                    startActivity(i)
                 }
             }
         }
