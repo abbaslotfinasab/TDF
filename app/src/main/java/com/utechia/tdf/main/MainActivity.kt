@@ -858,6 +858,7 @@ class MainActivity : AppCompatActivity() {
                     }else{
                         binding.bubble.visibility = View.VISIBLE
                         binding.notificationNumber.visibility = View.VISIBLE
+                        binding.bubble.bringToFront()
                         binding.notificationNumber.text = it.data.count.toString()
 
 
