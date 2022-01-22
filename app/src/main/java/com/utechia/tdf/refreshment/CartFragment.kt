@@ -43,14 +43,15 @@ class CartFragment : Fragment() {
 
         cartViewModel.getCart()
 
-        binding.appBackButton.setOnClickListener {
-            findNavController().popBackStack()
-        }
-
         binding.appCompatButton.setOnClickListener {
             checkOutViewModel.checkoutCart()
             checkObserver()
         }
+
+        binding.appBackButton.setOnClickListener {
+            findNavController().navigateUp()
+        }
+
 
         binding.recyclerView.apply {
             adapter = cartAdapter
@@ -114,6 +115,17 @@ class CartFragment : Fragment() {
 
     }
 
+    fun deleteItem(id:Int){
+
+        cartViewModel.deleteItem(id)
+        binding.appCompatButton.visibility = View.GONE
+        binding.recyclerView.visibility = View.GONE
+        binding.emptyLayout.visibility = View.VISIBLE
+        binding.appBackButton.setOnClickListener {
+            findNavController().navigateUp()
+        }
+    }
+
     private fun checkObserver() {
         checkOutViewModel.orderModel.observe(viewLifecycleOwner) {
 
@@ -124,9 +136,6 @@ class CartFragment : Fragment() {
                     binding.appCompatButton.visibility = View.VISIBLE
                     binding.recyclerView.visibility = View.VISIBLE
                     binding.emptyLayout.visibility = View.GONE
-                    findNavController().navigate(R.id.action_cartFragment_to_orderFragment,null)
-
-
                 }
 
                 is Result.Loading -> {

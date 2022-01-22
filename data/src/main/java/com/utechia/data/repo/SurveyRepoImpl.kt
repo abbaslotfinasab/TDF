@@ -31,6 +31,7 @@ class SurveyRepoImpl @Inject constructor(
             }
 
         } else throw IOException("No Internet Connection")
+
     }
 
     override suspend fun getSurvey(id: Int): MutableList<SurveyModel> {
@@ -70,6 +71,5 @@ class SurveyRepoImpl @Inject constructor(
             }
 
         } else throw IOException("No Internet Connection")
-
     }
 }
