@@ -30,7 +30,6 @@ class CartFragment : Fragment() {
     private val cartAdapter:CartAdapter = CartAdapter(this)
     private var food: MutableList<ItemModel> = mutableListOf()
 
-
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
@@ -115,14 +114,16 @@ class CartFragment : Fragment() {
 
     }
 
-    fun deleteItem(id:Int){
+    fun deleteItem(id:Int,size:Int){
 
         cartViewModel.deleteItem(id)
-        binding.appCompatButton.visibility = View.GONE
-        binding.recyclerView.visibility = View.GONE
-        binding.emptyLayout.visibility = View.VISIBLE
-        binding.appBackButton.setOnClickListener {
-            findNavController().navigateUp()
+        if(size<2) {
+            binding.appCompatButton.visibility = View.GONE
+            binding.recyclerView.visibility = View.GONE
+            binding.emptyLayout.visibility = View.VISIBLE
+            binding.appBackButton.setOnClickListener {
+                findNavController().navigateUp()
+            }
         }
     }
 

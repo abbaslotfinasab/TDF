@@ -72,7 +72,7 @@ class CartAdapter(private val cartFragment: CartFragment): RecyclerView.Adapter<
                 }
                 else {
                     number=0
-                    cartFragment.deleteItem(carts[position].food.id!!)
+                    cartFragment.deleteItem(carts[position].food.id!!,carts.size)
                     carts.removeAt(position)
                     notifyItemRemoved(position)
                 }
