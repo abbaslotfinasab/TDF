@@ -137,6 +137,7 @@ class CartFragment : Fragment() {
                     binding.appCompatButton.visibility = View.VISIBLE
                     binding.recyclerView.visibility = View.VISIBLE
                     binding.emptyLayout.visibility = View.GONE
+                    findNavController().navigate(R.id.action_cartFragment_to_orderFragment)
                 }
 
                 is Result.Loading -> {
