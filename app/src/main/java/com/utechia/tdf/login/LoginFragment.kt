@@ -39,6 +39,7 @@ class LoginFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         prefs = requireActivity().getSharedPreferences("tdf", Context.MODE_PRIVATE)
+        binding.prg.bringToFront()
 
 
 
@@ -61,11 +62,9 @@ class LoginFragment : Fragment() {
             verifyViewModel.verify(code)
             verifyObserver()
             code = ""
-
         }
 
         observer()
-
     }
 
     private fun verifyObserver() {
@@ -83,7 +82,6 @@ class LoginFragment : Fragment() {
                             putString("USER_ID",it.data.userHomeId)
                             putString("mail",it.data.mail)
                             putBoolean("Start",true)
-
                         }.apply()
                         findNavController().navigate(R.id.action_loginFragment_to_userhomeFragment)
 
@@ -100,12 +98,8 @@ class LoginFragment : Fragment() {
 
                         }.apply()
                         findNavController().navigate(R.id.action_loginFragment_to_teaBoyHomeFragment)
-
-
                     }
-
                 }
-
                 is Result.Loading ->{
                     binding.prg.visibility = View.VISIBLE
                     binding.appCompatButton.isEnabled = false
@@ -138,8 +132,7 @@ class LoginFragment : Fragment() {
 
                 }
 
-                is Result.Error -> {
-                    binding.prg.visibility = View.GONE
+                is Result.Error -> { binding.prg.visibility = View.GONE
                     binding.appCompatButton.isEnabled = true
                     Toast.makeText(context, it.message, Toast.LENGTH_SHORT).show()
 

@@ -27,9 +27,7 @@ class LoginRepoImpl @Inject constructor(
             return when(result.isSuccessful){
 
                 true ->{
-
                     result.body()!!.data!!.toDomain()
-
                 }
                 else ->
                     throw IOException("Server is not responding")

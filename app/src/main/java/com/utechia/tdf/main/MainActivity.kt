@@ -868,14 +868,13 @@ class MainActivity : AppCompatActivity() {
                 is Result.Loading -> {}
 
                 is Result.Error -> {
-
-                    prefs.edit().clear().apply()
-
-                    logoutFromFCM()
-
-                    val i = Intent(this,MainActivity::class.java)
-                    finish()
-                    startActivity(i)
+                    if(it.message == "unauthorized") {
+                        prefs.edit().clear().apply()
+                        logoutFromFCM()
+                        val i = Intent(this, MainActivity::class.java)
+                        finish()
+                        startActivity(i)
+                    }
                 }
             }
         }
