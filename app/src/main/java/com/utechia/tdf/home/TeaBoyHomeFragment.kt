@@ -25,6 +25,7 @@ class TeaBoyHomeFragment : Fragment() {
     private lateinit var prefs: SharedPreferences
     private var name = ""
     private var floor = ""
+    private var status = false
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -62,7 +63,15 @@ class TeaBoyHomeFragment : Fragment() {
 */
         orderViewModel.getOrder()
 
-        binding.switchCompat.isChecked = prefs.getBoolean("isTeaBoyActive",true)
+
+        status = prefs.getBoolean("isTeaBoyActive",true)
+        binding.switchCompat.isChecked = status
+
+        if (status){
+            binding.status.text = "Active"
+        }else
+            binding.status.text = "DeActive"
+
 
         binding.switchCompat.setOnCheckedChangeListener { _, isChecked ->
 

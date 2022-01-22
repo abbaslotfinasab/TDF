@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <dimen name="pending_height">170dp</dimen>
+    <dimen name="delivered_height">130dp</dimen>
+
+
+</resources>

@@ -165,8 +165,8 @@
             app:itemIconTint="@drawable/nav_item"
             android:visibility="gone"
             app:labelVisibilityMode='labeled'
-            app:itemTextAppearanceActive="@style/MenuItems"
-            app:itemTextAppearanceInactive="@style/MenuItems"
+            app:itemTextAppearanceActive="@style/userMenuItems"
+            app:itemTextAppearanceInactive="@style/userMenuItems"
             app:itemTextColor="@drawable/nav_item"
             app:layout_constraintBottom_toBottomOf="parent"/>
 

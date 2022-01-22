@@ -71,22 +71,24 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/textview1" />
 
-    <RatingBar
-        android:id="@+id/rating"
-        style="?android:attr/ratingBarStyleSmall"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="30dp"
-        android:isIndicator="false"
-        android:numStars="5"
-        android:progressBackgroundTint="@color/gray"
-        android:progressTint="#FFCB45"
-        android:rating="5"
-        android:secondaryProgressTint="@color/gray"
-        android:stepSize="1"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textview2" />
+            <RatingBar
+                android:id="@+id/rating"
+                android:layout_width="wrap_content"
+                android:layout_height="40dp"
+                android:layout_marginTop="15dp"
+                android:isIndicator="false"
+                android:progressBackgroundTint="@color/gray"
+                android:secondaryProgressTint="@color/gray"
+                android:max="5"
+                android:numStars="5"
+                android:progressTint="#FFCB45"
+                android:rating="5"
+                android:scaleX="0.6"
+                android:scaleY="0.6"
+                android:stepSize="1"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/textview2" />
 
     <androidx.appcompat.widget.AppCompatButton
         android:id="@+id/btnAccept"

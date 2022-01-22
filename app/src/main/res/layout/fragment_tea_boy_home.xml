@@ -26,6 +26,18 @@
             app:layout_constraintTop_toTopOf="parent" />
 
 
+        <TextView
+            android:id="@+id/status"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="15dp"
+            android:text="Active"
+            android:textColor="#929292"
+            app:layout_constraintBottom_toBottomOf="@+id/switchCompat"
+            app:layout_constraintEnd_toStartOf="@+id/switchCompat"
+            app:layout_constraintTop_toTopOf="@+id/switchCompat" />
+
+
     <androidx.appcompat.widget.SwitchCompat
         android:id="@+id/switchCompat"
         android:layout_width="wrap_content"
@@ -63,39 +75,44 @@
 
         <RatingBar
             android:id="@+id/rating"
-            style="?android:attr/ratingBarStyleSmall"
+            style="@style/Widget.AppCompat.RatingBar"
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            android:layout_height="40dp"
             android:layout_marginStart="20dp"
-            android:layout_marginTop="18dp"
+            android:layout_marginTop="15dp"
             android:isIndicator="true"
+            android:max="5"
             android:numStars="5"
             android:progressTint="#FFCB45"
             android:rating="5"
+            android:scaleX="0.6"
+            android:scaleY="0.6"
             android:stepSize="0.1"
+            android:transformPivotX="0dp"
+            android:transformPivotY="0dp"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/textView9" />
 
-    <TextView
-        android:id="@+id/ratingNum"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="5dp"
-        android:layout_marginTop="3dp"
-        android:gravity="center"
-        android:text="5.0"
-        android:textColor="@color/black"
-        android:textSize="14sp"
-        app:layout_constraintBottom_toBottomOf="@+id/rating"
-        app:layout_constraintStart_toEndOf="@+id/rating"
-        app:layout_constraintTop_toTopOf="@+id/rating" />
+        <TextView
+            android:id="@+id/ratingNum"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="-90dp"
+            android:layout_marginBottom="5dp"
+            android:gravity="center"
+            android:text="(5)"
+            android:textColor="#929292"
+            android:textSize="18sp"
+            app:layout_constraintBottom_toBottomOf="@+id/rating"
+            app:layout_constraintStart_toEndOf="@+id/rating"
+            app:layout_constraintTop_toTopOf="@+id/rating" />
 
         <TextView
             android:id="@+id/textView11"
             android:layout_width="63dp"
             android:layout_height="37dp"
             android:layout_marginStart="20dp"
-            android:layout_marginTop="25dp"
+            android:layout_marginTop="20dp"
             android:text="Tasks"
             android:textColor="@color/black"
             android:textSize="18sp"
@@ -118,7 +135,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginStart="13dp"
                 android:layout_marginTop="13dp"
-                android:text="Pending \n Orders"
+                android:text="Pending\nOrders"
                 android:textColor="#61598B"
                 android:textSize="12sp"
                 app:layout_constraintStart_toStartOf="parent"
@@ -129,6 +146,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="13dp"
+                android:layout_marginTop="20dp"
                 android:layout_marginBottom="10dp"
                 android:textColor="#FF3726"
                 android:textSize="24sp"
@@ -154,7 +172,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginStart="13dp"
                 android:layout_marginTop="13dp"
-                android:text="Delivered \n Orders"
+                android:text="Delivered\nOrders"
                 android:textColor="#479696"
                 android:textSize="12sp"
                 app:layout_constraintStart_toStartOf="parent"
@@ -165,6 +183,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="13dp"
+                android:layout_marginTop="20dp"
                 android:layout_marginBottom="10dp"
                 android:textColor="#479696"
                 android:textSize="24sp"
@@ -190,7 +209,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginStart="13dp"
                 android:layout_marginTop="13dp"
-                android:text="Cancelled \n Orders"
+                android:text="Cancelled\nOrders"
                 android:textColor="#61598B"
                 android:textSize="12sp"
                 app:layout_constraintStart_toStartOf="parent"
@@ -201,6 +220,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="13dp"
+                android:layout_marginTop="20dp"
                 android:layout_marginBottom="10dp"
                 android:textColor="#403572"
                 android:textSize="24sp"

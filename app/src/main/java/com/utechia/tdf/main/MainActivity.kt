@@ -186,6 +186,9 @@ class MainActivity : AppCompatActivity() {
         binding.bottomNavigation.apply {
             menu.clear()
             inflateMenu(R.menu.user_bottom_nav_menu)
+            this.itemTextAppearanceActive = R.style.userMenuItems
+            this.itemTextAppearanceInactive = R.style.userMenuItems
+
         }
 
         binding.navigationView.apply {
@@ -419,6 +422,9 @@ class MainActivity : AppCompatActivity() {
         binding.bottomNavigation.apply {
             menu.clear()
             inflateMenu(R.menu.teaboy_bottom_nav_menu)
+            this.itemTextAppearanceActive = R.style.TeaBoyMenuItems
+            this.itemTextAppearanceInactive = R.style.TeaBoyMenuItems
+
         }
 
         binding.navigationView.apply {
@@ -536,7 +542,6 @@ class MainActivity : AppCompatActivity() {
                             .setExitAnim(android.R.anim.fade_out)
                             .setPopEnterAnim(android.R.anim.fade_out)
                             .setPopEnterAnim(android.R.anim.fade_in)
-                            .setPopEnterAnim(android.R.anim.slide_in_left)
                             .build()
                         )
                     }, 300)

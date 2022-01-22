@@ -218,12 +218,16 @@ class TicketDetailsFragment : Fragment() {
                     }
 
                     if (it0.data.status == "Close"){
+                        binding.btnReply.visibility = View.VISIBLE
+                        binding.btnClose.visibility = View.VISIBLE
                         binding.btnClose.isEnabled = false
                         binding.btnReply.isEnabled = false
                         binding.btnClose.setBackgroundColor(ContextCompat.getColor(requireActivity(),R.color.gray))
                         binding.btnReply.setBackgroundColor(ContextCompat.getColor(requireActivity(),R.color.gray))
 
                     }else{
+                        binding.btnReply.visibility = View.VISIBLE
+                        binding.btnClose.visibility = View.VISIBLE
                         binding.btnClose.isEnabled = true
                         binding.btnReply.isEnabled = true
                         binding.btnClose.setBackgroundColor(Color.parseColor("#FF6464"))
