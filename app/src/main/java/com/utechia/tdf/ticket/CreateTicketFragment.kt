@@ -124,7 +124,7 @@ class CreateTicketFragment : Fragment() {
             observer()
         }
 
-        binding.btnUpload.setOnClickListener {
+        binding.uploadLayout0.setOnClickListener {
             findNavController().navigate(R.id.action_createTicketFragment_to_uploadFragment)
 
         }

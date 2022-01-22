@@ -81,7 +81,7 @@ class MessageFragment : BottomSheetDialogFragment() {
             observer()
         }
 
-        binding.btnUpload.setOnClickListener {
+        binding.uploadLayout0.setOnClickListener {
             showUpload()
         }
     }
