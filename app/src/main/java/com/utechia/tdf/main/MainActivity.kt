@@ -8,6 +8,7 @@ import android.os.Bundle
 import android.os.Handler
 import android.os.Looper
 import android.view.View
+import android.view.WindowManager
 import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatDelegate
 import androidx.core.content.ContextCompat
@@ -290,6 +291,11 @@ class MainActivity : AppCompatActivity() {
 
                     }
 
+                    R.id.eventDetailsFragment -> {
+                        design("eventDetails")
+
+                    }
+
                     R.id.ticketDetailsFragment -> {
                         design("ticketDetails")
 
@@ -487,6 +493,11 @@ class MainActivity : AppCompatActivity() {
 
                 R.id.eventSystemFragment -> {
                     design("event")
+
+                }
+
+                R.id.eventDetailsFragment -> {
+                    design("eventDetails")
 
                 }
 
@@ -791,6 +802,7 @@ class MainActivity : AppCompatActivity() {
             }
 
             "event" ->{
+                window.clearFlags(WindowManager.LayoutParams.FLAG_LAYOUT_NO_LIMITS)
                 window.statusBarColor = ContextCompat.getColor(this, R.color.status)
                 binding.customToolbar.background = ContextCompat.getDrawable(this,R.color.status)
                 binding.customToolbar.visibility = View.VISIBLE
@@ -801,6 +813,15 @@ class MainActivity : AppCompatActivity() {
                 binding.drawerLayout.setDrawerLockMode(DrawerLayout.LOCK_MODE_LOCKED_CLOSED)
 
             }
+            "eventDetails" ->{
+                window.setFlags(WindowManager.LayoutParams.FLAG_LAYOUT_NO_LIMITS,WindowManager.LayoutParams.FLAG_LAYOUT_NO_LIMITS)
+                binding.customToolbar.visibility = View.GONE
+                binding.toolbar.visibility = View.GONE
+                binding.customButton.visibility = View.GONE
+                binding.bottomNavigation.visibility = View.GONE
+                binding.drawerLayout.setDrawerLockMode(DrawerLayout.LOCK_MODE_LOCKED_CLOSED)
+
+        }
 
             "createTicket"->{
                 window.statusBarColor = ContextCompat.getColor(this, R.color.status)

@@ -7,6 +7,7 @@ import android.widget.ImageView
 import android.widget.RatingBar
 import android.widget.TextView
 import androidx.appcompat.widget.AppCompatButton
+import androidx.constraintlayout.widget.ConstraintLayout
 import androidx.core.os.bundleOf
 import androidx.navigation.findNavController
 import androidx.recyclerview.widget.RecyclerView
@@ -45,6 +46,8 @@ class EventAdapter: RecyclerView.Adapter<RecyclerView.ViewHolder>() {
         private val rate: RatingBar = itemView.findViewById(R.id.rating)
         private val result: AppCompatButton = itemView.findViewById(R.id.btnResult)
         private val status: TextView = itemView.findViewById(R.id.username)
+        private val layout: ConstraintLayout = itemView.findViewById(R.id.eventLayout)
+
 
         fun bind0(position: Int) {
 
@@ -58,10 +61,13 @@ class EventAdapter: RecyclerView.Adapter<RecyclerView.ViewHolder>() {
                 .error(R.mipmap.ic_evente_banner_foreground)
                 .into(image)
 
-
             result.setOnClickListener {
                 val bundle = bundleOf("surveyId" to event[position].id)
-                itemView.findNavController().navigate(R.id.action_surveySystemFragment_to_createSurveyFragment,bundle)
+                itemView.findNavController().navigate(R.id.action_eventSystemFragment_to_eventDetailsFragment,bundle)
+            }
+            layout.setOnClickListener {
+                val bundle = bundleOf("surveyId" to event[position].id)
+                itemView.findNavController().navigate(R.id.action_eventSystemFragment_to_eventDetailsFragment,bundle)
             }
         }
     }

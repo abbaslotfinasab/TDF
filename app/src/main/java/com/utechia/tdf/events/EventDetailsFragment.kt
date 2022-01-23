@@ -5,6 +5,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
+import androidx.navigation.fragment.findNavController
 import com.bumptech.glide.Glide
 import com.utechia.tdf.R
 import com.utechia.tdf.databinding.FragmentEventDetailsBinding
@@ -26,6 +27,13 @@ class EventDetailsFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+
+        binding.backArrow.bringToFront()
+
+        binding.backArrow.setOnClickListener {
+            findNavController().navigateUp()
+        }
+
 
         Glide.with(requireActivity())
             .load(R.mipmap.ic_evente_banner_foreground)

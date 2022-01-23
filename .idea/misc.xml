@@ -281,6 +281,7 @@
         <entry key="app/src/main/res/drawable-v24/ic_launcher_foreground.xml" value="0.1" />
         <entry key="app/src/main/res/drawable/back_medium.xml" value="0.1" />
         <entry key="app/src/main/res/drawable/cancel_btn.xml" value="0.1" />
+        <entry key="app/src/main/res/drawable/gradiant.xml" value="0.13796296296296295" />
         <entry key="app/src/main/res/drawable/ic_event_back.xml" value="0.209375" />
         <entry key="app/src/main/res/drawable/ic_event_cal.xml" value="0.1" />
         <entry key="app/src/main/res/drawable/ic_group_order.xml" value="0.1717948717948718" />
