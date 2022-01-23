@@ -21,6 +21,7 @@ class EventAdapter: RecyclerView.Adapter<RecyclerView.ViewHolder>() {
 
     fun addData(_event: MutableList<EventModel>) {
         event.clear()
+        notifyDataSetChanged()
         event.addAll(_event)
         notifyItemRangeChanged(0,_event.size-1)
     }
@@ -54,7 +55,7 @@ class EventAdapter: RecyclerView.Adapter<RecyclerView.ViewHolder>() {
 
             Glide.with(itemView.context)
                 .load("https://sandbox.tdf.gov.sa/${event[position].coverphoto}")
-                .centerCrop()
+                .error(R.mipmap.ic_evente_banner_foreground)
                 .into(image)
 
 

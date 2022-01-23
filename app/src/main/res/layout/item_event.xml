@@ -10,6 +10,8 @@
         android:layout_width="89dp"
         android:layout_height="96dp"
         android:layout_marginStart="10dp"
+        android:src="@mipmap/ic_evente_banner_foreground"
+        android:scaleType="centerCrop"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
