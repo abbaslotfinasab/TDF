@@ -32,9 +32,9 @@
         android:layout_marginStart="20dp"
         android:layout_marginBottom="10dp"
         android:textColor="#787777"
-        android:textSize="10sp"
+        android:textSize="11sp"
         app:layout_constraintBottom_toTopOf="@+id/title"
-        app:layout_constraintStart_toEndOf="@+id/image"
+        app:layout_constraintStart_toEndOf="@id/image"
         app:layout_constraintTop_toTopOf="@+id/image" />
 
     <ImageView

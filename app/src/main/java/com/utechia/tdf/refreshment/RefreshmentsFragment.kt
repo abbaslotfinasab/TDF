@@ -79,7 +79,6 @@ class RefreshmentsFragment : Fragment() {
                 R.id.action_refreshmentFragment_to_orderFragment,
 
                 )
-
         }
     }
 }

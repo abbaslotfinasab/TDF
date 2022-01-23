@@ -10,6 +10,7 @@ import androidx.appcompat.widget.AppCompatButton
 import androidx.core.os.bundleOf
 import androidx.navigation.findNavController
 import androidx.recyclerview.widget.RecyclerView
+import com.bumptech.glide.Glide
 import com.utechia.domain.model.EventModel
 import com.utechia.tdf.R
 
@@ -47,6 +48,15 @@ class EventAdapter: RecyclerView.Adapter<RecyclerView.ViewHolder>() {
         fun bind0(position: Int) {
 
             title.text = event[position].title
+            subTitle.text = event[position].signstatus
+            status.text = event[position].type
+            rate.rating = 5.0f
+
+            Glide.with(itemView.context)
+                .load("https://sandbox.tdf.gov.sa/${event[position].coverphoto}")
+                .centerCrop()
+                .into(image)
+
 
             result.setOnClickListener {
                 val bundle = bundleOf("surveyId" to event[position].id)

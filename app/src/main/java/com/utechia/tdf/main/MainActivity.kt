@@ -849,7 +849,6 @@ class MainActivity : AppCompatActivity() {
                 binding.drawerLayout.setDrawerLockMode(DrawerLayout.LOCK_MODE_LOCKED_CLOSED)
 
             }
-
         }
     }
 
@@ -868,16 +867,21 @@ class MainActivity : AppCompatActivity() {
                         binding.notificationNumber.bringToFront()
                         binding.notificationNumber.text = it.data.unread_notification.toString()
                     }
-                    if(it.data.pending_orders!=0){
-                        binding.bottomNavigation.getOrCreateBadge(R.id.refreshmentFragment).backgroundColor = Color.parseColor("#FF6464")
-                        binding.bottomNavigation.getOrCreateBadge(R.id.refreshmentFragment).number = it.data.pending_orders!!
+                    if(it.data.pending_orders!=0) {
+                        binding.bottomNavigation.getOrCreateBadge(R.id.refreshmentFragment).backgroundColor =
+                            Color.parseColor("#FF6464")
+                        binding.bottomNavigation.getOrCreateBadge(R.id.refreshmentFragment).number =
+                            it.data.pending_orders!!
                         with(prefs.edit()) {
-                            putInt("order",it.data.pending_orders!!)
+                            putInt("order", it.data.pending_orders!!)
                         }.apply()
-                        }
-                    else
+                    }
+                    else {
                         binding.bottomNavigation.removeBadge(R.id.refreshmentFragment)
-
+                        with(prefs.edit()) {
+                            putInt("order",0)
+                        }.apply()
+                    }
                 }
 
                 is Result.Loading -> {}
