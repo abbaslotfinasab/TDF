@@ -12,9 +12,7 @@ class EventUseCaseImpl @Inject constructor(private val eventRepo: EventRepo)
         return eventRepo.getEvent(status)
     }
 
-    override suspend fun get(id: Int): MutableList<EventModel> {
-        return eventRepo.getEventByID(id)
-    }
+
 
     override suspend fun apply(id: Int): MutableList<EventModel> {
         return eventRepo.apply(id)

@@ -133,8 +133,9 @@ class TicketDetailsFragment : Fragment() {
             .navigate(R.id.action_ticketDetailsFragment_to_ticketRatingFragment,bundle)
     }
 
-    fun deleteItem(position:Int){
+    fun deleteItem(position:Int,uri:String){
         fragment.uploadOrder.localFile.removeAt(position)
+        fragment.uploadOrder.globalFile.remove(uri)
         fragment.uploadOrder.notifyItemRemoved(position)
 
         if(fragment.uploadOrder.localFile.isEmpty()){
@@ -202,7 +203,8 @@ class TicketDetailsFragment : Fragment() {
                             snapshot.children.forEach {
                                 chatAdapter.addData(it.getValue<Chat>()!!)
                             }
-                            binding.recyclerView.scrollToPosition(chatAdapter.chat.size)
+
+                            binding.recyclerView.smoothScrollToPosition(chatAdapter.chat.size)
 
                         }
 
@@ -214,7 +216,10 @@ class TicketDetailsFragment : Fragment() {
                     binding.recyclerView.apply {
                         adapter = chatAdapter
                         layoutManager = LinearLayoutManager(context,LinearLayoutManager.VERTICAL,false)
+                        if(itemDecorationCount>0)
+                            removeItemDecorationAt(0)
                         addItemDecoration(ChatItemDecoration())
+
                     }
 
                     if (it0.data.status == "Close"){

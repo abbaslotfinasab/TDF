@@ -1,6 +1,7 @@
 package com.utechia.domain.model
 
 data class EventModel(
+
     val capacity: Int?,
     val coverphoto: String?,
     val date_endsign: String?,
@@ -18,5 +19,7 @@ data class EventModel(
     val signstatus: String?,
     val status: String?,
     val title: String?,
-    val type: String?
+    val type: String?,
+    val contribute: String?
+
 )

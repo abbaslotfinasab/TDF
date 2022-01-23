@@ -33,15 +33,15 @@ class SessionManager @Inject constructor(@ApplicationContext private val context
     }
 
     fun fetchAuthToken(): String? {
-        return prefs.getString(USER_TOKEN, null)
+        return prefs.getString(USER_TOKEN, "")
     }
 
     fun fetchHomeId(): String? {
-        return prefs.getString(USER_ID, null)
+        return prefs.getString(USER_ID, "")
     }
 
     fun fetchFireBaeToken(): String? {
-        return prefs.getString("fcm", null)
+        return prefs.getString("fcm", "")
     }
 
 }

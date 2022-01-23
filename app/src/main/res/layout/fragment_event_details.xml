@@ -1,51 +1,60 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.core.widget.NestedScrollView
+<androidx.constraintlayout.widget.ConstraintLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="#FCFCFD"
-    android:fillViewport="true"
+    android:background="@color/white"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     tools:context=".events.EventDetailsFragment">
 
+    <ImageView
+        android:id="@+id/backArrow"
+        android:layout_width="32dp"
+        android:layout_height="32dp"
+        android:layout_marginStart="20dp"
+        android:layout_marginTop="50dp"
+        android:scaleType="centerInside"
+        android:src="@drawable/ic_back"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+
+    <ImageView
+        android:id="@+id/eventImage"
+        android:layout_width="match_parent"
+        android:layout_height="240dp"
+        android:scaleType="centerCrop"
+        android:foreground="@drawable/gradiant"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <androidx.core.widget.NestedScrollView
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:background="@color/white"
+        android:fillViewport="true"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/eventImage">
+
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
-
-        <ImageView
-            android:id="@+id/backArrow"
-            android:layout_width="32dp"
-            android:layout_height="32dp"
-            android:layout_marginStart="20dp"
-            android:layout_marginTop="60dp"
-            android:scaleType="centerInside"
-            android:src="@drawable/ic_back"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
-
-
-        <ImageView
-            android:id="@+id/eventImage"
-            android:layout_width="match_parent"
-            android:layout_height="240dp"
-            android:scaleType="centerCrop"
-            android:foreground="@drawable/gradiant"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
+        android:layout_height="wrap_content"
+        android:background="@color/white"
+        >
 
         <TextView
-            android:id="@+id/textView31"
+            android:id="@+id/title"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="38dp"
             android:layout_marginTop="44dp"
-            android:text="IoT Workshop"
             android:textColor="@color/black"
             android:textSize="22sp"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/eventImage" />
+            app:layout_constraintTop_toTopOf="parent" />
 
         <ImageView
             android:id="@+id/imageView18"
@@ -55,14 +64,13 @@
             android:layout_marginTop="35dp"
             android:src="@drawable/ic_event_doc"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/textView31" />
+            app:layout_constraintTop_toBottomOf="@+id/title" />
 
         <TextView
-            android:id="@+id/textView32"
+            android:id="@+id/type"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="12sp"
-            android:text="Workshop"
             android:textColor="@color/black"
             android:textSize="14sp"
             app:layout_constraintBottom_toBottomOf="@+id/imageView18"
@@ -77,15 +85,14 @@
             android:layout_marginTop="35dp"
             android:layout_marginEnd="12dp"
             android:src="@drawable/ic_group_event"
-            app:layout_constraintEnd_toStartOf="@+id/textView34"
-            app:layout_constraintTop_toBottomOf="@+id/textView31" />
+            app:layout_constraintEnd_toStartOf="@+id/capacity"
+            app:layout_constraintTop_toBottomOf="@+id/title" />
 
         <TextView
-            android:id="@+id/textView34"
-            android:layout_width="wrap_content"
+            android:id="@+id/capacity"
+            android:layout_width="50dp"
             android:layout_height="wrap_content"
             android:layout_marginEnd="50dp"
-            android:text="Workshop"
             android:textColor="@color/black"
             android:textSize="14sp"
             app:layout_constraintBottom_toBottomOf="@+id/imageView19"
@@ -104,12 +111,12 @@
             app:layout_constraintTop_toBottomOf="@+id/imageView18" />
 
         <TextView
+            android:id="@+id/date"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_marginStart="12sp"
             android:textColor="@color/black"
             android:textSize="14sp"
-            android:text="Workshop"
-            android:layout_marginStart="12sp"
             app:layout_constraintBottom_toBottomOf="@+id/imageView20"
             app:layout_constraintStart_toEndOf="@+id/imageView20"
             app:layout_constraintTop_toTopOf="@+id/imageView20" />
@@ -121,16 +128,15 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="20dp"
             android:layout_marginEnd="12dp"
-            android:src="@drawable/ic_event_doc"
-            app:layout_constraintEnd_toStartOf="@+id/textView35"
+            android:src="@drawable/ic_group_loca"
+            app:layout_constraintEnd_toStartOf="@+id/time"
             app:layout_constraintTop_toBottomOf="@+id/imageView19" />
 
         <TextView
-            android:id="@+id/textView35"
-            android:layout_width="wrap_content"
+            android:id="@+id/time"
+            android:layout_width="50dp"
             android:layout_height="wrap_content"
             android:layout_marginEnd="50dp"
-            android:text="Workshop"
             android:textColor="@color/black"
             android:textSize="14sp"
             app:layout_constraintBottom_toBottomOf="@+id/imageView21"
@@ -143,7 +149,7 @@
             android:layout_height="wrap_content"
             android:layout_marginStart="33dp"
             android:layout_marginTop="40dp"
-            android:layout_marginEnd="33dp"
+            android:layout_marginEnd="40dp"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/imageView20" />
@@ -159,10 +165,10 @@
             app:layout_constraintTop_toBottomOf="@+id/description" />
 
         <TextView
-            android:id="@+id/textView36"
+            android:id="@+id/location"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Workshop"
+            android:layout_marginStart="12dp"
             android:textColor="@color/black"
             android:textSize="14sp"
             app:layout_constraintBottom_toBottomOf="@+id/imageView22"
@@ -184,8 +190,9 @@
 
 
         <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/recyclerView"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+            android:layout_height="200dp"
             android:layout_marginStart="33dp"
             android:layout_marginTop="10dp"
             android:layout_marginEnd="33dp"
@@ -196,40 +203,38 @@
 
         <androidx.appcompat.widget.AppCompatButton
             android:id="@+id/appCompatButton"
-            android:visibility="gone"
             android:layout_width="0dp"
             android:layout_height="60dp"
             android:layout_marginStart="35dp"
             android:layout_marginEnd="35dp"
-            android:textSize="16sp"
-            android:layout_marginBottom="60dp"
             android:background="#3360DD"
-            android:text="Apply"
             android:textAllCaps="false"
             android:textColor="@color/white"
+            android:textSize="16sp"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent" />
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/recyclerView" />
 
         <androidx.cardview.widget.CardView
             android:id="@+id/prg"
             android:layout_width="72dp"
             android:layout_height="72dp"
-            app:cardElevation="6dp"
-            app:cardCornerRadius="36dp"
             android:visibility="gone"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
+            app:cardCornerRadius="36dp"
+            app:cardElevation="6dp"
             app:cardPreventCornerOverlap="true"
+            app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintCircleRadius="36dp"
+            app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent">
 
             <com.agrawalsuneet.dotsloader.loaders.LazyLoader
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:gravity="center"
                 android:layout_gravity="center"
+                android:gravity="center"
                 app:lazyloader_animDur="800"
                 app:lazyloader_dotsDist="5dp"
                 app:lazyloader_dotsRadius="5dp"
@@ -245,6 +250,7 @@
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 
+    </androidx.core.widget.NestedScrollView>
 
-</androidx.core.widget.NestedScrollView>
+</androidx.constraintlayout.widget.ConstraintLayout>
 

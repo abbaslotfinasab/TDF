@@ -2,6 +2,7 @@ package com.utechia.data.di
 
 import com.utechia.data.repo.*
 import com.utechia.domain.repository.*
+import com.utechia.domain.usecases.EventDetailsUsCaseImpl
 import dagger.Binds
 import dagger.Module
 import dagger.hilt.InstallIn
@@ -126,4 +127,9 @@ abstract class RepositoryModule {
     abstract fun bindEventsRepositoryService(
         eventRepoImpl: EventRepoImpl
     ): EventRepo
+
+    @Binds
+    abstract fun bindEventsDetailsRepositoryService(
+        eventDetailsRepoImpl: EventDetailsRepoImpl
+    ): EventDetailRepo
 }

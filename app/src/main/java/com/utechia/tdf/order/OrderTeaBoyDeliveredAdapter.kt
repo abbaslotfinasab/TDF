@@ -14,7 +14,7 @@ import java.time.OffsetDateTime
 import java.time.ZoneId
 import java.time.format.DateTimeFormatter
 
-class OrderTeaBoyAdapter(private val teaBoyOrdersFragment: TeaBoyOrdersFragment): RecyclerView.Adapter<RecyclerView.ViewHolder>() {
+class OrderTeaBoyDeliveredAdapter(private val teaBoyOrdersFragment: TeaBoyOrdersFragment): RecyclerView.Adapter<RecyclerView.ViewHolder>() {
 
     var userOrders: MutableList<TeaBoyOrderDataModel> = mutableListOf()
     private var timeZone = ""
@@ -32,19 +32,18 @@ class OrderTeaBoyAdapter(private val teaBoyOrdersFragment: TeaBoyOrdersFragment)
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): RecyclerView.ViewHolder {
 
-       return ViewHolder(
+        return ViewHolder(
             LayoutInflater.from(parent.context)
-                .inflate(R.layout.order_teaboy_item, parent, false)
+                .inflate(R.layout.item_order_teaboy_delivered, parent, false)
         )
     }
-
 
     override fun onBindViewHolder(holder: RecyclerView.ViewHolder, position: Int) {
         (holder as ViewHolder).bind0(position)
     }
 
-
     override fun getItemCount(): Int = userOrders.size
+
 
     inner class ViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
         private val date: TextView = itemView.findViewById(R.id.date)
@@ -54,9 +53,6 @@ class OrderTeaBoyAdapter(private val teaBoyOrdersFragment: TeaBoyOrdersFragment)
         private val details: TextView = itemView.findViewById(R.id.btnDetails)
         private val user: TextView = itemView.findViewById(R.id.username)
         private val location: TextView = itemView.findViewById(R.id.location)
-        private val reject: TextView = itemView.findViewById(R.id.btnReject)
-        private val accept: TextView = itemView.findViewById(R.id.btnAccept)
-        private val confirm: TextView = itemView.findViewById(R.id.btnConfirm)
         private val layout: ConstraintLayout = itemView.findViewById(R.id.orderLayout)
 
         fun bind0(position: Int) {
@@ -76,43 +72,10 @@ class OrderTeaBoyAdapter(private val teaBoyOrdersFragment: TeaBoyOrdersFragment)
             } else if (userOrders[position].cart?.items?.size!! != 0)
                 title.text = userOrders[position].cart?.items!![0].food.title
 
-            when (userOrders[position].status) {
-
-                "waiting" -> {
-                    reject.visibility = View.VISIBLE
-                    accept.visibility = View.VISIBLE
-                    confirm.visibility = View.INVISIBLE
-
-                }
-                "preparing" -> {
-                    reject.visibility = View.GONE
-                    accept.visibility = View.GONE
-                    confirm.visibility = View.VISIBLE
-
-                }
-            }
 
 
             user.text = userOrders[position].user?.displayName
             location.text = userOrders[position].user?.officeFloor
-
-
-            reject.setOnClickListener {
-                val bundle = bundleOf("orderId" to userOrders[position].id)
-                itemView.findNavController()
-                    .navigate(R.id.action_teaBoyOrdersFragment_to_rejectFragment, bundle)
-            }
-
-            accept.setOnClickListener {
-                val bundle = bundleOf("orderId" to userOrders[position].id)
-                itemView.findNavController()
-                    .navigate(R.id.action_teaBoyOrdersFragment_to_acceptFragment, bundle)
-            }
-
-            confirm.setOnClickListener {
-                teaBoyOrdersFragment.userOrderViewModel.deliverOrder(userOrders[position].id!!)
-                itemView.findNavController().navigate(R.id.action_teaBoyOrdersFragment_self)
-            }
 
             details.setOnClickListener {
                 val bundle = bundleOf("orderId" to userOrders[position].cart?.id)
@@ -124,7 +87,6 @@ class OrderTeaBoyAdapter(private val teaBoyOrdersFragment: TeaBoyOrdersFragment)
                 itemView.findNavController()
                     .navigate(R.id.action_orderFragment_to_orderDetailsFragment, bundle)
             }
-
         }
     }
 }

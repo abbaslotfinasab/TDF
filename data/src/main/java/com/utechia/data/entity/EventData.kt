@@ -8,7 +8,6 @@ import kotlinx.parcelize.RawValue
 import kotlinx.serialization.Contextual
 import kotlinx.serialization.Serializable
 
-
 @Parcelize
 @Serializable
 data class EventData(
@@ -29,9 +28,10 @@ data class EventData(
     val signstatus: String?,
     val status: String?,
     val title: String?,
-    val type: String?
+    val type: String?,
+    val contribut:Contribut?
 ):Parcelable, ResponseObject<EventModel> {
     override fun toDomain(): EventModel {
-        return EventModel(capacity, coverphoto, date_endsign, date_startsign, datestart, datetime,department,description,duration,eventPlace,guests?.map { it.toDomain() }!!.toMutableList(),id,isDisable,joinnumbr,signstatus,status,title,type)
+        return EventModel(capacity, coverphoto, date_endsign, date_startsign, datestart, datetime,department,description,duration,eventPlace,guests?.map { it.toDomain() }!!.toMutableList(),id,isDisable,joinnumbr,signstatus,status,title,type,contribut?.status)
     }
 }

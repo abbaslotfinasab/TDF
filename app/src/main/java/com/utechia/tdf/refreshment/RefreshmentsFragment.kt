@@ -11,6 +11,7 @@ import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.findNavController
 import com.utechia.tdf.R
 import com.utechia.tdf.databinding.FragmentRefreshmentBinding
+import com.utechia.tdf.main.MainActivity
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
@@ -19,6 +20,9 @@ class RefreshmentsFragment : Fragment() {
     private lateinit var binding: FragmentRefreshmentBinding
     private lateinit var prefs: SharedPreferences
     private var order = 0
+    private var name = ""
+    private var job = ""
+
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -31,6 +35,20 @@ class RefreshmentsFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         prefs = requireActivity().getSharedPreferences("tdf", AppCompatActivity.MODE_PRIVATE)
+
+        if (prefs.getBoolean("Start",false)) {
+
+            name = prefs.getString("name", "").toString()
+            job = prefs.getString("job", "").toString()
+            (activity as MainActivity).setupUser(name, job)
+
+            with(prefs.edit()){
+
+                putBoolean("Start",false)
+
+            }.apply()
+
+        }
 
         order = prefs.getInt("order",0)
 

@@ -208,10 +208,18 @@
         tools:layout="@layout/fragment_event_system" >
         <action
             android:id="@+id/action_eventSystemFragment_to_eventDetailsFragment"
-            app:destination="@id/eventDetailsFragment" />
+            app:destination="@id/eventDetailsFragment"
+            app:enterAnim="@android:anim/fade_in"
+            app:exitAnim="@android:anim/fade_out"
+            app:popEnterAnim="@android:anim/fade_in"
+            app:popExitAnim="@android:anim/fade_out"/>
         <action
             android:id="@+id/action_eventSystemFragment_to_eventRateFragment"
-            app:destination="@id/eventRateFragment" />
+            app:destination="@id/eventRateFragment"
+            app:enterAnim="@android:anim/fade_in"
+            app:exitAnim="@android:anim/fade_out"
+            app:popEnterAnim="@android:anim/fade_in"
+            app:popExitAnim="@android:anim/fade_out"/>
     </fragment>
 
     <fragment
@@ -455,6 +463,16 @@
         <action
             android:id="@+id/action_loginFragment_to_userhomeFragment"
             app:destination="@id/userhomeFragment"
+            app:launchSingleTop="true"
+            app:popUpTo="@id/nav_graph"
+            app:enterAnim="@android:anim/fade_in"
+            app:exitAnim="@android:anim/fade_out"
+            app:popEnterAnim="@android:anim/fade_in"
+            app:popExitAnim="@android:anim/fade_out"/>
+
+        <action
+            android:id="@+id/action_loginFragment_to_refreshmentFragment"
+            app:destination="@id/refreshmentFragment"
             app:launchSingleTop="true"
             app:popUpTo="@id/nav_graph"
             app:enterAnim="@android:anim/fade_in"

@@ -4,6 +4,7 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -18,6 +19,7 @@ class TeaBoyOrdersFragment : Fragment() {
     private lateinit var binding: FragmentTeaBoyOrdersBinding
     val userOrderViewModel: TeaBoyOrderViewModel by viewModels()
     private val orderAdapter: OrderTeaBoyAdapter = OrderTeaBoyAdapter(this)
+    private val orderDeliveredAdapter: OrderTeaBoyDeliveredAdapter = OrderTeaBoyDeliveredAdapter(this)
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -31,20 +33,29 @@ class TeaBoyOrdersFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
         userOrderViewModel.getOrderTeaBoy("pending")
 
+        binding.recyclerView.apply{
+            adapter = orderAdapter
+            layoutManager = LinearLayoutManager(context, LinearLayoutManager.VERTICAL,false)
+            addItemDecoration(ItemDecorationOrder())
+        }
+
         binding.tabLayout.addOnTabSelectedListener(object :TabLayout.OnTabSelectedListener{
             override fun onTabSelected(tab: TabLayout.Tab?) {
 
                 when(tab?.position){
 
                     0 -> {
+                        binding.recyclerView.adapter = orderAdapter
                         userOrderViewModel.getOrderTeaBoy("pending")
                         observer()
                     }
                     1 -> {
+                        binding.recyclerView.adapter = orderDeliveredAdapter
                         userOrderViewModel.getOrderTeaBoy("delivered")
                         observer()
                     }
                     2 -> {
+                        binding.recyclerView.adapter = orderDeliveredAdapter
                         userOrderViewModel.getOrderTeaBoy("cancelled")
                         observer()
                     }
@@ -92,13 +103,6 @@ class TeaBoyOrdersFragment : Fragment() {
 
         })
 
-        binding.recyclerView.apply{
-            adapter = orderAdapter
-            layoutManager = LinearLayoutManager(context, LinearLayoutManager.VERTICAL,false)
-            addItemDecoration(ItemDecorationOrder())
-        }
-
-
         observer()
 
     }
@@ -115,6 +119,7 @@ class TeaBoyOrdersFragment : Fragment() {
                         binding.recyclerView.visibility = View.VISIBLE
                         binding.emptyLayout.visibility = View.GONE
                         orderAdapter.addData(it.data)
+                        orderDeliveredAdapter.addData(it.data)
 
                     }
                     else{
@@ -134,7 +139,7 @@ class TeaBoyOrdersFragment : Fragment() {
                     binding.prg.visibility = View.GONE
                     binding.recyclerView.visibility = View.GONE
                     binding.emptyLayout.visibility = View.VISIBLE
-                    /*Toast.makeText(context, it.message, Toast.LENGTH_SHORT).show()*/
+                    Toast.makeText(context, it.message, Toast.LENGTH_SHORT).show()
                 }
             }
         }

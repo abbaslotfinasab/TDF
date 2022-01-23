@@ -9,7 +9,6 @@ import dagger.hilt.InstallIn
 import dagger.hilt.android.qualifiers.ApplicationContext
 import dagger.hilt.components.SingletonComponent
 import okhttp3.OkHttpClient
-import okhttp3.logging.HttpLoggingInterceptor
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
 import retrofit2.converter.scalars.ScalarsConverterFactory
@@ -23,16 +22,12 @@ class ApiModule {
 
     @Provides
     @Singleton
-    fun provideOkHttpClient(@ApplicationContext context:Context,service: dagger.Lazy<Service>): OkHttpClient {
-        return OkHttpClient.Builder()
-            .addInterceptor(HttpLoggingInterceptor())
-            .authenticator(AuthInterceptor(context,service))
-            .followRedirects(false)
-            .followSslRedirects(false)
-            .connectTimeout(30,TimeUnit.SECONDS)
-            .readTimeout(30, TimeUnit.SECONDS)
-            .writeTimeout(30, TimeUnit.SECONDS)
-            .build()
+    fun provideOkHttpClient(@ApplicationContext context: Context): OkHttpClient {
+        val okHttpBuilder = OkHttpClient.Builder()
+        okHttpBuilder.connectTimeout(30, TimeUnit.SECONDS)
+        okHttpBuilder.readTimeout(30, TimeUnit.SECONDS)
+        okHttpBuilder.addInterceptor(AuthInterceptor(context))
+        return okHttpBuilder.build()
     }
 
     @Provides

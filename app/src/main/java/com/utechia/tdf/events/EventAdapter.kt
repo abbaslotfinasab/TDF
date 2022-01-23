@@ -1,5 +1,6 @@
 package com.utechia.tdf.events
 
+import android.graphics.Color
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -61,12 +62,155 @@ class EventAdapter: RecyclerView.Adapter<RecyclerView.ViewHolder>() {
                 .error(R.mipmap.ic_evente_banner_foreground)
                 .into(image)
 
+
+            when(event[position].contribute){
+
+                null -> {
+                    subTitle.text ="Pending"
+                    subTitle.setTextColor(Color.parseColor("#A4A6B3"))
+
+                    when(event[position].status){
+
+                        "End" -> {
+                            result.visibility = View.GONE
+                            rate.visibility = View.GONE
+                            subTitle.visibility = View.VISIBLE
+                        }
+
+                        "Inprogress" -> {
+
+                            result.visibility = View.GONE
+                            rate.visibility = View.GONE
+                            subTitle.visibility = View.VISIBLE
+
+
+                        }
+                        "Upcoming" -> {
+
+                            result.visibility = View.VISIBLE
+                            subTitle.visibility = View.VISIBLE
+                            rate.visibility = View.GONE
+                            result.text = "Apply"
+                            result.setBackgroundColor(Color.parseColor("#3360DD"))
+                            result.isEnabled = true
+
+                        }
+                    }
+                }
+
+                "Rejected" -> {
+
+                    subTitle.visibility = View.VISIBLE
+                    subTitle.text ="Rejected"
+                    subTitle.setTextColor(Color.parseColor("#FF6464"))
+
+                    when(event[position].status){
+
+                        "End" -> {
+                            result.visibility = View.VISIBLE
+                            rate.visibility = View.GONE
+                            result.text = "Evaluated"
+                            result.setBackgroundColor(Color.parseColor("#A4A6B3"))
+                            result.isEnabled = false
+                        }
+
+                        "Inprogress" -> {
+
+                            result.visibility = View.GONE
+                            rate.visibility = View.GONE
+
+                        }
+                        "Upcoming" -> {
+
+                            result.visibility = View.VISIBLE
+                            result.visibility = View.VISIBLE
+                            rate.visibility = View.GONE
+                            result.text = "Apply"
+                            result.setBackgroundColor(Color.parseColor("#3360DD"))
+                            result.isEnabled = true
+
+                        }
+                    }
+                }
+
+                "Cancelled" -> {
+
+                    subTitle.visibility = View.VISIBLE
+                    subTitle.text ="Cancelled"
+                    subTitle.setTextColor(Color.parseColor("#F5A62E"))
+
+                    when(event[position].status){
+
+                        "End" -> {
+                            result.visibility = View.VISIBLE
+                            rate.visibility = View.GONE
+                            result.text = "Evaluated"
+                            result.setBackgroundColor(Color.parseColor("#A4A6B3"))
+                            result.isEnabled = false
+                        }
+
+                        "Inprogress" -> {
+
+                            result.visibility = View.GONE
+                            rate.visibility = View.GONE
+
+                        }
+                        "Upcoming" -> {
+
+                            result.visibility = View.VISIBLE
+                            result.visibility = View.VISIBLE
+                            rate.visibility = View.GONE
+                            result.text = "Apply"
+                            result.setBackgroundColor(Color.parseColor("#3360DD"))
+                            result.isEnabled = true
+
+                        }
+                    }
+
+                }
+
+                "Attended" -> {
+
+                    subTitle.visibility = View.VISIBLE
+                    subTitle.text ="Attended"
+                    subTitle.setTextColor(Color.parseColor("#59B48D"))
+
+                    when(event[position].status){
+
+                        "End" -> {
+                            result.visibility = View.VISIBLE
+                            rate.visibility = View.VISIBLE
+                            result.text = "Evaluated"
+                            result.setBackgroundColor(Color.parseColor("#A4A6B3"))
+                            result.isEnabled = false
+                        }
+
+                        "Inprogress" -> {
+
+                            result.visibility = View.GONE
+                            rate.visibility = View.GONE
+
+                        }
+                        "Upcoming" -> {
+
+                            result.visibility = View.VISIBLE
+                            result.visibility = View.VISIBLE
+                            rate.visibility = View.GONE
+                            result.text = "Apply"
+                            result.setBackgroundColor(Color.parseColor("#A4A6B3"))
+                            result.isEnabled = false
+
+                        }
+                    }
+                }
+            }
+
             result.setOnClickListener {
-                val bundle = bundleOf("surveyId" to event[position].id)
+                val bundle = bundleOf("eId" to event[position].id)
                 itemView.findNavController().navigate(R.id.action_eventSystemFragment_to_eventDetailsFragment,bundle)
             }
             layout.setOnClickListener {
-                val bundle = bundleOf("surveyId" to event[position].id)
+                val bundle = bundleOf("eId" to event[position].id)
                 itemView.findNavController().navigate(R.id.action_eventSystemFragment_to_eventDetailsFragment,bundle)
             }
         }

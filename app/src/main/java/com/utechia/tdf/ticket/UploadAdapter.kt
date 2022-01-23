@@ -13,10 +13,12 @@ import com.utechia.tdf.R
 
 class UploadAdapter : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
 
-    var file: MutableList<String> = mutableListOf()
+    var localFile: MutableList<String> = mutableListOf()
+    var mediaUrl:MutableSet<String> = mutableSetOf()
+
 
     fun addData(uri:String) {
-        file.add(uri)
+        localFile.add(uri)
         notifyDataSetChanged()
     }
 
@@ -31,7 +33,7 @@ class UploadAdapter : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
         (holder as ViewHolder).bind0(position)
     }
 
-    override fun getItemCount(): Int = file.size+1
+    override fun getItemCount(): Int = localFile.size+1
 
     inner class ViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
         private val image: ImageView = itemView.findViewById(R.id.image)
@@ -39,23 +41,23 @@ class UploadAdapter : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
 
         fun bind0(position: Int) {
 
-            if (position<file.size) {
+            if (position<localFile.size) {
 
                 deleteIcon.visibility = View.VISIBLE
                 deleteIcon.bringToFront()
 
                 Glide.with(itemView.context)
-                    .load(file[position])
+                    .load(localFile[position])
                     .error(R.drawable.ic_empty_upload)
                     .centerCrop()
                     .into(image)
                 image.setOnClickListener {
-                    val bundle = bundleOf("uri" to file[position].toString())
+                    val bundle = bundleOf("uri" to localFile[position])
                     itemView.findNavController().navigate(R.id.action_createTicketFragment_to_blankFragment,bundle)
                 }
 
                 deleteIcon.setOnClickListener {
-                    val bundle = bundleOf("position" to position)
+                    val bundle = bundleOf("position" to position ,"uri" to mediaUrl.elementAt(position))
                     itemView.findNavController().navigate(R.id.action_createTicketFragment_to_uploadDeleteFragment,bundle)
                 }
             }

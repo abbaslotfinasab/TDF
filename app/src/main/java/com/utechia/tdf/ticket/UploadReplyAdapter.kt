@@ -64,7 +64,7 @@ class UploadReplyAdapter(val messageFragment: MessageFragment) : RecyclerView.Ad
                 }
 
                 deleteIcon.setOnClickListener {
-                    val bundle = bundleOf("position" to position)
+                    val bundle = bundleOf("position" to position,"uri" to globalFile.elementAtOrNull(position))
                     messageFragment.showDelete(bundle)
                 }
             }

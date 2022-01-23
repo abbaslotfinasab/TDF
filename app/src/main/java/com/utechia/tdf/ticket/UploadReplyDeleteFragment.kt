@@ -18,6 +18,8 @@ class UploadReplyDeleteFragment : DialogFragment() {
     private lateinit var binding: FragmentUploadDeleteBinding
     private lateinit var navHostFragment : NavHostFragment
     private var positionId = 0
+    private var uri = ""
+
 
 
 
@@ -44,12 +46,14 @@ class UploadReplyDeleteFragment : DialogFragment() {
         navHostFragment = requireActivity().supportFragmentManager.fragments[0] as NavHostFragment
         val parent = navHostFragment.childFragmentManager.primaryNavigationFragment as TicketDetailsFragment
 
-        if (arguments != null)
+        if (arguments != null) {
             positionId = requireArguments().getInt("position", 0)
+            uri = requireArguments().getString("uri", "")
+        }
 
         binding.btnDelete.setOnClickListener {
 
-            parent.deleteItem(positionId)
+            parent.deleteItem(positionId,uri)
 
             dialog?.dismiss()
 

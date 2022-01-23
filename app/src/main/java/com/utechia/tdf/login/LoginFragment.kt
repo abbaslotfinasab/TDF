@@ -83,7 +83,7 @@ class LoginFragment : Fragment() {
                             putString("mail",it.data.mail)
                             putBoolean("Start",true)
                         }.apply()
-                        findNavController().navigate(R.id.action_loginFragment_to_userhomeFragment)
+                        findNavController().navigate(R.id.action_loginFragment_to_refreshmentFragment)
                     }
 
                     else {

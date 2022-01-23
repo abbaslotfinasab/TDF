@@ -9,6 +9,7 @@ import android.os.Handler
 import android.os.Looper
 import android.view.View
 import android.view.WindowManager
+import android.widget.Toast
 import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatDelegate
 import androidx.core.content.ContextCompat
@@ -82,7 +83,7 @@ class MainActivity : AppCompatActivity() {
             }
             !teaBoy() -> {
                 mainViewModel.getCount()
-                graph.setStartDestination(R.id.userhomeFragment)
+                graph.setStartDestination(R.id.refreshmentFragment)
                 val name = prefs.getString("name","").toString()
                 val job = prefs.getString("job","").toString()
                 setupUser(name,job)
@@ -200,8 +201,12 @@ class MainActivity : AppCompatActivity() {
             navController.addOnDestinationChangedListener{_, destination, _ ->
                 binding.bottomNavigation.setupWithNavController(navController)
 
-                mainViewModel.getCount()
-                observer()
+                if(destination.id != R.id.loginFragment) {
+
+                    mainViewModel.getCount()
+                    observer()
+
+                }
 
                 when (destination.id){
 
@@ -441,8 +446,12 @@ class MainActivity : AppCompatActivity() {
         navController.addOnDestinationChangedListener{_, destination, _ ->
             binding.bottomNavigation.setupWithNavController(navController)
 
-            mainViewModel.getCount()
-            observer()
+            if(destination.id != R.id.loginFragment) {
+
+                mainViewModel.getCount()
+                observer()
+
+            }
 
             when (destination.id){
 
@@ -908,11 +917,14 @@ class MainActivity : AppCompatActivity() {
                 is Result.Loading -> {}
 
                 is Result.Error -> {
-                    prefs.edit().clear().apply()
-                    logoutFromFCM()
-                    val i = Intent(this, MainActivity::class.java)
-                    finish()
-                    startActivity(i)
+
+                    if (it.message == "Unauthorized") {
+                        prefs.edit().clear().apply()
+                        logoutFromFCM()
+                        val i = Intent(this, MainActivity::class.java)
+                        finish()
+                        startActivity(i)
+                    }
                 }
             }
         }

@@ -2,6 +2,7 @@ package com.utechia.data.repo
 
 import com.utechia.data.api.Service
 import com.utechia.data.entity.NotificationToken
+import com.utechia.data.entity.RefreshToken
 import com.utechia.data.utile.NetworkHelper
 import com.utechia.data.utile.SessionManager
 import com.utechia.domain.model.NotificationCountModel
@@ -22,11 +23,19 @@ class MainRepoImpl @Inject constructor(
 
         if (networkHelper.isNetworkConnected()) {
 
-            val result = service.countNotification()
+            var result = service.countNotification()
+            val homeId = sessionManager.fetchHomeId()?:""
 
-            return when (result.isSuccessful) {
+                if (result.code()== 401 || result.code()==403 ){
 
-                true ->{
+                val token = service.refresh( RefreshToken(homeId)).body()?.data.toString()
+                    sessionManager.updateAuthToken(token)
+                    result = service.countNotification()
+                }
+
+            return when (result.code()) {
+
+                200 ->{
 
                     val fcmToken = sessionManager.fetchFireBaeToken()?:""
 
@@ -35,11 +44,20 @@ class MainRepoImpl @Inject constructor(
                         service.notification(NotificationToken(fcmToken))
 
                     result.body()?.data!!.toDomain()
+
+                }
+
+                401 -> {
+                    throw IOException("Unauthorized")
+
+                }
+
+                403 -> {
+                    throw IOException("Unauthorized")
+
                 }
 
                 else -> {
-                    service.notification(NotificationToken(sessionManager.fetchFireBaeToken()!!))
-
                     throw IOException("Server is Not Responding")
                 }
             }

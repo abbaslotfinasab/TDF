@@ -31,10 +31,9 @@ class CreateTicketFragment : Fragment() {
     private val ticketViewModel:TicketViewModel by viewModels()
     private val baseNeedsViewModel:BaseNeedsViewModel by viewModels()
     private val uploadViewModel:UploadViewModel by viewModels()
-    private val uploadOrder:UploadAdapter = UploadAdapter()
+    private val uploadAdapter:UploadAdapter = UploadAdapter()
     private val floor:MutableList<String> = mutableListOf()
     private val categoryList:ArrayList<CategoryModel> = arrayListOf()
-    private val mediaUrl:MutableSet<String> = mutableSetOf()
     private var selectedFloor = "Floor11"
     private var priority = "Low"
     var category = 1
@@ -70,7 +69,7 @@ class CreateTicketFragment : Fragment() {
             }
         }
 
-        if (uploadOrder.file.size !=0){
+        if (uploadAdapter.localFile.size !=0){
             binding.uploadLayout0.visibility = View.GONE
             binding.recyclerView.visibility = View.VISIBLE
         }
@@ -86,7 +85,7 @@ class CreateTicketFragment : Fragment() {
         baseNeedsViewModel.getNeeds()
 
         binding.recyclerView.apply {
-            adapter = uploadOrder
+            adapter = uploadAdapter
             layoutManager = GridLayoutManager(context,calculateNoOfColumns(context, 100.0F))
         }
 
@@ -118,7 +117,7 @@ class CreateTicketFragment : Fragment() {
                 category,
                 priority,
                 selectedFloor,
-                mediaUrl,
+                uploadAdapter.mediaUrl,
 
                 )
             observer()
@@ -252,11 +251,12 @@ class CreateTicketFragment : Fragment() {
         category = mId
     }
 
-    fun deleteItem(position:Int){
-        uploadOrder.file.removeAt(position)
-        uploadOrder.notifyItemRemoved(position)
+    fun deleteItem(position:Int,uri:String){
+        uploadAdapter.localFile.removeAt(position)
+        uploadAdapter.mediaUrl.remove(uri)
+        uploadAdapter.notifyItemRemoved(position)
 
-        if(uploadOrder.file.isEmpty()){
+        if(uploadAdapter.localFile.isEmpty()){
             replacement()
         }
     }
@@ -279,7 +279,7 @@ class CreateTicketFragment : Fragment() {
                 // Use Uri object instead of File to avoid storage permissions
                 binding.uploadLayout0.visibility = View.GONE
                 binding.recyclerView.visibility = View.VISIBLE
-                uploadOrder.addData(uri.toString())
+                uploadAdapter.addData(uri.toString())
                 uploadViewModel.uploadFile(uri)
                 uploadObserver()
 
@@ -296,7 +296,7 @@ class CreateTicketFragment : Fragment() {
             when (it) {
                 is Result.Success -> {
                     binding.prg.visibility = View.GONE
-                    mediaUrl.add(it.data.path!!)
+                    uploadAdapter.mediaUrl.add(it.data.path!!)
                 }
 
                 is Result.Loading -> {
