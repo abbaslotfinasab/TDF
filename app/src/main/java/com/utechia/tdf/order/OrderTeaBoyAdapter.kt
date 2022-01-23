@@ -101,6 +101,22 @@ class OrderTeaBoyAdapter(private val teaBoyOrdersFragment: TeaBoyOrdersFragment)
             } else if (userOrders[position].cart?.items?.size!! != 0)
                 title.text = userOrders[position].cart?.items!![0].food.title
 
+            when (userOrders[position].status) {
+
+                "waiting" -> {
+                    reject.visibility = View.VISIBLE
+                    accept.visibility = View.VISIBLE
+                    confirm.visibility = View.INVISIBLE
+
+                }
+                "preparing" -> {
+                    reject.visibility = View.GONE
+                    accept.visibility = View.GONE
+                    confirm.visibility = View.VISIBLE
+
+                }
+            }
+
 
             user.text = userOrders[position].user?.displayName
             location.text = userOrders[position].user?.officeFloor
