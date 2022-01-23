@@ -92,7 +92,7 @@ class TeaBoyOrdersFragment : Fragment() {
 
         })
 
-        binding.recyclerView.apply {
+        binding.recyclerView.apply{
             adapter = orderAdapter
             layoutManager = LinearLayoutManager(context, LinearLayoutManager.VERTICAL,false)
             addItemDecoration(ItemDecorationOrder())
