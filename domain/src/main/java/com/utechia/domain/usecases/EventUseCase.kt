@@ -1,9 +1,11 @@
 package com.utechia.domain.usecases
 
-interface EventUseCase<R> {
+import com.utechia.domain.model.EventModel
 
-    suspend fun execute(status:String):MutableList<R>
-    suspend fun get(id:Int):MutableList<R>
-    suspend fun apply(id:Int):MutableList<R>
+interface EventUseCase {
+
+    suspend fun execute(status:String):MutableList<EventModel>
+    suspend fun get(id:Int):MutableList<EventModel>
+    suspend fun apply(id:Int):MutableList<EventModel>
 
 }

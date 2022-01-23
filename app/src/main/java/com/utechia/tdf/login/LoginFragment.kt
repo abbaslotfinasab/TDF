@@ -84,7 +84,6 @@ class LoginFragment : Fragment() {
                             putBoolean("Start",true)
                         }.apply()
                         findNavController().navigate(R.id.action_loginFragment_to_userhomeFragment)
-
                     }
 
                     else {

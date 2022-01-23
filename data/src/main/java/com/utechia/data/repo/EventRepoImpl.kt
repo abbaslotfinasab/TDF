@@ -1,6 +1,6 @@
 package com.utechia.data.repo
 
-/*
+
 import com.utechia.data.api.Service
 import com.utechia.data.utile.NetworkHelper
 import com.utechia.domain.model.EventModel
@@ -17,8 +17,8 @@ class EventRepoImpl @Inject constructor(
     ):EventRepo {
 
     override suspend fun getEvent(status:String): MutableList<EventModel> {
-       */
-/* if (networkHelper.isNetworkConnected()) {
+
+    if (networkHelper.isNetworkConnected()) {
 
             val result = service.getAllEvent(1,500,status)
 
@@ -32,17 +32,17 @@ class EventRepoImpl @Inject constructor(
                     throw IOException("Server is Not Responding")
             }
 
-        } else throw IOException("No Internet Connection")*//*
+        } else throw IOException("No Internet Connection")
 
-        return emptyList<EventModel>().toMutableList()
+
     }
 
     override suspend fun getEventByID(id: Int): MutableList<EventModel> {
 
-      */
-/*  if (networkHelper.isNetworkConnected()) {
 
-            val result = service.getTicket(id)
+  if (networkHelper.isNetworkConnected()) {
+
+            val result = service.getEvent(id)
 
             return when (result.isSuccessful) {
 
@@ -54,15 +54,14 @@ class EventRepoImpl @Inject constructor(
                     throw IOException("Server is Not Responding")
             }
 
-        } else throw IOException("No Internet Connection")*//*
+        } else throw IOException("No Internet Connection")
 
-        return emptyList<EventModel>().toMutableList()
     }
 
     override suspend fun apply(id: Int): MutableList<EventModel> {
 
-     */
-/*   if (networkHelper.isNetworkConnected()) {
+
+   if (networkHelper.isNetworkConnected()) {
 
             val result = service.getEvaluate()
 
@@ -76,9 +75,6 @@ class EventRepoImpl @Inject constructor(
                     throw IOException("Server is Not Responding")
             }
 
-        } else throw IOException("No Internet Connection") *//*
-
-
-        return emptyList<EventModel>().toMutableList()
+        } else throw IOException("No Internet Connection")
     }
-}*/
+}

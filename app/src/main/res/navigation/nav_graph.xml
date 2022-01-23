@@ -456,6 +456,7 @@
             android:id="@+id/action_loginFragment_to_userhomeFragment"
             app:destination="@id/userhomeFragment"
             app:launchSingleTop="true"
+            app:popUpTo="@id/nav_graph"
             app:enterAnim="@android:anim/fade_in"
             app:exitAnim="@android:anim/fade_out"
             app:popEnterAnim="@android:anim/fade_in"
@@ -464,6 +465,7 @@
         <action
             android:id="@+id/action_loginFragment_to_teaBoyHomeFragment"
             app:launchSingleTop="true"
+            app:popUpTo="@id/nav_graph"
             app:destination="@id/teaBoyHomeFragment"
             app:enterAnim="@android:anim/fade_in"
             app:exitAnim="@android:anim/fade_out"

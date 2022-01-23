@@ -122,9 +122,8 @@ abstract class RepositoryModule {
         ticketDetailsRepoImpl: TicketDetailsRepoImpl
     ): TicketDetailsRepo
 
-  /*  @Binds
-    abstract fun bindEventRepositoryService(
+    @Binds
+    abstract fun bindEventsRepositoryService(
         eventRepoImpl: EventRepoImpl
     ): EventRepo
-*/
 }

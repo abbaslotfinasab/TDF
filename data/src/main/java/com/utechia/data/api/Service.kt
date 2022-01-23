@@ -177,4 +177,7 @@ interface Service {
     @GET("event")
     suspend fun getAllEvent(@Query("page") page: Int,@Query("page_size") page_size: Int,@Query("statustype") status: String):Response<Event>
 
+    @GET("event")
+    suspend fun getEvent(@Query("id")id:Int):Response<Event>
+
 }

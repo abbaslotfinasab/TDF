@@ -1,5 +1,4 @@
 package com.utechia.tdf.events
-/*
 
 import androidx.lifecycle.LiveData
 import com.utechia.domain.utile.Result
@@ -16,19 +15,19 @@ import javax.inject.Inject
 
 @HiltViewModel
 class EventViewModel @Inject constructor(
-    private val  eventUseCaseImpl: EventUseCaseImpl
-): ViewModel() {
+    private val eventUseCaseImpl: EventUseCaseImpl
+):ViewModel() {
 
-        private val _event = MutableLiveData<Result<MutableList<EventModel>>>()
-    val event: LiveData<Result<MutableList<EventModel>>>
-        get() = _event
+    private val _event = MutableLiveData<Result<MutableList<EventModel>>>()
+    val event:LiveData<Result<MutableList<EventModel>>>
+    get() = _event
 
     private val handler = CoroutineExceptionHandler {
             _, exception ->
-        _event.postValue(exception.message?.let { Result.Error(it) })
+        _event.postValue(exception.message?.let { Result.Error(it)})
     }
 
-    fun getEventList(status:String){
+     fun getAllEvent(status:String){
 
         viewModelScope.launch(Dispatchers.IO+handler) {
 
@@ -37,11 +36,26 @@ class EventViewModel @Inject constructor(
             eventUseCaseImpl.execute(status).let {
 
                 _event.postValue(Result.Success(it))
+
             }
         }
     }
 
-    fun applyEvent(id:Int){
+     fun getEvent(id:Int){
+
+        viewModelScope.launch(Dispatchers.IO+handler) {
+
+            _event.postValue(Result.Loading)
+
+            eventUseCaseImpl.get(id).let {
+
+                _event.postValue(Result.Success(it))
+
+            }
+        }
+    }
+
+     fun applyEvent(id:Int){
 
         viewModelScope.launch(Dispatchers.IO+handler) {
 
@@ -54,16 +68,5 @@ class EventViewModel @Inject constructor(
         }
     }
 
-    fun getEvent(id:Int){
 
-        viewModelScope.launch(Dispatchers.IO+handler) {
-
-            _event.postValue(Result.Loading)
-
-            eventUseCaseImpl.get(id).let {
-
-                _event.postValue(Result.Success(it))
-            }
-        }
-    }
-}*/
+}
