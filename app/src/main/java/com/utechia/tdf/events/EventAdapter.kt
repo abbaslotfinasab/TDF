@@ -66,24 +66,17 @@ class EventAdapter: RecyclerView.Adapter<RecyclerView.ViewHolder>() {
             when(event[position].contribute){
 
                 null -> {
-                    subTitle.text ="Pending"
-                    subTitle.setTextColor(Color.parseColor("#A4A6B3"))
-
+                    subTitle.visibility = View.GONE
                     when(event[position].status){
 
                         "End" -> {
                             result.visibility = View.GONE
                             rate.visibility = View.GONE
-                            subTitle.visibility = View.VISIBLE
                         }
 
                         "Inprogress" -> {
-
                             result.visibility = View.GONE
                             rate.visibility = View.GONE
-                            subTitle.visibility = View.VISIBLE
-
-
                         }
                         "Upcoming" -> {
 
@@ -121,8 +114,6 @@ class EventAdapter: RecyclerView.Adapter<RecyclerView.ViewHolder>() {
 
                         }
                         "Upcoming" -> {
-
-                            result.visibility = View.VISIBLE
                             result.visibility = View.VISIBLE
                             rate.visibility = View.GONE
                             result.text = "Apply"
@@ -156,8 +147,6 @@ class EventAdapter: RecyclerView.Adapter<RecyclerView.ViewHolder>() {
 
                         }
                         "Upcoming" -> {
-
-                            result.visibility = View.VISIBLE
                             result.visibility = View.VISIBLE
                             rate.visibility = View.GONE
                             result.text = "Apply"
@@ -169,7 +158,40 @@ class EventAdapter: RecyclerView.Adapter<RecyclerView.ViewHolder>() {
 
                 }
 
-                "Attended" -> {
+                "Pending" -> {
+                    subTitle.visibility = View.VISIBLE
+                    subTitle.text ="Pending"
+                    subTitle.setTextColor(Color.parseColor("#A4A6B3"))
+
+                    when(event[position].status){
+
+                        "End" -> {
+                            result.visibility = View.VISIBLE
+                            rate.visibility = View.GONE
+                            result.text = "Evaluated"
+                            result.setBackgroundColor(Color.parseColor("#A4A6B3"))
+                            result.isEnabled = false
+                        }
+
+                        "Inprogress" -> {
+                            result.visibility = View.VISIBLE
+                            rate.visibility = View.GONE
+                            result.text = "Apply"
+                            result.setBackgroundColor(Color.parseColor("#A4A6B3"))
+                            result.isEnabled = false
+                        }
+                        "Upcoming" -> {
+                            result.visibility = View.VISIBLE
+                            rate.visibility = View.GONE
+                            result.text = "Apply"
+                            result.setBackgroundColor(Color.parseColor("#A4A6B3"))
+                            result.isEnabled = false
+
+                        }
+                    }
+                }
+
+                "Attending" -> {
 
                     subTitle.visibility = View.VISIBLE
                     subTitle.text ="Attended"
