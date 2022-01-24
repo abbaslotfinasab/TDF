@@ -72,11 +72,8 @@ class UploadReplyAdapter(val messageFragment: MessageFragment) : RecyclerView.Ad
             else{
                 deleteIcon.visibility = View.GONE
 
-                Glide.with(itemView.context)
-                    .load(R.drawable.addicon)
-                    .error(R.drawable.ic_empty_upload)
-                    .centerCrop()
-                    .into(image)
+                image.setBackgroundResource(R.drawable.addicon)
+
 
                 image.setOnClickListener {
                     messageFragment.showUpload()
