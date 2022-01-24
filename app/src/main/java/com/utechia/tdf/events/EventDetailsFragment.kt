@@ -99,7 +99,7 @@ class EventDetailsFragment : Fragment() {
                                         setBackgroundColor(Color.parseColor("#3360DD"))
                                         isEnabled = true
                                         setOnClickListener{
-
+                                            eventViewModel.applyEvent(eId)
                                         }
                                     }
 
@@ -133,7 +133,7 @@ class EventDetailsFragment : Fragment() {
                                     binding.appCompatButton.apply {
                                         visibility = View.VISIBLE
                                         text = "Cancel"
-                                        setBackgroundColor(Color.parseColor("##FF6464"))
+                                        setBackgroundColor(Color.parseColor("#FF6464"))
                                         isEnabled = true
                                         setOnClickListener {
 
@@ -145,7 +145,7 @@ class EventDetailsFragment : Fragment() {
                                     binding.appCompatButton.apply {
                                         visibility = View.VISIBLE
                                         text = "Cancel"
-                                        setBackgroundColor(Color.parseColor("##FF6464"))
+                                        setBackgroundColor(Color.parseColor("#FF6464"))
                                         isEnabled = true
                                         setOnClickListener {
 
