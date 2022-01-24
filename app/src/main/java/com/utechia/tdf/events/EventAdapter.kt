@@ -58,7 +58,7 @@ class EventAdapter: RecyclerView.Adapter<RecyclerView.ViewHolder>() {
             rate.rating = 5.0f
 
             Glide.with(itemView.context)
-                .load("https://sandbox.tdf.gov.sa/${event[position].coverphoto}")
+                .load("https://sandbox.tdf.gov.sa${event[position].coverphoto}")
                 .error(R.mipmap.ic_evente_banner_foreground)
                 .into(image)
 

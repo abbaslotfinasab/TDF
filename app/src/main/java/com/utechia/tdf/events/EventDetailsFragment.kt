@@ -62,20 +62,20 @@ class EventDetailsFragment : Fragment() {
                     binding.prg.visibility = View.GONE
 
                     Glide.with(requireActivity())
-                        .load("https://sandbox.tdf.gov.sa/${it.data.coverphoto}")
+                        .load("https://sandbox.tdf.gov.sa${it.data.coverphoto}")
                         .centerCrop()
                         .error(R.mipmap.ic_evente_banner_foreground)
                         .into(binding.eventImage)
 
                     binding.title.text = it.data.title
                     binding.type.text = it.data.type
-                    binding.capacity.text = it.data.capacity.toString()
+                    binding.capacity.text = "${it.data.joinnumbr}/${it.data.capacity.toString()}"
                     timeZone = OffsetDateTime.parse(it.data.datestart).atZoneSameInstant(
                         ZoneId.systemDefault()
                     ).toLocalDateTime().format(DateTimeFormatter.ofPattern("yyyy.MM.dd  HH:mm"))
 
                     binding.date.text = "$timeZone"
-                    binding.time.text = "${it.data.duration} hrs"
+                    binding.time.text = "${it.data.duration} min"
 
                     binding.description.text = it.data.description
                     binding.location.text = it.data.eventPlace
@@ -98,6 +98,9 @@ class EventDetailsFragment : Fragment() {
                                         text = "Apply"
                                         setBackgroundColor(Color.parseColor("#3360DD"))
                                         isEnabled = true
+                                        setOnClickListener{
+
+                                        }
                                     }
 
                                 }
@@ -108,6 +111,9 @@ class EventDetailsFragment : Fragment() {
                                         text = "Apply"
                                         setBackgroundColor(Color.parseColor("#3360DD"))
                                         isEnabled = true
+                                        setOnClickListener{
+
+                                        }
                                     }
                                 }
 
@@ -117,6 +123,9 @@ class EventDetailsFragment : Fragment() {
                                         text = "Apply"
                                         setBackgroundColor(Color.parseColor("#3360DD"))
                                         isEnabled = true
+                                        setOnClickListener{
+
+                                        }
                                     }
                                 }
 
@@ -126,7 +135,11 @@ class EventDetailsFragment : Fragment() {
                                         text = "Cancel"
                                         setBackgroundColor(Color.parseColor("##FF6464"))
                                         isEnabled = true
-                                    }                                }
+                                        setOnClickListener {
+
+                                        }
+                                    }
+                                }
 
                                 "Attending" -> {
                                     binding.appCompatButton.apply {
@@ -134,7 +147,11 @@ class EventDetailsFragment : Fragment() {
                                         text = "Cancel"
                                         setBackgroundColor(Color.parseColor("##FF6464"))
                                         isEnabled = true
-                                    }                                }
+                                        setOnClickListener {
+
+                                        }
+                                    }
+                                }
                             }
                         }
                     }
