@@ -1222,6 +1222,16 @@
             app:exitAnim="@android:anim/fade_out"
             app:popEnterAnim="@android:anim/fade_in"
             app:popExitAnim="@android:anim/fade_out"/>
+
+        <action
+            android:id="@+id/action_eventDetailsFragment_to_cancelEventFragment"
+            app:destination="@id/cancelEventFragment"
+            app:launchSingleTop="true"
+            app:enterAnim="@android:anim/fade_in"
+            app:exitAnim="@android:anim/fade_out"
+            app:popEnterAnim="@android:anim/fade_in"
+            app:popExitAnim="@android:anim/fade_out"/>
+
     </fragment>
     <dialog
         android:id="@+id/eventRateFragment"
@@ -1236,6 +1246,22 @@
         tools:layout="@layout/fragment_event_result" >
         <action
             android:id="@+id/action_eventResultFragment_to_eventSystemFragment"
+            app:destination="@id/eventSystemFragment"
+            app:launchSingleTop="true"
+            app:enterAnim="@android:anim/fade_in"
+            app:exitAnim="@android:anim/fade_out"
+            app:popEnterAnim="@android:anim/fade_in"
+            app:popExitAnim="@android:anim/fade_out"/>
+    </dialog>
+
+    <dialog
+        android:id="@+id/cancelEventFragment"
+        android:name="com.utechia.tdf.events.CancelEventFragment"
+        android:label="fragment_cancel_event"
+        tools:layout="@layout/fragment_cancel_event" >
+
+        <action
+            android:id="@+id/action_cancelEventFragment_to_eventSystemFragment"
             app:destination="@id/eventSystemFragment"
             app:launchSingleTop="true"
             app:enterAnim="@android:anim/fade_in"

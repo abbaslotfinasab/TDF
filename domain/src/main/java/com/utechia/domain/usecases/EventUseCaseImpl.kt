@@ -18,4 +18,8 @@ class EventUseCaseImpl @Inject constructor(private val eventRepo: EventRepo)
         return eventRepo.apply(id)
     }
 
+    override suspend fun cancel(id: Int): MutableList<EventModel> {
+        return eventRepo.apply(id)
+    }
+
 }

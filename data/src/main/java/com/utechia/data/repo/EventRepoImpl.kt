@@ -2,8 +2,6 @@ package com.utechia.data.repo
 
 
 import com.utechia.data.api.Service
-import com.utechia.data.entity.EventData
-import com.utechia.data.entity.EventDetails
 import com.utechia.data.utile.NetworkHelper
 import com.utechia.domain.model.EventModel
 import com.utechia.domain.repository.EventRepo
@@ -45,7 +43,27 @@ class EventRepoImpl @Inject constructor(
 
    if (networkHelper.isNetworkConnected()) {
 
-       val result = service.getEvaluate()
+       val result = service.applyEvent(id)
+
+            return when (result.isSuccessful) {
+
+                true -> {
+                    emptyList<EventModel>().toMutableList()
+                }
+
+                else ->
+                    throw IOException("Server is Not Responding")
+            }
+
+        } else throw IOException("No Internet Connection")
+    }
+
+    override suspend fun cancel(id: Int): MutableList<EventModel> {
+
+
+        if (networkHelper.isNetworkConnected()) {
+
+            val result = service.cancelEvent(id)
 
             return when (result.isSuccessful) {
 

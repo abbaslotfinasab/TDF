@@ -54,5 +54,17 @@ class EventViewModel @Inject constructor(
         }
     }
 
+    fun cancelEvent(id:Int){
+
+        viewModelScope.launch(Dispatchers.IO+handler) {
+
+            _event.postValue(Result.Loading)
+
+            eventUseCaseImpl.cancel(id).let {
+
+                _event.postValue(Result.Success(it))
+            }
+        }
+    }
 
 }

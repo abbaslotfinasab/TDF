@@ -40,11 +40,11 @@ class EventResultFragment : DialogFragment() {
         super.onViewCreated(view, savedInstanceState)
 
         binding.exit.setOnClickListener {
-            findNavController().navigate(R.id.ticketConfirmationFragment_to_TicketFragment)
+            findNavController().navigate(R.id.action_eventResultFragment_to_eventSystemFragment)
             dialog?.dismiss()        }
 
         binding.btnKeep.setOnClickListener {
-            findNavController().navigate(R.id.ticketConfirmationFragment_to_TicketFragment)
+            findNavController().navigate(R.id.action_eventResultFragment_to_eventSystemFragment)
             dialog?.dismiss()
 
         }

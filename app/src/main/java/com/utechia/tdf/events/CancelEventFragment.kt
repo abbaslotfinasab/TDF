@@ -1,4 +1,4 @@
-package com.utechia.tdf.permission
+package com.utechia.tdf.events
 
 import android.graphics.Color
 import android.graphics.drawable.ColorDrawable
@@ -10,27 +10,25 @@ import android.view.Window
 import android.widget.Toast
 import androidx.fragment.app.DialogFragment
 import androidx.fragment.app.viewModels
-import androidx.navigation.fragment.NavHostFragment
 import androidx.navigation.fragment.findNavController
 import com.utechia.domain.utile.Result
 import com.utechia.tdf.R
-import com.utechia.tdf.databinding.FragmentCancelRequestBinding
-import com.utechia.tdf.ticket.CreateTicketFragment
+import com.utechia.tdf.databinding.FragmentCancelEventBinding
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
-class CancelRequestFragment : DialogFragment() {
+class CancelEventFragment : DialogFragment() {
 
-    private lateinit var binding: FragmentCancelRequestBinding
-    private val permissionViewModel:PermissionViewModel by viewModels()
-    private var permissionId = 0
+    private lateinit var binding: FragmentCancelEventBinding
+    private val eventViewModel:EventViewModel by viewModels()
+    private var eId = 0
 
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
-        binding = FragmentCancelRequestBinding.inflate(inflater, container, false)
+        binding = FragmentCancelEventBinding.inflate(inflater, container, false)
 
         if(dialog !=null && dialog?.window !=null){
             dialog?.window?.setBackgroundDrawable(ColorDrawable(Color.TRANSPARENT))
@@ -45,7 +43,7 @@ class CancelRequestFragment : DialogFragment() {
         super.onViewCreated(view, savedInstanceState)
 
         if (arguments !=null){
-            permissionId = requireArguments().getInt("permissionId",0)
+            eId = requireArguments().getInt("eId",0)
 
         }
 
@@ -58,7 +56,7 @@ class CancelRequestFragment : DialogFragment() {
         }
 
         binding.btnCancel.setOnClickListener {
-            permissionViewModel.updatePermission(permissionId,"cancelled")
+            eventViewModel.cancelEvent(eId)
             observer()
         }
 
@@ -66,12 +64,12 @@ class CancelRequestFragment : DialogFragment() {
 
     private fun observer() {
 
-        permissionViewModel.permissionModel.observe(viewLifecycleOwner) {
+        eventViewModel.event.observe(viewLifecycleOwner) {
 
             when (it) {
                 is Result.Success -> {
                     binding.prg.visibility = View.VISIBLE
-                    findNavController().navigate(R.id.cancelRequestFragment_to_permissionFragment)
+                    findNavController().navigate(R.id.action_cancelEventFragment_to_eventSystemFragment)
                     dialog?.dismiss()
                 }
 
@@ -86,7 +84,8 @@ class CancelRequestFragment : DialogFragment() {
                 is Result.Error -> {
                     binding.prg.visibility = View.GONE
                     Toast.makeText(context, it.message, Toast.LENGTH_SHORT).show()
-                    findNavController().navigate(R.id.cancelRequestFragment_to_permissionFragment)
+                    findNavController().navigate(R.id.action_cancelEventFragment_to_eventSystemFragment)
+                    dialog?.dismiss()
 
                 }
             }

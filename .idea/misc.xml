@@ -295,6 +295,8 @@
         <entry key="app/src/main/res/layout/cart_item.xml" value="0.12092391304347826" />
         <entry key="app/src/main/res/layout/custom_list_item.xml" value="0.1" />
         <entry key="app/src/main/res/layout/fragment_accept.xml" value="0.19322916666666667" />
+        <entry key="app/src/main/res/layout/fragment_cancel_event.xml" value="0.22" />
+        <entry key="app/src/main/res/layout/fragment_cancel_request.xml" value="0.1" />
         <entry key="app/src/main/res/layout/fragment_cart.xml" value="0.10235507246376811" />
         <entry key="app/src/main/res/layout/fragment_category_fragment.xml" value="0.1" />
         <entry key="app/src/main/res/layout/fragment_close_ticket.xml" value="0.19322916666666667" />
@@ -342,7 +344,7 @@
         <entry key="app/src/main/res/layout/item_chat_details.xml" value="0.75" />
         <entry key="app/src/main/res/layout/item_chat_user.xml" value="0.1" />
         <entry key="app/src/main/res/layout/item_event.xml" value="0.22" />
-        <entry key="app/src/main/res/layout/item_guess_event.xml" value="0.5" />
+        <entry key="app/src/main/res/layout/item_guess_event.xml" value="0.25" />
         <entry key="app/src/main/res/layout/item_notification.xml" value="0.33" />
         <entry key="app/src/main/res/layout/item_order_notification.xml" value="0.2" />
         <entry key="app/src/main/res/layout/item_order_teaboy_delivered.xml" value="0.5" />

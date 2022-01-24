@@ -2,17 +2,21 @@ package com.utechia.tdf.events
 
 import android.graphics.Color
 import android.os.Bundle
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.LinearLayout
 import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
+import androidx.recyclerview.widget.LinearLayoutManager
 import com.bumptech.glide.Glide
 import com.utechia.domain.utile.Result
 import com.utechia.tdf.R
 import com.utechia.tdf.databinding.FragmentEventDetailsBinding
+import com.utechia.tdf.ticket.ChatItemDecoration
 import dagger.hilt.android.AndroidEntryPoint
 import java.time.OffsetDateTime
 import java.time.ZoneId
@@ -63,6 +67,15 @@ class EventDetailsFragment : Fragment() {
                     binding.prg.visibility = View.GONE
                     guestAdapter.addData(it.data.guestModels)
 
+                    binding.recyclerView.apply {
+                        adapter = guestAdapter
+                        layoutManager = LinearLayoutManager(context,LinearLayoutManager.VERTICAL,false)
+                        if(itemDecorationCount>0)
+                            removeItemDecorationAt(0)
+                        addItemDecoration(GuestItemDecoration())
+
+                    }
+
                     Glide.with(requireActivity())
                         .load("https://sandbox.tdf.gov.sa${it.data.coverphoto}")
                         .centerCrop()
@@ -102,6 +115,7 @@ class EventDetailsFragment : Fragment() {
                                         isEnabled = true
                                         setOnClickListener{
                                             eventViewModel.applyEvent(eId)
+                                            applyObserver()
                                         }
                                     }
 
@@ -138,7 +152,7 @@ class EventDetailsFragment : Fragment() {
                                         setBackgroundColor(Color.parseColor("#FF6464"))
                                         isEnabled = true
                                         setOnClickListener {
-
+                                            findNavController().navigate(R.id.action_eventDetailsFragment_to_cancelEventFragment)
                                         }
                                     }
                                 }
@@ -150,6 +164,7 @@ class EventDetailsFragment : Fragment() {
                                         setBackgroundColor(Color.parseColor("#FF6464"))
                                         isEnabled = true
                                         setOnClickListener {
+                                            findNavController().navigate(R.id.action_eventDetailsFragment_to_cancelEventFragment)
 
                                         }
                                     }
@@ -167,6 +182,29 @@ class EventDetailsFragment : Fragment() {
                 is Result.Error -> {
                     binding.prg.visibility = View.GONE
                     binding.appCompatButton.visibility = View.GONE
+                    Toast.makeText(context, it.message, Toast.LENGTH_SHORT).show()
+                }
+            }
+        }
+    }
+
+    private fun applyObserver() {
+        eventViewModel.event.observe(viewLifecycleOwner){
+
+            when (it) {
+                is Result.Success -> {
+                    binding.prg.visibility = View.GONE
+                    findNavController().navigate(R.id.action_eventDetailsFragment_to_eventResultFragment)
+
+                }
+
+                is Result.Loading -> {
+                    binding.prg.visibility = View.VISIBLE
+
+                }
+
+                is Result.Error -> {
+                    binding.prg.visibility = View.GONE
                     Toast.makeText(context, it.message, Toast.LENGTH_SHORT).show()
                 }
             }

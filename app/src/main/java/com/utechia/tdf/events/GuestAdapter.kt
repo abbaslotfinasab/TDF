@@ -1,10 +1,14 @@
 package com.utechia.tdf.events
 
+import android.content.Intent
+import android.net.Uri
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.ImageView
 import android.widget.TextView
+import android.widget.Toast
+import androidx.core.content.ContextCompat
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.utechia.domain.model.GuestModel
@@ -50,11 +54,27 @@ class GuestAdapter: RecyclerView.Adapter<RecyclerView.ViewHolder>() {
 
             Glide.with(itemView.context)
                 .load("https://sandbox.tdf.gov.sa${guest[position].avatar}")
-                .error(R.mipmap.profile)
+                .error(R.drawable.ic_baseline_person_24)
                 .into(profile)
 
-        }
+            if (guest[position].linkedin != "") {
+                link.setOnClickListener {
+                    val browserIntent =
+                        Intent(Intent.ACTION_VIEW, Uri.parse(guest[position].linkedin))
+                    ContextCompat.startActivity(itemView.context, browserIntent, null)
+                }
+            }else
+                link.visibility = View.GONE
 
+            if (guest[position].weblink != "") {
+                browser.setOnClickListener {
+                    val browserIntent =
+                        Intent(Intent.ACTION_VIEW, Uri.parse(guest[position].weblink))
+                    ContextCompat.startActivity(itemView.context, browserIntent, null)
+                }
+            }else
+                browser.visibility = View.GONE
+        }
     }
 }
 

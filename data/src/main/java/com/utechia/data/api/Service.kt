@@ -180,4 +180,10 @@ interface Service {
     @GET("event/{id}")
     suspend fun getEvent(@Path("id")id:Int):Response<EventDetails>
 
+    @POST("event/apply/{eventid}")
+    suspend fun applyEvent(@Path("eventid")eventid:Int):Response<Void>
+
+    @POST("event/cancelapply/{contributerid}")
+    suspend fun cancelEvent(@Path("contributerid")contributerid:Int):Response<Void>
+
 }
