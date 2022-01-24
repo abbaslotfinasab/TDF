@@ -350,7 +350,7 @@
         <entry key="app/src/main/res/layout/item_survey.xml" value="0.22" />
         <entry key="app/src/main/res/layout/item_ticket_admin.xml" value="0.1" />
         <entry key="app/src/main/res/layout/item_ticket_client.xml" value="0.1" />
-        <entry key="app/src/main/res/layout/item_upload.xml" value="0.1" />
+        <entry key="app/src/main/res/layout/item_upload.xml" value="0.5" />
         <entry key="app/src/main/res/layout/order_item.xml" value="0.22" />
         <entry key="app/src/main/res/layout/order_teaboy_item.xml" value="0.1" />
         <entry key="app/src/main/res/layout/refreshment_item.xml" value="0.1" />

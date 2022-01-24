@@ -65,11 +65,7 @@ class UploadAdapter : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
             else{
                 deleteIcon.visibility = View.GONE
 
-                Glide.with(itemView.context)
-                    .load(R.drawable.addicon)
-                    .error(R.drawable.ic_empty_upload)
-                    .centerCrop()
-                    .into(image)
+                image.setBackgroundResource(R.drawable.addicon)
 
                 image.setOnClickListener {
                     itemView.findNavController().navigate(R.id.action_createTicketFragment_to_uploadFragment)
