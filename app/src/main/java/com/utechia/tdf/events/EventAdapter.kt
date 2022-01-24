@@ -81,7 +81,6 @@ class EventAdapter: RecyclerView.Adapter<RecyclerView.ViewHolder>() {
                         "Upcoming" -> {
 
                             result.visibility = View.VISIBLE
-                            subTitle.visibility = View.VISIBLE
                             rate.visibility = View.GONE
                             result.text = "Apply"
                             result.setBackgroundColor(Color.parseColor("#3360DD"))
