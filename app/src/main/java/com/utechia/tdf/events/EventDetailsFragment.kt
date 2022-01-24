@@ -77,16 +77,20 @@ class EventDetailsFragment : Fragment() {
 
                     binding.description.text = it.data.description
                     binding.location.text = it.data.eventPlace
+                    binding.appCompatButton.visibility = View.VISIBLE
 
 
                 }
 
                 is Result.Loading -> {
                     binding.prg.visibility = View.VISIBLE
+                    binding.appCompatButton.visibility = View.GONE
+
                 }
 
                 is Result.Error -> {
                     binding.prg.visibility = View.GONE
+                    binding.appCompatButton.visibility = View.GONE
                     Toast.makeText(context, it.message, Toast.LENGTH_SHORT).show()
                 }
             }
