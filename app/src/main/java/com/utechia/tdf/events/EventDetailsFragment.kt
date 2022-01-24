@@ -1,5 +1,6 @@
 package com.utechia.tdf.events
 
+import android.graphics.Color
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -22,6 +23,7 @@ class EventDetailsFragment : Fragment() {
 
     private lateinit var binding: FragmentEventDetailsBinding
     private val eventDetViewModel:EventDetailsViewModel by viewModels()
+    private val eventViewModel:EventViewModel by viewModels()
     private var eId = 0
     private var timeZone = ""
 
@@ -77,11 +79,66 @@ class EventDetailsFragment : Fragment() {
 
                     binding.description.text = it.data.description
                     binding.location.text = it.data.eventPlace
-                    binding.appCompatButton.visibility = View.VISIBLE
 
+                    when(it.data.status){
 
+                        "End" -> {
+                            binding.appCompatButton.visibility = View.GONE
+                        }
+
+                        "Inprogress" -> {
+                            binding.appCompatButton.visibility = View.GONE
+                        }
+                        "Upcoming" -> {
+                            when(it.data.contribute){
+
+                                null ->{
+                                    binding.appCompatButton.apply {
+                                        visibility = View.VISIBLE
+                                        text = "Apply"
+                                        setBackgroundColor(Color.parseColor("#3360DD"))
+                                        isEnabled = true
+                                    }
+
+                                }
+
+                                "Rejected" -> {
+                                    binding.appCompatButton.apply {
+                                        visibility = View.VISIBLE
+                                        text = "Apply"
+                                        setBackgroundColor(Color.parseColor("#3360DD"))
+                                        isEnabled = true
+                                    }
+                                }
+
+                                "Cancelled" -> {
+                                    binding.appCompatButton.apply {
+                                        visibility = View.VISIBLE
+                                        text = "Apply"
+                                        setBackgroundColor(Color.parseColor("#3360DD"))
+                                        isEnabled = true
+                                    }
+                                }
+
+                                "Pending" -> {
+                                    binding.appCompatButton.apply {
+                                        visibility = View.VISIBLE
+                                        text = "Cancel"
+                                        setBackgroundColor(Color.parseColor("##FF6464"))
+                                        isEnabled = true
+                                    }                                }
+
+                                "Attending" -> {
+                                    binding.appCompatButton.apply {
+                                        visibility = View.VISIBLE
+                                        text = "Cancel"
+                                        setBackgroundColor(Color.parseColor("##FF6464"))
+                                        isEnabled = true
+                                    }                                }
+                            }
+                        }
+                    }
                 }
-
                 is Result.Loading -> {
                     binding.prg.visibility = View.VISIBLE
                     binding.appCompatButton.visibility = View.GONE
