@@ -22,6 +22,7 @@ import java.time.format.DateTimeFormatter
 class EventDetailsFragment : Fragment() {
 
     private lateinit var binding: FragmentEventDetailsBinding
+    private val guestAdapter:GuestAdapter = GuestAdapter()
     private val eventDetViewModel:EventDetailsViewModel by viewModels()
     private val eventViewModel:EventViewModel by viewModels()
     private var eId = 0
@@ -60,6 +61,7 @@ class EventDetailsFragment : Fragment() {
             when (it) {
                 is Result.Success -> {
                     binding.prg.visibility = View.GONE
+                    guestAdapter.addData(it.data.guestModels)
 
                     Glide.with(requireActivity())
                         .load("https://sandbox.tdf.gov.sa${it.data.coverphoto}")

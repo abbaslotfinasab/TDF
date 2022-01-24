@@ -6,7 +6,7 @@
     android:background="#F4F3F7">
 
     <ImageView
-        android:id="@+id/image"
+        android:id="@+id/avatar"
         android:layout_width="wrap_content"
         android:layout_height="0dp"
         android:layout_marginStart="10dp"
@@ -54,6 +54,24 @@
         android:textSize="12sp"
         app:layout_constraintBottom_toBottomOf="@+id/image"
         app:layout_constraintStart_toEndOf="@+id/image" />
+
+    <ImageView
+        android:id="@+id/link"
+        android:layout_width="48dp"
+        android:layout_height="48dp"
+        android:scaleType="centerInside"
+        android:src="@drawable/ic_linkdin"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <ImageView
+        android:id="@+id/browser"
+        android:layout_width="48dp"
+        android:layout_height="48dp"
+        android:scaleType="centerInside"
+        android:src="@drawable/ic_web"
+        app:layout_constraintEnd_toStartOf="@+id/link"
+        app:layout_constraintTop_toTopOf="parent" />
 
 
 
