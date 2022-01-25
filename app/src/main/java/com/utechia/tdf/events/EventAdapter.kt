@@ -78,6 +78,7 @@ class EventAdapter: RecyclerView.Adapter<RecyclerView.ViewHolder>() {
                             result.visibility = View.GONE
                             rate.visibility = View.GONE
                         }
+
                         "Upcoming" -> {
 
                             result.visibility = View.VISIBLE
@@ -200,10 +201,17 @@ class EventAdapter: RecyclerView.Adapter<RecyclerView.ViewHolder>() {
 
                         "End" -> {
                             result.visibility = View.VISIBLE
-                            rate.visibility = View.VISIBLE
                             result.text = "Evaluate"
-                            result.setBackgroundColor(Color.parseColor("#A4A6B3"))
-                            result.isEnabled = false
+                            if(event[position].userrate !=null) {
+                                rate.visibility = View.VISIBLE
+                                result.setBackgroundColor(Color.parseColor("#A4A6B3"))
+                                result.isEnabled = false
+                                rate.rating = event[position].userrate?.toFloat()!!
+                            }else{
+                                rate.visibility = View.GONE
+                                result.setBackgroundColor(Color.parseColor("#3360DD"))
+                                result.isEnabled = true
+                            }
                         }
 
                         "Inprogress" -> {

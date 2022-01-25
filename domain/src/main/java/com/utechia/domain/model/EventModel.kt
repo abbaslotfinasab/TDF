@@ -21,7 +21,9 @@ data class EventModel(
     val title: String?,
     val type: String?,
     val contribute: String?,
-    val contributeId: Int?
+    val contributeId: Int?,
+    val userrate: Int?,
 
 
-)
+
+    )
