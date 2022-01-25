@@ -32,6 +32,6 @@ data class EventData(
     val contribut:Contribut?
 ):Parcelable, ResponseObject<EventModel> {
     override fun toDomain(): EventModel {
-        return EventModel(capacity, coverphoto, date_endsign, date_startsign, datestart, datetime,department,description,duration,eventPlace,guests?.map { it.toDomain() }!!.toMutableList(),id,isDisable,joinnumbr,signstatus,status,title,type,contribut?.status)
+        return EventModel(capacity, coverphoto, date_endsign, date_startsign, datestart, datetime,department,description,duration,eventPlace,guests?.map { it.toDomain() }!!.toMutableList(),id,isDisable,joinnumbr,signstatus,status,title,type,contribut?.status,contribut?.id)
     }
 }

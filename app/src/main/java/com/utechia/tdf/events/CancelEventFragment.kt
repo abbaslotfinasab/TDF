@@ -59,7 +59,6 @@ class CancelEventFragment : DialogFragment() {
             eventViewModel.cancelEvent(eId)
             observer()
         }
-
     }
 
     private fun observer() {

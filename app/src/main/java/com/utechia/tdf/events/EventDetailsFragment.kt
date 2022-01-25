@@ -8,6 +8,7 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.LinearLayout
 import android.widget.Toast
+import androidx.core.os.bundleOf
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
@@ -30,6 +31,7 @@ class EventDetailsFragment : Fragment() {
     private val eventDetViewModel:EventDetailsViewModel by viewModels()
     private val eventViewModel:EventViewModel by viewModels()
     private var eId = 0
+    private var contributeId = 0
     private var timeZone = ""
 
     override fun onCreateView(
@@ -128,7 +130,8 @@ class EventDetailsFragment : Fragment() {
                                         setBackgroundColor(Color.parseColor("#3360DD"))
                                         isEnabled = true
                                         setOnClickListener{
-
+                                            eventViewModel.applyEvent(eId)
+                                            applyObserver()
                                         }
                                     }
                                 }
@@ -140,32 +143,36 @@ class EventDetailsFragment : Fragment() {
                                         setBackgroundColor(Color.parseColor("#3360DD"))
                                         isEnabled = true
                                         setOnClickListener{
-
+                                            eventViewModel.applyEvent(eId)
+                                            applyObserver()
                                         }
                                     }
                                 }
 
                                 "Pending" -> {
                                     binding.appCompatButton.apply {
+                                        contributeId = it.data.contributeId!!
                                         visibility = View.VISIBLE
                                         text = "Cancel"
                                         setBackgroundColor(Color.parseColor("#FF6464"))
                                         isEnabled = true
                                         setOnClickListener {
-                                            findNavController().navigate(R.id.action_eventDetailsFragment_to_cancelEventFragment)
+                                            val bundle = bundleOf("eId" to contributeId)
+                                            findNavController().navigate(R.id.action_eventDetailsFragment_to_cancelEventFragment,bundle)
                                         }
                                     }
                                 }
 
                                 "Attending" -> {
                                     binding.appCompatButton.apply {
+                                        contributeId = it.data.contributeId!!
                                         visibility = View.VISIBLE
                                         text = "Cancel"
                                         setBackgroundColor(Color.parseColor("#FF6464"))
                                         isEnabled = true
                                         setOnClickListener {
-                                            findNavController().navigate(R.id.action_eventDetailsFragment_to_cancelEventFragment)
-
+                                            val bundle = bundleOf("eId" to contributeId)
+                                            findNavController().navigate(R.id.action_eventDetailsFragment_to_cancelEventFragment,bundle)
                                         }
                                     }
                                 }

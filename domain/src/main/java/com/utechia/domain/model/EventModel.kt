@@ -20,6 +20,8 @@ data class EventModel(
     val status: String?,
     val title: String?,
     val type: String?,
-    val contribute: String?
+    val contribute: String?,
+    val contributeId: Int?
+
 
 )
