@@ -30,6 +30,7 @@ class EventDetailsFragment : Fragment() {
     private val guestAdapter:GuestAdapter = GuestAdapter()
     private val eventDetViewModel:EventDetailsViewModel by viewModels()
     private val eventViewModel:EventViewModel by viewModels()
+    private lateinit var bundle:Bundle
     private var eId = 0
     private var contributeId = 0
     private var timeZone = ""
@@ -100,7 +101,31 @@ class EventDetailsFragment : Fragment() {
                     when(it.data.status){
 
                         "End" -> {
-                            binding.appCompatButton.visibility = View.GONE
+
+                            when (it.data.contribute) {
+
+                                "Attending" -> {
+                                    if (it.data.userrate != null) {
+                                        binding.appCompatButton.apply {
+                                            visibility = View.VISIBLE
+                                            text = "Evaluated"
+                                            setBackgroundColor(Color.parseColor("#A4A6B3"))
+                                            isEnabled = false
+                                        }
+                                    }else{
+                                        binding.appCompatButton.apply {
+                                            visibility = View.VISIBLE
+                                            text = "Evaluate"
+                                            setBackgroundColor(Color.parseColor("#3360DD"))
+                                            isEnabled = false
+                                        }
+                                        bundle = bundleOf("eId" to eId)
+                                        findNavController().navigate(R.id.action_eventDetailsFragment_to_eventRateFragment,bundle)
+                                    }
+                                }
+                                else ->
+                                    binding.appCompatButton.visibility = View.GONE
+                            }
                         }
 
                         "Inprogress" -> {

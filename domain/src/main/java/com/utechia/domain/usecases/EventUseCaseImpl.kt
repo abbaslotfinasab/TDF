@@ -22,4 +22,8 @@ class EventUseCaseImpl @Inject constructor(private val eventRepo: EventRepo)
         return eventRepo.cancel(id)
     }
 
+    override suspend fun rate(id: Int,rate:Int): MutableList<EventModel> {
+        return eventRepo.rate(id,rate)
+    }
+
 }

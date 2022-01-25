@@ -186,4 +186,7 @@ interface Service {
     @POST("event/cancelapply/{contributerid}")
     suspend fun cancelEvent(@Path("contributerid")contributerid:Int):Response<Void>
 
+    @POST("survey/rateevent")
+    suspend fun rateEvent(@Body rateEvent: RateEvent):Response<Void>
+
 }

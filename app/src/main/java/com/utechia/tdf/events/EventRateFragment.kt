@@ -11,9 +11,10 @@ import android.widget.RatingBar
 import android.widget.Toast
 import androidx.fragment.app.DialogFragment
 import androidx.fragment.app.viewModels
+import androidx.navigation.fragment.findNavController
 import com.utechia.domain.utile.Result
+import com.utechia.tdf.R
 import com.utechia.tdf.databinding.FragmentEventRateBinding
-import com.utechia.tdf.ticket.TicketViewModel
 import dagger.hilt.android.AndroidEntryPoint
 
 
@@ -21,8 +22,8 @@ import dagger.hilt.android.AndroidEntryPoint
 class EventRateFragment : DialogFragment() {
 
     private lateinit var binding: FragmentEventRateBinding
-    private val ticketViewModel: TicketViewModel by viewModels()
-    private var ticket = 0
+    private val eventViewModel:EventViewModel by viewModels()
+    private var event = 0
     private var rate = 0
 
 
@@ -44,7 +45,7 @@ class EventRateFragment : DialogFragment() {
         super.onViewCreated(view, savedInstanceState)
 
         if (arguments != null) {
-            ticket = requireArguments().getInt("ticketId", 0)
+            event = requireArguments().getInt("eId", 0)
 
         }
 
@@ -58,13 +59,14 @@ class EventRateFragment : DialogFragment() {
         }
 
         binding.btnAccept.setOnClickListener {
-            ticketViewModel.rateTicket(ticket, rate)
+            eventViewModel.rateEvent(event,rate)
             observer()
         }
     }
 
     private fun observer() {
-        ticketViewModel.ticketModel.observe(viewLifecycleOwner) {
+
+        eventViewModel.event.observe(viewLifecycleOwner) {
 
             when (it) {
                 is Result.Success -> {
@@ -74,6 +76,7 @@ class EventRateFragment : DialogFragment() {
 
                 is Result.Loading -> {
                     binding.prg.visibility = View.VISIBLE
+                    binding.exit.isEnabled = false
 
                 }
 
@@ -81,6 +84,7 @@ class EventRateFragment : DialogFragment() {
                     binding.prg.visibility = View.GONE
                     Toast.makeText(context, it.message, Toast.LENGTH_SHORT).show()
                     dialog?.dismiss()
+
                 }
             }
         }

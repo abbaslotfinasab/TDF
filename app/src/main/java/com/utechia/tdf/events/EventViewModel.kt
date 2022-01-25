@@ -67,4 +67,17 @@ class EventViewModel @Inject constructor(
         }
     }
 
+    fun rateEvent(id:Int,rate:Int){
+
+        viewModelScope.launch(Dispatchers.IO+handler) {
+
+            _event.postValue(Result.Loading)
+
+            eventUseCaseImpl.rate(id,rate).let {
+
+                _event.postValue(Result.Success(it))
+            }
+        }
+    }
+
 }
