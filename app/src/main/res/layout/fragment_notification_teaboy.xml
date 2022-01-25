@@ -80,17 +80,17 @@
         app:layout_constraintStart_toEndOf="@+id/username"
         app:layout_constraintTop_toTopOf="@+id/username" />
 
-    <TextView
-        android:id="@+id/location"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="10dp"
-        android:gravity="center"
-        android:textSize="12sp"
-        android:visibility="invisible"
-        app:layout_constraintBottom_toBottomOf="@+id/imageView12"
-        app:layout_constraintStart_toEndOf="@+id/imageView12"
-        app:layout_constraintTop_toTopOf="@+id/imageView12" />
+            <TextView
+                android:id="@+id/location"
+                android:layout_width="0dp"
+                android:layout_height="16dp"
+                android:layout_marginStart="10dp"
+                android:gravity="center"
+                android:textSize="12sp"
+                android:visibility="invisible"
+                app:layout_constraintBottom_toBottomOf="@+id/imageView12"
+                app:layout_constraintStart_toEndOf="@+id/imageView12"
+                app:layout_constraintTop_toTopOf="@+id/imageView12" />
 
             <ImageView
                 android:id="@+id/imageView13"

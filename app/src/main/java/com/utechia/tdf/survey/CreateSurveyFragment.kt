@@ -173,6 +173,8 @@ class CreateSurveyFragment : Fragment() {
             }
 
             "open_end" ->{
+
+                binding.description.setText("")
                 binding.description.visibility = View.VISIBLE
                 binding.radioGroup.visibility = View.GONE
                 binding.rating.visibility = View.GONE

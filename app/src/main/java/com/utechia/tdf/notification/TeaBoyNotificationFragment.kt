@@ -91,6 +91,7 @@ class TeaBoyNotificationFragment : DialogFragment() {
                     binding.imageView12.visibility = View.VISIBLE
                     binding.username.visibility = View.VISIBLE
                     binding.subtitle.visibility = View.VISIBLE
+                    binding.location.visibility = View.VISIBLE
                     binding.date.visibility = View.VISIBLE
                     binding.order.visibility = View.VISIBLE
                     binding.username.text = it.data[0].user?.displayName
