@@ -201,7 +201,7 @@ class EventAdapter: RecyclerView.Adapter<RecyclerView.ViewHolder>() {
                         "End" -> {
                             result.visibility = View.VISIBLE
                             rate.visibility = View.VISIBLE
-                            result.text = "Evaluated"
+                            result.text = "Evaluate"
                             result.setBackgroundColor(Color.parseColor("#A4A6B3"))
                             result.isEnabled = false
                         }

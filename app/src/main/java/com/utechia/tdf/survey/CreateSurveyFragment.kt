@@ -148,6 +148,7 @@ class CreateSurveyFragment : Fragment() {
         when(survey[0].surveytype){
 
             "rate" ->{
+                binding.rating.rating = 5.0f
                 binding.description.visibility = View.GONE
                 binding.radioGroup.visibility = View.GONE
                 binding.rating.visibility = View.VISIBLE
