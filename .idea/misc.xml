@@ -297,6 +297,7 @@
         <entry key="app/src/main/res/layout/fragment_accept.xml" value="0.19322916666666667" />
         <entry key="app/src/main/res/layout/fragment_cancel_event.xml" value="0.22" />
         <entry key="app/src/main/res/layout/fragment_cancel_request.xml" value="0.1" />
+        <entry key="app/src/main/res/layout/fragment_cancelled.xml" value="0.19322916666666667" />
         <entry key="app/src/main/res/layout/fragment_cart.xml" value="0.10235507246376811" />
         <entry key="app/src/main/res/layout/fragment_category_fragment.xml" value="0.1" />
         <entry key="app/src/main/res/layout/fragment_close_ticket.xml" value="0.19322916666666667" />
@@ -306,6 +307,7 @@
         <entry key="app/src/main/res/layout/fragment_create_refreshment.xml" value="0.22" />
         <entry key="app/src/main/res/layout/fragment_create_reservation.xml" value="0.19322916666666667" />
         <entry key="app/src/main/res/layout/fragment_create_ticket.xml" value="0.18" />
+        <entry key="app/src/main/res/layout/fragment_delivered.xml" value="0.1" />
         <entry key="app/src/main/res/layout/fragment_event_details.xml" value="0.22" />
         <entry key="app/src/main/res/layout/fragment_event_rate.xml" value="0.1" />
         <entry key="app/src/main/res/layout/fragment_event_result.xml" value="0.15854700854700854" />
@@ -319,8 +321,9 @@
         <entry key="app/src/main/res/layout/fragment_notification_details.xml" value="0.1" />
         <entry key="app/src/main/res/layout/fragment_notification_rating.xml" value="0.10235507246376811" />
         <entry key="app/src/main/res/layout/fragment_notification_teaboy.xml" value="0.2558139534883721" />
-        <entry key="app/src/main/res/layout/fragment_order.xml" value="0.19322916666666667" />
+        <entry key="app/src/main/res/layout/fragment_order.xml" value="0.1" />
         <entry key="app/src/main/res/layout/fragment_order_details.xml" value="0.19322916666666667" />
+        <entry key="app/src/main/res/layout/fragment_pending.xml" value="0.1" />
         <entry key="app/src/main/res/layout/fragment_profile.xml" value="0.11607142857142858" />
         <entry key="app/src/main/res/layout/fragment_qr_code.xml" value="0.19322916666666667" />
         <entry key="app/src/main/res/layout/fragment_rate_confirmation.xml" value="0.22" />

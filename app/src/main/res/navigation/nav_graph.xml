@@ -379,7 +379,7 @@
     </fragment>
     <fragment
         android:id="@+id/orderFragment"
-        android:name="com.utechia.tdf.order.OrderFragment"
+        android:name="com.utechia.tdf.order.userviewpager.UserOrderFragment"
         android:label="fragment_order"
         tools:layout="@layout/fragment_order" >
         <action
@@ -1271,5 +1271,20 @@
             app:popEnterAnim="@android:anim/fade_in"
             app:popExitAnim="@android:anim/fade_out"/>
     </dialog>
+    <fragment
+        android:id="@+id/pendingFragment"
+        android:name="com.utechia.tdf.order.userviewpager.UserPendingFragment"
+        android:label="fragment_pending"
+        tools:layout="@layout/fragment_pending" />
+    <fragment
+        android:id="@+id/deliveredFragment"
+        android:name="com.utechia.tdf.order.userviewpager.UserDeliveredFragment"
+        android:label="fragment_delivered"
+        tools:layout="@layout/fragment_delivered" />
+    <fragment
+        android:id="@+id/cancellFragment"
+        android:name="com.utechia.tdf.order.userviewpager.UserCancelledFragment"
+        android:label="fragment_cancell"
+        tools:layout="@layout/fragment_cancelled" />
 
 </navigation>

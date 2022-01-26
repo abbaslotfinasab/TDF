@@ -14,13 +14,14 @@ import androidx.navigation.fragment.findNavController
 import com.utechia.domain.utile.Result
 import com.utechia.tdf.R
 import com.utechia.tdf.databinding.FragmentCancelBinding
+import com.utechia.tdf.order.userviewpager.UserOrderViewModel
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
 class CancelFragment : DialogFragment() {
 
     private lateinit var binding: FragmentCancelBinding
-    private val userOrderViewModel:UserOrderViewModel by viewModels()
+    private val userOrderViewModel: UserOrderViewModel by viewModels()
     private var orderId = 0
 
     override fun onCreateView(

@@ -4,6 +4,12 @@
     <string name="timetitle">Please select the time</string>
     <string name="accept">OK</string>
     <string name="reject">Cancel</string>
+    <string name="pending">Pending</string>
+    <string name="delivered">Delivered</string>
+    <string name="cancelled">Cancelled</string>
+    <string name="wait">Waiting</string>
+    <string name="prepare">Preparing</string>
+
 
     <string-array name="month_array">
         <item>January</item>

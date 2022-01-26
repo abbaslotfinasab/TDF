@@ -20,7 +20,7 @@ import com.utechia.tdf.order.OrderCountViewModel
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
-class ActivationFragment : DialogFragment() {
+class ActivationFragment : DialogFragment(),View.OnClickListener{
 
     private lateinit var binding: FragmentActivationBinding
     private val orderViewModel: OrderCountViewModel by viewModels()
@@ -43,28 +43,11 @@ class ActivationFragment : DialogFragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+
         prefs = requireActivity().getSharedPreferences("tdf", Context.MODE_PRIVATE)
 
-        binding.btnCancel.setOnClickListener {
-            findNavController().clearBackStack(R.id.teaBoyHomeFragment)
-            findNavController().navigate(R.id.action_activationFragment_to_teaBoyHomeFragment)
-            dialog?.dismiss()
-        }
+        observer()
 
-        binding.exit.setOnClickListener {
-            findNavController().clearBackStack(R.id.teaBoyHomeFragment)
-            findNavController().navigate(R.id.action_activationFragment_to_teaBoyHomeFragment)
-            dialog?.dismiss()
-        }
-
-        binding.btnDelete.setOnClickListener {
-            orderViewModel.setStatus(true)
-            observer()
-            with(prefs.edit()) {
-                putBoolean("isTeaBoyActive", true)
-            }.apply()
-
-        }
     }
 
     private fun observer() {
@@ -73,10 +56,7 @@ class ActivationFragment : DialogFragment() {
             when (it) {
                 is Result.Success -> {
                     binding.prg.visibility = View.GONE
-                    findNavController().clearBackStack(R.id.teaBoyHomeFragment)
                     findNavController().navigate(R.id.action_activationFragment_to_teaBoyHomeFragment)
-                    dialog?.dismiss()
-
 
                 }
 
@@ -91,10 +71,30 @@ class ActivationFragment : DialogFragment() {
                 is Result.Error -> {
                     binding.prg.visibility = View.GONE
                     Toast.makeText(context, it.message, Toast.LENGTH_SHORT).show()
-                    findNavController().clearBackStack(R.id.teaBoyHomeFragment)
                     findNavController().navigate(R.id.action_activationFragment_to_teaBoyHomeFragment)
-                    dialog?.dismiss()
                 }
+            }
+        }
+    }
+
+    override fun onClick(v: View?) {
+
+        when(v?.id){
+
+            R.id.btnCancel -> {
+                dialog?.dismiss()
+            }
+
+            R.id.exit -> {
+                dialog?.dismiss()
+            }
+
+            R.id.btnDelete -> {
+
+                orderViewModel.setStatus(true)
+                with(prefs.edit()) {
+                    putBoolean("isTeaBoyActive", true)
+                }.apply()
             }
         }
     }
