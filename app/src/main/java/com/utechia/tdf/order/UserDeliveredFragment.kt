@@ -1,4 +1,4 @@
-package com.utechia.tdf.order.userviewpager
+package com.utechia.tdf.order
 
 import android.os.Bundle
 import android.view.LayoutInflater
@@ -11,14 +11,13 @@ import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.utechia.domain.enum.OrderEnum
 import com.utechia.domain.utile.Result
-import com.utechia.tdf.databinding.FragmentCancelledBinding
-import com.utechia.tdf.order.ItemDecorationOrder
+import com.utechia.tdf.databinding.FragmentDeliveredBinding
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
-class UserCancelledFragment : Fragment() {
+class UserDeliveredFragment : Fragment() {
 
-    private lateinit var binding: FragmentCancelledBinding
+    private lateinit var binding: FragmentDeliveredBinding
     private val userOrderViewModel: UserOrderViewModel by viewModels()
     private val userOrderAdapter: UserOrderAdapter = UserOrderAdapter()
 
@@ -27,19 +26,18 @@ class UserCancelledFragment : Fragment() {
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
-        binding = FragmentCancelledBinding.inflate(inflater, container, false)
+        binding = FragmentDeliveredBinding.inflate(inflater, container, false)
         return binding.root
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        userOrderViewModel.getOrder(OrderEnum.Cancel.order)
-
+        userOrderViewModel.getOrder(OrderEnum.Delivered.order)
 
         binding.refreshLayout.setOnRefreshListener {
 
-            userOrderViewModel.getOrder(OrderEnum.Cancel.order)
+            userOrderViewModel.getOrder(OrderEnum.Delivered.order)
 
         }
 
@@ -53,12 +51,12 @@ class UserCancelledFragment : Fragment() {
             addItemDecoration(ItemDecorationOrder())
         }
 
+
         observer()
     }
 
     private fun observer() {
         userOrderViewModel.userOrderModel.observe(viewLifecycleOwner){
-
 
             when (it) {
                 is Result.Success -> {
@@ -87,6 +85,7 @@ class UserCancelledFragment : Fragment() {
                 }
 
                 is Result.Error -> {
+                    binding.refreshLayout.isRefreshing = false
                     binding.prg.visibility = View.GONE
                     binding.recyclerView.visibility = View.GONE
                     binding.emptyLayout.visibility = View.VISIBLE

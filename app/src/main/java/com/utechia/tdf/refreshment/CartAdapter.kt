@@ -58,7 +58,7 @@ class CartAdapter(private val cartFragment: CartFragment): RecyclerView.Adapter<
 
                     number += 1
                     numberText.text = number.toString()
-                    cartFragment.cartViewModel.postCart(carts[position].food.id!!, number)
+                    cartFragment.cartViewModel.postCart(carts[position].food.id?:0, number)
 
                 }
 
@@ -66,13 +66,13 @@ class CartAdapter(private val cartFragment: CartFragment): RecyclerView.Adapter<
                 if (number >1) {
                     number -= 1
                     cartFragment.cartViewModel.updateCart(
-                        carts[position].food.id!!,
+                        carts[position].food.id?:0,
                         number
                     )
                 }
                 else {
                     number=0
-                    cartFragment.deleteItem(carts[position].food.id!!,carts.size)
+                    cartFragment.deleteItem(carts[position].food.id?:0,carts.size)
                     carts.removeAt(position)
                     notifyItemRemoved(position)
                 }

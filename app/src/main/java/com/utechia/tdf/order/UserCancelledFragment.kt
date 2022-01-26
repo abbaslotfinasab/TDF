@@ -1,4 +1,4 @@
-package com.utechia.tdf.order.userviewpager
+package com.utechia.tdf.order
 
 import android.os.Bundle
 import android.view.LayoutInflater
@@ -11,14 +11,13 @@ import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.utechia.domain.enum.OrderEnum
 import com.utechia.domain.utile.Result
-import com.utechia.tdf.databinding.FragmentPendingBinding
-import com.utechia.tdf.order.ItemDecorationOrder
+import com.utechia.tdf.databinding.FragmentCancelledBinding
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
-class UserPendingFragment : Fragment() {
+class UserCancelledFragment : Fragment() {
 
-    private lateinit var binding: FragmentPendingBinding
+    private lateinit var binding: FragmentCancelledBinding
     private val userOrderViewModel: UserOrderViewModel by viewModels()
     private val userOrderAdapter: UserOrderAdapter = UserOrderAdapter()
 
@@ -27,17 +26,19 @@ class UserPendingFragment : Fragment() {
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
-        binding = FragmentPendingBinding.inflate(inflater, container, false)
+        binding = FragmentCancelledBinding.inflate(inflater, container, false)
         return binding.root
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        userOrderViewModel.getOrder(OrderEnum.Pending.order)
+
+        userOrderViewModel.getOrder(OrderEnum.Cancel.order)
+
 
         binding.refreshLayout.setOnRefreshListener {
 
-            userOrderViewModel.getOrder(OrderEnum.Pending.order)
+            userOrderViewModel.getOrder(OrderEnum.Cancel.order)
 
         }
 
@@ -57,11 +58,11 @@ class UserPendingFragment : Fragment() {
     private fun observer() {
         userOrderViewModel.userOrderModel.observe(viewLifecycleOwner){
 
-
             when (it) {
                 is Result.Success -> {
                     binding.prg.visibility = View.GONE
                     binding.refreshLayout.isRefreshing = false
+
 
                     if (it.data.size!=0){
                         binding.recyclerView.visibility = View.VISIBLE
@@ -77,15 +78,14 @@ class UserPendingFragment : Fragment() {
                 }
 
                 is Result.Loading -> {
-                    binding.prg.visibility = View.GONE
                     binding.refreshLayout.isRefreshing = true
+                    binding.prg.visibility = View.GONE
                     binding.recyclerView.visibility = View.GONE
                     binding.emptyLayout.visibility = View.GONE
                 }
 
                 is Result.Error -> {
                     binding.prg.visibility = View.GONE
-                    binding.refreshLayout.isRefreshing = false
                     binding.recyclerView.visibility = View.GONE
                     binding.emptyLayout.visibility = View.VISIBLE
                     Toast.makeText(context, it.message, Toast.LENGTH_SHORT).show()

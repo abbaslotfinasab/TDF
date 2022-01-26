@@ -1,11 +1,10 @@
-package com.utechia.tdf.order.userviewpager
+package com.utechia.tdf.order
 
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
-import androidx.fragment.app.viewModels
 import com.google.android.material.tabs.TabLayout
 import com.google.android.material.tabs.TabLayoutMediator
 import com.utechia.tdf.R
@@ -16,8 +15,8 @@ import dagger.hilt.android.AndroidEntryPoint
 class UserOrderFragment : Fragment() {
 
     private lateinit var binding: FragmentOrderBinding
-    private val userOrderViewModel: UserOrderViewModel by viewModels()
     private lateinit var userViewPagerAdapter: UserViewPagerAdapter
+    private var type = ""
 
 
     override fun onCreateView(
@@ -32,9 +31,11 @@ class UserOrderFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
         userViewPagerAdapter = UserViewPagerAdapter(parentFragmentManager, lifecycle)
 
-        userOrderViewModel.getOrder("pending")
-
         binding.pager.adapter = userViewPagerAdapter
+
+        if (arguments != null) {
+            type = requireArguments().getString("type","")
+        }
 
         TabLayoutMediator(binding.tabLayout,binding.pager){ tab, position ->
 
@@ -53,8 +54,21 @@ class UserOrderFragment : Fragment() {
                 }
             }
 
-            binding.pager.setCurrentItem(tab.position, true)
-        }.attach()
+            when(type){
+
+                "rate" -> {
+                    binding.pager.setCurrentItem(1,true)
+                }
+                "cancel" ->{
+                    binding.pager.setCurrentItem(0,true)
+
+                }
+                else -> {
+                    binding.pager.setCurrentItem(tab.position,true)
+
+                }
+
+            }}.attach()
 
 
         binding.tabLayout.addOnTabSelectedListener(object : TabLayout.OnTabSelectedListener {

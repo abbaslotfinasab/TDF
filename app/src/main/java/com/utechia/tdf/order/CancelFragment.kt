@@ -8,13 +8,13 @@ import android.view.View
 import android.view.ViewGroup
 import android.view.Window
 import android.widget.Toast
+import androidx.core.os.bundleOf
 import androidx.fragment.app.DialogFragment
 import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
 import com.utechia.domain.utile.Result
 import com.utechia.tdf.R
 import com.utechia.tdf.databinding.FragmentCancelBinding
-import com.utechia.tdf.order.userviewpager.UserOrderViewModel
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
@@ -22,6 +22,7 @@ class CancelFragment : DialogFragment() {
 
     private lateinit var binding: FragmentCancelBinding
     private val userOrderViewModel: UserOrderViewModel by viewModels()
+    private lateinit var bundle: Bundle
     private var orderId = 0
 
     override fun onCreateView(
@@ -41,6 +42,10 @@ class CancelFragment : DialogFragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+        bundle = bundleOf("type" to "cancel")
+
+        observer()
+
 
         if (arguments != null) {
             orderId = requireArguments().getInt("orderId")
@@ -58,8 +63,6 @@ class CancelFragment : DialogFragment() {
         binding.btnCancel.setOnClickListener {
 
             userOrderViewModel.cancelOrder(orderId)
-            observer()
-
         }
     }
 
@@ -71,8 +74,7 @@ class CancelFragment : DialogFragment() {
             when (it) {
                 is Result.Success -> {
                     binding.prg.visibility = View.GONE
-                    findNavController().clearBackStack(R.id.orderFragment)
-                    findNavController().navigate(R.id.action_cancelFragment_to_orderFragment)
+                    findNavController().navigate(R.id.action_cancelFragment_to_orderFragment,bundle)
                     dialog?.dismiss()
 
                 }
@@ -84,14 +86,12 @@ class CancelFragment : DialogFragment() {
                     binding.exit.isEnabled = false
 
 
-
                 }
 
                 is Result.Error -> {
                     binding.prg.visibility = View.GONE
                     Toast.makeText(context, it.message, Toast.LENGTH_SHORT).show()
-                    findNavController().clearBackStack(R.id.orderFragment)
-                    findNavController().navigate(R.id.action_cancelFragment_to_orderFragment)
+                    findNavController().navigate(R.id.action_cancelFragment_to_orderFragment,bundle)
                     dialog?.dismiss()
                 }
             }

@@ -1,4 +1,4 @@
-package com.utechia.tdf.order.userviewpager
+package com.utechia.tdf.order
 
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData

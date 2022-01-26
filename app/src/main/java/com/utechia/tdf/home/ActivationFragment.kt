@@ -46,6 +46,13 @@ class ActivationFragment : DialogFragment(),View.OnClickListener{
 
         prefs = requireActivity().getSharedPreferences("tdf", Context.MODE_PRIVATE)
 
+        binding.btnDelete.setOnClickListener {
+            orderViewModel.setStatus(true)
+            with(prefs.edit()) {
+                putBoolean("isTeaBoyActive", true)
+            }.apply()
+        }
+
         observer()
 
     }

@@ -13,7 +13,6 @@ import androidx.fragment.app.viewModels
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.utechia.domain.utile.Result
 import com.utechia.tdf.databinding.FragmentOrderDetailsBinding
-import com.utechia.tdf.order.userviewpager.UserOrderViewModel
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint

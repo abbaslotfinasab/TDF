@@ -1,4 +1,4 @@
-package com.utechia.tdf.order.userviewpager
+package com.utechia.tdf.order
 
 import android.os.Bundle
 import android.view.LayoutInflater
@@ -11,14 +11,13 @@ import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.utechia.domain.enum.OrderEnum
 import com.utechia.domain.utile.Result
-import com.utechia.tdf.databinding.FragmentDeliveredBinding
-import com.utechia.tdf.order.ItemDecorationOrder
+import com.utechia.tdf.databinding.FragmentPendingBinding
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
-class UserDeliveredFragment : Fragment() {
+class UserPendingFragment : Fragment() {
 
-    private lateinit var binding: FragmentDeliveredBinding
+    private lateinit var binding: FragmentPendingBinding
     private val userOrderViewModel: UserOrderViewModel by viewModels()
     private val userOrderAdapter: UserOrderAdapter = UserOrderAdapter()
 
@@ -27,18 +26,17 @@ class UserDeliveredFragment : Fragment() {
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
-        binding = FragmentDeliveredBinding.inflate(inflater, container, false)
+        binding = FragmentPendingBinding.inflate(inflater, container, false)
         return binding.root
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-
-        userOrderViewModel.getOrder(OrderEnum.Delivered.order)
+        userOrderViewModel.getOrder(OrderEnum.Pending.order)
 
         binding.refreshLayout.setOnRefreshListener {
 
-            userOrderViewModel.getOrder(OrderEnum.Delivered.order)
+            userOrderViewModel.getOrder(OrderEnum.Pending.order)
 
         }
 
@@ -52,7 +50,6 @@ class UserDeliveredFragment : Fragment() {
             addItemDecoration(ItemDecorationOrder())
         }
 
-
         observer()
     }
 
@@ -64,7 +61,6 @@ class UserDeliveredFragment : Fragment() {
                 is Result.Success -> {
                     binding.prg.visibility = View.GONE
                     binding.refreshLayout.isRefreshing = false
-
 
                     if (it.data.size!=0){
                         binding.recyclerView.visibility = View.VISIBLE
@@ -80,15 +76,15 @@ class UserDeliveredFragment : Fragment() {
                 }
 
                 is Result.Loading -> {
-                    binding.refreshLayout.isRefreshing = true
                     binding.prg.visibility = View.GONE
+                    binding.refreshLayout.isRefreshing = true
                     binding.recyclerView.visibility = View.GONE
                     binding.emptyLayout.visibility = View.GONE
                 }
 
                 is Result.Error -> {
-                    binding.refreshLayout.isRefreshing = false
                     binding.prg.visibility = View.GONE
+                    binding.refreshLayout.isRefreshing = false
                     binding.recyclerView.visibility = View.GONE
                     binding.emptyLayout.visibility = View.VISIBLE
                     Toast.makeText(context, it.message, Toast.LENGTH_SHORT).show()

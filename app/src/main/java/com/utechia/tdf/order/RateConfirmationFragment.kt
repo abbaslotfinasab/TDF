@@ -3,31 +3,26 @@ package com.utechia.tdf.order
 import android.graphics.Color
 import android.graphics.drawable.ColorDrawable
 import android.os.Bundle
-import android.os.Handler
-import android.os.Looper
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.view.Window
 import android.widget.Toast
+import androidx.core.os.bundleOf
 import androidx.fragment.app.DialogFragment
 import androidx.fragment.app.viewModels
-import androidx.lifecycle.ViewModel
 import androidx.navigation.fragment.findNavController
 import com.utechia.domain.utile.Result
 import com.utechia.tdf.R
-import com.utechia.tdf.databinding.FragmentConfirmSurveyBinding
 import com.utechia.tdf.databinding.FragmentRateConfirmationBinding
 import dagger.hilt.android.AndroidEntryPoint
-import java.util.ArrayList
-import org.json.JSONArray
-
 
 @AndroidEntryPoint
 class RateConfirmationFragment : DialogFragment() {
 
     private lateinit var binding: FragmentRateConfirmationBinding
     private val orderRateVieModel:OrderRateViwModel by viewModels()
+    private lateinit var bundle: Bundle
     private var orderId = 0
     private var rate = 0
 
@@ -50,6 +45,10 @@ class RateConfirmationFragment : DialogFragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+        bundle = bundleOf("type" to "rate")
+
+        observer()
+
 
         if (arguments != null) {
             orderId = requireArguments().getInt("orderId")
@@ -58,9 +57,6 @@ class RateConfirmationFragment : DialogFragment() {
         }
         binding.btnKeep.setOnClickListener {
             orderRateVieModel.setRate(orderId,rate)
-            observer()
-
-
         }
 
         binding.exit.setOnClickListener {
@@ -68,7 +64,6 @@ class RateConfirmationFragment : DialogFragment() {
         }
 
         binding.btnCancel.setOnClickListener {
-            findNavController().navigate(R.id.rateConfirmationFragment_to_OrderFragment)
             dialog?.dismiss()
 
         }
@@ -81,9 +76,8 @@ class RateConfirmationFragment : DialogFragment() {
             when (it) {
                 is Result.Success -> {
                     binding.prg.visibility = View.GONE
-                    findNavController().navigate(R.id.rateConfirmationFragment_to_OrderFragment)
+                    findNavController().navigate(R.id.rateConfirmationFragment_to_OrderFragment,bundle)
                     dialog?.dismiss()
-
 
                 }
 
@@ -94,7 +88,7 @@ class RateConfirmationFragment : DialogFragment() {
                 is Result.Error -> {
                     binding.prg.visibility = View.GONE
                     Toast.makeText(context, it.message, Toast.LENGTH_SHORT).show()
-                    findNavController().navigate(R.id.rateConfirmationFragment_to_OrderFragment)
+                    findNavController().navigate(R.id.rateConfirmationFragment_to_OrderFragment,bundle)
                     dialog?.dismiss()
 
 

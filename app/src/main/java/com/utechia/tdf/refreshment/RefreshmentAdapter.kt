@@ -66,13 +66,13 @@ class RefreshmentAdapter(private val createRefreshmentFragment: CreateRefreshmen
             like.setOnClickListener {
                 it.visibility = View.GONE
                 dislike.visibility = View.VISIBLE
-                createRefreshmentFragment.favoriteViewModel.like(refreshment[position].id!!)
+                createRefreshmentFragment.favoriteViewModel.like(refreshment[position].id?:0)
             }
 
             dislike.setOnClickListener {
                 it.visibility = View.GONE
                 like.visibility = View.VISIBLE
-                createRefreshmentFragment.favoriteViewModel.dislike(refreshment[position].id!!)
+                createRefreshmentFragment.favoriteViewModel.dislike(refreshment[position].id?:0)
 
             }
 
@@ -97,12 +97,12 @@ class RefreshmentAdapter(private val createRefreshmentFragment: CreateRefreshmen
                 refreshment[position].open=true
                 it.visibility = View.GONE
                 layout.visibility = View.VISIBLE
-                createRefreshmentFragment.cartViewModel.postCart(refreshment[position].id!!,refreshment[position].number )
+                createRefreshmentFragment.cartViewModel.postCart(refreshment[position].id?:0,refreshment[position].number )
             }
             plus.setOnClickListener {
                 refreshment[position].number  += 1
                 numberText.text = refreshment[position].number .toString()
-                createRefreshmentFragment.cartViewModel.updateCart(refreshment[position].id!!,refreshment[position].number )
+                createRefreshmentFragment.cartViewModel.updateCart(refreshment[position].id?:0,refreshment[position].number )
 
             }
 
@@ -110,7 +110,7 @@ class RefreshmentAdapter(private val createRefreshmentFragment: CreateRefreshmen
                 if (refreshment[position].number >1) {
                     refreshment[position].number  -= 1
                     createRefreshmentFragment.cartViewModel.updateCart(
-                        refreshment[position].id!!,
+                        refreshment[position].id?:0,
                         refreshment[position].number
                     )
                 }
@@ -118,7 +118,7 @@ class RefreshmentAdapter(private val createRefreshmentFragment: CreateRefreshmen
                     refreshment[position].number =0
                     layout.visibility = View.GONE
                     add.visibility = View.VISIBLE
-                    createRefreshmentFragment.cartViewModel.deleteCart(refreshment[position].id!!)
+                    createRefreshmentFragment.cartViewModel.deleteCart(refreshment[position].id?:0)
                 }
 
                 numberText.text = refreshment[position].number .toString()

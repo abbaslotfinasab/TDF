@@ -1,4 +1,4 @@
-package com.utechia.tdf.order.userviewpager
+package com.utechia.tdf.order
 
 import android.os.Handler
 import android.os.Looper
@@ -7,7 +7,6 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.RatingBar
 import android.widget.TextView
-import androidx.compose.ui.res.stringResource
 import androidx.constraintlayout.widget.ConstraintLayout
 import androidx.core.content.ContextCompat
 import androidx.core.os.bundleOf
@@ -70,20 +69,20 @@ class UserOrderAdapter: RecyclerView.Adapter<RecyclerView.ViewHolder>() {
             number.text = "${userOrders[position].cart?.items?.size}x"
             oderId.text = "Order ID:${userOrders[position].id}"
 
-            if (userOrders[position].cart?.items?.size!! >1){
-                title.text = userOrders[position].cart?.items!![0].food.title+"..."
+            if (userOrders[position].cart?.items?.size?:0 >1){
+                title.text = userOrders[position].cart?.items?.get(0)?.food?.title+"..."
             }
-            else if (userOrders[position].cart?.items?.size!! !=0)
-                title.text = userOrders[position].cart?.items!![0].food.title
+            else if (userOrders[position].cart?.items?.size !=0)
+                title.text = userOrders[position].cart?.items?.get(0)?.food?.title
 
 
             when (userOrders[position].status){
 
-                OrderEnum.Prepare.order-> {
+                OrderEnum.Wait.order-> {
 
                     status.apply {
                         visibility = View.VISIBLE
-                        text = "Waiting" // in progress
+                        text = resources.getText(R.string.wait)
                         setBackgroundColor(ContextCompat.getColor(itemView.context, R.color.waiting))
                     }
                     cancel.visibility = View.VISIBLE
@@ -95,7 +94,7 @@ class UserOrderAdapter: RecyclerView.Adapter<RecyclerView.ViewHolder>() {
 
                     status.apply {
                         visibility = View.VISIBLE
-                        text = "Preparing" // in progress
+                        text = resources.getText(R.string.prepare)
                         setBackgroundColor(ContextCompat.getColor(itemView.context, R.color.prepare))
                     }
                     cancel.visibility = View.GONE
@@ -128,10 +127,10 @@ class UserOrderAdapter: RecyclerView.Adapter<RecyclerView.ViewHolder>() {
                     cancel.visibility = View.INVISIBLE
                     ratingBar.visibility = View.VISIBLE
                     rateNumber.visibility = View.VISIBLE
-                    if (userOrders[position].orderrate?.isNotEmpty()!!) {
+                    if (userOrders[position].orderrate?.isNotEmpty() == true) {
                         indicate = true
-                        rateNumber.text = userOrders[position].orderrate!![0].rate!!.toFloat().toString()
-                        ratingBar.rating = userOrders[position].orderrate!![0].rate!!.toFloat()
+                        rateNumber.text = userOrders[position].orderrate?.get(0)?.rate?.toFloat().toString()
+                        ratingBar.rating = userOrders[position].orderrate?.get(0)?.rate?.toFloat()?:0.0f
                     }
                     else
                         ratingBar.setIsIndicator(false)
@@ -139,7 +138,7 @@ class UserOrderAdapter: RecyclerView.Adapter<RecyclerView.ViewHolder>() {
             }
             ratingBar.onRatingBarChangeListener =
                 RatingBar.OnRatingBarChangeListener { _, rating, _ ->
-                    if (!indicate && userOrders[position].orderrate!!?.isEmpty()) {
+                    if (!indicate && userOrders[position].orderrate?.isEmpty() != false) {
                         rateNumber.text = "${rating.toInt()}.0"
 
                         Handler(Looper.getMainLooper()).postDelayed({

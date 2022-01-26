@@ -19,7 +19,7 @@ class CheckOutRepoImpl @Inject constructor(
 
             val result = service.postOrder()
 
-            return when (result.isSuccessful) {
+            return when (result.isSuccessful && result.body() !=null) {
 
                 true -> {
                     result.body()!!.toDomain()

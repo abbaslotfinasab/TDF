@@ -1,4 +1,4 @@
-package com.utechia.tdf.order.userviewpager
+package com.utechia.tdf.order
 
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentManager
