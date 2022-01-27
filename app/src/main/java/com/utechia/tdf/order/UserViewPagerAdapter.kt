@@ -4,6 +4,7 @@ import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentManager
 import androidx.lifecycle.Lifecycle
 import androidx.viewpager2.adapter.FragmentStateAdapter
+import com.utechia.domain.enum.OrderEnum
 
 class UserViewPagerAdapter(fa: FragmentManager, lifecycle:Lifecycle) : FragmentStateAdapter(fa,lifecycle) {
 
@@ -14,19 +15,19 @@ class UserViewPagerAdapter(fa: FragmentManager, lifecycle:Lifecycle) : FragmentS
         return when (position) {
 
             0 -> {
-                UserPendingFragment()
+                UserPendingFragment(OrderEnum.Pending.order)
             }
 
             1 -> {
-                UserDeliveredFragment()
+                UserPendingFragment(OrderEnum.Delivered.order)
             }
 
             2 -> {
-                UserCancelledFragment()
+                UserPendingFragment(OrderEnum.Cancel.order)
             }
 
             else -> {
-                UserOrderFragment()
+                UserPendingFragment(OrderEnum.Pending.order)
             }
         }
     }

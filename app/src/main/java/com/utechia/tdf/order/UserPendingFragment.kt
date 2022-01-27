@@ -15,7 +15,7 @@ import com.utechia.tdf.databinding.FragmentPendingBinding
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
-class UserPendingFragment : Fragment() {
+class UserPendingFragment(val order: String) : Fragment() {
 
     private lateinit var binding: FragmentPendingBinding
     private val userOrderViewModel: UserOrderViewModel by viewModels()
@@ -32,11 +32,11 @@ class UserPendingFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        userOrderViewModel.getOrder(OrderEnum.Pending.order)
+        userOrderViewModel.getOrder(order)
 
         binding.refreshLayout.setOnRefreshListener {
 
-            userOrderViewModel.getOrder(OrderEnum.Pending.order)
+            userOrderViewModel.getOrder(order)
 
         }
 
