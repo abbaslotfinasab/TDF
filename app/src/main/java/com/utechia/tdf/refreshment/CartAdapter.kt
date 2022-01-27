@@ -50,7 +50,7 @@ class CartAdapter(private val cartFragment: CartFragment): RecyclerView.Adapter<
             numberText.text = carts[position].quantity.toString()
 
             Glide.with(itemView.context)
-                .load("https://sandbox.tdf.gov.sa/api/cafeteria/image/${carts[position].food.imageName}")
+                .load("${carts[position].food.imageName}")
                 .centerCrop()
                 .into(image)
 

@@ -1,6 +1,7 @@
 package com.utechia.data.entity
 
 import android.os.Parcelable
+import com.utechia.data.BuildConfig
 import com.utechia.data.base.ResponseObject
 import com.utechia.domain.model.RefreshmentModel
 import kotlinx.parcelize.Parcelize
@@ -22,8 +23,8 @@ data class RefreshmentData(
 
 ):Parcelable , ResponseObject<RefreshmentModel> {
     override fun toDomain(): RefreshmentModel {
-        return RefreshmentModel(category,createdAt,id,imageName,imagePath,rating,status,title,updatedAt,false,
+        return RefreshmentModel(category,createdAt,id,"${BuildConfig.BASE_URL}/api/cafeteria/image/${imageName}",imagePath,rating,status,title,updatedAt,false,
             open = false, number = 0
         )
     }
-}
+}                                                                

@@ -1,6 +1,7 @@
 package com.utechia.data.di
 
 import android.content.Context
+import com.utechia.data.BuildConfig
 import com.utechia.data.api.Service
 import com.utechia.data.utile.AuthInterceptor
 import dagger.Module
@@ -34,7 +35,7 @@ class ApiModule {
     @Singleton
     fun provideRetrofit(okHttpClient: OkHttpClient): Retrofit {
         return Retrofit.Builder()
-            .baseUrl("https://sandbox.tdf.gov.sa/api/")
+            .baseUrl("${BuildConfig.BASE_URL}/api/")
             .addConverterFactory(ScalarsConverterFactory.create())
             .addConverterFactory(GsonConverterFactory.create())
             .client(okHttpClient)

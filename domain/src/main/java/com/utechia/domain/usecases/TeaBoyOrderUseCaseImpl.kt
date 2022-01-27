@@ -21,7 +21,7 @@ class TeaBoyOrderUseCaseImpl @Inject constructor(private val teaBoyOrderRepo: Te
         return teaBoyOrderRepo.rejectOrder(id)
     }
 
-    override suspend fun deliveredOrder(id: Int){
+    override suspend fun deliveredOrder(id: Int):MutableList<TeaBoyOrderDataModel>{
         return teaBoyOrderRepo.deliveredOrder(id)
     }
 

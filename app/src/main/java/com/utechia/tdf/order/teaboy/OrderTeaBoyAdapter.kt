@@ -1,5 +1,7 @@
 package com.utechia.tdf.order.teaboy
 
+import android.os.Handler
+import android.os.Looper
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -72,9 +74,9 @@ class OrderTeaBoyAdapter(private val teaBoyOrdersFragment: TeaBoyOrderChildFragm
             location.text = userOrders[position].user?.officeFloor
 
             if (userOrders[position].cart?.items?.size!! > 1) {
-                title.text = userOrders[position].cart?.items!![0].food.title + "..."
-            } else if (userOrders[position].cart?.items?.size!! != 0)
-                title.text = userOrders[position].cart?.items!![0].food.title
+                title.text = userOrders[position].cart?.items?.get(0)?.food?.title + "..."
+            } else if (userOrders[position].cart?.items?.size != 0)
+                title.text = userOrders[position].cart?.items?.get(0)?.food?.title
 
             when (userOrders[position].status) {
 
@@ -105,7 +107,15 @@ class OrderTeaBoyAdapter(private val teaBoyOrdersFragment: TeaBoyOrderChildFragm
             }
 
             confirm.setOnClickListener {
+
                 teaBoyOrdersFragment.teaBoyOrderViewModel.deliverOrder(userOrders[position].id?:0)
+
+                Handler(Looper.getMainLooper()).postDelayed({
+
+                    teaBoyOrdersFragment.teaBoyOrderViewModel.getOrderTeaBoy(OrderEnum.Pending.order)
+
+                }, 200)
+
             }
 
             layout.setOnClickListener {

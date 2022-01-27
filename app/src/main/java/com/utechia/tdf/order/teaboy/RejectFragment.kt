@@ -58,7 +58,6 @@ class RejectFragment : DialogFragment(),View.OnClickListener {
             when (it) {
                 is Result.Success -> {
                     binding.prg.visibility = View.GONE
-                    findNavController().clearBackStack(R.id.orderFragment)
                     findNavController().navigate(R.id.action_rejectFragment_to_teaBoyOrdersFragment)
                     dialog?.dismiss()
 
@@ -76,7 +75,6 @@ class RejectFragment : DialogFragment(),View.OnClickListener {
                 is Result.Error -> {
                     binding.prg.visibility = View.GONE
                     Toast.makeText(context, it.message, Toast.LENGTH_SHORT).show()
-                    findNavController().clearBackStack(R.id.orderFragment)
                     findNavController().navigate(R.id.action_rejectFragment_to_teaBoyOrdersFragment)
                     dialog?.dismiss()
                 }

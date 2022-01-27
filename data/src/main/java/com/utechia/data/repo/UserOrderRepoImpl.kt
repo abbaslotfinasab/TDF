@@ -41,7 +41,7 @@ class UserOrderRepoImpl @Inject constructor(
 
             val result = service.cancelOrder(FavoriteBody(id))
 
-            return when (result.isSuccessful && result.body() !=null) {
+            return when (result.isSuccessful) {
 
                 true -> {
                     emptyList<UserOrderDataModel>().toMutableList()

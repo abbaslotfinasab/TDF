@@ -143,7 +143,7 @@ class UserOrderAdapter: RecyclerView.Adapter<RecyclerView.ViewHolder>() {
 
                         Handler(Looper.getMainLooper()).postDelayed({
 
-                            val bundle = bundleOf("orderId" to userOrders[position].id, "rate" to rating.toInt())
+                            val bundle = bundleOf(OrderEnum.ID.order to userOrders[position].id, "rate" to rating.toInt())
                             itemView.findNavController().navigate(R.id.orderFragment_to_rateConfirmationFragment, bundle)
 
                         }, 300)

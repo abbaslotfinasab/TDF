@@ -54,7 +54,7 @@ class TeaBoyOrderRepoImpl @Inject constructor(
 
     }
 
-    override suspend fun deliveredOrder(id: Int) {
+    override suspend fun deliveredOrder(id: Int):MutableList<TeaBoyOrderDataModel> {
 
         if (networkHelper.isNetworkConnected()) {
 
@@ -62,7 +62,10 @@ class TeaBoyOrderRepoImpl @Inject constructor(
 
             return when (result.isSuccessful) {
 
-                true -> {}
+                true -> {
+                    emptyList<TeaBoyOrderDataModel>().toMutableList()
+
+                }
 
                 else ->
                     throw IOException("Server is Not Responding")
@@ -78,7 +81,7 @@ class TeaBoyOrderRepoImpl @Inject constructor(
 
             val result = service.getTeaBoyOrder(status,1,500)
 
-            return when (result.isSuccessful) {
+            return when (result.isSuccessful && result.body() !=null) {
 
                 true -> {
 
@@ -98,7 +101,7 @@ class TeaBoyOrderRepoImpl @Inject constructor(
 
             val result = service.getSingleOrderTeaBoy(id)
 
-            return when (result.isSuccessful) {
+            return when (result.isSuccessful && result.body() !=null) {
 
                 true -> {
                     result.body()?.data!!.list?.map { it.toDomain() }!!.toMutableList()

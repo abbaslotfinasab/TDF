@@ -31,13 +31,17 @@ android {
         consumerProguardFiles "consumer-rules.pro"
         minSdkVersion 21
     }
-
     buildTypes {
+        debug {
+            buildConfigField "String", "BASE_URL", "\"https://sandbox.tdf.gov.sa\""
+        }
         release {
-            minifyEnabled false
+            minifyEnabled true
+            buildConfigField "String", "BASE_URL", "\"https://sandbox.tdf.gov.sa\""
             proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
         }
     }
+
     compileOptions {
         sourceCompatibility JavaVersion.VERSION_1_8
         targetCompatibility JavaVersion.VERSION_1_8

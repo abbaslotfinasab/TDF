@@ -44,7 +44,7 @@ class UserOrderDetailsAdapter: RecyclerView.Adapter<RecyclerView.ViewHolder>() {
             number.text = "${orders[position].quantity}x"
 
             Glide.with(itemView.context)
-                .load("https://sandbox.tdf.gov.sa/api/cafeteria/image/${orders[position].food.imageName}")
+                .load("${orders[position].food.imageName}")
                 .centerCrop()
                 .into(image)
 

@@ -19,7 +19,7 @@ import com.utechia.tdf.databinding.FragmentCancelBinding
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
-class UserCancelFragment : DialogFragment() {
+class UserCancelFragment : DialogFragment(),View.OnClickListener {
 
     private lateinit var binding: FragmentCancelBinding
     private val userOrderViewModel: UserOrderViewModel by viewModels()
@@ -31,6 +31,9 @@ class UserCancelFragment : DialogFragment() {
         savedInstanceState: Bundle?
     ): View {
         binding = FragmentCancelBinding.inflate(inflater, container, false)
+        binding.btnCancel.setOnClickListener(this)
+        binding.btnKeep.setOnClickListener(this)
+        binding.exit.setOnClickListener(this)
 
         if(dialog !=null && dialog?.window !=null){
             dialog?.window?.setBackgroundDrawable(ColorDrawable(Color.TRANSPARENT))
@@ -53,18 +56,6 @@ class UserCancelFragment : DialogFragment() {
 
         }
 
-        binding.btnKeep.setOnClickListener {
-            dialog?.dismiss()
-        }
-
-        binding.exit.setOnClickListener {
-            dialog?.dismiss()
-        }
-
-        binding.btnCancel.setOnClickListener {
-
-            userOrderViewModel.cancelOrder(orderId)
-        }
     }
 
     private fun observer() {
@@ -95,6 +86,23 @@ class UserCancelFragment : DialogFragment() {
                     findNavController().navigate(R.id.action_cancelFragment_to_orderFragment,bundle)
                     dialog?.dismiss()
                 }
+            }
+        }
+    }
+
+    override fun onClick(v: View?) {
+        when(v?.id){
+
+            R.id.exit ->{
+                dialog?.dismiss()
+            }
+
+            R.id.btnKeep ->{
+                dialog?.dismiss()
+            }
+
+            R.id.btnCancel ->{
+                userOrderViewModel.cancelOrder(orderId)
             }
         }
     }

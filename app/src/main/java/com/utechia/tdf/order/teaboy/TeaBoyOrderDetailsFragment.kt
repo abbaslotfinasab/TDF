@@ -77,7 +77,7 @@ class TeaBoyOrderDetailsFragment : DialogFragment() {
                 is Result.Success -> {
                     binding.prg.visibility = View.GONE
                     binding.recyclerView.visibility = View.VISIBLE
-                    userOrderAdapter.addData(it.data[0].cart?.items!!)
+                    it.data[0].cart?.items?.let { it1 -> userOrderAdapter.addData(it1) }
                 }
 
                 is Result.Loading -> {
