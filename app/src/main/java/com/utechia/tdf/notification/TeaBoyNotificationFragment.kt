@@ -15,7 +15,7 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import com.utechia.domain.utile.Result
 import com.utechia.tdf.R
 import com.utechia.tdf.databinding.FragmentNotificationTeaboyBinding
-import com.utechia.tdf.order.TeaBoyOrderViewModel
+import com.utechia.tdf.order.teaboy.TeaBoyOrderViewModel
 import dagger.hilt.android.AndroidEntryPoint
 import java.time.OffsetDateTime
 import java.time.ZoneId
@@ -76,7 +76,7 @@ class TeaBoyNotificationFragment : DialogFragment() {
     }
 
     private fun observer() {
-        teaOrderViewModel.userOrderModel.observe(viewLifecycleOwner){
+        teaOrderViewModel.orderModel.observe(viewLifecycleOwner){
 
 
             when (it) {

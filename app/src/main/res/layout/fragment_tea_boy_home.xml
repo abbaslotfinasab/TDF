@@ -120,7 +120,7 @@
             app:layout_constraintTop_toBottomOf="@+id/rating" />
 
         <androidx.constraintlayout.widget.ConstraintLayout
-            android:id="@+id/constraintLayout4"
+            android:id="@+id/pendingLayout"
             android:layout_width="95dp"
             android:layout_height="95dp"
             android:layout_marginStart="20dp"
@@ -157,13 +157,13 @@
         </androidx.constraintlayout.widget.ConstraintLayout>
 
         <androidx.constraintlayout.widget.ConstraintLayout
-            android:id="@+id/constraintLayout5"
+            android:id="@+id/deliveredLayout"
             android:layout_width="95dp"
             android:layout_height="95dp"
             android:layout_marginStart="20dp"
             android:layout_marginTop="25dp"
             android:background="@color/white"
-            app:layout_constraintStart_toEndOf="@id/constraintLayout4"
+            app:layout_constraintStart_toEndOf="@id/pendingLayout"
             app:layout_constraintTop_toBottomOf="@+id/textView11">
 
             <TextView
@@ -188,19 +188,19 @@
                 android:textColor="#479696"
                 android:textSize="24sp"
                 app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintStart_toStartOf="@id/constraintLayout5"
+                app:layout_constraintStart_toStartOf="@id/deliveredLayout"
                 app:layout_constraintTop_toBottomOf="@+id/textView20" />
 
         </androidx.constraintlayout.widget.ConstraintLayout>
 
         <androidx.constraintlayout.widget.ConstraintLayout
-            android:id="@+id/constraintLayout6"
+            android:id="@+id/cancelledLayout"
             android:layout_width="95dp"
             android:layout_height="95dp"
             android:layout_marginStart="20dp"
             android:layout_marginTop="25dp"
             android:background="@color/white"
-            app:layout_constraintStart_toEndOf="@id/constraintLayout5"
+            app:layout_constraintStart_toEndOf="@id/deliveredLayout"
             app:layout_constraintTop_toBottomOf="@+id/textView11">
 
             <TextView

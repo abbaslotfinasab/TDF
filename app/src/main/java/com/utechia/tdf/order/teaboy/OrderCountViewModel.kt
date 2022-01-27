@@ -1,10 +1,11 @@
-package com.utechia.tdf.order
+package com.utechia.tdf.order.teaboy
 
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.utechia.domain.usecases.OrderRateUseCaseImpl
+import com.utechia.domain.model.OrderCountModel
+import com.utechia.domain.usecases.OrderCountUseCaseImpl
 import com.utechia.domain.utile.Result
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.CoroutineExceptionHandler
@@ -13,14 +14,14 @@ import kotlinx.coroutines.launch
 import javax.inject.Inject
 
 @HiltViewModel
-class OrderRateViwModel @Inject constructor(
+class OrderCountViewModel @Inject constructor(
 
-    private val orderRateUseCaseImpl: OrderRateUseCaseImpl
+    private val orderCountUseCaseImpl: OrderCountUseCaseImpl
 
-):ViewModel() {
+    ):ViewModel() {
 
-    private val _orderModel = MutableLiveData<Result<Boolean>>()
-    val orderModel: LiveData<Result<Boolean>>
+    private val _orderModel = MutableLiveData<Result<MutableList<OrderCountModel>>>()
+    val orderModel: LiveData<Result<MutableList<OrderCountModel>>>
         get() = _orderModel
 
 
@@ -29,13 +30,25 @@ class OrderRateViwModel @Inject constructor(
         _orderModel.postValue(exception.message?.let { Result.Error(it) })
     }
 
-    fun setRate(order:Int,rate:Int){
+    fun getOrder(){
 
         viewModelScope.launch(Dispatchers.IO+handler) {
 
             _orderModel.postValue(Result.Loading)
 
-            orderRateUseCaseImpl.execute(order,rate).let {
+            orderCountUseCaseImpl.getOrderCount().let {
+
+                _orderModel.postValue(Result.Success(it))
+            }
+        }
+    }
+
+    fun setStatus(status:Boolean){
+        viewModelScope.launch(Dispatchers.IO+handler) {
+
+            _orderModel.postValue(Result.Loading)
+
+            orderCountUseCaseImpl.setStatus(status).let {
 
                 _orderModel.postValue(Result.Success(it))
             }

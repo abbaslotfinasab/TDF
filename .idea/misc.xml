@@ -323,6 +323,7 @@
         <entry key="app/src/main/res/layout/fragment_notification_teaboy.xml" value="0.2558139534883721" />
         <entry key="app/src/main/res/layout/fragment_order.xml" value="0.1" />
         <entry key="app/src/main/res/layout/fragment_order_details.xml" value="0.19322916666666667" />
+        <entry key="app/src/main/res/layout/fragment_order_result.xml" value="0.18" />
         <entry key="app/src/main/res/layout/fragment_pending.xml" value="0.1" />
         <entry key="app/src/main/res/layout/fragment_profile.xml" value="0.11607142857142858" />
         <entry key="app/src/main/res/layout/fragment_qr_code.xml" value="0.19322916666666667" />
@@ -332,7 +333,8 @@
         <entry key="app/src/main/res/layout/fragment_request_details.xml" value="0.19322916666666667" />
         <entry key="app/src/main/res/layout/fragment_reservation_details.xml" value="0.19322916666666667" />
         <entry key="app/src/main/res/layout/fragment_survey_system.xml" value="0.1" />
-        <entry key="app/src/main/res/layout/fragment_tea_boy_home.xml" value="0.29411764705882354" />
+        <entry key="app/src/main/res/layout/fragment_tea_boy_home.xml" value="0.1" />
+        <entry key="app/src/main/res/layout/fragment_tea_boy_order_child.xml" value="0.1" />
         <entry key="app/src/main/res/layout/fragment_tea_boy_order_details.xml" value="0.19322916666666667" />
         <entry key="app/src/main/res/layout/fragment_tea_boy_orders.xml" value="0.19322916666666667" />
         <entry key="app/src/main/res/layout/fragment_tea_boy_profile.xml" value="0.11005434782608696" />

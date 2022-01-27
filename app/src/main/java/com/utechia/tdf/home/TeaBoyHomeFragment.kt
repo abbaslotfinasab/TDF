@@ -7,21 +7,24 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
+import androidx.core.os.bundleOf
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
+import com.utechia.domain.enum.OrderEnum
 import com.utechia.domain.utile.Result
 import com.utechia.tdf.R
 import com.utechia.tdf.main.MainActivity
 import com.utechia.tdf.databinding.FragmentTeaBoyHomeBinding
-import com.utechia.tdf.order.OrderCountViewModel
+import com.utechia.tdf.order.teaboy.OrderCountViewModel
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
-class TeaBoyHomeFragment : Fragment() {
+class TeaBoyHomeFragment : Fragment(),View.OnClickListener {
 
     private lateinit var binding: FragmentTeaBoyHomeBinding
     private val orderViewModel: OrderCountViewModel by viewModels()
+    private lateinit var bundle: Bundle
     private lateinit var prefs: SharedPreferences
     private var name = ""
     private var floor = ""
@@ -32,11 +35,15 @@ class TeaBoyHomeFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View {
         binding = FragmentTeaBoyHomeBinding.inflate(inflater, container, false)
+        binding.pendingLayout.setOnClickListener(this)
+        binding.deliveredLayout.setOnClickListener(this)
+        binding.cancelledLayout.setOnClickListener(this)
         return binding.root
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+
         prefs = requireActivity().getSharedPreferences("tdf", Context.MODE_PRIVATE)
 
         if (prefs.getBoolean("Start",false)) {
@@ -68,9 +75,9 @@ class TeaBoyHomeFragment : Fragment() {
         binding.switchCompat.isChecked = status
 
         if (status){
-            binding.status.text = "Active"
+            binding.status.text = getString(R.string.active)
         }else
-            binding.status.text = "DeActive"
+            binding.status.text = getString(R.string.deactive)
 
 
         binding.switchCompat.setOnCheckedChangeListener { _, isChecked ->
@@ -104,6 +111,31 @@ class TeaBoyHomeFragment : Fragment() {
                     binding.prg.visibility = View.GONE
                     Toast.makeText(context, it.message, Toast.LENGTH_SHORT).show()
                 }
+            }
+        }
+    }
+
+    override fun onClick(v: View?) {
+        when(v?.id){
+
+            R.id.pendingLayout -> {
+                bundle = bundleOf("type" to OrderEnum.Pending.order)
+                findNavController().navigate(R.id.action_teaBoyHomeFragment_to_teaBoyOrdersFragment,bundle)
+
+            }
+
+            R.id.deliveredLayout -> {
+                bundle = bundleOf("type" to OrderEnum.Delivered.order)
+                findNavController().navigate(R.id.action_teaBoyHomeFragment_to_teaBoyOrdersFragment,bundle)
+
+
+            }
+
+            R.id.cancelledLayout -> {
+                bundle = bundleOf("type" to OrderEnum.Cancel.order)
+                findNavController().navigate(R.id.action_teaBoyHomeFragment_to_teaBoyOrdersFragment,bundle)
+
+
             }
         }
     }

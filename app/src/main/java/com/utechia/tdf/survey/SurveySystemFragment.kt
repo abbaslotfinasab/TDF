@@ -12,7 +12,7 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import com.google.android.material.tabs.TabLayout
 import com.utechia.domain.utile.Result
 import com.utechia.tdf.databinding.FragmentSurveySystemBinding
-import com.utechia.tdf.order.ItemDecorationOrder
+import com.utechia.tdf.order.user.ItemDecorationOrder
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint

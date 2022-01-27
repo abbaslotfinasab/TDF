@@ -1,4 +1,4 @@
-package com.utechia.tdf.order
+package com.utechia.tdf.order.user
 
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
@@ -63,6 +63,19 @@ class UserOrderViewModel @Inject constructor(
             _orderModel.postValue(Result.Loading)
 
             orderUseCaseImpl.singleOrder(id).let {
+
+                _orderModel.postValue(Result.Success(it))
+            }
+        }
+    }
+
+    fun setRate(order:Int,rate:Int){
+
+        viewModelScope.launch(Dispatchers.IO+handler) {
+
+            _orderModel.postValue(Result.Loading)
+
+            orderUseCaseImpl.rate(order,rate).let {
 
                 _orderModel.postValue(Result.Success(it))
             }

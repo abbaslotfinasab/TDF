@@ -1,4 +1,4 @@
-package com.utechia.tdf.order
+package com.utechia.tdf.order.user
 
 import android.graphics.Color
 import android.graphics.drawable.ColorDrawable
@@ -12,6 +12,7 @@ import androidx.core.os.bundleOf
 import androidx.fragment.app.DialogFragment
 import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
+import com.utechia.domain.enum.OrderEnum
 import com.utechia.domain.utile.Result
 import com.utechia.tdf.R
 import com.utechia.tdf.databinding.FragmentRateConfirmationBinding
@@ -21,7 +22,7 @@ import dagger.hilt.android.AndroidEntryPoint
 class RateConfirmationFragment : DialogFragment() {
 
     private lateinit var binding: FragmentRateConfirmationBinding
-    private val orderRateVieModel:OrderRateViwModel by viewModels()
+    private val orderRateVieModel: UserOrderViewModel by viewModels()
     private lateinit var bundle: Bundle
     private var orderId = 0
     private var rate = 0
@@ -45,16 +46,16 @@ class RateConfirmationFragment : DialogFragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        bundle = bundleOf("type" to "rate")
+        bundle = bundleOf(OrderEnum.Type.order to OrderEnum.Delivered.name)
 
         observer()
 
 
         if (arguments != null) {
-            orderId = requireArguments().getInt("orderId")
+            orderId = requireArguments().getInt(OrderEnum.Type.order)
             rate = requireArguments().getInt("rate")
-
         }
+
         binding.btnKeep.setOnClickListener {
             orderRateVieModel.setRate(orderId,rate)
         }
@@ -70,7 +71,7 @@ class RateConfirmationFragment : DialogFragment() {
     }
 
     private fun observer() {
-        orderRateVieModel.orderModel.observe(viewLifecycleOwner){
+        orderRateVieModel.userOrderModel.observe(viewLifecycleOwner){
 
 
             when (it) {

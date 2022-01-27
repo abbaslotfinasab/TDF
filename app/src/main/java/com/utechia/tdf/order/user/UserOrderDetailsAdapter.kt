@@ -1,4 +1,4 @@
-package com.utechia.tdf.order
+package com.utechia.tdf.order.user
 
 import android.view.LayoutInflater
 import android.view.View
@@ -10,7 +10,7 @@ import com.bumptech.glide.Glide
 import com.utechia.domain.model.ItemModel
 import com.utechia.tdf.R
 
-class OrderDetailsAdapter: RecyclerView.Adapter<RecyclerView.ViewHolder>() {
+class UserOrderDetailsAdapter: RecyclerView.Adapter<RecyclerView.ViewHolder>() {
 
     var orders: MutableList<ItemModel> = mutableListOf()
 

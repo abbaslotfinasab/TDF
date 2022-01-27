@@ -1,4 +1,4 @@
-package com.utechia.tdf.order
+package com.utechia.tdf.order.user
 
 import android.os.Handler
 import android.os.Looper
@@ -154,17 +154,17 @@ class UserOrderAdapter: RecyclerView.Adapter<RecyclerView.ViewHolder>() {
                 }
 
             cancel.setOnClickListener {
-                val bundle = bundleOf("orderId" to userOrders[position].id)
+                val bundle = bundleOf(OrderEnum.ID.order to userOrders[position].id)
                 itemView.findNavController().navigate(R.id.action_orderFragment_to_cancelFragment,bundle)
             }
 
             details.setOnClickListener {
-                val bundle = bundleOf("cartId" to userOrders[position].cart?.id)
+                val bundle = bundleOf(OrderEnum.ID.order to userOrders[position].cart?.id)
                 itemView.findNavController().navigate(R.id.action_orderFragment_to_orderDetailsFragment,bundle)
             }
 
             layout.setOnClickListener {
-                val bundle = bundleOf("cartId" to userOrders[position].cart?.id)
+                val bundle = bundleOf(OrderEnum.ID.order to userOrders[position].cart?.id)
                 itemView.findNavController().navigate(R.id.action_orderFragment_to_orderDetailsFragment,bundle)
             }
         }

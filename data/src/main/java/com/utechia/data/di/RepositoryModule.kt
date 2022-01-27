@@ -2,7 +2,6 @@ package com.utechia.data.di
 
 import com.utechia.data.repo.*
 import com.utechia.domain.repository.*
-import com.utechia.domain.usecases.EventDetailsUsCaseImpl
 import dagger.Binds
 import dagger.Module
 import dagger.hilt.InstallIn
@@ -77,11 +76,6 @@ abstract class RepositoryModule {
     abstract fun bindSurveyRepositoryService(
         surveyRepoImpl: SurveyRepoImpl
     ): SurveyRepo
-
-    @Binds
-    abstract fun bindOrderRateRepositoryService(
-        orderRateRepoImpl: OrderRateRepoImpl
-    ): OrderRateRepo
 
     @Binds
     abstract fun bindSurveyAnswerRepositoryService(

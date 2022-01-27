@@ -16,7 +16,7 @@ import androidx.navigation.fragment.findNavController
 import com.utechia.domain.utile.Result
 import com.utechia.tdf.R
 import com.utechia.tdf.databinding.FragmentDeactivationBinding
-import com.utechia.tdf.order.OrderCountViewModel
+import com.utechia.tdf.order.teaboy.OrderCountViewModel
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint

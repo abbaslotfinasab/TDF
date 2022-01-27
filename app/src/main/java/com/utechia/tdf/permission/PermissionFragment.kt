@@ -1,6 +1,5 @@
 package com.utechia.tdf.permission
 
-import android.content.Context
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -14,7 +13,7 @@ import com.google.android.material.tabs.TabLayout
 import com.utechia.domain.utile.Result
 import com.utechia.tdf.R
 import com.utechia.tdf.databinding.FragmentPermissionBinding
-import com.utechia.tdf.order.ItemDecorationOrder
+import com.utechia.tdf.order.user.ItemDecorationOrder
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint

@@ -1,4 +1,4 @@
-package com.utechia.tdf.order
+package com.utechia.tdf.order.user
 
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentManager
@@ -15,19 +15,19 @@ class UserViewPagerAdapter(fa: FragmentManager, lifecycle:Lifecycle) : FragmentS
         return when (position) {
 
             0 -> {
-                UserPendingFragment(OrderEnum.Pending.order)
+                UserOrderChildFragment(OrderEnum.Pending.order)
             }
 
             1 -> {
-                UserPendingFragment(OrderEnum.Delivered.order)
+                UserOrderChildFragment(OrderEnum.Delivered.order)
             }
 
             2 -> {
-                UserPendingFragment(OrderEnum.Cancel.order)
+                UserOrderChildFragment(OrderEnum.Cancel.order)
             }
 
             else -> {
-                UserPendingFragment(OrderEnum.Pending.order)
+                UserOrderChildFragment(OrderEnum.Pending.order)
             }
         }
     }

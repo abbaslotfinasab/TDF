@@ -19,4 +19,9 @@ class UserOrderUseCaseImpl @Inject constructor(private val userOrderRepo: UserOr
     override suspend fun singleOrder(id: Int): MutableList<UserOrderDataModel> {
         return userOrderRepo.singleOrder(id)
     }
+
+    override suspend fun rate(order: Int, rate: Int): MutableList<UserOrderDataModel> {
+        return userOrderRepo.rate(order,rate)
+    }
+
 }

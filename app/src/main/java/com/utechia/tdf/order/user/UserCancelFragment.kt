@@ -1,4 +1,4 @@
-package com.utechia.tdf.order
+package com.utechia.tdf.order.user
 
 import android.graphics.Color
 import android.graphics.drawable.ColorDrawable
@@ -8,26 +8,29 @@ import android.view.View
 import android.view.ViewGroup
 import android.view.Window
 import android.widget.Toast
+import androidx.core.os.bundleOf
 import androidx.fragment.app.DialogFragment
 import androidx.fragment.app.viewModels
-import androidx.recyclerview.widget.LinearLayoutManager
+import androidx.navigation.fragment.findNavController
+import com.utechia.domain.enum.OrderEnum
 import com.utechia.domain.utile.Result
-import com.utechia.tdf.databinding.FragmentOrderDetailsBinding
+import com.utechia.tdf.R
+import com.utechia.tdf.databinding.FragmentCancelBinding
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
-class OrderDetailsFragment : DialogFragment() {
+class UserCancelFragment : DialogFragment() {
 
-    private lateinit var binding: FragmentOrderDetailsBinding
+    private lateinit var binding: FragmentCancelBinding
     private val userOrderViewModel: UserOrderViewModel by viewModels()
-    private val orderAdapter:OrderDetailsAdapter = OrderDetailsAdapter()
-    private var cartId = 0
+    private lateinit var bundle: Bundle
+    private var orderId = 0
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
-        binding = FragmentOrderDetailsBinding.inflate(inflater, container, false)
+        binding = FragmentCancelBinding.inflate(inflater, container, false)
 
         if(dialog !=null && dialog?.window !=null){
             dialog?.window?.setBackgroundDrawable(ColorDrawable(Color.TRANSPARENT))
@@ -40,52 +43,57 @@ class OrderDetailsFragment : DialogFragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+        bundle = bundleOf(OrderEnum.Type.order to OrderEnum.Cancel.order)
 
-        if (arguments !=null){
-            cartId = requireArguments().getInt("cartId")
+        observer()
+
+
+        if (arguments != null) {
+            orderId = requireArguments().getInt(OrderEnum.ID.order)
+
         }
 
-        userOrderViewModel.singleOrder(cartId)
-
-        binding.recyclerView.apply {
-            adapter = orderAdapter
-            layoutManager = LinearLayoutManager(context,LinearLayoutManager.VERTICAL,false)
-            addItemDecoration(ItemDecorationOrderDetails())
+        binding.btnKeep.setOnClickListener {
+            dialog?.dismiss()
         }
-
 
         binding.exit.setOnClickListener {
             dialog?.dismiss()
         }
 
         binding.btnCancel.setOnClickListener {
-            dialog?.dismiss()
+
+            userOrderViewModel.cancelOrder(orderId)
         }
-
-        observer()
-
     }
 
     private fun observer() {
+
         userOrderViewModel.userOrderModel.observe(viewLifecycleOwner){
 
 
             when (it) {
                 is Result.Success -> {
                     binding.prg.visibility = View.GONE
-                    binding.recyclerView.visibility = View.VISIBLE
-                    orderAdapter.addData(it.data[0].cart?.items!!)
+                    findNavController().navigate(R.id.action_cancelFragment_to_orderFragment,bundle)
+                    dialog?.dismiss()
+
                 }
 
                 is Result.Loading -> {
                     binding.prg.visibility = View.VISIBLE
-                    binding.recyclerView.visibility = View.VISIBLE
+                    binding.btnKeep.isEnabled = false
+                    binding.btnCancel.isEnabled = false
+                    binding.exit.isEnabled = false
+
+
                 }
 
                 is Result.Error -> {
                     binding.prg.visibility = View.GONE
-                    binding.recyclerView.visibility = View.GONE
                     Toast.makeText(context, it.message, Toast.LENGTH_SHORT).show()
+                    findNavController().navigate(R.id.action_cancelFragment_to_orderFragment,bundle)
+                    dialog?.dismiss()
                 }
             }
         }

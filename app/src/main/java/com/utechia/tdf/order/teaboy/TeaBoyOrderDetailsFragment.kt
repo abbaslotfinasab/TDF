@@ -1,4 +1,4 @@
-package com.utechia.tdf.order
+package com.utechia.tdf.order.teaboy
 
 import android.graphics.Color
 import android.graphics.drawable.ColorDrawable
@@ -11,16 +11,18 @@ import android.widget.Toast
 import androidx.fragment.app.DialogFragment
 import androidx.fragment.app.viewModels
 import androidx.recyclerview.widget.LinearLayoutManager
+import com.utechia.domain.enum.OrderEnum
 import com.utechia.domain.utile.Result
 import com.utechia.tdf.databinding.FragmentOrderDetailsBinding
+import com.utechia.tdf.order.user.UserOrderDetailsAdapter
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
 class TeaBoyOrderDetailsFragment : DialogFragment() {
 
     private lateinit var binding: FragmentOrderDetailsBinding
-    private val userOrderViewModel:TeaBoyOrderViewModel by viewModels()
-    private val orderAdapter:OrderDetailsAdapter = OrderDetailsAdapter()
+    private val userOrderViewModel: TeaBoyOrderViewModel by viewModels()
+    private val userOrderAdapter: UserOrderDetailsAdapter = UserOrderDetailsAdapter()
     private var cartId = 0
 
     override fun onCreateView(
@@ -42,14 +44,14 @@ class TeaBoyOrderDetailsFragment : DialogFragment() {
         super.onViewCreated(view, savedInstanceState)
 
         if (arguments !=null){
-            cartId = requireArguments().getInt("cartId")
+            cartId = requireArguments().getInt(OrderEnum.ID.order,0)
         }
 
         userOrderViewModel.singleOrderTeaBoy(cartId)
 
 
         binding.recyclerView.apply {
-            adapter = orderAdapter
+            adapter = userOrderAdapter
             layoutManager = LinearLayoutManager(context,LinearLayoutManager.VERTICAL,false)
             addItemDecoration(ItemDecorationOrderDetails())
         }
@@ -68,14 +70,14 @@ class TeaBoyOrderDetailsFragment : DialogFragment() {
     }
 
     private fun observer() {
-        userOrderViewModel.userOrderModel.observe(viewLifecycleOwner){
+        userOrderViewModel.orderModel.observe(viewLifecycleOwner){
 
 
             when (it) {
                 is Result.Success -> {
                     binding.prg.visibility = View.GONE
                     binding.recyclerView.visibility = View.VISIBLE
-                    orderAdapter.addData(it.data[0].cart?.items!!)
+                    userOrderAdapter.addData(it.data[0].cart?.items!!)
                 }
 
                 is Result.Loading -> {

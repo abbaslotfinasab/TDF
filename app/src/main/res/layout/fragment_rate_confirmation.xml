@@ -6,7 +6,7 @@
     android:layout_height="372dp"
     android:background="@color/white"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    tools:context=".order.RateConfirmationFragment">
+    tools:context=".order.user.RateConfirmationFragment">
 
     <ImageView
         android:id="@+id/exit"

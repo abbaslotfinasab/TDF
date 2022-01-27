@@ -379,7 +379,7 @@
     </fragment>
     <fragment
         android:id="@+id/orderFragment"
-        android:name="com.utechia.tdf.order.UserOrderFragment"
+        android:name="com.utechia.tdf.order.user.UserOrderParentFragment"
         android:label="fragment_order"
         tools:layout="@layout/fragment_order" >
         <action
@@ -523,13 +523,25 @@
         <action
             android:id="@+id/action_teaBoyHomeFragment_to_deactivationFragment"
             app:destination="@id/deactivationFragment"
+            app:launchSingleTop="true"
+            app:popUpTo="@id/teaBoyHomeFragment"
             app:enterAnim="@android:anim/fade_in"
             app:exitAnim="@android:anim/fade_out"
             app:popEnterAnim="@android:anim/fade_in"
             app:popExitAnim="@android:anim/fade_out"/>
         <action
             android:id="@+id/action_teaBoyHomeFragment_to_activationFragment"
+            app:launchSingleTop="true"
+            app:popUpTo="@id/teaBoyHomeFragment"
             app:destination="@id/activationFragment"
+            app:enterAnim="@android:anim/fade_in"
+            app:exitAnim="@android:anim/fade_out"
+            app:popEnterAnim="@android:anim/fade_in"
+            app:popExitAnim="@android:anim/fade_out"/>
+
+        <action
+            android:id="@+id/action_teaBoyHomeFragment_to_teaBoyOrdersFragment"
+            app:destination="@id/teaBoyOrdersFragment"
             app:enterAnim="@android:anim/fade_in"
             app:exitAnim="@android:anim/fade_out"
             app:popEnterAnim="@android:anim/fade_in"
@@ -538,7 +550,7 @@
 
     <fragment
         android:id="@+id/teaBoyOrdersFragment"
-        android:name="com.utechia.tdf.order.TeaBoyOrdersFragment"
+        android:name="com.utechia.tdf.order.teaboy.TeaBoyOrderParentFragment"
         android:label="fragment_tea_boy_orders"
         tools:layout="@layout/fragment_tea_boy_orders" >
         <action
@@ -557,7 +569,7 @@
             app:popExitAnim="@android:anim/fade_out"/>
 
         <action
-            android:id="@+id/action_orderFragment_to_orderDetailsFragment"
+            android:id="@+id/action_teaBoyOrdersFragment_to_teaBoyOrderDetailsFragment"
             app:destination="@id/teaBoyOrderDetailsFragment"
             app:enterAnim="@android:anim/fade_in"
             app:exitAnim="@android:anim/fade_out"
@@ -595,7 +607,7 @@
 
     <dialog
         android:id="@+id/cancelFragment"
-        android:name="com.utechia.tdf.order.CancelFragment"
+        android:name="com.utechia.tdf.order.user.UserCancelFragment"
         android:label="fragment_cancel"
         tools:layout="@layout/fragment_cancel" >
         <argument
@@ -619,7 +631,7 @@
         tools:layout="@layout/fragment_status" />
     <dialog
         android:id="@+id/orderDetailsFragment"
-        android:name="com.utechia.tdf.order.OrderDetailsFragment"
+        android:name="com.utechia.tdf.order.user.UserOrderDetailsFragment"
         android:label="fragment_order_details"
         tools:layout="@layout/fragment_order_details" >
         <argument
@@ -629,7 +641,7 @@
     </dialog>
     <dialog
         android:id="@+id/acceptFragment"
-        android:name="com.utechia.tdf.order.AcceptFragment"
+        android:name="com.utechia.tdf.order.teaboy.AcceptFragment"
         android:label="fragment_accept"
         tools:layout="@layout/fragment_accept" >
 
@@ -649,7 +661,7 @@
     </dialog>
     <dialog
         android:id="@+id/rejectFragment"
-        android:name="com.utechia.tdf.order.RejectFragment"
+        android:name="com.utechia.tdf.order.teaboy.RejectFragment"
         android:label="fragment_reject"
         tools:layout="@layout/fragment_reject" >
 
@@ -921,7 +933,7 @@
 
     <dialog
         android:id="@+id/rateConfirmationFragment"
-        android:name="com.utechia.tdf.order.RateConfirmationFragment"
+        android:name="com.utechia.tdf.order.user.RateConfirmationFragment"
         android:label="fragment_rate_confirmation"
         tools:layout="@layout/fragment_rate_confirmation" >
 
@@ -938,7 +950,7 @@
     </dialog>
     <dialog
         android:id="@+id/teaBoyOrderDetailsFragment"
-        android:name="com.utechia.tdf.order.TeaBoyOrderDetailsFragment"
+        android:name="com.utechia.tdf.order.teaboy.TeaBoyOrderDetailsFragment"
         android:label="fragment_tea_boy_order_details"
         tools:layout="@layout/fragment_tea_boy_order_details" >
 
@@ -1271,20 +1283,16 @@
             app:popEnterAnim="@android:anim/fade_in"
             app:popExitAnim="@android:anim/fade_out"/>
     </dialog>
+
     <fragment
         android:id="@+id/pendingFragment"
-        android:name="com.utechia.tdf.order.UserPendingFragment"
+        android:name="com.utechia.tdf.order.user.UserOrderChildFragment"
         android:label="fragment_pending"
         tools:layout="@layout/fragment_pending" />
     <fragment
-        android:id="@+id/deliveredFragment"
-        android:name="com.utechia.tdf.order.UserDeliveredFragment"
-        android:label="fragment_delivered"
-        tools:layout="@layout/fragment_delivered" />
-    <fragment
-        android:id="@+id/cancellFragment"
-        android:name="com.utechia.tdf.order.UserCancelledFragment"
-        android:label="fragment_cancell"
-        tools:layout="@layout/fragment_cancelled" />
+        android:id="@+id/teaBoyOrderChildFragment"
+        android:name="com.utechia.tdf.order.teaboy.TeaBoyOrderChildFragment"
+        android:label="fragment_tea_boy_order_child"
+        tools:layout="@layout/fragment_tea_boy_order_child" />
 
 </navigation>

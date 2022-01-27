@@ -1,4 +1,4 @@
-package com.utechia.tdf.order
+package com.utechia.tdf.order.teaboy
 
 import android.graphics.Color
 import android.graphics.drawable.ColorDrawable
@@ -8,80 +8,65 @@ import android.view.View
 import android.view.ViewGroup
 import android.view.Window
 import android.widget.Toast
-import androidx.core.os.bundleOf
 import androidx.fragment.app.DialogFragment
 import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
+import com.utechia.domain.enum.OrderEnum
 import com.utechia.domain.utile.Result
 import com.utechia.tdf.R
-import com.utechia.tdf.databinding.FragmentCancelBinding
+import com.utechia.tdf.databinding.FragmentRejectBinding
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
-class CancelFragment : DialogFragment() {
+class RejectFragment : DialogFragment(),View.OnClickListener {
 
-    private lateinit var binding: FragmentCancelBinding
-    private val userOrderViewModel: UserOrderViewModel by viewModels()
-    private lateinit var bundle: Bundle
+    private lateinit var binding: FragmentRejectBinding
+    private val teaBoyOrderViewModel: TeaBoyOrderViewModel by viewModels()
     private var orderId = 0
+
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
-        binding = FragmentCancelBinding.inflate(inflater, container, false)
+        binding = FragmentRejectBinding.inflate(inflater, container, false)
+        binding.exit.setOnClickListener(this)
+        binding.btnCancel.setOnClickListener(this)
+        binding.btnDelete.setOnClickListener(this)
 
-        if(dialog !=null && dialog?.window !=null){
+        if (dialog != null && dialog?.window != null) {
             dialog?.window?.setBackgroundDrawable(ColorDrawable(Color.TRANSPARENT))
             dialog?.window?.requestFeature(Window.FEATURE_NO_TITLE)
             dialog?.setCancelable(false)
-
         }
         return binding.root
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        bundle = bundleOf("type" to "cancel")
+
+        if (arguments != null)
+            orderId = requireArguments().getInt(OrderEnum.ID.order, 0)
 
         observer()
-
-
-        if (arguments != null) {
-            orderId = requireArguments().getInt("orderId")
-
-        }
-
-        binding.btnKeep.setOnClickListener {
-            dialog?.dismiss()
-        }
-
-        binding.exit.setOnClickListener {
-            dialog?.dismiss()
-        }
-
-        binding.btnCancel.setOnClickListener {
-
-            userOrderViewModel.cancelOrder(orderId)
-        }
     }
 
     private fun observer() {
 
-        userOrderViewModel.userOrderModel.observe(viewLifecycleOwner){
-
+        teaBoyOrderViewModel.orderModel.observe(viewLifecycleOwner) {
 
             when (it) {
                 is Result.Success -> {
                     binding.prg.visibility = View.GONE
-                    findNavController().navigate(R.id.action_cancelFragment_to_orderFragment,bundle)
+                    findNavController().clearBackStack(R.id.orderFragment)
+                    findNavController().navigate(R.id.action_rejectFragment_to_teaBoyOrdersFragment)
                     dialog?.dismiss()
 
                 }
 
                 is Result.Loading -> {
                     binding.prg.visibility = View.VISIBLE
-                    binding.btnKeep.isEnabled = false
+                    binding.btnDelete.isEnabled = false
                     binding.btnCancel.isEnabled = false
                     binding.exit.isEnabled = false
 
@@ -91,9 +76,27 @@ class CancelFragment : DialogFragment() {
                 is Result.Error -> {
                     binding.prg.visibility = View.GONE
                     Toast.makeText(context, it.message, Toast.LENGTH_SHORT).show()
-                    findNavController().navigate(R.id.action_cancelFragment_to_orderFragment,bundle)
+                    findNavController().clearBackStack(R.id.orderFragment)
+                    findNavController().navigate(R.id.action_rejectFragment_to_teaBoyOrdersFragment)
                     dialog?.dismiss()
                 }
+            }
+        }
+    }
+
+    override fun onClick(v: View?) {
+
+        when(v?.id){
+
+            R.id.exit ->{
+            }
+
+            R.id.btnCancel ->{
+                dialog?.dismiss()
+            }
+
+            R.id.btnDelete ->{
+                teaBoyOrderViewModel.rejectOrder(orderId)
             }
         }
     }

@@ -9,6 +9,8 @@
     <string name="cancelled">Cancelled</string>
     <string name="wait">Waiting</string>
     <string name="prepare">Preparing</string>
+    <string name="active">Active</string>
+    <string name="deactive">DeActive</string>
 
 
     <string-array name="month_array">

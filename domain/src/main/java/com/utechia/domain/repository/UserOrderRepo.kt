@@ -7,5 +7,7 @@ interface UserOrderRepo {
     suspend fun getOrder(status:String):MutableList<UserOrderDataModel>
     suspend fun cancelOrder(id:Int):MutableList<UserOrderDataModel>
     suspend fun singleOrder(id:Int):MutableList<UserOrderDataModel>
+    suspend fun rate(order:Int,rate:Int):MutableList<UserOrderDataModel>
+
 
 }

@@ -2,6 +2,8 @@ package com.utechia.domain.enum
 
 enum class OrderEnum(val order: String) {
 
+    ID("orderId"),
+    Type("type"),
     Pending("pending"),
     Cancel("cancelled"),
     Delivered("delivered"),

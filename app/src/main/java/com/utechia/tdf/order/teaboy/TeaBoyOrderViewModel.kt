@@ -1,4 +1,4 @@
-package com.utechia.tdf.order
+package com.utechia.tdf.order.teaboy
 
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
@@ -21,7 +21,7 @@ class TeaBoyOrderViewModel @Inject constructor(
 ):ViewModel() {
 
     private val _orderModel = MutableLiveData<Result<MutableList<TeaBoyOrderDataModel>>>()
-    val userOrderModel: LiveData<Result<MutableList<TeaBoyOrderDataModel>>>
+    val orderModel: LiveData<Result<MutableList<TeaBoyOrderDataModel>>>
         get() = _orderModel
 
     private val handler = CoroutineExceptionHandler {

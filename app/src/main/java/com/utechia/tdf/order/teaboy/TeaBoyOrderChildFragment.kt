@@ -1,4 +1,4 @@
-package com.utechia.tdf.order
+package com.utechia.tdf.order.teaboy
 
 import android.os.Bundle
 import android.view.LayoutInflater
@@ -9,34 +9,35 @@ import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
-import com.utechia.domain.enum.OrderEnum
 import com.utechia.domain.utile.Result
-import com.utechia.tdf.databinding.FragmentPendingBinding
+import com.utechia.tdf.databinding.FragmentTeaBoyOrderChildBinding
+import com.utechia.tdf.order.user.ItemDecorationOrder
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
-class UserPendingFragment(val order: String) : Fragment() {
+class TeaBoyOrderChildFragment(val order: String) : Fragment() {
 
-    private lateinit var binding: FragmentPendingBinding
-    private val userOrderViewModel: UserOrderViewModel by viewModels()
-    private val userOrderAdapter: UserOrderAdapter = UserOrderAdapter()
+    private lateinit var binding: FragmentTeaBoyOrderChildBinding
+    val teaBoyOrderViewModel:TeaBoyOrderViewModel by viewModels()
+    private val orderTeaBoyAdapter:OrderTeaBoyAdapter = OrderTeaBoyAdapter(this)
+
 
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
-        binding = FragmentPendingBinding.inflate(inflater, container, false)
+        binding = FragmentTeaBoyOrderChildBinding.inflate(inflater, container, false)
         return binding.root
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        userOrderViewModel.getOrder(order)
+        teaBoyOrderViewModel.getOrderTeaBoy(order)
 
         binding.refreshLayout.setOnRefreshListener {
 
-            userOrderViewModel.getOrder(order)
+            teaBoyOrderViewModel.getOrderTeaBoy(order)
 
         }
 
@@ -45,7 +46,7 @@ class UserPendingFragment(val order: String) : Fragment() {
         }
 
         binding.recyclerView.apply {
-            adapter = userOrderAdapter
+            adapter = orderTeaBoyAdapter
             layoutManager = LinearLayoutManager(context,LinearLayoutManager.VERTICAL,false)
             addItemDecoration(ItemDecorationOrder())
         }
@@ -54,7 +55,7 @@ class UserPendingFragment(val order: String) : Fragment() {
     }
 
     private fun observer() {
-        userOrderViewModel.userOrderModel.observe(viewLifecycleOwner){
+        teaBoyOrderViewModel.orderModel.observe(viewLifecycleOwner){
 
 
             when (it) {
@@ -65,7 +66,7 @@ class UserPendingFragment(val order: String) : Fragment() {
                     if (it.data.size!=0){
                         binding.recyclerView.visibility = View.VISIBLE
                         binding.emptyLayout.visibility = View.GONE
-                        userOrderAdapter.addData(it.data)
+                        orderTeaBoyAdapter.addData(it.data)
 
                     }
                     else{

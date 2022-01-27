@@ -1,4 +1,4 @@
-package com.utechia.tdf.order
+package com.utechia.tdf.survey
 
 import android.graphics.Color
 import android.graphics.drawable.ColorDrawable

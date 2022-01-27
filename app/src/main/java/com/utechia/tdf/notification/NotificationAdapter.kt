@@ -66,8 +66,6 @@ class NotificationAdapter: RecyclerView.Adapter<RecyclerView.ViewHolder>() {
                 localTime.atOffset(ZoneOffset.UTC).toInstant()
             )
 
-            Log.d("duration", duration.seconds.toString())
-
             when (duration.seconds) {
 
                 in 0 until 60 -> {

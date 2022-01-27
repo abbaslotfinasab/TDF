@@ -1,4 +1,4 @@
-package com.utechia.tdf.order
+package com.utechia.tdf.order.teaboy
 
 import android.os.Bundle
 import android.view.LayoutInflater
@@ -7,15 +7,16 @@ import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import com.google.android.material.tabs.TabLayout
 import com.google.android.material.tabs.TabLayoutMediator
+import com.utechia.domain.enum.OrderEnum
 import com.utechia.tdf.R
-import com.utechia.tdf.databinding.FragmentOrderBinding
+import com.utechia.tdf.databinding.FragmentTeaBoyOrdersBinding
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
-class UserOrderFragment : Fragment() {
+class TeaBoyOrderParentFragment : Fragment() {
 
-    private lateinit var binding: FragmentOrderBinding
-    private lateinit var userViewPagerAdapter: UserViewPagerAdapter
+    private lateinit var binding: FragmentTeaBoyOrdersBinding
+    private lateinit var teaBoyViewPagerAdapter:TeaBoyViewPagerAdapter
     private var type = ""
 
 
@@ -23,18 +24,18 @@ class UserOrderFragment : Fragment() {
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
-        binding = FragmentOrderBinding.inflate(inflater, container, false)
+        binding = FragmentTeaBoyOrdersBinding.inflate(inflater, container, false)
         return binding.root
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        userViewPagerAdapter = UserViewPagerAdapter(parentFragmentManager, lifecycle)
+        teaBoyViewPagerAdapter = TeaBoyViewPagerAdapter(parentFragmentManager, lifecycle)
 
-        binding.pager.adapter = userViewPagerAdapter
+        binding.pager.adapter = teaBoyViewPagerAdapter
 
         if (arguments != null) {
-            type = requireArguments().getString("type","")
+            type = requireArguments().getString(OrderEnum.Type.order,"")
         }
 
         TabLayoutMediator(binding.tabLayout,binding.pager){ tab, position ->
@@ -56,18 +57,39 @@ class UserOrderFragment : Fragment() {
 
             when(type){
 
-                "rate" -> {
-                    binding.pager.setCurrentItem(1,true)
-                }
-                "cancel" ->{
-                    binding.pager.setCurrentItem(0,true)
+                OrderEnum.Delivered.order -> {
+                    binding.pager.postDelayed({
+                        binding.pager.setCurrentItem(1,true)
+                        binding.tabLayout.selectTab(tab.parent?.getTabAt(1))
+
+                    },100)
 
                 }
+                OrderEnum.Pending.order ->{
+
+                    binding.pager.postDelayed({
+                        binding.pager.setCurrentItem(0,true)
+                        binding.tabLayout.selectTab(tab.parent?.getTabAt(0))
+
+                    },100)
+                }
+
+                OrderEnum.Cancel.order ->{
+
+                    binding.pager.postDelayed({
+                        binding.pager.setCurrentItem(2,true)
+                        binding.tabLayout.selectTab(tab.parent?.getTabAt(2))
+
+                    },100)
+                }
+
                 else -> {
-                    binding.pager.setCurrentItem(tab.position,true)
+                    binding.pager.postDelayed({
+                        binding.pager.setCurrentItem(0,true)
+                        binding.tabLayout.selectTab(tab.parent?.getTabAt(0))
 
+                    },100)
                 }
-
             }}.attach()
 
 
