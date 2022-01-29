@@ -14,8 +14,8 @@ class ItemDecorationRefreshment: RecyclerView.ItemDecoration(){
         @NonNull parent: RecyclerView,
         @NonNull state: RecyclerView.State
     ) {
-        outRect.left = 30
-        outRect.right = 30
+        outRect.left = 20
+        outRect.right = 20
 
 
     }

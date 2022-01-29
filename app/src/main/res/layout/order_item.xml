@@ -4,7 +4,7 @@
     android:layout_width="match_parent"
     android:background="@color/white"
     android:id="@+id/orderLayout"
-    android:layout_height="117dp">
+    android:layout_height="115dp">
 
     <TextView
         android:id="@+id/title"
@@ -19,16 +19,31 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
+
     <TextView
-        android:id="@+id/subtitle"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:id="@+id/subtitle0"
+        android:layout_width="0dp"
+        android:layout_height="13dp"
         android:layout_marginStart="15dp"
+        android:text="@string/orderid"
         android:textColor="@color/black"
         android:textSize="11sp"
+        android:textStyle="bold"
         app:layout_constraintBottom_toTopOf="@+id/status"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/numberText" />
+        app:layout_constraintTop_toBottomOf="@+id/title" />
+
+
+    <TextView
+        android:id="@+id/subtitle"
+        android:layout_width="0dp"
+        android:layout_height="13dp"
+        android:layout_marginStart="2dp"
+        android:textColor="@color/black"
+        android:textSize="11sp"
+        app:layout_constraintBottom_toBottomOf="@+id/subtitle0"
+        app:layout_constraintStart_toEndOf="@+id/subtitle0"
+        app:layout_constraintTop_toTopOf="@+id/subtitle0" />
 
     <TextView
         android:id="@+id/status"
@@ -45,86 +60,102 @@
     <RatingBar
         android:id="@+id/rating"
         style="?android:attr/ratingBarStyleSmall"
-        android:isIndicator="true"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="15dp"
+        android:layout_marginEnd="5dp"
+        android:isIndicator="true"
         android:numStars="5"
         android:progressBackgroundTint="@color/gray"
         android:progressTint="#FFCB45"
         android:rating="0"
         android:secondaryProgressTint="@color/gray"
         android:stepSize="1"
-        android:visibility="gone"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/subtitle" />
+        android:visibility="visible"
+        app:layout_constraintBottom_toBottomOf="@+id/ratingNum"
+        app:layout_constraintEnd_toStartOf="@+id/ratingNum"
+        app:layout_constraintTop_toTopOf="@+id/ratingNum" />
 
     <TextView
         android:id="@+id/ratingNum"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="8dp"
+        android:layout_marginEnd="10dp"
+        android:layout_marginBottom="15dp"
         android:gravity="center"
         android:text="0.0"
         android:textColor="@color/black"
         android:textSize="11sp"
-        android:visibility="gone"
-        app:layout_constraintBottom_toBottomOf="@+id/rating"
-        app:layout_constraintStart_toEndOf="@+id/rating"
-        app:layout_constraintTop_toTopOf="@+id/rating" />
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent" />
 
 
     <TextView
         android:id="@+id/numberText"
         android:layout_width="32dp"
         android:layout_height="32dp"
-        android:layout_marginStart="5dp"
+        android:layout_marginStart="20dp"
         android:background="@drawable/ic_teaboy_back"
         android:gravity="center"
-        android:textColor="#787777"
+        android:textColor="#828282"
         android:textSize="12sp"
         app:layout_constraintBottom_toBottomOf="@+id/title"
         app:layout_constraintStart_toEndOf="@+id/title"
         app:layout_constraintTop_toTopOf="@+id/title" />
 
-    <androidx.appcompat.widget.AppCompatButton
-        android:id="@+id/btnDetails"
-        android:layout_width="62dp"
-        android:layout_height="18dp"
+    <ImageView
+        android:id="@+id/imageView13"
+        android:layout_width="19dp"
+        android:layout_height="19dp"
+        android:layout_marginEnd="2dp"
+        android:src="@drawable/ic_clock"
+        app:layout_constraintBottom_toBottomOf="@+id/time"
+        app:layout_constraintEnd_toStartOf="@+id/time"
+        app:layout_constraintTop_toTopOf="@+id/time" />
+
+    <TextView
+        android:id="@+id/time"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="20dp"
         android:layout_marginEnd="15dp"
-        android:background="@drawable/delivered_btn"
         android:gravity="center"
-        android:text="Details"
-        android:textAllCaps="false"
-        android:textColor="@color/white"
-        android:textSize="11sp"
-        android:visibility="visible"
-        app:layout_constraintBottom_toBottomOf="@+id/title"
+        android:textColor="@color/black"
+        android:textSize="12sp"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toTopOf="@+id/title" />
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <ImageView
+        android:id="@+id/imageView14"
+        android:layout_width="19dp"
+        android:layout_height="19dp"
+        android:layout_marginEnd="2dp"
+        android:src="@drawable/ic_ant_design_calendar_outlined"
+        app:layout_constraintBottom_toBottomOf="@+id/date"
+        app:layout_constraintEnd_toStartOf="@+id/date"
+        app:layout_constraintTop_toTopOf="@+id/date" />
 
     <TextView
         android:id="@+id/date"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginEnd="15dp"
+        android:layout_marginTop="20dp"
+        android:layout_marginEnd="10dp"
         android:gravity="center"
         android:textColor="@color/black"
-        android:textSize="11sp"
-        app:layout_constraintTop_toTopOf="@id/subtitle"
-        app:layout_constraintBottom_toBottomOf="@+id/subtitle"
-        app:layout_constraintEnd_toEndOf="parent" />
+        android:textSize="12sp"
+        app:layout_constraintEnd_toStartOf="@+id/imageView13"
+        app:layout_constraintTop_toTopOf="parent" />
+
 
     <androidx.appcompat.widget.AppCompatButton
         android:id="@+id/btnCancel"
-        android:layout_width="62dp"
-        android:layout_height="18dp"
-        android:layout_marginEnd="15dp"
-        android:layout_marginBottom="20dp"
+        android:layout_width="96dp"
+        android:layout_height="30dp"
+        android:layout_marginEnd="10dp"
+        android:layout_marginBottom="15dp"
         android:background="@drawable/cancel_btn"
         android:gravity="center"
-        android:text="Cancel"
+        android:text="@string/cancel"
         android:textAllCaps="false"
         android:textColor="@color/white"
         android:textSize="11sp"

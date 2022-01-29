@@ -50,10 +50,11 @@
         android:textSize="11sp"
         app:layout_constraintStart_toEndOf="@+id/image"
         app:layout_constraintTop_toTopOf="parent" />
+
     <ImageView
         android:id="@+id/imageView13"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_width="13dp"
+        android:layout_height="11dp"
         android:layout_marginStart="20dp"
         android:src="@drawable/ic_event_doc_item"
         app:layout_constraintBottom_toBottomOf="@+id/image"

@@ -17,14 +17,16 @@
         <androidx.appcompat.widget.SearchView
             android:id="@+id/autoCompleteTextView"
             android:layout_width="0dp"
-            android:layout_height="40dp"
+            android:layout_height="50dp"
+            android:layout_marginStart="20dp"
             android:layout_marginTop="40dp"
+            android:layout_marginEnd="20dp"
             android:background="@color/white"
             android:gravity="start"
             android:textSize="14sp"
             app:iconifiedByDefault="false"
-            app:layout_constraintEnd_toEndOf="@+id/tableRow"
-            app:layout_constraintStart_toStartOf="@+id/tableRow"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
             app:queryBackground="@null"
             app:queryHint="search"
@@ -42,14 +44,14 @@
         app:layout_constraintStart_toStartOf="@+id/autoCompleteTextView"
         app:layout_constraintTop_toBottomOf="@+id/autoCompleteTextView" />
 
-        <TableRow
+        <LinearLayout
             android:id="@+id/tableRow"
-            android:layout_width="wrap_content"
+            android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:layout_marginTop="17dp"
-            android:gravity="center"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
+            android:layout_marginTop="15dp"
+            android:orientation="horizontal"
+            app:layout_constraintEnd_toEndOf="@+id/autoCompleteTextView"
+            app:layout_constraintStart_toStartOf="@+id/autoCompleteTextView"
             app:layout_constraintTop_toBottomOf="@+id/autoCompleteTextView">
 
 
@@ -57,7 +59,9 @@
                 android:id="@+id/food"
                 android:layout_width="70dp"
                 android:layout_height="113dp"
-                android:background="#FCFCFD">
+                android:background="#FCFCFD"
+                android:layout_weight="0.25"
+                app:layout_constraintStart_toStartOf="parent">
 
                 <ImageView
                     android:id="@+id/imageView7"
@@ -74,11 +78,11 @@
 
                 <TextView
                     android:id="@+id/foodText"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
+                    android:layout_width="match_parent"
+                    android:layout_height="27dp"
                     android:layout_marginBottom="20dp"
                     android:gravity="center"
-                    android:text="Snacks"
+                    android:text="@string/snacks"
                     android:textColor="@color/black"
                     android:textSize="12sp"
                     app:layout_constraintBottom_toBottomOf="parent"
@@ -92,8 +96,10 @@
                 android:id="@+id/drink"
                 android:layout_width="70dp"
                 android:layout_height="113dp"
-                android:layout_marginStart="13dp"
-                android:background="#FCFCFD">
+                android:layout_marginStart="10dp"
+                android:background="#FCFCFD"
+                android:layout_weight="0.25"
+                app:layout_constraintStart_toEndOf="@+id/food">
 
                 <ImageView
                     android:layout_width="wrap_content"
@@ -113,7 +119,7 @@
                     android:layout_height="wrap_content"
                     android:layout_marginBottom="20dp"
                     android:gravity="center"
-                    android:text="Drinks"
+                    android:text="@string/drinks"
                     android:textColor="@color/black"
                     android:textSize="12sp"
                     app:layout_constraintBottom_toBottomOf="parent" />
@@ -124,8 +130,10 @@
                 android:id="@+id/order"
                 android:layout_width="70dp"
                 android:layout_height="113dp"
-                android:layout_marginStart="13dp"
-                android:background="#FCFCFD">
+                android:layout_marginStart="10dp"
+                android:background="#FCFCFD"
+                android:layout_weight="0.25"
+                app:layout_constraintStart_toEndOf="@+id/drink">
 
                 <ImageView
                     android:layout_width="wrap_content"
@@ -144,7 +152,7 @@
                     android:layout_height="wrap_content"
                     android:layout_marginBottom="20dp"
                     android:gravity="center"
-                    android:text="Orders"
+                    android:text="@string/orders"
                     android:textColor="@color/black"
                     android:textSize="12sp"
                     app:layout_constraintBottom_toBottomOf="parent"
@@ -158,8 +166,10 @@
                 android:id="@+id/favorite"
                 android:layout_width="70dp"
                 android:layout_height="113dp"
-                android:layout_marginStart="15dp"
-                android:background="#FCFCFD">
+                android:layout_marginStart="10dp"
+                android:background="#FCFCFD"
+                android:layout_weight="0.25"
+                app:layout_constraintStart_toEndOf="@+id/order">
 
                 <ImageView
                     android:layout_width="wrap_content"
@@ -174,11 +184,11 @@
 
                 <TextView
                     android:id="@+id/favoriteText"
-                    android:layout_width="wrap_content"
+                    android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginBottom="20dp"
                     android:gravity="center"
-                    android:text="Favorites"
+                    android:text="@string/favorites"
                     android:textColor="@color/black"
                     android:textSize="12sp"
                     app:layout_constraintBottom_toBottomOf="parent"
@@ -187,7 +197,7 @@
 
             </androidx.constraintlayout.widget.ConstraintLayout>
 
-        </TableRow>
+        </LinearLayout>
 
 
         <com.google.android.material.tabs.TabLayout
@@ -208,13 +218,13 @@
             <com.google.android.material.tabs.TabItem
                 android:layout_width="wrap_content"
                 android:layout_height="match_parent"
-                android:text="Hot Drinks" />
+                android:text="@string/hot_drinks" />
 
 
             <com.google.android.material.tabs.TabItem
                 android:layout_width="wrap_content"
                 android:layout_height="match_parent"
-                android:text="Cold Drinks" />
+                android:text="@string/cold_drinks" />
 
 
         </com.google.android.material.tabs.TabLayout>
@@ -229,23 +239,21 @@
         app:layout_constraintTop_toBottomOf="@+id/tabLayout" />
 
 
-    <androidx.appcompat.widget.AppCompatButton
-        android:id="@+id/appCompatButton"
-        android:layout_width="0dp"
-        android:layout_height="60dp"
-        android:layout_marginStart="40dp"
-        android:layout_marginTop="35dp"
-        android:layout_marginEnd="40dp"
-        android:layout_marginBottom="60dp"
-        android:background="#3360DD"
-        android:text="go to cart"
-        android:textAllCaps="false"
-        android:textColor="@color/white"
-        android:textSize="16sp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/recyclerView" />
+        <androidx.appcompat.widget.AppCompatButton
+            android:id="@+id/appCompatButton"
+            android:layout_width="0dp"
+            android:layout_height="60dp"
+            android:layout_marginStart="20dp"
+            android:layout_marginEnd="20dp"
+            android:layout_marginBottom="30dp"
+            android:background="#3360DD"
+            android:text="@string/go_to_cart"
+            android:textAllCaps="false"
+            android:textColor="@color/white"
+            android:textSize="16sp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent" />
 
     <androidx.cardview.widget.CardView
         android:id="@+id/prg"

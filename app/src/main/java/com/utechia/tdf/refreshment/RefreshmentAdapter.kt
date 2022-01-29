@@ -3,9 +3,11 @@ package com.utechia.tdf.refreshment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.FrameLayout
 import android.widget.ImageView
 import android.widget.TextView
 import androidx.cardview.widget.CardView
+import androidx.constraintlayout.widget.ConstraintLayout
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.utechia.domain.model.RefreshmentModel
@@ -44,9 +46,19 @@ class RefreshmentAdapter(private val createRefreshmentFragment: CreateRefreshmen
         private val plus: TextView = itemView.findViewById(R.id.plusNumber)
         private val numberText: TextView = itemView.findViewById(R.id.numberText)
         private val minus: TextView = itemView.findViewById(R.id.minusNumber)
+        private val nameLayout:FrameLayout = itemView.findViewById(R.id.nameLayout)
 
 
         fun bind0(position: Int) {
+            like.bringToFront()
+            dislike.bringToFront()
+            plus.bringToFront()
+            add.bringToFront()
+            nameLayout.bringToFront()
+            name.bringToFront()
+
+
+
 
             name.text = refreshment[position].title
             layout.visibility = View.GONE

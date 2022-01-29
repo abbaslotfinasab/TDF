@@ -7,6 +7,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.view.Window
+import android.widget.RatingBar
 import android.widget.Toast
 import androidx.core.os.bundleOf
 import androidx.fragment.app.DialogFragment
@@ -46,17 +47,23 @@ class RateConfirmationFragment : DialogFragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        bundle = bundleOf(OrderEnum.Type.order to OrderEnum.Delivered.name)
+        bundle = bundleOf(OrderEnum.Type.order to OrderEnum.Delivered.order)
 
         observer()
 
 
         if (arguments != null) {
-            orderId = requireArguments().getInt(OrderEnum.Type.order)
-            rate = requireArguments().getInt("rate")
+            orderId = requireArguments().getInt(OrderEnum.ID.order)
         }
 
-        binding.btnKeep.setOnClickListener {
+
+        binding.rating.onRatingBarChangeListener =
+            RatingBar.OnRatingBarChangeListener { _, rating, _ ->
+                rate = rating.toInt()
+            }
+
+
+        binding.btnAccept.setOnClickListener {
             orderRateVieModel.setRate(orderId,rate)
         }
 
@@ -64,10 +71,7 @@ class RateConfirmationFragment : DialogFragment() {
             dialog?.dismiss()
         }
 
-        binding.btnCancel.setOnClickListener {
-            dialog?.dismiss()
 
-        }
     }
 
     private fun observer() {

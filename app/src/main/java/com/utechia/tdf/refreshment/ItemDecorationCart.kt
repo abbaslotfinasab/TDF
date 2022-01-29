@@ -15,8 +15,8 @@ class ItemDecorationCart: RecyclerView.ItemDecoration(){
         @NonNull parent: RecyclerView,
         @NonNull state: RecyclerView.State
     ) {
-        outRect.left = 35
-        outRect.right = 35
+        outRect.left = 40
+        outRect.right = 40
         outRect.top = 20
 
         if (parent.getChildAdapterPosition(view) != parent.adapter!!.itemCount-1)

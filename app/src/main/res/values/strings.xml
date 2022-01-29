@@ -11,6 +11,18 @@
     <string name="prepare">Preparing</string>
     <string name="active">Active</string>
     <string name="deactive">DeActive</string>
+    <string name="go_to_cart">Go to cart</string>
+    <string name="hot_drinks">Hot Drinks</string>
+    <string name="cold_drinks">Cold Drinks</string>
+    <string name="snacks">Snacks</string>
+    <string name="drinks">Drinks</string>
+    <string name="orders">Orders</string>
+    <string name="favorites">Favorites</string>
+    <string name="checkout">CheckOut</string>
+    <string name="orderid">OrderID:</string>
+    <string name="cancel">Cancel</string>
+    <string name="evaluate">Evaluate</string>
+
 
 
     <string-array name="month_array">
