@@ -1,6 +1,8 @@
 package com.utechia.data.repo
 
 import com.utechia.data.api.Service
+import com.utechia.data.entity.CartBody
+import com.utechia.data.entity.FavoriteBody
 import com.utechia.data.utile.NetworkHelper
 import com.utechia.domain.model.RefreshmentModel
 import com.utechia.domain.repository.RefreshmentRepo
@@ -23,7 +25,7 @@ class RefreshmentRepoImpl @Inject constructor(
 
             val result = service.getRefreshment(type)
 
-                return when (result.isSuccessful) {
+            return when(result.isSuccessful &&  result.body() !=null){
 
                     true -> {
                         result.body()?.data?.map { it.toDomain() }!!.toMutableList()
@@ -63,7 +65,7 @@ class RefreshmentRepoImpl @Inject constructor(
 
             val result = service.getCart(id)
 
-            return when(result.isSuccessful){
+            return when(result.isSuccessful &&  result.body() !=null){
 
                 true ->{
                     result.body()?.data?.map { it.toDomain() }!!.toMutableList()
@@ -76,4 +78,15 @@ class RefreshmentRepoImpl @Inject constructor(
         } else throw IOException("No Internet Connection")
 
     }
+
+    override suspend fun postCart(id: Int, quantity: Int) = service.postCart(CartBody(id,quantity))
+
+    override suspend fun updateCart(id: Int, quantity: Int) = service.updateCart(CartBody(id,quantity))
+
+    override suspend fun deleteCart(id: Int) = service.deleteRefreshment(id)
+
+    override suspend fun like(id: Int) = service.like(FavoriteBody(id))
+
+    override suspend fun dislike(id: Int) = service.dislike(id)
+
 }

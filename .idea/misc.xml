@@ -337,7 +337,7 @@
         <entry key="app/src/main/res/layout/fragment_request_details.xml" value="0.33" />
         <entry key="app/src/main/res/layout/fragment_reservation_details.xml" value="0.19322916666666667" />
         <entry key="app/src/main/res/layout/fragment_survey_system.xml" value="0.1" />
-        <entry key="app/src/main/res/layout/fragment_tea_boy_home.xml" value="0.1" />
+        <entry key="app/src/main/res/layout/fragment_tea_boy_home.xml" value="0.3170940170940171" />
         <entry key="app/src/main/res/layout/fragment_tea_boy_order_child.xml" value="0.1" />
         <entry key="app/src/main/res/layout/fragment_tea_boy_order_details.xml" value="0.19322916666666667" />
         <entry key="app/src/main/res/layout/fragment_tea_boy_orders.xml" value="0.19322916666666667" />
@@ -354,6 +354,7 @@
         <entry key="app/src/main/res/layout/item_chat_user.xml" value="0.1" />
         <entry key="app/src/main/res/layout/item_event.xml" value="0.22" />
         <entry key="app/src/main/res/layout/item_guess_event.xml" value="0.25" />
+        <entry key="app/src/main/res/layout/item_home_news.xml" value="0.33" />
         <entry key="app/src/main/res/layout/item_notification.xml" value="0.33" />
         <entry key="app/src/main/res/layout/item_order_notification.xml" value="0.2" />
         <entry key="app/src/main/res/layout/item_order_teaboy_delivered.xml" value="0.5" />
@@ -363,6 +364,7 @@
         <entry key="app/src/main/res/layout/item_ticket_admin.xml" value="0.1" />
         <entry key="app/src/main/res/layout/item_ticket_client.xml" value="0.1" />
         <entry key="app/src/main/res/layout/item_upload.xml" value="0.5" />
+        <entry key="app/src/main/res/layout/order_details_item.xml" value="0.5" />
         <entry key="app/src/main/res/layout/order_item.xml" value="0.1" />
         <entry key="app/src/main/res/layout/order_teaboy_item.xml" value="0.1" />
         <entry key="app/src/main/res/layout/refreshment_item.xml" value="0.22" />

@@ -57,6 +57,9 @@ interface Service {
     @DELETE("cafeteria/cart/{id}")
     suspend fun deleteCart(@Path("id")id:Int):Response<Void>
 
+    @DELETE("cafeteria/cart/{id}")
+    suspend fun deleteRefreshment(@Path("id")id:Int)
+
     @Headers("Content-Type: application/json")
     @POST("cafeteria")
     suspend fun postOrder():Response<OrderBody>

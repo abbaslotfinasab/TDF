@@ -17,8 +17,9 @@ class FavoriteAdapter(private val favoriteFragment: FavoriteFragment): RecyclerV
 
     fun addData(_favorite: MutableList<FavoriteModel>) {
         favorite.clear()
-        favorite.addAll(_favorite)
         notifyDataSetChanged()
+        favorite.addAll(_favorite)
+        notifyItemRangeChanged(0,_favorite.size)
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): RecyclerView.ViewHolder =
@@ -64,7 +65,7 @@ class FavoriteAdapter(private val favoriteFragment: FavoriteFragment): RecyclerV
             }
 
             Glide.with(itemView.context)
-                .load("https://sandbox.tdf.gov.sa/api/cafeteria/image/${favorite[position].food?.imageName}")
+                .load(favorite[position].food?.imageName)
                 .centerCrop()
                 .into(image)
 

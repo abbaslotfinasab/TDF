@@ -1,4 +1,4 @@
-package com.utechia.tdf.refreshment
+package com.utechia.tdf.cart
 
 import android.graphics.Color
 import android.graphics.drawable.ColorDrawable
@@ -20,7 +20,7 @@ import dagger.hilt.android.AndroidEntryPoint
 class DeleteFragment : DialogFragment() {
 
     private lateinit var binding: FragmentDeleteBinding
-    private val cartViewModel:CartViewModel by viewModels()
+    private val cartViewModel: CartViewModel by viewModels()
     private var foodId = 0
 
 

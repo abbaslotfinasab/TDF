@@ -1,4 +1,4 @@
-package com.utechia.tdf.refreshment
+package com.utechia.tdf.cart
 
 import android.graphics.Canvas
 import android.graphics.drawable.Drawable
@@ -25,10 +25,10 @@ import dagger.hilt.android.AndroidEntryPoint
 class CartFragment : Fragment() {
 
     private lateinit var binding: FragmentCartBinding
-    val cartViewModel:CartViewModel by viewModels()
-    private val checkOutViewModel:CheckOutViewModel by viewModels()
-    private val cartAdapter:CartAdapter = CartAdapter(this)
+    val cartViewModel: CartViewModel by viewModels()
+    private val cartAdapter: CartAdapter = CartAdapter(this)
     private var food: MutableList<ItemModel> = mutableListOf()
+    private var checkout = false
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -43,8 +43,8 @@ class CartFragment : Fragment() {
         cartViewModel.getCart()
 
         binding.appCompatButton.setOnClickListener {
-            checkOutViewModel.checkoutCart()
-            checkObserver()
+            cartViewModel.checkoutCart()
+            checkout = true
         }
 
         binding.appBackButton.setOnClickListener {
@@ -117,6 +117,8 @@ class CartFragment : Fragment() {
     fun deleteItem(id:Int,size:Int){
 
         cartViewModel.deleteItem(id)
+        checkout = false
+
         if(size<2) {
             binding.appCompatButton.visibility = View.GONE
             binding.recyclerView.visibility = View.GONE
@@ -126,32 +128,6 @@ class CartFragment : Fragment() {
             }
         }
     }
-
-    private fun checkObserver() {
-        checkOutViewModel.orderModel.observe(viewLifecycleOwner) {
-
-            when (it) {
-                is Result.Success -> {
-
-                    binding.prg.visibility = View.GONE
-                    binding.appCompatButton.visibility = View.VISIBLE
-                    binding.recyclerView.visibility = View.VISIBLE
-                    binding.emptyLayout.visibility = View.GONE
-                    findNavController().navigate(R.id.action_cartFragment_to_orderFragment)
-                }
-
-                is Result.Loading -> {
-                    binding.prg.visibility = View.VISIBLE
-                }
-
-                is Result.Error -> {
-                    binding.prg.visibility = View.GONE
-                    Toast.makeText(context, it.message, Toast.LENGTH_SHORT).show()
-                }
-            }
-        }
-    }
-
 
     private fun observer() {
 
@@ -170,9 +146,13 @@ class CartFragment : Fragment() {
 
                     }
                     else{
-                        binding.recyclerView.visibility = View.GONE
-                        binding.emptyLayout.visibility = View.VISIBLE
-                        binding.appCompatButton.visibility = View.GONE
+                        if (checkout)
+                            findNavController().navigate(R.id.action_cartFragment_to_orderFragment)
+                        else {
+                            binding.recyclerView.visibility = View.GONE
+                            binding.emptyLayout.visibility = View.VISIBLE
+                            binding.appCompatButton.visibility = View.GONE
+                        }
                     }
 
                 }
@@ -182,6 +162,7 @@ class CartFragment : Fragment() {
                 }
 
                 is Result.Error -> {
+                    checkout = false
                     binding.prg.visibility = View.GONE
                     Toast.makeText(context, it.message, Toast.LENGTH_SHORT).show()
                 }

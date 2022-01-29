@@ -350,7 +350,7 @@
 
     <fragment
         android:id="@+id/cartFragment"
-        android:name="com.utechia.tdf.refreshment.CartFragment"
+        android:name="com.utechia.tdf.cart.CartFragment"
         android:label="fragment_cart"
         tools:layout="@layout/fragment_cart" >
         <action
@@ -587,7 +587,7 @@
 
     <dialog
         android:id="@+id/deleteFragment"
-        android:name="com.utechia.tdf.refreshment.DeleteFragment"
+        android:name="com.utechia.tdf.cart.DeleteFragment"
         android:label="fragment_delete"
         tools:layout="@layout/fragment_delete" >
 

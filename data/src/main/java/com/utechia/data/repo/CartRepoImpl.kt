@@ -59,4 +59,23 @@ class CartRepoImpl @Inject constructor(
 
     }
 
+    override suspend fun checkout(): MutableList<CartModel> {
+
+        if (networkHelper.isNetworkConnected()) {
+
+            val result = service.postOrder()
+
+            return when (result.isSuccessful) {
+
+                true -> {
+                    emptyList<CartModel>().toMutableList()
+                }
+                else -> {
+                    throw IOException("Server is Not Responding")
+                }
+            }
+
+        } else throw IOException("No Internet Connection")
+    }
+
 }

@@ -1,4 +1,4 @@
-package com.utechia.tdf.refreshment
+package com.utechia.tdf.cart
 
 import android.view.LayoutInflater
 import android.view.View
@@ -16,8 +16,10 @@ class CartAdapter(private val cartFragment: CartFragment): RecyclerView.Adapter<
 
     fun addData(_carts: MutableList<ItemModel>) {
         carts.clear()
-        carts.addAll(_carts)
         notifyDataSetChanged()
+        carts.addAll(_carts)
+        notifyItemRangeChanged(0,_carts.size)
+
     }
 
 
@@ -74,7 +76,8 @@ class CartAdapter(private val cartFragment: CartFragment): RecyclerView.Adapter<
                     number=0
                     cartFragment.deleteItem(carts[position].food.id?:0,carts.size)
                     carts.removeAt(position)
-                    notifyItemRemoved(position)
+                    notifyDataSetChanged()
+
                 }
                 numberText.text = number.toString()
             }

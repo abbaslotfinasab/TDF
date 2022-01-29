@@ -68,11 +68,6 @@ abstract class RepositoryModule {
     ): PermissionTypeRepo
 
     @Binds
-    abstract fun bindCheckOutRepositoryService(
-        checkOutRepoImpl: CheckOutRepoImpl
-    ): CheckOutRepo
-
-    @Binds
     abstract fun bindSurveyRepositoryService(
         surveyRepoImpl: SurveyRepoImpl
     ): SurveyRepo

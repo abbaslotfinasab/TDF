@@ -56,4 +56,51 @@ class RefreshmentViewModel @Inject constructor(
         }
 
     }
+
+    fun postCart(id:Int,quantity:Int){
+
+        viewModelScope.launch(Dispatchers.IO+handler) {
+
+            refreshmentUseCaseImpl.postCart(id,quantity)
+
+        }
+    }
+
+    fun updateCart(id:Int,quantity:Int){
+
+        viewModelScope.launch(Dispatchers.IO+handler) {
+
+            refreshmentUseCaseImpl.updateCart(id,quantity)
+
+        }
+    }
+
+    fun deleteCart(id:Int){
+
+        viewModelScope.launch(Dispatchers.IO+handler) {
+
+            refreshmentUseCaseImpl.deleteCart(id)
+
+        }
+    }
+    fun like(id:Int){
+
+        viewModelScope.launch(Dispatchers.IO+handler) {
+
+            refreshmentUseCaseImpl.like(id)
+
+        }
+
+    }
+
+    fun dislike(id:Int){
+
+        viewModelScope.launch(Dispatchers.IO+handler) {
+
+            refreshmentUseCaseImpl.dislike(id)
+
+        }
+
+    }
+
 }

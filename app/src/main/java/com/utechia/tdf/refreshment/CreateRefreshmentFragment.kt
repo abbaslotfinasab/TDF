@@ -12,19 +12,17 @@ import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.google.android.material.tabs.TabLayout
+import com.utechia.domain.enum.RefreshmentEnum
 import com.utechia.domain.utile.Result
 import com.utechia.tdf.R
 import com.utechia.tdf.databinding.FragmentCreateRefreshmentBinding
-import com.utechia.tdf.favorite.FavoriteViewModel
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
 class CreateRefreshmentFragment : Fragment() {
 
     private lateinit var binding: FragmentCreateRefreshmentBinding
-    private val refreshmentViewModel: RefreshmentViewModel by viewModels()
-    val favoriteViewModel: FavoriteViewModel by viewModels()
-    val cartViewModel:CartViewModel by viewModels()
+    val refreshmentViewModel: RefreshmentViewModel by viewModels()
     private val refreshmentAdapter: RefreshmentAdapter = RefreshmentAdapter(this)
     private var category = ""
 
@@ -45,11 +43,9 @@ class CreateRefreshmentFragment : Fragment() {
 
                 if (query != "") {
                     query?.let { refreshmentViewModel.search(it,category) }
-                    observer()
                 }
                 else{
                     query.let { refreshmentViewModel.getRefreshment(category) }
-                    observer()
                 }
 
                 return false
@@ -58,11 +54,9 @@ class CreateRefreshmentFragment : Fragment() {
 
                 if (newText != "") {
                     newText?.let { refreshmentViewModel.search(it,category) }
-                    observer()
                 }
                 else{
                     newText.let { refreshmentViewModel.getRefreshment(category) }
-                    observer()
                 }
 
                 return false
@@ -70,33 +64,28 @@ class CreateRefreshmentFragment : Fragment() {
 
         })
 
-
         if (arguments != null)
-            category = requireArguments().getString("category", "")
+            category = requireArguments().getString(RefreshmentEnum.Category.refreshment, "")
 
         select(category)
 
         refreshmentViewModel.getRefreshment(category)
-        observer()
 
         binding.food.setOnClickListener {
 
-            category = "food"
+            category = RefreshmentEnum.Food.refreshment
             unselect()
-            select("food")
+            select(category)
             refreshmentViewModel.getRefreshment(category)
-            observer()
 
 
         }
 
         binding.drink.setOnClickListener {
-            category = "hot_drink"
+            category = RefreshmentEnum.Hot.refreshment
             unselect()
-            select("hot_drink")
-            refreshmentViewModel.getRefreshment("hot_drink")
-            observer()
-
+            select(category)
+            refreshmentViewModel.getRefreshment(category)
 
         }
 
@@ -104,7 +93,7 @@ class CreateRefreshmentFragment : Fragment() {
         binding.favorite.setOnClickListener {
 
             unselect()
-            select("Favorites")
+            select(RefreshmentEnum.Favorite.refreshment)
             findNavController().navigate(R.id.action_createRefreshmentFragment_to_favoriteFragment)
 
         }
@@ -113,7 +102,7 @@ class CreateRefreshmentFragment : Fragment() {
         binding.order.setOnClickListener {
 
             unselect()
-            select("Orders")
+            select(RefreshmentEnum.Order.refreshment)
             findNavController().navigate(R.id.action_createRefreshmentFragment_to_orderFragment)
         }
 
@@ -123,14 +112,12 @@ class CreateRefreshmentFragment : Fragment() {
                 when(tab?.position){
 
                     0 -> {
-                        category = "hot_drink"
+                        category = RefreshmentEnum.Hot.refreshment
                         refreshmentViewModel.getRefreshment(category)
-                        observer()
                     }
                     1 -> {
-                        category = "cold_drink"
+                        category = RefreshmentEnum.Cold.refreshment
                         refreshmentViewModel.getRefreshment(category)
-                        observer()
                     }
 
                 }
@@ -144,12 +131,10 @@ class CreateRefreshmentFragment : Fragment() {
                      0 -> {
                          category = "hot_drink"
                          refreshmentViewModel.getRefreshment(category)
-                         observer()
                      }
                      1 -> {
                          category = "cold_drink"
                          refreshmentViewModel.getRefreshment(category)
-                         observer()
                      }
 
 
@@ -163,12 +148,10 @@ class CreateRefreshmentFragment : Fragment() {
                       0 -> {
                           category = "hot_drink"
                           refreshmentViewModel.getRefreshment(category)
-                          observer()
                       }
                       1 -> {
                           category = "cold_drink"
                           refreshmentViewModel.getRefreshment(category)
-                          observer()
                       }
 
 
@@ -187,13 +170,15 @@ class CreateRefreshmentFragment : Fragment() {
             findNavController().navigate(R.id.action_createRefreshmentFragment_to_cartFragment)
 
         }
+
+        observer()
     }
 
     private fun select(category: String) {
 
         when (category) {
 
-            "food" -> {
+            RefreshmentEnum.Food.refreshment -> {
 
                 unselect()
                 binding.food.setBackgroundColor(Color.parseColor("#335DE0"))
@@ -202,14 +187,14 @@ class CreateRefreshmentFragment : Fragment() {
 
             }
 
-            "hot_drink" -> {
+            RefreshmentEnum.Hot.refreshment -> {
                 unselect()
                 binding.drink.setBackgroundColor(Color.parseColor("#335DE0"))
                 binding.drinkText.setTextColor(Color.WHITE)
                 binding.tabLayout.visibility = View.VISIBLE
             }
 
-            "Orders" -> {
+            RefreshmentEnum.Order.refreshment -> {
                 unselect()
                 binding.order.setBackgroundColor(Color.parseColor("#335DE0"))
                 binding.orderText.setTextColor(Color.WHITE)
@@ -217,7 +202,7 @@ class CreateRefreshmentFragment : Fragment() {
 
             }
 
-            "Favorites" -> {
+            RefreshmentEnum.Favorite.refreshment -> {
                 unselect()
                 binding.favorite.setBackgroundColor(Color.parseColor("#335DE0"))
                 binding.favoriteText.setTextColor(Color.WHITE)

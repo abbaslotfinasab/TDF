@@ -9,6 +9,7 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.core.os.bundleOf
 import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.findNavController
+import com.utechia.domain.enum.RefreshmentEnum
 import com.utechia.tdf.R
 import com.utechia.tdf.databinding.FragmentRefreshmentBinding
 import com.utechia.tdf.main.MainActivity
@@ -49,25 +50,24 @@ class RefreshmentsFragment : Fragment() {
             }.apply()
 
         }
-
         order = prefs.getInt("order",0)
 
         if (order!=0){
             binding.bubble.visibility = View.VISIBLE
             binding.orderNumber.visibility = View.VISIBLE
             binding.orderNumber.text = order.toString()
-            binding.status.text = "Your orders are preparing"
+            binding.status.text = getString(R.string.preparingStatus)
         }else{
             binding.bubble.visibility = View.GONE
             binding.orderNumber.visibility = View.GONE
-            binding.status.text = "No active orders"
+            binding.status.text = getString(R.string.daliveryStatus)
 
         }
 
 
         binding.food.setOnClickListener {
 
-            val bundle = bundleOf("category" to "food")
+            val bundle = bundleOf(RefreshmentEnum.Category.refreshment to RefreshmentEnum.Food.refreshment)
             findNavController().navigate(
                 R.id.action_refreshmentFragment_to_createRefreshmentFragment,
                 bundle
@@ -76,7 +76,7 @@ class RefreshmentsFragment : Fragment() {
 
         binding.drink.setOnClickListener {
 
-            val bundle = bundleOf("category" to "hot_drink")
+            val bundle = bundleOf(RefreshmentEnum.Category.refreshment to RefreshmentEnum.Hot.refreshment)
             findNavController().navigate(
                 R.id.action_refreshmentFragment_to_createRefreshmentFragment,
                 bundle

@@ -119,20 +119,20 @@ class TeaBoyHomeFragment : Fragment(),View.OnClickListener {
         when(v?.id){
 
             R.id.pendingLayout -> {
-                bundle = bundleOf("type" to OrderEnum.Pending.order)
+                bundle = bundleOf(OrderEnum.Type.order to OrderEnum.Pending.order)
                 findNavController().navigate(R.id.action_teaBoyHomeFragment_to_teaBoyOrdersFragment,bundle)
 
             }
 
             R.id.deliveredLayout -> {
-                bundle = bundleOf("type" to OrderEnum.Delivered.order)
+                bundle = bundleOf(OrderEnum.Type.order  to OrderEnum.Delivered.order)
                 findNavController().navigate(R.id.action_teaBoyHomeFragment_to_teaBoyOrdersFragment,bundle)
 
 
             }
 
             R.id.cancelledLayout -> {
-                bundle = bundleOf("type" to OrderEnum.Cancel.order)
+                bundle = bundleOf(OrderEnum.Type.order  to OrderEnum.Cancel.order)
                 findNavController().navigate(R.id.action_teaBoyHomeFragment_to_teaBoyOrdersFragment,bundle)
 
 

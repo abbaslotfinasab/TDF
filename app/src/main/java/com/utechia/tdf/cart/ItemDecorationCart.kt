@@ -1,4 +1,4 @@
-package com.utechia.tdf.refreshment
+package com.utechia.tdf.cart
 
 import android.graphics.Rect
 import android.view.View
@@ -15,8 +15,8 @@ class ItemDecorationCart: RecyclerView.ItemDecoration(){
         @NonNull parent: RecyclerView,
         @NonNull state: RecyclerView.State
     ) {
-        outRect.left = 40
-        outRect.right = 40
+        outRect.left = 20
+        outRect.right = 20
         outRect.top = 20
 
         if (parent.getChildAdapterPosition(view) != parent.adapter!!.itemCount-1)

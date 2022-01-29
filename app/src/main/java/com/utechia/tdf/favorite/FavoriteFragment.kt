@@ -32,7 +32,6 @@ class FavoriteFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
 
         favoriteViewModel.getFavorite()
-        observer()
 
         binding.favoriteRecycler.apply {
             adapter=favoriteAdapter
@@ -43,7 +42,7 @@ class FavoriteFragment : Fragment() {
         binding.appBackButton.setOnClickListener {
             findNavController().popBackStack()
         }
-
+        observer()
     }
 
     private fun observer() {

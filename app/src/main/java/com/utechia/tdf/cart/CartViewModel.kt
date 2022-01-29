@@ -1,4 +1,4 @@
-package com.utechia.tdf.refreshment
+package com.utechia.tdf.cart
 
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
@@ -83,5 +83,19 @@ class CartViewModel @Inject constructor(
 
     }
 
+    fun checkoutCart(){
+
+        viewModelScope.launch(Dispatchers.IO+handler) {
+
+            _cartModel.postValue(Result.Loading)
+
+            cartUseCaseImpl.execute().let {
+
+                _cartModel.postValue(Result.Success(it))
+            }
+
+        }
+
+    }
 
 }

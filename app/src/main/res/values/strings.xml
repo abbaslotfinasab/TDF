@@ -22,7 +22,16 @@
     <string name="orderid">OrderID:</string>
     <string name="cancel">Cancel</string>
     <string name="evaluate">Evaluate</string>
-
+    <string name="order_details">Order Details</string>
+    <string name="ok">Ok</string>
+    <string name="preparingStatus">Your orders are preparing</string>
+    <string name="daliveryStatus">No active orders</string>
+    <string name="delivered_norders">Delivered\nOrders</string>
+    <string name="pending_norders">Pending\nOrders</string>
+    <string name="cancelled_norders">Cancelled\nOrders</string>
+    <string name="tasks">Tasks</string>
+    <string name="points">Points</string>
+    <string name="status">Status</string>
 
 
     <string-array name="month_array">
