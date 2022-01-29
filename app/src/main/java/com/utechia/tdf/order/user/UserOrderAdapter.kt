@@ -148,7 +148,7 @@ class UserOrderAdapter: RecyclerView.Adapter<RecyclerView.ViewHolder>() {
                 }
 
                 OrderEnum.Delivered.order -> {
-                    status.visibility = View.INVISIBLE
+                    status.visibility = View.GONE
                     if (userOrders[position].orderrate?.isNotEmpty() == true) {
                         rateNumber.visibility = View.VISIBLE
                         ratingBar.visibility = View.VISIBLE
