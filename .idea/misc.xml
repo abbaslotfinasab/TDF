@@ -331,7 +331,7 @@
         <entry key="app/src/main/res/layout/fragment_pending.xml" value="0.1" />
         <entry key="app/src/main/res/layout/fragment_profile.xml" value="0.11607142857142858" />
         <entry key="app/src/main/res/layout/fragment_qr_code.xml" value="0.19322916666666667" />
-        <entry key="app/src/main/res/layout/fragment_rate_confirmation.xml" value="0.22" />
+        <entry key="app/src/main/res/layout/fragment_rate_confirmation.xml" value="0.1" />
         <entry key="app/src/main/res/layout/fragment_rating_ticket.xml" value="0.22" />
         <entry key="app/src/main/res/layout/fragment_refreshment.xml" value="0.25" />
         <entry key="app/src/main/res/layout/fragment_request_details.xml" value="0.33" />
@@ -369,6 +369,7 @@
         <entry key="app/src/main/res/layout/order_teaboy_item.xml" value="0.5" />
         <entry key="app/src/main/res/layout/refreshment_item.xml" value="0.22" />
         <entry key="app/src/main/res/layout/ticket_item.xml" value="0.1613588110403397" />
+        <entry key="app/src/main/res/menu/teaboy_bottom_nav_menu.xml" value="0.15854700854700854" />
         <entry key="app/src/main/res/mipmap-anydpi-v26/ic_launcher.xml" value="0.11944444444444445" />
         <entry key="app/src/main/res/mipmap-anydpi-v26/ic_launcher_round.xml" value="0.1" />
       </map>

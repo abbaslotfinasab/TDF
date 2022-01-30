@@ -34,6 +34,8 @@
     <string name="points">Points</string>
     <string name="status">Status</string>
     <string name="details">Details</string>
+    <string name="rate_order">Rate Order</string>
+    <string name="confirm">Confirm</string>
 
 
     <string-array name="month_array">
