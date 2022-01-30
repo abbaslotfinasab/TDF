@@ -4,13 +4,13 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
+import com.utechia.domain.enum.OrderEnum
 import com.utechia.domain.model.TeaBoyOrderDataModel
 import com.utechia.domain.usecases.TeaBoyOrderUseCaseImpl
 import com.utechia.domain.utile.Result
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.CoroutineExceptionHandler
 import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
 import javax.inject.Inject
 
@@ -88,7 +88,10 @@ class TeaBoyOrderViewModel @Inject constructor(
 
         viewModelScope.launch(Dispatchers.IO+handler) {
 
-            orderUseCaseImpl.deliveredOrder(id)
+            orderUseCaseImpl.deliveredOrder(id).let {
+
+                getOrderTeaBoy(OrderEnum.Pending.order)
+            }
 
         }
     }
