@@ -32,6 +32,10 @@ class ActivationFragment : DialogFragment(),View.OnClickListener{
         savedInstanceState: Bundle?
     ): View {
         binding = FragmentActivationBinding.inflate(inflater, container, false)
+        binding.btnDelete.setOnClickListener(this)
+        binding.btnCancel.setOnClickListener(this)
+        binding.exit.setOnClickListener(this)
+
 
         if (dialog != null && dialog?.window != null) {
             dialog?.window?.setBackgroundDrawable(ColorDrawable(Color.TRANSPARENT))
@@ -46,13 +50,6 @@ class ActivationFragment : DialogFragment(),View.OnClickListener{
 
         prefs = requireActivity().getSharedPreferences("tdf", Context.MODE_PRIVATE)
 
-        binding.btnDelete.setOnClickListener {
-            orderViewModel.setStatus(true)
-            with(prefs.edit()) {
-                putBoolean("isTeaBoyActive", true)
-            }.apply()
-        }
-
         observer()
 
     }
@@ -63,8 +60,12 @@ class ActivationFragment : DialogFragment(),View.OnClickListener{
             when (it) {
                 is Result.Success -> {
                     binding.prg.visibility = View.GONE
-                    findNavController().navigate(R.id.action_activationFragment_to_teaBoyHomeFragment)
 
+                    with(prefs.edit()) {
+                        putBoolean("isTeaBoyActive", true)
+                    }.apply()
+
+                    dialog?.dismiss()
                 }
 
                 is Result.Loading -> {
@@ -78,7 +79,7 @@ class ActivationFragment : DialogFragment(),View.OnClickListener{
                 is Result.Error -> {
                     binding.prg.visibility = View.GONE
                     Toast.makeText(context, it.message, Toast.LENGTH_SHORT).show()
-                    findNavController().navigate(R.id.action_activationFragment_to_teaBoyHomeFragment)
+                    dialog?.dismiss()
                 }
             }
         }
@@ -89,19 +90,16 @@ class ActivationFragment : DialogFragment(),View.OnClickListener{
         when(v?.id){
 
             R.id.btnCancel -> {
-                dialog?.dismiss()
+                findNavController().navigate(R.id.action_activationFragment_to_teaBoyHomeFragment)
             }
 
             R.id.exit -> {
-                dialog?.dismiss()
+                findNavController().navigate(R.id.action_activationFragment_to_teaBoyHomeFragment)
             }
 
             R.id.btnDelete -> {
 
                 orderViewModel.setStatus(true)
-                with(prefs.edit()) {
-                    putBoolean("isTeaBoyActive", true)
-                }.apply()
             }
         }
     }

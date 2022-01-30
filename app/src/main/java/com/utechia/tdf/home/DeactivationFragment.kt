@@ -20,7 +20,7 @@ import com.utechia.tdf.order.teaboy.OrderCountViewModel
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
-class DeactivationFragment : DialogFragment() {
+class DeactivationFragment : DialogFragment(),View.OnClickListener {
 
     private lateinit var binding: FragmentDeactivationBinding
     private val orderViewModel: OrderCountViewModel by viewModels()
@@ -32,6 +32,9 @@ class DeactivationFragment : DialogFragment() {
         savedInstanceState: Bundle?
     ): View {
         binding = FragmentDeactivationBinding.inflate(inflater, container, false)
+        binding.btnDelete.setOnClickListener(this)
+        binding.btnCancel.setOnClickListener(this)
+        binding.exit.setOnClickListener(this)
 
         if (dialog != null && dialog?.window != null) {
             dialog?.window?.setBackgroundDrawable(ColorDrawable(Color.TRANSPARENT))
@@ -43,27 +46,12 @@ class DeactivationFragment : DialogFragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+
         prefs = requireActivity().getSharedPreferences("tdf", Context.MODE_PRIVATE)
 
-        binding.btnCancel.setOnClickListener {
-            findNavController().clearBackStack(R.id.teaBoyHomeFragment)
-            findNavController().navigate(R.id.action_deactivationFragment_to_teaBoyHomeFragment)
-            dialog?.dismiss()
-        }
+        observer()
 
-        binding.exit.setOnClickListener {
-            findNavController().clearBackStack(R.id.teaBoyHomeFragment)
-            findNavController().navigate(R.id.action_deactivationFragment_to_teaBoyHomeFragment)
-            dialog?.dismiss()
-        }
 
-        binding.btnDelete.setOnClickListener {
-            orderViewModel.setStatus(false)
-            observer()
-            with(prefs.edit()) {
-                putBoolean("isTeaBoyActive", false)
-            }.apply()
-        }
     }
 
     private fun observer() {
@@ -72,8 +60,12 @@ class DeactivationFragment : DialogFragment() {
             when (it) {
                 is Result.Success -> {
                     binding.prg.visibility = View.GONE
-                    findNavController().clearBackStack(R.id.teaBoyHomeFragment)
-                    findNavController().navigate(R.id.action_deactivationFragment_to_teaBoyHomeFragment)
+
+                    with(prefs.edit()) {
+                        putBoolean("isTeaBoyActive", false)
+                    }.apply()
+
+
                     dialog?.dismiss()
 
 
@@ -90,12 +82,28 @@ class DeactivationFragment : DialogFragment() {
                 is Result.Error -> {
                     binding.prg.visibility = View.GONE
                     Toast.makeText(context, it.message, Toast.LENGTH_SHORT).show()
-                    findNavController().clearBackStack(R.id.teaBoyHomeFragment)
-                    findNavController().navigate(R.id.action_deactivationFragment_to_teaBoyHomeFragment)
                     dialog?.dismiss()
                 }
             }
         }
     }
 
+    override fun onClick(v: View?) {
+
+        when(v?.id){
+
+            R.id.btnCancel -> {
+                findNavController().navigate(R.id.action_deactivationFragment_to_teaBoyHomeFragment)
+            }
+
+            R.id.exit -> {
+                findNavController().navigate(R.id.action_deactivationFragment_to_teaBoyHomeFragment)
+            }
+
+            R.id.btnDelete -> {
+
+                orderViewModel.setStatus(false)
+            }
+        }
+    }
 }
