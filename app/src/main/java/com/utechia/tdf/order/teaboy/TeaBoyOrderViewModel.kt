@@ -88,11 +88,12 @@ class TeaBoyOrderViewModel @Inject constructor(
 
         viewModelScope.launch(Dispatchers.IO+handler) {
 
+            _orderModel.postValue(Result.Loading)
+
             orderUseCaseImpl.deliveredOrder(id).let {
 
                 getOrderTeaBoy(OrderEnum.Pending.order)
             }
-
         }
     }
 }
