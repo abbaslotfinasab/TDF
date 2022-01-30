@@ -1262,5 +1262,10 @@
         android:name="com.utechia.tdf.order.teaboy.TeaBoyOrderChildFragment"
         android:label="fragment_tea_boy_order_child"
         tools:layout="@layout/fragment_tea_boy_order_child" />
+    <fragment
+        android:id="@+id/createRefreshmenChildtFragment"
+        android:name="com.utechia.tdf.refreshment.CreateRefreshmentChildFragment"
+        android:label="fragment_create_refreshmen_childt"
+        tools:layout="@layout/fragment_create_refreshmen_childt" />
 
 </navigation>

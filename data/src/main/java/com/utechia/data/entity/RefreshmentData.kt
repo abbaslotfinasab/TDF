@@ -19,11 +19,12 @@ data class RefreshmentData(
     val rating: Int?,
     val status: Boolean?,
     val title: String?,
+    val isFavorite:Boolean?,
     val updatedAt: String?
 
 ):Parcelable , ResponseObject<RefreshmentModel> {
     override fun toDomain(): RefreshmentModel {
-        return RefreshmentModel(category,createdAt,id,"${BuildConfig.BASE_URL}/api/cafeteria/image/${imageName}",imagePath,rating,status,title,updatedAt,false,
+        return RefreshmentModel(category,createdAt,id,"${BuildConfig.BASE_URL}/api/cafeteria/image/${imageName}",imagePath,rating,status,title,updatedAt,isFavorite,
             open = false, number = 0
         )
     }

@@ -1,7 +1,6 @@
 package com.utechia.tdf.notification
 
 import android.graphics.Color
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -27,6 +26,7 @@ class NotificationAdapter: RecyclerView.Adapter<RecyclerView.ViewHolder>() {
 
     fun addData(_notification: MutableList<NotificationModel>) {
         notification.clear()
+        notifyDataSetChanged()
         notification.addAll(_notification)
         notifyItemRangeChanged(0,_notification.size-1)
     }
@@ -81,7 +81,7 @@ class NotificationAdapter: RecyclerView.Adapter<RecyclerView.ViewHolder>() {
                 }
 
                 in 43200 until 172800 -> {
-                    name.text = "yesterday"
+                    name.text = itemView.resources.getText(R.string.yesterday)
                 }
 
                 in 172800 until 604800 -> {
@@ -107,15 +107,15 @@ class NotificationAdapter: RecyclerView.Adapter<RecyclerView.ViewHolder>() {
                 image.setBackgroundResource(R.drawable.ic_push_notif)
                 title.setTextColor(ContextCompat.getColor(itemView.context, R.color.black))
                 subTitle.setTextColor(ContextCompat.getColor(itemView.context, R.color.black))
-                name.setTextColor(Color.parseColor("#335DE0"))
+                name.setTextColor(ContextCompat.getColor(itemView.context, R.color.notification_read))
 
 
             } else {
-                layout.setBackgroundColor(Color.parseColor("#3360DD"))
-                image.setBackgroundResource(R.drawable.ic_push_notif_read)
-                title.setTextColor(ContextCompat.getColor(itemView.context, R.color.white))
-                subTitle.setTextColor(ContextCompat.getColor(itemView.context, R.color.white))
-                name.setTextColor(ContextCompat.getColor(itemView.context, R.color.white))
+                layout.setBackgroundColor(ContextCompat.getColor(itemView.context, R.color.notification_unread))
+                image.setBackgroundResource(R.drawable.ic_push_notif)
+                title.setTextColor(ContextCompat.getColor(itemView.context, R.color.black))
+                subTitle.setTextColor(ContextCompat.getColor(itemView.context, R.color.black))
+                name.setTextColor(ContextCompat.getColor(itemView.context, R.color.black))
             }
             layout.setOnClickListener {
 
@@ -129,7 +129,7 @@ class NotificationAdapter: RecyclerView.Adapter<RecyclerView.ViewHolder>() {
                 image.setBackgroundResource(R.drawable.ic_push_notif)
                 title.setTextColor(ContextCompat.getColor(itemView.context, R.color.black))
                 subTitle.setTextColor(ContextCompat.getColor(itemView.context, R.color.black))
-                name.setTextColor(Color.parseColor("#335DE0"))
+                name.setTextColor(ContextCompat.getColor(itemView.context, R.color.notification_unread))
                 notification[position].isRead=true
 
                 itemView.findNavController().navigate(

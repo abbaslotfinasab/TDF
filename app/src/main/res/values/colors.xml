@@ -14,6 +14,12 @@
     <color name="cancel">#FF5A61</color>
     <color name="accepted">#59B48D</color>
     <color name="confirm">#3360DD</color>
+    <color name="refreshment_unselected">#FCFCFD</color>
+    <color name="refreshment_selected">#335DE0</color>
+    <color name="notification_read">#B3335DE0</color>
+    <color name="notification_unread">#260058FF</color>
+
+
 
     <color name="switchBack">
 

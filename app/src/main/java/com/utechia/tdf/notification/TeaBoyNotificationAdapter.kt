@@ -16,8 +16,9 @@ class TeaBoyNotificationAdapter: RecyclerView.Adapter<RecyclerView.ViewHolder>()
 
     fun addData(_orders: MutableList<ItemModel>) {
         orders.clear()
-        orders.addAll(_orders)
         notifyDataSetChanged()
+        orders.addAll(_orders)
+        notifyItemRangeChanged(0,_orders.size)
     }
 
 
@@ -44,7 +45,7 @@ class TeaBoyNotificationAdapter: RecyclerView.Adapter<RecyclerView.ViewHolder>()
             number.text = orders[position].quantity.toString()
 
             Glide.with(itemView.context)
-                .load("https://sandbox.tdf.gov.sa/api/cafeteria/image/${orders[position].food.imageName}")
+                .load(orders[position].food.imageName)
                 .centerCrop()
                 .into(image)
 

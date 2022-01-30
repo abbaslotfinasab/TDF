@@ -5,57 +5,69 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.Toast
 import androidx.appcompat.widget.SearchView
+import androidx.core.content.ContextCompat
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
-import androidx.recyclerview.widget.LinearLayoutManager
+import androidx.viewpager2.widget.ViewPager2
 import com.google.android.material.tabs.TabLayout
 import com.utechia.domain.enum.RefreshmentEnum
-import com.utechia.domain.utile.Result
 import com.utechia.tdf.R
 import com.utechia.tdf.databinding.FragmentCreateRefreshmentBinding
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
-class CreateRefreshmentFragment : Fragment() {
+class CreateRefreshmentFragment : Fragment(),View.OnClickListener {
 
     private lateinit var binding: FragmentCreateRefreshmentBinding
     val refreshmentViewModel: RefreshmentViewModel by viewModels()
-    private val refreshmentAdapter: RefreshmentAdapter = RefreshmentAdapter(this)
-    private var category = ""
+    private lateinit var refreshmentViewPagerAdapter:RefreshmentViewPagerAdapter
+    private var category = RefreshmentEnum.Food.refreshment
+
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
         binding = FragmentCreateRefreshmentBinding.inflate(inflater, container, false)
+        binding.food.setOnClickListener(this)
+        binding.drink.setOnClickListener(this)
+        binding.order.setOnClickListener(this)
+        binding.favorite.setOnClickListener(this)
+
         return binding.root
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        binding.autoCompleteTextView.setOnQueryTextListener(object : SearchView.OnQueryTextListener{
+
+        if (arguments != null)
+            category = requireArguments().getString(RefreshmentEnum.Category.refreshment, "")
+
+        refreshmentViewPagerAdapter = RefreshmentViewPagerAdapter(childFragmentManager, lifecycle)
+        binding.pager.adapter = refreshmentViewPagerAdapter
+
+        binding.autoCompleteTextView.setOnQueryTextListener(object :
+            SearchView.OnQueryTextListener {
 
             override fun onQueryTextSubmit(query: String?): Boolean {
 
                 if (query != "") {
-                    query?.let { refreshmentViewModel.search(it,category) }
-                }
-                else{
+                    query?.let { refreshmentViewModel.search(it, category) }
+                } else {
                     query.let { refreshmentViewModel.getRefreshment(category) }
                 }
 
                 return false
             }
+
             override fun onQueryTextChange(newText: String?): Boolean {
 
                 if (newText != "") {
-                    newText?.let { refreshmentViewModel.search(it,category) }
-                }
-                else{
+                    newText?.let { refreshmentViewModel.search(it, category) }
+                } else {
                     newText.let { refreshmentViewModel.getRefreshment(category) }
                 }
 
@@ -64,47 +76,7 @@ class CreateRefreshmentFragment : Fragment() {
 
         })
 
-        if (arguments != null)
-            category = requireArguments().getString(RefreshmentEnum.Category.refreshment, "")
-
-        select(category)
-
         refreshmentViewModel.getRefreshment(category)
-
-        binding.food.setOnClickListener {
-
-            category = RefreshmentEnum.Food.refreshment
-            unselect()
-            select(category)
-            refreshmentViewModel.getRefreshment(category)
-
-
-        }
-
-        binding.drink.setOnClickListener {
-            category = RefreshmentEnum.Hot.refreshment
-            unselect()
-            select(category)
-            refreshmentViewModel.getRefreshment(category)
-
-        }
-
-
-        binding.favorite.setOnClickListener {
-
-            unselect()
-            select(RefreshmentEnum.Favorite.refreshment)
-            findNavController().navigate(R.id.action_createRefreshmentFragment_to_favoriteFragment)
-
-        }
-
-
-        binding.order.setOnClickListener {
-
-            unselect()
-            select(RefreshmentEnum.Order.refreshment)
-            findNavController().navigate(R.id.action_createRefreshmentFragment_to_orderFragment)
-        }
 
         binding.tabLayout.addOnTabSelectedListener(object : TabLayout.OnTabSelectedListener{
             override fun onTabSelected(tab: TabLayout.Tab?) {
@@ -112,16 +84,13 @@ class CreateRefreshmentFragment : Fragment() {
                 when(tab?.position){
 
                     0 -> {
-                        category = RefreshmentEnum.Hot.refreshment
-                        refreshmentViewModel.getRefreshment(category)
+                        select(RefreshmentEnum.Hot.refreshment)
                     }
+
                     1 -> {
-                        category = RefreshmentEnum.Cold.refreshment
-                        refreshmentViewModel.getRefreshment(category)
+                        select(RefreshmentEnum.Cold.refreshment)
                     }
-
                 }
-
             }
 
             override fun onTabUnselected(tab: TabLayout.Tab?) {
@@ -160,64 +129,96 @@ class CreateRefreshmentFragment : Fragment() {
 
         })
 
-        binding.recyclerView.apply {
-            adapter = refreshmentAdapter
-            layoutManager = LinearLayoutManager(context,LinearLayoutManager.HORIZONTAL,false)
-            addItemDecoration(ItemDecorationRefreshment())
-        }
+        binding.pager.registerOnPageChangeCallback(object :ViewPager2.OnPageChangeCallback(){
 
-        binding.appCompatButton.setOnClickListener {
-            findNavController().navigate(R.id.action_createRefreshmentFragment_to_cartFragment)
+            override fun onPageSelected(position: Int) {
+                super.onPageSelected(position)
+                when(position){
 
-        }
+                    0->{
+                        select(RefreshmentEnum.Food.refreshment)
+                    }
 
-        observer()
+                    1->{
+                        select(RefreshmentEnum.Hot.refreshment)
+                    }
+
+                    2->{
+                        select(RefreshmentEnum.Cold.refreshment)
+                    }
+                }
+            }
+        })
+
+        select(category)
     }
 
     private fun select(category: String) {
+        unselect()
 
         when (category) {
 
             RefreshmentEnum.Food.refreshment -> {
+                binding.pager.postDelayed({
+                    binding.pager.setCurrentItem(0,true)
 
-                unselect()
+                },100)
                 binding.food.setBackgroundColor(Color.parseColor("#335DE0"))
                 binding.foodText.setTextColor(Color.WHITE)
                 binding.tabLayout.visibility = View.GONE
+                refreshmentViewModel.getRefreshment(category)
 
             }
 
             RefreshmentEnum.Hot.refreshment -> {
-                unselect()
-                binding.drink.setBackgroundColor(Color.parseColor("#335DE0"))
+                binding.pager.postDelayed({
+                    binding.pager.setCurrentItem(1,true)
+
+                },100)
+                binding.tabLayout.getTabAt(0)?.select()
+                binding.food.setBackgroundColor(ContextCompat.getColor(requireActivity(),R.color.refreshment_selected))
                 binding.drinkText.setTextColor(Color.WHITE)
                 binding.tabLayout.visibility = View.VISIBLE
+                refreshmentViewModel.getRefreshment(category)
+
+            }
+
+            RefreshmentEnum.Cold.refreshment -> {
+                binding.pager.postDelayed({
+                    binding.pager.setCurrentItem(2,true)
+
+                },100)
+                binding.tabLayout.getTabAt(1)?.select()
+                binding.drink.setBackgroundColor(ContextCompat.getColor(requireActivity(),R.color.refreshment_selected))
+                binding.drinkText.setTextColor(Color.WHITE)
+                binding.tabLayout.visibility = View.VISIBLE
+                refreshmentViewModel.getRefreshment(category)
+
             }
 
             RefreshmentEnum.Order.refreshment -> {
-                unselect()
-                binding.order.setBackgroundColor(Color.parseColor("#335DE0"))
+                binding.order.setBackgroundColor(ContextCompat.getColor(requireActivity(),R.color.refreshment_selected))
                 binding.orderText.setTextColor(Color.WHITE)
                 binding.tabLayout.visibility = View.GONE
 
             }
 
             RefreshmentEnum.Favorite.refreshment -> {
-                unselect()
-                binding.favorite.setBackgroundColor(Color.parseColor("#335DE0"))
+                binding.favorite.setBackgroundColor(ContextCompat.getColor(requireActivity(),R.color.refreshment_selected))
                 binding.favoriteText.setTextColor(Color.WHITE)
                 binding.tabLayout.visibility = View.GONE
 
             }
         }
+
     }
 
     private fun unselect() {
 
-        binding.food.setBackgroundColor(Color.parseColor("#FCFCFD"))
-        binding.drink.setBackgroundColor(Color.parseColor("#FCFCFD"))
-        binding.order.setBackgroundColor(Color.parseColor("#FCFCFD"))
-        binding.favorite.setBackgroundColor(Color.parseColor("#FCFCFD"))
+        binding.food.setBackgroundColor(ContextCompat.getColor(requireActivity(),R.color.refreshment_unselected))
+        binding.drink.setBackgroundColor(ContextCompat.getColor(requireActivity(),R.color.refreshment_unselected))
+        binding.order.setBackgroundColor(ContextCompat.getColor(requireActivity(),R.color.refreshment_unselected))
+        binding.favorite.setBackgroundColor(ContextCompat.getColor(requireActivity(),R.color.refreshment_unselected))
         binding.foodText.setTextColor(Color.BLACK)
         binding.drinkText.setTextColor(Color.BLACK)
         binding.orderText.setTextColor(Color.BLACK)
@@ -225,22 +226,40 @@ class CreateRefreshmentFragment : Fragment() {
 
     }
 
-    private fun observer() {
+    override fun onClick(v: View?) {
 
-        refreshmentViewModel.refreshmentModel.observe(viewLifecycleOwner) {
+        when(v?.id){
 
-            when (it) {
-                is Result.Success -> {
-                    binding.prg.visibility = View.GONE
-                    refreshmentAdapter.addData(it.data)
-                }
-                is Result.Loading -> {binding.prg.visibility = View.VISIBLE}
+            R.id.food -> {
 
-                is Result.Error -> {
-                    binding.prg.visibility = View.GONE
-                    Toast.makeText(context, it.message, Toast.LENGTH_SHORT).show()
-                }
+                category = RefreshmentEnum.Food.refreshment
+
+            }
+
+            R.id.drink -> {
+
+                category = RefreshmentEnum.Hot.refreshment
+
+            }
+
+            R.id.favorite -> {
+
+                category = RefreshmentEnum.Favorite.refreshment
+                findNavController().navigate(R.id.action_createRefreshmentFragment_to_favoriteFragment)
+
+            }
+
+            R.id.order -> {
+
+                category = RefreshmentEnum.Order.refreshment
+                findNavController().navigate(R.id.action_createRefreshmentFragment_to_orderFragment)
+            }
+
+            R.id.appBackButton -> {
+
+                findNavController().navigate(R.id.action_createRefreshmentFragment_to_cartFragment)
             }
         }
+        select(category)
     }
 }

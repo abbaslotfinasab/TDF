@@ -12,7 +12,7 @@ import com.bumptech.glide.Glide
 import com.utechia.domain.model.RefreshmentModel
 import com.utechia.tdf.R
 
-class RefreshmentAdapter(private val createRefreshmentFragment: CreateRefreshmentFragment) : RecyclerView.Adapter<RecyclerView.ViewHolder>()  {
+class RefreshmentAdapter(private val createRefreshmentFragment: CreateRefreshmentChildFragment) : RecyclerView.Adapter<RecyclerView.ViewHolder>()  {
 
     var refreshment:MutableList<RefreshmentModel> = mutableListOf()
 
@@ -70,7 +70,7 @@ class RefreshmentAdapter(private val createRefreshmentFragment: CreateRefreshmen
 
 
 
-            if (refreshment[position].like){
+            if (refreshment[position].like == true){
                 like.visibility = View.INVISIBLE
                 dislike.visibility = View.VISIBLE
             }else{

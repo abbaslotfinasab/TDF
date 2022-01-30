@@ -20,7 +20,7 @@ data class RefreshmentModel(
 
     val updatedAt: String?,
 
-    var like:Boolean=false,
+    var like:Boolean?,
 
     var open:Boolean=false,
 
