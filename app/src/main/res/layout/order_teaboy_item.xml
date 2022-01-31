@@ -26,7 +26,7 @@
     <TextView
         android:id="@+id/subtitle0"
         android:layout_width="0dp"
-        android:layout_height="13dp"
+        android:layout_height="wrap_content"
         android:layout_marginStart="10dp"
         android:layout_marginTop="15dp"
         android:text="@string/orderid"
@@ -40,7 +40,7 @@
     <TextView
         android:id="@+id/subtitle"
         android:layout_width="0dp"
-        android:layout_height="13dp"
+        android:layout_height="wrap_content"
         android:layout_marginStart="2dp"
         android:textColor="@color/black"
         android:textSize="11sp"
