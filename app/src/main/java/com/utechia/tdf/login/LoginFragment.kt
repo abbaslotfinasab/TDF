@@ -13,6 +13,7 @@ import androidx.core.content.ContextCompat
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
+import com.utechia.domain.enum.MainEnum
 import com.utechia.domain.utile.Result
 import com.utechia.tdf.R
 import com.utechia.tdf.databinding.FragmentLoginBinding
@@ -38,7 +39,7 @@ class LoginFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        prefs = requireActivity().getSharedPreferences("tdf", Context.MODE_PRIVATE)
+        prefs = requireActivity().getSharedPreferences(MainEnum.Tdf.name, Context.MODE_PRIVATE)
         binding.prg.bringToFront()
 
 
@@ -83,7 +84,7 @@ class LoginFragment : Fragment() {
                             putString("mail",it.data.mail)
                             putBoolean("Start",true)
                         }.apply()
-                        findNavController().navigate(R.id.action_loginFragment_to_refreshmentFragment)
+                        findNavController().navigate(R.id.action_loginFragment_to_userhomeFragment)
                     }
 
                     else {

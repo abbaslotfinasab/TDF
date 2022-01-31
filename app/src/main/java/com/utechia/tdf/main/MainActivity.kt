@@ -84,7 +84,7 @@ class MainActivity : AppCompatActivity() {
             }
             !teaBoy() -> {
                 mainViewModel.getCount()
-                graph.setStartDestination(R.id.refreshmentFragment)
+                graph.setStartDestination(R.id.userhomeFragment)
                 val name = prefs.getString(MainEnum.Name.main,"").toString()
                 val job = prefs.getString(MainEnum.Job.main,"").toString()
                 setupUser(name,job)

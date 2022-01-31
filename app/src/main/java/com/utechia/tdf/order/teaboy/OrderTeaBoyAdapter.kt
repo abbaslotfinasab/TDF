@@ -59,6 +59,7 @@ class OrderTeaBoyAdapter(private val teaBoyOrdersFragment: TeaBoyOrderChildFragm
         private val location: TextView = itemView.findViewById(R.id.location)
         private val reject: TextView = itemView.findViewById(R.id.btnCancel)
         private val accept: TextView = itemView.findViewById(R.id.btnAccept)
+        private val details: TextView = itemView.findViewById(R.id.btnDetails)
         private val layout: ConstraintLayout = itemView.findViewById(R.id.orderLayout)
 
         fun bind0(position: Int) {
@@ -66,18 +67,18 @@ class OrderTeaBoyAdapter(private val teaBoyOrdersFragment: TeaBoyOrderChildFragm
             timeZone = OffsetDateTime.parse(userOrders[position].updatedAt?:"2022-01-01T10:12:31.484Z").atZoneSameInstant(
                 ZoneId.systemDefault()
             ).toLocalDateTime().format(DateTimeFormatter.ofPattern("yyyy.MM.dd"))
-            date.text = "$timeZone"
+            date.text = timeZone
 
 
             timeZone = OffsetDateTime.parse(userOrders[position].updatedAt?:"2022-01-01T10:12:31.484Z").atZoneSameInstant(
                 ZoneId.systemDefault()
             ).toLocalDateTime().format(DateTimeFormatter.ofPattern("HH:mm"))
-            time.text = "$timeZone"
+            time.text = timeZone
 
             number.text = "${userOrders[position].cart?.items?.size}x"
             oderId.text = "${userOrders[position].id}"
             user.text = userOrders[position].user?.displayName
-            location.text ="${userOrders[position].floor?:""}st Floor - Room ${userOrders[position].location?:""}"
+            location.text ="${userOrders[position].user?.officeFloor ?:""}st Floor - Room ${userOrders[position].user?.officeWorkStation ?:""}"
 
             if (userOrders[position].cart?.items?.size!! > 1) {
                 title.text = userOrders[position].cart?.items?.get(0)?.food?.title + "..."
@@ -137,6 +138,12 @@ class OrderTeaBoyAdapter(private val teaBoyOrdersFragment: TeaBoyOrderChildFragm
 
 
             layout.setOnClickListener {
+                val bundle = bundleOf(OrderEnum.ID.order to userOrders[position].cart?.id)
+                itemView.findNavController()
+                    .navigate(R.id.action_teaBoyOrdersFragment_to_teaBoyOrderDetailsFragment,bundle)
+            }
+
+            details.setOnClickListener {
                 val bundle = bundleOf(OrderEnum.ID.order to userOrders[position].cart?.id)
                 itemView.findNavController()
                     .navigate(R.id.action_teaBoyOrdersFragment_to_teaBoyOrderDetailsFragment,bundle)
