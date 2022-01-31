@@ -10,7 +10,6 @@ import androidx.core.content.ContextCompat
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
-import androidx.viewpager2.widget.ViewPager2
 import com.google.android.material.tabs.TabLayout
 import com.utechia.domain.enum.RefreshmentEnum
 import com.utechia.tdf.R
@@ -35,12 +34,18 @@ class CreateRefreshmentFragment : Fragment(),View.OnClickListener {
         binding.drink.setOnClickListener(this)
         binding.order.setOnClickListener(this)
         binding.favorite.setOnClickListener(this)
-
         return binding.root
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+
+        binding.appCompatButton.apply {
+            bringToFront()
+            setOnClickListener {
+                findNavController().navigate(R.id.action_createRefreshmentFragment_to_cartFragment)
+            }
+        }
 
 
         if (arguments != null)
@@ -232,11 +237,6 @@ class CreateRefreshmentFragment : Fragment(),View.OnClickListener {
 
                 category = RefreshmentEnum.Order.refreshment
                 findNavController().navigate(R.id.action_createRefreshmentFragment_to_orderFragment)
-            }
-
-            R.id.appBackButton -> {
-
-                findNavController().navigate(R.id.action_createRefreshmentFragment_to_cartFragment)
             }
         }
         select(category)

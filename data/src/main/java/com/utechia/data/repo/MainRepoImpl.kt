@@ -31,6 +31,7 @@ class MainRepoImpl @Inject constructor(
                 val token = service.refresh( RefreshToken(homeId)).body()?.data.toString()
                     sessionManager.updateAuthToken(token)
                     result = service.countNotification()
+
                 }
 
             return when (result.code()) {
@@ -48,11 +49,6 @@ class MainRepoImpl @Inject constructor(
                 }
 
                 401 -> {
-                    throw IOException("Unauthorized")
-
-                }
-
-                403 -> {
                     throw IOException("Unauthorized")
 
                 }

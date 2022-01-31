@@ -12,6 +12,7 @@ import android.view.WindowManager
 import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatDelegate
 import androidx.core.content.ContextCompat
+import androidx.core.os.bundleOf
 import androidx.core.view.GravityCompat
 import androidx.core.view.forEach
 import androidx.drawerlayout.widget.DrawerLayout
@@ -26,6 +27,7 @@ import com.google.firebase.analytics.ktx.analytics
 import com.google.firebase.installations.FirebaseInstallations
 import com.google.firebase.ktx.Firebase
 import com.google.firebase.messaging.FirebaseMessaging
+import com.utechia.domain.enum.MainEnum
 import com.utechia.domain.utile.Result
 import com.utechia.tdf.R
 import com.utechia.tdf.databinding.ActivityMainBinding
@@ -49,7 +51,7 @@ class MainActivity : AppCompatActivity() {
         AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO)
         binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
-        prefs = getSharedPreferences("tdf", MODE_PRIVATE)
+        prefs = getSharedPreferences(MainEnum.Tdf.main, MODE_PRIVATE)
 
         FirebaseMessaging.getInstance().token.addOnCompleteListener(OnCompleteListener { task ->
             if (task.isSuccessful) {
@@ -57,7 +59,7 @@ class MainActivity : AppCompatActivity() {
                     return@OnCompleteListener
                 else {
                     with(prefs.edit()) {
-                        putString("fcm", task.result)
+                        putString(MainEnum.Fcm.main, task.result)
                     }.apply()
                 }
             }
@@ -75,16 +77,16 @@ class MainActivity : AppCompatActivity() {
             teaBoy() -> {
                 mainViewModel.getCount()
                 graph.setStartDestination(R.id.teaBoyHomeFragment)
-                val name = prefs.getString("name","").toString()
-                val floor = prefs.getString("floor","").toString()
+                val name = prefs.getString(MainEnum.Name.main,"").toString()
+                val floor = prefs.getString(MainEnum.Job.main,"").toString()
                 setupTeaBoy(name,floor)
                 observer()
             }
             !teaBoy() -> {
                 mainViewModel.getCount()
                 graph.setStartDestination(R.id.refreshmentFragment)
-                val name = prefs.getString("name","").toString()
-                val job = prefs.getString("job","").toString()
+                val name = prefs.getString(MainEnum.Name.main,"").toString()
+                val job = prefs.getString(MainEnum.Job.main,"").toString()
                 setupUser(name,job)
                 observer()
             }
@@ -141,7 +143,6 @@ class MainActivity : AppCompatActivity() {
             binding.drawerLayout.closeDrawer(GravityCompat.END)
 
         }
-
     }
 
     override fun onBackPressed() {
@@ -161,7 +162,7 @@ class MainActivity : AppCompatActivity() {
                     return@OnCompleteListener
                 }
                 with(prefs.edit()) {
-                    putString("fcm", task.result)
+                    putString(MainEnum.Fcm.main, task.result)
                 }.apply()
             })
         }
@@ -169,13 +170,13 @@ class MainActivity : AppCompatActivity() {
 
     private fun checkOutUser(): Boolean {
 
-        return prefs.getString("USER_ID",null) !=null
+        return prefs.getString(MainEnum.ID.main,null) !=null
 
     }
 
     private fun teaBoy(): Boolean {
 
-        return prefs.getBoolean("isTeaBoy",false)
+        return prefs.getBoolean(MainEnum.TeaBoy.main,false)
 
     }
 
@@ -211,112 +212,110 @@ class MainActivity : AppCompatActivity() {
 
                     R.id.userhomeFragment ->{
                         navController.clearBackStack(R.id.loginFragment)
-                        design("home")
+                        design(MainEnum.Home.main)
 
                     }
                     R.id.refreshmentFragment ->{
-                        design("refreshment")
+                        design(MainEnum.Refreshment.main)
+                        val bundle = bundleOf("order" to 2)
+                        destination.addInDefaultArgs(bundle)
 
                     }
 
                     R.id.createRefreshmentFragment ->{
-                        design("menu")
+                        design(MainEnum.Menu.main)
 
                     }
 
                     R.id.orderFragment ->{
                         navController.clearBackStack(R.id.cartFragment)
-                        design("orders")
+                        design(MainEnum.UserOrder.main)
 
                     }
 
                     R.id.reservationFragment ->{
-                        design("reservation")
+                        design(MainEnum.Reservation.main)
 
                     }
 
                     R.id.favoriteFragment ->{
-                        design("favorites")
+                        design(MainEnum.Favorite.main)
 
                     }
 
                     R.id.cartFragment ->{
-                        design("cart")
+                        design(MainEnum.Cart.main)
 
                     }
 
                     R.id.userprofileFragment ->{
-                        design("profile")
+                        design(MainEnum.Profile.main)
 
                     }
                     R.id.qrCodeFragment -> {
-                        design("qrcode")
+                        design(MainEnum.Code.main)
                     }
 
                     R.id.createReservationFragment -> {
-                        design("createReservationFragment")
+                        design(MainEnum.CreateReservation.main)
                     }
 
                     R.id.loginFragment ->{
-                        design("login")
+                        design(MainEnum.Login.main)
 
                     }
                     R.id.authenticationFragment -> {
-                        design("error")
+                        design(MainEnum.Error.main)
                     }
 
                     R.id.permissionFragment -> {
-                        design("permission")
+                        design(MainEnum.Permission.main)
 
                     }
 
                     R.id.surveySystemFragment -> {
-                        design("survey")
+                        design(MainEnum.Survey.main)
 
                     }
 
                     R.id.calendarFragment -> {
-                        design("calendar")
+                        design(MainEnum.Calendar.main)
 
                     }
 
                     R.id.ticketSystemFragment -> {
-                        design("ticket")
+                        design(MainEnum.Ticket.main)
 
                     }
 
                     R.id.createTicketFragment -> {
-                        design("createTicket")
+                        design(MainEnum.CreateTicket.main)
 
                     }
 
                     R.id.eventSystemFragment -> {
-                        design("event")
+                        design(MainEnum.Event.main)
 
                     }
 
                     R.id.eventDetailsFragment -> {
-                        design("eventDetails")
+                        design(MainEnum.EventDetails.main)
 
                     }
 
                     R.id.ticketDetailsFragment -> {
-                        design("ticketDetails")
+                        design(MainEnum.TicketDetails.main)
 
                     }
 
                     R.id.blankFragment -> {
-                        design("blank")
+                        design(MainEnum.Blank.main)
 
                     }
 
                     R.id.notificationFragment -> {
-                        design("notification")
+                        design(MainEnum.Notification.main)
 
-                    }
-
-                    else -> {
-                        design("drawer")
                     }
                 }
             }
@@ -446,85 +445,79 @@ class MainActivity : AppCompatActivity() {
             binding.bottomNavigation.setupWithNavController(navController)
 
             if(destination.id != R.id.loginFragment) {
-
                 mainViewModel.getCount()
                 observer()
-
             }
 
             when (destination.id){
 
                 R.id.teaBoyHomeFragment ->{
                     navController.clearBackStack(R.id.loginFragment)
-                    design("home")
+                    design(MainEnum.Home.main)
 
                 }
                 R.id.teaBoyOrdersFragment ->{
-                    design("tOrders")
+                    design(MainEnum.TeaBoyOrder.main)
                 }
                 R.id.qrCodeFragment -> {
-                    design("qrcode")
+                    design(MainEnum.Code.main)
                 }
                 R.id.loginFragment ->{
-                    design("login")
+                    design(MainEnum.Login.main)
 
                 }
                 R.id.authenticationFragment -> {
-                    design("error")
+                    design(MainEnum.Error.main)
                 }
 
                 R.id.permissionFragment -> {
-                    design("permission")
+                    design(MainEnum.Permission.main)
 
                 }
 
                 R.id.surveySystemFragment -> {
-                    design("survey")
+                    design(MainEnum.Survey.main)
 
                 }
 
                 R.id.calendarFragment -> {
-                    design("calendar")
+                    design(MainEnum.Calendar.main)
 
                 }
 
 
                 R.id.ticketSystemFragment -> {
-                    design("ticket")
+                    design(MainEnum.Ticket.main)
 
                 }
 
                 R.id.createTicketFragment -> {
-                    design("createTicket")
+                    design(MainEnum.CreateTicket.main)
 
                 }
 
                 R.id.eventSystemFragment -> {
-                    design("event")
+                    design(MainEnum.Event.main)
 
                 }
 
                 R.id.eventDetailsFragment -> {
-                    design("eventDetails")
+                    design(MainEnum.EventDetails.main)
 
                 }
 
                 R.id.ticketDetailsFragment -> {
-                    design("ticketDetails")
+                    design(MainEnum.TicketDetails.main)
 
                 }
 
                 R.id.blankFragment -> {
-                    design("blank")
+                    design(MainEnum.Blank.main)
 
                 }
 
                 R.id.notificationFragment -> {
-                    design("notification")
-                }
-
-                else -> {
-                    design("drawer")
+                    design(MainEnum.Notification.main)
                 }
             }
         }
@@ -638,7 +631,7 @@ class MainActivity : AppCompatActivity() {
 
         when(title){
 
-            "login" ->{
+        MainEnum.Login.main -> {
                 window.statusBarColor = ContextCompat.getColor(this,R.color.white)
                 binding.toolbar.visibility = View.GONE
                 binding.customButton.visibility = View.GONE
@@ -648,7 +641,7 @@ class MainActivity : AppCompatActivity() {
 
             }
 
-            "home" ->{
+            MainEnum.Home.main -> {
                 window.statusBarColor = ContextCompat.getColor(this,R.color.status)
                 binding.toolbar.visibility = View.VISIBLE
                 binding.customToolbar.visibility = View.GONE
@@ -658,7 +651,7 @@ class MainActivity : AppCompatActivity() {
 
             }
 
-            "refreshment" ->{
+            MainEnum.Refreshment.main -> {
                 window.statusBarColor = ContextCompat.getColor(this, R.color.status)
                 binding.toolbar.visibility = View.VISIBLE
                 binding.customToolbar.visibility = View.GONE
@@ -669,30 +662,30 @@ class MainActivity : AppCompatActivity() {
 
             }
 
-            "menu" ->{
+            MainEnum.Menu.main ->{
                 window.statusBarColor = ContextCompat.getColor(this, R.color.status)
                 binding.customToolbar.visibility = View.VISIBLE
                 binding.toolbar.visibility = View.INVISIBLE
                 binding.customButton.visibility = View.GONE
-                binding.customTitle.text = "Menu"
+                binding.customTitle.text = getString(R.string.menu)
                 binding.bottomNavigation.visibility = View.GONE
                 binding.drawerLayout.setDrawerLockMode(DrawerLayout.LOCK_MODE_LOCKED_CLOSED)
 
 
             }
 
-            "orders" ->{
+            MainEnum.UserOrder.main -> {
                 window.statusBarColor = ContextCompat.getColor(this, R.color.status)
                 binding.customToolbar.visibility = View.VISIBLE
                 binding.toolbar.visibility = View.INVISIBLE
                 binding.customButton.visibility = View.GONE
-                binding.customTitle.text = "Orders"
+                binding.customTitle.text = getString(R.string.order)
                 binding.bottomNavigation.visibility = View.GONE
                 binding.drawerLayout.setDrawerLockMode(DrawerLayout.LOCK_MODE_LOCKED_CLOSED)
 
             }
 
-            "tOrders" ->{
+            MainEnum.TeaBoyOrder.main  -> {
                 window.statusBarColor = ContextCompat.getColor(this, R.color.status)
                 binding.customToolbar.visibility = View.INVISIBLE
                 binding.toolbar.visibility = View.VISIBLE
@@ -702,29 +695,29 @@ class MainActivity : AppCompatActivity() {
 
             }
 
-            "favorites" ->{
+            MainEnum.Favorite.main  ->{
                 window.statusBarColor = ContextCompat.getColor(this, R.color.status)
                 binding.customToolbar.visibility = View.VISIBLE
                 binding.toolbar.visibility = View.INVISIBLE
                 binding.customButton.visibility = View.GONE
-                binding.customTitle.text = "Favorites"
+                binding.customTitle.text = getString(R.string.favorit)
                 binding.bottomNavigation.visibility = View.GONE
                 binding.drawerLayout.setDrawerLockMode(DrawerLayout.LOCK_MODE_LOCKED_CLOSED)
 
             }
 
-            "cart" ->{
+            MainEnum.Cart.main ->{
                 window.statusBarColor = ContextCompat.getColor(this, R.color.status)
                 binding.customToolbar.visibility = View.VISIBLE
                 binding.toolbar.visibility = View.INVISIBLE
                 binding.customButton.visibility = View.GONE
-                binding.customTitle.text = "Cart"
+                binding.customTitle.text = getString(R.string.cart)
                 binding.bottomNavigation.visibility = View.GONE
                 binding.drawerLayout.setDrawerLockMode(DrawerLayout.LOCK_MODE_LOCKED_CLOSED)
 
             }
 
-            "qrcode"->{
+            MainEnum.Code.main->{
                 window.statusBarColor = ContextCompat.getColor(this,R.color.status)
                 binding.toolbar.visibility = View.VISIBLE
                 binding.customButton.visibility = View.VISIBLE
@@ -734,7 +727,7 @@ class MainActivity : AppCompatActivity() {
 
             }
 
-            "reservation"->{
+            MainEnum.Reservation.main->{
                 window.statusBarColor = ContextCompat.getColor(this,R.color.status)
                 binding.toolbar.visibility = View.VISIBLE
                 binding.customToolbar.visibility = View.GONE
@@ -744,17 +737,17 @@ class MainActivity : AppCompatActivity() {
 
             }
 
-            "createReservationFragment"->{
+            MainEnum.CreateReservation.main->{
                 window.statusBarColor = ContextCompat.getColor(this, R.color.status)
                 binding.customToolbar.visibility = View.VISIBLE
                 binding.toolbar.visibility = View.INVISIBLE
                 binding.customButton.visibility = View.GONE
-                binding.customTitle.text = "Reservation"
+                binding.customTitle.text = getString(R.string.reservation)
                 binding.bottomNavigation.visibility = View.GONE
                 binding.drawerLayout.setDrawerLockMode(DrawerLayout.LOCK_MODE_LOCKED_CLOSED)
             }
 
-            "profile"->{
+            MainEnum.Profile.main->{
                 window.statusBarColor = ContextCompat.getColor(this,R.color.status)
                 binding.toolbar.visibility = View.VISIBLE
                 binding.customToolbar.visibility = View.GONE
@@ -764,64 +757,64 @@ class MainActivity : AppCompatActivity() {
 
             }
 
-            "permission" ->{
+            MainEnum.Permission.main ->{
                 window.statusBarColor = ContextCompat.getColor(this, R.color.status)
                 binding.customToolbar.visibility = View.VISIBLE
                 binding.toolbar.visibility = View.INVISIBLE
                 binding.customButton.visibility = View.GONE
-                binding.customTitle.text = "Leave Requests"
+                binding.customTitle.text = getString(R.string.leave)
                 binding.bottomNavigation.visibility = View.GONE
                 binding.drawerLayout.setDrawerLockMode(DrawerLayout.LOCK_MODE_LOCKED_CLOSED)
 
             }
 
-            "survey" ->{
+            MainEnum.Survey.main ->{
                 window.statusBarColor = ContextCompat.getColor(this, R.color.status)
                 binding.customToolbar.visibility = View.VISIBLE
                 binding.toolbar.visibility = View.INVISIBLE
                 binding.customButton.visibility = View.GONE
-                binding.customTitle.text = "Survey System"
+                binding.customTitle.text = getString(R.string.survey)
                 binding.bottomNavigation.visibility = View.GONE
                 binding.drawerLayout.setDrawerLockMode(DrawerLayout.LOCK_MODE_LOCKED_CLOSED)
 
             }
 
-            "calendar" ->{
+            MainEnum.Calendar.main ->{
                 window.statusBarColor = ContextCompat.getColor(this, R.color.status)
                 binding.customToolbar.visibility = View.VISIBLE
                 binding.toolbar.visibility = View.INVISIBLE
                 binding.customButton.visibility = View.GONE
-                binding.customTitle.text = "Calendar"
+                binding.customTitle.text = getString(R.string.calendar)
                 binding.bottomNavigation.visibility = View.GONE
                 binding.drawerLayout.setDrawerLockMode(DrawerLayout.LOCK_MODE_LOCKED_CLOSED)
 
             }
 
-            "ticket" ->{
+            MainEnum.Ticket.main ->{
                 window.statusBarColor = ContextCompat.getColor(this, R.color.status)
                 binding.customToolbar.background = ContextCompat.getDrawable(this,R.color.status)
                 binding.customToolbar.visibility = View.VISIBLE
                 binding.toolbar.visibility = View.INVISIBLE
                 binding.customButton.visibility = View.GONE
-                binding.customTitle.text = "Ticket"
+                binding.customTitle.text = getString(R.string.ticket)
                 binding.bottomNavigation.visibility = View.GONE
                 binding.drawerLayout.setDrawerLockMode(DrawerLayout.LOCK_MODE_LOCKED_CLOSED)
 
             }
 
-            "event" ->{
+            MainEnum.Event.main ->{
                 window.clearFlags(WindowManager.LayoutParams.FLAG_LAYOUT_NO_LIMITS)
                 window.statusBarColor = ContextCompat.getColor(this, R.color.status)
                 binding.customToolbar.background = ContextCompat.getDrawable(this,R.color.status)
                 binding.customToolbar.visibility = View.VISIBLE
                 binding.toolbar.visibility = View.INVISIBLE
                 binding.customButton.visibility = View.GONE
-                binding.customTitle.text = "Events"
+                binding.customTitle.text = getString(R.string.event)
                 binding.bottomNavigation.visibility = View.GONE
                 binding.drawerLayout.setDrawerLockMode(DrawerLayout.LOCK_MODE_LOCKED_CLOSED)
 
             }
-            "eventDetails" ->{
+            MainEnum.EventDetails.main ->{
                 window.setFlags(WindowManager.LayoutParams.FLAG_LAYOUT_NO_LIMITS,WindowManager.LayoutParams.FLAG_LAYOUT_NO_LIMITS)
                 binding.customToolbar.visibility = View.GONE
                 binding.toolbar.visibility = View.GONE
@@ -831,31 +824,31 @@ class MainActivity : AppCompatActivity() {
 
         }
 
-            "createTicket"->{
+            MainEnum.CreateTicket.main->{
                 window.statusBarColor = ContextCompat.getColor(this, R.color.status)
                 binding.customToolbar.background = ContextCompat.getDrawable(this,R.color.status)
                 binding.customToolbar.visibility = View.VISIBLE
                 binding.toolbar.visibility = View.INVISIBLE
                 binding.customButton.visibility = View.GONE
-                binding.customTitle.text = "Add Ticket"
+                binding.customTitle.text = getString(R.string.addTicket)
                 binding.bottomNavigation.visibility = View.GONE
                 binding.drawerLayout.setDrawerLockMode(DrawerLayout.LOCK_MODE_LOCKED_CLOSED)
 
             }
 
-            "ticketDetails" ->{
+            MainEnum.TicketDetails.main ->{
                 window.statusBarColor = ContextCompat.getColor(this, R.color.status)
                 binding.customToolbar.background = ContextCompat.getDrawable(this,R.color.status)
                 binding.customToolbar.visibility = View.VISIBLE
                 binding.toolbar.visibility = View.INVISIBLE
                 binding.customButton.visibility = View.GONE
-                binding.customTitle.text = "Ticket Details"
+                binding.customTitle.text = getString(R.string.ticketDetails)
                 binding.bottomNavigation.visibility = View.GONE
                 binding.drawerLayout.setDrawerLockMode(DrawerLayout.LOCK_MODE_LOCKED_CLOSED)
 
             }
 
-            "blank"->{
+            MainEnum.Blank.main->{
                 window.statusBarColor = ContextCompat.getColor(this, R.color.black)
                 binding.customToolbar.background = ContextCompat.getDrawable(this,R.color.black)
                 binding.customToolbar.visibility = View.VISIBLE
@@ -867,13 +860,13 @@ class MainActivity : AppCompatActivity() {
 
             }
 
-            "notification"->{
+            MainEnum.Notification.main->{
                 window.statusBarColor = ContextCompat.getColor(this, R.color.status)
                 binding.customToolbar.background = ContextCompat.getDrawable(this,R.color.status)
                 binding.customToolbar.visibility = View.VISIBLE
                 binding.toolbar.visibility = View.INVISIBLE
                 binding.customButton.visibility = View.GONE
-                binding.customTitle.text = "Notification"
+                binding.customTitle.text = getString(R.string.notification)
                 binding.bottomNavigation.visibility = View.GONE
                 binding.drawerLayout.setDrawerLockMode(DrawerLayout.LOCK_MODE_LOCKED_CLOSED)
 
@@ -916,7 +909,6 @@ class MainActivity : AppCompatActivity() {
                 is Result.Loading -> {}
 
                 is Result.Error -> {
-
                     if (it.message == "Unauthorized") {
                         prefs.edit().clear().apply()
                         logoutFromFCM()

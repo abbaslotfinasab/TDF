@@ -37,6 +37,19 @@
     <string name="rate_order">Rate Order</string>
     <string name="confirm">Confirm</string>
     <string name="yesterday">yesterday</string>
+    <string name="menu">Menu</string>
+    <string name="order">Orders</string>
+    <string name="cart">Cart</string>
+    <string name="favorit">Favorites</string>
+    <string name="reservation">Reservation</string>
+    <string name="leave">Leave Requests</string>
+    <string name="survey">Survey System</string>
+    <string name="calendar">Calendar</string>
+    <string name="ticket">Ticket</string>
+    <string name="event">Events</string>
+    <string name="addTicket">Add Ticket</string>
+    <string name="ticketDetails">Ticket Details</string>
+    <string name="notification">Notification</string>
 
 
     <string-array name="month_array">
