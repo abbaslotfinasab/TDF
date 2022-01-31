@@ -1,4 +1,4 @@
-package com.utechia.tdf.home
+package com.utechia.tdf.home.user
 
 import android.content.Intent
 import android.net.Uri

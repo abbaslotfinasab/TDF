@@ -6,7 +6,7 @@
     android:layout_height="372dp"
     android:background="@drawable/spinner_back"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    tools:context=".home.StatusFragment">
+    tools:context=".home.teaboy.StatusFragment">
 
     <ImageView
         android:layout_width="36dp"

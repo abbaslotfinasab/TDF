@@ -1,4 +1,4 @@
-package com.utechia.tdf.home
+package com.utechia.tdf.home.teaboy
 
 import android.content.Context
 import android.content.SharedPreferences
@@ -15,14 +15,14 @@ import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
 import com.utechia.domain.utile.Result
 import com.utechia.tdf.R
-import com.utechia.tdf.databinding.FragmentActivationBinding
+import com.utechia.tdf.databinding.FragmentDeactivationBinding
 import com.utechia.tdf.order.teaboy.OrderCountViewModel
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
-class ActivationFragment : DialogFragment(),View.OnClickListener{
+class DeactivationFragment : DialogFragment(),View.OnClickListener {
 
-    private lateinit var binding: FragmentActivationBinding
+    private lateinit var binding: FragmentDeactivationBinding
     private val orderViewModel: OrderCountViewModel by viewModels()
     private lateinit var prefs: SharedPreferences
 
@@ -31,11 +31,10 @@ class ActivationFragment : DialogFragment(),View.OnClickListener{
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
-        binding = FragmentActivationBinding.inflate(inflater, container, false)
+        binding = FragmentDeactivationBinding.inflate(inflater, container, false)
         binding.btnDelete.setOnClickListener(this)
         binding.btnCancel.setOnClickListener(this)
         binding.exit.setOnClickListener(this)
-
 
         if (dialog != null && dialog?.window != null) {
             dialog?.window?.setBackgroundDrawable(ColorDrawable(Color.TRANSPARENT))
@@ -52,6 +51,7 @@ class ActivationFragment : DialogFragment(),View.OnClickListener{
 
         observer()
 
+
     }
 
     private fun observer() {
@@ -62,10 +62,13 @@ class ActivationFragment : DialogFragment(),View.OnClickListener{
                     binding.prg.visibility = View.GONE
 
                     with(prefs.edit()) {
-                        putBoolean("isTeaBoyActive", true)
+                        putBoolean("isTeaBoyActive", false)
                     }.apply()
 
+
                     dialog?.dismiss()
+
+
                 }
 
                 is Result.Loading -> {
@@ -90,16 +93,16 @@ class ActivationFragment : DialogFragment(),View.OnClickListener{
         when(v?.id){
 
             R.id.btnCancel -> {
-                findNavController().navigate(R.id.action_activationFragment_to_teaBoyHomeFragment)
+                findNavController().navigate(R.id.action_deactivationFragment_to_teaBoyHomeFragment)
             }
 
             R.id.exit -> {
-                findNavController().navigate(R.id.action_activationFragment_to_teaBoyHomeFragment)
+                findNavController().navigate(R.id.action_deactivationFragment_to_teaBoyHomeFragment)
             }
 
             R.id.btnDelete -> {
 
-                orderViewModel.setStatus(true)
+                orderViewModel.setStatus(false)
             }
         }
     }

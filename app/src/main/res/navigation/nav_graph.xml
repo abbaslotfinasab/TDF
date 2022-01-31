@@ -7,7 +7,7 @@
 
     <fragment
         android:id="@+id/userhomeFragment"
-        android:name="com.utechia.tdf.home.UserHomeFragment"
+        android:name="com.utechia.tdf.home.user.UserHomeFragment"
         android:label="fragment_home"
         tools:layout="@layout/fragment_home_user" />
 
@@ -484,7 +484,7 @@
     </dialog>
     <fragment
         android:id="@+id/teaBoyHomeFragment"
-        android:name="com.utechia.tdf.home.TeaBoyHomeFragment"
+        android:name="com.utechia.tdf.home.teaboy.TeaBoyHomeFragment"
         android:label="fragment_tea_boy_home"
         tools:layout="@layout/fragment_tea_boy_home" >
         <action
@@ -600,7 +600,7 @@
 
     <dialog
         android:id="@+id/statusFragment"
-        android:name="com.utechia.tdf.home.StatusFragment"
+        android:name="com.utechia.tdf.home.teaboy.StatusFragment"
         android:label="fragment_status"
         tools:layout="@layout/fragment_status" />
     <dialog
@@ -656,7 +656,7 @@
 
     <dialog
         android:id="@+id/activationFragment"
-        android:name="com.utechia.tdf.home.ActivationFragment"
+        android:name="com.utechia.tdf.home.teaboy.ActivationFragment"
         android:label="fragment_activation"
         tools:layout="@layout/fragment_activation" >
         <action
@@ -669,7 +669,7 @@
     </dialog>
     <dialog
         android:id="@+id/deactivationFragment"
-        android:name="com.utechia.tdf.home.DeactivationFragment"
+        android:name="com.utechia.tdf.home.teaboy.DeactivationFragment"
         android:label="fragment_deactivation"
         tools:layout="@layout/fragment_deactivation" >
         <action

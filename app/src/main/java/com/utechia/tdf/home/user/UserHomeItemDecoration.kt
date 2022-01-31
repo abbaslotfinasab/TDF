@@ -1,4 +1,4 @@
-package com.utechia.tdf.home
+package com.utechia.tdf.home.user
 
 import android.graphics.Rect
 import android.view.View
@@ -14,10 +14,13 @@ class UserHomeItemDecoration: RecyclerView.ItemDecoration(){
         @NonNull parent: RecyclerView,
         @NonNull state: RecyclerView.State
     ) {
-        outRect.left = 20
-        outRect.right = 20
-        outRect.top = 20
+        outRect.left = 40
+        outRect.right = 40
         outRect.bottom = 20
+        if (parent.getChildAdapterPosition(view) ==0)
+            outRect.top = 40
+        else
+            outRect.bottom = 20
 
 
 

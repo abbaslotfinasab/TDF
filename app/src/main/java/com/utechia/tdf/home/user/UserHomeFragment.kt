@@ -1,4 +1,4 @@
-package com.utechia.tdf.home
+package com.utechia.tdf.home.user
 
 import android.content.Context
 import android.content.SharedPreferences
@@ -20,8 +20,8 @@ import dagger.hilt.android.AndroidEntryPoint
 class UserHomeFragment : Fragment() {
 
     private lateinit var binding: FragmentHomeUserBinding
-    private val homeViewModel:UserHomeViewModel by viewModels()
-    private val userHomeAdapter:UserHomeAdapter = UserHomeAdapter()
+    private val homeViewModel: UserHomeViewModel by viewModels()
+    private val userHomeAdapter: UserHomeAdapter = UserHomeAdapter()
     private lateinit var prefs: SharedPreferences
 
 

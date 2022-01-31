@@ -50,6 +50,7 @@
     <string name="addTicket">Add Ticket</string>
     <string name="ticketDetails">Ticket Details</string>
     <string name="notification">Notification</string>
+    <string name="exit_time">Exit Time</string>
 
 
     <string-array name="month_array">

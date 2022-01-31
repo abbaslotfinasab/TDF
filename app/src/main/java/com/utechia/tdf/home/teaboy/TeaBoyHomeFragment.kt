@@ -1,4 +1,4 @@
-package com.utechia.tdf.home
+package com.utechia.tdf.home.teaboy
 
 import android.content.Context
 import android.content.SharedPreferences
@@ -45,11 +45,11 @@ class TeaBoyHomeFragment : Fragment(),View.OnClickListener {
         super.onViewCreated(view, savedInstanceState)
 
         prefs = requireActivity().getSharedPreferences("tdf", Context.MODE_PRIVATE)
+        name = prefs.getString("name", "").toString()
+        floor = prefs.getString("floor", "").toString()
 
         if (prefs.getBoolean("Start",false)) {
 
-            name = prefs.getString("name", "").toString()
-            floor = prefs.getString("floor", "").toString()
             (activity as MainActivity).setupTeaBoy()
 
             with(prefs.edit()){
@@ -60,14 +60,18 @@ class TeaBoyHomeFragment : Fragment(),View.OnClickListener {
 
         }
 
-       /* binding.token.setOnClickListener {
+        binding.name.text = name
+        binding.job.text = "${floor}st Floor TeaBoy"
 
-            val clipboard = requireActivity().getSystemService(Context.CLIPBOARD_SERVICE) as ClipboardManager
-            val clip = ClipData.newPlainText("label",prefs.getString("fcm", ""))
-            clipboard.setPrimaryClip(clip)
-            Toast.makeText(context,"Copied",Toast.LENGTH_SHORT).show()
-        }
-*/
+
+        /* binding.token.setOnClickListener {
+
+             val clipboard = requireActivity().getSystemService(Context.CLIPBOARD_SERVICE) as ClipboardManager
+             val clip = ClipData.newPlainText("label",prefs.getString("fcm", ""))
+             clipboard.setPrimaryClip(clip)
+             Toast.makeText(context,"Copied",Toast.LENGTH_SHORT).show()
+         }
+ */
         orderViewModel.getOrder()
 
 
