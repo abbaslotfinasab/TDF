@@ -44,6 +44,10 @@ class MainActivity : AppCompatActivity() {
     private lateinit var prefs: SharedPreferences
     private lateinit var analytics: FirebaseAnalytics
 
+    companion object{
+        const val Order = "order"
+    }
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         analytics = Firebase.analytics
@@ -209,7 +213,7 @@ class MainActivity : AppCompatActivity() {
                     }
                     R.id.refreshmentFragment ->{
                         design(MainEnum.Refreshment.main)
-                        val bundle = bundleOf("order" to 2)
+                        val bundle = bundleOf(Order to 2)
                         destination.addInDefaultArgs(bundle)
 
                     }
@@ -883,13 +887,13 @@ class MainActivity : AppCompatActivity() {
                         binding.bottomNavigation.getOrCreateBadge(R.id.refreshmentFragment).number =
                             it.data.pending_orders!!
                         with(prefs.edit()) {
-                            putInt("order", it.data.pending_orders!!)
+                            putInt(Order, it.data.pending_orders!!)
                         }.apply()
                     }
                     else {
                         binding.bottomNavigation.removeBadge(R.id.refreshmentFragment)
                         with(prefs.edit()) {
-                            putInt("order",0)
+                            putInt(Order,0)
                         }.apply()
                     }
                 }

@@ -11,6 +11,7 @@ import androidx.core.os.bundleOf
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
+import com.utechia.domain.enum.MainEnum
 import com.utechia.domain.enum.OrderEnum
 import com.utechia.domain.utile.Result
 import com.utechia.tdf.R
@@ -30,6 +31,13 @@ class TeaBoyHomeFragment : Fragment(),View.OnClickListener {
     private var floor = ""
     private var status = false
 
+    companion object{
+        const val Start = "start"
+        const val Name = "name"
+        const val Floor = "floor"
+        const val Active = "isTeaBoyActive"
+    }
+
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
@@ -44,17 +52,17 @@ class TeaBoyHomeFragment : Fragment(),View.OnClickListener {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        prefs = requireActivity().getSharedPreferences("tdf", Context.MODE_PRIVATE)
-        name = prefs.getString("name", "").toString()
-        floor = prefs.getString("floor", "").toString()
+        prefs = requireActivity().getSharedPreferences(MainEnum.Tdf.main, Context.MODE_PRIVATE)
+        name = prefs.getString(Name, "").toString()
+        floor = prefs.getString(Floor, "").toString()
 
-        if (prefs.getBoolean("Start",false)) {
+        if (prefs.getBoolean(Start,false)) {
 
             (activity as MainActivity).setupTeaBoy()
 
             with(prefs.edit()){
 
-                putBoolean("Start",false)
+                putBoolean(Start,false)
 
             }.apply()
 
@@ -75,7 +83,7 @@ class TeaBoyHomeFragment : Fragment(),View.OnClickListener {
         orderViewModel.getOrder()
 
 
-        status = prefs.getBoolean("isTeaBoyActive",true)
+        status = prefs.getBoolean(Active,true)
         binding.switchCompat.isChecked = status
 
         if (status){

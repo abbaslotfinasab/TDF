@@ -24,6 +24,12 @@ class UserHomeFragment : Fragment() {
     private val userHomeAdapter: UserHomeAdapter = UserHomeAdapter()
     private lateinit var prefs: SharedPreferences
 
+    companion object{
+
+        const val Start = "start"
+
+    }
+
 
 
     override fun onCreateView(
@@ -46,13 +52,13 @@ class UserHomeFragment : Fragment() {
 
         }
 
-        if (prefs.getBoolean("Start",false)) {
+        if (prefs.getBoolean(Start,false)) {
 
             (activity as MainActivity).setupUser()
 
             with(prefs.edit()){
 
-                putBoolean("Start",false)
+                putBoolean(Start,false)
 
             }.apply()
 

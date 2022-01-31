@@ -30,6 +30,22 @@ class LoginFragment : Fragment() {
     private var uri = ""
     private var code = ""
 
+    companion object{
+
+        const val Start = "start"
+        const val Code = "code"
+        const val Name = "name"
+        const val Floor = "floor"
+        const val TeaBoy = "isTeaBoy"
+        const val Active = "isTeaBoyActive"
+        const val Mail = "mail"
+        const val Job = "job"
+
+
+
+
+    }
+
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
@@ -40,13 +56,13 @@ class LoginFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        prefs = requireActivity().getSharedPreferences("tdf", Context.MODE_PRIVATE)
+        prefs = requireActivity().getSharedPreferences(MainEnum.Tdf.main, Context.MODE_PRIVATE)
         binding.prg.bringToFront()
 
 
 
         if (arguments != null) {
-            code = requireArguments().getString("code", "")
+            code = requireArguments().getString(Code, "")
             arguments?.clear()
         }
 
@@ -79,23 +95,23 @@ class LoginFragment : Fragment() {
                     binding.prg.visibility = View.VISIBLE
                     if (it.data.isTeaBoy == false) {
                         with(prefs.edit()){
-                            putString("name",it.data.name)
-                            putString("job",it.data.jobTitle)
+                            putString(Name,it.data.name)
+                            putString(Job,it.data.jobTitle)
                             putString(MainEnum.ID.main,it.data.userHomeId)
-                            putString("mail",it.data.mail)
-                            putBoolean("Start",true)
+                            putString(Mail,it.data.mail)
+                            putBoolean(Start,true)
                         }.apply()
                         findNavController().navigate(R.id.action_loginFragment_to_userhomeFragment)
                     }
 
                     else {
                         with(prefs.edit()){
-                            putString("name",it.data.name)
-                            putString("floor", it.data.floor.toString())
-                            putBoolean("isTeaBoy", it.data.isTeaBoy == true)
-                            putBoolean("isTeaBoyActive", it.data.isTeaBoyActive == true)
+                            putString(Name,it.data.name)
+                            putString(Floor, it.data.floor.toString())
+                            putBoolean(TeaBoy, it.data.isTeaBoy == true)
+                            putBoolean(Active, it.data.isTeaBoyActive == true)
                             putString(MainEnum.ID.main,it.data.userHomeId)
-                            putBoolean("Start",true)
+                            putBoolean(Start,true)
 
                         }.apply()
                         findNavController().navigate(R.id.action_loginFragment_to_teaBoyHomeFragment)
