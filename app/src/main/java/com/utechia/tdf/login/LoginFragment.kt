@@ -39,7 +39,7 @@ class LoginFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        prefs = requireActivity().getSharedPreferences(MainEnum.Tdf.name, Context.MODE_PRIVATE)
+        prefs = requireActivity().getSharedPreferences("tdf", Context.MODE_PRIVATE)
         binding.prg.bringToFront()
 
 
@@ -80,7 +80,7 @@ class LoginFragment : Fragment() {
                         with(prefs.edit()){
                             putString("name",it.data.name)
                             putString("job",it.data.jobTitle)
-                            putString("USER_ID",it.data.userHomeId)
+                            putString(MainEnum.ID.main,it.data.userHomeId)
                             putString("mail",it.data.mail)
                             putBoolean("Start",true)
                         }.apply()
@@ -93,7 +93,7 @@ class LoginFragment : Fragment() {
                             putString("floor", it.data.floor.toString())
                             putBoolean("isTeaBoy", it.data.isTeaBoy == true)
                             putBoolean("isTeaBoyActive", it.data.isTeaBoyActive == true)
-                            putString("USER_ID",it.data.userHomeId)
+                            putString(MainEnum.ID.main,it.data.userHomeId)
                             putBoolean("Start",true)
 
                         }.apply()

@@ -2,7 +2,6 @@ package com.utechia.tdf.main
 
 import android.content.Intent
 import android.content.SharedPreferences
-import android.graphics.Color
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.os.Handler
@@ -77,17 +76,13 @@ class MainActivity : AppCompatActivity() {
             teaBoy() -> {
                 mainViewModel.getCount()
                 graph.setStartDestination(R.id.teaBoyHomeFragment)
-                val name = prefs.getString(MainEnum.Name.main,"").toString()
-                val floor = prefs.getString(MainEnum.Job.main,"").toString()
-                setupTeaBoy(name,floor)
+                setupTeaBoy()
                 observer()
             }
             !teaBoy() -> {
                 mainViewModel.getCount()
                 graph.setStartDestination(R.id.userhomeFragment)
-                val name = prefs.getString(MainEnum.Name.main,"").toString()
-                val job = prefs.getString(MainEnum.Job.main,"").toString()
-                setupUser(name,job)
+                setupUser()
                 observer()
             }
             else ->
@@ -180,10 +175,7 @@ class MainActivity : AppCompatActivity() {
 
     }
 
-    fun setupUser(name: String, job:String) {
-
-        binding.title.text = name
-        binding.subTitle.text = job
+    fun setupUser() {
 
         binding.bottomNavigation.apply {
             menu.clear()
@@ -423,10 +415,7 @@ class MainActivity : AppCompatActivity() {
             }
         }
 
-    fun setupTeaBoy(name: String, floor:String) {
-
-        binding.title.text = name
-        binding.subTitle .text = floor+"th Floor TeaBoy"
+    fun setupTeaBoy() {
 
         binding.bottomNavigation.apply {
             menu.clear()
@@ -890,8 +879,7 @@ class MainActivity : AppCompatActivity() {
                         binding.notificationNumber.text = it.data.unread_notification.toString()
                     }
                     if(it.data.pending_orders!=0) {
-                        binding.bottomNavigation.getOrCreateBadge(R.id.refreshmentFragment).backgroundColor =
-                            Color.parseColor("#FF6464")
+                        binding.bottomNavigation.getOrCreateBadge(R.id.refreshmentFragment).backgroundColor = ContextCompat.getColor(this,R.color.bubblr)
                         binding.bottomNavigation.getOrCreateBadge(R.id.refreshmentFragment).number =
                             it.data.pending_orders!!
                         with(prefs.edit()) {

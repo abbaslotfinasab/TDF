@@ -50,7 +50,7 @@ class TeaBoyHomeFragment : Fragment(),View.OnClickListener {
 
             name = prefs.getString("name", "").toString()
             floor = prefs.getString("floor", "").toString()
-            (activity as MainActivity).setupTeaBoy(name,floor)
+            (activity as MainActivity).setupTeaBoy()
 
             with(prefs.edit()){
 

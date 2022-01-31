@@ -29,6 +29,8 @@ class CreateRefreshmentChildFragment(val refreshment: String) : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+        binding.prg.bringToFront()
+        
         refreshmentViewModel.getRefreshment(refreshment)
 
         binding.recyclerView.apply {

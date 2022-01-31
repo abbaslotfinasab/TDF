@@ -45,7 +45,7 @@ class UserHomeFragment : Fragment() {
 
             name = prefs.getString("name", "").toString()
             job = prefs.getString("job", "").toString()
-            (activity as MainActivity).setupUser(name, job)
+            (activity as MainActivity).setupUser()
 
             with(prefs.edit()){
 
@@ -70,8 +70,6 @@ class UserHomeFragment : Fragment() {
                 is Result.Success -> {
                     binding.prg.visibility = View.GONE
                     userHomeAdapter.addData(it.data)
-
-
                 }
 
                 is Result.Loading -> {

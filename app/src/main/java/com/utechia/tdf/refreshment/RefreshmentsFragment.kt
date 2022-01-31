@@ -41,7 +41,7 @@ class RefreshmentsFragment : Fragment() {
 
             name = prefs.getString("name", "").toString()
             job = prefs.getString("job", "").toString()
-            (activity as MainActivity).setupUser(name, job)
+            (activity as MainActivity).setupUser()
 
             with(prefs.edit()){
 
