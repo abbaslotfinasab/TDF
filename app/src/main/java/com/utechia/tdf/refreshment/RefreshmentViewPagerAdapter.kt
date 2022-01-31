@@ -6,7 +6,7 @@ import androidx.lifecycle.Lifecycle
 import androidx.viewpager2.adapter.FragmentStateAdapter
 import com.utechia.domain.enum.RefreshmentEnum
 
-class RefreshmentViewPagerAdapter(fa: FragmentManager, lifecycle:Lifecycle) : FragmentStateAdapter(fa,lifecycle) {
+class RefreshmentViewPagerAdapter(private val fa: FragmentManager, lifecycle:Lifecycle) : FragmentStateAdapter(fa,lifecycle) {
 
     override fun getItemCount(): Int = 3
 

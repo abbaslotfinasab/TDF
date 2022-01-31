@@ -12,7 +12,7 @@ import com.bumptech.glide.Glide
 import com.utechia.domain.model.RefreshmentModel
 import com.utechia.tdf.R
 
-class RefreshmentAdapter(private val createRefreshmentFragment: CreateRefreshmentChildFragment) : RecyclerView.Adapter<RecyclerView.ViewHolder>()  {
+class RefreshmentAdapter(private val createRefreshmentFragment: CreateRefreshmentFragment) : RecyclerView.Adapter<RecyclerView.ViewHolder>()  {
 
     var refreshment:MutableList<RefreshmentModel> = mutableListOf()
 
@@ -23,6 +23,20 @@ class RefreshmentAdapter(private val createRefreshmentFragment: CreateRefreshmen
         notifyItemRangeChanged(0,_refreshmentModel.size)
 
     }
+
+   /* fun filter(search:String) {
+        refreshment.clear()
+        *//*refreshment.filter {
+            if(it.title?.contains(search) == true){
+                refreshment.clear()
+                refreshment.add(it)
+            }
+            else{
+               return
+            }
+        }*//*
+        notifyDataSetChanged()
+    }*/
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): RecyclerView.ViewHolder =
         ViewHolder(
