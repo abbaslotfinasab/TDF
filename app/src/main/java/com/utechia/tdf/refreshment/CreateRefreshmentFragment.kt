@@ -129,6 +129,8 @@ class CreateRefreshmentFragment : Fragment(),View.OnClickListener {
 
         })
 
+        binding.pager.isUserInputEnabled = false
+
         binding.pager.registerOnPageChangeCallback(object :ViewPager2.OnPageChangeCallback(){
 
             override fun onPageSelected(position: Int) {
