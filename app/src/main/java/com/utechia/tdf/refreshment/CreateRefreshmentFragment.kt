@@ -176,7 +176,7 @@ class CreateRefreshmentFragment : Fragment(),View.OnClickListener {
 
                 },100)
                 binding.tabLayout.getTabAt(0)?.select()
-                binding.food.setBackgroundColor(ContextCompat.getColor(requireActivity(),R.color.refreshment_selected))
+                binding.drink.setBackgroundColor(ContextCompat.getColor(requireActivity(),R.color.refreshment_selected))
                 binding.drinkText.setTextColor(Color.WHITE)
                 binding.tabLayout.visibility = View.VISIBLE
                 refreshmentViewModel.getRefreshment(category)
