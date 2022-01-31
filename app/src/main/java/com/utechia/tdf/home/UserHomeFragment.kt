@@ -3,7 +3,6 @@ package com.utechia.tdf.home
 import android.content.Context
 import android.content.SharedPreferences
 import android.os.Bundle
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -11,6 +10,7 @@ import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.recyclerview.widget.LinearLayoutManager
+import com.utechia.domain.enum.MainEnum
 import com.utechia.domain.utile.Result
 import com.utechia.tdf.main.MainActivity
 import com.utechia.tdf.databinding.FragmentHomeUserBinding
@@ -23,8 +23,7 @@ class UserHomeFragment : Fragment() {
     private val homeViewModel:UserHomeViewModel by viewModels()
     private val userHomeAdapter:UserHomeAdapter = UserHomeAdapter()
     private lateinit var prefs: SharedPreferences
-    private var name = ""
-    private var job = ""
+
 
 
     override fun onCreateView(
@@ -37,14 +36,18 @@ class UserHomeFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        prefs = requireActivity().getSharedPreferences("tdf", Context.MODE_PRIVATE)
+        prefs = requireActivity().getSharedPreferences(MainEnum.Tdf.main, Context.MODE_PRIVATE)
 
         homeViewModel.getNews()
 
+        binding.refreshLayout.setOnRefreshListener {
+
+            homeViewModel.getNews()
+
+        }
+
         if (prefs.getBoolean("Start",false)) {
 
-            name = prefs.getString("name", "").toString()
-            job = prefs.getString("job", "").toString()
             (activity as MainActivity).setupUser()
 
             with(prefs.edit()){
@@ -69,16 +72,19 @@ class UserHomeFragment : Fragment() {
             when (it) {
                 is Result.Success -> {
                     binding.prg.visibility = View.GONE
+                    binding.refreshLayout.isRefreshing = false
                     userHomeAdapter.addData(it.data)
                 }
 
                 is Result.Loading -> {
-                    binding.prg.visibility = View.VISIBLE
+                    binding.prg.visibility = View.GONE
+                    binding.refreshLayout.isRefreshing = true
                     binding.recyclerView.visibility = View.GONE
                 }
 
                 is Result.Error -> {
                     binding.prg.visibility = View.GONE
+                    binding.refreshLayout.isRefreshing = false
                     binding.recyclerView.visibility = View.GONE
                     Toast.makeText(context, it.message, Toast.LENGTH_SHORT).show()
                 }

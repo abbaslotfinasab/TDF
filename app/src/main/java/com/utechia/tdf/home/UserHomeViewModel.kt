@@ -34,6 +34,7 @@ class UserHomeViewModel @Inject constructor(
         viewModelScope.launch(Dispatchers.IO + handler) {
 
             _news.postValue(Result.Loading)
+
             newsList.clear()
             newsList.add(NewsModel("SAUDI ARABIA ANNOUNCES TOURISM DEVELOPMENT FUND", R.mipmap.news,"https://www.google.com","2017-01-23T10:12:31.484Z"))
             newsList.add(NewsModel("The tourism is set to support the development of large scale mixed-used projects and resorts", R.mipmap.news,"https://www.google.com","2017-01-23T10:12:31.484Z"))
@@ -41,6 +42,7 @@ class UserHomeViewModel @Inject constructor(
             newsList.add(NewsModel("The tourism is set to support the development of large scale mixed-used projects and resorts", R.mipmap.news,"https://www.google.com","2017-01-23T10:12:31.484Z"))
 
             _news.postValue(Result.Success(newsList))
+
         }
     }
 }
