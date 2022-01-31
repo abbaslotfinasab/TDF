@@ -76,8 +76,6 @@ class CreateRefreshmentFragment : Fragment(),View.OnClickListener {
 
         })
 
-        refreshmentViewModel.getRefreshment(category)
-
         binding.tabLayout.addOnTabSelectedListener(object : TabLayout.OnTabSelectedListener{
             override fun onTabSelected(tab: TabLayout.Tab?) {
 
@@ -130,27 +128,6 @@ class CreateRefreshmentFragment : Fragment(),View.OnClickListener {
         })
 
         binding.pager.isUserInputEnabled = false
-
-        binding.pager.registerOnPageChangeCallback(object :ViewPager2.OnPageChangeCallback(){
-
-            override fun onPageSelected(position: Int) {
-                super.onPageSelected(position)
-                when(position){
-
-                    0->{
-                        select(RefreshmentEnum.Food.refreshment)
-                    }
-
-                    1->{
-                        select(RefreshmentEnum.Hot.refreshment)
-                    }
-
-                    2->{
-                        select(RefreshmentEnum.Cold.refreshment)
-                    }
-                }
-            }
-        })
 
         select(category)
     }
