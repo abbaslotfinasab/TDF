@@ -63,13 +63,13 @@ class OrderTeaBoyAdapter(private val teaBoyOrdersFragment: TeaBoyOrderChildFragm
 
         fun bind0(position: Int) {
 
-            timeZone = OffsetDateTime.parse(userOrders[position].updatedAt).atZoneSameInstant(
+            timeZone = OffsetDateTime.parse(userOrders[position].updatedAt?:"2022-01-01T10:12:31.484Z").atZoneSameInstant(
                 ZoneId.systemDefault()
             ).toLocalDateTime().format(DateTimeFormatter.ofPattern("yyyy.MM.dd"))
             date.text = "$timeZone"
 
 
-            timeZone = OffsetDateTime.parse(userOrders[position].updatedAt).atZoneSameInstant(
+            timeZone = OffsetDateTime.parse(userOrders[position].updatedAt?:"2022-01-01T10:12:31.484Z").atZoneSameInstant(
                 ZoneId.systemDefault()
             ).toLocalDateTime().format(DateTimeFormatter.ofPattern("HH:mm"))
             time.text = "$timeZone"
@@ -77,7 +77,7 @@ class OrderTeaBoyAdapter(private val teaBoyOrdersFragment: TeaBoyOrderChildFragm
             number.text = "${userOrders[position].cart?.items?.size}x"
             oderId.text = "${userOrders[position].id}"
             user.text = userOrders[position].user?.displayName
-            location.text = "${userOrders[position].user?.officeFloor}st Floor - Room ${userOrders[position].user?.officeFloor}"
+            location.text ="${userOrders[position].floor?:""}st Floor - Room ${userOrders[position].location?:""}"
 
             if (userOrders[position].cart?.items?.size!! > 1) {
                 title.text = userOrders[position].cart?.items?.get(0)?.food?.title + "..."
