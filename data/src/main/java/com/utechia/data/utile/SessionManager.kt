@@ -17,7 +17,7 @@ class SessionManager @Inject constructor(@ApplicationContext private val context
     fun saveAuthToken(verify: VerifyData) {
         val editor = prefs.edit()
         editor.putString(MainEnum.Token.main, verify.token)
-        editor.putString(MainEnum.ID.main, verify.userHomeId)
+        editor.putString(MainEnum.HomeId.main, verify.userHomeId)
         editor.apply()
     }
 
@@ -32,7 +32,7 @@ class SessionManager @Inject constructor(@ApplicationContext private val context
     }
 
     fun fetchHomeId(): String? {
-        return prefs.getString(MainEnum.ID.main, "")
+        return prefs.getString(MainEnum.HomeId.main, "")
     }
 
     fun fetchFireBaeToken(): String? {

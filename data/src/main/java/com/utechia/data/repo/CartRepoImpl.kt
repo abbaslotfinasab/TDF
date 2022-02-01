@@ -1,6 +1,7 @@
 package com.utechia.data.repo
 
 import com.utechia.data.api.Service
+import com.utechia.data.dao.RefreshmentDao
 import com.utechia.data.entity.CartBody
 import com.utechia.data.utile.NetworkHelper
 import com.utechia.domain.model.CartModel
@@ -13,6 +14,8 @@ import javax.inject.Singleton
 class CartRepoImpl @Inject constructor(
     private val service: Service,
     private val networkHelper: NetworkHelper,
+    private val refreshmentDao: RefreshmentDao,
+
 
     ):CartRepo {
     override suspend fun getCart(): MutableList<CartModel> {
@@ -25,8 +28,19 @@ class CartRepoImpl @Inject constructor(
 
                 true -> {
 
+                    result.body()?.data?.map {
+                        it.items?.map { it1 ->
+                            it1.quantity?.let { it2 ->
+                                it1.food.id?.let { it3 ->
+                                    refreshmentDao.updateNumber(
+                                        it3,
+                                        it2
+                                    )
+                                }
+                            }
+                        }
+                    }
                 result.body()?.data?.map { it.toDomain()}!!.toMutableList()
-
                 }
                 else ->
                     throw IOException("Server is Not Responding")
@@ -36,9 +50,15 @@ class CartRepoImpl @Inject constructor(
     }
 
 
-    override suspend fun postCart(id: Int, quantity: Int) = service.postCart(CartBody(id,quantity))
+    override suspend fun postCart(id: Int, quantity: Int){
+        refreshmentDao.updateNumber(id,quantity)
+        service.postCart(CartBody(id,quantity))
+    }
 
-    override suspend fun updateCart(id: Int, quantity: Int) = service.updateCart(CartBody(id,quantity))
+    override suspend fun updateCart(id: Int, quantity: Int) {
+        refreshmentDao.updateNumber(id,quantity)
+        service.updateCart(CartBody(id, quantity))
+    }
 
     override suspend fun deleteCart(id: Int):MutableList<CartModel>{
 
@@ -49,6 +69,8 @@ class CartRepoImpl @Inject constructor(
             return when (result.isSuccessful) {
 
                 true -> {
+                    refreshmentDao.deleteItem(id)
+
                     emptyList<CartModel>().toMutableList()
                 }
                 else ->
@@ -68,14 +90,14 @@ class CartRepoImpl @Inject constructor(
             return when (result.isSuccessful) {
 
                 true -> {
+                    refreshmentDao.deleteAll()
+
                     emptyList<CartModel>().toMutableList()
                 }
                 else -> {
                     throw IOException("Server is Not Responding")
                 }
             }
-
         } else throw IOException("No Internet Connection")
     }
-
 }

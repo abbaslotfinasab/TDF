@@ -60,7 +60,7 @@ class CartAdapter(private val cartFragment: CartFragment): RecyclerView.Adapter<
 
                     number += 1
                     numberText.text = number.toString()
-                    cartFragment.cartViewModel.postCart(carts[position].food.id?:0, number)
+                    cartFragment.cartViewModel.updateCart(carts[position].food.id?:0, number)
 
                 }
 

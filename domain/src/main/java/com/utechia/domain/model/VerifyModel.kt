@@ -9,9 +9,7 @@ data class VerifyModel(
     val floor : Int?,
     val name: String?,
     val jobTitle:String?,
-    val mail:String?
+    val mail:String?,
+    val userid: Int?,
 
-
-
-
-)
+    )

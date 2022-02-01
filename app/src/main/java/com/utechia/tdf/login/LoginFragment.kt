@@ -5,7 +5,6 @@ import android.content.Intent
 import android.content.SharedPreferences
 import android.net.Uri
 import android.os.Bundle
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -40,6 +39,7 @@ class LoginFragment : Fragment() {
         const val Active = "isTeaBoyActive"
         const val Mail = "mail"
         const val Job = "job"
+        const val ID = "userId"
 
 
 
@@ -97,8 +97,9 @@ class LoginFragment : Fragment() {
                         with(prefs.edit()){
                             putString(Name,it.data.name)
                             putString(Job,it.data.jobTitle)
-                            putString(MainEnum.ID.main,it.data.userHomeId)
+                            putString(MainEnum.HomeId.main,it.data.userHomeId)
                             putString(Mail,it.data.mail)
+                            it.data.userid?.let { it1 -> putInt(MainEnum.UserId.main, it1) }
                             putBoolean(Start,true)
                         }.apply()
                         findNavController().navigate(R.id.action_loginFragment_to_userhomeFragment)
@@ -110,7 +111,8 @@ class LoginFragment : Fragment() {
                             putString(Floor, it.data.floor.toString())
                             putBoolean(TeaBoy, it.data.isTeaBoy == true)
                             putBoolean(Active, it.data.isTeaBoyActive == true)
-                            putString(MainEnum.ID.main,it.data.userHomeId)
+                            putString(MainEnum.HomeId.main,it.data.userHomeId)
+                            it.data.userid?.let { it1 -> putInt(MainEnum.UserId.main, it1) }
                             putBoolean(Start,true)
 
                         }.apply()
@@ -149,10 +151,10 @@ class LoginFragment : Fragment() {
 
                 }
 
-                is Result.Error -> { binding.prg.visibility = View.GONE
+                is Result.Error -> {
+                    binding.prg.visibility = View.GONE
                     binding.appCompatButton.isEnabled = true
                     Toast.makeText(context, it.message, Toast.LENGTH_SHORT).show()
-
                 }
             }
         }

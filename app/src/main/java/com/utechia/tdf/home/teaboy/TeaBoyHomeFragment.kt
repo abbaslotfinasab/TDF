@@ -11,6 +11,14 @@ import androidx.core.os.bundleOf
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
+import com.google.firebase.database.DataSnapshot
+import com.google.firebase.database.DatabaseError
+import com.google.firebase.database.DatabaseReference
+import com.google.firebase.database.ValueEventListener
+import com.google.firebase.database.ktx.database
+import com.google.firebase.database.ktx.getValue
+import com.google.firebase.ktx.Firebase
+import com.utechia.data.entity.Chat
 import com.utechia.domain.enum.MainEnum
 import com.utechia.domain.enum.OrderEnum
 import com.utechia.domain.utile.Result
@@ -25,6 +33,7 @@ class TeaBoyHomeFragment : Fragment(),View.OnClickListener {
 
     private lateinit var binding: FragmentTeaBoyHomeBinding
     private val orderViewModel: OrderCountViewModel by viewModels()
+    private lateinit var database: DatabaseReference
     private lateinit var bundle: Bundle
     private lateinit var prefs: SharedPreferences
     private var name = ""
@@ -36,6 +45,7 @@ class TeaBoyHomeFragment : Fragment(),View.OnClickListener {
         const val Name = "name"
         const val Floor = "floor"
         const val Active = "isTeaBoyActive"
+        const val ID = "userId"
     }
 
     override fun onCreateView(
@@ -51,6 +61,9 @@ class TeaBoyHomeFragment : Fragment(),View.OnClickListener {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+/*
+        database = Firebase.database("https://tdf-oms-default-rtdb.asia-southeast1.firebasedatabase.app/").reference
+*/
 
         prefs = requireActivity().getSharedPreferences(MainEnum.Tdf.main, Context.MODE_PRIVATE)
         name = prefs.getString(Name, "").toString()
@@ -67,21 +80,10 @@ class TeaBoyHomeFragment : Fragment(),View.OnClickListener {
             }.apply()
 
         }
-
         binding.name.text = name
         binding.job.text = "${floor}st Floor TeaBoy"
 
-
-        /* binding.token.setOnClickListener {
-
-             val clipboard = requireActivity().getSystemService(Context.CLIPBOARD_SERVICE) as ClipboardManager
-             val clip = ClipData.newPlainText("label",prefs.getString("fcm", ""))
-             clipboard.setPrimaryClip(clip)
-             Toast.makeText(context,"Copied",Toast.LENGTH_SHORT).show()
-         }
- */
         orderViewModel.getOrder()
-
 
         status = prefs.getBoolean(Active,true)
         binding.switchCompat.isChecked = status
@@ -90,6 +92,21 @@ class TeaBoyHomeFragment : Fragment(),View.OnClickListener {
             binding.status.text = getString(R.string.active)
         }else
             binding.status.text = getString(R.string.deactive)
+
+
+
+      /*  val tranceActionListener = database.child("Transaction").child(ID)
+
+        tranceActionListener.addValueEventListener(object: ValueEventListener {
+            override fun onDataChange(snapshot: DataSnapshot) {
+                binding.prg.visibility = View.GONE
+            }
+
+            override fun onCancelled(error: DatabaseError) {
+                Toast.makeText(context,error.message,Toast.LENGTH_SHORT).show()
+            }
+        })
+*/
 
 
         binding.switchCompat.setOnCheckedChangeListener { _, isChecked ->

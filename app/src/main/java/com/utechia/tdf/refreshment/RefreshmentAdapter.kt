@@ -24,19 +24,6 @@ class RefreshmentAdapter(private val createRefreshmentFragment: CreateRefreshmen
 
     }
 
-   /* fun filter(search:String) {
-        refreshment.clear()
-        *//*refreshment.filter {
-            if(it.title?.contains(search) == true){
-                refreshment.clear()
-                refreshment.add(it)
-            }
-            else{
-               return
-            }
-        }*//*
-        notifyDataSetChanged()
-    }*/
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): RecyclerView.ViewHolder =
         ViewHolder(
@@ -76,7 +63,7 @@ class RefreshmentAdapter(private val createRefreshmentFragment: CreateRefreshmen
 
 
             name.text = refreshment[position].title
-            numberText.text = refreshment[position].number.toString()
+            numberText.text = (refreshment[position].number?:0).toString()
             layout.visibility = View.GONE
             add.visibility = View.VISIBLE
             dislike.visibility = View.GONE
@@ -105,7 +92,7 @@ class RefreshmentAdapter(private val createRefreshmentFragment: CreateRefreshmen
 
             }
 
-            if (refreshment[position].open){
+            if (refreshment[position].number>0){
 
                 layout.visibility = View.VISIBLE
                 add.visibility = View.GONE
@@ -121,26 +108,25 @@ class RefreshmentAdapter(private val createRefreshmentFragment: CreateRefreshmen
                 .into(image)
 
             add.setOnClickListener {
-                refreshment[position].number += 1
+                refreshment[position].number = refreshment[position].number?.plus(1)
                 numberText.text = refreshment[position].number .toString()
                 refreshment[position].open=true
                 it.visibility = View.GONE
                 layout.visibility = View.VISIBLE
-                createRefreshmentFragment.refreshmentViewModel.postCart(refreshment[position].id?:0,refreshment[position].number )
+                createRefreshmentFragment.refreshmentViewModel.postCart(refreshment[position].id?:0,refreshment[position].number?:0 )
             }
             plus.setOnClickListener {
-                refreshment[position].number  += 1
+                refreshment[position].number = refreshment[position].number?.plus(1)
                 numberText.text = refreshment[position].number .toString()
-                createRefreshmentFragment.refreshmentViewModel.updateCart(refreshment[position].id?:0,refreshment[position].number )
-
+                createRefreshmentFragment.refreshmentViewModel.updateCart(refreshment[position].id?:0,refreshment[position].number?:0 )
             }
 
             minus.setOnClickListener {
-                if (refreshment[position].number >1) {
-                    refreshment[position].number  -= 1
+                if (refreshment[position].number?:0 >1) {
+                    refreshment[position].number = refreshment[position].number?.minus(1)
                     createRefreshmentFragment.refreshmentViewModel.updateCart(
                         refreshment[position].id?:0,
-                        refreshment[position].number
+                        refreshment[position].number?:0
                     )
                 }
                 else {

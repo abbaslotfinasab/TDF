@@ -22,7 +22,7 @@ data class RefreshmentModel(
 
     var like:Boolean?,
 
-    var open:Boolean=false,
+    var open:Boolean?,
 
     var number:Int=0,
 

@@ -169,8 +169,7 @@ class MainActivity : AppCompatActivity() {
 
     private fun checkOutUser(): Boolean {
 
-        return prefs.getString(MainEnum.ID.main,null) !=null
-
+        return prefs.getString(MainEnum.HomeId.main,"")?:"" != ""
     }
 
     private fun teaBoy(): Boolean {

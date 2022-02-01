@@ -10,16 +10,24 @@ import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.recyclerview.widget.LinearLayoutManager
+import com.google.firebase.database.DataSnapshot
+import com.google.firebase.database.DatabaseError
+import com.google.firebase.database.DatabaseReference
+import com.google.firebase.database.ValueEventListener
+import com.google.firebase.database.ktx.database
+import com.google.firebase.ktx.Firebase
 import com.utechia.domain.enum.MainEnum
 import com.utechia.domain.utile.Result
 import com.utechia.tdf.main.MainActivity
 import com.utechia.tdf.databinding.FragmentHomeUserBinding
+import com.utechia.tdf.home.teaboy.TeaBoyHomeFragment
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
 class UserHomeFragment : Fragment() {
 
     private lateinit var binding: FragmentHomeUserBinding
+    private lateinit var database: DatabaseReference
     private val homeViewModel: UserHomeViewModel by viewModels()
     private val userHomeAdapter: UserHomeAdapter = UserHomeAdapter()
     private lateinit var prefs: SharedPreferences
@@ -27,6 +35,7 @@ class UserHomeFragment : Fragment() {
     companion object{
 
         const val Start = "start"
+        const val ID = "userId"
 
     }
 
@@ -42,6 +51,9 @@ class UserHomeFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+/*
+        database = Firebase.database("https://tdf-oms-default-rtdb.asia-southeast1.firebasedatabase.app/").reference
+*/
         prefs = requireActivity().getSharedPreferences(MainEnum.Tdf.main, Context.MODE_PRIVATE)
 
         homeViewModel.getNews()

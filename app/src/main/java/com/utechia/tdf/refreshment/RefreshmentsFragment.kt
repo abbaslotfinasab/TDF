@@ -8,10 +8,12 @@ import android.view.ViewGroup
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.os.bundleOf
 import androidx.fragment.app.Fragment
+import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
 import com.utechia.domain.enum.MainEnum
 import com.utechia.domain.enum.RefreshmentEnum
 import com.utechia.tdf.R
+import com.utechia.tdf.cart.CartViewModel
 import com.utechia.tdf.databinding.FragmentRefreshmentBinding
 import dagger.hilt.android.AndroidEntryPoint
 
@@ -19,7 +21,8 @@ import dagger.hilt.android.AndroidEntryPoint
 class RefreshmentsFragment : Fragment() {
 
     private lateinit var binding: FragmentRefreshmentBinding
-    private lateinit var prefs: SharedPreferences
+    private val cartViewModel:CartViewModel by viewModels()
+        private lateinit var prefs: SharedPreferences
     private var order = 0
 
     companion object{
@@ -37,6 +40,8 @@ class RefreshmentsFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         prefs = requireActivity().getSharedPreferences(MainEnum.Tdf.main, AppCompatActivity.MODE_PRIVATE)
+
+        cartViewModel.getCart()
 
         order = prefs.getInt(Order,0)
 

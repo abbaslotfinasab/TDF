@@ -1,6 +1,7 @@
 package com.utechia.data.repo
 
 import com.utechia.data.api.Service
+import com.utechia.data.dao.RefreshmentDao
 import com.utechia.data.entity.CartBody
 import com.utechia.data.entity.FavoriteBody
 import com.utechia.data.utile.NetworkHelper
@@ -15,6 +16,7 @@ class RefreshmentRepoImpl @Inject constructor(
 
     private val service:Service,
     private val networkHelper: NetworkHelper,
+    private val refreshmentDao: RefreshmentDao,
 
     ):RefreshmentRepo {
 
@@ -25,39 +27,34 @@ class RefreshmentRepoImpl @Inject constructor(
 
             val result = service.getRefreshment(type)
 
-            return when(result.isSuccessful &&  result.body() !=null){
+            return when (result.isSuccessful && result.body() != null) {
 
-                    true -> {
-                        result.body()?.data?.map { it.toDomain() }!!.toMutableList()
-                    }
+                true -> {
 
-                    else ->
-                        throw IOException("Server is Not Responding")
+                    if (refreshmentDao.getALL(type).size==0)
+                    result.body()?.data?.let { refreshmentDao.insertAll(it) }
+
+                    refreshmentDao.getALL(type).map { it.toDomain() }.toMutableList()
                 }
 
+                else ->
+                    throw IOException("Server is Not Responding")
+            }
 
-            } else throw IOException("No Internet Connection")
-        }
+        } else throw IOException("No Internet Connection")
+    }
 
-        @Throws(IOException::class)
-        override suspend fun search(search: String, type: String): MutableList<RefreshmentModel> {
+    @Throws(IOException::class)
+    override suspend fun search(search: String, type: String): MutableList<RefreshmentModel> {
 
-            if (networkHelper.isNetworkConnected()) {
+        if (networkHelper.isNetworkConnected()) {
 
-                val result = service.search(search, type)
+            return refreshmentDao.search(search).map {
+                it.toDomain()
+            }.toMutableList()
 
-                return when (result.isSuccessful) {
-
-                    true -> {
-                        result.body()?.data?.map { it.toDomain() }!!.toMutableList()
-                    }
-
-                    else ->
-                        throw IOException("Server is Not Responding")
-                }
-
-            } else throw IOException("No Internet Connection")
-        }
+        } else throw IOException("No Internet Connection")
+    }
 
     @Throws(IOException::class)
     override suspend fun getCart(id: Int): MutableList<RefreshmentModel> {
@@ -65,9 +62,9 @@ class RefreshmentRepoImpl @Inject constructor(
 
             val result = service.getCart(id)
 
-            return when(result.isSuccessful &&  result.body() !=null){
+            return when (result.isSuccessful && result.body() != null) {
 
-                true ->{
+                true -> {
                     result.body()?.data?.map { it.toDomain() }!!.toMutableList()
                 }
 
@@ -79,14 +76,24 @@ class RefreshmentRepoImpl @Inject constructor(
 
     }
 
-    override suspend fun postCart(id: Int, quantity: Int) = service.postCart(CartBody(id,quantity))
+    override suspend fun postCart(id: Int, quantity: Int) {
+        refreshmentDao.updateNumber(id,quantity)
+        service.postCart(CartBody(id,quantity))
+    }
 
-    override suspend fun updateCart(id: Int, quantity: Int) = service.updateCart(CartBody(id,quantity))
+    override suspend fun updateCart(id: Int, quantity: Int){
 
-    override suspend fun deleteCart(id: Int) = service.deleteRefreshment(id)
+        refreshmentDao.updateNumber(id, quantity)
+        service.updateCart(CartBody(id, quantity))
+    }
+
+    override suspend fun deleteCart(id: Int) {
+
+        refreshmentDao.deleteItem(id)
+        service.deleteRefreshment(id)
+    }
 
     override suspend fun like(id: Int) = service.like(FavoriteBody(id))
 
     override suspend fun dislike(id: Int) = service.dislike(id)
-
 }
