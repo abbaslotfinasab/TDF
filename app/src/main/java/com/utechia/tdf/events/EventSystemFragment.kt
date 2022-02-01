@@ -86,7 +86,7 @@ class EventSystemFragment : Fragment() {
 
                 else -> {
                     binding.pager.postDelayed({
-                        binding.pager.setCurrentItem(2,true)
+                        binding.pager.setCurrentItem(0,true)
                         binding.tabLayout.selectTab(tab.parent?.getTabAt(0))
 
                     },200)
