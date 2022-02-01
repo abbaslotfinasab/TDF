@@ -2,8 +2,6 @@ package com.utechia.tdf.refreshment
 
 import android.content.SharedPreferences
 import android.os.Bundle
-import android.os.Handler
-import android.os.Looper
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -17,6 +15,7 @@ import com.utechia.domain.enum.MainEnum
 import com.utechia.domain.enum.RefreshmentEnum
 import com.utechia.domain.utile.Result
 import com.utechia.tdf.R
+import com.utechia.tdf.cart.CartViewModel
 import com.utechia.tdf.databinding.FragmentRefreshmentBinding
 import dagger.hilt.android.AndroidEntryPoint
 
@@ -25,7 +24,8 @@ class RefreshmentsFragment : Fragment(),View.OnClickListener {
 
     private lateinit var binding: FragmentRefreshmentBinding
     private val refreshmentViewModel:RefreshmentViewModel by viewModels()
-        private lateinit var prefs: SharedPreferences
+    private val cartViewModel: CartViewModel by viewModels()
+    private lateinit var prefs: SharedPreferences
     private var order = 0
 
     companion object{
@@ -63,23 +63,21 @@ class RefreshmentsFragment : Fragment(),View.OnClickListener {
             binding.status.text = getString(R.string.daliveryStatus)
 
         }
-        observer()
+        refreshmentObserver()
+
+        cartObserver()
     }
 
-    fun observer() {
+    private fun refreshmentObserver() {
 
         refreshmentViewModel.refreshmentModel.observe(viewLifecycleOwner) {
 
             when (it) {
                 is Result.Success -> {
+                    cartViewModel.getCart()
+                    binding.food.isEnabled = false
+                    binding.drink.isEnabled = false
 
-                    refreshmentViewModel.getCart()
-
-                    Handler(Looper.getMainLooper()).postDelayed({
-                        binding.prg.visibility = View.GONE
-                        binding.food.isEnabled = true
-                        binding.drink.isEnabled = true
-                    }, 300)
 
                 }
                 is Result.Loading -> {
@@ -132,6 +130,29 @@ class RefreshmentsFragment : Fragment(),View.OnClickListener {
                     R.id.action_refreshmentFragment_to_orderFragment,
 
                     )
+            }
+        }
+    }
+
+    private fun cartObserver() {
+
+        cartViewModel.cartModel.observe(viewLifecycleOwner) {
+
+            when (it) {
+                is Result.Success -> {
+                    binding.prg.visibility = View.GONE
+                    binding.drink.isEnabled = true
+                    binding.food.isEnabled = true
+                }
+
+                is Result.Loading -> {
+                    binding.prg.visibility = View.GONE
+                }
+
+                is Result.Error -> {
+                    binding.prg.visibility = View.GONE
+                    Toast.makeText(context, it.message, Toast.LENGTH_SHORT).show()
+                }
             }
         }
     }
