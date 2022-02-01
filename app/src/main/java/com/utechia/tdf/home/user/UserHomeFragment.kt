@@ -114,7 +114,7 @@ class UserHomeFragment : Fragment() {
         binding.recyclerView.apply {
             adapter = userHomeAdapter
             layoutManager = LinearLayoutManager(context,LinearLayoutManager.VERTICAL,false)
-            addItemDecoration(UserHomeItemDecoration())
+          //  addItemDecoration(UserHomeItemDecoration())
         }
         observer()
     }
