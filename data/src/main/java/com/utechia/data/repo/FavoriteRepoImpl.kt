@@ -1,6 +1,7 @@
 package com.utechia.data.repo
 
 import com.utechia.data.api.Service
+import com.utechia.data.dao.RefreshmentDao
 import com.utechia.data.entity.FavoriteBody
 import com.utechia.data.utile.NetworkHelper
 import com.utechia.domain.model.FavoriteModel
@@ -13,6 +14,8 @@ import javax.inject.Singleton
 class FavoriteRepoImpl @Inject constructor(
     private val service: Service,
     private val networkHelper: NetworkHelper,
+    private val refreshmentDao: RefreshmentDao,
+
 
     ):FavoriteRepo {
     override suspend fun getFavorite(): MutableList<FavoriteModel> {
@@ -54,9 +57,13 @@ class FavoriteRepoImpl @Inject constructor(
 
         } else throw IOException("No Internet Connection")
     }
+    override suspend fun like(id: Int) {
+        refreshmentDao.like(id)
+        service.like(FavoriteBody(id))
+    }
 
-    override suspend fun like(id: Int) = service.like(FavoriteBody(id))
-
-    override suspend fun dislike(id: Int) = service.dislike(id)
-
+    override suspend fun dislike(id: Int){
+        refreshmentDao.dislike(id)
+        service.dislike(id)
+    }
 }

@@ -21,14 +21,10 @@ interface Service {
     suspend fun verifyLogin(@Field("code")code:String): Response<Verify>
 
     @GET("cafeteria")
-    suspend fun getRefreshment(@Query("type")type:String): Response<Refreshment>
+    suspend fun getRefreshment(): Response<Refreshment>
 
     @GET("cafeteria")
     suspend fun search(@Query("search")Search:String, @Query("type")type:String): Response<Refreshment>
-
-    @POST("cafeteria")
-    @FormUrlEncoded
-    suspend fun getCart(@Field("foodId")foodId:Int): Response<Refreshment>
 
     @GET("user/favorite")
     suspend fun getFavorite():Response<Favorite>

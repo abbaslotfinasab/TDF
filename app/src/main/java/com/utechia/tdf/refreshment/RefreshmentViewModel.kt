@@ -43,6 +43,16 @@ class RefreshmentViewModel @Inject constructor(
 
     }
 
+    fun getCart(){
+
+        viewModelScope.launch(Dispatchers.IO+handler) {
+
+            refreshmentUseCaseImpl.cart()
+
+        }
+
+    }
+
     fun search(search:String,category: String){
 
         viewModelScope.launch(Dispatchers.IO+handler) {

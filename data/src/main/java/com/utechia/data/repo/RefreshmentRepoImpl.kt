@@ -25,21 +25,48 @@ class RefreshmentRepoImpl @Inject constructor(
 
         if (networkHelper.isNetworkConnected()) {
 
-            val result = service.getRefreshment(type)
+            if (type=="") {
 
-            return when (result.isSuccessful && result.body() != null) {
+                val result = service.getRefreshment()
 
-                true -> {
+                return when (result.isSuccessful && result.body() != null) {
 
-                    if (refreshmentDao.getALL(type).size==0)
-                    result.body()?.data?.let { refreshmentDao.insertAll(it) }
+                    true -> {
 
-                    refreshmentDao.getALL(type).map { it.toDomain() }.toMutableList()
+                        result.body()?.data?.let { refreshmentDao.insertAll(it) }
+
+                        refreshmentDao.getALL(type).map { it.toDomain() }.toMutableList()
+                    }
+
+                    else ->
+                        throw IOException("Server is Not Responding")
+
                 }
-
-                else ->
-                    throw IOException("Server is Not Responding")
             }
+            else {
+                if(refreshmentDao.getSize().size!=0) {
+                    return refreshmentDao.getALL(type).map { it.toDomain() }.toMutableList()
+                }
+                else{
+
+                    val result = service.getRefreshment()
+
+                    return when (result.isSuccessful && result.body() != null) {
+
+                        true -> {
+
+                            result.body()?.data?.let { refreshmentDao.insertAll(it) }
+
+                            refreshmentDao.getALL(type).map { it.toDomain() }.toMutableList()
+                        }
+
+                        else ->
+                            throw IOException("Server is Not Responding")
+
+                    }
+                }
+            }
+
 
         } else throw IOException("No Internet Connection")
     }
@@ -57,15 +84,28 @@ class RefreshmentRepoImpl @Inject constructor(
     }
 
     @Throws(IOException::class)
-    override suspend fun getCart(id: Int): MutableList<RefreshmentModel> {
+    override suspend fun getCart(): MutableList<RefreshmentModel> {
         if (networkHelper.isNetworkConnected()) {
 
-            val result = service.getCart(id)
+            val result = service.getCart()
 
-            return when (result.isSuccessful && result.body() != null) {
+            return when (result.isSuccessful) {
 
                 true -> {
-                    result.body()?.data?.map { it.toDomain() }!!.toMutableList()
+
+                    result.body()?.data?.map {
+                        it.items?.map { it1 ->
+                            it1.quantity?.let { it2 ->
+                                it1.food.id?.let { it3 ->
+                                    refreshmentDao.updateNumber(
+                                        it3,
+                                        it2
+                                    )
+                                }
+                            }
+                        }
+                    }
+                    emptyList<RefreshmentModel>().toMutableList()
                 }
 
                 else ->
@@ -93,7 +133,13 @@ class RefreshmentRepoImpl @Inject constructor(
         service.deleteRefreshment(id)
     }
 
-    override suspend fun like(id: Int) = service.like(FavoriteBody(id))
+    override suspend fun like(id: Int) {
+        refreshmentDao.like(id)
+        service.like(FavoriteBody(id))
+    }
 
-    override suspend fun dislike(id: Int) = service.dislike(id)
+    override suspend fun dislike(id: Int){
+        refreshmentDao.dislike(id)
+        service.dislike(id)
+    }
 }

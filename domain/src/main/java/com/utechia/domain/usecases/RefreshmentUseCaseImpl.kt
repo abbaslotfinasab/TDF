@@ -16,8 +16,8 @@ class RefreshmentUseCaseImpl @Inject constructor(private val refreshmentRepo: Re
 
     }
 
-    override suspend fun cart(id: Int): MutableList<RefreshmentModel> {
-        return refreshmentRepo.getCart(id)
+    override suspend fun cart(): MutableList<RefreshmentModel> {
+        return refreshmentRepo.getCart()
     }
     override suspend fun postCart(id: Int, quantity: Int) {
         return refreshmentRepo.postCart(id,quantity)

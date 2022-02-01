@@ -6,7 +6,7 @@ interface RefreshmentRepo {
 
     suspend fun getRefreshment(type: String): MutableList<RefreshmentModel>
     suspend fun search(search: String, type: String): MutableList<RefreshmentModel>
-    suspend fun getCart(id: Int): MutableList<RefreshmentModel>
+    suspend fun getCart(): MutableList<RefreshmentModel>
     suspend fun postCart(id: Int, quantity: Int)
     suspend fun updateCart(id: Int, quantity: Int)
     suspend fun deleteCart(id: Int)
