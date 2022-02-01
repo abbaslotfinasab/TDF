@@ -16,7 +16,7 @@
         android:layout_height="match_parent">
 
         <androidx.constraintlayout.widget.ConstraintLayout
-            android:id="@+id/constraintLayout5"
+            android:id="@+id/transactionLayout"
             android:layout_width="0dp"
             android:layout_height="100dp"
             android:layout_marginStart="16dp"
