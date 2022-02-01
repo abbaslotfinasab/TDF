@@ -19,6 +19,7 @@ import com.google.firebase.database.ktx.database
 import com.google.firebase.database.ktx.getValue
 import com.google.firebase.ktx.Firebase
 import com.utechia.data.entity.Chat
+import com.utechia.data.entity.Transaction
 import com.utechia.domain.enum.MainEnum
 import com.utechia.domain.enum.OrderEnum
 import com.utechia.domain.utile.Result
@@ -39,6 +40,7 @@ class TeaBoyHomeFragment : Fragment(),View.OnClickListener {
     private var name = ""
     private var floor = ""
     private var status = false
+    private var userId = ""
 
     companion object{
         const val Start = "start"
@@ -61,13 +63,16 @@ class TeaBoyHomeFragment : Fragment(),View.OnClickListener {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-/*
+
         database = Firebase.database("https://tdf-oms-default-rtdb.asia-southeast1.firebasedatabase.app/").reference
-*/
+
 
         prefs = requireActivity().getSharedPreferences(MainEnum.Tdf.main, Context.MODE_PRIVATE)
         name = prefs.getString(Name, "").toString()
         floor = prefs.getString(Floor, "").toString()
+        userId = prefs.getInt(ID, 0).toString()
+
+
 
         if (prefs.getBoolean(Start,false)) {
 
@@ -95,18 +100,39 @@ class TeaBoyHomeFragment : Fragment(),View.OnClickListener {
 
 
 
-      /*  val tranceActionListener = database.child("Transaction").child(ID)
+        val tranceActionListener = database.child("Transaction").child(userId)
 
         tranceActionListener.addValueEventListener(object: ValueEventListener {
             override fun onDataChange(snapshot: DataSnapshot) {
                 binding.prg.visibility = View.GONE
+
+                val enter = snapshot.child("first_checkin").getValue<Transaction>()
+                val exit = snapshot.child("last_checkout").getValue<Transaction>()
+
+                if (enter?.punch_time.isNullOrEmpty()){
+                    binding.transactionLayout.visibility = View.GONE
+                }
+                else{
+                    binding.transactionLayout.visibility = View.VISIBLE
+                    binding.entranceDate.text = enter?.punch_time
+                    binding.entranceFloor.text = enter?.area_alias
+
+                    if (exit?.punch_time.isNullOrEmpty()){
+                        binding.exitDate.visibility = View.GONE
+                        binding.exitFloor.visibility = View.GONE
+                    }
+                    else{
+                        binding.exitDate.text = enter?.punch_time
+                        binding.exitFloor.text = enter?.area_alias
+                    }
+                }
             }
 
             override fun onCancelled(error: DatabaseError) {
                 Toast.makeText(context,error.message,Toast.LENGTH_SHORT).show()
             }
         })
-*/
+
 
 
         binding.switchCompat.setOnCheckedChangeListener { _, isChecked ->

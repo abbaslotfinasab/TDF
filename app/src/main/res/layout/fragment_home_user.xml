@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.swiperefreshlayout.widget.SwipeRefreshLayout
+<androidx.constraintlayout.widget.ConstraintLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
@@ -9,17 +9,12 @@
     android:id="@+id/refreshLayout"
     tools:context=".home.user.UserHomeFragment">
 
-
-    <androidx.constraintlayout.widget.ConstraintLayout
-        android:layout_width="match_parent"
-        android:background="#F4F3F7"
-        android:layout_height="match_parent">
-
         <androidx.constraintlayout.widget.ConstraintLayout
-            android:id="@+id/constraintLayout5"
+            android:id="@+id/transactionLayout"
             android:layout_width="0dp"
             android:layout_height="100dp"
             android:layout_marginStart="17dp"
+            android:visibility="gone"
             android:layout_marginTop="17dp"
             android:layout_marginEnd="17dp"
             android:background="@color/white"
@@ -133,10 +128,10 @@
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="1.0"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/constraintLayout5"
+            app:layout_constraintTop_toBottomOf="@+id/transactionLayout"
             app:layout_constraintVertical_bias="0.0" />
 
-        <androidx.cardview.widget.CardView
+    <androidx.cardview.widget.CardView
         android:id="@+id/prg"
         android:layout_width="72dp"
         android:layout_height="72dp"
@@ -149,6 +144,7 @@
         app:layout_constraintCircleRadius="36dp"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent">
+
 
         <com.agrawalsuneet.dotsloader.loaders.LazyLoader
             android:layout_width="wrap_content"
@@ -167,6 +163,4 @@
 
     </androidx.cardview.widget.CardView>
 
-    </androidx.constraintlayout.widget.ConstraintLayout>
-
-</androidx.swiperefreshlayout.widget.SwipeRefreshLayout>
+</androidx.constraintlayout.widget.ConstraintLayout>

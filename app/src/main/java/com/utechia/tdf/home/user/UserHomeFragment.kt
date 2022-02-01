@@ -15,7 +15,9 @@ import com.google.firebase.database.DatabaseError
 import com.google.firebase.database.DatabaseReference
 import com.google.firebase.database.ValueEventListener
 import com.google.firebase.database.ktx.database
+import com.google.firebase.database.ktx.getValue
 import com.google.firebase.ktx.Firebase
+import com.utechia.data.entity.Transaction
 import com.utechia.domain.enum.MainEnum
 import com.utechia.domain.utile.Result
 import com.utechia.tdf.main.MainActivity
@@ -31,6 +33,8 @@ class UserHomeFragment : Fragment() {
     private val homeViewModel: UserHomeViewModel by viewModels()
     private val userHomeAdapter: UserHomeAdapter = UserHomeAdapter()
     private lateinit var prefs: SharedPreferences
+    private var userId = ""
+
 
     companion object{
 
@@ -51,18 +55,15 @@ class UserHomeFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-/*
+
         database = Firebase.database("https://tdf-oms-default-rtdb.asia-southeast1.firebasedatabase.app/").reference
-*/
+
         prefs = requireActivity().getSharedPreferences(MainEnum.Tdf.main, Context.MODE_PRIVATE)
 
+        userId = prefs.getInt(ID, 0).toString()
+
+
         homeViewModel.getNews()
-
-        binding.refreshLayout.setOnRefreshListener {
-
-            homeViewModel.getNews()
-
-        }
 
         if (prefs.getBoolean(Start,false)) {
 
@@ -75,6 +76,40 @@ class UserHomeFragment : Fragment() {
             }.apply()
 
         }
+
+        val tranceActionListener = database.child("Transaction").child(userId)
+
+        tranceActionListener.addValueEventListener(object: ValueEventListener {
+            override fun onDataChange(snapshot: DataSnapshot) {
+                binding.prg.visibility = View.GONE
+
+                val enter = snapshot.child("first_checkin").getValue<Transaction>()
+                val exit = snapshot.child("last_checkout").getValue<Transaction>()
+
+                if (enter?.punch_time.isNullOrEmpty()){
+                    binding.transactionLayout.visibility = View.GONE
+                }
+                else{
+                    binding.transactionLayout.visibility = View.VISIBLE
+                    binding.entranceDate.text = enter?.punch_time
+                    binding.entranceFloor.text = enter?.area_alias
+
+                    if (exit?.punch_time.isNullOrEmpty()){
+                        binding.exitDate.visibility = View.GONE
+                        binding.exitFloor.visibility = View.GONE
+                    }
+                    else{
+                        binding.exitDate.text = enter?.punch_time
+                        binding.exitFloor.text = enter?.area_alias
+                    }
+                }
+            }
+
+            override fun onCancelled(error: DatabaseError) {
+                Toast.makeText(context,error.message,Toast.LENGTH_SHORT).show()
+            }
+        })
+
 
         binding.recyclerView.apply {
             adapter = userHomeAdapter
@@ -90,19 +125,16 @@ class UserHomeFragment : Fragment() {
             when (it) {
                 is Result.Success -> {
                     binding.prg.visibility = View.GONE
-                    binding.refreshLayout.isRefreshing = false
                     userHomeAdapter.addData(it.data)
                 }
 
                 is Result.Loading -> {
-                    binding.prg.visibility = View.GONE
-                    binding.refreshLayout.isRefreshing = true
+                    binding.prg.visibility = View.VISIBLE
                     binding.recyclerView.visibility = View.GONE
                 }
 
                 is Result.Error -> {
                     binding.prg.visibility = View.GONE
-                    binding.refreshLayout.isRefreshing = false
                     binding.recyclerView.visibility = View.GONE
                     Toast.makeText(context, it.message, Toast.LENGTH_SHORT).show()
                 }

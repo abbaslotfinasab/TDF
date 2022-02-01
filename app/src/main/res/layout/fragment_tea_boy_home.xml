@@ -69,10 +69,11 @@
             app:trackTint="@drawable/switch_back" />
 
         <androidx.constraintlayout.widget.ConstraintLayout
-            android:id="@+id/constraintLayout5"
+            android:id="@+id/transactionLayout"
             android:layout_width="0dp"
             android:layout_height="100dp"
             android:layout_marginStart="17dp"
+            android:visibility="gone"
             android:layout_marginTop="33dp"
             android:layout_marginEnd="17dp"
             android:background="@color/white"
@@ -188,7 +189,7 @@
             android:textColor="@color/black"
             android:textSize="18sp"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/constraintLayout5" />
+            app:layout_constraintTop_toBottomOf="@+id/transactionLayout" />
 
         <RatingBar
             android:id="@+id/rating"
