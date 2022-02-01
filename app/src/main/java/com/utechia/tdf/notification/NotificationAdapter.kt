@@ -115,7 +115,7 @@ class NotificationAdapter: RecyclerView.Adapter<RecyclerView.ViewHolder>() {
                 image.setBackgroundResource(R.drawable.ic_push_notif)
                 title.setTextColor(ContextCompat.getColor(itemView.context, R.color.black))
                 subTitle.setTextColor(ContextCompat.getColor(itemView.context, R.color.black))
-                name.setTextColor(ContextCompat.getColor(itemView.context, R.color.black))
+                name.setTextColor(ContextCompat.getColor(itemView.context, R.color.dateRead))
             }
             layout.setOnClickListener {
 
@@ -129,7 +129,7 @@ class NotificationAdapter: RecyclerView.Adapter<RecyclerView.ViewHolder>() {
                 image.setBackgroundResource(R.drawable.ic_push_notif)
                 title.setTextColor(ContextCompat.getColor(itemView.context, R.color.black))
                 subTitle.setTextColor(ContextCompat.getColor(itemView.context, R.color.black))
-                name.setTextColor(ContextCompat.getColor(itemView.context, R.color.notification_unread))
+                name.setTextColor(ContextCompat.getColor(itemView.context, R.color.notification_read))
                 notification[position].isRead=true
 
                 itemView.findNavController().navigate(

@@ -295,6 +295,8 @@
         <entry key="app/src/main/res/drawable/notification_bubble.xml" value="0.1" />
         <entry key="app/src/main/res/drawable/quantity_back.xml" value="0.12314814814814815" />
         <entry key="app/src/main/res/drawable/question_back.xml" value="0.12314814814814815" />
+        <entry key="app/src/main/res/font/gilory.xml" value="0.18333333333333332" />
+        <entry key="app/src/main/res/font/poppins.xml" value="0.18333333333333332" />
         <entry key="app/src/main/res/layout/activity_main.xml" value="0.22" />
         <entry key="app/src/main/res/layout/cart_item.xml" value="0.12092391304347826" />
         <entry key="app/src/main/res/layout/custom_list_item.xml" value="0.1" />
@@ -357,7 +359,7 @@
         <entry key="app/src/main/res/layout/item_event.xml" value="0.22" />
         <entry key="app/src/main/res/layout/item_guess_event.xml" value="0.25" />
         <entry key="app/src/main/res/layout/item_home_news.xml" value="0.33" />
-        <entry key="app/src/main/res/layout/item_notification.xml" value="0.33" />
+        <entry key="app/src/main/res/layout/item_notification.xml" value="0.18" />
         <entry key="app/src/main/res/layout/item_order_notification.xml" value="0.2" />
         <entry key="app/src/main/res/layout/item_order_teaboy_delivered.xml" value="0.5" />
         <entry key="app/src/main/res/layout/item_permission.xml" value="0.19322916666666667" />
