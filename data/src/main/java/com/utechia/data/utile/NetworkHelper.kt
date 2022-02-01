@@ -11,7 +11,7 @@ class NetworkHelper @Inject constructor(@ApplicationContext private val context:
 
     fun isNetworkConnected(): Boolean {
 
-        val cm = context.getSystemService(Context.CONNECTIVITY_SERVICE) as ConnectivityManager
+      /*  val cm = context.getSystemService(Context.CONNECTIVITY_SERVICE) as ConnectivityManager
         if (Build.VERSION.SDK_INT < 23) {
             val ni = cm.activeNetworkInfo
             if (ni != null) {
@@ -27,7 +27,7 @@ class NetworkHelper @Inject constructor(@ApplicationContext private val context:
                     NetworkCapabilities.TRANSPORT_VPN
                 )
             }
-        }
-        return false
+        }*/
+        return true
     }
 }

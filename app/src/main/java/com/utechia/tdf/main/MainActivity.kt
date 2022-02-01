@@ -883,7 +883,7 @@ class MainActivity : AppCompatActivity() {
                         binding.notificationNumber.text = it.data.unread_notification.toString()
                     }
                     if(it.data.pending_orders!=0) {
-                        binding.bottomNavigation.getOrCreateBadge(R.id.refreshmentFragment).backgroundColor = ContextCompat.getColor(this,R.color.bubblr)
+                        binding.bottomNavigation.getOrCreateBadge(R.id.refreshmentFragment).backgroundColor = ContextCompat.getColor(this,R.color.bubble)
                         binding.bottomNavigation.getOrCreateBadge(R.id.refreshmentFragment).number =
                             it.data.pending_orders!!
                         with(prefs.edit()) {

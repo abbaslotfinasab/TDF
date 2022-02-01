@@ -1267,5 +1267,10 @@
         android:name="com.utechia.tdf.refreshment.CreateRefreshmentChildFragment"
         android:label="fragment_create_refreshmen_childt"
         tools:layout="@layout/fragment_create_refreshmen_childt" />
+    <fragment
+        android:id="@+id/eventSystemChildFragment"
+        android:name="com.utechia.tdf.events.EventSystemChildFragment"
+        android:label="fragment_event_system_child"
+        tools:layout="@layout/fragment_event_system_child" />
 
 </navigation>

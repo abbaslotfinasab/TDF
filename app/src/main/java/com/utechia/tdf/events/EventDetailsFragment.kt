@@ -1,23 +1,21 @@
 package com.utechia.tdf.events
 
-import android.graphics.Color
 import android.os.Bundle
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.LinearLayout
 import android.widget.Toast
+import androidx.core.content.ContextCompat
 import androidx.core.os.bundleOf
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.bumptech.glide.Glide
+import com.utechia.domain.enum.EventsEnum
 import com.utechia.domain.utile.Result
 import com.utechia.tdf.R
 import com.utechia.tdf.databinding.FragmentEventDetailsBinding
-import com.utechia.tdf.ticket.ChatItemDecoration
 import dagger.hilt.android.AndroidEntryPoint
 import java.time.OffsetDateTime
 import java.time.ZoneId
@@ -47,7 +45,7 @@ class EventDetailsFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
 
         if (arguments!=null){
-            eId = requireArguments().getInt("eId",0)
+            eId = requireArguments().getInt(EventsEnum.ID.event ,0)
         }
 
         eventDetViewModel.getEvent(eId)
@@ -80,7 +78,7 @@ class EventDetailsFragment : Fragment() {
                     }
 
                     Glide.with(requireActivity())
-                        .load("https://sandbox.tdf.gov.sa${it.data.coverphoto}")
+                        .load(it.data.coverphoto)
                         .centerCrop()
                         .error(R.mipmap.ic_evente_banner_foreground)
                         .into(binding.eventImage)
@@ -98,106 +96,162 @@ class EventDetailsFragment : Fragment() {
                     binding.description.text = it.data.description
                     binding.location.text = it.data.eventPlace
 
-                    when(it.data.status){
 
-                        "End" -> {
+                    if(it.data.isPublic==true) {
+                        binding.appCompatButton.visibility = View.GONE
+                        binding.status.visibility = View.VISIBLE
+                    }
+                    else {
 
-                            when (it.data.contribute) {
+                        binding.status.visibility = View.GONE
 
-                                "Attending" -> {
-                                    if (it.data.userrate != null) {
-                                        binding.appCompatButton.apply {
-                                            visibility = View.VISIBLE
-                                            text = "Evaluated"
-                                            setBackgroundColor(Color.parseColor("#A4A6B3"))
-                                            isEnabled = false
+                        when (it.data.status) {
+
+                            EventsEnum.End.event -> {
+
+                                when (it.data.contribute) {
+
+                                    EventsEnum.Attending.event -> {
+                                        if (it.data.userrate != null) {
+                                            binding.appCompatButton.apply {
+                                                visibility = View.VISIBLE
+                                                text = resources.getText(R.string.evaluate)
+                                                setBackgroundColor(
+                                                    ContextCompat.getColor(
+                                                        context,
+                                                        R.color.disActive
+                                                    )
+                                                )
+                                                isEnabled = false
+                                            }
+                                        } else {
+                                            binding.appCompatButton.apply {
+                                                visibility = View.VISIBLE
+                                                text = resources.getText(R.string.evaluate)
+                                                setBackgroundColor(
+                                                    ContextCompat.getColor(
+                                                        context,
+                                                        R.color.confirm
+                                                    )
+                                                )
+                                                isEnabled = false
+                                            }
+                                            bundle = bundleOf(EventsEnum.ID.event to eId)
+                                            findNavController().navigate(
+                                                R.id.action_eventDetailsFragment_to_eventRateFragment,
+                                                bundle
+                                            )
                                         }
-                                    }else{
-                                        binding.appCompatButton.apply {
-                                            visibility = View.VISIBLE
-                                            text = "Evaluate"
-                                            setBackgroundColor(Color.parseColor("#3360DD"))
-                                            isEnabled = false
-                                        }
-                                        bundle = bundleOf("eId" to eId)
-                                        findNavController().navigate(R.id.action_eventDetailsFragment_to_eventRateFragment,bundle)
                                     }
+                                    else ->
+                                        binding.appCompatButton.visibility = View.GONE
                                 }
-                                else ->
-                                    binding.appCompatButton.visibility = View.GONE
                             }
-                        }
 
-                        "Inprogress" -> {
-                            binding.appCompatButton.visibility = View.GONE
-                        }
-                        "Upcoming" -> {
-                            when(it.data.contribute){
+                            EventsEnum.Inprogress.event -> {
+                                binding.appCompatButton.visibility = View.GONE
+                            }
+                            EventsEnum.Upcoming.event -> {
+                                when (it.data.contribute) {
 
-                                null ->{
-                                    binding.appCompatButton.apply {
-                                        visibility = View.VISIBLE
-                                        text = "Apply"
-                                        setBackgroundColor(Color.parseColor("#3360DD"))
-                                        isEnabled = true
-                                        setOnClickListener{
-                                            eventViewModel.applyEvent(eId)
-                                            applyObserver()
+                                    null -> {
+                                        binding.appCompatButton.apply {
+                                            visibility = View.VISIBLE
+                                            text = resources.getText(R.string.apply)
+                                            setBackgroundColor(
+                                                ContextCompat.getColor(
+                                                    context,
+                                                    R.color.confirm
+                                                )
+                                            )
+                                            isEnabled = true
+                                            setOnClickListener {
+                                                eventViewModel.applyEvent(eId)
+                                                applyObserver()
+                                            }
+                                        }
+
+                                    }
+
+                                    EventsEnum.Rejected.event -> {
+                                        binding.appCompatButton.apply {
+                                            visibility = View.VISIBLE
+                                            text = resources.getText(R.string.apply)
+                                            setBackgroundColor(
+                                                ContextCompat.getColor(
+                                                    context,
+                                                    R.color.confirm
+                                                )
+                                            )
+                                            isEnabled = true
+                                            setOnClickListener {
+                                                eventViewModel.applyEvent(eId)
+                                                applyObserver()
+                                            }
                                         }
                                     }
 
-                                }
-
-                                "Rejected" -> {
-                                    binding.appCompatButton.apply {
-                                        visibility = View.VISIBLE
-                                        text = "Apply"
-                                        setBackgroundColor(Color.parseColor("#3360DD"))
-                                        isEnabled = true
-                                        setOnClickListener{
-                                            eventViewModel.applyEvent(eId)
-                                            applyObserver()
+                                    EventsEnum.Cancelled.event -> {
+                                        binding.appCompatButton.apply {
+                                            visibility = View.VISIBLE
+                                            text = resources.getText(R.string.apply)
+                                            setBackgroundColor(
+                                                ContextCompat.getColor(
+                                                    context,
+                                                    R.color.confirm
+                                                )
+                                            )
+                                            isEnabled = true
+                                            setOnClickListener {
+                                                eventViewModel.applyEvent(eId)
+                                                applyObserver()
+                                            }
                                         }
                                     }
-                                }
 
-                                "Cancelled" -> {
-                                    binding.appCompatButton.apply {
-                                        visibility = View.VISIBLE
-                                        text = "Apply"
-                                        setBackgroundColor(Color.parseColor("#3360DD"))
-                                        isEnabled = true
-                                        setOnClickListener{
-                                            eventViewModel.applyEvent(eId)
-                                            applyObserver()
+                                    EventsEnum.Pending.event -> {
+                                        binding.appCompatButton.apply {
+                                            contributeId = it.data.contributeId!!
+                                            visibility = View.VISIBLE
+                                            text = resources.getText(R.string.cancel)
+                                            setBackgroundColor(
+                                                ContextCompat.getColor(
+                                                    context,
+                                                    R.color.bubble
+                                                )
+                                            )
+                                            isEnabled = true
+                                            setOnClickListener {
+                                                val bundle =
+                                                    bundleOf(EventsEnum.ID.event to contributeId)
+                                                findNavController().navigate(
+                                                    R.id.action_eventDetailsFragment_to_cancelEventFragment,
+                                                    bundle
+                                                )
+                                            }
                                         }
                                     }
-                                }
 
-                                "Pending" -> {
-                                    binding.appCompatButton.apply {
-                                        contributeId = it.data.contributeId!!
-                                        visibility = View.VISIBLE
-                                        text = "Cancel"
-                                        setBackgroundColor(Color.parseColor("#FF6464"))
-                                        isEnabled = true
-                                        setOnClickListener {
-                                            val bundle = bundleOf("eId" to contributeId)
-                                            findNavController().navigate(R.id.action_eventDetailsFragment_to_cancelEventFragment,bundle)
-                                        }
-                                    }
-                                }
-
-                                "Attending" -> {
-                                    binding.appCompatButton.apply {
-                                        contributeId = it.data.contributeId!!
-                                        visibility = View.VISIBLE
-                                        text = "Cancel"
-                                        setBackgroundColor(Color.parseColor("#FF6464"))
-                                        isEnabled = true
-                                        setOnClickListener {
-                                            val bundle = bundleOf("eId" to contributeId)
-                                            findNavController().navigate(R.id.action_eventDetailsFragment_to_cancelEventFragment,bundle)
+                                    EventsEnum.Attending.event -> {
+                                        binding.appCompatButton.apply {
+                                            contributeId = it.data.contributeId!!
+                                            visibility = View.VISIBLE
+                                            text = resources.getText(R.string.cancel)
+                                            setBackgroundColor(
+                                                ContextCompat.getColor(
+                                                    context,
+                                                    R.color.bubble
+                                                )
+                                            )
+                                            isEnabled = true
+                                            setOnClickListener {
+                                                val bundle =
+                                                    bundleOf(EventsEnum.ID.event to contributeId)
+                                                findNavController().navigate(
+                                                    R.id.action_eventDetailsFragment_to_cancelEventFragment,
+                                                    bundle
+                                                )
+                                            }
                                         }
                                     }
                                 }

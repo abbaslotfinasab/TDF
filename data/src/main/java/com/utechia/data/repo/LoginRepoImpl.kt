@@ -24,7 +24,7 @@ class LoginRepoImpl @Inject constructor(
 
             val result = service.getLoginUrl()
 
-            return when(result.isSuccessful){
+            return when(result.isSuccessful && result.body() !=null){
 
                 true ->{
                     result.body()!!.data!!.toDomain()

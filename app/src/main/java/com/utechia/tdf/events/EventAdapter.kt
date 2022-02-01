@@ -1,6 +1,5 @@
 package com.utechia.tdf.events
 
-import android.graphics.Color
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -9,10 +8,12 @@ import android.widget.RatingBar
 import android.widget.TextView
 import androidx.appcompat.widget.AppCompatButton
 import androidx.constraintlayout.widget.ConstraintLayout
+import androidx.core.content.ContextCompat
 import androidx.core.os.bundleOf
 import androidx.navigation.findNavController
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
+import com.utechia.domain.enum.EventsEnum
 import com.utechia.domain.model.EventModel
 import com.utechia.tdf.R
 
@@ -58,188 +59,304 @@ class EventAdapter: RecyclerView.Adapter<RecyclerView.ViewHolder>() {
             rate.rating = 5.0f
 
             Glide.with(itemView.context)
-                .load("https://sandbox.tdf.gov.sa${event[position].coverphoto}")
+                .load(event[position].coverphoto)
                 .error(R.mipmap.ic_evente_banner_foreground)
                 .into(image)
 
-
-            when(event[position].contribute){
-
-                null -> {
-                    subTitle.visibility = View.GONE
-                    when(event[position].status){
-
-                        "End" -> {
-                            result.visibility = View.GONE
-                            rate.visibility = View.GONE
-                        }
-
-                        "Inprogress" -> {
-                            result.visibility = View.GONE
-                            rate.visibility = View.GONE
-                        }
-
-                        "Upcoming" -> {
-
-                            result.visibility = View.VISIBLE
-                            rate.visibility = View.GONE
-                            result.text = "Apply"
-                            result.setBackgroundColor(Color.parseColor("#3360DD"))
-                            result.isEnabled = true
-
-                        }
-                    }
-                }
-
-                "Rejected" -> {
-
-                    subTitle.visibility = View.VISIBLE
-                    subTitle.text ="Rejected"
-                    subTitle.setTextColor(Color.parseColor("#FF6464"))
-
-                    when(event[position].status){
-
-                        "End" -> {
-                            result.visibility = View.VISIBLE
-                            rate.visibility = View.GONE
-                            result.text = "Evaluated"
-                            result.setBackgroundColor(Color.parseColor("#A4A6B3"))
-                            result.isEnabled = false
-                        }
-
-                        "Inprogress" -> {
-
-                            result.visibility = View.GONE
-                            rate.visibility = View.GONE
-
-                        }
-                        "Upcoming" -> {
-                            result.visibility = View.VISIBLE
-                            rate.visibility = View.GONE
-                            result.text = "Apply"
-                            result.setBackgroundColor(Color.parseColor("#3360DD"))
-                            result.isEnabled = true
-
-                        }
-                    }
-                }
-
-                "Cancelled" -> {
-
-                    subTitle.visibility = View.VISIBLE
-                    subTitle.text ="Cancelled"
-                    subTitle.setTextColor(Color.parseColor("#F5A62E"))
-
-                    when(event[position].status){
-
-                        "End" -> {
-                            result.visibility = View.VISIBLE
-                            rate.visibility = View.GONE
-                            result.text = "Evaluated"
-                            result.setBackgroundColor(Color.parseColor("#A4A6B3"))
-                            result.isEnabled = false
-                        }
-
-                        "Inprogress" -> {
-
-                            result.visibility = View.GONE
-                            rate.visibility = View.GONE
-
-                        }
-                        "Upcoming" -> {
-                            result.visibility = View.VISIBLE
-                            rate.visibility = View.GONE
-                            result.text = "Apply"
-                            result.setBackgroundColor(Color.parseColor("#3360DD"))
-                            result.isEnabled = true
-
-                        }
+            
+            
+            if (event[position].isPublic==true){
+                subTitle.visibility = View.VISIBLE
+                subTitle.text = itemView.resources.getText(R.string.publicEvent)
+                subTitle.setBackgroundColor(ContextCompat.getColor(itemView.context,R.color.accepted))
+                subTitle.setTextColor(ContextCompat.getColor(itemView.context,R.color.white))
+                rate.visibility = View.GONE
+                if (event[position].status == EventsEnum.End.event){
+                    result.visibility = View.VISIBLE
+                    result.text = itemView.resources.getText(R.string.evaluate)
+                    if (event[position].userrate == null){
+                        rate.visibility = View.GONE
+                        result.setBackgroundColor(
+                            ContextCompat.getColor(
+                                itemView.context,
+                                R.color.confirm
+                            )
+                        )
+                        result.isEnabled = true
+                    }else{
+                        result.setBackgroundColor(
+                            ContextCompat.getColor(
+                                itemView.context,
+                                R.color.disActive
+                            )
+                        )
+                        result.isEnabled = false
+                        rate.visibility = View.VISIBLE
+                        rate.rating = event[position].userrate?.toFloat()?:5.0f
                     }
 
                 }
+                else{
+                    result.visibility = View.GONE
+                    rate.visibility = View.GONE
 
-                "Pending" -> {
-                    subTitle.visibility = View.VISIBLE
-                    subTitle.text ="Pending"
-                    subTitle.setTextColor(Color.parseColor("#A4A6B3"))
-
-                    when(event[position].status){
-
-                        "End" -> {
-                            result.visibility = View.VISIBLE
-                            rate.visibility = View.GONE
-                            result.text = "Evaluated"
-                            result.setBackgroundColor(Color.parseColor("#A4A6B3"))
-                            result.isEnabled = false
-                        }
-
-                        "Inprogress" -> {
-                            result.visibility = View.VISIBLE
-                            rate.visibility = View.GONE
-                            result.text = "Apply"
-                            result.setBackgroundColor(Color.parseColor("#A4A6B3"))
-                            result.isEnabled = false
-                        }
-                        "Upcoming" -> {
-                            result.visibility = View.VISIBLE
-                            rate.visibility = View.GONE
-                            result.text = "Apply"
-                            result.setBackgroundColor(Color.parseColor("#A4A6B3"))
-                            result.isEnabled = false
-
-                        }
-                    }
                 }
+            }
+            else {
 
-                "Attending" -> {
+                when (event[position].contribute) {
 
-                    subTitle.visibility = View.VISIBLE
-                    subTitle.text ="Attended"
-                    subTitle.setTextColor(Color.parseColor("#59B48D"))
+                    null -> {
+                        subTitle.visibility = View.GONE
+                        when (event[position].status) {
 
-                    when(event[position].status){
-
-                        "End" -> {
-                            result.visibility = View.VISIBLE
-                            result.text = "Evaluate"
-                            if(event[position].userrate !=null) {
-                                rate.visibility = View.VISIBLE
-                                result.setBackgroundColor(Color.parseColor("#A4A6B3"))
-                                result.isEnabled = false
-                                rate.rating = event[position].userrate?.toFloat()!!
-                            }else{
+                            EventsEnum.End.event -> {
+                                result.visibility = View.GONE
                                 rate.visibility = View.GONE
-                                result.setBackgroundColor(Color.parseColor("#3360DD"))
+                            }
+
+                            EventsEnum.Inprogress.event -> {
+                                result.visibility = View.GONE
+                                rate.visibility = View.GONE
+                            }
+
+                            EventsEnum.Upcoming.event -> {
+
+                                result.visibility = View.VISIBLE
+                                rate.visibility = View.GONE
+                                result.text = itemView.resources.getText(R.string.apply)
+                                result.setBackgroundColor(
+                                    ContextCompat.getColor(
+                                        itemView.context,
+                                        R.color.confirm
+                                    )
+                                )
                                 result.isEnabled = true
+
+                            }
+                        }
+                    }
+
+                    EventsEnum.Rejected.event -> {
+
+                        subTitle.visibility = View.VISIBLE
+                        subTitle.text = itemView.resources.getText(R.string.reject)
+                        subTitle.setTextColor(
+                            ContextCompat.getColor(
+                                itemView.context,
+                                R.color.bubble
+                            )
+                        )
+
+                        when (event[position].status) {
+
+                            EventsEnum.End.event -> {
+                                result.visibility = View.VISIBLE
+                                rate.visibility = View.GONE
+                                result.text = itemView.resources.getText(R.string.evaluate)
+                                subTitle.setBackgroundColor(
+                                    ContextCompat.getColor(
+                                        itemView.context,
+                                        R.color.disActive
+                                    )
+                                )
+                                result.isEnabled = false
+                            }
+
+                            EventsEnum.Inprogress.event -> {
+
+                                result.visibility = View.GONE
+                                rate.visibility = View.GONE
+
+                            }
+                            EventsEnum.Upcoming.event -> {
+                                result.visibility = View.VISIBLE
+                                rate.visibility = View.GONE
+                                result.text = itemView.resources.getText(R.string.apply)
+                                result.setBackgroundColor(
+                                    ContextCompat.getColor(
+                                        itemView.context,
+                                        R.color.confirm
+                                    )
+                                )
+                                result.isEnabled = true
+
+                            }
+                        }
+                    }
+
+                    EventsEnum.Cancelled.event -> {
+
+                        subTitle.visibility = View.VISIBLE
+                        subTitle.text = itemView.resources.getText(R.string.cancelled)
+                        subTitle.setTextColor(
+                            ContextCompat.getColor(
+                                itemView.context,
+                                R.color.waiting
+                            )
+                        )
+
+                        when (event[position].status) {
+
+                            EventsEnum.End.event -> {
+                                result.visibility = View.VISIBLE
+                                rate.visibility = View.GONE
+                                result.text = itemView.resources.getText(R.string.evaluate)
+                                result.setBackgroundColor(
+                                    ContextCompat.getColor(
+                                        itemView.context,
+                                        R.color.disActive
+                                    )
+                                )
+                                result.isEnabled = false
+                            }
+
+                            EventsEnum.Inprogress.event -> {
+
+                                result.visibility = View.GONE
+                                rate.visibility = View.GONE
+
+                            }
+                            EventsEnum.Upcoming.event -> {
+                                result.visibility = View.VISIBLE
+                                rate.visibility = View.GONE
+                                result.text = itemView.resources.getText(R.string.apply)
+                                result.setBackgroundColor(
+                                    ContextCompat.getColor(
+                                        itemView.context,
+                                        R.color.confirm
+                                    )
+                                )
+                                result.isEnabled = true
+
                             }
                         }
 
-                        "Inprogress" -> {
+                    }
 
-                            result.visibility = View.GONE
-                            rate.visibility = View.GONE
+                    EventsEnum.Pending.event -> {
+                        subTitle.visibility = View.VISIBLE
+                        subTitle.text = itemView.resources.getText(R.string.pending)
+                        subTitle.setTextColor(
+                            ContextCompat.getColor(
+                                itemView.context,
+                                R.color.disActive
+                            )
+                        )
 
+                        when (event[position].status) {
+
+                            EventsEnum.End.event -> {
+                                result.visibility = View.VISIBLE
+                                rate.visibility = View.GONE
+                                result.text = itemView.resources.getText(R.string.apply)
+                                result.setBackgroundColor(
+                                    ContextCompat.getColor(
+                                        itemView.context,
+                                        R.color.disActive
+                                    )
+                                )
+                                result.isEnabled = false
+                            }
+
+                            EventsEnum.Inprogress.event -> {
+                                result.visibility = View.VISIBLE
+                                rate.visibility = View.GONE
+                                result.text = itemView.resources.getText(R.string.apply)
+                                result.setBackgroundColor(
+                                    ContextCompat.getColor(
+                                        itemView.context,
+                                        R.color.disActive
+                                    )
+                                )
+                                result.isEnabled = false
+                            }
+                            EventsEnum.Upcoming.event -> {
+                                result.visibility = View.VISIBLE
+                                rate.visibility = View.GONE
+                                result.text = itemView.resources.getText(R.string.apply)
+                                result.setBackgroundColor(
+                                    ContextCompat.getColor(
+                                        itemView.context,
+                                        R.color.disActive
+                                    )
+                                )
+                                result.isEnabled = false
+
+                            }
                         }
-                        "Upcoming" -> {
+                    }
 
-                            result.visibility = View.VISIBLE
-                            result.visibility = View.VISIBLE
-                            rate.visibility = View.GONE
-                            result.text = "Apply"
-                            result.setBackgroundColor(Color.parseColor("#A4A6B3"))
-                            result.isEnabled = false
+                    EventsEnum.Attending.event -> {
 
+                        subTitle.visibility = View.VISIBLE
+                        subTitle.text = itemView.resources.getText(R.string.attended)
+                        subTitle.setTextColor(
+                            ContextCompat.getColor(
+                                itemView.context,
+                                R.color.accepted
+                            )
+                        )
+
+                        when (event[position].status) {
+
+                            EventsEnum.End.event -> {
+                                result.visibility = View.VISIBLE
+                                result.text = itemView.resources.getText(R.string.evaluate)
+                                if (event[position].userrate != null) {
+                                    rate.visibility = View.VISIBLE
+                                    result.setBackgroundColor(
+                                        ContextCompat.getColor(
+                                            itemView.context,
+                                            R.color.disActive
+                                        )
+                                    )
+                                    result.isEnabled = false
+                                    rate.rating = event[position].userrate?.toFloat()!!
+                                } else {
+                                    rate.visibility = View.GONE
+                                    result.setBackgroundColor(
+                                        ContextCompat.getColor(
+                                            itemView.context,
+                                            R.color.confirm
+                                        )
+                                    )
+                                    result.isEnabled = true
+                                }
+                            }
+
+                            EventsEnum.Inprogress.event -> {
+
+                                result.visibility = View.GONE
+                                rate.visibility = View.GONE
+
+                            }
+                            EventsEnum.Upcoming.event -> {
+
+                                result.visibility = View.VISIBLE
+                                result.visibility = View.VISIBLE
+                                rate.visibility = View.GONE
+                                result.text = itemView.resources.getText(R.string.apply)
+                                result.setBackgroundColor(
+                                    ContextCompat.getColor(
+                                        itemView.context,
+                                        R.color.disActive
+                                    )
+                                )
+                                result.isEnabled = false
+
+                            }
                         }
                     }
                 }
             }
 
             result.setOnClickListener {
-                val bundle = bundleOf("eId" to event[position].id)
+                val bundle = bundleOf(   EventsEnum.ID.event to event[position].id)
                 itemView.findNavController().navigate(R.id.action_eventSystemFragment_to_eventDetailsFragment,bundle)
             }
             layout.setOnClickListener {
-                val bundle = bundleOf("eId" to event[position].id)
+                val bundle = bundleOf(EventsEnum.ID.event  to event[position].id)
                 itemView.findNavController().navigate(R.id.action_eventSystemFragment_to_eventDetailsFragment,bundle)
             }
         }

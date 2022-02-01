@@ -23,7 +23,7 @@ class EventRepoImpl @Inject constructor(
 
             val result = service.getAllEvent(1,500,status)
 
-            return when (result.isSuccessful) {
+            return when (result.isSuccessful && result.body() !=null) {
 
                 true -> {
                     result.body()?.data!!.list?.map { it.toDomain() }!!.toMutableList()

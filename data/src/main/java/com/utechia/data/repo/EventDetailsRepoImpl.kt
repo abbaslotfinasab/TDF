@@ -22,7 +22,7 @@ class EventDetailsRepoImpl @Inject constructor(
 
             val result = service.getEvent(id)
 
-            return when (result.isSuccessful) {
+            return when (result.isSuccessful && result.body() !=null) {
 
                 true -> {
                     result.body()?.data!!.toDomain()

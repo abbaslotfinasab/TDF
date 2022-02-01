@@ -11,9 +11,8 @@ import android.widget.RatingBar
 import android.widget.Toast
 import androidx.fragment.app.DialogFragment
 import androidx.fragment.app.viewModels
-import androidx.navigation.fragment.findNavController
+import com.utechia.domain.enum.EventsEnum
 import com.utechia.domain.utile.Result
-import com.utechia.tdf.R
 import com.utechia.tdf.databinding.FragmentEventRateBinding
 import dagger.hilt.android.AndroidEntryPoint
 
@@ -45,7 +44,7 @@ class EventRateFragment : DialogFragment() {
         super.onViewCreated(view, savedInstanceState)
 
         if (arguments != null) {
-            event = requireArguments().getInt("eId", 0)
+            event = requireArguments().getInt(EventsEnum.ID.event , 0)
 
         }
 
@@ -60,8 +59,8 @@ class EventRateFragment : DialogFragment() {
 
         binding.btnAccept.setOnClickListener {
             eventViewModel.rateEvent(event,rate)
-            observer()
         }
+        observer()
     }
 
     private fun observer() {

@@ -1,6 +1,7 @@
 package com.utechia.data.entity
 
 import android.os.Parcelable
+import com.utechia.data.BuildConfig
 import com.utechia.data.base.ResponseObject
 import com.utechia.domain.model.EventModel
 import kotlinx.parcelize.Parcelize
@@ -24,6 +25,7 @@ data class EventData(
     val guests: @Contextual @RawValue MutableList<Guest>?,
     val id: Int?,
     val isDisable: Boolean?,
+    val isPublic: Boolean?,
     val joinnumbr: Int?,
     val signstatus: String?,
     val status: String?,
@@ -33,6 +35,6 @@ data class EventData(
     val contribut:Contribut?
 ):Parcelable, ResponseObject<EventModel> {
     override fun toDomain(): EventModel {
-        return EventModel(capacity, coverphoto, date_endsign, date_startsign, datestart, datetime,department,description,duration,eventPlace,guests?.map { it.toDomain() }!!.toMutableList(),id,isDisable,joinnumbr,signstatus,status,title,type,contribut?.status,contribut?.id,userrate)
+        return EventModel(capacity, "${BuildConfig.BASE_URL}$coverphoto", date_endsign, date_startsign, datestart, datetime,department,description,duration,eventPlace,guests?.map { it.toDomain() }!!.toMutableList(),id,isDisable,isPublic,joinnumbr,signstatus,status,title,type,contribut?.status,contribut?.id,userrate)
     }
 }

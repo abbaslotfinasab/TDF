@@ -125,7 +125,7 @@ class CalendarRequestFragment : DialogFragment() {
             setThemeColor(R.color.status)
             setTitleColor(R.color.white)
             setPositiveButtonText(R.string.accept)
-            setNegativeButtonText(R.string.reject)
+            setNegativeButtonText(R.string.cancel)
             setPositiveButtonColor(R.color.status)
             setNegativeButtonColor(R.color.status)
         }.build().apply {

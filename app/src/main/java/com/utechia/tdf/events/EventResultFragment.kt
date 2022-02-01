@@ -7,8 +7,10 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.view.Window
+import androidx.core.os.bundleOf
 import androidx.fragment.app.DialogFragment
 import androidx.navigation.fragment.findNavController
+import com.utechia.domain.enum.EventsEnum
 import com.utechia.tdf.R
 import com.utechia.tdf.databinding.FragmentEventResultBinding
 import dagger.hilt.android.AndroidEntryPoint
@@ -18,6 +20,8 @@ import dagger.hilt.android.AndroidEntryPoint
 class EventResultFragment : DialogFragment() {
 
     private lateinit var binding: FragmentEventResultBinding
+    private lateinit var bundle : Bundle
+
 
 
 
@@ -38,13 +42,15 @@ class EventResultFragment : DialogFragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+        bundle = bundleOf(EventsEnum.Type.event to EventsEnum.Upcoming.event )
+
 
         binding.exit.setOnClickListener {
-            findNavController().navigate(R.id.action_eventResultFragment_to_eventSystemFragment)
+            findNavController().navigate(R.id.action_eventResultFragment_to_eventSystemFragment,bundle)
             dialog?.dismiss()        }
 
         binding.btnKeep.setOnClickListener {
-            findNavController().navigate(R.id.action_eventResultFragment_to_eventSystemFragment)
+            findNavController().navigate(R.id.action_eventResultFragment_to_eventSystemFragment,bundle)
             dialog?.dismiss()
 
         }

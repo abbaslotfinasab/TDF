@@ -8,9 +8,11 @@ import android.view.View
 import android.view.ViewGroup
 import android.view.Window
 import android.widget.Toast
+import androidx.core.os.bundleOf
 import androidx.fragment.app.DialogFragment
 import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
+import com.utechia.domain.enum.EventsEnum
 import com.utechia.domain.utile.Result
 import com.utechia.tdf.R
 import com.utechia.tdf.databinding.FragmentCancelEventBinding
@@ -21,6 +23,7 @@ class CancelEventFragment : DialogFragment() {
 
     private lateinit var binding: FragmentCancelEventBinding
     private val eventViewModel:EventViewModel by viewModels()
+    private lateinit var bundle : Bundle
     private var eId = 0
 
 
@@ -41,9 +44,11 @@ class CancelEventFragment : DialogFragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+        bundle = bundleOf(EventsEnum.Type.event to EventsEnum.Upcoming.event )
+
 
         if (arguments !=null){
-            eId = requireArguments().getInt("eId",0)
+            eId = requireArguments().getInt(EventsEnum.ID.event,0)
 
         }
 
@@ -57,8 +62,8 @@ class CancelEventFragment : DialogFragment() {
 
         binding.btnCancel.setOnClickListener {
             eventViewModel.cancelEvent(eId)
-            observer()
         }
+        observer()
     }
 
     private fun observer() {
@@ -68,7 +73,7 @@ class CancelEventFragment : DialogFragment() {
             when (it) {
                 is Result.Success -> {
                     binding.prg.visibility = View.VISIBLE
-                    findNavController().navigate(R.id.action_cancelEventFragment_to_eventSystemFragment)
+                    findNavController().navigate(R.id.action_cancelEventFragment_to_eventSystemFragment,bundle)
                     dialog?.dismiss()
                 }
 
@@ -83,7 +88,7 @@ class CancelEventFragment : DialogFragment() {
                 is Result.Error -> {
                     binding.prg.visibility = View.GONE
                     Toast.makeText(context, it.message, Toast.LENGTH_SHORT).show()
-                    findNavController().navigate(R.id.action_cancelEventFragment_to_eventSystemFragment)
+                    findNavController().navigate(R.id.action_cancelEventFragment_to_eventSystemFragment,bundle)
                     dialog?.dismiss()
 
                 }

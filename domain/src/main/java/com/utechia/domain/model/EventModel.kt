@@ -15,6 +15,7 @@ data class EventModel(
     val guestModels: MutableList<GuestModel>,
     val id: Int?,
     val isDisable: Boolean?,
+    val isPublic: Boolean?,
     val joinnumbr: Int?,
     val signstatus: String?,
     val status: String?,

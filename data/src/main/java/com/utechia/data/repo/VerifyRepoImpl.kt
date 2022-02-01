@@ -25,7 +25,7 @@ class VerifyRepoImpl @Inject constructor(
 
             val result = service.verifyLogin(code)
 
-            return when(result.isSuccessful){
+            return when(result.isSuccessful && result.body() !=null){
 
                 true ->{
                     result.body()?.data?.let {

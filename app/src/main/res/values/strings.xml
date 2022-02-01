@@ -3,11 +3,10 @@
     <string name="hello_blank_fragment">Hello blank fragment</string>
     <string name="timetitle">Please select the time</string>
     <string name="accept">Accept</string>
-    <string name="reject">Cancel</string>
+    <string name="reject">Reject</string>
     <string name="complete">Complete</string>
     <string name="pending">Pending</string>
     <string name="delivered">Delivered</string>
-    <string name="cancelled">Cancelled</string>
     <string name="wait">Waiting</string>
     <string name="prepare">Preparing</string>
     <string name="active">Active</string>
@@ -22,6 +21,7 @@
     <string name="checkout">CheckOut</string>
     <string name="orderid">OrderID:</string>
     <string name="cancel">Cancel</string>
+    <string name="cancelled">Cancel</string>
     <string name="evaluate">Evaluate</string>
     <string name="order_details">Order Details</string>
     <string name="ok">OK</string>
@@ -51,6 +51,15 @@
     <string name="ticketDetails">Ticket Details</string>
     <string name="notification">Notification</string>
     <string name="exit_time">Exit Time</string>
+    <string name="past_events">Past Events</string>
+    <string name="current_events">Current Events</string>
+    <string name="upcoming_events">Upcoming Events</string>
+    <string name="no_events">No Events</string>
+    <string name="no_events_are_currently_active">No events are currently active</string>
+    <string name="apply">Apply</string>
+    <string name="attended">Attended</string>
+    <string name="publicEvent">Public Event</string>
+
 
 
     <string-array name="month_array">
