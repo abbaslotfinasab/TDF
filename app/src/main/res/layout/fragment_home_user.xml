@@ -1,24 +1,18 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.swiperefreshlayout.widget.SwipeRefreshLayout
+<androidx.constraintlayout.widget.ConstraintLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="#F4F3F7"
-    android:id="@+id/refreshLayout"
     tools:context=".home.user.UserHomeFragment">
 
-
-    <androidx.constraintlayout.widget.ConstraintLayout
-        android:layout_width="match_parent"
-        android:background="#F4F3F7"
-        android:layout_height="match_parent">
 
         <androidx.constraintlayout.widget.ConstraintLayout
             android:id="@+id/transactionLayout"
             android:layout_width="0dp"
-            android:visibility="visible"
+            android:visibility="gone"
             android:layout_height="100dp"
             android:layout_marginStart="16dp"
             android:layout_marginTop="16dp"
@@ -34,7 +28,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginStart="18dp"
                 android:layout_marginTop="15dp"
-                android:text="Entrance Time"
+                android:text="@string/entrance_time"
                 android:textColor="@color/black"
                 android:textSize="14sp"
                 android:fontFamily="@font/gilroy_semibold"
@@ -131,18 +125,17 @@
         </androidx.constraintlayout.widget.ConstraintLayout>
 
 
-        <androidx.recyclerview.widget.RecyclerView
-            android:id="@+id/recyclerView"
-            android:layout_width="match_parent"
-            android:layout_height="0dp"
-            tools:listitem="@layout/item_home_news"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            android:clipToPadding="false"
-            android:paddingBottom="64dp"
-            app:layout_constraintTop_toBottomOf="@+id/transactionLayout"
-            />
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/recyclerView"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:clipToPadding="false"
+        android:paddingBottom="64dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="@+id/transactionLayout"
+        app:layout_constraintStart_toStartOf="@+id/transactionLayout"
+        app:layout_constraintTop_toBottomOf="@+id/transactionLayout"
+        tools:listitem="@layout/item_home_news" />
 
         <androidx.cardview.widget.CardView
         android:id="@+id/prg"
@@ -177,4 +170,3 @@
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 
-</androidx.swiperefreshlayout.widget.SwipeRefreshLayout>

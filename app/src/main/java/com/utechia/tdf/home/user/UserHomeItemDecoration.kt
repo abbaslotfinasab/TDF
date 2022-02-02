@@ -14,15 +14,13 @@ class UserHomeItemDecoration: RecyclerView.ItemDecoration(){
         @NonNull parent: RecyclerView,
         @NonNull state: RecyclerView.State
     ) {
-        outRect.left = 40
-        outRect.right = 40
+        outRect.left = 0
+        outRect.right = 0
         outRect.bottom = 20
         if (parent.getChildAdapterPosition(view) ==0)
             outRect.top = 40
         else
             outRect.bottom = 20
-
-
 
     }
 

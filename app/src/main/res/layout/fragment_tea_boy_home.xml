@@ -85,6 +85,7 @@
                 android:id="@+id/entrance"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:visibility="gone"
                 android:layout_marginStart="18dp"
                 android:layout_marginTop="15dp"
                 android:text="Entrance Time"

@@ -99,7 +99,6 @@ class TeaBoyHomeFragment : Fragment(),View.OnClickListener {
             binding.status.text = getString(R.string.deactive)
 
 
-
         val tranceActionListener = database.child("Transaction").child(userId)
 
         tranceActionListener.addValueEventListener(object: ValueEventListener {

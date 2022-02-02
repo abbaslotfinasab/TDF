@@ -44,6 +44,7 @@ class EventAdapter: RecyclerView.Adapter<RecyclerView.ViewHolder>() {
     inner class ViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
         private val title: TextView = itemView.findViewById(R.id.title)
         private val subTitle: TextView = itemView.findViewById(R.id.subTitle)
+        private val btnPublic: TextView = itemView.findViewById(R.id.status)
         private val image: ImageView = itemView.findViewById(R.id.image)
         private val rate: RatingBar = itemView.findViewById(R.id.rating)
         private val result: AppCompatButton = itemView.findViewById(R.id.btnResult)
@@ -66,10 +67,8 @@ class EventAdapter: RecyclerView.Adapter<RecyclerView.ViewHolder>() {
             
             
             if (event[position].isPublic==true){
-                subTitle.visibility = View.VISIBLE
-                subTitle.text = itemView.resources.getText(R.string.publicEvent)
-                subTitle.setBackgroundColor(ContextCompat.getColor(itemView.context,R.color.accepted))
-                subTitle.setTextColor(ContextCompat.getColor(itemView.context,R.color.white))
+                subTitle.visibility = View.GONE
+                btnPublic.visibility = View.VISIBLE
                 rate.visibility = View.GONE
                 if (event[position].status == EventsEnum.End.event){
                     result.visibility = View.VISIBLE
@@ -103,7 +102,7 @@ class EventAdapter: RecyclerView.Adapter<RecyclerView.ViewHolder>() {
                 }
             }
             else {
-
+                btnPublic.visibility = View.GONE
                 when (event[position].contribute) {
 
                     null -> {

@@ -59,7 +59,7 @@
     <string name="apply">Apply</string>
     <string name="attended">Attended</string>
     <string name="publicEvent">Public Event</string>
-
+    <string name="entrance_time">Entrance Time</string>
 
 
     <string-array name="month_array">
