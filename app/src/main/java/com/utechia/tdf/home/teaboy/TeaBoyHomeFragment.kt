@@ -120,8 +120,8 @@ class TeaBoyHomeFragment : Fragment(),View.OnClickListener {
                         binding.exitFloor.visibility = View.GONE
                     }
                     else{
-                        binding.exitDate.text = enter?.punch_time
-                        binding.exitFloor.text = enter?.area_alias
+                        binding.exitDate.text = exit?.punch_time
+                        binding.exitFloor.text = exit?.area_alias
                     }
                 }
             }
