@@ -110,18 +110,35 @@ class CreateTicketFragment : Fragment() {
 
         binding.appCompatButton.setOnClickListener {
 
-            ticketViewModel.postTicket(
 
-                binding.description.text.toString(),
-                binding.title.text.toString(),
-                category,
-                priority,
-                selectedFloor,
-                uploadAdapter.mediaUrl,
+            when{
 
-                )
-            observer()
+                binding.title.text.isNullOrEmpty() -> {
+                    Toast.makeText(context,"Title is required",Toast.LENGTH_SHORT).show()
+                }
+
+                binding.description.text.isNullOrEmpty() -> {
+                    Toast.makeText(context,"Description is required",Toast.LENGTH_SHORT).show()
+
+                }
+
+                else ->{
+                    ticketViewModel.postTicket(
+
+                        binding.description.text.toString(),
+                        binding.title.text.toString(),
+                        category,
+                        priority,
+                        selectedFloor,
+                        uploadAdapter.mediaUrl,
+
+                        )
+                }
+            }
         }
+
+        observer()
+
 
         binding.uploadLayout0.setOnClickListener {
             findNavController().navigate(R.id.action_createTicketFragment_to_uploadFragment)

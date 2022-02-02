@@ -35,6 +35,16 @@
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent" />
 
+            <TextView
+                android:id="@+id/star23"
+                android:layout_width="10dp"
+                android:layout_height="10dp"
+                android:text="*"
+                android:textColor="#FF6464"
+                android:textSize="14sp"
+                app:layout_constraintStart_toEndOf="@+id/textView23"
+                app:layout_constraintTop_toTopOf="parent" />
+
             <EditText
                 android:id="@+id/title"
                 android:layout_width="0dp"
@@ -78,6 +88,17 @@
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent" />
 
+
+            <TextView
+                android:id="@+id/star25"
+                android:layout_width="10dp"
+                android:layout_height="10dp"
+                android:text="*"
+                android:textColor="#FF6464"
+                android:textSize="14sp"
+                app:layout_constraintStart_toEndOf="@+id/textView25"
+                app:layout_constraintTop_toTopOf="@+id/textView25" />
+
             <androidx.constraintlayout.widget.ConstraintLayout
                 android:id="@+id/category"
                 android:layout_width="0dp"
@@ -104,6 +125,7 @@
                     app:layout_constraintEnd_toStartOf="@+id/imageView16"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toTopOf="parent" />
+
 
                 <ImageView
                     android:id="@+id/imageView16"
@@ -251,6 +273,18 @@
                 android:textSize="14sp"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent" />
+
+            <TextView
+                android:id="@+id/star28"
+                android:layout_width="10dp"
+                android:layout_height="10dp"
+                android:text="*"
+                android:textColor="#FF6464"
+                android:textSize="14sp"
+                app:layout_constraintStart_toEndOf="@+id/textView28"
+                app:layout_constraintTop_toTopOf="@+id/textView28" />
+
+
 
             <EditText
                 android:id="@+id/description"

@@ -313,7 +313,7 @@
         <entry key="app/src/main/res/layout/fragment_create_refreshmen_childt.xml" value="0.1" />
         <entry key="app/src/main/res/layout/fragment_create_refreshment.xml" value="0.1" />
         <entry key="app/src/main/res/layout/fragment_create_reservation.xml" value="0.19322916666666667" />
-        <entry key="app/src/main/res/layout/fragment_create_ticket.xml" value="0.18" />
+        <entry key="app/src/main/res/layout/fragment_create_ticket.xml" value="0.33" />
         <entry key="app/src/main/res/layout/fragment_delivered.xml" value="0.1" />
         <entry key="app/src/main/res/layout/fragment_event_details.xml" value="0.22" />
         <entry key="app/src/main/res/layout/fragment_event_rate.xml" value="0.1" />
