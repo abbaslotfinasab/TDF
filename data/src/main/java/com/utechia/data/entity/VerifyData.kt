@@ -19,11 +19,12 @@ data class VerifyData(
     val jobTitle:String?,
     val mail:String?,
     val userid: Int?,
+    val employeeId: Int?
 
 
 
     ):Parcelable, ResponseObject<VerifyModel> {
     override fun toDomain(): VerifyModel {
-        return VerifyModel(token, userHomeId,isTeaBoy,isTeaBoyActive,floor,name,jobTitle,mail,userid)
+        return VerifyModel(token, userHomeId,isTeaBoy,isTeaBoyActive,floor,name,jobTitle,mail,userid,employeeId)
     }
 }

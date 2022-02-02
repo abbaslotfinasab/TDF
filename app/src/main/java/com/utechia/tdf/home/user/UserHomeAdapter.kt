@@ -11,24 +11,19 @@ import androidx.constraintlayout.widget.ConstraintLayout
 import androidx.core.content.ContextCompat
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
-import com.utechia.domain.model.NewsModel
+import com.utechia.data.entity.News
 import com.utechia.tdf.R
-import java.time.OffsetDateTime
-import java.time.ZoneId
-import java.time.format.DateTimeFormatter
 
 
 class UserHomeAdapter: RecyclerView.Adapter<RecyclerView.ViewHolder>() {
 
-    var news: MutableList<NewsModel> = mutableListOf()
-    private var timeZone = ""
+    var news: MutableList<News> = mutableListOf()
 
 
-    fun addData(_news: MutableList<NewsModel>) {
-        news.clear()
-        notifyDataSetChanged()
-        news.addAll(_news)
-        notifyItemRangeChanged(0,_news.size)
+    fun addData(_news:News) {
+        news.add(_news)
+        notifyItemChanged(news.size)
+
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): RecyclerView.ViewHolder =
@@ -52,21 +47,24 @@ class UserHomeAdapter: RecyclerView.Adapter<RecyclerView.ViewHolder>() {
 
         fun bind0(position: Int) {
 
-            title.text = news[position].description
-
-            timeZone = OffsetDateTime.parse(news[position].date?:"2022-01-01T10:12:31.484Z").atZoneSameInstant(
-                ZoneId.systemDefault()
-            ).toLocalDateTime().format(DateTimeFormatter.ofPattern("yyyy.MM.dd"))
-            date.text = timeZone
+            title.text = news[position].title
+            date.text = news[position].date
 
 
             Glide.with(itemView.context)
-                .load(news[position].coverphoto)
+                .load(
+                    if(position%2==0){
+                        R.mipmap.news
+                    }else{
+                        R.mipmap.news2
+                    }
+                )
+                .error(R.mipmap.news)
                 .into(image)
 
             layout.setOnClickListener {
                 val browserIntent =
-                Intent(Intent.ACTION_VIEW, Uri.parse(news[position].url?:"https:\\www.google.com"))
+                Intent(Intent.ACTION_VIEW, Uri.parse(news[position].link?:"https:\\www.google.com"))
                 ContextCompat.startActivity(itemView.context, browserIntent, null)
             }
         }

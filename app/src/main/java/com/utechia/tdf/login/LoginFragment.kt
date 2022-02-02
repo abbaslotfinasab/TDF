@@ -100,6 +100,7 @@ class LoginFragment : Fragment() {
                             putString(MainEnum.HomeId.main,it.data.userHomeId)
                             putString(Mail,it.data.mail)
                             it.data.userid?.let { it1 -> putInt(MainEnum.UserId.main, it1) }
+                            it.data.employeeId?.let { it2 -> putInt(MainEnum.EmployeeId.main, it2) }
                             putBoolean(Start,true)
                         }.apply()
                         findNavController().navigate(R.id.action_loginFragment_to_userhomeFragment)
@@ -113,6 +114,7 @@ class LoginFragment : Fragment() {
                             putBoolean(Active, it.data.isTeaBoyActive == true)
                             putString(MainEnum.HomeId.main,it.data.userHomeId)
                             it.data.userid?.let { it1 -> putInt(MainEnum.UserId.main, it1) }
+                            it.data.employeeId?.let { it2 -> putInt(MainEnum.EmployeeId.main, it2) }
                             putBoolean(Start,true)
 
                         }.apply()

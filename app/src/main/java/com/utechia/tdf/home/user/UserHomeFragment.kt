@@ -17,9 +17,9 @@ import com.google.firebase.database.ValueEventListener
 import com.google.firebase.database.ktx.database
 import com.google.firebase.database.ktx.getValue
 import com.google.firebase.ktx.Firebase
+import com.utechia.data.entity.News
 import com.utechia.data.entity.Transaction
 import com.utechia.domain.enum.MainEnum
-import com.utechia.domain.utile.Result
 import com.utechia.tdf.main.MainActivity
 import com.utechia.tdf.databinding.FragmentHomeUserBinding
 import dagger.hilt.android.AndroidEntryPoint
@@ -29,16 +29,15 @@ class UserHomeFragment : Fragment() {
 
     private lateinit var binding: FragmentHomeUserBinding
     private lateinit var database: DatabaseReference
-    private val homeViewModel: UserHomeViewModel by viewModels()
     private val userHomeAdapter: UserHomeAdapter = UserHomeAdapter()
     private lateinit var prefs: SharedPreferences
-    private var userId = ""
+    private var employeeId = ""
 
 
     companion object{
 
         const val Start = "start"
-        const val ID = "userId"
+        const val ID = "employeeId"
 
     }
 
@@ -59,10 +58,8 @@ class UserHomeFragment : Fragment() {
 
         prefs = requireActivity().getSharedPreferences(MainEnum.Tdf.main, Context.MODE_PRIVATE)
 
-        userId = prefs.getInt(ID, 0).toString()
+        employeeId = prefs.getInt(ID, 0).toString()
 
-
-        homeViewModel.getNews()
 
         if (prefs.getBoolean(Start,false)) {
 
@@ -76,14 +73,19 @@ class UserHomeFragment : Fragment() {
 
         }
 
-        val tranceActionListener = database.child("Transaction").child(userId)
+        val tranceActionListener = database
 
         tranceActionListener.addValueEventListener(object: ValueEventListener {
             override fun onDataChange(snapshot: DataSnapshot) {
                 binding.prg.visibility = View.GONE
 
-                val enter = snapshot.child("first_checkin").getValue<Transaction>()
-                val exit = snapshot.child("last_checkout").getValue<Transaction>()
+                userHomeAdapter.news.clear()
+                snapshot.child("Newes").children.forEach {
+                    userHomeAdapter.addData(it.getValue<News>()!!)
+                }
+
+                val enter = snapshot.child("Transaction").child(employeeId).child("first_checkin").getValue<Transaction>()
+                val exit = snapshot.child("Transaction").child(employeeId).child("last_checkout").getValue<Transaction>()
 
                 if (enter?.punch_time.isNullOrEmpty()){
                     binding.transactionLayout.visibility = View.GONE
@@ -114,30 +116,6 @@ class UserHomeFragment : Fragment() {
             adapter = userHomeAdapter
             layoutManager = LinearLayoutManager(context,LinearLayoutManager.VERTICAL,false)
           //  addItemDecoration(UserHomeItemDecoration())
-        }
-        observer()
-    }
-
-    private fun observer() {
-        homeViewModel.news.observe(viewLifecycleOwner){
-
-            when (it) {
-                is Result.Success -> {
-                    binding.prg.visibility = View.GONE
-                    userHomeAdapter.addData(it.data)
-                }
-
-                is Result.Loading -> {
-                    binding.prg.visibility = View.VISIBLE
-                    binding.recyclerView.visibility = View.GONE
-                }
-
-                is Result.Error -> {
-                    binding.prg.visibility = View.GONE
-                    binding.recyclerView.visibility = View.GONE
-                    Toast.makeText(context, it.message, Toast.LENGTH_SHORT).show()
-                }
-            }
         }
     }
 }

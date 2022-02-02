@@ -11,5 +11,7 @@ data class VerifyModel(
     val jobTitle:String?,
     val mail:String?,
     val userid: Int?,
+    val employeeId: Int?
 
-    )
+
+)

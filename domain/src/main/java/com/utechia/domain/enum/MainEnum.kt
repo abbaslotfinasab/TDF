@@ -8,6 +8,7 @@ enum class MainEnum(val main:String) {
     Job("job"),
     Delivered("delivered"),
     UserId("userId"),
+    EmployeeId("employeeId"),
     HomeId("homeId"),
     Floor("floor"),
     TeaBoy("isTeaBoy"),

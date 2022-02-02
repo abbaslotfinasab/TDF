@@ -6,7 +6,6 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.utechia.domain.model.NewsModel
 import com.utechia.domain.utile.Result
-import com.utechia.tdf.R
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.CoroutineExceptionHandler
 import kotlinx.coroutines.Dispatchers
@@ -32,19 +31,6 @@ class UserHomeViewModel @Inject constructor(
 
         viewModelScope.launch(Dispatchers.IO + handler) {
 
-            _news.postValue(Result.Loading)
-
-            newsList.clear()
-            newsList.add(NewsModel("SAUDI ARABIA ANNOUNCES TOURISM DEVELOPMENT FUND", R.mipmap.news,"https://www.google.com","2017-01-23T10:12:31.484Z"))
-            newsList.add(NewsModel("The tourism is set to support the development of large scale mixed-used projects and resorts", R.mipmap.news,"https://www.google.com","2017-01-23T10:12:31.484Z"))
-            newsList.add(NewsModel("SAUDI ARABIA ANNOUNCES TOURISM DEVELOPMENT FUND", R.mipmap.news,"https://www.google.com","2017-01-23T10:12:31.484Z"))
-            newsList.add(NewsModel("The tourism is set to support the development of large scale mixed-used projects and resorts", R.mipmap.news,"https://www.google.com","2017-01-23T10:12:31.484Z"))
-            newsList.add(NewsModel("SAUDI ARABIA ANNOUNCES TOURISM DEVELOPMENT FUND", R.mipmap.news,"https://www.google.com","2017-01-23T10:12:31.484Z"))
-            newsList.add(NewsModel("The tourism is set to support the development of large scale mixed-used projects and resorts", R.mipmap.news,"https://www.google.com","2017-01-23T10:12:31.484Z"))
-            newsList.add(NewsModel("SAUDI ARABIA ANNOUNCES TOURISM DEVELOPMENT FUND", R.mipmap.news,"https://www.google.com","2017-01-23T10:12:31.484Z"))
-            newsList.add(NewsModel("The tourism is set to support the development of large scale mixed-used projects and resorts", R.mipmap.news,"https://www.google.com","2017-01-23T10:12:31.484Z"))
-
-            _news.postValue(Result.Success(newsList))
 
         }
     }

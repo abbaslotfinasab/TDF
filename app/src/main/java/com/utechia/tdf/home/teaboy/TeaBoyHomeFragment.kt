@@ -18,7 +18,6 @@ import com.google.firebase.database.ValueEventListener
 import com.google.firebase.database.ktx.database
 import com.google.firebase.database.ktx.getValue
 import com.google.firebase.ktx.Firebase
-import com.utechia.data.entity.Chat
 import com.utechia.data.entity.Transaction
 import com.utechia.domain.enum.MainEnum
 import com.utechia.domain.enum.OrderEnum
@@ -40,14 +39,14 @@ class TeaBoyHomeFragment : Fragment(),View.OnClickListener {
     private var name = ""
     private var floor = ""
     private var status = false
-    private var userId = ""
+    private var employeeId = ""
 
     companion object{
         const val Start = "start"
         const val Name = "name"
         const val Floor = "floor"
         const val Active = "isTeaBoyActive"
-        const val ID = "userId"
+        const val ID = "employeeId"
     }
 
     override fun onCreateView(
@@ -70,7 +69,7 @@ class TeaBoyHomeFragment : Fragment(),View.OnClickListener {
         prefs = requireActivity().getSharedPreferences(MainEnum.Tdf.main, Context.MODE_PRIVATE)
         name = prefs.getString(Name, "").toString()
         floor = prefs.getString(Floor, "").toString()
-        userId = prefs.getInt(ID, 0).toString()
+        employeeId = prefs.getInt(ID, 0).toString()
 
 
 
@@ -99,7 +98,7 @@ class TeaBoyHomeFragment : Fragment(),View.OnClickListener {
             binding.status.text = getString(R.string.deactive)
 
 
-        val tranceActionListener = database.child("Transaction").child(userId)
+        val tranceActionListener = database.child("Transaction").child(employeeId)
 
         tranceActionListener.addValueEventListener(object: ValueEventListener {
             override fun onDataChange(snapshot: DataSnapshot) {

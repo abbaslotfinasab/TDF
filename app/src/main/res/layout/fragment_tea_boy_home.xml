@@ -68,15 +68,16 @@
             app:thumbTint="@color/white"
             app:trackTint="@drawable/switch_back" />
 
+
         <androidx.constraintlayout.widget.ConstraintLayout
             android:id="@+id/transactionLayout"
             android:layout_width="0dp"
             android:layout_height="100dp"
-            android:layout_marginStart="17dp"
+            android:layout_marginStart="20dp"
+            android:layout_marginTop="16dp"
+            android:layout_marginEnd="20dp"
+            android:background="@drawable/entrance_exit_bg"
             android:visibility="gone"
-            android:layout_marginTop="33dp"
-            android:layout_marginEnd="17dp"
-            android:background="@color/white"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/imageView23">
@@ -85,10 +86,10 @@
                 android:id="@+id/entrance"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:visibility="gone"
                 android:layout_marginStart="18dp"
                 android:layout_marginTop="15dp"
-                android:text="Entrance Time"
+                android:fontFamily="@font/gilroy_semibold"
+                android:text="@string/entrance_time"
                 android:textColor="@color/black"
                 android:textSize="14sp"
                 android:textStyle="bold"
@@ -101,8 +102,9 @@
                 android:layout_height="wrap_content"
                 android:layout_marginStart="18dp"
                 android:layout_marginTop="5dp"
+                android:fontFamily="@font/gilroy_medium"
                 android:textColor="@color/black"
-                android:textSize="12sp"
+                android:textSize="13sp"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/entrance" />
 
@@ -119,7 +121,7 @@
                 android:paddingEnd="5dp"
                 android:paddingBottom="1dp"
                 android:textColor="@color/white"
-                android:textSize="12sp"
+                android:textSize="13sp"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/entranceDate" />
@@ -128,7 +130,8 @@
                 android:id="@+id/line"
                 android:layout_width="1dp"
                 android:layout_height="0dp"
-                android:background="#1F000000"
+                android:layout_marginVertical="12dp"
+                android:background="#1A000000"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
@@ -140,6 +143,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginStart="18dp"
                 android:layout_marginTop="15dp"
+                android:fontFamily="@font/gilroy_semibold"
                 android:text="@string/exit_time"
                 android:textColor="@color/black"
                 android:textSize="14sp"
@@ -153,8 +157,9 @@
                 android:layout_height="wrap_content"
                 android:layout_marginStart="18dp"
                 android:layout_marginTop="5dp"
+                android:fontFamily="@font/gilroy_medium"
                 android:textColor="@color/black"
-                android:textSize="12sp"
+                android:textSize="13sp"
                 app:layout_constraintStart_toStartOf="@id/line"
                 app:layout_constraintTop_toBottomOf="@+id/exit" />
 
@@ -171,13 +176,14 @@
                 android:paddingEnd="5dp"
                 android:paddingBottom="1dp"
                 android:textColor="@color/white"
-                android:textSize="12sp"
+                android:textSize="13sp"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintStart_toStartOf="@id/line"
                 app:layout_constraintTop_toBottomOf="@+id/exitDate" />
 
 
         </androidx.constraintlayout.widget.ConstraintLayout>
+
 
 
         <TextView
