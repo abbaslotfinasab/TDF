@@ -330,6 +330,7 @@
             app:exitAnim="@android:anim/fade_out"
             app:popEnterAnim="@android:anim/fade_in"
             app:popExitAnim="@android:anim/fade_out" />
+
         <action
             android:id="@+id/action_createRefreshmentFragment_to_orderFragment"
             app:destination="@id/orderFragment"
@@ -353,6 +354,7 @@
         android:name="com.utechia.tdf.cart.CartFragment"
         android:label="fragment_cart"
         tools:layout="@layout/fragment_cart" >
+
         <action
             android:id="@+id/action_cartFragment_to_deleteFragment"
             app:destination="@id/deleteFragment"
@@ -370,6 +372,16 @@
             app:exitAnim="@android:anim/fade_out"
             app:popEnterAnim="@android:anim/fade_in"
             app:popExitAnim="@android:anim/fade_out"/>
+
+        <action
+            android:id="@+id/action_cartFragment_to_cartConfirmationFragment"
+            app:destination="@id/cartConfirmationFragment"
+            app:launchSingleTop="true"
+            app:enterAnim="@android:anim/fade_in"
+            app:exitAnim="@android:anim/fade_out"
+            app:popEnterAnim="@android:anim/fade_in"
+            app:popExitAnim="@android:anim/fade_out" />
+
     </fragment>
 
     <fragment
@@ -385,6 +397,7 @@
             app:exitAnim="@android:anim/fade_out"
             app:popEnterAnim="@android:anim/fade_in"
             app:popExitAnim="@android:anim/fade_out"/>
+
         <action
             android:id="@+id/action_orderFragment_to_orderDetailsFragment"
             app:destination="@id/orderDetailsFragment"
@@ -1272,5 +1285,23 @@
         android:name="com.utechia.tdf.events.EventSystemChildFragment"
         android:label="fragment_event_system_child"
         tools:layout="@layout/fragment_event_system_child" />
+    <dialog
+        android:id="@+id/cartConfirmationFragment"
+        android:name="com.utechia.tdf.cart.CartConfirmationFragment"
+        android:label="fragment_cart_confirmation"
+        tools:layout="@layout/fragment_cart_confirmation" >
+
+        <action
+            android:id="@+id/action_cartConfirmationFragment_to_userOrderFragment"
+            app:destination="@id/orderFragment"
+            app:launchSingleTop="true"
+            app:popUpTo="@id/createRefreshmentFragment"
+            app:enterAnim="@android:anim/fade_in"
+            app:exitAnim="@android:anim/fade_out"
+            app:popEnterAnim="@android:anim/fade_in"
+            app:popExitAnim="@android:anim/fade_out"/>
+
+
+    </dialog>
 
 </navigation>

@@ -37,7 +37,16 @@ class NotificationFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+
         notificationViewModel.getNotification()
+
+        binding.refreshLayout.setOnRefreshListener {
+
+            notificationViewModel.getNotification()
+
+        }
+
+
 
         binding.recyclerView.apply {
             layoutManager = LinearLayoutManager(context,LinearLayoutManager.VERTICAL,false)
@@ -108,6 +117,7 @@ class NotificationFragment : Fragment() {
 
             when (it) {
                 is Result.Success -> {
+                    binding.refreshLayout.isRefreshing = false
                     binding.prg.visibility = View.GONE
 
                     if (it.data.size!=0){
@@ -120,13 +130,15 @@ class NotificationFragment : Fragment() {
                 }
 
                 is Result.Loading -> {
-                    binding.prg.visibility = View.VISIBLE
+                    binding.refreshLayout.isRefreshing = true
+                    binding.prg.visibility = View.GONE
                     binding.emptyLayout.visibility = View.GONE
                     binding.recyclerView.visibility = View.GONE
 
                 }
 
                 is Result.Error -> {
+                    binding.refreshLayout.isRefreshing = false
                     binding.prg.visibility = View.GONE
                     binding.emptyLayout.visibility = View.VISIBLE
                     binding.recyclerView.visibility = View.GONE

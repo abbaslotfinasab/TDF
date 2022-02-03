@@ -1,4 +1,4 @@
-package com.utechia.tdf.order.teaboy
+package com.utechia.tdf.cart
 
 import android.graphics.Color
 import android.graphics.drawable.ColorDrawable
@@ -11,30 +11,29 @@ import android.widget.Toast
 import androidx.fragment.app.DialogFragment
 import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
-import com.utechia.domain.enum.OrderEnum
 import com.utechia.domain.utile.Result
 import com.utechia.tdf.R
-import com.utechia.tdf.databinding.FragmentRejectBinding
+import com.utechia.tdf.databinding.FragmentCartConfirmationBinding
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
-class RejectFragment : DialogFragment(),View.OnClickListener {
+class CartConfirmationFragment : DialogFragment(),View.OnClickListener {
 
-    private lateinit var binding: FragmentRejectBinding
-    private val teaBoyOrderViewModel: TeaBoyOrderViewModel by viewModels()
-    private var orderId = 0
+    private lateinit var binding: FragmentCartConfirmationBinding
+    private val cartViewModel: CartViewModel by viewModels()
 
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
-        binding = FragmentRejectBinding.inflate(inflater, container, false)
-        binding.exit.setOnClickListener(this)
-        binding.btnCancel.setOnClickListener(this)
-        binding.btnDelete.setOnClickListener(this)
+        binding = FragmentCartConfirmationBinding.inflate(inflater, container, false)
 
-        if (dialog != null && dialog?.window != null) {
+        binding.btnAccept.setOnClickListener(this)
+        binding.btnCancel.setOnClickListener(this)
+        binding.exit.setOnClickListener(this)
+
+        if(dialog !=null && dialog?.window !=null){
             dialog?.window?.setBackgroundDrawable(ColorDrawable(Color.TRANSPARENT))
             dialog?.window?.requestFeature(Window.FEATURE_NO_TITLE)
             dialog?.setCancelable(false)
@@ -45,37 +44,33 @@ class RejectFragment : DialogFragment(),View.OnClickListener {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        if (arguments != null)
-            orderId = requireArguments().getInt(OrderEnum.ID.order, 0)
-
         observer()
+
     }
 
     private fun observer() {
 
-        teaBoyOrderViewModel.orderModel.observe(viewLifecycleOwner) {
+        cartViewModel.cartModel.observe(viewLifecycleOwner) {
 
             when (it) {
                 is Result.Success -> {
                     binding.prg.visibility = View.GONE
-                    findNavController().navigate(R.id.action_rejectFragment_to_teaBoyOrdersFragment)
+                    findNavController().navigate(R.id.action_cartConfirmationFragment_to_userOrderFragment)
                     dialog?.dismiss()
 
                 }
 
                 is Result.Loading -> {
                     binding.prg.visibility = View.VISIBLE
-                    binding.btnDelete.isEnabled = false
+                    binding.btnAccept.isEnabled = false
                     binding.btnCancel.isEnabled = false
                     binding.exit.isEnabled = false
-
 
                 }
 
                 is Result.Error -> {
                     binding.prg.visibility = View.GONE
                     Toast.makeText(context, it.message, Toast.LENGTH_SHORT).show()
-                    findNavController().navigate(R.id.action_rejectFragment_to_teaBoyOrdersFragment)
                     dialog?.dismiss()
                 }
             }
@@ -83,19 +78,18 @@ class RejectFragment : DialogFragment(),View.OnClickListener {
     }
 
     override fun onClick(v: View?) {
-
         when(v?.id){
 
-            R.id.exit ->{
+            R.id.btnCancel -> {
                 dialog?.dismiss()
             }
 
-            R.id.btnCancel ->{
+            R.id.exit -> {
                 dialog?.dismiss()
             }
 
-            R.id.btnDelete ->{
-                teaBoyOrderViewModel.rejectOrder(orderId)
+            R.id.btnAccept -> {
+                cartViewModel.checkoutCart()
             }
         }
     }

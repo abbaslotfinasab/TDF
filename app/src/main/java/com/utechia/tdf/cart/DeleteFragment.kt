@@ -17,7 +17,7 @@ import com.utechia.tdf.databinding.FragmentDeleteBinding
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
-class DeleteFragment : DialogFragment() {
+class DeleteFragment : DialogFragment(),View.OnClickListener {
 
     private lateinit var binding: FragmentDeleteBinding
     private val cartViewModel: CartViewModel by viewModels()
@@ -30,7 +30,11 @@ class DeleteFragment : DialogFragment() {
     ): View {
         binding = FragmentDeleteBinding.inflate(inflater, container, false)
 
-        if(dialog !=null && dialog?.window !=null){
+        binding.btnCancel.setOnClickListener(this)
+        binding.btnDelete.setOnClickListener(this)
+        binding.exit.setOnClickListener(this)
+
+        if (dialog != null && dialog?.window != null) {
             dialog?.window?.setBackgroundDrawable(ColorDrawable(Color.TRANSPARENT))
             dialog?.window?.requestFeature(Window.FEATURE_NO_TITLE)
             dialog?.setCancelable(false)
@@ -46,21 +50,18 @@ class DeleteFragment : DialogFragment() {
 
         binding.btnDelete.setOnClickListener {
 
-            cartViewModel.deleteCart(foodId)
-            observer()
 
         }
 
+        observer()
+
+
         binding.btnCancel.setOnClickListener {
-            findNavController().clearBackStack(R.id.deleteFragment)
-            findNavController().navigate(R.id.action_deleteFragment_to_cartFragment)
-            dialog?.dismiss()
+
         }
 
         binding.exit.setOnClickListener {
-            findNavController().clearBackStack(R.id.deleteFragment)
-            findNavController().navigate(R.id.action_deleteFragment_to_cartFragment)
-            dialog?.dismiss()
+
         }
 
     }
@@ -72,7 +73,6 @@ class DeleteFragment : DialogFragment() {
             when (it) {
                 is Result.Success -> {
                     binding.prg.visibility = View.GONE
-                    findNavController().clearBackStack(R.id.deleteFragment)
                     findNavController().navigate(R.id.action_deleteFragment_to_cartFragment)
                     dialog?.dismiss()
 
@@ -89,7 +89,6 @@ class DeleteFragment : DialogFragment() {
                 is Result.Error -> {
                     binding.prg.visibility = View.GONE
                     Toast.makeText(context, it.message, Toast.LENGTH_SHORT).show()
-                    findNavController().clearBackStack(R.id.deleteFragment)
                     findNavController().navigate(R.id.action_deleteFragment_to_cartFragment)
                     dialog?.dismiss()
                 }
@@ -98,4 +97,23 @@ class DeleteFragment : DialogFragment() {
 
     }
 
+    override fun onClick(v: View?) {
+        when (v?.id) {
+            R.id.btnDelete -> {
+                cartViewModel.deleteCart(foodId)
+
+            }
+
+            R.id.btnCancel -> {
+                findNavController().navigate(R.id.action_deleteFragment_to_cartFragment)
+                dialog?.dismiss()
+            }
+
+            R.id.exit -> {
+                findNavController().navigate(R.id.action_deleteFragment_to_cartFragment)
+                dialog?.dismiss()
+            }
+        }
+    }
 }
+

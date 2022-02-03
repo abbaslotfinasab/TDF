@@ -204,7 +204,6 @@
             android:layout_width="wrap_content"
             android:layout_height="40dp"
             android:layout_marginStart="20dp"
-            android:layout_marginTop="10dp"
             android:isIndicator="true"
             android:max="5"
             android:numStars="5"
@@ -261,7 +260,7 @@
                 android:layout_marginStart="13dp"
                 android:layout_marginTop="13dp"
                 android:text="@string/pending_norders"
-                android:textColor="#F5A62E"
+                android:textColor="#040404"
                 android:textSize="12sp"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent" />
@@ -298,7 +297,7 @@
                 android:layout_marginStart="13dp"
                 android:layout_marginTop="13dp"
                 android:text="@string/delivered_norders"
-                android:textColor="#59B48D"
+                android:textColor="#040404"
                 android:textSize="12sp"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent" />
@@ -335,7 +334,7 @@
                 android:layout_marginStart="13dp"
                 android:layout_marginTop="13dp"
                 android:text="@string/cancelled_norders"
-                android:textColor="#FF6363"
+                android:textColor="#040404"
                 android:textSize="12sp"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent" />

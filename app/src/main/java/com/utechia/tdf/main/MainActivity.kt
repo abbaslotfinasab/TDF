@@ -152,7 +152,7 @@ class MainActivity : AppCompatActivity() {
 
     private fun logoutFromFCM() {
 
-       /* lifecycleScope.launch(Dispatchers.IO) {
+        lifecycleScope.launch(Dispatchers.IO) {
             FirebaseInstallations.getInstance().delete()
             FirebaseMessaging.getInstance().deleteToken()
 
@@ -164,7 +164,7 @@ class MainActivity : AppCompatActivity() {
                     putString(MainEnum.Fcm.main, task.result)
                 }.apply()
             })
-        }*/
+        }
     }
 
     private fun checkOutUser(): Boolean {

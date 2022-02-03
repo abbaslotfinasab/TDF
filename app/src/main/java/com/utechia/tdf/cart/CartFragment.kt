@@ -43,8 +43,7 @@ class CartFragment : Fragment() {
         cartViewModel.getCart()
 
         binding.appCompatButton.setOnClickListener {
-            cartViewModel.checkoutCart()
-            checkout = true
+            findNavController().navigate(R.id.action_cartFragment_to_cartConfirmationFragment)
         }
 
         binding.appBackButton.setOnClickListener {
@@ -146,15 +145,10 @@ class CartFragment : Fragment() {
 
                     }
                     else{
-                        if (checkout)
-                            findNavController().navigate(R.id.action_cartFragment_to_orderFragment)
-                        else {
-                            binding.recyclerView.visibility = View.GONE
-                            binding.emptyLayout.visibility = View.VISIBLE
-                            binding.appCompatButton.visibility = View.GONE
-                        }
+                        binding.recyclerView.visibility = View.GONE
+                        binding.emptyLayout.visibility = View.VISIBLE
+                        binding.appCompatButton.visibility = View.GONE
                     }
-
                 }
 
                 is Result.Loading -> {

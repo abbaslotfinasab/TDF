@@ -305,6 +305,7 @@
         <entry key="app/src/main/res/layout/fragment_cancel_request.xml" value="0.1" />
         <entry key="app/src/main/res/layout/fragment_cancelled.xml" value="0.19322916666666667" />
         <entry key="app/src/main/res/layout/fragment_cart.xml" value="0.10235507246376811" />
+        <entry key="app/src/main/res/layout/fragment_cart_confirmation.xml" value="0.22" />
         <entry key="app/src/main/res/layout/fragment_category_fragment.xml" value="0.1" />
         <entry key="app/src/main/res/layout/fragment_close_ticket.xml" value="0.19322916666666667" />
         <entry key="app/src/main/res/layout/fragment_confirm.xml" value="0.19322916666666667" />
