@@ -17,6 +17,7 @@ import androidx.recyclerview.widget.GridLayoutManager
 import com.google.android.material.bottomsheet.BottomSheetBehavior
 import com.google.android.material.bottomsheet.BottomSheetDialog
 import com.google.android.material.bottomsheet.BottomSheetDialogFragment
+import com.utechia.domain.enum.TicketEnum
 import com.utechia.domain.utile.Result
 import com.utechia.tdf.R
 import com.utechia.tdf.databinding.FragmentMessageBinding
@@ -69,7 +70,7 @@ class MessageFragment : BottomSheetDialogFragment() {
 
 
         if (arguments != null)
-            ticketId = requireArguments().getInt("ticketId", 0)
+            ticketId = requireArguments().getInt(TicketEnum.Id.ticket, 0)
 
         binding.recyclerView.apply {
             adapter = uploadOrder
@@ -78,12 +79,12 @@ class MessageFragment : BottomSheetDialogFragment() {
 
         binding.appCompatButton.setOnClickListener {
             ticketViwModel.replyTicket(ticketId, uploadOrder.globalFile,binding.description.text.toString())
-            observer()
         }
 
         binding.uploadLayout0.setOnClickListener {
             showUpload()
         }
+        observer()
     }
 
     private fun calculateNoOfColumns(

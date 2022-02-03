@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="#EDEDF3"
+    android:background="#F4F3F7"
     tools:context=".ticket.TicketDetailsFragment">
 
     <androidx.recyclerview.widget.RecyclerView
@@ -16,41 +16,60 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
-    <androidx.appcompat.widget.AppCompatButton
-        android:id="@+id/btnReply"
+    <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="0dp"
-        android:layout_height="60dp"
-        android:layout_marginStart="15dp"
-        android:layout_marginEnd="15dp"
-        android:layout_marginBottom="20dp"
-        android:background="#3360DD"
-        android:padding="3dp"
-        android:text="Reply"
-        android:textAllCaps="false"
-        android:textColor="@color/white"
-        android:textSize="12sp"
-        android:visibility="gone"
-        app:layout_constraintBottom_toBottomOf="@+id/recyclerView"
-        app:layout_constraintEnd_toEndOf="@id/recyclerView"
-        app:layout_constraintStart_toStartOf="@+id/guideline3" />
-
-    <androidx.appcompat.widget.AppCompatButton
-        android:id="@+id/btnClose"
-        android:layout_width="0dp"
-        android:layout_height="60dp"
-        android:layout_marginStart="15dp"
-        android:layout_marginEnd="15dp"
-        android:layout_marginBottom="20dp"
-        android:background="#FF6464"
-        android:padding="3dp"
-        android:text="Close Ticket"
-        android:textAllCaps="false"
-        android:textColor="@color/white"
-        android:textSize="12sp"
-        android:visibility="gone"
+        android:layout_height="wrap_content"
+        android:background="#F4F3F7"
         app:layout_constraintBottom_toBottomOf="@id/recyclerView"
-        app:layout_constraintEnd_toStartOf="@+id/guideline3"
-        app:layout_constraintStart_toStartOf="@id/recyclerView" />
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="@id/recyclerView">
+
+        <androidx.appcompat.widget.AppCompatButton
+            android:id="@+id/btnReply"
+            android:layout_width="174dp"
+            android:layout_height="63dp"
+            android:layout_marginStart="8dp"
+            android:layout_marginEnd="15dp"
+            android:layout_marginBottom="20dp"
+            android:background="#3360DD"
+            android:padding="3dp"
+            android:text="Reply"
+            android:textAllCaps="false"
+            android:textColor="@color/white"
+            android:textSize="12sp"
+            android:visibility="gone"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="@+id/guideline3"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <androidx.constraintlayout.widget.Guideline
+            android:id="@+id/guideline3"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:orientation="vertical"
+            app:layout_constraintGuide_percent="0.5" />
+
+        <androidx.appcompat.widget.AppCompatButton
+            android:id="@+id/btnClose"
+            android:layout_width="0dp"
+            android:layout_height="60dp"
+            android:layout_marginStart="15dp"
+            android:layout_marginEnd="8dp"
+            android:layout_marginBottom="20dp"
+            android:background="#FF6464"
+            android:padding="3dp"
+            android:text="Close Ticket"
+            android:textAllCaps="false"
+            android:textColor="@color/white"
+            android:textSize="12sp"
+            android:visibility="gone"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toStartOf="@+id/guideline3"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
 
 
     <androidx.cardview.widget.CardView
@@ -82,13 +101,6 @@
             app:lazyloader_thirdDotColor="#3360DD" />
 
     </androidx.cardview.widget.CardView>
-
-    <androidx.constraintlayout.widget.Guideline
-        android:id="@+id/guideline3"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:orientation="vertical"
-        app:layout_constraintGuide_percent="0.5"/>
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>

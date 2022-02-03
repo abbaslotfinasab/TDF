@@ -11,6 +11,7 @@ import android.widget.Toast
 import androidx.fragment.app.DialogFragment
 import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
+import com.utechia.domain.enum.TicketEnum
 import com.utechia.domain.utile.Result
 import com.utechia.tdf.R
 import com.utechia.tdf.databinding.FragmentCloseTicketBinding
@@ -42,7 +43,7 @@ class CloseTicketFragment : DialogFragment() {
         super.onViewCreated(view, savedInstanceState)
 
         if (arguments != null)
-            ticketId = requireArguments().getInt("ticketId", 0)
+            ticketId = requireArguments().getInt(TicketEnum.Id.ticket, 0)
 
         binding.btnKeep.setOnClickListener {
             ticketViewModel.closeTicket(ticketId)

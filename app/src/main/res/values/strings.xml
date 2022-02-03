@@ -16,7 +16,7 @@
     <string name="cold_drinks">Cold Drinks</string>
     <string name="snacks">Snacks</string>
     <string name="drinks">Drinks</string>
-    <string name="orders">Orders</string>
+
     <string name="favorites">Favorites</string>
     <string name="checkout">CheckOut</string>
     <string name="orderid">OrderID:</string>
@@ -41,10 +41,8 @@
     <string name="order">Orders</string>
     <string name="cart">Cart</string>
     <string name="favorit">Favorites</string>
-    <string name="reservation">Reservation</string>
     <string name="leave">Leave Requests</string>
     <string name="survey">Survey System</string>
-    <string name="calendar">Calendar</string>
     <string name="ticket">Ticket</string>
     <string name="event">Events</string>
     <string name="addTicket">Add Ticket</string>
@@ -60,6 +58,22 @@
     <string name="attended">Attended</string>
     <string name="publicEvent">Public Event</string>
     <string name="entrance_time">Entrance Time</string>
+    <string name="open_tickets">Open tickets</string>
+    <string name="closed_tickets">Closed tickets</string>
+    <string name="create_new_support_ticket">Create new support ticket</string>
+    <string name="title">Title:</string>
+    <string name="ticket_id">Ticket ID:</string>
+    <string name="category">Category:</string>
+    <string name="calendar">Calendar</string>
+    <string name="leave_request">Leave Request</string>
+    <string name="ticket_system">Ticket System</string>
+    <string name="event_system">Event System</string>
+    <string name="survey_system">Survey System</string>
+    <string name="refreshments">Refreshments</string>
+    <string name="reservation">Reservation</string>
+    <string name="profile">Profile</string>
+    <string name="home">Home</string>
+    <string name="orders">Orders</string>
 
 
     <string-array name="month_array">

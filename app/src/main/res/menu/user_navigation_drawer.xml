@@ -2,33 +2,33 @@
 <menu xmlns:android="http://schemas.android.com/apk/res/android">
 
 
-
         <item
             android:id="@+id/surveySystemFragment"
             android:icon="@drawable/ic_layer"
-            android:title="Survey System"/>
+            android:title="@string/survey_system"/>
 
 
         <item
             android:id="@+id/eventSystemFragment"
             android:icon="@drawable/ic_people"
-            android:title="Event System" />
+            android:title="@string/event_system" />
 
 
         <item
             android:id="@+id/ticketSystemFragment"
             android:icon="@drawable/ic_document_normal"
-            android:title="Ticket System" />
+            android:title="@string/ticket_system" />
 
 
         <item
             android:id="@+id/permissionFragment"
             android:icon="@drawable/ic_permission"
-            android:title="Leave Request" />
+            android:title="@string/leave_request" />
 
         <item
             android:id="@+id/calendarFragment"
             android:icon="@drawable/ic_stickynote"
-            android:title="Calendar" />
+            android:visible="false"
+            android:title="@string/calendar" />
 
 </menu>

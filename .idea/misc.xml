@@ -279,9 +279,11 @@
         <entry key="..\:/Users/Dr Computer/AndroidStudioProjects/tdf_oms_android_application_kotlin_v1/app/src/main/res/menu/bottom_nav_menu.xml" value="0.20416666666666666" />
         <entry key="..\:/Users/Dr Computer/AndroidStudioProjects/tdf_oms_android_application_kotlin_v1/app/src/main/res/menu/navigation_drawer.xml" value="0.20416666666666666" />
         <entry key="app/src/main/res/drawable-v24/ic_launcher_foreground.xml" value="0.1" />
+        <entry key="app/src/main/res/drawable/admin_back.xml" value="0.1717948717948718" />
         <entry key="app/src/main/res/drawable/back_medium.xml" value="0.1" />
         <entry key="app/src/main/res/drawable/border.xml" value="0.1717948717948718" />
         <entry key="app/src/main/res/drawable/cancel_btn.xml" value="0.1" />
+        <entry key="app/src/main/res/drawable/client_back.xml" value="0.1717948717948718" />
         <entry key="app/src/main/res/drawable/gradiant.xml" value="0.13796296296296295" />
         <entry key="app/src/main/res/drawable/ic_clock.xml" value="0.1717948717948718" />
         <entry key="app/src/main/res/drawable/ic_event_back.xml" value="0.209375" />
@@ -348,14 +350,15 @@
         <entry key="app/src/main/res/layout/fragment_tea_boy_orders.xml" value="0.19322916666666667" />
         <entry key="app/src/main/res/layout/fragment_tea_boy_profile.xml" value="0.11005434782608696" />
         <entry key="app/src/main/res/layout/fragment_tea_boy_statistics.xml" value="0.19322916666666667" />
+        <entry key="app/src/main/res/layout/fragment_ticket_child.xml" value="0.1" />
         <entry key="app/src/main/res/layout/fragment_ticket_confirmation.xml" value="0.25" />
-        <entry key="app/src/main/res/layout/fragment_ticket_details.xml" value="0.15" />
+        <entry key="app/src/main/res/layout/fragment_ticket_details.xml" value="0.25" />
         <entry key="app/src/main/res/layout/fragment_ticket_system.xml" value="0.25" />
         <entry key="app/src/main/res/layout/fragment_upload.xml" value="0.19322916666666667" />
         <entry key="app/src/main/res/layout/header_navigation_drawer.xml" value="0.1" />
         <entry key="app/src/main/res/layout/item_chat_admin.xml" value="0.25" />
         <entry key="app/src/main/res/layout/item_chat_client.xml" value="0.22" />
-        <entry key="app/src/main/res/layout/item_chat_details.xml" value="0.75" />
+        <entry key="app/src/main/res/layout/item_chat_details.xml" value="0.67" />
         <entry key="app/src/main/res/layout/item_chat_user.xml" value="0.1" />
         <entry key="app/src/main/res/layout/item_event.xml" value="0.22" />
         <entry key="app/src/main/res/layout/item_guess_event.xml" value="0.25" />

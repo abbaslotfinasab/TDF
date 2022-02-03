@@ -5,12 +5,12 @@
     <item
         android:id="@+id/userhomeFragment"
         android:icon="@drawable/ic_home"
-        android:title="Home"/>
+        android:title="@string/home"/>
 
     <item
         android:id="@+id/refreshmentFragment"
         android:icon="@drawable/ic_refreshment"
-        android:title="Refreshments"/>
+        android:title="@string/refreshments"/>
 
     <item
         android:id="@+id/navigation_qrcode"
@@ -21,11 +21,11 @@
     <item
         android:id="@+id/reservationFragment"
         android:icon="@drawable/ic_reservation"
-        android:title="Reservation"/>
+        android:title="@string/reservation"/>
 
     <item
         android:id="@+id/userprofileFragment"
         android:icon="@drawable/ic_profile"
-        android:title="Profile"/>
+        android:title="@string/profile"/>
 
 </menu>

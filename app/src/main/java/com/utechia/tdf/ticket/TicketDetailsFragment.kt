@@ -2,7 +2,6 @@ package com.utechia.tdf.ticket
 
 import android.app.Activity
 import android.content.Intent
-import android.graphics.Color
 import android.net.Uri
 import android.os.Bundle
 import android.view.LayoutInflater
@@ -23,6 +22,7 @@ import com.google.firebase.database.ktx.database
 import com.google.firebase.database.ktx.getValue
 import com.google.firebase.ktx.Firebase
 import com.utechia.data.entity.Chat
+import com.utechia.domain.enum.TicketEnum
 import com.utechia.domain.utile.Result
 import com.utechia.tdf.databinding.FragmentTicketDetailsBinding
 import dagger.hilt.android.AndroidEntryPoint
@@ -61,7 +61,7 @@ class TicketDetailsFragment : Fragment() {
         binding.btnClose.bringToFront()
 
         if (arguments != null) {
-            mId = requireArguments().getInt("ticketId",0)
+            mId = requireArguments().getInt(TicketEnum.Id.ticket,0)
         }
 
         ticketViewModel.getSingleTicket(mId)
@@ -72,17 +72,15 @@ class TicketDetailsFragment : Fragment() {
         }
 
         binding.btnClose.setOnClickListener {
-            val bundle = bundleOf("ticketId" to mId)
-            findNavController().clearBackStack(R.id.ticketDetailsFragment)
+            val bundle = bundleOf(TicketEnum.Id.ticket to mId)
             findNavController().navigate(R.id.action_ticketDetailsFragment_to_closeTicketFragment,bundle)
-
         }
     }
 
     private fun showDialog() {
         fragment.uploadOrder.localFile.clear()
         fragment.uploadOrder.globalFile.clear()
-        val bundle = bundleOf("ticketId" to mId)
+        val bundle = bundleOf(TicketEnum.Id.ticket to mId)
         fragment.arguments = bundle
         if (!fragment.isAdded)
         fragment.show(childFragmentManager,"Tag")
@@ -127,7 +125,7 @@ class TicketDetailsFragment : Fragment() {
     }
 
     fun rating(mId:Int){
-        val bundle = bundleOf("ticketId" to mId)
+        val bundle = bundleOf(TicketEnum.Id.ticket to mId)
         findNavController().clearBackStack(R.id.ticketDetailsFragment)
         findNavController()
             .navigate(R.id.action_ticketDetailsFragment_to_ticketRatingFragment,bundle)
@@ -222,7 +220,7 @@ class TicketDetailsFragment : Fragment() {
 
                     }
 
-                    if (it0.data.status == "Close"){
+                    if (it0.data.status == TicketEnum.Close.ticket){
                         binding.btnReply.visibility = View.VISIBLE
                         binding.btnClose.visibility = View.VISIBLE
                         binding.btnClose.isEnabled = false
@@ -235,8 +233,8 @@ class TicketDetailsFragment : Fragment() {
                         binding.btnClose.visibility = View.VISIBLE
                         binding.btnClose.isEnabled = true
                         binding.btnReply.isEnabled = true
-                        binding.btnClose.setBackgroundColor(Color.parseColor("#FF6464"))
-                        binding.btnReply.setBackgroundColor(Color.parseColor("#3360DD"))
+                        binding.btnClose.setBackgroundColor(ContextCompat.getColor(requireActivity(),R.color.cancel))
+                        binding.btnReply.setBackgroundColor(ContextCompat.getColor(requireActivity(),R.color.confirm))
 
                     }
                 }

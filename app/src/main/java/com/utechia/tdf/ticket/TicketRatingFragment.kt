@@ -11,6 +11,7 @@ import android.widget.RatingBar
 import android.widget.Toast
 import androidx.fragment.app.DialogFragment
 import androidx.fragment.app.viewModels
+import com.utechia.domain.enum.TicketEnum
 import com.utechia.domain.utile.Result
 import com.utechia.tdf.databinding.FragmentRatingTicketBinding
 import dagger.hilt.android.AndroidEntryPoint
@@ -43,7 +44,7 @@ class TicketRatingFragment : DialogFragment() {
         super.onViewCreated(view, savedInstanceState)
 
         if (arguments != null) {
-            ticket = requireArguments().getInt("ticketId", 0)
+            ticket = requireArguments().getInt(TicketEnum.Id.ticket, 0)
 
         }
 

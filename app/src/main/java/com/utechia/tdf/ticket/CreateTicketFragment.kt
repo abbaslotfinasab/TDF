@@ -17,6 +17,7 @@ import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.GridLayoutManager
 import com.github.dhaval2404.imagepicker.ImagePicker
+import com.utechia.domain.enum.TicketEnum
 import com.utechia.domain.model.CategoryModel
 import com.utechia.domain.utile.Result
 import com.utechia.tdf.R
@@ -36,7 +37,7 @@ class CreateTicketFragment : Fragment() {
     private val categoryList:ArrayList<CategoryModel> = arrayListOf()
     private var selectedFloor = "Floor11"
     private var priority = "Low"
-    var category = 1
+    var category = -1
 
 
 
@@ -57,13 +58,13 @@ class CreateTicketFragment : Fragment() {
 
         binding.segmented.apply{
             when(priority){
-                "Low"->{
+                TicketEnum.Low.ticket->{
                     this.check(R.id.lowItem)
                 }
-                "Medium"->{
+                TicketEnum.Medium.ticket->{
                     this.check(R.id.mediumItem)
                 }
-                "High"->{
+                TicketEnum.High.ticket->{
                     this.check(R.id.highItem)
                 }
             }
@@ -92,9 +93,9 @@ class CreateTicketFragment : Fragment() {
         binding.segmented.onSegmentChecked {
 
             when(this.checkedRadioButtonId){
-                R.id.highItem -> priority = "High"
-                R.id.mediumItem -> priority = "Normal"
-                R.id.lowItem -> priority = "Low"
+                R.id.highItem -> priority = TicketEnum.High.ticket
+                R.id.mediumItem -> priority = TicketEnum.Normal.ticket
+                R.id.lowItem -> priority = TicketEnum.Low.ticket
             }
         }
 
@@ -115,6 +116,11 @@ class CreateTicketFragment : Fragment() {
 
                 binding.title.text.isNullOrEmpty() -> {
                     Toast.makeText(context,"Title is required",Toast.LENGTH_SHORT).show()
+                }
+
+                category ==-1 -> {
+                    Toast.makeText(context,"category is required",Toast.LENGTH_SHORT).show()
+
                 }
 
                 binding.description.text.isNullOrEmpty() -> {

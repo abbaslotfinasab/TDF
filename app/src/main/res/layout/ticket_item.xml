@@ -14,7 +14,7 @@
         android:layout_height="wrap_content"
         android:layout_marginStart="15dp"
         android:layout_marginTop="15dp"
-        android:text="Title:"
+        android:text="@string/title"
         android:textColor="#9F9F9F"
         android:textSize="13sp"
         app:layout_constraintStart_toStartOf="parent"
@@ -23,13 +23,13 @@
 
     <TextView
         android:id="@+id/title"
-        android:layout_width="wrap_content"
+        android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:layout_marginStart="15dp"
         android:textColor="@color/black"
         android:textSize="16sp"
         android:textStyle="bold"
-        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="@+id/title0"
         app:layout_constraintTop_toBottomOf="@+id/title0" />
 
     <TextView
@@ -38,7 +38,7 @@
         android:layout_height="wrap_content"
         android:layout_marginStart="15dp"
         android:layout_marginTop="20dp"
-        android:text="Ticket ID:"
+        android:text="@string/ticket_id"
         android:textColor="#9F9F9F"
         android:textSize="14sp"
         app:layout_constraintStart_toStartOf="parent"
@@ -46,11 +46,13 @@
 
     <TextView
         android:id="@+id/subTitle"
-        android:layout_width="wrap_content"
+        android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginStart="15dp"
+        android:layout_marginEnd="5dp"
         android:textColor="@color/black"
         android:textSize="14sp"
+        app:layout_constraintEnd_toStartOf="@+id/category"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/subtitle0" />
 
@@ -58,7 +60,7 @@
         android:id="@+id/category0"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Category:"
+        android:text="@string/category"
         android:textColor="#9F9F9F"
         android:textSize="14sp"
         app:layout_constraintBottom_toBottomOf="@+id/subtitle0"
@@ -68,10 +70,12 @@
 
     <TextView
         android:id="@+id/category"
-        android:layout_width="wrap_content"
+        android:layout_width="0dp"
         android:layout_height="wrap_content"
+        android:layout_marginEnd="5dp"
         android:textColor="@color/black"
         android:textSize="16sp"
+        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="@+id/category0"
         app:layout_constraintTop_toBottomOf="@+id/category0" />
 
@@ -93,8 +97,8 @@
         android:layout_height="wrap_content"
         android:layout_marginStart="15dp"
         android:gravity="center"
-        android:paddingEnd="20dp"
-        android:paddingStart="20dp"
+        android:paddingEnd="30dp"
+        android:paddingStart="30dp"
         android:textColor="#59B48D"
         android:padding="5dp"
         android:textSize="12sp"
