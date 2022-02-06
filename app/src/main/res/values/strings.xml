@@ -74,6 +74,13 @@
     <string name="profile">Profile</string>
     <string name="home">Home</string>
     <string name="orders">Orders</string>
+    <string name="on_going">On going</string>
+    <string name="completed">Completed</string>
+    <string name="rejected">Rejected</string>
+    <string name="accepted">Accepted</string>
+    <string name="leave_request_details">Leave Request Details</string>
+    <string name="from">From:</string>
+    <string name="to">To:</string>
 
 
     <string-array name="month_array">

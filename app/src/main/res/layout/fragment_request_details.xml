@@ -1,12 +1,25 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout
+<androidx.coordinatorlayout.widget.CoordinatorLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools"
-    android:layout_width="345dp"
-    android:layout_height="372dp"
-    android:background="@color/white"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    tools:context=".permission.RequestDetailsFragment">
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="340dp"
+    android:layout_height="400dp"
+    android:background="@color/white"
+    tools:context="permission.RequestDetailsFragment">
+
+    <FrameLayout
+        android:layout_width="345dp"
+        android:layout_height="400dp"
+        android:background="@color/white"
+        >
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:background="@color/white"
+            android:gravity="center_horizontal">
+
 
     <ImageView
         android:id="@+id/exit"
@@ -27,7 +40,7 @@
         android:layout_marginTop="28dp"
         android:layout_marginEnd="80dp"
         android:gravity="center"
-        android:text="Leave Request Details"
+        android:text="@string/leave_request_details"
         android:textColor="@color/black"
         android:textSize="18sp"
         app:layout_constraintEnd_toEndOf="parent"
@@ -46,52 +59,79 @@
         app:layout_constraintStart_toStartOf="@+id/textview1"
         app:layout_constraintTop_toBottomOf="@+id/textview1" />
 
-    <TextView
-        android:id="@+id/from"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="15dp"
-        android:layout_marginTop="10dp"
-        android:text="From:"
-        android:textColor="#828282"
-        android:textSize="11sp"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/title" />
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:id="@+id/dateLayout"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="15dp"
+                android:layout_marginTop="10dp"
+                android:layout_marginEnd="15dp"
+                android:background="#EDEDED"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/title">
 
-    <TextView
-        android:id="@+id/startDate"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="2dp"
-        android:textColor="@color/black"
-        android:textSize="11sp"
-        app:layout_constraintBottom_toBottomOf="@+id/from"
-        app:layout_constraintStart_toEndOf="@+id/from"
-        app:layout_constraintTop_toTopOf="@+id/from" />
+                <TextView
+                    android:id="@+id/from"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="10dp"
+                    android:layout_marginTop="10dp"
+                    android:layout_marginBottom="10dp"
+                    android:text="@string/from"
+                    android:textColor="#828282"
+                    android:textSize="11sp"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
 
-    <TextView
-        android:id="@+id/to"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginEnd="2dp"
-        android:text="To:"
-        android:textColor="#828282"
-        android:textSize="11sp"
-        app:layout_constraintBottom_toBottomOf="@+id/endDate"
-        app:layout_constraintEnd_toStartOf="@id/endDate"
-        app:layout_constraintTop_toTopOf="@+id/endDate" />
+                <TextView
+                    android:id="@+id/startDate"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="2dp"
+                    android:textColor="@color/black"
+                    android:textSize="11sp"
+                    app:layout_constraintBottom_toBottomOf="@+id/from"
+                    app:layout_constraintEnd_toStartOf="@+id/guideline4"
+                    app:layout_constraintStart_toEndOf="@+id/from"
+                    app:layout_constraintTop_toTopOf="@+id/from" />
 
-    <TextView
-        android:id="@+id/endDate"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="10dp"
-        android:layout_marginEnd="15dp"
-        android:gravity="center"
-        android:textColor="@color/black"
-        android:textSize="11sp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/title" />
+                <TextView
+                    android:id="@+id/to"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="5dp"
+                    android:layout_marginTop="10dp"
+                    android:layout_marginBottom="10dp"
+                    android:text="@string/to"
+                    android:textColor="#828282"
+                    android:textSize="11sp"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintStart_toStartOf="@+id/guideline4"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+                <TextView
+                    android:id="@+id/endDate"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="2dp"
+                    android:gravity="center"
+                    android:textColor="@color/black"
+                    android:textSize="11sp"
+                    android:paddingEnd="5dp"
+                    app:layout_constraintBottom_toBottomOf="@+id/to"
+                    app:layout_constraintStart_toEndOf="@+id/to"
+                    app:layout_constraintTop_toTopOf="@+id/to" />
+
+                <androidx.constraintlayout.widget.Guideline
+                    android:id="@+id/guideline4"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical"
+                    app:layout_constraintGuide_percent="0.5" />
+
+            </androidx.constraintlayout.widget.ConstraintLayout>
 
 
     <TextView
@@ -108,7 +148,7 @@
         app:layout_constraintBottom_toTopOf="@+id/btnCancel"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/from" />
+        app:layout_constraintTop_toBottomOf="@+id/dateLayout" />
 
 
     <androidx.appcompat.widget.AppCompatButton
@@ -160,5 +200,6 @@
 
     </androidx.cardview.widget.CardView>
 
-</androidx.constraintlayout.widget.ConstraintLayout>
-
+        </androidx.constraintlayout.widget.ConstraintLayout>
+    </FrameLayout>
+</androidx.coordinatorlayout.widget.CoordinatorLayout>

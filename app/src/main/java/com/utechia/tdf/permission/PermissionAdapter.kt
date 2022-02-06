@@ -9,15 +9,14 @@ import androidx.core.content.ContextCompat
 import androidx.core.os.bundleOf
 import androidx.navigation.findNavController
 import androidx.recyclerview.widget.RecyclerView
+import com.utechia.domain.enum.PermissionEnum
 import com.utechia.domain.model.PermissionModel
 import com.utechia.tdf.R
-import java.text.SimpleDateFormat
 import java.time.OffsetDateTime
 import java.time.ZoneId
 import java.time.format.DateTimeFormatter
-import java.util.*
 
-class PermissionAdapter(private val permissionFragment: PermissionFragment): RecyclerView.Adapter<RecyclerView.ViewHolder>() {
+class PermissionAdapter(private val permissionFragment: PermissionChildFragment): RecyclerView.Adapter<RecyclerView.ViewHolder>() {
 
     var permission: MutableList<PermissionModel> = mutableListOf()
     private var startTimeZone = ""
@@ -74,74 +73,68 @@ class PermissionAdapter(private val permissionFragment: PermissionFragment): Rec
 
             when (permission[position].status){
 
-                "waiting" -> {
+                PermissionEnum.Wait.permission -> {
                     status.apply {
                         visibility = View.VISIBLE
-                        text = "Waiting"
+                        text = itemView.resources.getText(R.string.wait)
                         setBackgroundColor(ContextCompat.getColor(itemView.context, R.color.waiting))
                     }
                     cancel.visibility = View.VISIBLE
 
 
                 }
-                "accepted" ->{
+                PermissionEnum.Accepted.permission ->{
                     status.apply {
                         visibility = View.VISIBLE
-                        text = "Accepted"
+                        text = itemView.resources.getText(R.string.accepted)
                         setBackgroundColor(ContextCompat.getColor(itemView.context,R.color.accepted ))
                     }
                     cancel.visibility = View.VISIBLE
 
 
                 }
-                "expired" ->{
+                PermissionEnum.Expired.permission ->{
                     cancel.visibility = View.GONE
                     status.visibility = View.GONE
                 }
 
-                "rejected" ->{
+                PermissionEnum.Rejected.permission ->{
                     cancel.visibility = View.GONE
                     status.apply {
                         visibility = View.VISIBLE
-                        text = "Rejected"
+                        text = itemView.resources.getText(R.string.rejected)
                         setBackgroundColor(ContextCompat.getColor(itemView.context, R.color.waiting))
                     }
 
                 }
 
-                "cancelled" ->{
+                PermissionEnum.Cancelled.permission ->{
                     cancel.visibility = View.GONE
                     status.apply {
                         visibility = View.VISIBLE
-                        text = "Cancelled"
+                        text = itemView.resources.getText(R.string.cancelled)
                         setBackgroundColor(ContextCompat.getColor(itemView.context,R.color.cancel ))
                     }
-
-
                 }
-
             }
 
             cancel.setOnClickListener {
-                val bundle = bundleOf("permissionId" to permission[position].id)
+                val bundle = bundleOf(PermissionEnum.ID.permission to permission[position].id)
                 itemView.findNavController().navigate(R.id.action_permissionFragment_to_cancelRequestFragment,bundle)
                 permissionFragment.onPause()
             }
 
             details.setOnClickListener {
-                val bundle = bundleOf("permissionId" to permission[position].id)
+                val bundle = bundleOf("title" to  permission[position].type , "description" to  permission[position].description , "startTime" to  permission[position].datestarts , "endTime" to  permission[position].dateends)
                 itemView.findNavController().navigate(R.id.action_permissionFragment_to_requestDetailsFragment,bundle)
             }
 
             layout.setOnClickListener {
-                val bundle = bundleOf("permissionId" to permission[position].id)
+                val bundle = bundleOf("title" to  permission[position].type , "description" to  permission[position].description , "startTime" to  permission[position].datestarts , "endTime" to  permission[position].dateends)
                 itemView.findNavController().navigate(R.id.action_permissionFragment_to_requestDetailsFragment,bundle)
             }
-
         }
-
     }
-
 }
 
 

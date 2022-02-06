@@ -49,7 +49,6 @@ class EventSystemChildFragment(val event:String) : Fragment() {
 
         observer()
 
-
     }
 
     private fun observer() {

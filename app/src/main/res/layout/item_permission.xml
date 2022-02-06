@@ -57,14 +57,16 @@
 
     <TextView
         android:id="@+id/numberText"
-        android:layout_width="32dp"
-        android:layout_height="32dp"
+        android:layout_width="35dp"
+        android:layout_height="35dp"
         android:layout_marginStart="15dp"
         android:background="@drawable/ic_teaboy_back"
         android:gravity="center"
         android:textColor="#787777"
-        android:textSize="12sp"
+        android:textSize="11sp"
+        android:padding="1dp"
         app:layout_constraintBottom_toBottomOf="@+id/title"
+        app:layout_constraintEnd_toStartOf="@+id/btnDetails"
         app:layout_constraintStart_toEndOf="@+id/title"
         app:layout_constraintTop_toTopOf="@+id/title" />
 
@@ -72,12 +74,12 @@
         android:id="@+id/btnDetails"
         android:layout_width="62dp"
         android:layout_height="18dp"
-        android:layout_marginTop="25dp"
+        android:layout_marginTop="15dp"
         android:layout_marginEnd="15dp"
         android:background="@drawable/delivered_btn"
-        android:textAllCaps="false"
         android:gravity="center"
         android:text="Details"
+        android:textAllCaps="false"
         android:textColor="@color/white"
         android:textSize="11sp"
         android:visibility="visible"
@@ -88,31 +90,31 @@
         android:id="@+id/to"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginEnd="2dp"
+        android:layout_marginStart="22dp"
         android:text="To:"
         android:textColor="#828282"
         android:textSize="11sp"
-        app:layout_constraintBottom_toBottomOf="@+id/endDate"
-        app:layout_constraintEnd_toStartOf="@id/endDate"
-        app:layout_constraintTop_toTopOf="@+id/endDate" />
+        app:layout_constraintBottom_toBottomOf="@+id/startDate"
+        app:layout_constraintStart_toEndOf="@+id/startDate"
+        app:layout_constraintTop_toTopOf="@+id/startDate" />
 
     <TextView
         android:id="@+id/endDate"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginEnd="15dp"
+        android:layout_marginStart="2dp"
         android:gravity="center"
         android:textColor="@color/black"
         android:textSize="11sp"
-        app:layout_constraintTop_toTopOf="@+id/from"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintBottom_toBottomOf="@+id/from" />
+        app:layout_constraintBottom_toBottomOf="@+id/to"
+        app:layout_constraintStart_toEndOf="@+id/to"
+        app:layout_constraintTop_toTopOf="@+id/to" />
 
 
     <androidx.appcompat.widget.AppCompatButton
         android:id="@+id/btnCancel"
-        android:layout_width="62dp"
-        android:layout_height="18dp"
+        android:layout_width="96dp"
+        android:layout_height="28dp"
         android:layout_marginEnd="15dp"
         android:layout_marginBottom="20dp"
         android:background="@drawable/cancel_btn"

@@ -4,163 +4,140 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.Toast
 import androidx.fragment.app.Fragment
-import androidx.fragment.app.viewModels
-import androidx.navigation.fragment.findNavController
-import androidx.recyclerview.widget.LinearLayoutManager
 import com.google.android.material.tabs.TabLayout
-import com.utechia.domain.utile.Result
+import com.google.android.material.tabs.TabLayoutMediator
+import com.utechia.domain.enum.PermissionEnum
 import com.utechia.tdf.R
 import com.utechia.tdf.databinding.FragmentPermissionBinding
-import com.utechia.tdf.order.user.ItemDecorationOrder
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
 class PermissionFragment : Fragment() {
 
     private lateinit var binding:FragmentPermissionBinding
-    private val permissionViewModel:PermissionViewModel by viewModels()
-    private val permissionAdapter:PermissionAdapter = PermissionAdapter(this)
+    private lateinit var permissionViewPagerAdapter:PermissionViewPagerAdapter
+    private var type = ""
+
+
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
         binding = FragmentPermissionBinding.inflate(inflater, container, false)
-
         return binding.root
     }
 
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+        permissionViewPagerAdapter = PermissionViewPagerAdapter(childFragmentManager, lifecycle)
 
-        permissionViewModel.getPermission("waiting")
+        binding.pager.adapter=permissionViewPagerAdapter
 
-
-        binding.recyclerView.apply {
-            adapter = permissionAdapter
-            layoutManager = LinearLayoutManager(context,LinearLayoutManager.VERTICAL,false)
-            addItemDecoration(ItemDecorationOrder())
+        if (arguments != null) {
+            type = requireArguments().getString(PermissionEnum.Type.permission, "")
         }
 
-        binding.tabLayout.addOnTabSelectedListener(object : TabLayout.OnTabSelectedListener{
+        TabLayoutMediator(binding.tabLayout, binding.pager) { tab, position ->
 
-            override fun onTabSelected(tab: TabLayout.Tab?) {
+            when (position) {
 
-                when(tab?.position){
-
-                    0 -> {
-                        permissionViewModel.getPermission("waiting")
-                        observer()
-
-                    }
-                    1 -> {
-                        permissionViewModel.getPermission("expired")
-                        observer()
-                    }
-                    2 -> {
-                        permissionViewModel.getPermission("cancelled")
-                        observer()
-                    }
+                0 -> {
+                    tab.text = getText(R.string.on_going)
                 }
 
+                1 -> {
+                    tab.text = getText(R.string.completed)
+                }
+
+                2 -> {
+                    tab.text = getText(R.string.rejected)
+                }
+            }
+
+            when (type) {
+
+                PermissionEnum.Wait.permission -> {
+
+                    binding.pager.postDelayed({
+                        binding.pager.setCurrentItem(0, true)
+                        binding.tabLayout.selectTab(tab.parent?.getTabAt(1))
+
+                    }, 200)
+
+                }
+                PermissionEnum.Expired.permission -> {
+
+                    binding.pager.postDelayed({
+                        binding.pager.setCurrentItem(1, true)
+                        binding.tabLayout.selectTab(tab.parent?.getTabAt(0))
+
+                    }, 200)
+                }
+
+                PermissionEnum.Cancelled.permission -> {
+
+                    binding.pager.postDelayed({
+                        binding.pager.setCurrentItem(2, true)
+                        binding.tabLayout.selectTab(tab.parent?.getTabAt(2))
+
+                    }, 200)
+                }
+            }
+        }.attach()
+
+
+
+        binding.tabLayout.addOnTabSelectedListener(object : TabLayout.OnTabSelectedListener {
+            override fun onTabSelected(tab: TabLayout.Tab?) {
+
+                when (tab?.position) {
+
+                    0 -> {
+                        binding.pager.currentItem = tab.position
+                    }
+                    1 -> {
+                        binding.pager.currentItem = tab.position
+                    }
+                    2 -> {
+                        binding.pager.currentItem = tab.position
+                    }
+                }
             }
 
             override fun onTabUnselected(tab: TabLayout.Tab?) {
 
-                /*    when(tab?.position){
+                /*    when (tab?.position) {
 
-                    0 -> {
-                        permissionViewModel.getPermission("pending")
-                        observer()
-
-                    }
-                    1 -> {
-                        permissionViewModel.getPermission("delivered")
-                        observer()
-                    }
-                    2 -> {
-                        permissionViewModel.getPermission("cancelled")
-                        observer()
-                    }
-                }*/
+                        0 -> {
+                            binding.pager.currentItem = tab.position
+                        }
+                        1 -> {
+                            binding.pager.currentItem = tab.position
+                        }
+                        2 -> {
+                            binding.pager.currentItem = tab.position
+                        }
+                    }*/
             }
 
             override fun onTabReselected(tab: TabLayout.Tab?) {
 
-                /*     when(tab?.position){
+                /* when (tab?.position) {
 
-                    0 -> {
-                        permissionViewModel.getPermission("pending")
-                        observer()
-
-                    }
-                    1 -> {
-                        permissionViewModel.getPermission("delivered")
-                        observer()
-                    }
-                    2 -> {
-                        permissionViewModel.getPermission("cancelled")
-                        observer()
-                    }
-                }*/
+                     0 -> {
+                         binding.pager.currentItem = tab.position
+                     }
+                     1 -> {
+                         binding.pager.currentItem = tab.position
+                     }
+                     2 -> {
+                         binding.pager.currentItem = tab.position
+                     }
+                 }*/
             }
-
         })
-
-
-        binding.more.setOnClickListener {
-            findNavController().navigate(R.id.action_permissionFragment_to_calendarRequestFragment)
-        }
-
-        binding.plus.setOnClickListener {
-            findNavController().navigate(R.id.action_permissionFragment_to_calendarRequestFragment)
-        }
-
-        observer()
-
-    }
-
-    fun observer() {
-        permissionViewModel.permissionModel.observe(viewLifecycleOwner){
-
-            when (it) {
-                is Result.Success -> {
-                    binding.prg.visibility = View.GONE
-
-                    if (it.data.size!=0){
-                        binding.recyclerView.visibility = View.VISIBLE
-                        binding.createLayout.visibility = View.GONE
-                        binding.more.visibility = View.VISIBLE
-                        permissionAdapter.addData(it.data)
-
-                    }
-                    else{
-                        binding.recyclerView.visibility = View.GONE
-                        binding.createLayout.visibility = View.VISIBLE
-                        binding.more.visibility = View.GONE
-                    }
-
-                }
-
-                is Result.Loading -> {
-                    binding.prg.visibility = View.VISIBLE
-                    binding.recyclerView.visibility = View.GONE
-                    binding.createLayout.visibility = View.GONE
-                    binding.more.visibility = View.GONE
-
-                }
-
-                is Result.Error -> {
-                    binding.prg.visibility = View.GONE
-                    binding.recyclerView.visibility = View.GONE
-                    binding.createLayout.visibility = View.VISIBLE
-                    binding.more.visibility = View.GONE
-                    Toast.makeText(context, it.message, Toast.LENGTH_SHORT).show()
-                }
-            }
-        }
     }
 }

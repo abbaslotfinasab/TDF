@@ -336,12 +336,14 @@
         <entry key="app/src/main/res/layout/fragment_order_details.xml" value="0.19322916666666667" />
         <entry key="app/src/main/res/layout/fragment_order_result.xml" value="0.18" />
         <entry key="app/src/main/res/layout/fragment_pending.xml" value="0.1" />
+        <entry key="app/src/main/res/layout/fragment_permission.xml" value="0.15854700854700854" />
+        <entry key="app/src/main/res/layout/fragment_permission_child.xml" value="0.15854700854700854" />
         <entry key="app/src/main/res/layout/fragment_profile.xml" value="0.11607142857142858" />
         <entry key="app/src/main/res/layout/fragment_qr_code.xml" value="0.19322916666666667" />
         <entry key="app/src/main/res/layout/fragment_rate_confirmation.xml" value="0.1" />
         <entry key="app/src/main/res/layout/fragment_rating_ticket.xml" value="0.22" />
         <entry key="app/src/main/res/layout/fragment_refreshment.xml" value="0.25" />
-        <entry key="app/src/main/res/layout/fragment_request_details.xml" value="0.33" />
+        <entry key="app/src/main/res/layout/fragment_request_details.xml" value="0.5033921302578019" />
         <entry key="app/src/main/res/layout/fragment_reservation_details.xml" value="0.19322916666666667" />
         <entry key="app/src/main/res/layout/fragment_survey_system.xml" value="0.1" />
         <entry key="app/src/main/res/layout/fragment_tea_boy_home.xml" value="0.23660714285714285" />
@@ -366,7 +368,7 @@
         <entry key="app/src/main/res/layout/item_notification.xml" value="0.18" />
         <entry key="app/src/main/res/layout/item_order_notification.xml" value="0.2" />
         <entry key="app/src/main/res/layout/item_order_teaboy_delivered.xml" value="0.5" />
-        <entry key="app/src/main/res/layout/item_permission.xml" value="0.19322916666666667" />
+        <entry key="app/src/main/res/layout/item_permission.xml" value="0.33" />
         <entry key="app/src/main/res/layout/item_push_notification.xml" value="0.25" />
         <entry key="app/src/main/res/layout/item_survey.xml" value="0.22" />
         <entry key="app/src/main/res/layout/item_ticket_admin.xml" value="0.1" />
