@@ -11,6 +11,7 @@ import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
+import com.utechia.domain.enum.SurveyEnum
 import com.utechia.domain.model.SurveyModel
 import com.utechia.domain.utile.Result
 import com.utechia.tdf.R
@@ -39,9 +40,8 @@ class CreateSurveyFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-
         if (arguments != null)
-            surveyId = requireArguments().getInt("surveyId", 0)
+            surveyId = requireArguments().getInt(SurveyEnum.Id.survey, 0)
 
         surveyViewModel.getSurvey(surveyId)
 

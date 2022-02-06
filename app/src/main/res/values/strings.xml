@@ -81,6 +81,13 @@
     <string name="leave_request_details">Leave Request Details</string>
     <string name="from">From:</string>
     <string name="to">To:</string>
+    <string name="evaluated_surveys">Evaluated Surveys</string>
+    <string name="available_surveys">Available Surveys</string>
+    <string name="rating">Rating</string>
+    <string name="multiple">Multiple choice</string>
+    <string name="open">Open</string>
+
+
 
 
     <string-array name="month_array">

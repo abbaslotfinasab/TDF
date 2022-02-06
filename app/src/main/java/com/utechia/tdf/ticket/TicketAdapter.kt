@@ -61,7 +61,7 @@ class TicketAdapter: RecyclerView.Adapter<RecyclerView.ViewHolder>() {
 
             }
 
-            timeZone = OffsetDateTime.parse(ticket[position].dateupdate).atZoneSameInstant(
+            timeZone = OffsetDateTime.parse(ticket[position].dateupdate?:"2010-01-01T12:00:00+0100").atZoneSameInstant(
                 ZoneId.systemDefault()
             ).toLocalDateTime().format(DateTimeFormatter.ofPattern("yyyy.MM.dd-HH:mm"))
             date.text = "$timeZone"
