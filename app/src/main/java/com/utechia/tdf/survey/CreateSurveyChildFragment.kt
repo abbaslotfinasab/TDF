@@ -6,6 +6,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.RadioButton
+import android.widget.Toast
 import androidx.fragment.app.Fragment
 import com.utechia.domain.enum.SurveyEnum
 import com.utechia.domain.model.QuestionModel
@@ -31,13 +32,13 @@ class CreateSurveyChildFragment(val questionModel: QuestionModel, val type: Stri
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
+        binding.questionTitle.text = questionModel.title
+
         when(type){
             SurveyEnum.Rate.survey -> {
                 binding.rating.visibility = View.VISIBLE
                 binding.description.visibility = View.GONE
                 binding.radioGroup.visibility = View.GONE
-
-
             }
 
             SurveyEnum.Multi.survey -> {
