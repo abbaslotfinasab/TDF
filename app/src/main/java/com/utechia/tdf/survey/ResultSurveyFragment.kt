@@ -31,6 +31,5 @@ class ResultSurveyFragment : Fragment() {
         binding.appCompatButton.setOnClickListener {
             findNavController().navigate(R.id.resultSurveyFragment_to_surveySystemFragment)
         }
-
     }
 }

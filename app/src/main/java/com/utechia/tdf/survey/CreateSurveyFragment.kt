@@ -8,6 +8,7 @@ import android.widget.Toast
 import androidx.core.content.ContextCompat
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
+import androidx.navigation.fragment.findNavController
 import androidx.viewpager2.widget.ViewPager2
 import com.utechia.domain.enum.SurveyEnum
 import com.utechia.domain.utile.Result
@@ -204,10 +205,10 @@ class CreateSurveyFragment : Fragment(),View.OnClickListener {
         when (v?.id) {
 
             R.id.btnNext -> {
-                if (binding.pager.currentItem < questionSize) {
+                if (binding.pager.currentItem < questionSize-1) {
                     binding.pager.setCurrentItem(binding.pager.currentItem + 1, true)
                 } else {
-                    // survey result
+                    findNavController().navigate(R.id.createSurveyFragment_to_confirmSurveyFragment)
                 }
 
             }

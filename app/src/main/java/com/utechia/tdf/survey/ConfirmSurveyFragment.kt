@@ -55,7 +55,6 @@ class ConfirmSurveyFragment : DialogFragment() {
         binding.btnKeep.setOnClickListener {
 
             surveyViewModel.postAnswer(jsonArray)
-            observer()
         }
 
         binding.exit.setOnClickListener {
@@ -63,10 +62,12 @@ class ConfirmSurveyFragment : DialogFragment() {
         }
 
         binding.btnCancel.setOnClickListener {
-            findNavController().navigate(R.id.confirmSurveyFragment_to_surveySystemFragment)
             dialog?.dismiss()
 
         }
+
+        observer()
+
     }
 
     private fun observer() {
@@ -91,9 +92,7 @@ class ConfirmSurveyFragment : DialogFragment() {
                 is Result.Error -> {
                     binding.prg.visibility = View.GONE
                     Toast.makeText(context, it.message, Toast.LENGTH_SHORT).show()
-/*
                     findNavController().navigate(R.id.confirmSurveyFragment_to_surveySystemFragment)
-*/
 
                 }
             }
