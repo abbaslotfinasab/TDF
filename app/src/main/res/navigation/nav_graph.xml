@@ -1317,8 +1317,13 @@
         tools:layout="@layout/fragment_permission_child" />
     <fragment
         android:id="@+id/surveyChildFragment"
-        android:name="com.utechia.tdf.SurveyChildFragment"
+        android:name="com.utechia.tdf.survey.SurveyChildFragment"
         android:label="fragment_survey_child"
         tools:layout="@layout/fragment_survey_child" />
+    <fragment
+        android:id="@+id/createSurveyChildFragment"
+        android:name="com.utechia.tdf.survey.CreateSurveyChildFragment"
+        android:label="fragment_create_survey_child"
+        tools:layout="@layout/fragment_create_survey_child" />
 
 </navigation>

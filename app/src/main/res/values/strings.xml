@@ -25,6 +25,7 @@
     <string name="evaluate">Evaluate</string>
     <string name="order_details">Order Details</string>
     <string name="ok">OK</string>
+    <string name="next">Next</string>
     <string name="preparingStatus">Your orders are preparing</string>
     <string name="daliveryStatus">No active orders</string>
     <string name="delivered_norders">Delivered\nOrders</string>

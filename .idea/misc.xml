@@ -316,7 +316,8 @@
         <entry key="app/src/main/res/layout/fragment_create_refreshmen_childt.xml" value="0.1" />
         <entry key="app/src/main/res/layout/fragment_create_refreshment.xml" value="0.1" />
         <entry key="app/src/main/res/layout/fragment_create_reservation.xml" value="0.19322916666666667" />
-        <entry key="app/src/main/res/layout/fragment_create_survey.xml" value="0.1" />
+        <entry key="app/src/main/res/layout/fragment_create_survey.xml" value="0.22" />
+        <entry key="app/src/main/res/layout/fragment_create_survey_child.xml" value="0.1" />
         <entry key="app/src/main/res/layout/fragment_create_ticket.xml" value="0.33" />
         <entry key="app/src/main/res/layout/fragment_delivered.xml" value="0.1" />
         <entry key="app/src/main/res/layout/fragment_event_details.xml" value="0.22" />
@@ -330,7 +331,7 @@
         <entry key="app/src/main/res/layout/fragment_message.xml" value="0.15" />
         <entry key="app/src/main/res/layout/fragment_notification.xml" value="0.10235507246376811" />
         <entry key="app/src/main/res/layout/fragment_notification_delete.xml" value="0.1" />
-        <entry key="app/src/main/res/layout/fragment_notification_details.xml" value="0.1" />
+        <entry key="app/src/main/res/layout/fragment_notification_details.xml" value="0.18" />
         <entry key="app/src/main/res/layout/fragment_notification_rating.xml" value="0.10235507246376811" />
         <entry key="app/src/main/res/layout/fragment_notification_teaboy.xml" value="0.2558139534883721" />
         <entry key="app/src/main/res/layout/fragment_order.xml" value="0.1" />
