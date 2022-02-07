@@ -36,6 +36,7 @@ class CreateSurveyFragment : Fragment(),View.OnClickListener {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+
         if (arguments != null) {
             surveyId = requireArguments().getInt(SurveyEnum.Id.survey, 0)
         }
@@ -125,7 +126,6 @@ class CreateSurveyFragment : Fragment(),View.OnClickListener {
         if (questionSize > 1) {
             binding.btnNext.apply {
                 visibility = View.VISIBLE
-                isEnabled = true
                 text = getText(R.string.next)
                 binding.btnNext.setBackgroundColor(
                     ContextCompat.getColor(
@@ -137,7 +137,6 @@ class CreateSurveyFragment : Fragment(),View.OnClickListener {
         } else {
             binding.btnNext.apply {
                 visibility = View.VISIBLE
-                isEnabled = true
                 text = getText(R.string.evaluate)
                 binding.btnNext.setBackgroundColor(
                     ContextCompat.getColor(
@@ -165,7 +164,6 @@ class CreateSurveyFragment : Fragment(),View.OnClickListener {
 
         binding.btnNext.apply {
             visibility = View.VISIBLE
-            isEnabled = true
             text = getText(R.string.next)
             binding.btnNext.setBackgroundColor(
                 ContextCompat.getColor(
@@ -192,7 +190,6 @@ class CreateSurveyFragment : Fragment(),View.OnClickListener {
 
         binding.btnNext.apply {
             visibility = View.VISIBLE
-            isEnabled = true
             text = getText(R.string.evaluate)
             binding.btnNext.setBackgroundColor(
                 ContextCompat.getColor(
@@ -210,13 +207,13 @@ class CreateSurveyFragment : Fragment(),View.OnClickListener {
                 if (binding.pager.currentItem < questionSize) {
                     binding.pager.setCurrentItem(binding.pager.currentItem + 1, true)
                 } else {
-                    //set survey result
+                    // survey result
                 }
 
             }
 
             R.id.btnPrevious -> {
-                if (binding.pager.currentItem > 1) {
+                if (binding.pager.currentItem > 0) {
                     binding.pager.setCurrentItem(binding.pager.currentItem - 1, true)
                 }
             }
