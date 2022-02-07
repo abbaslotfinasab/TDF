@@ -39,10 +39,6 @@ class UserOrderChildFragment(val order: String) : Fragment() {
 
         }
 
-        binding.appBackButton.setOnClickListener {
-            findNavController().popBackStack()
-        }
-
         binding.recyclerView.apply {
             adapter = userOrderAdapter
             layoutManager = LinearLayoutManager(context,LinearLayoutManager.VERTICAL,false)

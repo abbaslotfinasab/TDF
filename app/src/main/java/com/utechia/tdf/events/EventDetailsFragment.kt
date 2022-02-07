@@ -100,6 +100,38 @@ class EventDetailsFragment : Fragment() {
                     if(it.data.isPublic==true) {
                         binding.appCompatButton.visibility = View.GONE
                         binding.status.visibility = View.VISIBLE
+
+                        if(it.data.userrate == null && it.data.status == EventsEnum.End.event){
+                            binding.appCompatButton.apply {
+                                visibility = View.VISIBLE
+                                text = resources.getText(R.string.evaluate)
+                                setBackgroundColor(
+                                    ContextCompat.getColor(
+                                        context,
+                                        R.color.confirm
+                                    )
+                                )
+                                isEnabled = false
+                            }
+                            bundle = bundleOf(EventsEnum.ID.event to eId)
+                            findNavController().navigate(
+                                R.id.action_eventDetailsFragment_to_eventRateFragment,
+                                bundle
+                            )
+                        }else{
+                            binding.appCompatButton.apply {
+                                visibility = View.VISIBLE
+                                text = resources.getText(R.string.evaluate)
+                                setBackgroundColor(
+                                    ContextCompat.getColor(
+                                        context,
+                                        R.color.disActive
+                                    )
+                                )
+                                isEnabled = false
+                            }
+                        }
+
                     }
                     else {
 

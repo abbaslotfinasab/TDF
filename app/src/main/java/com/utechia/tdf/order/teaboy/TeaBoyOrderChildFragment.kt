@@ -41,9 +41,6 @@ class TeaBoyOrderChildFragment(val order: String) : Fragment() {
 
         }
 
-        binding.appBackButton.setOnClickListener {
-            findNavController().popBackStack()
-        }
 
         binding.recyclerView.apply {
             adapter = orderTeaBoyAdapter

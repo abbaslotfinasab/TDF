@@ -86,8 +86,9 @@
     <string name="rating">Rating</string>
     <string name="multiple">Multiple choice</string>
     <string name="open">Open</string>
-
-
+    <string name="no_orders_found">No Orders Found</string>
+    <string name="type_text">Type text...</string>
+    <string name="satisfaction_survey">Satisfaction Survey</string>
 
 
     <string-array name="month_array">
