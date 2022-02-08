@@ -1,6 +1,5 @@
 package com.utechia.tdf.ticket
 
-import android.graphics.Color
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -9,8 +8,8 @@ import androidx.constraintlayout.widget.ConstraintLayout
 import androidx.core.content.ContextCompat
 import androidx.core.os.bundleOf
 import androidx.navigation.findNavController
-import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.RecyclerView
+import com.utechia.domain.enum.TicketEnum
 import com.utechia.domain.model.TicketModel
 import com.utechia.tdf.R
 import java.time.OffsetDateTime
@@ -25,8 +24,9 @@ class TicketAdapter: RecyclerView.Adapter<RecyclerView.ViewHolder>() {
 
     fun addData(_ticket: MutableList<TicketModel>) {
         ticket.clear()
-        ticket.addAll(_ticket)
         notifyDataSetChanged()
+        ticket.addAll(_ticket)
+        notifyItemRangeChanged(0,_ticket.size)
 
     }
 
@@ -64,7 +64,7 @@ class TicketAdapter: RecyclerView.Adapter<RecyclerView.ViewHolder>() {
             timeZone = OffsetDateTime.parse(ticket[position].dateupdate?:"2010-01-01T12:00:00+0100").atZoneSameInstant(
                 ZoneId.systemDefault()
             ).toLocalDateTime().format(DateTimeFormatter.ofPattern("yyyy.MM.dd-HH:mm"))
-            date.text = "$timeZone"
+            date.text = timeZone
 
             title.text = ticket[position].title
             subTitle.text = ticket[position].id.toString()
@@ -73,21 +73,21 @@ class TicketAdapter: RecyclerView.Adapter<RecyclerView.ViewHolder>() {
 
             when (ticket[position].Priority) {
 
-                "High" -> {
+                TicketEnum.High.ticket -> {
                     priority.apply {
                         visibility = View.VISIBLE
-                        text = "High"
-                        setTextColor(Color.parseColor("#FF6464"))
+                        text = itemView.context.getText(R.string.High)
+                        setTextColor(ContextCompat.getColor(itemView.context,R.color.high))
                         background = ContextCompat.getDrawable(context,R.drawable.back_low)
 
                     }
                 }
 
-                "Low" -> {
+                TicketEnum.Low.ticket -> {
                     priority.apply {
                         visibility = View.VISIBLE
-                        text = "Low"
-                        setTextColor(Color.parseColor("#59B48D"))
+                        text = itemView.context.getText(R.string.Low)
+                        setTextColor(ContextCompat.getColor(itemView.context,R.color.low))
                         background = ContextCompat.getDrawable(context,R.drawable.supporter_back)
                     }
                 }
@@ -96,8 +96,8 @@ class TicketAdapter: RecyclerView.Adapter<RecyclerView.ViewHolder>() {
 
                     priority.apply {
                         visibility = View.VISIBLE
-                        text = "Medium"
-                        setTextColor(Color.parseColor("#F5A62E"))
+                        text = itemView.context.getText(R.string.Medium)
+                        setTextColor(ContextCompat.getColor(itemView.context,R.color.medium))
                         background = ContextCompat.getDrawable(context,R.drawable.back_medium)
 
                     }

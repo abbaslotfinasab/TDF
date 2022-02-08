@@ -16,16 +16,17 @@
     <string name="cold_drinks">Cold Drinks</string>
     <string name="snacks">Snacks</string>
     <string name="drinks">Drinks</string>
-
     <string name="favorites">Favorites</string>
     <string name="checkout">CheckOut</string>
     <string name="orderid">OrderID:</string>
-    <string name="cancel">Cancel</string>
     <string name="cancelled">Cancel</string>
     <string name="evaluate">Evaluate</string>
     <string name="order_details">Order Details</string>
     <string name="ok">OK</string>
     <string name="next">Next</string>
+    <string name="Low">Low</string>
+    <string name="High">High</string>
+    <string name="Medium">Medium</string>
     <string name="preparingStatus">Your orders are preparing</string>
     <string name="daliveryStatus">No active orders</string>
     <string name="delivered_norders">Delivered\nOrders</string>
@@ -88,8 +89,26 @@
     <string name="multiple">Multiple choice</string>
     <string name="open">Open</string>
     <string name="no_orders_found">No Orders Found</string>
-    <string name="type_text">Type text...</string>
+    <string name="type_text">Type text…</string>
     <string name="satisfaction_survey">Satisfaction Survey</string>
+    <string name="empty_cart">Empty Cart</string>
+    <string name="back_to_menu">Back to menu</string>
+    <string name="do_you_want_submit_the_norder">Do you want submit the\norder</string>
+    <string name="no">No</string>
+    <string name="yes">Yes</string>
+    <string name="delete">Delete</string>
+    <string name="are_you_sure_you_want_to_delete_n_this_cart_item">Are you sure you want to delete\n this cart item ?</string>
+    <string name="send_request">Send Request</string>
+    <string name="are_you_sure_you_want_to_send_n_this_request">Are you sure you want to send\n this request ?</string>
+    <string name="cancel">Cancel</string>
+    <string name="send">Send</string>
+    <string name="lorem_ipsum">Lorem Ipsum</string>
+    <string name="are_you_sure_to_submit_survey">Are you sure to submit survey?</string>
+    <string name="type_of_permission">Type of Permission</string>
+    <string name="description">Description</string>
+    <string name="request">Request</string>
+    <string name="back">Back</string>
+    <string name="deactivation">Deactivation</string>
 
 
     <string-array name="month_array">

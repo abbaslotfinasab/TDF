@@ -88,7 +88,7 @@
         android:layout_marginBottom="30dp"
         android:padding="3dp"
         android:background="#FF6464"
-        android:text="Cancel"
+        android:text="@string/cancel"
         android:textAllCaps="false"
         android:textColor="@color/white"
         android:textSize="12sp"
