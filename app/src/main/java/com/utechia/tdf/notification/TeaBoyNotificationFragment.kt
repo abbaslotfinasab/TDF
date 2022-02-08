@@ -12,6 +12,7 @@ import androidx.fragment.app.DialogFragment
 import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
+import com.utechia.domain.enum.OrderEnum
 import com.utechia.domain.utile.Result
 import com.utechia.tdf.R
 import com.utechia.tdf.databinding.FragmentNotificationTeaboyBinding
@@ -52,7 +53,7 @@ class TeaBoyNotificationFragment : DialogFragment() {
         super.onViewCreated(view, savedInstanceState)
 
         if (arguments != null)
-            cartId = requireArguments().getInt("cartId", 0)
+            cartId = requireArguments().getInt(OrderEnum.ID.order, 0)
 
         teaOrderViewModel.singleOrderTeaBoy(cartId)
 
@@ -100,7 +101,7 @@ class TeaBoyNotificationFragment : DialogFragment() {
                     timeZone = OffsetDateTime.parse(it.data[0].updatedAt).atZoneSameInstant(
                         ZoneId.systemDefault()
                     ).toLocalDateTime().format(DateTimeFormatter.ofPattern("yyyy.MM.dd-HH:mm"))
-                    binding.date .text = "$timeZone"
+                    binding.date .text = timeZone
                     orderAdapterTeaBoy.addData(it.data[0].cart?.items!!)
                 }
 

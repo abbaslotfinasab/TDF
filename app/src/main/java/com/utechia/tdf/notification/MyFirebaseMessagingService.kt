@@ -13,6 +13,7 @@ import androidx.core.os.bundleOf
 import androidx.navigation.NavDeepLinkBuilder
 import com.google.firebase.messaging.FirebaseMessagingService
 import com.google.firebase.messaging.RemoteMessage
+import com.utechia.domain.enum.*
 import com.utechia.tdf.R
 import com.utechia.tdf.main.MainActivity
 
@@ -38,13 +39,13 @@ class MyFirebaseMessagingService : FirebaseMessagingService() {
     override fun onMessageReceived(remoteMessage: RemoteMessage) {
         super.onMessageReceived(remoteMessage)
         if(remoteMessage.notification!=null && remoteMessage.data.isNotEmpty())
-        generateNotification(remoteMessage.data["type"]!!,remoteMessage.data["referenceId"]!!.toLong(),remoteMessage.notification?.title!!,remoteMessage.notification?.body!!)
+        generateNotification(remoteMessage.data[NotificationEnum.Type.notification]!!,remoteMessage.data[NotificationEnum.ID.notification]!!.toLong(),remoteMessage.notification?.title!!,remoteMessage.notification?.body!!)
     }
 
     override fun onNewToken(token: String) {
         super.onNewToken(token)
 
-        prefs = getSharedPreferences("tdf", MODE_PRIVATE)
+        prefs = getSharedPreferences(MainEnum.Tdf.main, MODE_PRIVATE)
 
         with(prefs.edit()) {
             putString("fcm",token)
@@ -96,9 +97,9 @@ class MyFirebaseMessagingService : FirebaseMessagingService() {
 
         when(type){
 
-            "Teaboy"->{
+            NotificationEnum.TeaBoy.notification->{
 
-                val bundle = bundleOf("cartId" to referenceId)
+                val bundle = bundleOf(OrderEnum.ID.order to referenceId)
 
                 return NavDeepLinkBuilder(applicationContext)
                     .setGraph(R.navigation.nav_graph)
@@ -110,9 +111,9 @@ class MyFirebaseMessagingService : FirebaseMessagingService() {
 
             }
 
-            "Ticket"->{
+            NotificationEnum.Ticket.notification->{
 
-                val bundle = bundleOf("fid" to referenceId)
+                val bundle = bundleOf(TicketEnum.Id.ticket to referenceId)
 
                 return NavDeepLinkBuilder(applicationContext)
                     .setGraph(R.navigation.nav_graph)
@@ -124,7 +125,7 @@ class MyFirebaseMessagingService : FirebaseMessagingService() {
 
             }
 
-            "Cafeteria"->{
+            NotificationEnum.Cafeteria.notification->{
 
                 return NavDeepLinkBuilder(applicationContext)
                     .setGraph(R.navigation.nav_graph)
@@ -135,12 +136,26 @@ class MyFirebaseMessagingService : FirebaseMessagingService() {
 
             }
 
-            "Permission"->{
+            NotificationEnum.Permission.notification->{
 
                 return NavDeepLinkBuilder(applicationContext)
                     .setGraph(R.navigation.nav_graph)
                     .setComponentName(MainActivity::class.java)
                     .setDestination(R.id.permissionFragment)
+                    .createTaskStackBuilder()
+                    .getPendingIntent(0, PendingIntent.FLAG_ONE_SHOT)
+
+            }
+
+            NotificationEnum.Event.notification->{
+
+                val bundle = bundleOf(EventsEnum.ID.event to referenceId)
+
+                return NavDeepLinkBuilder(applicationContext)
+                    .setGraph(R.navigation.nav_graph)
+                    .setComponentName(MainActivity::class.java)
+                    .setArguments(bundle)
+                    .setDestination(R.id.eventDetailsFragment)
                     .createTaskStackBuilder()
                     .getPendingIntent(0, PendingIntent.FLAG_ONE_SHOT)
 

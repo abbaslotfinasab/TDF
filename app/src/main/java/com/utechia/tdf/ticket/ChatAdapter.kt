@@ -151,11 +151,17 @@ class ChatAdapter(private val ticketDetailsFragment: TicketDetailsFragment): Rec
             description.text = chat[position].text
             user.text = chat[position].username
 
-            data.apply {
-                firebaseUploadAdapter = FirebaseUploadAdapter(chat[position].mediaurl!!)
-                adapter = firebaseUploadAdapter
-                layoutManager = GridLayoutManager(context, calculateNoOfColumns(context))
+            if (chat[position].mediaurl.isNullOrEmpty()){
+                data.visibility = View.GONE
+            }else {
+                data.apply {
+                    visibility = visibility
+                    firebaseUploadAdapter = FirebaseUploadAdapter(chat[position].mediaurl!!)
+                    adapter = firebaseUploadAdapter
+                    layoutManager = GridLayoutManager(context, calculateNoOfColumns(context))
+                }
             }
+
             if (ticket[0].status == "Close" && !single && ticket[0].rateable!!) {
                 single = true
                 ticketDetailsFragment.rating(ticket[0].id!!)
@@ -187,10 +193,15 @@ class ChatAdapter(private val ticketDetailsFragment: TicketDetailsFragment): Rec
             user.text = chat[position].username
             description.text = chat[position].text
 
-            data.apply {
-                firebaseUploadAdapter = FirebaseUploadAdapter(chat[0].mediaurl!!)
-                adapter = firebaseUploadAdapter
-                layoutManager = GridLayoutManager(context, calculateNoOfColumns(context))
+            if (chat[position].mediaurl.isNullOrEmpty()){
+                data.visibility = View.GONE
+            }else {
+                data.apply {
+                    visibility = visibility
+                    firebaseUploadAdapter = FirebaseUploadAdapter(chat[position].mediaurl!!)
+                    adapter = firebaseUploadAdapter
+                    layoutManager = GridLayoutManager(context, calculateNoOfColumns(context))
+                }
             }
 
             if (ticket[0].status == "Close" && !single && ticket[0].rateable!!) {

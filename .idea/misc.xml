@@ -364,7 +364,7 @@
         <entry key="app/src/main/res/layout/fragment_upload.xml" value="0.19322916666666667" />
         <entry key="app/src/main/res/layout/header_navigation_drawer.xml" value="0.1" />
         <entry key="app/src/main/res/layout/item_chat_admin.xml" value="0.25" />
-        <entry key="app/src/main/res/layout/item_chat_client.xml" value="0.22" />
+        <entry key="app/src/main/res/layout/item_chat_client.xml" value="0.1" />
         <entry key="app/src/main/res/layout/item_chat_details.xml" value="0.67" />
         <entry key="app/src/main/res/layout/item_chat_user.xml" value="0.1" />
         <entry key="app/src/main/res/layout/item_event.xml" value="0.22" />
