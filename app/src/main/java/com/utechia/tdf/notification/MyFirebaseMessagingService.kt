@@ -38,8 +38,19 @@ class MyFirebaseMessagingService : FirebaseMessagingService() {
 
     override fun onMessageReceived(remoteMessage: RemoteMessage) {
         super.onMessageReceived(remoteMessage)
-        if(remoteMessage.notification!=null && remoteMessage.data.isNotEmpty())
-        generateNotification(remoteMessage.data[NotificationEnum.Type.notification]!!,remoteMessage.data[NotificationEnum.ID.notification]!!.toLong(),remoteMessage.notification?.title!!,remoteMessage.notification?.body!!)
+        if(remoteMessage.notification!=null && remoteMessage.data.isNullOrEmpty())
+        {
+            remoteMessage.data[NotificationEnum.Type.notification]?.let { type ->
+                remoteMessage.data[NotificationEnum.ID.notification]?.toLong()
+                    ?.let { refID ->
+                        generateNotification(type,
+                            refID,remoteMessage.notification?.title?:getString(R.string.new_notification),remoteMessage.notification?.body?:"")
+                    } }
+        }else if(remoteMessage.notification!=null)
+        {
+            generateNotification(null,
+                null,remoteMessage.notification?.title?:getString(R.string.new_notification),remoteMessage.notification?.body?:"")
+        }
     }
 
     override fun onNewToken(token: String) {
@@ -53,28 +64,28 @@ class MyFirebaseMessagingService : FirebaseMessagingService() {
 
     }
 
-    private fun generateNotification(type:String, referenceId:Long, title: String, message: String) {
+    private fun generateNotification(type:String?, referenceId:Long?, title: String, message: String) {
 
         var builder : NotificationCompat.Builder = if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.N) {
             NotificationCompat.Builder(applicationContext, channel_Id)
-                .setSmallIcon(R.drawable.ic_notification)
+                .setSmallIcon(R.drawable.ic_tdf_notification)
                 .setContentTitle(title)
                 .setContentTitle(message)
-                .setAutoCancel(true)
-                .setVibrate(longArrayOf(1000,1000,1000,1000))
-                .setOnlyAlertOnce(true)
+                //.setAutoCancel(true)
+                //.setVibrate(longArrayOf(1000,1000,1000,1000))
+                //.setOnlyAlertOnce(true)
                 .setPriority(NotificationManager.IMPORTANCE_MAX)
                 .setDefaults(Notification.DEFAULT_ALL)
                 .setContentIntent(navigate(type,referenceId))
                 .setChannelId(channel_Id)
         } else {
             NotificationCompat.Builder(applicationContext, channel_Id)
-                .setSmallIcon(R.drawable.ic_notification)
-                .setAutoCancel(true)
+                .setSmallIcon(R.drawable.ic_tdf_notification)
+                //.setAutoCancel(true)
                 .setContentTitle(title)
                 .setContentTitle(message)
-                .setVibrate(longArrayOf(1000,1000,1000,1000))
-                .setOnlyAlertOnce(true)
+                //.setVibrate(longArrayOf(1000,1000,1000,1000))
+                //.setOnlyAlertOnce(true)
                 .setDefaults(Notification.DEFAULT_ALL)
                 .setContentIntent(navigate(type,referenceId))
                 .setChannelId(channel_Id)
@@ -93,7 +104,7 @@ class MyFirebaseMessagingService : FirebaseMessagingService() {
         notificationManager.notify(0,builder.build())
     }
 
-    private fun navigate(type: String, referenceId: Long): PendingIntent? {
+    private fun navigate(type: String?, referenceId: Long?): PendingIntent? {
 
         when(type){
 
