@@ -155,7 +155,7 @@ class ChatAdapter(private val ticketDetailsFragment: TicketDetailsFragment): Rec
                 data.visibility = View.GONE
             }else {
                 data.apply {
-                    visibility = visibility
+                    visibility = View.VISIBLE
                     firebaseUploadAdapter = FirebaseUploadAdapter(chat[position].mediaurl!!)
                     adapter = firebaseUploadAdapter
                     layoutManager = GridLayoutManager(context, calculateNoOfColumns(context))
@@ -197,7 +197,7 @@ class ChatAdapter(private val ticketDetailsFragment: TicketDetailsFragment): Rec
                 data.visibility = View.GONE
             }else {
                 data.apply {
-                    visibility = visibility
+                    visibility = View.VISIBLE
                     firebaseUploadAdapter = FirebaseUploadAdapter(chat[position].mediaurl!!)
                     adapter = firebaseUploadAdapter
                     layoutManager = GridLayoutManager(context, calculateNoOfColumns(context))
