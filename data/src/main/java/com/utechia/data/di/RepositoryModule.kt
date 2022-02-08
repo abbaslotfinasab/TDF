@@ -73,11 +73,6 @@ abstract class RepositoryModule {
     ): SurveyRepo
 
     @Binds
-    abstract fun bindSurveyAnswerRepositoryService(
-        surveyAnswerRepoImpl: SurveyAnswerRepoImpl
-    ): SurveyAnswerRepo
-
-    @Binds
     abstract fun bindTeaBoyOrderRepositoryService(
         teaBoyOrderRepoImpl: TeaBoyOrderRepoImpl
     ): TeaBoyOrderRepo

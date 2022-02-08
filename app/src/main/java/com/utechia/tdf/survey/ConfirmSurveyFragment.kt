@@ -11,11 +11,11 @@ import android.widget.Toast
 import androidx.fragment.app.DialogFragment
 import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
+import com.utechia.domain.model.AnswerModel
 import com.utechia.domain.utile.Result
 import com.utechia.tdf.R
 import com.utechia.tdf.databinding.FragmentConfirmSurveyBinding
 import dagger.hilt.android.AndroidEntryPoint
-import java.util.ArrayList
 import org.json.JSONArray
 
 
@@ -23,10 +23,9 @@ import org.json.JSONArray
 class ConfirmSurveyFragment : DialogFragment() {
 
     private lateinit var binding: FragmentConfirmSurveyBinding
-    private var answer:ArrayList<HashMap<String,Any>> = ArrayList()
-    private val surveyViewModel:SurveyAnswerViewModel by viewModels()
+    private val surveyViewModel: SurveyViewModel by viewModels()
+    private lateinit var answer:ArrayList<*>
     private lateinit var jsonArray: JSONArray
-
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -46,9 +45,10 @@ class ConfirmSurveyFragment : DialogFragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
+
         if (arguments != null) {
             answer =
-                (requireArguments().getSerializable("answer") as ArrayList<HashMap<String, Any>>?)!!
+                (requireArguments().getSerializable("answer") as ArrayList<*>)
         }
         jsonArray = JSONArray(answer)
 
@@ -76,7 +76,7 @@ class ConfirmSurveyFragment : DialogFragment() {
             when (it) {
                 is Result.Success -> {
                     binding.prg.visibility = View.GONE
-                    findNavController().navigate(R.id.confirmSurveyFragment_to_surveySystemFragment)
+                    findNavController().navigate(R.id.confirmSurveyFragment_to_resultSurveyFragment)
 
 
                 }

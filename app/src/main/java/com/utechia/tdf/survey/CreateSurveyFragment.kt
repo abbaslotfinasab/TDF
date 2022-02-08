@@ -6,6 +6,7 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
 import androidx.core.content.ContextCompat
+import androidx.core.os.bundleOf
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
@@ -20,7 +21,7 @@ import dagger.hilt.android.AndroidEntryPoint
 class CreateSurveyFragment : Fragment(),View.OnClickListener {
 
     private lateinit var binding: FragmentCreateSurveyBinding
-    private val surveyViewModel: SurveyViewModel by viewModels()
+    val surveyViewModel: SurveyViewModel by viewModels()
     private lateinit var createSurveyViewPagerAdapter: CreateSurveyViewPagerAdapter
     private var questionSize: Int = 0
     private var surveyId = 0
@@ -208,9 +209,9 @@ class CreateSurveyFragment : Fragment(),View.OnClickListener {
                 if (binding.pager.currentItem < questionSize-1) {
                     binding.pager.setCurrentItem(binding.pager.currentItem + 1, true)
                 } else {
-                    findNavController().navigate(R.id.createSurveyFragment_to_confirmSurveyFragment)
+                    val bundle = bundleOf("answer" to surveyViewModel.answer)
+                    findNavController().navigate(R.id.createSurveyFragment_to_confirmSurveyFragment,bundle)
                 }
-
             }
 
             R.id.btnPrevious -> {
