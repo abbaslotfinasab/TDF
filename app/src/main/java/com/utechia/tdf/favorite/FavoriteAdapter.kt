@@ -36,7 +36,6 @@ class FavoriteAdapter(private val favoriteFragment: FavoriteFragment): RecyclerV
     inner class ViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
         private val image:ImageView = itemView.findViewById(R.id.image)
         private val title:TextView = itemView.findViewById(R.id.title)
-        private val subTitle:TextView = itemView.findViewById(R.id.subTitle)
         private val like: ImageView = itemView.findViewById(R.id.like)
         private val dislike: ImageView = itemView.findViewById(R.id.dislike)
 
@@ -44,8 +43,6 @@ class FavoriteAdapter(private val favoriteFragment: FavoriteFragment): RecyclerV
         fun bind0(position: Int) {
 
             title.text = favorite[position].food?.title
-            val number = (0..20).random()
-            subTitle.text = "Ordered $number times in total"
             dislike.visibility = View.VISIBLE
             like.visibility = View.GONE
 

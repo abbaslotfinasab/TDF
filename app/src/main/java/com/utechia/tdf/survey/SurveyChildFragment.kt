@@ -50,13 +50,6 @@ class SurveyChildFragment(val survey: String) : Fragment() {
 
         }
 
-
-        binding.appBackButton.setOnClickListener {
-
-            findNavController().navigateUp()
-
-        }
-
         binding.recyclerView.apply {
             adapter = surveyAdapter
             layoutManager = LinearLayoutManager(context, LinearLayoutManager.VERTICAL,false)
@@ -99,6 +92,7 @@ class SurveyChildFragment(val survey: String) : Fragment() {
 
                 is Result.Error -> {
                     binding.prg.visibility = View.GONE
+                    binding.refreshLayout.isRefreshing = false
                     binding.recyclerView.visibility = View.GONE
                     binding.emptyLayout.visibility = View.VISIBLE
                     Toast.makeText(context, it.message, Toast.LENGTH_SHORT).show()
