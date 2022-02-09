@@ -31,7 +31,7 @@ class MyFirebaseMessagingService : FirebaseMessagingService() {
 
         remoteView.setTextViewText(R.id.title,title)
         remoteView.setTextViewText(R.id.subTitle,message)
-        remoteView.setImageViewResource(R.id.image,R.drawable.ic_notification)
+        remoteView.setImageViewResource(R.id.image,R.drawable.ic_tdf_notification)
         return remoteView
 
     }
