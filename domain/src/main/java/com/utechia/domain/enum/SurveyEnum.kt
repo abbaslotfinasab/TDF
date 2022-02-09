@@ -10,9 +10,7 @@ enum class SurveyEnum(val survey:String) {
     Rate("rate"),
     Multi("multi"),
     Open("open_end"),
-
-
-
-
-
+    Question("question"),
+    Text("text"),
+    Option("option"),
 }
