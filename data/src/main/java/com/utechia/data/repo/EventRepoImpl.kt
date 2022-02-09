@@ -26,7 +26,7 @@ class EventRepoImpl @Inject constructor(
             return when (result.isSuccessful && result.body() !=null) {
 
                 true -> {
-                    result.body()?.data!!.list?.map { it.toDomain() }!!.toMutableList()
+                    result.body()?.data?.list?.map { it.toDomain() }!!.toMutableList()
                 }
 
                 else ->

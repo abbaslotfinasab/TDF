@@ -1,6 +1,5 @@
 package com.utechia.data.repo
 
-import android.util.Log
 import com.utechia.data.api.Service
 import com.utechia.data.entity.RateTicketBody
 import com.utechia.data.entity.ReplyBody
@@ -28,7 +27,7 @@ class TicketRepoImpl @Inject constructor(
             return when (result.isSuccessful) {
 
                 true -> {
-                    result.body()?.data!!.list?.map { it.toDomain() }!!.toMutableList()
+                    result.body()?.data?.list?.map { it.toDomain() }!!.toMutableList()
                 }
 
                 else ->
@@ -49,9 +48,6 @@ class TicketRepoImpl @Inject constructor(
 
         if (networkHelper.isNetworkConnected()) {
 
-            Log.d("postChat",  TicketBody(
-                Priority,category,description,Floor,mediaurl,title
-            ).toString())
             val result = service.postTicket(
                 TicketBody(
                     Priority,category,description,Floor,mediaurl,title

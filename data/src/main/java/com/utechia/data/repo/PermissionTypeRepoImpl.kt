@@ -19,7 +19,7 @@ class PermissionTypeRepoImpl @Inject constructor(
             val result = service.getPermissionType()
 
             if (result.isSuccessful)
-                return result.body()!!.data!!
+                return result.body()?.data!!
                 else
                     throw IOException("Server is Not Responding")
 
