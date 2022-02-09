@@ -11,7 +11,6 @@ import kotlinx.serialization.Serializable
 @Parcelize
 @Serializable
 data class Question(
-    val answers: @Contextual @RawValue MutableList<Answer>?,
     val id: Int?,
     val options: MutableList<String>?,
     val rate: @Contextual @RawValue  Any?,
@@ -21,6 +20,6 @@ data class Question(
     val type: String?
 ):Parcelable,ResponseObject<QuestionModel> {
     override fun toDomain(): QuestionModel {
-        return QuestionModel(answers?.map { it.toDomain() }!!.toMutableList(),id,options,rate,ratestars,text,title,type)
+        return QuestionModel(id,options,rate,ratestars,text,title,type)
     }
 }

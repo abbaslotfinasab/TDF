@@ -14,13 +14,8 @@ data class SurveyData(
     val createdAt: String?,
     val dateend: String?,
     val datestart: String?,
-    val enableedit: Boolean?,
     val id: Int?,
-    val iscancelled: Boolean?,
-    val isexpierd: Boolean?,
-    val isinprogress: Boolean?,
-    val iswatting: Boolean?,
-    val questions: @Contextual @RawValue List<Question>?= emptyList(),
+    val questions: @Contextual @RawValue List<Question>?,
     val surveystatus: String?,
     val surveytype: String?,
     val systemtype: String?,
@@ -28,6 +23,6 @@ data class SurveyData(
     val updatedAt: String?
 ):Parcelable,ResponseObject<SurveyModel> {
     override fun toDomain(): SurveyModel {
-        return SurveyModel(createdAt,dateend,datestart,enableedit,id,iscancelled,isexpierd,isinprogress,iswatting,questions?.map { it.toDomain() }!!.toMutableList(),surveystatus,surveytype,systemtype,title,updatedAt)
+        return SurveyModel(createdAt,dateend,datestart,id,questions?.map { it.toDomain() }!!.toMutableList(),surveystatus,surveytype,systemtype,title,updatedAt)
     }
 }

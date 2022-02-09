@@ -18,18 +18,18 @@ class CreateSurveyViewPagerAdapter(fa: FragmentManager, lifecycle:Lifecycle , va
         return when (type) {
 
             SurveyEnum.Rate.survey -> {
-                CreateSurveyChildFragment(survey[position], type)
+                CreateSurveyChildFragment(survey[position], type,position)
             }
 
             SurveyEnum.Multi.survey -> {
-                CreateSurveyChildFragment(survey[position], type)
+                CreateSurveyChildFragment(survey[position], type,position)
             }
 
             SurveyEnum.Open.survey -> {
-                CreateSurveyChildFragment(survey[position], type)
+                CreateSurveyChildFragment(survey[position], type,position)
             }
             else -> {
-                CreateSurveyChildFragment(survey[position], type)
+                CreateSurveyChildFragment(survey[position], type,position)
             }
         }
     }

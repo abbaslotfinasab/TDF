@@ -1,6 +1,8 @@
 package com.utechia.tdf.survey
 
 import android.os.Bundle
+import android.text.Editable
+import android.text.TextWatcher
 import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
@@ -16,13 +18,15 @@ import com.utechia.tdf.databinding.FragmentCreateSurveyChildBinding
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
-class CreateSurveyChildFragment(private val questionModel: QuestionModel, val type: String) : Fragment() {
+class CreateSurveyChildFragment(
+    private val questionModel: QuestionModel,
+    val type: String,
+    private val position: Int
+) : Fragment() {
 
     private lateinit var binding: FragmentCreateSurveyChildBinding
     private lateinit var navHostFragment : NavHostFragment
     private lateinit var radioButton:RadioButton
-
-
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -37,7 +41,6 @@ class CreateSurveyChildFragment(private val questionModel: QuestionModel, val ty
 
         navHostFragment = requireActivity().supportFragmentManager.fragments[0] as NavHostFragment
         val parent = navHostFragment.childFragmentManager.primaryNavigationFragment as CreateSurveyFragment
-
 
 
         binding.questionTitle.text = questionModel.title
@@ -76,19 +79,115 @@ class CreateSurveyChildFragment(private val questionModel: QuestionModel, val ty
 
         binding.rating.onRatingBarChangeListener =
             RatingBar.OnRatingBarChangeListener { _, rating, _ ->
-                parent.surveyViewModel.answer.add(hashMapOf("question" to questionModel.id!!,"rate" to rating.toInt()))
+                if ( parent.surveyViewModel.answer.size-1>=position) {
+                    for (i in 0 until  parent.surveyViewModel.answer.size-1) {
+                        if (parent.surveyViewModel.answer[i]["question"] == questionModel.id!!) {
+                            parent.surveyViewModel.answer.removeAt(i)
+                        }
+                    }
 
+                    parent.surveyViewModel.answer.add(
+                        hashMapOf(
+                            "question" to questionModel.id!!,
+                            "rate" to rating.toInt()
+                        )
+                    )
+
+                }else{
+                    parent.surveyViewModel.answer.add(
+                        hashMapOf(
+                            "question" to questionModel.id!!,
+                            "rate" to rating.toInt()
+                        )
+                    )
+                }
                 Log.d("answer", parent.surveyViewModel.answer.toString())
-
             }
 
         binding.radioGroup.setOnCheckedChangeListener { group, checkedId ->
             group.findViewById<RadioButton>(checkedId)?.let {
-                parent.surveyViewModel.answer.add(hashMapOf("question" to questionModel.id!!,"option" to it.text.toString()))
-
+                if ( parent.surveyViewModel.answer.size-1>=position) {
+                    for (i in 0 until  parent.surveyViewModel.answer.size-1) {
+                        if (parent.surveyViewModel.answer[i]["question"] == questionModel.id!!) {
+                            parent.surveyViewModel.answer.removeAt(i)
+                        }
+                    }
+                    parent.surveyViewModel.answer.add(
+                        hashMapOf(
+                            "question" to questionModel.id!!,
+                            "option" to it.text.toString()
+                        )
+                    )
+                }else{
+                    parent.surveyViewModel.answer.add(
+                        hashMapOf(
+                            "question" to questionModel.id!!,
+                            "option" to it.text.toString()
+                        )
+                    )
+                }
                 Log.d("answer", parent.surveyViewModel.answer.toString())
-
             }
         }
+
+        binding.description.addTextChangedListener(object :TextWatcher{
+            override fun beforeTextChanged(s: CharSequence?, start: Int, count: Int, after: Int) {
+              /*  if ( parent.surveyViewModel.answer.size-1>=position) {
+                    parent.surveyViewModel.answer.removeAt(position)
+                    parent.surveyViewModel.answer.add(
+                        hashMapOf(
+                            "question" to questionModel.id!!,
+                            "text" to s.toString()
+                        )
+                    )
+                }else{
+                    parent.surveyViewModel.answer.add(
+                        hashMapOf(
+                            "question" to questionModel.id!!,
+                            "text" to s.toString()
+                        )
+                    )
+                }*/
+            }
+
+            override fun onTextChanged(s: CharSequence?, start: Int, before: Int, count: Int) {
+             /*   if ( parent.surveyViewModel.answer.size-1>=position) {
+                    parent.surveyViewModel.answer.removeAt(position)
+                    parent.surveyViewModel.answer.add(
+                        hashMapOf(
+                            "question" to questionModel.id!!,
+                            "text" to s.toString()
+                        )
+                    )
+                }else{
+                    parent.surveyViewModel.answer.add(
+                        hashMapOf(
+                            "question" to questionModel.id!!,
+                            "text" to s.toString()
+                        )
+                    )
+                }*/
+            }
+
+            override fun afterTextChanged(s: Editable?) {
+
+                if ( parent.surveyViewModel.answer.size-1>=position) {
+                    parent.surveyViewModel.answer.removeAt(position)
+                    parent.surveyViewModel.answer.add(
+                        hashMapOf(
+                            "question" to questionModel.id!!,
+                            "text" to s.toString()
+                        )
+                    )
+                }else{
+                    parent.surveyViewModel.answer.add(
+                        hashMapOf(
+                            "question" to questionModel.id!!,
+                            "text" to s.toString()
+                        )
+                    )
+                }
+            }
+        })
     }
 }

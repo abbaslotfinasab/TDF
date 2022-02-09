@@ -20,13 +20,18 @@ class SurveyAdapter: RecyclerView.Adapter<RecyclerView.ViewHolder>() {
     var survey: MutableList<SurveyModel> = mutableListOf()
     private var startTimeZone = ""
     private var endTimeZone = ""
+    private var evaluated = false
 
 
 
-    fun addData(_survey: MutableList<SurveyModel>) {
+
+    fun addData(_survey: MutableList<SurveyModel>,_evaluated:Boolean) {
         survey.clear()
-        survey.addAll(_survey)
         notifyDataSetChanged()
+        survey.addAll(_survey)
+        notifyItemRangeChanged(0,_survey.size)
+        evaluated = _evaluated
+
     }
 
 
@@ -65,7 +70,7 @@ class SurveyAdapter: RecyclerView.Adapter<RecyclerView.ViewHolder>() {
             ).toLocalDateTime().format(DateTimeFormatter.ofPattern("yyyy.MM.dd-HH:mm"))
             endDate.text = "$endTimeZone"
 
-            if (survey[position].surveystatus==SurveyEnum.Expired.survey || survey[position].surveystatus==SurveyEnum.Cancelled.survey){
+            if (survey[position].surveystatus==SurveyEnum.Expired.survey || survey[position].surveystatus==SurveyEnum.Cancelled.survey || evaluated){
                 result.visibility = View.GONE
             }else {
                 result.visibility = View.VISIBLE
@@ -93,7 +98,6 @@ class SurveyAdapter: RecyclerView.Adapter<RecyclerView.ViewHolder>() {
                 val bundle = bundleOf(SurveyEnum.Id.survey to survey[position].id)
                 itemView.findNavController().navigate(R.id.action_surveySystemFragment_to_createSurveyFragment,bundle)
             }
-
         }
     }
 }

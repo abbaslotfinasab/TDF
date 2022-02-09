@@ -21,6 +21,7 @@ class SurveyChildFragment(val survey: String) : Fragment() {
     private lateinit var binding: FragmentSurveyChildBinding
     private val surveyViewModel:SurveyViewModel by viewModels()
     private val surveyAdapter: SurveyAdapter = SurveyAdapter()
+    private var evaluated = false
 
 
     override fun onCreateView(
@@ -34,18 +35,24 @@ class SurveyChildFragment(val survey: String) : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        if (survey == SurveyEnum.Evaluate.survey) {
+        evaluated = if (survey == SurveyEnum.Evaluate.survey) {
             surveyViewModel.getSurveyList()
+            false
         }else{
             surveyViewModel.getEvaluate()
+            true
+
         }
 
         binding.refreshLayout.setOnRefreshListener {
 
-            if (survey == SurveyEnum.Evaluate.survey) {
+            evaluated = if (survey == SurveyEnum.Evaluate.survey) {
                 surveyViewModel.getSurveyList()
+                false
             }else{
                 surveyViewModel.getEvaluate()
+                true
+
             }
 
         }
@@ -72,7 +79,7 @@ class SurveyChildFragment(val survey: String) : Fragment() {
                     if (it.data.size!=0){
                         binding.recyclerView.visibility = View.VISIBLE
                         binding.emptyLayout.visibility = View.GONE
-                        surveyAdapter.addData(it.data)
+                        surveyAdapter.addData(it.data,evaluated)
 
 
                     }
