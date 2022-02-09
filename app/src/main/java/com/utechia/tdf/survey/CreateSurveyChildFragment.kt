@@ -114,14 +114,14 @@ class CreateSurveyChildFragment(
                     parent.surveyViewModel.answer.add(
                         hashMapOf(
                             SurveyEnum.Question.survey to questionModel.id!!,
-                            SurveyEnum.Open.survey to it.text.toString()
+                            SurveyEnum.Option.survey to it.text.toString()
                         )
                     )
                 }else{
                     parent.surveyViewModel.answer.add(
                         hashMapOf(
                             SurveyEnum.Question.survey to questionModel.id!!,
-                            SurveyEnum.Open.survey to it.text.toString()
+                            SurveyEnum.Option.survey to it.text.toString()
                         )
                     )
                 }
