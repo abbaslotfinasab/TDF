@@ -80,10 +80,7 @@ class SurveyRepoImpl @Inject constructor(
 
         if (networkHelper.isNetworkConnected()) {
 
-            Log.d("answer", answer.toString())
-
-            val result = service.postAnswer(answer)
-
+            val result = service.postAnswer(answer.toString())
 
             return when (result.isSuccessful) {
 

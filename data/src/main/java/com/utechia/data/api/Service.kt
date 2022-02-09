@@ -127,7 +127,7 @@ interface Service {
 
     @Headers("Content-Type: application/json")
     @POST("survey/answer")
-    suspend fun postAnswer(@Body answer: JSONArray):Response<Void>
+    suspend fun postAnswer(@Body answer: String):Response<Void>
 
     @Headers("Content-Type: application/json")
     @POST("survey/rateorder")
