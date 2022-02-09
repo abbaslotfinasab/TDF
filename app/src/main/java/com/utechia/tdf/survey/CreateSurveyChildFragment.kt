@@ -110,7 +110,6 @@ class CreateSurveyChildFragment(
                             parent.surveyViewModel.answer.removeAt(i)
                         }
                     }
-
                     parent.surveyViewModel.answer.add(
                         hashMapOf(
                             SurveyEnum.Question.survey to questionModel.id!!,

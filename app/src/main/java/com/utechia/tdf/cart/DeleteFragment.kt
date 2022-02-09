@@ -48,21 +48,8 @@ class DeleteFragment : DialogFragment(),View.OnClickListener {
         if (arguments != null)
             foodId = requireArguments().getInt("foodId", 0)
 
-        binding.btnDelete.setOnClickListener {
-
-
-        }
-
         observer()
 
-
-        binding.btnCancel.setOnClickListener {
-
-        }
-
-        binding.exit.setOnClickListener {
-
-        }
 
     }
 
