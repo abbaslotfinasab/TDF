@@ -6,4 +6,6 @@ interface MainUseCase {
 
     suspend fun count(): NotificationCountModel
 
+    suspend fun sendToken()
+
 }

@@ -44,4 +44,13 @@ class MainViewModel @Inject constructor(
             }
         }
     }
+
+    fun sendToken(){
+
+        viewModelScope.launch(Dispatchers.IO+handler) {
+
+         mainUseCaseImpl.sendToken()
+
+        }
+    }
 }

@@ -37,15 +37,7 @@ class MainRepoImpl @Inject constructor(
             return when (result.code()) {
 
                 200 ->{
-
-                    val fcmToken = sessionManager.fetchFireBaeToken()?:""
-
-                    if(fcmToken.isNotEmpty())
-
-                        service.notification(NotificationToken(fcmToken))
-
                     result.body()?.data!!.toDomain()
-
                 }
 
                 401 -> {
@@ -59,5 +51,13 @@ class MainRepoImpl @Inject constructor(
             }
 
         } else throw IOException("No Internet Connection")
+    }
+
+    override suspend fun sendToken() {
+
+        val fcmToken = sessionManager.fetchFireBaeToken()?:""
+
+        if(fcmToken.isNotEmpty())
+            service.notification(NotificationToken(fcmToken))
     }
 }

@@ -12,4 +12,8 @@ class MainUseCaseImpl @Inject constructor(private val mainRepo: MainRepo)
     override suspend fun count(): NotificationCountModel {
         return mainRepo.getCountNotification()
     }
+
+    override suspend fun sendToken() {
+        return mainRepo.sendToken()
+    }
 }

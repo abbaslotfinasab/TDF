@@ -81,13 +81,11 @@ class MainActivity : AppCompatActivity() {
                 mainViewModel.getCount()
                 graph.setStartDestination(R.id.teaBoyHomeFragment)
                 setupTeaBoy()
-                observer()
             }
             !teaBoy() -> {
                 mainViewModel.getCount()
                 graph.setStartDestination(R.id.userhomeFragment)
                 setupUser()
-                observer()
             }
             else ->
                 graph.setStartDestination(R.id.loginFragment)
@@ -142,6 +140,7 @@ class MainActivity : AppCompatActivity() {
             binding.drawerLayout.closeDrawer(GravityCompat.END)
 
         }
+        observer()
     }
 
     override fun onBackPressed() {
@@ -193,14 +192,13 @@ class MainActivity : AppCompatActivity() {
             inflateMenu(R.menu.user_navigation_drawer)
         }
 
+        mainViewModel.sendToken()
+
             navController.addOnDestinationChangedListener{_, destination, _ ->
                 binding.bottomNavigation.setupWithNavController(navController)
 
                 if(destination.id != R.id.loginFragment) {
-
                     mainViewModel.getCount()
-                    observer()
-
                 }
 
                 when (destination.id){
@@ -428,6 +426,8 @@ class MainActivity : AppCompatActivity() {
 
         }
 
+        mainViewModel.sendToken()
+
         binding.navigationView.apply {
             menu.clear()
             inflateMenu(R.menu.teaboy_navigation_drawer)
@@ -438,7 +438,6 @@ class MainActivity : AppCompatActivity() {
 
             if(destination.id != R.id.loginFragment) {
                 mainViewModel.getCount()
-                observer()
             }
 
             when (destination.id){
