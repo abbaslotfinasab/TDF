@@ -78,6 +78,8 @@ class CreateSurveyFragment : Fragment(),View.OnClickListener {
                     questionSize = it1.data[0].questions?.size ?: 0
 
                     if (it1.data[0].questions.isNullOrEmpty()) {
+                        binding.numberText.visibility = View.VISIBLE
+                        binding.textView6.visibility = View.VISIBLE
                         binding.numberText.text = "0/0"
                         binding.pager.visibility = View.GONE
                         binding.btnNext.visibility = View.GONE
@@ -85,6 +87,10 @@ class CreateSurveyFragment : Fragment(),View.OnClickListener {
                         Toast.makeText(context, "No question Found", Toast.LENGTH_SHORT).show()
 
                     } else {
+                        binding.numberText.visibility = View.VISIBLE
+                        binding.textView6.visibility = View.VISIBLE
+                        binding.btnNext.visibility = View.VISIBLE
+                        binding.btnPrevious.visibility = View.VISIBLE
                         firstPage()
                         binding.numberText.text =
                             "${binding.pager.currentItem + 1}/${it1.data[0].questions?.size}"
@@ -101,10 +107,21 @@ class CreateSurveyFragment : Fragment(),View.OnClickListener {
 
                 is Result.Loading -> {
                     binding.prg.visibility = View.VISIBLE
+                    binding.btnNext.visibility = View.GONE
+                    binding.btnPrevious.visibility = View.GONE
+                    binding.numberText.visibility = View.GONE
+                    binding.textView6.visibility = View.GONE
+                    binding.pager.visibility = View.GONE
+
                 }
 
                 is Result.Error -> {
                     binding.prg.visibility = View.GONE
+                    binding.btnNext.visibility = View.GONE
+                    binding.btnPrevious.visibility = View.GONE
+                    binding.numberText.visibility = View.GONE
+                    binding.textView6.visibility = View.GONE
+                    binding.pager.visibility = View.GONE
                     Toast.makeText(context, it1.message, Toast.LENGTH_SHORT).show()
                 }
             }

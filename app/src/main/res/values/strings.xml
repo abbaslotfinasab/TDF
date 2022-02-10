@@ -110,6 +110,7 @@
     <string name="back">Back</string>
     <string name="deactivation">Deactivation</string>
     <string name="new_notification">New Notification</string>
+    <string name="priority">Priority:</string>
 
 
     <string-array name="month_array">

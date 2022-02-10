@@ -283,6 +283,8 @@
         <entry key="app/src/main/res/drawable/back_medium.xml" value="0.1" />
         <entry key="app/src/main/res/drawable/border.xml" value="0.1717948717948718" />
         <entry key="app/src/main/res/drawable/cancel_btn.xml" value="0.1" />
+        <entry key="app/src/main/res/drawable/category_back.xml" value="0.1717948717948718" />
+        <entry key="app/src/main/res/drawable/chat_details_back.xml" value="0.1717948717948718" />
         <entry key="app/src/main/res/drawable/client_back.xml" value="0.1717948717948718" />
         <entry key="app/src/main/res/drawable/gradiant.xml" value="0.13796296296296295" />
         <entry key="app/src/main/res/drawable/ic_clock.xml" value="0.1717948717948718" />
