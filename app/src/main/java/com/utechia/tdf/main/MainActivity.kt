@@ -1,6 +1,5 @@
 package com.utechia.tdf.main
 
-import android.content.Intent
 import android.content.SharedPreferences
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
@@ -902,9 +901,15 @@ class MainActivity : AppCompatActivity() {
                     if (it.message == "Unauthorized") {
                         prefs.edit().clear().apply()
                         logoutFromFCM()
-                        val i = Intent(this, MainActivity::class.java)
-                        finish()
-                        startActivity(i)
+                        navController.navigate(R.id.loginFragment,null,NavOptions.Builder()
+                            .setPopUpTo(R.id.loginFragment, inclusive = true, saveState = true)
+                            .setLaunchSingleTop(true)
+                            .setEnterAnim(android.R.anim.fade_in)
+                            .setExitAnim(android.R.anim.fade_out)
+                            .setPopEnterAnim(android.R.anim.fade_out)
+                            .setPopEnterAnim(android.R.anim.fade_in)
+                            .build()
+                        )
                     }
                 }
             }
