@@ -26,6 +26,7 @@ class CreateSurveyChildFragment(
     private lateinit var binding: FragmentCreateSurveyChildBinding
     private lateinit var navHostFragment : NavHostFragment
     private lateinit var radioButton:RadioButton
+    private var rate = 0
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -78,6 +79,7 @@ class CreateSurveyChildFragment(
 
         binding.rating.onRatingBarChangeListener =
             RatingBar.OnRatingBarChangeListener { _, rating, _ ->
+                rate = rating.toInt()
                 if ( parent.surveyViewModel.answer.size-1>=position) {
                     for (i in 0 until parent.surveyViewModel.answer.size-1) {
                         if (parent.surveyViewModel.answer[i][SurveyEnum.Question.survey] == questionModel.id!!) {
@@ -88,7 +90,7 @@ class CreateSurveyChildFragment(
                     parent.surveyViewModel.answer.add(
                         hashMapOf(
                             SurveyEnum.Question.survey to questionModel.id!!,
-                            SurveyEnum.Rate.survey to rating.toInt()
+                            SurveyEnum.Rate.survey to rate
                         )
                     )
 
@@ -96,7 +98,7 @@ class CreateSurveyChildFragment(
                     parent.surveyViewModel.answer.add(
                         hashMapOf(
                             SurveyEnum.Question.survey to questionModel.id!!,
-                            SurveyEnum.Rate.survey to rating.toInt()
+                            SurveyEnum.Rate.survey to rate
                         )
                     )
                 }

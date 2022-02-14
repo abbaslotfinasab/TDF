@@ -39,7 +39,7 @@
             android:numStars="5"
             android:progressBackgroundTint="@color/gray"
             android:progressTint="#FFCB45"
-            android:rating="5"
+            android:rating="0"
             android:secondaryProgressTint="@color/gray"
             android:stepSize="1"
             android:visibility="gone"
