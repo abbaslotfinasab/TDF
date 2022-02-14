@@ -902,7 +902,6 @@ class MainActivity : AppCompatActivity() {
                         prefs.edit().clear().apply()
                         logoutFromFCM()
                         navController.navigate(R.id.loginFragment,null,NavOptions.Builder()
-                            .setPopUpTo(R.id.loginFragment, inclusive = true, saveState = true)
                             .setLaunchSingleTop(true)
                             .setEnterAnim(android.R.anim.fade_in)
                             .setExitAnim(android.R.anim.fade_out)
