@@ -3,6 +3,7 @@ package com.utechia.data.repo
 import com.utechia.data.api.Service
 import com.utechia.data.entity.FavoriteBody
 import com.utechia.data.utile.NetworkHelper
+import com.utechia.domain.enum.PagingEnum
 import com.utechia.domain.model.TeaBoyOrderDataModel
 import com.utechia.domain.repository.TeaBoyOrderRepo
 import java.io.IOException
@@ -79,7 +80,7 @@ class TeaBoyOrderRepoImpl @Inject constructor(
 
         if (networkHelper.isNetworkConnected()) {
 
-            val result = service.getTeaBoyOrder(status,1,500)
+            val result = service.getTeaBoyOrder(status, PagingEnum.Number.page, PagingEnum.Size.page)
 
             return when (result.isSuccessful && result.body() !=null) {
 

@@ -4,6 +4,7 @@ import com.utechia.data.api.Service
 import com.utechia.data.entity.FavoriteBody
 import com.utechia.data.entity.OrderRateBody
 import com.utechia.data.utile.NetworkHelper
+import com.utechia.domain.enum.PagingEnum
 import com.utechia.domain.model.UserOrderDataModel
 import com.utechia.domain.repository.UserOrderRepo
 import java.io.IOException
@@ -19,7 +20,7 @@ class UserOrderRepoImpl @Inject constructor(
 
         if (networkHelper.isNetworkConnected()) {
 
-            val result = service.getOrder(status, 1, 500)
+            val result = service.getOrder(status, PagingEnum.Number.page, PagingEnum.Size.page)
 
             return when (result.isSuccessful && result.body() !=null) {
 

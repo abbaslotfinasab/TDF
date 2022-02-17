@@ -191,6 +191,8 @@ class MainActivity : AppCompatActivity() {
             inflateMenu(R.menu.user_navigation_drawer)
         }
 
+        mainViewModel.getCount()
+
         mainViewModel.sendToken()
 
             navController.addOnDestinationChangedListener{_, destination, _ ->
@@ -424,6 +426,8 @@ class MainActivity : AppCompatActivity() {
             this.itemTextAppearanceInactive = R.style.TeaBoyMenuItems
 
         }
+
+        mainViewModel.getCount()
 
         mainViewModel.sendToken()
 

@@ -1,9 +1,7 @@
 package com.utechia.data.repo
 
-import android.util.Log
 import com.utechia.data.api.Service
 import com.utechia.data.utile.NetworkHelper
-import com.utechia.domain.model.AnswerModel
 import com.utechia.domain.model.SurveyModel
 import com.utechia.domain.repository.SurveyRepo
 import org.json.JSONArray

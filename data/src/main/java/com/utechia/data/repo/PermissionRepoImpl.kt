@@ -4,6 +4,7 @@ import com.utechia.data.api.Service
 import com.utechia.data.entity.PermissionPostBody
 import com.utechia.data.entity.PermissionUpdateBody
 import com.utechia.data.utile.NetworkHelper
+import com.utechia.domain.enum.PagingEnum
 import com.utechia.domain.model.PermissionModel
 import com.utechia.domain.repository.PermissionRepo
 import java.io.IOException
@@ -20,7 +21,7 @@ class PermissionRepoImpl @Inject constructor(
 
         if (networkHelper.isNetworkConnected()) {
 
-            val result = service.getPermission(status,1,500)
+            val result = service.getPermission(status, PagingEnum.Number.page,PagingEnum.Size.page)
 
             return when (result.isSuccessful) {
 

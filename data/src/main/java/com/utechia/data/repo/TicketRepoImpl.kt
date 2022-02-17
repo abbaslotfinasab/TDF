@@ -5,6 +5,7 @@ import com.utechia.data.entity.RateTicketBody
 import com.utechia.data.entity.ReplyBody
 import com.utechia.data.entity.TicketBody
 import com.utechia.data.utile.NetworkHelper
+import com.utechia.domain.enum.PagingEnum
 import com.utechia.domain.model.TicketModel
 import com.utechia.domain.repository.TicketRepo
 import java.io.IOException
@@ -22,7 +23,7 @@ class TicketRepoImpl @Inject constructor(
 
         if (networkHelper.isNetworkConnected()) {
 
-            val result = service.getTicketList(status,1,500)
+            val result = service.getTicketList(status, PagingEnum.Number.page, PagingEnum.Size.page)
 
             return when (result.isSuccessful) {
 

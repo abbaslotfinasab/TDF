@@ -2,6 +2,7 @@ package com.utechia.data.repo
 
 import com.utechia.data.api.Service
 import com.utechia.data.utile.NetworkHelper
+import com.utechia.domain.enum.PagingEnum
 import com.utechia.domain.model.NotificationModel
 import com.utechia.domain.repository.NotificationRepo
 import java.io.IOException
@@ -17,7 +18,7 @@ class NotificationRepoImpl @Inject constructor(
 
         if (networkHelper.isNetworkConnected()) {
 
-            val result = service.getNotification(1,500)
+            val result = service.getNotification(PagingEnum.Number.page,PagingEnum.Size.page)
 
             return when (result.isSuccessful) {
 

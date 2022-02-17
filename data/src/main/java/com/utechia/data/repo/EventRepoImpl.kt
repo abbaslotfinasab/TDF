@@ -4,6 +4,7 @@ package com.utechia.data.repo
 import com.utechia.data.api.Service
 import com.utechia.data.entity.RateEvent
 import com.utechia.data.utile.NetworkHelper
+import com.utechia.domain.enum.PagingEnum
 import com.utechia.domain.model.EventModel
 import com.utechia.domain.repository.EventRepo
 import java.io.IOException
@@ -21,7 +22,7 @@ class EventRepoImpl @Inject constructor(
 
     if (networkHelper.isNetworkConnected()) {
 
-            val result = service.getAllEvent(1,500,status)
+            val result = service.getAllEvent(PagingEnum.Number.page, PagingEnum.Size.page,status)
 
             return when (result.isSuccessful && result.body() !=null) {
 
