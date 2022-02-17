@@ -27,8 +27,11 @@ class CreateRefreshmentFragment : Fragment(),View.OnClickListener {
     private var category = RefreshmentEnum.Food.refreshment
     val refreshmentAdapter: RefreshmentAdapter = RefreshmentAdapter(this)
 
+    override fun onStop() {
+        super.onStop()
+        binding.appCompatButton.visibility = View.GONE
 
-
+    }
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
