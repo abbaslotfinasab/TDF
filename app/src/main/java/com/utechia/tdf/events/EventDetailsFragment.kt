@@ -118,7 +118,7 @@ class EventDetailsFragment : Fragment() {
                                 R.id.action_eventDetailsFragment_to_eventRateFragment,
                                 bundle
                             )
-                        }else{
+                        }else if(it.data.userrate != null && it.data.status == EventsEnum.End.event){
                             binding.appCompatButton.apply {
                                 visibility = View.VISIBLE
                                 text = resources.getText(R.string.evaluate)
@@ -130,6 +130,8 @@ class EventDetailsFragment : Fragment() {
                                 )
                                 isEnabled = false
                             }
+                        }else{
+                            binding.appCompatButton.visibility = View.GONE
                         }
 
                     }
