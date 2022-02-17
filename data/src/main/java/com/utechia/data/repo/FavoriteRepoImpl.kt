@@ -57,6 +57,7 @@ class FavoriteRepoImpl @Inject constructor(
 
         } else throw IOException("No Internet Connection")
     }
+
     override suspend fun like(id: Int) {
         refreshmentDao.like(id)
         service.like(FavoriteBody(id))
@@ -66,4 +67,5 @@ class FavoriteRepoImpl @Inject constructor(
         refreshmentDao.dislike(id)
         service.dislike(id)
     }
+
 }
