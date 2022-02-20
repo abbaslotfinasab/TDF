@@ -280,6 +280,7 @@
         <entry key="..\:/Users/Dr Computer/AndroidStudioProjects/tdf_oms_android_application_kotlin_v1/app/src/main/res/menu/navigation_drawer.xml" value="0.20416666666666666" />
         <entry key="app/src/main/res/drawable-v24/ic_launcher_foreground.xml" value="0.1" />
         <entry key="app/src/main/res/drawable/admin_back.xml" value="0.1717948717948718" />
+        <entry key="app/src/main/res/drawable/back_gradiant.xml" value="0.1717948717948718" />
         <entry key="app/src/main/res/drawable/back_medium.xml" value="0.1" />
         <entry key="app/src/main/res/drawable/border.xml" value="0.1717948717948718" />
         <entry key="app/src/main/res/drawable/cancel_btn.xml" value="0.1" />
@@ -326,7 +327,7 @@
         <entry key="app/src/main/res/layout/fragment_create_ticket.xml" value="0.33" />
         <entry key="app/src/main/res/layout/fragment_deactivation.xml" value="0.1" />
         <entry key="app/src/main/res/layout/fragment_delivered.xml" value="0.1" />
-        <entry key="app/src/main/res/layout/fragment_event_details.xml" value="0.22" />
+        <entry key="app/src/main/res/layout/fragment_event_details.xml" value="0.1" />
         <entry key="app/src/main/res/layout/fragment_event_rate.xml" value="0.1" />
         <entry key="app/src/main/res/layout/fragment_event_result.xml" value="0.15854700854700854" />
         <entry key="app/src/main/res/layout/fragment_event_system.xml" value="0.18" />

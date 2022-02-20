@@ -1,5 +1,7 @@
 package com.utechia.tdf.events
 
+import android.animation.Animator
+import android.animation.AnimatorListenerAdapter
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -7,6 +9,7 @@ import android.view.ViewGroup
 import android.widget.Toast
 import androidx.core.content.ContextCompat
 import androidx.core.os.bundleOf
+import androidx.core.widget.NestedScrollView
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
@@ -50,11 +53,54 @@ class EventDetailsFragment : Fragment() {
 
         eventDetViewModel.getEvent(eId)
 
-        binding.backArrow.bringToFront()
+        binding.backArrow1.bringToFront()
+        binding.header.bringToFront()
+        binding.header.alpha = 0f
 
-        binding.backArrow.setOnClickListener {
+
+        binding.backArrow0.setOnClickListener {
             findNavController().navigateUp()
         }
+
+        binding.backArrow1.setOnClickListener {
+            findNavController().navigateUp()
+        }
+
+
+        binding.scrollView.setOnScrollChangeListener(NestedScrollView.OnScrollChangeListener { v, _, scrollY, _, oldScrollY ->
+            when {
+                scrollY>oldScrollY -> {
+                    binding.backArrow1.visibility = View.GONE
+                    //down
+                    binding.eventImage.animate().alpha((scrollY*1.0f) / (binding.eventImage.height - binding.header.height)).setListener(object :AnimatorListenerAdapter(){
+
+                        override fun onAnimationEnd(animation: Animator?) {
+                            super.onAnimationEnd(animation)
+                            binding.header.alpha = (scrollY*1.0f) / (binding.eventImage.height - binding.header.height)
+                        }
+
+                    })
+
+                }
+                scrollY<oldScrollY -> {
+
+                    binding.backArrow1.visibility = View.VISIBLE
+
+                    binding.eventImage.animate().alpha(1.0f).setListener(object :AnimatorListenerAdapter(){
+
+                        override fun onAnimationEnd(animation: Animator?) {
+                            super.onAnimationEnd(animation)
+                            binding.header.alpha = 0f
+
+                        }
+
+                    })
+                }
+                scrollY==0 -> {
+                    binding.header.alpha = 0f
+                }
+            }
+        })
 
         observer()
     }
@@ -90,7 +136,7 @@ class EventDetailsFragment : Fragment() {
                         ZoneId.systemDefault()
                     ).toLocalDateTime().format(DateTimeFormatter.ofPattern("yyyy.MM.dd  HH:mm"))
 
-                    binding.date.text = "$timeZone"
+                    binding.date.text = timeZone
                     binding.time.text = "${it.data.duration} min"
 
                     binding.description.text = it.data.description
