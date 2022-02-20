@@ -7,7 +7,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.view.Window
-import android.widget.Toast
+import androidx.core.os.bundleOf
 import androidx.fragment.app.DialogFragment
 import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
@@ -22,6 +22,7 @@ class CloseTicketFragment : DialogFragment() {
 
     private lateinit var binding: FragmentCloseTicketBinding
     private val ticketViewModel:TicketViewModel by viewModels()
+    private lateinit var bundle : Bundle
     private var ticketId = 0
 
     override fun onCreateView(
@@ -41,13 +42,14 @@ class CloseTicketFragment : DialogFragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+        bundle = bundleOf(TicketEnum.Type.ticket to TicketEnum.Close.ticket)
+
 
         if (arguments != null)
             ticketId = requireArguments().getInt(TicketEnum.Id.ticket, 0)
 
         binding.btnKeep.setOnClickListener {
             ticketViewModel.closeTicket(ticketId)
-            observer()
         }
 
         binding.btnCancel.setOnClickListener {
@@ -58,6 +60,7 @@ class CloseTicketFragment : DialogFragment() {
         binding.exit.setOnClickListener {
             dialog?.dismiss()
         }
+        observer()
     }
 
 
@@ -66,9 +69,8 @@ class CloseTicketFragment : DialogFragment() {
 
             when (it) {
                 is Result.Success -> {
-                    binding.prg.visibility = View.VISIBLE
-                    findNavController().clearBackStack(R.id.closeTicketFragment)
-                    findNavController().navigate(R.id.action_closeTicketFragment_to_ticketSystemFragment)
+                    binding.prg.visibility = View.GONE
+                    findNavController().navigate(R.id.action_closeTicketFragment_to_ticketSystemFragment,bundle)
 
 
                 }
@@ -80,9 +82,7 @@ class CloseTicketFragment : DialogFragment() {
 
                 is Result.Error -> {
                     binding.prg.visibility = View.GONE
-                    Toast.makeText(context, it.message, Toast.LENGTH_SHORT).show()
-                    findNavController().navigate(R.id.action_closeTicketFragment_to_ticketSystemFragment)
-
+                    findNavController().navigate(R.id.action_closeTicketFragment_to_ticketSystemFragment,bundle)
                 }
             }
         }

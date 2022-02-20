@@ -2,6 +2,7 @@ package com.utechia.domain.enum
 
 enum class TicketEnum(val ticket:String) {
     Id("ticketId"),
+    Type("type"),
     Open("Open"),
     Close("Close"),
     New("New"),

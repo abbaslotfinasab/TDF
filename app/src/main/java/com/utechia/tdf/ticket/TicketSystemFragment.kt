@@ -4,10 +4,11 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Toast
 import androidx.fragment.app.Fragment
 import com.google.android.material.tabs.TabLayout
 import com.google.android.material.tabs.TabLayoutMediator
-import com.utechia.domain.enum.OrderEnum
+import com.utechia.domain.enum.EventsEnum
 import com.utechia.domain.enum.TicketEnum
 import com.utechia.tdf.R
 import com.utechia.tdf.databinding.FragmentTicketSystemBinding
@@ -31,11 +32,10 @@ class TicketSystemFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         ticketViewPagerAdapter = TicketViewPagerAdapter(childFragmentManager,lifecycle)
-
         binding.pager.adapter = ticketViewPagerAdapter
 
         if (arguments != null) {
-            type = requireArguments().getString(OrderEnum.Type.order,"")
+            type = requireArguments().getString(TicketEnum.Type.ticket,"")
         }
 
 
@@ -61,16 +61,16 @@ class TicketSystemFragment : Fragment() {
                         binding.pager.setCurrentItem(0,true)
                         binding.tabLayout.selectTab(tab.parent?.getTabAt(0))
 
-                    },100)
+                    },200)
                 }
 
                 TicketEnum.Close.ticket ->{
 
                     binding.pager.postDelayed({
                         binding.pager.setCurrentItem(1,true)
-                        binding.tabLayout.selectTab(tab.parent?.getTabAt(2))
+                        binding.tabLayout.selectTab(tab.parent?.getTabAt(1))
 
-                    },100)
+                    },200)
                 }
 
             }}.attach()
