@@ -30,7 +30,7 @@ class TeaBoyOrderParentFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        teaBoyViewPagerAdapter = TeaBoyViewPagerAdapter(parentFragmentManager, lifecycle)
+        teaBoyViewPagerAdapter = TeaBoyViewPagerAdapter(childFragmentManager, lifecycle)
 
         binding.pager.adapter = teaBoyViewPagerAdapter
 

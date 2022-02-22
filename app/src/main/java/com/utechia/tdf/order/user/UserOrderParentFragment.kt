@@ -30,7 +30,7 @@ class UserOrderParentFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        userViewPagerAdapter = UserViewPagerAdapter(parentFragmentManager, lifecycle)
+        userViewPagerAdapter = UserViewPagerAdapter(childFragmentManager, lifecycle)
 
         binding.pager.adapter = userViewPagerAdapter
 
