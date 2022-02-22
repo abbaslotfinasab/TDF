@@ -84,6 +84,7 @@ class TeaBoyHomeFragment : Fragment(),View.OnClickListener {
             }.apply()
 
         }
+
         binding.name.text = name
         binding.job.text = "${floor}st Floor TeaBoy"
 
@@ -154,6 +155,8 @@ class TeaBoyHomeFragment : Fragment(),View.OnClickListener {
                     binding.active.text = it.data[0].delivered
                     binding.pending.text = it.data[0].pending
                     binding.cancelled.text = it.data[0].cancelled
+                    binding.rating.rating = prefs.getFloat(MainEnum.Avg.main,0f)
+                    binding.ratingNum.text = prefs.getFloat(MainEnum.Avg.main,0f).toString()
                 }
 
                 is Result.Loading -> {
@@ -181,14 +184,11 @@ class TeaBoyHomeFragment : Fragment(),View.OnClickListener {
                 bundle = bundleOf(OrderEnum.Type.order  to OrderEnum.Delivered.order)
                 findNavController().navigate(R.id.action_teaBoyHomeFragment_to_teaBoyOrdersFragment,bundle)
 
-
             }
 
             R.id.cancelledLayout -> {
                 bundle = bundleOf(OrderEnum.Type.order  to OrderEnum.Cancel.order)
                 findNavController().navigate(R.id.action_teaBoyHomeFragment_to_teaBoyOrdersFragment,bundle)
-
-
             }
         }
     }

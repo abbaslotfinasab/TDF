@@ -1,6 +1,7 @@
 package com.utechia.domain.enum
 
 enum class MainEnum(val main:String) {
+    Avg("avg"),
     Tdf("tdf"),
     Fcm("fcm"),
     Token("token"),

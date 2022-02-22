@@ -13,6 +13,12 @@ class SessionManager @Inject constructor(@ApplicationContext private val context
     private val prefs: SharedPreferences =
         context.getSharedPreferences(MainEnum.Tdf.main, Context.MODE_PRIVATE)
 
+    fun saveAvg(avg:Float){
+        val editor = prefs.edit()
+        editor.putFloat(MainEnum.Avg.main, avg)
+        editor.apply()
+    }
+
 
     fun saveAuthToken(verify: VerifyData) {
         val editor = prefs.edit()
