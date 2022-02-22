@@ -153,7 +153,7 @@ class EventAdapter: RecyclerView.Adapter<RecyclerView.ViewHolder>() {
                                 result.visibility = View.VISIBLE
                                 rate.visibility = View.GONE
                                 result.text = itemView.resources.getText(R.string.evaluate)
-                                subTitle.setBackgroundColor(
+                                result.setBackgroundColor(
                                     ContextCompat.getColor(
                                         itemView.context,
                                         R.color.disActive
@@ -259,16 +259,8 @@ class EventAdapter: RecyclerView.Adapter<RecyclerView.ViewHolder>() {
                             }
 
                             EventsEnum.Inprogress.event -> {
-                                result.visibility = View.VISIBLE
+                                result.visibility = View.GONE
                                 rate.visibility = View.GONE
-                                result.text = itemView.resources.getText(R.string.apply)
-                                result.setBackgroundColor(
-                                    ContextCompat.getColor(
-                                        itemView.context,
-                                        R.color.disActive
-                                    )
-                                )
-                                result.isEnabled = false
                             }
                             EventsEnum.Upcoming.event -> {
                                 result.visibility = View.VISIBLE
