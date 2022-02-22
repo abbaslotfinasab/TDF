@@ -4,8 +4,10 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.core.os.bundleOf
 import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.findNavController
+import com.utechia.domain.enum.SurveyEnum
 import com.utechia.tdf.R
 import com.utechia.tdf.databinding.FragmentResultSurveyBinding
 import dagger.hilt.android.AndroidEntryPoint
@@ -27,9 +29,10 @@ class ResultSurveyFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+        val bundle = bundleOf(SurveyEnum.Type.survey to SurveyEnum.Expired.survey)
 
         binding.appCompatButton.setOnClickListener {
-            findNavController().navigate(R.id.resultSurveyFragment_to_surveySystemFragment)
+            findNavController().navigate(R.id.resultSurveyFragment_to_surveySystemFragment,bundle)
         }
     }
 }

@@ -56,7 +56,6 @@ class CreateSurveyChildFragment(
                 binding.rating.visibility = View.GONE
                 binding.description.visibility = View.GONE
                 binding.radioGroup.visibility = View.VISIBLE
-
                 binding.radioGroup.clearCheck()
                 binding.radioGroup.removeAllViews()
 
