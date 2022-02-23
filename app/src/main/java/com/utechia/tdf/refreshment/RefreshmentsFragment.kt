@@ -48,21 +48,11 @@ class RefreshmentsFragment : Fragment(),View.OnClickListener {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         prefs = requireActivity().getSharedPreferences(MainEnum.Tdf.main, AppCompatActivity.MODE_PRIVATE)
-        order = prefs.getInt(Order,0)
+
+        setOrderNumber()
 
         refreshmentViewModel.getRefreshment("")
 
-        if (order!=0){
-            binding.bubble.visibility = View.VISIBLE
-            binding.orderNumber.visibility = View.VISIBLE
-            binding.orderNumber.text = order.toString()
-            binding.status.text = getString(R.string.preparingStatus)
-        }else{
-            binding.bubble.visibility = View.GONE
-            binding.orderNumber.visibility = View.GONE
-            binding.status.text = getString(R.string.daliveryStatus)
-
-        }
         refreshmentObserver()
 
         cartObserver()
@@ -77,6 +67,7 @@ class RefreshmentsFragment : Fragment(),View.OnClickListener {
                     cartViewModel.getCart()
                     binding.food.isEnabled = false
                     binding.drink.isEnabled = false
+                    setOrderNumber()
 
 
                 }
@@ -84,12 +75,15 @@ class RefreshmentsFragment : Fragment(),View.OnClickListener {
                     binding.prg.visibility = View.VISIBLE
                     binding.food.isEnabled = false
                     binding.drink.isEnabled = false
+                    setOrderNumber()
+
 
                 }
 
                 is Result.Error -> {
                     binding.food.isEnabled = true
                     binding.drink.isEnabled = true
+                    setOrderNumber()
                     binding.prg.visibility = View.GONE
                     Toast.makeText(context, it.message, Toast.LENGTH_SHORT).show()
                 }
@@ -143,17 +137,38 @@ class RefreshmentsFragment : Fragment(),View.OnClickListener {
                     binding.prg.visibility = View.GONE
                     binding.drink.isEnabled = true
                     binding.food.isEnabled = true
+                    setOrderNumber()
                 }
 
                 is Result.Loading -> {
                     binding.prg.visibility = View.GONE
+                    setOrderNumber()
+
                 }
 
                 is Result.Error -> {
                     binding.prg.visibility = View.GONE
+                    setOrderNumber()
                     Toast.makeText(context, it.message, Toast.LENGTH_SHORT).show()
                 }
             }
+        }
+    }
+
+    private fun setOrderNumber(){
+
+        order = prefs.getInt(Order,0)
+
+        if (order!=0){
+            binding.bubble.visibility = View.VISIBLE
+            binding.orderNumber.visibility = View.VISIBLE
+            binding.orderNumber.text = order.toString()
+            binding.status.text = getString(R.string.preparingStatus)
+        }else{
+            binding.bubble.visibility = View.GONE
+            binding.orderNumber.visibility = View.GONE
+            binding.status.text = getString(R.string.daliveryStatus)
+
         }
     }
 }
