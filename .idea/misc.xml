@@ -329,7 +329,7 @@
         <entry key="app/src/main/res/layout/fragment_delivered.xml" value="0.1" />
         <entry key="app/src/main/res/layout/fragment_event_details.xml" value="0.1" />
         <entry key="app/src/main/res/layout/fragment_event_rate.xml" value="0.1" />
-        <entry key="app/src/main/res/layout/fragment_event_result.xml" value="0.15854700854700854" />
+        <entry key="app/src/main/res/layout/fragment_event_result.xml" value="0.25" />
         <entry key="app/src/main/res/layout/fragment_event_system.xml" value="0.18" />
         <entry key="app/src/main/res/layout/fragment_event_system_child.xml" value="0.15854700854700854" />
         <entry key="app/src/main/res/layout/fragment_favorite.xml" value="0.19322916666666667" />
