@@ -8,20 +8,21 @@ import android.view.View
 import android.view.ViewGroup
 import android.view.Window
 import android.widget.Toast
+import androidx.core.os.bundleOf
 import androidx.fragment.app.DialogFragment
 import androidx.fragment.app.viewModels
-import androidx.navigation.fragment.NavHostFragment
 import androidx.navigation.fragment.findNavController
+import com.utechia.domain.enum.PermissionEnum
 import com.utechia.domain.utile.Result
 import com.utechia.tdf.R
 import com.utechia.tdf.databinding.FragmentCancelRequestBinding
-import com.utechia.tdf.ticket.CreateTicketFragment
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
 class CancelRequestFragment : DialogFragment() {
 
     private lateinit var binding: FragmentCancelRequestBinding
+    private lateinit var bundle : Bundle
     private val permissionViewModel:PermissionViewModel by viewModels()
     private var permissionId = 0
 
@@ -45,7 +46,7 @@ class CancelRequestFragment : DialogFragment() {
         super.onViewCreated(view, savedInstanceState)
 
         if (arguments !=null){
-            permissionId = requireArguments().getInt("permissionId",0)
+            permissionId = requireArguments().getInt(PermissionEnum.ID.permission,0)
 
         }
 
@@ -58,10 +59,9 @@ class CancelRequestFragment : DialogFragment() {
         }
 
         binding.btnCancel.setOnClickListener {
-            permissionViewModel.updatePermission(permissionId,"cancelled")
-            observer()
+            permissionViewModel.updatePermission(permissionId,PermissionEnum.Cancelled.permission)
         }
-
+        observer()
     }
 
     private fun observer() {
@@ -71,7 +71,8 @@ class CancelRequestFragment : DialogFragment() {
             when (it) {
                 is Result.Success -> {
                     binding.prg.visibility = View.VISIBLE
-                    findNavController().navigate(R.id.cancelRequestFragment_to_permissionFragment)
+                    bundle = bundleOf(PermissionEnum.Type.permission to PermissionEnum.Cancelled.permission)
+                    findNavController().navigate(R.id.cancelRequestFragment_to_permissionFragment,bundle)
                     dialog?.dismiss()
                 }
 
@@ -86,7 +87,8 @@ class CancelRequestFragment : DialogFragment() {
                 is Result.Error -> {
                     binding.prg.visibility = View.GONE
                     Toast.makeText(context, it.message, Toast.LENGTH_SHORT).show()
-                    findNavController().navigate(R.id.cancelRequestFragment_to_permissionFragment)
+                    bundle = bundleOf(PermissionEnum.Type.permission to PermissionEnum.Wait.permission  )
+                    findNavController().navigate(R.id.cancelRequestFragment_to_permissionFragment,bundle)
 
                 }
             }

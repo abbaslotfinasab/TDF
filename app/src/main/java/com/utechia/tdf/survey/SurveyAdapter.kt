@@ -63,12 +63,12 @@ class SurveyAdapter: RecyclerView.Adapter<RecyclerView.ViewHolder>() {
             startTimeZone = OffsetDateTime.parse(survey[position].datestart?:"2022-01-01T12:00:00+0100").atZoneSameInstant(
                 ZoneId.systemDefault()
             ).toLocalDateTime().format(DateTimeFormatter.ofPattern("yyyy.MM.dd-HH:mm"))
-            startDate.text = "$startTimeZone"
+            startDate.text = startTimeZone
 
             endTimeZone = OffsetDateTime.parse(survey[position].dateend?:"202-01-01T12:00:00+0100").atZoneSameInstant(
                 ZoneId.systemDefault()
             ).toLocalDateTime().format(DateTimeFormatter.ofPattern("yyyy.MM.dd-HH:mm"))
-            endDate.text = "$endTimeZone"
+            endDate.text = endTimeZone
 
             if (survey[position].surveystatus==SurveyEnum.Expired.survey || survey[position].surveystatus==SurveyEnum.Cancelled.survey || evaluated){
                 result.visibility = View.GONE

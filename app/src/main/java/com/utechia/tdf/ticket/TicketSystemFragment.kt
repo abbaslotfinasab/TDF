@@ -4,11 +4,9 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.Toast
 import androidx.fragment.app.Fragment
 import com.google.android.material.tabs.TabLayout
 import com.google.android.material.tabs.TabLayoutMediator
-import com.utechia.domain.enum.EventsEnum
 import com.utechia.domain.enum.TicketEnum
 import com.utechia.tdf.R
 import com.utechia.tdf.databinding.FragmentTicketSystemBinding
@@ -59,18 +57,14 @@ class TicketSystemFragment : Fragment() {
 
                     binding.pager.postDelayed({
                         binding.pager.setCurrentItem(0,true)
-                        binding.tabLayout.selectTab(tab.parent?.getTabAt(0))
-
-                    },200)
+                    },300)
                 }
 
                 TicketEnum.Close.ticket ->{
 
                     binding.pager.postDelayed({
                         binding.pager.setCurrentItem(1,true)
-                        binding.tabLayout.selectTab(tab.parent?.getTabAt(1))
-
-                    },200)
+                    },300)
                 }
 
             }}.attach()

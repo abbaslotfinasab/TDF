@@ -20,7 +20,6 @@
     <string name="checkout">CheckOut</string>
     <string name="orderid">OrderID:</string>
     <string name="cancelled">Cancel</string>
-    <string name="evaluate">Evaluate</string>
     <string name="order_details">Order Details</string>
     <string name="ok">OK</string>
     <string name="next">Next</string>
@@ -86,7 +85,7 @@
     <string name="evaluated_surveys">Evaluated Surveys</string>
     <string name="available_surveys">Available Surveys</string>
     <string name="rating">Rating</string>
-    <string name="multiple">Multiple choice</string>
+    <string name="multiple">Multiple</string>
     <string name="open">Open</string>
     <string name="no_orders_found">No Orders Found</string>
     <string name="type_text">Type text…</string>
@@ -111,6 +110,11 @@
     <string name="deactivation">Deactivation</string>
     <string name="new_notification">New Notification</string>
     <string name="priority">Priority:</string>
+    <string name="evaluate">Evaluate</string>
+    <string name="titleRequired">Title is required</string>
+    <string name="categoryRequired">Category is required</string>
+    <string name="descriptionRequired">Description is required</string>
+
 
 
     <string-array name="month_array">

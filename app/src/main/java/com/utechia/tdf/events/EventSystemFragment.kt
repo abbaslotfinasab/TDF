@@ -61,27 +61,21 @@ class EventSystemFragment : Fragment() {
 
                     binding.pager.postDelayed({
                         binding.pager.setCurrentItem(0,true)
-                        binding.tabLayout.selectTab(tab.parent?.getTabAt(1))
-
-                    },200)
+                    },300)
 
                 }
                 EventsEnum.Current.event ->{
 
                     binding.pager.postDelayed({
                         binding.pager.setCurrentItem(1,true)
-                        binding.tabLayout.selectTab(tab.parent?.getTabAt(0))
-
-                    },200)
+                    },300)
                 }
 
                 EventsEnum.Upcoming.event->{
 
                     binding.pager.postDelayed({
                         binding.pager.setCurrentItem(2,true)
-                        binding.tabLayout.selectTab(tab.parent?.getTabAt(2))
-
-                    },200)
+                    },300)
                 }
 
             }}.attach()

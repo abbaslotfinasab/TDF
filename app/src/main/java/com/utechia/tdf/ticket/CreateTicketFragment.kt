@@ -17,6 +17,7 @@ import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.GridLayoutManager
 import com.github.dhaval2404.imagepicker.ImagePicker
+import com.google.android.material.snackbar.Snackbar
 import com.utechia.domain.enum.TicketEnum
 import com.utechia.domain.model.CategoryModel
 import com.utechia.domain.utile.Result
@@ -29,6 +30,7 @@ import dagger.hilt.android.AndroidEntryPoint
 class CreateTicketFragment : Fragment() {
 
     private lateinit var binding: FragmentCreateTicketBinding
+    private lateinit var snackbar: Snackbar
     private val ticketViewModel:TicketViewModel by viewModels()
     private val baseNeedsViewModel:BaseNeedsViewModel by viewModels()
     private val uploadViewModel:UploadViewModel by viewModels()
@@ -115,17 +117,19 @@ class CreateTicketFragment : Fragment() {
             when{
 
                 binding.title.text.isNullOrEmpty() -> {
-                    Toast.makeText(context,"Title is required",Toast.LENGTH_SHORT).show()
+                    snackbar = Snackbar.make(view,R.string.titleRequired,Snackbar.LENGTH_SHORT)
+                    snackbar.show()
+
                 }
 
                 category ==-1 -> {
-                    Toast.makeText(context,"category is required",Toast.LENGTH_SHORT).show()
-
+                    snackbar = Snackbar.make(view,R.string.categoryRequired,Snackbar.LENGTH_SHORT)
+                    snackbar.show()
                 }
 
                 binding.description.text.isNullOrEmpty() -> {
-                    Toast.makeText(context,"Description is required",Toast.LENGTH_SHORT).show()
-
+                    snackbar = Snackbar.make(view,R.string.descriptionRequired,Snackbar.LENGTH_SHORT)
+                    snackbar.show()
                 }
 
                 else ->{

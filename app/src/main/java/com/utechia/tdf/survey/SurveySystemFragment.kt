@@ -60,9 +60,7 @@ class SurveySystemFragment : Fragment() {
 
                     binding.pager.postDelayed({
                         binding.pager.setCurrentItem(0, true)
-                        binding.tabLayout.selectTab(tab.parent?.getTabAt(1))
-
-                    }, 200)
+                    }, 300)
 
                 }
 
@@ -70,9 +68,7 @@ class SurveySystemFragment : Fragment() {
 
                     binding.pager.postDelayed({
                         binding.pager.setCurrentItem(1, true)
-                        binding.tabLayout.selectTab(tab.parent?.getTabAt(0))
-
-                    }, 200)
+                    }, 300)
                 }
             }
         }.attach()

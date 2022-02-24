@@ -63,27 +63,21 @@ class PermissionFragment : Fragment() {
 
                     binding.pager.postDelayed({
                         binding.pager.setCurrentItem(0, true)
-                        binding.tabLayout.selectTab(tab.parent?.getTabAt(1))
-
-                    }, 200)
+                    }, 300)
 
                 }
                 PermissionEnum.Expired.permission -> {
 
                     binding.pager.postDelayed({
                         binding.pager.setCurrentItem(1, true)
-                        binding.tabLayout.selectTab(tab.parent?.getTabAt(0))
-
-                    }, 200)
+                    }, 300)
                 }
 
                 PermissionEnum.Cancelled.permission -> {
 
                     binding.pager.postDelayed({
                         binding.pager.setCurrentItem(2, true)
-                        binding.tabLayout.selectTab(tab.parent?.getTabAt(2))
-
-                    }, 200)
+                    }, 300)
                 }
             }
         }.attach()
