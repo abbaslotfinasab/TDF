@@ -115,13 +115,13 @@ interface Service {
     suspend fun getPermissionType():Response<PermissionType>
 
     @GET("survey/listactive")
-    suspend fun getSurveyList():Response<Survey>
+    suspend fun getSurveyList(@Query("page") page: Int,@Query("page_size") page_size: Int):Response<Survey>
 
     @GET("survey/getarray/{id}")
     suspend fun getSurvey(@Path("id")id: Int):Response<Survey>
 
     @POST("survey/evaluted")
-    suspend fun getEvaluate():Response<Survey>
+    suspend fun getEvaluate(@Query("page") page: Int,@Query("page_size") page_size: Int):Response<Survey>
 
     @Headers("Content-Type: application/json")
     @POST("survey/answer")

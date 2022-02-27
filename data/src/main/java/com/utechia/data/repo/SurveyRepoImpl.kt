@@ -2,6 +2,7 @@ package com.utechia.data.repo
 
 import com.utechia.data.api.Service
 import com.utechia.data.utile.NetworkHelper
+import com.utechia.domain.enum.PagingEnum
 import com.utechia.domain.model.SurveyModel
 import com.utechia.domain.repository.SurveyRepo
 import org.json.JSONArray
@@ -19,12 +20,12 @@ class SurveyRepoImpl @Inject constructor(
 
         if (networkHelper.isNetworkConnected()) {
 
-            val result = service.getSurveyList()
+            val result = service.getSurveyList(PagingEnum.Number.page, PagingEnum.Size.page)
 
             return when (result.isSuccessful) {
 
                 true -> {
-                    result.body()?.data?.map { it.toDomain() }!!.toMutableList()
+                    result.body()?.data?.list?.map {it.toDomain() }!!.toMutableList()
                 }
 
                 else ->
@@ -44,7 +45,7 @@ class SurveyRepoImpl @Inject constructor(
             return when (result.isSuccessful) {
 
                 true -> {
-                    result.body()?.data?.map { it.toDomain() }!!.toMutableList()
+                    result.body()?.data?.list?.map {it.toDomain() }!!.toMutableList()
                 }
 
                 else ->
@@ -59,12 +60,12 @@ class SurveyRepoImpl @Inject constructor(
 
         if (networkHelper.isNetworkConnected()) {
 
-            val result = service.getEvaluate()
+            val result = service.getEvaluate(PagingEnum.Number.page, PagingEnum.Size.page)
 
             return when (result.isSuccessful) {
 
                 true -> {
-                    result.body()?.data?.map { it.toDomain() }!!.toMutableList()
+                    result.body()?.data?.list?.map {it.toDomain() }!!.toMutableList()
                 }
 
                 else ->
