@@ -360,7 +360,7 @@
         <entry key="app/src/main/res/layout/fragment_status.xml" value="0.1" />
         <entry key="app/src/main/res/layout/fragment_survey_child.xml" value="0.1" />
         <entry key="app/src/main/res/layout/fragment_survey_system.xml" value="0.1" />
-        <entry key="app/src/main/res/layout/fragment_tea_boy_home.xml" value="0.23660714285714285" />
+        <entry key="app/src/main/res/layout/fragment_tea_boy_home.xml" value="0.18" />
         <entry key="app/src/main/res/layout/fragment_tea_boy_order_child.xml" value="0.1" />
         <entry key="app/src/main/res/layout/fragment_tea_boy_order_details.xml" value="0.19322916666666667" />
         <entry key="app/src/main/res/layout/fragment_tea_boy_orders.xml" value="0.19322916666666667" />
