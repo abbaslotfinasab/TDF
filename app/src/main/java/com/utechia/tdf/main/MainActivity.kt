@@ -2,6 +2,7 @@ package com.utechia.tdf.main
 
 import android.Manifest
 import android.content.Context
+import android.content.Intent
 import android.content.SharedPreferences
 import android.content.pm.PackageManager
 import android.hardware.*
@@ -12,7 +13,6 @@ import android.os.Handler
 import android.os.Looper
 import android.view.View
 import android.view.WindowManager
-import android.widget.Toast
 import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatDelegate
 import androidx.core.content.ContextCompat
@@ -38,6 +38,8 @@ import com.utechia.tdf.databinding.ActivityMainBinding
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
+import java.security.Permission
+import java.security.Permissions
 
 @AndroidEntryPoint
 class MainActivity : AppCompatActivity(), SensorEventListener {
@@ -50,12 +52,9 @@ class MainActivity : AppCompatActivity(), SensorEventListener {
     private lateinit var analytics: FirebaseAnalytics
     private var  sensorManager : SensorManager? = null
     private var  sensor : Sensor? = null
-    private var step = 0
 
     companion object{
         const val Order = "order"
-        const val Steps = "steps"
-
     }
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -67,17 +66,15 @@ class MainActivity : AppCompatActivity(), SensorEventListener {
         prefs = getSharedPreferences(MainEnum.Tdf.main, MODE_PRIVATE)
 
 
-       /* if(ContextCompat.checkSelfPermission(this,
+        if(ContextCompat.checkSelfPermission(this,
                 Manifest.permission.ACTIVITY_RECOGNITION) == PackageManager.PERMISSION_DENIED){
             //ask for permission
             if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
-                requestPermissions(,{
-                    if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.Q) {
-                        Manifest.permission.ACTIVITY_RECOGNITION
-                    }
-                }, PHYISCAL_ACTIVITY)
+                if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.Q) {
+                    requestPermissions(arrayOf(Manifest.permission.ACTIVITY_RECOGNITION),1)
+                }
             }
-        }*/
+        }
 
         FirebaseMessaging.getInstance().token.addOnCompleteListener(OnCompleteListener { task ->
             if (task.isSuccessful) {
