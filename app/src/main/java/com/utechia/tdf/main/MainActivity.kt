@@ -2,7 +2,6 @@ package com.utechia.tdf.main
 
 import android.Manifest
 import android.content.Context
-import android.content.Intent
 import android.content.SharedPreferences
 import android.content.pm.PackageManager
 import android.hardware.*
@@ -25,6 +24,7 @@ import androidx.navigation.NavController
 import androidx.navigation.NavOptions
 import androidx.navigation.fragment.NavHostFragment
 import androidx.navigation.ui.setupWithNavController
+import androidx.work.*
 import com.google.android.gms.tasks.OnCompleteListener
 import com.google.firebase.analytics.FirebaseAnalytics
 import com.google.firebase.analytics.ktx.analytics
@@ -38,8 +38,9 @@ import com.utechia.tdf.databinding.ActivityMainBinding
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
-import java.security.Permission
-import java.security.Permissions
+import java.time.Duration
+import java.time.LocalDateTime
+import java.util.concurrent.TimeUnit
 
 @AndroidEntryPoint
 class MainActivity : AppCompatActivity(), SensorEventListener {
@@ -53,6 +54,10 @@ class MainActivity : AppCompatActivity(), SensorEventListener {
     private var  sensorManager : SensorManager? = null
     private var  sensor : Sensor? = null
 
+    private val workManager by lazy {
+        WorkManager.getInstance(applicationContext)
+    }
+
     companion object{
         const val Order = "order"
     }
@@ -62,8 +67,8 @@ class MainActivity : AppCompatActivity(), SensorEventListener {
         analytics = Firebase.analytics
         AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO)
         binding = ActivityMainBinding.inflate(layoutInflater)
-        setContentView(binding.root)
         prefs = getSharedPreferences(MainEnum.Tdf.main, MODE_PRIVATE)
+        setContentView(binding.root)
 
 
         if(ContextCompat.checkSelfPermission(this,
@@ -161,6 +166,9 @@ class MainActivity : AppCompatActivity(), SensorEventListener {
 
         }
         observer()
+
+        createPeriodTimeRequest()
+
     }
 
     override fun onResume() {
@@ -956,4 +964,18 @@ class MainActivity : AppCompatActivity(), SensorEventListener {
     override fun onAccuracyChanged(sensor: Sensor?, accuracy: Int) {
     }
 
+    private fun createPeriodTimeRequest(){
+
+        val delay :Duration = Duration.between(LocalDateTime.now().withHour(0).withMinute(0).withSecond(0).withNano(0),LocalDateTime.now())
+
+        val stepWorker : WorkRequest = PeriodicWorkRequestBuilder<StepsCountWorker>(24,TimeUnit.HOURS)
+            .setInitialDelay(if(delay.toMinutes().toInt()!=0){
+                delay.toMinutes()
+            }else{
+                 0
+                 },TimeUnit.MINUTES)
+            .build()
+
+        workManager.enqueue(stepWorker)
+    }
 }
