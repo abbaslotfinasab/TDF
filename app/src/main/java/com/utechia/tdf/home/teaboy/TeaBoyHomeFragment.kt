@@ -41,7 +41,7 @@ class TeaBoyHomeFragment : Fragment(),View.OnClickListener {
     private var floor = ""
     private var status = false
     private var employeeId = ""
-    private val df = DecimalFormat("#.##")
+    private val df = DecimalFormat("#.#")
 
     companion object{
         const val Start = "start"

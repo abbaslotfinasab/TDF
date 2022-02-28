@@ -32,7 +32,7 @@ class UserHomeFragment : Fragment() {
     private val userHomeAdapter: UserHomeAdapter = UserHomeAdapter()
     private lateinit var prefs: SharedPreferences
     private var employeeId = ""
-    private val df = DecimalFormat("#.##")
+    private val df = DecimalFormat("#.#")
 
 
 

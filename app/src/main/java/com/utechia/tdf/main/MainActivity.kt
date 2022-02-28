@@ -978,14 +978,12 @@ class MainActivity : AppCompatActivity(), SensorEventListener {
 
         val delay :Duration = Duration.between(LocalDateTime.now().withHour(0).withMinute(0).withSecond(0).withNano(0),LocalDateTime.now())
 
-        val stepWorker : WorkRequest = PeriodicWorkRequestBuilder<StepsCountWorker>(24,TimeUnit.HOURS)
-            .setInitialDelay(if(delay.toMinutes().toInt()!=0){
-                delay.toMinutes()
-            }else{
-                 0
-                 },TimeUnit.MINUTES)
+        val stepWorker : PeriodicWorkRequest = PeriodicWorkRequestBuilder<StepsCountWorker>(24,TimeUnit.HOURS)
+            .setInitialDelay(1440-delay.toMinutes(),TimeUnit.MINUTES)
             .build()
 
-        workManager.enqueue(stepWorker)
+        workManager.enqueueUniquePeriodicWork(
+            "send_periodic",ExistingPeriodicWorkPolicy.REPLACE,stepWorker
+        )
     }
 }

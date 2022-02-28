@@ -1,16 +1,25 @@
 package com.utechia.tdf.main
 
 import android.content.Context
+import android.content.SharedPreferences
+import androidx.appcompat.app.AppCompatActivity
 import androidx.work.Worker
 import androidx.work.WorkerParameters
+import com.utechia.domain.enum.MainEnum
 
-class StepsCountWorker(appContext: Context, workerParams: WorkerParameters):
+class StepsCountWorker(val appContext: Context, workerParams: WorkerParameters):
     Worker(appContext, workerParams) {
+
+    private var prefs:SharedPreferences? = null
+
+    companion object{
+        const val STEPS_COUNT = "steps"
+    }
+
     override fun doWork(): Result {
+        prefs = appContext.getSharedPreferences(MainEnum.Tdf.main, AppCompatActivity.MODE_PRIVATE)
+        prefs?.edit()?.remove(STEPS_COUNT)?.apply()
 
-        // Do the work here--in this case, upload the images.
-
-        // Indicate whether the work finished successfully with the Result
         return Result.success()
     }
 }
