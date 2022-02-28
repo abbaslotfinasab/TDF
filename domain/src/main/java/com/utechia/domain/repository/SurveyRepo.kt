@@ -1,6 +1,5 @@
 package com.utechia.domain.repository
 
-import com.utechia.domain.model.AnswerModel
 import com.utechia.domain.model.SurveyModel
 import org.json.JSONArray
 

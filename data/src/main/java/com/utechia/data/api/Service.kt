@@ -118,7 +118,7 @@ interface Service {
     suspend fun getSurveyList(@Query("page") page: Int,@Query("page_size") page_size: Int):Response<Survey>
 
     @GET("survey/getarray/{id}")
-    suspend fun getSurvey(@Path("id")id: Int):Response<Survey>
+    suspend fun getSurvey(@Path("id")id: Int):Response<SingleSurvey>
 
     @POST("survey/evaluted")
     suspend fun getEvaluate(@Query("page") page: Int,@Query("page_size") page_size: Int):Response<Survey>
