@@ -53,6 +53,7 @@ class MainActivity : AppCompatActivity(), SensorEventListener {
     private lateinit var analytics: FirebaseAnalytics
     private var  sensorManager : SensorManager? = null
     private var  sensor : Sensor? = null
+    private var steps = 0
 
     private val workManager by lazy {
         WorkManager.getInstance(applicationContext)
@@ -60,6 +61,8 @@ class MainActivity : AppCompatActivity(), SensorEventListener {
 
     companion object{
         const val Order = "order"
+        const val STEPS_COUNT = "steps"
+
     }
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -177,6 +180,8 @@ class MainActivity : AppCompatActivity(), SensorEventListener {
         sensorManager = getSystemService(Context.SENSOR_SERVICE) as SensorManager
         sensor = sensorManager?.getDefaultSensor(Sensor.TYPE_STEP_COUNTER)
         sensorManager?.registerListener(this, sensor, SensorManager.SENSOR_DELAY_FASTEST)
+        steps = prefs.getInt(STEPS_COUNT,0)
+        mainViewModel.stepCount(steps)
 
     }
 
@@ -956,8 +961,13 @@ class MainActivity : AppCompatActivity(), SensorEventListener {
     }
 
     override fun onSensorChanged(event: SensorEvent?) {
+            steps+=1
 
-        mainViewModel.stepCount(event?.values?.get(0)?.toInt()?:0)
+        with(prefs.edit()) {
+            putInt(STEPS_COUNT, steps)
+        }.apply()
+
+        mainViewModel.stepCount(steps)
 
     }
 

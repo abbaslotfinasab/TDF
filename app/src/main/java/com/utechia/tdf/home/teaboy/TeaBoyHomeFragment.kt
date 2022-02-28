@@ -27,6 +27,7 @@ import com.utechia.tdf.main.MainActivity
 import com.utechia.tdf.databinding.FragmentTeaBoyHomeBinding
 import com.utechia.tdf.order.teaboy.OrderCountViewModel
 import dagger.hilt.android.AndroidEntryPoint
+import java.text.DecimalFormat
 
 @AndroidEntryPoint
 class TeaBoyHomeFragment : Fragment(),View.OnClickListener {
@@ -40,6 +41,7 @@ class TeaBoyHomeFragment : Fragment(),View.OnClickListener {
     private var floor = ""
     private var status = false
     private var employeeId = ""
+    private val df = DecimalFormat("#.##")
 
     companion object{
         const val Start = "start"
@@ -176,6 +178,9 @@ class TeaBoyHomeFragment : Fragment(),View.OnClickListener {
         (activity as MainActivity).mainViewModel.stepCounter.observe(viewLifecycleOwner){
 
             binding.stepsCount.text = it.toString()
+            val cal = df.format(it*0.05)
+            binding.calory.text = cal.toString()
+
 
         }
 
