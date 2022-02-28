@@ -47,6 +47,7 @@ class TeaBoyHomeFragment : Fragment(),View.OnClickListener {
         const val Floor = "floor"
         const val Active = "isTeaBoyActive"
         const val ID = "employeeId"
+
     }
 
     override fun onCreateView(
@@ -161,14 +162,23 @@ class TeaBoyHomeFragment : Fragment(),View.OnClickListener {
 
                 is Result.Loading -> {
                     binding.prg.visibility = View.VISIBLE
+
                 }
 
                 is Result.Error -> {
                     binding.prg.visibility = View.GONE
                     Toast.makeText(context, it.message, Toast.LENGTH_SHORT).show()
+
                 }
             }
         }
+
+        (activity as MainActivity).mainViewModel.stepCounter.observe(viewLifecycleOwner){
+
+            binding.stepsCount.text = it.toString()
+
+        }
+
     }
 
     override fun onClick(v: View?) {

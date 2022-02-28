@@ -38,6 +38,7 @@ class UserHomeFragment : Fragment() {
         const val Start = "start"
         const val ID = "employeeId"
 
+
     }
 
 
@@ -115,6 +116,17 @@ class UserHomeFragment : Fragment() {
             adapter = userHomeAdapter
             layoutManager = LinearLayoutManager(context,LinearLayoutManager.VERTICAL,false)
           //  addItemDecoration(UserHomeItemDecoration())
+        }
+
+        observer()
+    }
+
+    private fun observer() {
+
+        (activity as MainActivity).mainViewModel.stepCounter.observe(viewLifecycleOwner){
+
+            binding.stepsCount.text = it.toString()
+
         }
     }
 }

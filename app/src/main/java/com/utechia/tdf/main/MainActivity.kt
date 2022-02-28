@@ -1,12 +1,18 @@
 package com.utechia.tdf.main
 
+import android.Manifest
+import android.content.Context
 import android.content.SharedPreferences
+import android.content.pm.PackageManager
+import android.hardware.*
+import android.os.Build
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.os.Handler
 import android.os.Looper
 import android.view.View
 import android.view.WindowManager
+import android.widget.Toast
 import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatDelegate
 import androidx.core.content.ContextCompat
@@ -34,17 +40,22 @@ import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 
 @AndroidEntryPoint
-class MainActivity : AppCompatActivity() {
+class MainActivity : AppCompatActivity(), SensorEventListener {
 
     private lateinit var binding:ActivityMainBinding
-    private val mainViewModel:MainViewModel by viewModels()
+    val mainViewModel:MainViewModel by viewModels()
     private var navHostFragment : NavHostFragment = NavHostFragment()
     private var navController : NavController = NavController(this)
     private lateinit var prefs: SharedPreferences
     private lateinit var analytics: FirebaseAnalytics
+    private var  sensorManager : SensorManager? = null
+    private var  sensor : Sensor? = null
+    private var step = 0
 
     companion object{
         const val Order = "order"
+        const val Steps = "steps"
+
     }
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -54,6 +65,19 @@ class MainActivity : AppCompatActivity() {
         binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
         prefs = getSharedPreferences(MainEnum.Tdf.main, MODE_PRIVATE)
+
+
+       /* if(ContextCompat.checkSelfPermission(this,
+                Manifest.permission.ACTIVITY_RECOGNITION) == PackageManager.PERMISSION_DENIED){
+            //ask for permission
+            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
+                requestPermissions(,{
+                    if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.Q) {
+                        Manifest.permission.ACTIVITY_RECOGNITION
+                    }
+                }, PHYISCAL_ACTIVITY)
+            }
+        }*/
 
         FirebaseMessaging.getInstance().token.addOnCompleteListener(OnCompleteListener { task ->
             if (task.isSuccessful) {
@@ -140,6 +164,15 @@ class MainActivity : AppCompatActivity() {
 
         }
         observer()
+    }
+
+    override fun onResume() {
+        super.onResume()
+
+        sensorManager = getSystemService(Context.SENSOR_SERVICE) as SensorManager
+        sensor = sensorManager?.getDefaultSensor(Sensor.TYPE_STEP_COUNTER)
+        sensorManager?.registerListener(this, sensor, SensorManager.SENSOR_DELAY_FASTEST)
+
     }
 
     override fun onBackPressed() {
@@ -887,15 +920,12 @@ class MainActivity : AppCompatActivity() {
                         binding.bottomNavigation.getOrCreateBadge(R.id.refreshmentFragment).backgroundColor = ContextCompat.getColor(this,R.color.bubble)
                         binding.bottomNavigation.getOrCreateBadge(R.id.refreshmentFragment).number =
                             it.data.pending_orders!!
-                        with(prefs.edit()) {
-                            putInt(Order, it.data.pending_orders!!)
-                        }.apply()
+
+                        mainViewModel.orderCount(it.data.pending_orders!!)
+
                     }
                     else {
-                        binding.bottomNavigation.removeBadge(R.id.refreshmentFragment)
-                        with(prefs.edit()) {
-                            putInt(Order,0)
-                        }.apply()
+                        mainViewModel.orderCount(0)
                     }
                 }
 
@@ -919,4 +949,14 @@ class MainActivity : AppCompatActivity() {
             }
         }
     }
+
+    override fun onSensorChanged(event: SensorEvent?) {
+
+        mainViewModel.stepCount(event?.values?.get(0)?.toInt()?:0)
+
+    }
+
+    override fun onAccuracyChanged(sensor: Sensor?, accuracy: Int) {
+    }
+
 }
