@@ -71,7 +71,7 @@ class CancelRequestFragment : DialogFragment() {
             when (it) {
                 is Result.Success -> {
                     binding.prg.visibility = View.VISIBLE
-                    bundle = bundleOf(PermissionEnum.Type.permission to PermissionEnum.Cancelled.permission)
+                    bundle = bundleOf(PermissionEnum.Type.permission to PermissionEnum.Wait.permission)
                     findNavController().navigate(R.id.cancelRequestFragment_to_permissionFragment,bundle)
                     dialog?.dismiss()
                 }

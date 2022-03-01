@@ -29,7 +29,7 @@ class ResultSurveyFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        val bundle = bundleOf(SurveyEnum.Type.survey to SurveyEnum.Expired.survey)
+        val bundle = bundleOf(SurveyEnum.Type.survey to SurveyEnum.Evaluate.survey)
 
         binding.appCompatButton.setOnClickListener {
             findNavController().navigate(R.id.resultSurveyFragment_to_surveySystemFragment,bundle)

@@ -42,7 +42,7 @@ class CloseTicketFragment : DialogFragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        bundle = bundleOf(TicketEnum.Type.ticket to TicketEnum.Close.ticket)
+        bundle = bundleOf(TicketEnum.Type.ticket to TicketEnum.Open.ticket)
 
 
         if (arguments != null)
