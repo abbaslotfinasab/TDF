@@ -158,6 +158,20 @@ class MyFirebaseMessagingService : FirebaseMessagingService() {
 
             }
 
+            NotificationEnum.Survey.notification->{
+
+                val bundle = bundleOf(SurveyEnum.Id.survey to referenceId)
+
+                return NavDeepLinkBuilder(applicationContext)
+                    .setGraph(R.navigation.nav_graph)
+                    .setComponentName(MainActivity::class.java)
+                    .setDestination(R.id.createSurveyFragment)
+                    .setArguments(bundle)
+                    .createTaskStackBuilder()
+                    .getPendingIntent(0, PendingIntent.FLAG_ONE_SHOT)
+
+            }
+
             NotificationEnum.Event.notification->{
 
                 val bundle = bundleOf(EventsEnum.ID.event to referenceId)
@@ -167,6 +181,17 @@ class MyFirebaseMessagingService : FirebaseMessagingService() {
                     .setComponentName(MainActivity::class.java)
                     .setArguments(bundle)
                     .setDestination(R.id.eventDetailsFragment)
+                    .createTaskStackBuilder()
+                    .getPendingIntent(0, PendingIntent.FLAG_ONE_SHOT)
+
+            }
+
+            NotificationEnum.Custom.notification->{
+
+                return NavDeepLinkBuilder(applicationContext)
+                    .setGraph(R.navigation.nav_graph)
+                    .setComponentName(MainActivity::class.java)
+                    .setDestination(R.id.nav_graph)
                     .createTaskStackBuilder()
                     .getPendingIntent(0, PendingIntent.FLAG_ONE_SHOT)
 
