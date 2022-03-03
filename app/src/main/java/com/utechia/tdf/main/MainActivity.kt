@@ -14,8 +14,8 @@ import android.view.View
 import android.view.WindowManager
 import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatDelegate
+import androidx.core.app.ActivityCompat
 import androidx.core.content.ContextCompat
-import androidx.core.os.bundleOf
 import androidx.core.view.GravityCompat
 import androidx.core.view.forEach
 import androidx.drawerlayout.widget.DrawerLayout
@@ -25,6 +25,7 @@ import androidx.navigation.NavOptions
 import androidx.navigation.fragment.NavHostFragment
 import androidx.navigation.ui.setupWithNavController
 import androidx.work.*
+import com.google.android.gms.fitness.data.*
 import com.google.android.gms.tasks.OnCompleteListener
 import com.google.firebase.analytics.FirebaseAnalytics
 import com.google.firebase.analytics.ktx.analytics
@@ -53,15 +54,20 @@ class MainActivity : AppCompatActivity(), SensorEventListener {
     private lateinit var analytics: FirebaseAnalytics
     private var  sensorManager : SensorManager? = null
     private var  sensor : Sensor? = null
-    private var steps = 0
+    private var previousSteps = 0
+    private var totalSteps = 0
+    private var currentSteps = 0
+
+
+
 
     private val workManager by lazy {
         WorkManager.getInstance(applicationContext)
     }
 
     companion object{
-        const val Order = "order"
-        const val STEPS_COUNT = "steps"
+        const val TOTAL_STEPS = "total_Steps"
+        const val PREVIOUS_STEPS = "previous_Steps"
 
     }
 
@@ -74,15 +80,15 @@ class MainActivity : AppCompatActivity(), SensorEventListener {
         setContentView(binding.root)
 
 
-        if(ContextCompat.checkSelfPermission(this,
-                Manifest.permission.ACTIVITY_RECOGNITION) == PackageManager.PERMISSION_DENIED){
-            //ask for permission
-            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
+            if(ContextCompat.checkSelfPermission(this, Manifest.permission.ACTIVITY_RECOGNITION)
+                    != PackageManager.PERMISSION_GRANTED) {
+
                 if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.Q) {
-                    requestPermissions(arrayOf(Manifest.permission.ACTIVITY_RECOGNITION),1)
+                    ActivityCompat.requestPermissions(this,
+                        arrayOf(Manifest.permission.ACTIVITY_RECOGNITION),
+                        1)
                 }
-            }
-        }
+                    }
 
         FirebaseMessaging.getInstance().token.addOnCompleteListener(OnCompleteListener { task ->
             if (task.isSuccessful) {
@@ -171,7 +177,6 @@ class MainActivity : AppCompatActivity(), SensorEventListener {
         observer()
 
         createPeriodTimeRequest()
-
     }
 
     override fun onResume() {
@@ -180,8 +185,19 @@ class MainActivity : AppCompatActivity(), SensorEventListener {
         sensorManager = getSystemService(Context.SENSOR_SERVICE) as SensorManager
         sensor = sensorManager?.getDefaultSensor(Sensor.TYPE_STEP_COUNTER)
         sensorManager?.registerListener(this, sensor, SensorManager.SENSOR_DELAY_FASTEST)
-        steps = prefs.getInt(STEPS_COUNT,0)
-        mainViewModel.stepCount(steps)
+        previousSteps = prefs.getInt(PREVIOUS_STEPS,0)
+        totalSteps = prefs.getInt(TOTAL_STEPS,0)
+
+        if(totalSteps<previousSteps){
+            with(prefs.edit()) {
+                putInt(PREVIOUS_STEPS, totalSteps)
+            }.apply()
+            previousSteps = prefs.getInt(PREVIOUS_STEPS,0)
+        }
+
+        currentSteps = totalSteps - previousSteps
+
+        mainViewModel.stepCount(currentSteps)
 
     }
 
@@ -254,8 +270,7 @@ class MainActivity : AppCompatActivity(), SensorEventListener {
                     }
                     R.id.refreshmentFragment ->{
                         design(MainEnum.Refreshment.main)
-                        val bundle = bundleOf(Order to 2)
-                        destination.addInDefaultArgs(bundle)
+
 
                     }
 
@@ -961,13 +976,24 @@ class MainActivity : AppCompatActivity(), SensorEventListener {
     }
 
     override fun onSensorChanged(event: SensorEvent?) {
-            steps+=1
+
+        totalSteps = event?.values?.get(0)?.toInt()?:0
+        previousSteps = prefs.getInt(PREVIOUS_STEPS,0)
+
+        if(totalSteps<previousSteps){
+            with(prefs.edit()) {
+                putInt(PREVIOUS_STEPS, totalSteps)
+            }.apply()
+            previousSteps = prefs.getInt(PREVIOUS_STEPS,0)
+        }
+
+        currentSteps = totalSteps - previousSteps
 
         with(prefs.edit()) {
-            putInt(STEPS_COUNT, steps)
+            putInt(TOTAL_STEPS, totalSteps)
         }.apply()
 
-        mainViewModel.stepCount(steps)
+        mainViewModel.stepCount(currentSteps)
 
     }
 
@@ -976,14 +1002,22 @@ class MainActivity : AppCompatActivity(), SensorEventListener {
 
     private fun createPeriodTimeRequest(){
 
-        val delay :Duration = Duration.between(LocalDateTime.now().withHour(0).withMinute(0).withSecond(0).withNano(0),LocalDateTime.now())
+        val delay :Duration = Duration.between(LocalDateTime.now(),LocalDateTime.now().withHour(0).withMinute(0).withSecond(0).withNano(0))
+
+        var time = delay.toMinutes()
+
+        time *= if (time<0){
+            -1
+        }else{
+            1
+        }
 
         val stepWorker : PeriodicWorkRequest = PeriodicWorkRequestBuilder<StepsCountWorker>(24,TimeUnit.HOURS)
-            .setInitialDelay(1440-delay.toMinutes(),TimeUnit.MINUTES)
+            .setInitialDelay((1440-time),TimeUnit.MINUTES)
             .build()
 
         workManager.enqueueUniquePeriodicWork(
-            "send_periodic",ExistingPeriodicWorkPolicy.KEEP,stepWorker
+            "send_periodic",ExistingPeriodicWorkPolicy.REPLACE,stepWorker
         )
     }
 }
