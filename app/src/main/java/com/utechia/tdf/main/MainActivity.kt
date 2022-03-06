@@ -68,6 +68,11 @@ class MainActivity : AppCompatActivity(), SensorEventListener {
 
     }
 
+    override fun onStart() {
+        super.onStart()
+
+    }
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         analytics = Firebase.analytics
@@ -187,7 +192,7 @@ class MainActivity : AppCompatActivity(), SensorEventListener {
         previousSteps = prefs.getInt(PREVIOUS_STEPS,0)
         totalSteps = prefs.getInt(TOTAL_STEPS,0)
 
-        if(totalSteps<previousSteps){
+        if(totalSteps<previousSteps || previousSteps==0){
             with(prefs.edit()) {
                 putInt(PREVIOUS_STEPS, totalSteps)
             }.apply()
@@ -367,6 +372,11 @@ class MainActivity : AppCompatActivity(), SensorEventListener {
 
                     R.id.notificationFragment -> {
                         design(MainEnum.Notification.main)
+
+                    }
+
+                    R.id.healthParentFragment -> {
+                        design(MainEnum.Health.main)
 
                     }
                 }
@@ -570,6 +580,11 @@ class MainActivity : AppCompatActivity(), SensorEventListener {
 
                 R.id.notificationFragment -> {
                     design(MainEnum.Notification.main)
+                }
+
+                R.id.healthParentFragment -> {
+                    design(MainEnum.Health.main)
+
                 }
             }
         }
@@ -923,6 +938,18 @@ class MainActivity : AppCompatActivity(), SensorEventListener {
                 binding.drawerLayout.setDrawerLockMode(DrawerLayout.LOCK_MODE_LOCKED_CLOSED)
 
             }
+
+            MainEnum.Health.main ->{
+                window.statusBarColor = ContextCompat.getColor(this, R.color.status)
+                binding.customToolbar.background = ContextCompat.getDrawable(this,R.color.status)
+                binding.customToolbar.visibility = View.VISIBLE
+                binding.toolbar.visibility = View.INVISIBLE
+                binding.customButton.visibility = View.GONE
+                binding.customTitle.text = getString(R.string.healthData)
+                binding.bottomNavigation.visibility = View.GONE
+                binding.drawerLayout.setDrawerLockMode(DrawerLayout.LOCK_MODE_LOCKED_CLOSED)
+
+            }
         }
     }
 
@@ -980,13 +1007,11 @@ class MainActivity : AppCompatActivity(), SensorEventListener {
         totalSteps = event?.values?.get(0)?.toInt()?:0
         previousSteps = prefs.getInt(PREVIOUS_STEPS,0)
 
-        if(totalSteps<previousSteps){
+        if(totalSteps<previousSteps || previousSteps==0){
             with(prefs.edit()) {
                 putInt(PREVIOUS_STEPS, totalSteps)
             }.apply()
         }
-
-        previousSteps = prefs.getInt(PREVIOUS_STEPS,0)
 
         currentSteps = totalSteps - previousSteps
 

@@ -146,6 +146,12 @@ class TeaBoyHomeFragment : Fragment(),View.OnClickListener {
                 findNavController().navigate(R.id.action_teaBoyHomeFragment_to_deactivationFragment)
 
         }
+
+        binding.pedometerLayout.setOnClickListener {
+            findNavController().navigate(R.id.action_teaBoyHomeFragment_to_healthParentFragment)
+        }
+
+
         observer()
     }
 

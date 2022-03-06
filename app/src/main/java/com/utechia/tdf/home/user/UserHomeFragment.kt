@@ -8,6 +8,7 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
 import androidx.fragment.app.Fragment
+import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.google.firebase.database.DataSnapshot
 import com.google.firebase.database.DatabaseError
@@ -19,6 +20,7 @@ import com.google.firebase.ktx.Firebase
 import com.utechia.data.entity.News
 import com.utechia.data.entity.Transaction
 import com.utechia.domain.enum.MainEnum
+import com.utechia.tdf.R
 import com.utechia.tdf.main.MainActivity
 import com.utechia.tdf.databinding.FragmentHomeUserBinding
 import dagger.hilt.android.AndroidEntryPoint
@@ -119,6 +121,10 @@ class UserHomeFragment : Fragment() {
             adapter = userHomeAdapter
             layoutManager = LinearLayoutManager(context,LinearLayoutManager.VERTICAL,false)
           //  addItemDecoration(UserHomeItemDecoration())
+        }
+
+        binding.pedometerLayout.setOnClickListener {
+            findNavController().navigate(R.id.action_userhomeFragment_to_healthParentFragment)
         }
 
         observer()

@@ -9,7 +9,15 @@
         android:id="@+id/userhomeFragment"
         android:name="com.utechia.tdf.home.user.UserHomeFragment"
         android:label="fragment_home"
-        tools:layout="@layout/fragment_home_user" />
+        tools:layout="@layout/fragment_home_user" >
+        <action
+            android:id="@+id/action_userhomeFragment_to_healthParentFragment"
+            app:destination="@id/healthParentFragment"
+            app:enterAnim="@android:anim/fade_in"
+            app:exitAnim="@android:anim/fade_out"
+            app:popEnterAnim="@android:anim/fade_in"
+            app:popExitAnim="@android:anim/fade_out"/>
+    </fragment>
 
     <fragment
         android:id="@+id/refreshmentFragment"
@@ -532,6 +540,13 @@
         <action
             android:id="@+id/action_teaBoyHomeFragment_to_teaBoyOrdersFragment"
             app:destination="@id/teaBoyOrdersFragment"
+            app:enterAnim="@android:anim/fade_in"
+            app:exitAnim="@android:anim/fade_out"
+            app:popEnterAnim="@android:anim/fade_in"
+            app:popExitAnim="@android:anim/fade_out"/>
+        <action
+            android:id="@+id/action_teaBoyHomeFragment_to_healthParentFragment"
+            app:destination="@id/healthParentFragment"
             app:enterAnim="@android:anim/fade_in"
             app:exitAnim="@android:anim/fade_out"
             app:popEnterAnim="@android:anim/fade_in"
@@ -1328,5 +1343,15 @@
         android:name="com.utechia.tdf.survey.CreateSurveyChildFragment"
         android:label="fragment_create_survey_child"
         tools:layout="@layout/fragment_create_survey_child" />
+    <fragment
+        android:id="@+id/healthParentFragment"
+        android:name="com.utechia.tdf.health.HealthParentFragment"
+        android:label="fragment_health_parent"
+        tools:layout="@layout/fragment_health_parent" />
+    <fragment
+        android:id="@+id/healthChildFragment"
+        android:name="com.utechia.tdf.health.HealthChildFragment"
+        android:label="fragment_health_child"
+        tools:layout="@layout/fragment_health_child" />
 
 </navigation>

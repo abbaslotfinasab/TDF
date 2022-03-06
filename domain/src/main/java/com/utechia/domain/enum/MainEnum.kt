@@ -27,6 +27,7 @@ enum class MainEnum(val main:String) {
     Login("login"),
     Error("error"),
     Permission("permission"),
+    Health("health"),
     Survey("error"),
     Calendar("Calendar"),
     Ticket("ticket"),
