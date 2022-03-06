@@ -335,7 +335,7 @@
         <entry key="app/src/main/res/layout/fragment_event_system_child.xml" value="0.15854700854700854" />
         <entry key="app/src/main/res/layout/fragment_favorite.xml" value="0.19322916666666667" />
         <entry key="app/src/main/res/layout/fragment_favorite_result.xml" value="0.18" />
-        <entry key="app/src/main/res/layout/fragment_health_child.xml" value="0.13333333333333333" />
+        <entry key="app/src/main/res/layout/fragment_health_child.xml" value="0.1" />
         <entry key="app/src/main/res/layout/fragment_health_parent.xml" value="0.1" />
         <entry key="app/src/main/res/layout/fragment_home_user.xml" value="0.2740029542097489" />
         <entry key="app/src/main/res/layout/fragment_login.xml" value="0.1" />
