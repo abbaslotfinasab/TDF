@@ -8,7 +8,7 @@ import androidx.work.Worker
 import androidx.work.WorkerParameters
 import com.utechia.domain.enum.MainEnum
 
-class StepsCountWorker(val appContext: Context, workerParams: WorkerParameters):
+class ResetStepsCountWorker(val appContext: Context, workerParams: WorkerParameters):
     Worker(appContext, workerParams) {
 
     private var prefs:SharedPreferences? = null

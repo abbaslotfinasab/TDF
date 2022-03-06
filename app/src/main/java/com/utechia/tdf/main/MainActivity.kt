@@ -58,9 +58,6 @@ class MainActivity : AppCompatActivity(), SensorEventListener {
     private var totalSteps = 0
     private var currentSteps = 0
 
-
-
-
     private val workManager by lazy {
         WorkManager.getInstance(applicationContext)
     }
@@ -177,6 +174,8 @@ class MainActivity : AppCompatActivity(), SensorEventListener {
         observer()
 
         createPeriodTimeRequest()
+
+        createLongRunningTimeRequest()
     }
 
     override fun onResume() {
@@ -192,8 +191,9 @@ class MainActivity : AppCompatActivity(), SensorEventListener {
             with(prefs.edit()) {
                 putInt(PREVIOUS_STEPS, totalSteps)
             }.apply()
-            previousSteps = prefs.getInt(PREVIOUS_STEPS,0)
         }
+
+        previousSteps = prefs.getInt(PREVIOUS_STEPS,0)
 
         currentSteps = totalSteps - previousSteps
 
@@ -984,8 +984,9 @@ class MainActivity : AppCompatActivity(), SensorEventListener {
             with(prefs.edit()) {
                 putInt(PREVIOUS_STEPS, totalSteps)
             }.apply()
-            previousSteps = prefs.getInt(PREVIOUS_STEPS,0)
         }
+
+        previousSteps = prefs.getInt(PREVIOUS_STEPS,0)
 
         currentSteps = totalSteps - previousSteps
 
@@ -1012,12 +1013,20 @@ class MainActivity : AppCompatActivity(), SensorEventListener {
             1
         }
 
-        val stepWorker : PeriodicWorkRequest = PeriodicWorkRequestBuilder<StepsCountWorker>(24,TimeUnit.HOURS)
+        val stepWorker : PeriodicWorkRequest = PeriodicWorkRequestBuilder<ResetStepsCountWorker>(24,TimeUnit.HOURS)
             .setInitialDelay((1440-time),TimeUnit.MINUTES)
             .build()
 
         workManager.enqueueUniquePeriodicWork(
             "send_periodic",ExistingPeriodicWorkPolicy.REPLACE,stepWorker
         )
+    }
+
+    private fun createLongRunningTimeRequest(){
+
+        val stepWorker : PeriodicWorkRequest = PeriodicWorkRequestBuilder<StepsCounterWorker>(24,TimeUnit.HOURS)
+            .build()
+
+        workManager.enqueue(stepWorker)
     }
 }

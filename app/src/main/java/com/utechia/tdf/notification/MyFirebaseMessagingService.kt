@@ -23,8 +23,7 @@ const val channel_Name = "com.utechia.tdf"
 
 class MyFirebaseMessagingService : FirebaseMessagingService() {
 
-    private lateinit var prefs: SharedPreferences
-
+    private var prefs: SharedPreferences? = null
 
     private fun getRemoteView(title:String, message:String):RemoteViews{
         val remoteView = RemoteViews (channel_Name,R.layout.item_push_notification)
@@ -58,9 +57,9 @@ class MyFirebaseMessagingService : FirebaseMessagingService() {
 
         prefs = getSharedPreferences(MainEnum.Tdf.main, MODE_PRIVATE)
 
-        with(prefs.edit()) {
-            putString("fcm",token)
-        }.apply()
+        with(prefs?.edit()) {
+            this?.putString("fcm",token)
+        }?.apply()
 
     }
 
