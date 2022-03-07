@@ -140,6 +140,16 @@
         <item>December</item>
     </string-array>
 
+    <string-array name="week">
+        <item>Sun</item>
+        <item>Mon</item>
+        <item>Tue</item>
+        <item>Wed</item>
+        <item>Thu</item>
+        <item>Fri</item>
+        <item>Sat</item>
+    </string-array>
+
     <string-array name="floor_array">
         <item>1</item>
         <item>2</item>

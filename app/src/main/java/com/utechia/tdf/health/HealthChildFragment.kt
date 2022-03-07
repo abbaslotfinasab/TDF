@@ -14,6 +14,7 @@ import com.github.mikephil.charting.components.XAxis
 import com.github.mikephil.charting.data.Entry
 import com.github.mikephil.charting.data.LineData
 import com.github.mikephil.charting.data.LineDataSet
+import com.github.mikephil.charting.formatter.IndexAxisValueFormatter
 import com.github.mikephil.charting.interfaces.datasets.ILineDataSet
 import com.utechia.domain.enum.HealthEnum
 import com.utechia.domain.utile.Result
@@ -31,6 +32,8 @@ class HealthChildFragment(val health: String) : Fragment() {
     private val yValues : ArrayList<Entry> = arrayListOf()
     private val dataSets:ArrayList<ILineDataSet> = arrayListOf()
     private lateinit var lineData:LineData
+    private lateinit var  xAxis : XAxis
+    private lateinit var week : Array<String>
 
 
 
@@ -44,6 +47,7 @@ class HealthChildFragment(val health: String) : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+        week = activity?.resources?.getStringArray(R.array.week)?: arrayOf("")
         healthViewModel.getTop()
 
 
@@ -88,6 +92,7 @@ class HealthChildFragment(val health: String) : Fragment() {
             binding.chart.xAxis.position = XAxis.XAxisPosition.BOTTOM
             binding.chart.legend.form = Legend.LegendForm.NONE
             binding.chart.description.isEnabled = false
+            binding.chart.xAxis.valueFormatter = IndexAxisValueFormatter(week?.toList())
 
 
         }else
