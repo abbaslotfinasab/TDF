@@ -9,6 +9,7 @@ import androidx.core.content.ContextCompat
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.recyclerview.widget.LinearLayoutManager
+import com.github.mikephil.charting.components.XAxis
 import com.github.mikephil.charting.data.Entry
 import com.github.mikephil.charting.data.LineData
 import com.github.mikephil.charting.data.LineDataSet
@@ -44,10 +45,6 @@ class HealthChildFragment(val health: String) : Fragment() {
         super.onViewCreated(view, savedInstanceState)
         healthViewModel.getTop()
 
-        binding.refreshLayout.setOnRefreshListener {
-            healthViewModel.getTop()
-
-        }
 
         if(health != HealthEnum.Daily.health){
 
@@ -66,6 +63,8 @@ class HealthChildFragment(val health: String) : Fragment() {
                 lineWidth = 2f
                 setDrawFilled(true)
                 fillDrawable = ContextCompat.getDrawable(requireActivity(),R.drawable.fade_chart)
+                mode = LineDataSet.Mode.CUBIC_BEZIER
+                setDrawValues(false)
             }
 
             dataSets.add(lineDateSet)
@@ -78,6 +77,7 @@ class HealthChildFragment(val health: String) : Fragment() {
             binding.chart.axisLeft.setDrawGridLines(false)
             binding.chart.axisRight.setDrawGridLines(false)
             binding.chart.xAxis.setDrawGridLines(false)
+            binding.chart.xAxis.position = XAxis.XAxisPosition.BOTTOM
 
 
 
@@ -99,16 +99,13 @@ class HealthChildFragment(val health: String) : Fragment() {
         healthViewModel.topHealthModel.observe(viewLifecycleOwner){
             when (it) {
                 is Result.Success -> {
-                    binding.refreshLayout.isRefreshing = false
                     healthAdapter.addData(it.data)
                 }
 
                 is Result.Loading -> {
-                    binding.refreshLayout.isRefreshing = true
                 }
 
                 is Result.Error -> {
-                    binding.refreshLayout.isRefreshing = false
                     Toast.makeText(context, it.message, Toast.LENGTH_SHORT).show()
                 }
             }
