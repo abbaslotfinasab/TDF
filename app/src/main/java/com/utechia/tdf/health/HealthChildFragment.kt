@@ -68,7 +68,6 @@ class HealthChildFragment(val health: String) : Fragment() {
                 is Result.Success -> {
                     binding.refreshLayout.isRefreshing = false
                     healthAdapter.addData(it.data)
-
                 }
 
                 is Result.Loading -> {
