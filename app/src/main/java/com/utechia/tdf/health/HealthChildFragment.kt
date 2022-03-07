@@ -9,6 +9,7 @@ import androidx.core.content.ContextCompat
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.recyclerview.widget.LinearLayoutManager
+import com.github.mikephil.charting.components.Legend
 import com.github.mikephil.charting.components.XAxis
 import com.github.mikephil.charting.data.Entry
 import com.github.mikephil.charting.data.LineData
@@ -52,11 +53,11 @@ class HealthChildFragment(val health: String) : Fragment() {
             yValues.add(Entry(1f,100f))
             yValues.add(Entry(2f,200f))
             yValues.add(Entry(3f,400f))
-            yValues.add(Entry(4f,200f))
-            yValues.add(Entry(5f,500f))
-            yValues.add(Entry(6f,600f))
+            yValues.add(Entry(4f,0f))
+            yValues.add(Entry(5f,0f))
+            yValues.add(Entry(6f,0f))
 
-            lineDateSet = LineDataSet(yValues,"My Steps")
+            lineDateSet = LineDataSet(yValues,"")
             lineDateSet.apply {
                 fillAlpha = 110
                 color = ContextCompat.getColor(requireActivity(), R.color.lineChart)
@@ -74,11 +75,19 @@ class HealthChildFragment(val health: String) : Fragment() {
 
             binding.chart.isDragEnabled = true
             binding.chart.setScaleEnabled(false)
+            binding.chart.axisLeft.setDrawLabels(false)
+            binding.chart.axisLeft.setDrawLimitLinesBehindData(false)
+            binding.chart.axisRight.setDrawLimitLinesBehindData(false)
+            binding.chart.axisRight.setDrawLabels(false)
+            binding.chart.xAxis.setDrawAxisLine(false)
+            binding.chart.axisLeft.setDrawAxisLine(false)
+            binding.chart.axisRight.setDrawAxisLine(false)
             binding.chart.axisLeft.setDrawGridLines(false)
             binding.chart.axisRight.setDrawGridLines(false)
             binding.chart.xAxis.setDrawGridLines(false)
             binding.chart.xAxis.position = XAxis.XAxisPosition.BOTTOM
-
+            binding.chart.legend.form = Legend.LegendForm.NONE
+            binding.chart.description.isEnabled = false
 
 
         }else
