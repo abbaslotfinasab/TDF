@@ -18,8 +18,5 @@ class HealthItemDecoration: RecyclerView.ItemDecoration(){
         outRect.right = 30
         outRect.bottom = 20
         outRect.top = 20
-
-
     }
-
 }
