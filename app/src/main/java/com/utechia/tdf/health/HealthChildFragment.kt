@@ -32,26 +32,28 @@ class HealthChildFragment(val health: String) : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+        healthViewModel.getTop()
 
-        when(health){
+        binding.refreshLayout.setOnRefreshListener {
+            healthViewModel.getTop()
 
-            HealthEnum.Daily.health -> {
-                binding.ChartLayout.visibility = View.GONE
-                healthViewModel.getTop()
-            }
-
-            HealthEnum.Weekly.health -> {
-                binding.ChartLayout.visibility = View.VISIBLE
-                healthViewModel.getTop()
-
-            }
-
-            HealthEnum.Monthly.health -> {
-                binding.ChartLayout.visibility = View.VISIBLE
-                healthViewModel.getTop()
-
-            }
         }
+
+        if(health != HealthEnum.Daily.health){
+
+
+
+            //set line chart value here
+
+
+
+
+
+
+        }else
+            binding.chart.visibility = View.GONE
+
+
         binding.recyclerView.apply {
             adapter = healthAdapter
             layoutManager = LinearLayoutManager(context,LinearLayoutManager.VERTICAL,false)
