@@ -11,11 +11,8 @@ import androidx.fragment.app.viewModels
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.github.mikephil.charting.components.Legend
 import com.github.mikephil.charting.components.XAxis
-import com.github.mikephil.charting.data.Entry
-import com.github.mikephil.charting.data.LineData
-import com.github.mikephil.charting.data.LineDataSet
-import com.github.mikephil.charting.formatter.IndexAxisValueFormatter
-import com.github.mikephil.charting.interfaces.datasets.ILineDataSet
+import com.github.mikephil.charting.data.*
+import com.github.mikephil.charting.interfaces.datasets.IBarDataSet
 import com.utechia.domain.enum.HealthEnum
 import com.utechia.domain.utile.Result
 import com.utechia.tdf.R
@@ -28,12 +25,10 @@ class HealthChildFragment(val health: String) : Fragment() {
     private lateinit var binding: FragmentHealthChildBinding
     private val healthViewModel:HealthViewModel by viewModels()
     private val healthAdapter :HealthAdapter = HealthAdapter()
-    private lateinit var lineDateSet :LineDataSet
-    private val yValues : ArrayList<Entry> = arrayListOf()
-    private val dataSets:ArrayList<ILineDataSet> = arrayListOf()
-    private lateinit var lineData:LineData
-    private lateinit var  xAxis : XAxis
-    private lateinit var week : Array<String>
+    private lateinit var barDateSet :BarDataSet
+    private val yValues : ArrayList<BarEntry> = arrayListOf()
+    private val dataSets:ArrayList<IBarDataSet> = arrayListOf()
+    private lateinit var barData:BarData
 
 
 
@@ -47,39 +42,33 @@ class HealthChildFragment(val health: String) : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        week = activity?.resources?.getStringArray(R.array.week)?: arrayOf("")
         healthViewModel.getTop()
 
 
         if(health != HealthEnum.Daily.health){
 
-            yValues.add(Entry(0f,300f))
-            yValues.add(Entry(1f,100f))
-            yValues.add(Entry(2f,200f))
-            yValues.add(Entry(3f,400f))
-            yValues.add(Entry(4f,0f))
-            yValues.add(Entry(5f,0f))
-            yValues.add(Entry(6f,0f))
+            yValues.add(BarEntry(1f,300f))
+            yValues.add(BarEntry(2f,100f))
+            yValues.add(BarEntry(3f,200f))
+            yValues.add(BarEntry(4f,400f))
+            yValues.add(BarEntry(5f,1f))
+            yValues.add(BarEntry(6f,1f))
+            yValues.add(BarEntry(7f,1f))
 
-            lineDateSet = LineDataSet(yValues,"")
-            lineDateSet.apply {
-                fillAlpha = 110
+            barDateSet = BarDataSet(yValues,"")
+            barDateSet.apply {
                 color = ContextCompat.getColor(requireActivity(), R.color.lineChart)
-                lineWidth = 2f
-                setDrawFilled(true)
-                fillDrawable = ContextCompat.getDrawable(requireActivity(),R.drawable.fade_chart)
-                mode = LineDataSet.Mode.CUBIC_BEZIER
                 setDrawValues(false)
             }
 
-            dataSets.add(lineDateSet)
+            dataSets.add(barDateSet)
 
-            lineData = LineData(dataSets)
-            binding.chart.data = lineData
+            barData = BarData(dataSets)
+            binding.chart.data = barData
 
             binding.chart.isDragEnabled = true
             binding.chart.setScaleEnabled(false)
-            binding.chart.axisLeft.setDrawLabels(false)
+            binding.chart.axisLeft.setDrawLabels(true)
             binding.chart.axisLeft.setDrawLimitLinesBehindData(false)
             binding.chart.axisRight.setDrawLimitLinesBehindData(false)
             binding.chart.axisRight.setDrawLabels(false)
@@ -92,8 +81,6 @@ class HealthChildFragment(val health: String) : Fragment() {
             binding.chart.xAxis.position = XAxis.XAxisPosition.BOTTOM
             binding.chart.legend.form = Legend.LegendForm.NONE
             binding.chart.description.isEnabled = false
-            binding.chart.xAxis.valueFormatter = IndexAxisValueFormatter(week?.toList())
-
 
         }else
             binding.chartLayout.visibility = View.GONE
