@@ -5,11 +5,17 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
+import androidx.core.content.ContextCompat
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.recyclerview.widget.LinearLayoutManager
+import com.github.mikephil.charting.data.Entry
+import com.github.mikephil.charting.data.LineData
+import com.github.mikephil.charting.data.LineDataSet
+import com.github.mikephil.charting.interfaces.datasets.ILineDataSet
 import com.utechia.domain.enum.HealthEnum
 import com.utechia.domain.utile.Result
+import com.utechia.tdf.R
 import com.utechia.tdf.databinding.FragmentHealthChildBinding
 import dagger.hilt.android.AndroidEntryPoint
 
@@ -19,6 +25,10 @@ class HealthChildFragment(val health: String) : Fragment() {
     private lateinit var binding: FragmentHealthChildBinding
     private val healthViewModel:HealthViewModel by viewModels()
     private val healthAdapter :HealthAdapter = HealthAdapter()
+    private lateinit var lineDateSet :LineDataSet
+    private val yValues : ArrayList<Entry> = arrayListOf()
+    private val dataSets:ArrayList<ILineDataSet> = arrayListOf()
+    private lateinit var lineData:LineData
 
 
 
@@ -41,17 +51,31 @@ class HealthChildFragment(val health: String) : Fragment() {
 
         if(health != HealthEnum.Daily.health){
 
+            yValues.add(Entry(0f,300f))
+            yValues.add(Entry(1f,100f))
+            yValues.add(Entry(2f,200f))
+            yValues.add(Entry(3f,400f))
+            yValues.add(Entry(4f,200f))
+            yValues.add(Entry(5f,500f))
+            yValues.add(Entry(6f,600f))
 
+
+            lineDateSet = LineDataSet(yValues,"Steps")
+            lineDateSet.apply {
+                fillAlpha = 110
+                color = ContextCompat.getColor(requireActivity(), R.color.lineChart)
+
+            }
+
+            dataSets.add(lineDateSet)
+
+            lineData = LineData(dataSets)
 
             //set line chart value here
-
-
-
-
-
+            binding.chart.data = lineData
 
         }else
-            binding.chart.visibility = View.GONE
+            binding.chartLayout.visibility = View.GONE
 
 
         binding.recyclerView.apply {

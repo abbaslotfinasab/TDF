@@ -15,7 +15,7 @@
         android:background="@color/background">
 
         <androidx.constraintlayout.widget.ConstraintLayout
-            android:id="@+id/ChartLayout"
+            android:id="@+id/chartLayout"
             android:layout_width="0dp"
             android:layout_height="280dp"
             android:layout_marginStart="20dp"
@@ -46,7 +46,7 @@
             android:textStyle="bold"
             android:textColor="@color/black"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/ChartLayout" />
+            app:layout_constraintTop_toBottomOf="@+id/chartLayout" />
 
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/recyclerView"
