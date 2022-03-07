@@ -59,20 +59,27 @@ class HealthChildFragment(val health: String) : Fragment() {
             yValues.add(Entry(5f,500f))
             yValues.add(Entry(6f,600f))
 
-
-            lineDateSet = LineDataSet(yValues,"Steps")
+            lineDateSet = LineDataSet(yValues,"My Steps")
             lineDateSet.apply {
                 fillAlpha = 110
                 color = ContextCompat.getColor(requireActivity(), R.color.lineChart)
-
+                lineWidth = 2f
+                setDrawFilled(true)
+                fillDrawable = ContextCompat.getDrawable(requireActivity(),R.drawable.fade_chart)
             }
 
             dataSets.add(lineDateSet)
 
             lineData = LineData(dataSets)
-
-            //set line chart value here
             binding.chart.data = lineData
+
+            binding.chart.isDragEnabled = true
+            binding.chart.setScaleEnabled(false)
+            binding.chart.axisLeft.setDrawGridLines(false)
+            binding.chart.axisRight.setDrawGridLines(false)
+            binding.chart.xAxis.setDrawGridLines(false)
+
+
 
         }else
             binding.chartLayout.visibility = View.GONE
