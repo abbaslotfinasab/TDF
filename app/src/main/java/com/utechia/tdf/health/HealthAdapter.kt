@@ -12,17 +12,20 @@ import androidx.core.content.ContextCompat
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.utechia.data.entity.News
+import com.utechia.domain.model.TopHealth
 import com.utechia.tdf.R
 
 
 class HealthAdapter: RecyclerView.Adapter<RecyclerView.ViewHolder>() {
 
-    var news: MutableList<News> = mutableListOf()
+    var health: MutableList<TopHealth> = mutableListOf()
 
 
-    fun addData(_news:News) {
-        news.add(_news)
-        notifyItemChanged(news.size)
+    fun addData(_health:MutableList<TopHealth>) {
+        health.clear()
+        notifyDataSetChanged()
+        health.addAll(_health)
+        notifyItemRangeChanged(0,health.size)
 
     }
 
@@ -36,37 +39,28 @@ class HealthAdapter: RecyclerView.Adapter<RecyclerView.ViewHolder>() {
         (holder as ViewHolder).bind0(position)
     }
 
-    override fun getItemCount(): Int = news.size
+    override fun getItemCount(): Int = health.size
 
     inner class ViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
-        private val title: TextView = itemView.findViewById(R.id.title)
-        private val date: TextView = itemView.findViewById(R.id.date)
+        private val name: TextView = itemView.findViewById(R.id.name)
+        private val calory: TextView = itemView.findViewById(R.id.calory)
         private val image: ImageView = itemView.findViewById(R.id.image)
-        private val layout: ConstraintLayout = itemView.findViewById(R.id.newsLayout)
+        private val steps: TextView = itemView.findViewById(R.id.steps)
 
 
         fun bind0(position: Int) {
 
-            title.text = news[position].title
-            date.text = news[position].date
+            name.text = health[position].name
+            calory.text = health[position].calory.toString()
+            steps.text = health[position].steps.toString()
+
 
 
             Glide.with(itemView.context)
-                .load(
-                    if(position%2==0){
-                        R.mipmap.news
-                    }else{
-                        R.mipmap.news2
-                    }
-                )
-                .error(R.mipmap.news)
+                .load(health[position].image)
+                .error(R.drawable.ic_user)
                 .into(image)
 
-            layout.setOnClickListener {
-                val browserIntent =
-                    Intent(Intent.ACTION_VIEW, Uri.parse(news[position].link?:"https:\\www.google.com"))
-                ContextCompat.startActivity(itemView.context, browserIntent, null)
-            }
         }
     }
 }
