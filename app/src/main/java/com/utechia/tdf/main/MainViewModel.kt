@@ -79,4 +79,13 @@ class MainViewModel @Inject constructor(
 
         }
     }
+
+    fun sendSteps(steps:Int,calory:Int,start:String,end:String){
+
+        viewModelScope.launch(Dispatchers.IO+handler) {
+
+            mainUseCaseImpl.sendSteps(steps,calory,start,end)
+
+        }
+    }
 }

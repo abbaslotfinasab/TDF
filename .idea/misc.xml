@@ -352,7 +352,7 @@
         <entry key="app/src/main/res/layout/fragment_pending.xml" value="0.1" />
         <entry key="app/src/main/res/layout/fragment_permission.xml" value="0.15854700854700854" />
         <entry key="app/src/main/res/layout/fragment_permission_child.xml" value="0.15854700854700854" />
-        <entry key="app/src/main/res/layout/fragment_profile.xml" value="0.11607142857142858" />
+        <entry key="app/src/main/res/layout/fragment_profile.xml" value="0.25" />
         <entry key="app/src/main/res/layout/fragment_qr_code.xml" value="0.19322916666666667" />
         <entry key="app/src/main/res/layout/fragment_rate_confirmation.xml" value="0.1" />
         <entry key="app/src/main/res/layout/fragment_rating_ticket.xml" value="0.22" />

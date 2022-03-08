@@ -193,4 +193,8 @@ interface Service {
     @GET("health/steps/top")
     suspend fun getTopSteps():Response<TopSteps>
 
+    @POST("health/steps")
+    @Headers("Content-Type: application/json")
+    suspend fun sendSteps(@Body steps: Steps):Response<Void>
+
 }

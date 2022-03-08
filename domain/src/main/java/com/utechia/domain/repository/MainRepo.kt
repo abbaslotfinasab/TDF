@@ -6,6 +6,6 @@ interface MainRepo {
 
     suspend fun getCountNotification():NotificationCountModel
     suspend fun sendToken()
-
+    suspend fun sendSteps(steps:Int,calory:Int,start:String,end:String)
 
 }

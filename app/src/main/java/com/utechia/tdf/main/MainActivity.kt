@@ -41,6 +41,9 @@ import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import java.time.Duration
 import java.time.LocalDateTime
+import java.time.ZoneId
+import java.time.ZoneOffset
+import java.time.format.DateTimeFormatter
 import java.util.concurrent.TimeUnit
 
 @AndroidEntryPoint
@@ -57,6 +60,9 @@ class MainActivity : AppCompatActivity(), SensorEventListener {
     private var previousSteps = 0
     private var totalSteps = 0
     private var currentSteps = 0
+    private var startTimeZone = ""
+    private var endTimeZone = ""
+
 
     private val workManager by lazy {
         WorkManager.getInstance(applicationContext)
@@ -65,11 +71,6 @@ class MainActivity : AppCompatActivity(), SensorEventListener {
     companion object{
         const val TOTAL_STEPS = "total_Steps"
         const val PREVIOUS_STEPS = "previous_Steps"
-
-    }
-
-    override fun onStart() {
-        super.onStart()
 
     }
 
@@ -203,6 +204,16 @@ class MainActivity : AppCompatActivity(), SensorEventListener {
         currentSteps = totalSteps - previousSteps
 
         mainViewModel.stepCount(currentSteps)
+
+        startTimeZone = LocalDateTime.now().withHour(0).withMinute(0).withSecond(0).withNano(0).atZone(ZoneId.systemDefault()).toOffsetDateTime().withOffsetSameInstant(
+            ZoneOffset.UTC)
+            .format(DateTimeFormatter.ofPattern("yyyy-MM-dd'T'HH:mm:ss.SSS'Z'")).toString()
+
+        endTimeZone = LocalDateTime.now().atZone(ZoneId.systemDefault()).toOffsetDateTime().withOffsetSameInstant(
+            ZoneOffset.UTC)
+            .format(DateTimeFormatter.ofPattern("yyyy-MM-dd'T'HH:mm:ss.SSS'Z'")).toString()
+
+        mainViewModel.sendSteps(currentSteps,(currentSteps*0.05).toInt(),startTimeZone,endTimeZone)
 
     }
 

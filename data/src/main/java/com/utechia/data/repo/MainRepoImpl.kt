@@ -3,6 +3,7 @@ package com.utechia.data.repo
 import com.utechia.data.api.Service
 import com.utechia.data.entity.NotificationToken
 import com.utechia.data.entity.RefreshToken
+import com.utechia.data.entity.Steps
 import com.utechia.data.utile.NetworkHelper
 import com.utechia.data.utile.SessionManager
 import com.utechia.domain.model.NotificationCountModel
@@ -59,5 +60,9 @@ class MainRepoImpl @Inject constructor(
 
         if(fcmToken.isNotEmpty())
             service.notification(NotificationToken(fcmToken))
+    }
+
+    override suspend fun sendSteps(steps: Int, calory: Int, start: String, end: String) {
+        service.sendSteps(Steps(steps,calory,start,end))
     }
 }

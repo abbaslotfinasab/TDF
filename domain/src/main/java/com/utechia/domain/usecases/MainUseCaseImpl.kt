@@ -16,4 +16,8 @@ class MainUseCaseImpl @Inject constructor(private val mainRepo: MainRepo)
     override suspend fun sendToken() {
         return mainRepo.sendToken()
     }
+
+    override suspend fun sendSteps(steps: Int, calory: Int, start: String, end: String) {
+        mainRepo.sendSteps(steps,calory,start,end)
+    }
 }
