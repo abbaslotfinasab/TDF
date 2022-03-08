@@ -13,7 +13,6 @@ import com.github.mikephil.charting.components.Legend
 import com.github.mikephil.charting.components.XAxis
 import com.github.mikephil.charting.data.*
 import com.github.mikephil.charting.interfaces.datasets.IBarDataSet
-import com.github.mikephil.charting.renderer.BarChartRenderer
 import com.utechia.domain.enum.HealthEnum
 import com.utechia.domain.utile.Result
 import com.utechia.tdf.R
@@ -45,13 +44,17 @@ class HealthChildFragment(val health: String) : Fragment() {
         super.onViewCreated(view, savedInstanceState)
         healthViewModel.getTop()
 
+        binding.refreshLayout.setOnRefreshListener {
+            healthViewModel.getTop()
+        }
+
 
         if(health != HealthEnum.Daily.health){
 
-            yValues.add(BarEntry(1f,300f))
-            yValues.add(BarEntry(2f,100f))
-            yValues.add(BarEntry(3f,200f))
-            yValues.add(BarEntry(4f,400f))
+            yValues.add(BarEntry(1f,400f))
+            yValues.add(BarEntry(2f,200f))
+            yValues.add(BarEntry(3f,600f))
+            yValues.add(BarEntry(4f,500f))
             yValues.add(BarEntry(5f,0f))
             yValues.add(BarEntry(6f,0f))
             yValues.add(BarEntry(7f,0f))
@@ -106,13 +109,16 @@ class HealthChildFragment(val health: String) : Fragment() {
         healthViewModel.topHealthModel.observe(viewLifecycleOwner){
             when (it) {
                 is Result.Success -> {
+                    binding.refreshLayout.isRefreshing = false
                     healthAdapter.addData(it.data)
                 }
 
                 is Result.Loading -> {
+                    binding.refreshLayout.isRefreshing = true
                 }
 
                 is Result.Error -> {
+                    binding.refreshLayout.isRefreshing = false
                     Toast.makeText(context, it.message, Toast.LENGTH_SHORT).show()
                 }
             }
