@@ -1,27 +1,22 @@
 package com.utechia.tdf.health
 
-import android.content.Intent
-import android.net.Uri
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.ImageView
 import android.widget.TextView
-import androidx.constraintlayout.widget.ConstraintLayout
-import androidx.core.content.ContextCompat
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
-import com.utechia.data.entity.News
-import com.utechia.domain.model.TopHealth
+import com.utechia.domain.model.TopStepsModel
 import com.utechia.tdf.R
 
 
 class HealthAdapter: RecyclerView.Adapter<RecyclerView.ViewHolder>() {
 
-    var health: MutableList<TopHealth> = mutableListOf()
+    var health: MutableList<TopStepsModel> = mutableListOf()
 
 
-    fun addData(_health:MutableList<TopHealth>) {
+    fun addData(_health:MutableList<TopStepsModel>) {
         health.clear()
         notifyDataSetChanged()
         health.addAll(_health)
@@ -50,14 +45,14 @@ class HealthAdapter: RecyclerView.Adapter<RecyclerView.ViewHolder>() {
 
         fun bind0(position: Int) {
 
-            name.text = health[position].name
-            calory.text = health[position].calory.toString()
-            steps.text = health[position].steps.toString()
+            name.text = health[position].user.displayName
+            calory.text = health[position].cal.toString()
+            steps.text = health[position].count.toString()
 
 
 
             Glide.with(itemView.context)
-                .load(health[position].image)
+                .load("")
                 .error(R.drawable.ic_profile_icon)
                 .into(image)
 

@@ -4,9 +4,10 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.utechia.domain.model.TopHealth
+import com.utechia.domain.model.TopStepsModel
+import com.utechia.domain.model.UserModel
+import com.utechia.domain.usecases.TopStepsUseCaseImpl
 import com.utechia.domain.utile.Result
-import com.utechia.tdf.R
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.CoroutineExceptionHandler
 import kotlinx.coroutines.Dispatchers
@@ -16,11 +17,12 @@ import javax.inject.Inject
 @HiltViewModel
 class HealthViewModel @Inject constructor(
 
+    private val topStepsUseCaseImpl: TopStepsUseCaseImpl
 
 ) : ViewModel() {
 
-    private val _topHealthModel = MutableLiveData<Result<MutableList<TopHealth>>>()
-    val topHealthModel: LiveData<Result<MutableList<TopHealth>>>
+    private val _topHealthModel = MutableLiveData<Result<MutableList<TopStepsModel>>>()
+    val topHealthModel: LiveData<Result<MutableList<TopStepsModel>>>
         get() = _topHealthModel
 
     private val handler = CoroutineExceptionHandler {
@@ -28,7 +30,7 @@ class HealthViewModel @Inject constructor(
         _topHealthModel.postValue(exception.message?.let { Result.Error(it) })
     }
 
-    private val data:MutableList<TopHealth> = mutableListOf()
+    private val data:MutableList<TopStepsModel> = mutableListOf()
 
     fun getTop(){
 
@@ -38,11 +40,11 @@ class HealthViewModel @Inject constructor(
 
             data.clear()
 
-            data.add(TopHealth(0,"William Dexter",300,15, R.drawable.ic_profile_icon.toString()))
-            data.add(TopHealth(0,"William Dexter",300,15, R.drawable.ic_profile_icon.toString()))
-            data.add(TopHealth(0,"William Dexter",300,15, R.drawable.ic_profile_icon.toString()))
-            data.add(TopHealth(0,"William Dexter",300,15, R.drawable.ic_profile_icon.toString()))
-            data.add(TopHealth(0,"William Dexter",300,15, R.drawable.ic_profile_icon.toString()))
+            data.add(TopStepsModel(0,133,300,15,"","", UserModel("TestFN TestLN",133,"","")))
+            data.add(TopStepsModel(0,133,300,15,"","", UserModel("TestFN TestLN",133,"","")))
+            data.add(TopStepsModel(0,133,300,15,"","", UserModel("TestFN TestLN",133,"","")))
+            data.add(TopStepsModel(0,133,300,15,"","", UserModel("TestFN TestLN",133,"","")))
+            data.add(TopStepsModel(0,133,300,15,"","", UserModel("TestFN TestLN",133,"","")))
 
 
             _topHealthModel.postValue(Result.Success(data))

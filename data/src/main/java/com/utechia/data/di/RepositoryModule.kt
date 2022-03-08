@@ -116,4 +116,9 @@ abstract class RepositoryModule {
     abstract fun bindEventsDetailsRepositoryService(
         eventDetailsRepoImpl: EventDetailsRepoImpl
     ): EventDetailRepo
+
+    @Binds
+    abstract fun bindTopStepsRepositoryService(
+        topStepsRepoImpl: TopStepsRepoImpl
+    ): TopStepsRepo
 }

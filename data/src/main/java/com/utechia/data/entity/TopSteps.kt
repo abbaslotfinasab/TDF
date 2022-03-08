@@ -11,7 +11,7 @@ import kotlinx.serialization.Serializable
 @Serializable
 data class TopSteps(
 
-    val data :@Contextual TopStepsData?,
+    val data :@Contextual MutableList<TopStepsData>?,
     val error:@Contextual Error?
 
 

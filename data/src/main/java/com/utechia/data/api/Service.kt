@@ -191,6 +191,6 @@ interface Service {
     suspend fun avg():Response<Average>
 
     @GET("health/steps/top")
-    suspend fun getEvent():Response<TopSteps>
+    suspend fun getTopSteps():Response<TopSteps>
 
 }
