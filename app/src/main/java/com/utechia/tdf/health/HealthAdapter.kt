@@ -58,7 +58,7 @@ class HealthAdapter: RecyclerView.Adapter<RecyclerView.ViewHolder>() {
 
             Glide.with(itemView.context)
                 .load(health[position].image)
-                .error(R.drawable.ic_user)
+                .error(R.drawable.ic_profile_icon)
                 .into(image)
 
         }

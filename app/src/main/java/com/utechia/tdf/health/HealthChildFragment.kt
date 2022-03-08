@@ -13,6 +13,7 @@ import com.github.mikephil.charting.components.Legend
 import com.github.mikephil.charting.components.XAxis
 import com.github.mikephil.charting.data.*
 import com.github.mikephil.charting.interfaces.datasets.IBarDataSet
+import com.github.mikephil.charting.renderer.BarChartRenderer
 import com.utechia.domain.enum.HealthEnum
 import com.utechia.domain.utile.Result
 import com.utechia.tdf.R
@@ -51,9 +52,9 @@ class HealthChildFragment(val health: String) : Fragment() {
             yValues.add(BarEntry(2f,100f))
             yValues.add(BarEntry(3f,200f))
             yValues.add(BarEntry(4f,400f))
-            yValues.add(BarEntry(5f,1f))
-            yValues.add(BarEntry(6f,1f))
-            yValues.add(BarEntry(7f,1f))
+            yValues.add(BarEntry(5f,0f))
+            yValues.add(BarEntry(6f,0f))
+            yValues.add(BarEntry(7f,0f))
 
             barDateSet = BarDataSet(yValues,"")
             barDateSet.apply {
@@ -72,8 +73,12 @@ class HealthChildFragment(val health: String) : Fragment() {
             binding.chart.axisLeft.setDrawLimitLinesBehindData(false)
             binding.chart.axisRight.setDrawLimitLinesBehindData(false)
             binding.chart.axisRight.setDrawLabels(false)
-            binding.chart.xAxis.setDrawAxisLine(false)
-            binding.chart.axisLeft.setDrawAxisLine(false)
+            binding.chart.xAxis.setDrawAxisLine(true)
+            binding.chart.xAxis.axisLineWidth = 1f
+            binding.chart.xAxis.axisLineColor = ContextCompat.getColor(requireActivity(),R.color.black)
+            binding.chart.axisLeft.setDrawAxisLine(true)
+            binding.chart.axisLeft.axisLineWidth = 1f
+            binding.chart.axisLeft.axisLineColor = ContextCompat.getColor(requireActivity(),R.color.black)
             binding.chart.axisRight.setDrawAxisLine(false)
             binding.chart.axisLeft.setDrawGridLines(false)
             binding.chart.axisRight.setDrawGridLines(false)
@@ -81,6 +86,7 @@ class HealthChildFragment(val health: String) : Fragment() {
             binding.chart.xAxis.position = XAxis.XAxisPosition.BOTTOM
             binding.chart.legend.form = Legend.LegendForm.NONE
             binding.chart.description.isEnabled = false
+            binding.chart.axisLeft.axisMinimum = 0f
 
         }else
             binding.chartLayout.visibility = View.GONE

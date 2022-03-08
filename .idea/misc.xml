@@ -383,7 +383,7 @@
         <entry key="app/src/main/res/layout/item_chat_user.xml" value="0.1" />
         <entry key="app/src/main/res/layout/item_event.xml" value="0.22" />
         <entry key="app/src/main/res/layout/item_guess_event.xml" value="0.25" />
-        <entry key="app/src/main/res/layout/item_health.xml" value="0.33" />
+        <entry key="app/src/main/res/layout/item_health.xml" value="0.67" />
         <entry key="app/src/main/res/layout/item_home_news.xml" value="0.33" />
         <entry key="app/src/main/res/layout/item_notification.xml" value="0.18" />
         <entry key="app/src/main/res/layout/item_order_notification.xml" value="0.2" />

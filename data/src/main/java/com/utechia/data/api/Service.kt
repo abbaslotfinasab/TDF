@@ -190,4 +190,7 @@ interface Service {
     @POST("survey/avgteaboy")
     suspend fun avg():Response<Average>
 
+    @GET("health/steps/top")
+    suspend fun getEvent():Response<TopSteps>
+
 }

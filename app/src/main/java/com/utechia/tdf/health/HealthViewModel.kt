@@ -38,11 +38,11 @@ class HealthViewModel @Inject constructor(
 
             data.clear()
 
-            data.add(TopHealth(0,"john",300,15, R.drawable.ic_user.toString()))
-            data.add(TopHealth(0,"john",300,15, R.drawable.ic_user.toString()))
-            data.add(TopHealth(0,"john",300,15, R.drawable.ic_user.toString()))
-            data.add(TopHealth(0,"john",300,15, R.drawable.ic_user.toString()))
-            data.add(TopHealth(0,"john",300,15, R.drawable.ic_user.toString()))
+            data.add(TopHealth(0,"William Dexter",300,15, R.drawable.ic_profile_icon.toString()))
+            data.add(TopHealth(0,"William Dexter",300,15, R.drawable.ic_profile_icon.toString()))
+            data.add(TopHealth(0,"William Dexter",300,15, R.drawable.ic_profile_icon.toString()))
+            data.add(TopHealth(0,"William Dexter",300,15, R.drawable.ic_profile_icon.toString()))
+            data.add(TopHealth(0,"William Dexter",300,15, R.drawable.ic_profile_icon.toString()))
 
 
             _topHealthModel.postValue(Result.Success(data))
