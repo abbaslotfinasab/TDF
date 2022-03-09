@@ -19,6 +19,7 @@ import com.utechia.domain.utile.Result
 import com.utechia.tdf.R
 import com.utechia.tdf.databinding.FragmentHealthChildBinding
 import dagger.hilt.android.AndroidEntryPoint
+import okhttp3.internal.notifyAll
 import java.time.LocalDateTime
 import java.time.OffsetDateTime
 import java.time.ZoneId
@@ -233,8 +234,8 @@ class HealthChildFragment(val health: String) : Fragment() {
             setDrawValues(false)
         }
         dataSets.add(barDateSet)
-
         barData = BarData(dataSets)
+        binding.chart.notifyDataSetChanged()
         binding.chart.data = barData
         binding.chart.isDragEnabled = true
         binding.chart.setScaleEnabled(false)
@@ -256,5 +257,6 @@ class HealthChildFragment(val health: String) : Fragment() {
         binding.chart.legend.form = Legend.LegendForm.NONE
         binding.chart.description.isEnabled = false
         binding.chart.axisLeft.axisMinimum = 0f
+        binding.chart.invalidate()
     }
 }
