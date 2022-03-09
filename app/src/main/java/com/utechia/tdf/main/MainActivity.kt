@@ -1062,7 +1062,6 @@ class MainActivity : AppCompatActivity(), SensorEventListener {
 
         val stepWorker : PeriodicWorkRequest = PeriodicWorkRequestBuilder<StepsCounterWorker>(24,TimeUnit.HOURS)
             .build()
-
         workManager.enqueue(stepWorker)
     }
 }

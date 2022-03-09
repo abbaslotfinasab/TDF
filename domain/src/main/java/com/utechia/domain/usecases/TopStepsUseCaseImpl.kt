@@ -8,8 +8,12 @@ import javax.inject.Singleton
 @Singleton
 class TopStepsUseCaseImpl @Inject constructor(private val topStepsRepo: TopStepsRepo):TopStepsUseCase<TopStepsModel> {
 
-    override suspend fun execute(): MutableList<TopStepsModel> {
-        return topStepsRepo.getTopUser()
+    override suspend fun execute(start: String,end: String): MutableList<TopStepsModel> {
+        return topStepsRepo.getTopUser(start,end)
+    }
+
+    override suspend fun getChart(start: String, end: String): MutableList<TopStepsModel> {
+        return topStepsRepo.getChart(start,end)
     }
 
 }

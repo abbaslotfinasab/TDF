@@ -4,5 +4,7 @@ import com.utechia.domain.model.TopStepsModel
 
 interface TopStepsRepo {
 
-    suspend fun getTopUser():MutableList<TopStepsModel>
+    suspend fun getTopUser(start:String,end:String):MutableList<TopStepsModel>
+    suspend fun getChart(start:String,end:String):MutableList<TopStepsModel>
+
 }

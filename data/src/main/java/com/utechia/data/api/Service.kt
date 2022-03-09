@@ -191,10 +191,13 @@ interface Service {
     suspend fun avg():Response<Average>
 
     @GET("health/steps/top")
-    suspend fun getTopSteps():Response<TopSteps>
+    suspend fun getTopSteps(@Query("fromdate")fromdate:String ,@Query("todate")todate:String):Response<TopSteps>
 
     @POST("health/steps")
     @Headers("Content-Type: application/json")
     suspend fun sendSteps(@Body steps: Steps):Response<Void>
+
+    @GET("health/steps/chart")
+    suspend fun getChart(@Query("fromdate")fromdate:String ,@Query("todate")todate:String):Response<TopSteps>
 
 }

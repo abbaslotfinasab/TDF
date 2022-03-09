@@ -29,15 +29,38 @@ class HealthViewModel @Inject constructor(
         _topHealthModel.postValue(exception.message?.let { Result.Error(it) })
     }
 
-    fun getTop(){
+    fun getTop(start: String,end: String){
 
         viewModelScope.launch(Dispatchers.IO+handler) {
 
             _topHealthModel.postValue(Result.Loading)
 
-            topStepsUseCaseImpl.execute().let {
+            topStepsUseCaseImpl.execute(start,end).let {
 
                 _topHealthModel.postValue(Result.Success(it))
+            }
+        }
+    }
+
+    private val _chartModel = MutableLiveData<Result<MutableList<TopStepsModel>>>()
+    val chartModel: LiveData<Result<MutableList<TopStepsModel>>>
+        get() = _chartModel
+
+    private val _handler = CoroutineExceptionHandler {
+            _, exception ->
+        _chartModel.postValue(exception.message?.let { Result.Error(it) })
+    }
+
+    fun getChart(start:String,end:String){
+
+        viewModelScope.launch(Dispatchers.IO+_handler) {
+
+            _topHealthModel.postValue(Result.Loading)
+
+            topStepsUseCaseImpl.getChart(start,end).let {
+
+                _chartModel.postValue(Result.Success(it))
+
             }
         }
     }
