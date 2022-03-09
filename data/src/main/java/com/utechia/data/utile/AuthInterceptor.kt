@@ -1,6 +1,7 @@
 package com.utechia.data.utile
 
 import android.content.Context
+import android.util.Log
 import dagger.hilt.android.qualifiers.ApplicationContext
 import okhttp3.Interceptor
 import okhttp3.Response
@@ -15,6 +16,8 @@ class AuthInterceptor @Inject constructor(@ApplicationContext context: Context) 
 
         sessionManager.fetchAuthToken()?.let {
             requestBuilder.addHeader("Authorization", "Bearer $it")
+
+            Log.i("Bearer","Bearer $it")
         }
 
         return chain.proceed(requestBuilder.build())

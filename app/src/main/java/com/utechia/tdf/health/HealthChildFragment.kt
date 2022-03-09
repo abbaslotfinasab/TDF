@@ -102,16 +102,6 @@ class HealthChildFragment(val health: String) : Fragment() {
             ZoneOffset.UTC)
             .format(DateTimeFormatter.ofPattern("yyyy-MM-dd'T'HH:mm:ss.SSS'Z'")).toString()
 
-
-        Log.d("lastDayOfMonth",lastDayOfMonth)
-        Log.d("firstDayOfMonth",firstDayOfMonth)
-        Log.d("lastDayOfWeek",lastDayOfWeek)
-        Log.d("firstDayOfWeek",firstDayOfWeek)
-        Log.d("start",startTime)
-        Log.d("end",endTime)
-
-
-
         when(health){
 
             HealthEnum.Daily.health -> {
