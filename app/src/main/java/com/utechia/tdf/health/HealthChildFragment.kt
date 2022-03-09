@@ -1,7 +1,6 @@
 package com.utechia.tdf.health
 
 import android.os.Bundle
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -48,6 +47,7 @@ class HealthChildFragment(val health: String) : Fragment() {
     private var dayOfWeek = 0f
     private var dayOfMonth = 0f
     private lateinit var dw : List<String>
+    private lateinit var customBarChartRenderer: RoundedBarChartRenderer
 
 
 
@@ -67,6 +67,8 @@ class HealthChildFragment(val health: String) : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         dw = requireActivity().resources.getStringArray(R.array.week).toList()
+
+        customBarChartRenderer = RoundedBarChartRenderer(binding.chart,binding.chart.animator,binding.chart.viewPortHandler,10f)
 
         currentDayOfWeek = LocalDateTime.now().dayOfWeek.value
 
@@ -229,8 +231,8 @@ class HealthChildFragment(val health: String) : Fragment() {
         }
         dataSets.add(barDateSet)
         barData = BarData(dataSets)
-        binding.chart.notifyDataSetChanged()
         binding.chart.data = barData
+        binding.chart.notifyDataSetChanged()
         binding.chart.isDragEnabled = true
         binding.chart.setScaleEnabled(false)
         binding.chart.axisLeft.setDrawLabels(true)
@@ -251,6 +253,7 @@ class HealthChildFragment(val health: String) : Fragment() {
         binding.chart.legend.form = Legend.LegendForm.NONE
         binding.chart.description.isEnabled = false
         binding.chart.axisLeft.axisMinimum = 0f
+        binding.chart.renderer = customBarChartRenderer
         binding.chart.invalidate()
     }
 }
