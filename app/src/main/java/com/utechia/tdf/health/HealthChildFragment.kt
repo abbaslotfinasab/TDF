@@ -13,13 +13,13 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import com.github.mikephil.charting.components.Legend
 import com.github.mikephil.charting.components.XAxis
 import com.github.mikephil.charting.data.*
+import com.github.mikephil.charting.formatter.IndexAxisValueFormatter
 import com.github.mikephil.charting.interfaces.datasets.IBarDataSet
 import com.utechia.domain.enum.HealthEnum
 import com.utechia.domain.utile.Result
 import com.utechia.tdf.R
 import com.utechia.tdf.databinding.FragmentHealthChildBinding
 import dagger.hilt.android.AndroidEntryPoint
-import okhttp3.internal.notifyAll
 import java.time.LocalDateTime
 import java.time.OffsetDateTime
 import java.time.ZoneId
@@ -47,6 +47,7 @@ class HealthChildFragment(val health: String) : Fragment() {
     private var endTime = ""
     private var dayOfWeek = 0f
     private var dayOfMonth = 0f
+    private lateinit var dw : List<String>
 
 
 
@@ -65,6 +66,7 @@ class HealthChildFragment(val health: String) : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+        dw = requireActivity().resources.getStringArray(R.array.week).toList()
 
         currentDayOfWeek = LocalDateTime.now().dayOfWeek.value
 
@@ -130,9 +132,10 @@ class HealthChildFragment(val health: String) : Fragment() {
                     healthViewModel.getChart(firstDayOfWeek,lastDayOfWeek)
                 }
 
-                for (i in 1..7){
+                for (i in 0..6){
                     yValues.add(BarEntry(i.toFloat(),0f))
                 }
+                binding.chart.xAxis.valueFormatter = IndexAxisValueFormatter(dw)
                 designChart()
             }
 
@@ -198,6 +201,7 @@ class HealthChildFragment(val health: String) : Fragment() {
 
                                 yValues.add(BarEntry(dayOfWeek,it.data[i].count?.toFloat()?:0f))
                             }
+                            binding.chart.xAxis.valueFormatter = IndexAxisValueFormatter(dw)
                         }
 
                         HealthEnum.Monthly.health -> {

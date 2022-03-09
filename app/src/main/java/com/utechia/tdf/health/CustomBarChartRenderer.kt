@@ -19,10 +19,8 @@ class CustomBarChartRenderer(
 
     }
 
+
     override fun drawValue(c: Canvas?, valueText: String?, x: Float, y: Float, color: Int) {
         super.drawValue(c, valueText, x, y, color)
     }
-
-
-
 }
