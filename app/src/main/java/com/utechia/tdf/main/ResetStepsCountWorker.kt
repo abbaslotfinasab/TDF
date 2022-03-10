@@ -2,7 +2,6 @@ package com.utechia.tdf.main
 
 import android.content.Context
 import android.content.SharedPreferences
-import android.util.Log
 import androidx.appcompat.app.AppCompatActivity
 import androidx.work.Worker
 import androidx.work.WorkerParameters

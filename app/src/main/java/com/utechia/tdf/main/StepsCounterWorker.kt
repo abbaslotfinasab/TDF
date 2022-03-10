@@ -1,4 +1,5 @@
 package com.utechia.tdf.main
+/*
 
 import android.app.NotificationChannel
 import android.app.NotificationManager
@@ -41,10 +42,10 @@ class StepsCounterWorker(val appContext: Context, workerParams: WorkerParameters
 
     override fun onSensorChanged(event: SensorEvent?) {
 
-        totalSteps = event?.values?.get(0)?.toInt()?:0
-        previousSteps = prefs?.getInt(MainActivity.PREVIOUS_STEPS,0)?:0
+        totalSteps = event?.values?.get(0)?.toInt() ?: 0
+        previousSteps = prefs?.getInt(MainActivity.PREVIOUS_STEPS, 0) ?: 0
 
-        if(totalSteps<previousSteps || previousSteps==0){
+        if (totalSteps < previousSteps || previousSteps == 0) {
             with(prefs?.edit()) {
                 this?.putInt(MainActivity.PREVIOUS_STEPS, totalSteps)
             }?.apply()
@@ -86,9 +87,10 @@ class StepsCounterWorker(val appContext: Context, workerParams: WorkerParameters
             )
             notificationManager.createNotificationChannel(notificationChannel)
         }
+
         notificationManager.notify(0, notification)
 
-        return ForegroundInfo(42,notification)
+        return ForegroundInfo(42, notification)
     }
-
-    }
+}
+*/
