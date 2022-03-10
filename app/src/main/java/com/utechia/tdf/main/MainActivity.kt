@@ -10,6 +10,7 @@ import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.os.Handler
 import android.os.Looper
+import android.util.Log
 import android.view.View
 import android.view.WindowManager
 import androidx.activity.viewModels
@@ -182,7 +183,6 @@ class MainActivity : AppCompatActivity(), SensorEventListener {
 
         createPeriodTimeRequest()
 
-        createLongRunningTimeRequest()
     }
 
     override fun onResume() {
@@ -1058,13 +1058,5 @@ class MainActivity : AppCompatActivity(), SensorEventListener {
         workManager.enqueueUniquePeriodicWork(
             "send_periodic",ExistingPeriodicWorkPolicy.REPLACE,stepWorker
         )
-    }
-
-    private fun createLongRunningTimeRequest(){
-
-        val stepWorker : PeriodicWorkRequest = PeriodicWorkRequestBuilder<StepsCounterWorker>(24,TimeUnit.HOURS)
-            .build()
-        workManager.enqueue(stepWorker)
-
     }
 }

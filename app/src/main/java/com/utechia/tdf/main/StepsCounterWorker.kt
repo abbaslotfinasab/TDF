@@ -22,14 +22,10 @@ class StepsCounterWorker(val appContext: Context, workerParams: WorkerParameters
 
     private var prefs: SharedPreferences? = null
     private var totalSteps = 0
+    private var previousSteps = 0
+    private var currentSteps = 0
     private var sensorManager: SensorManager? = null
     private var sensor: Sensor? = null
-
-
-    companion object {
-        const val TOTAL_STEPS = "total_Steps"
-
-    }
 
     private val notificationManager =
         appContext.getSystemService(Context.NOTIFICATION_SERVICE) as NotificationManager
@@ -45,18 +41,28 @@ class StepsCounterWorker(val appContext: Context, workerParams: WorkerParameters
 
     override fun onSensorChanged(event: SensorEvent?) {
 
-        totalSteps = event?.values?.get(0)?.toInt() ?: 0
+        totalSteps = event?.values?.get(0)?.toInt()?:0
+        previousSteps = prefs?.getInt(MainActivity.PREVIOUS_STEPS,0)?:0
 
-        createForegroundInfo(totalSteps,0f)
+        if(totalSteps<previousSteps || previousSteps==0){
+            with(prefs?.edit()) {
+                this?.putInt(MainActivity.PREVIOUS_STEPS, totalSteps)
+            }?.apply()
+        }
+
+        currentSteps = totalSteps - previousSteps
+
         with(prefs?.edit()) {
-            this?.putInt(TOTAL_STEPS, totalSteps)
+            this?.putInt(MainActivity.TOTAL_STEPS, totalSteps)
         }?.apply()
+
+        createForegroundInfo(currentSteps)
     }
 
     override fun onAccuracyChanged(sensor: Sensor?, accuracy: Int) {
     }
 
-    private fun createForegroundInfo(steps: Int, calory: Float): ForegroundInfo {
+    private fun createForegroundInfo(steps: Int): ForegroundInfo {
         val title = appContext.getString(R.string.dailySteps)
         val cancel = appContext.getString(R.string.cancel)
 
@@ -84,4 +90,5 @@ class StepsCounterWorker(val appContext: Context, workerParams: WorkerParameters
 
         return ForegroundInfo(42,notification)
     }
-}
+
+    }

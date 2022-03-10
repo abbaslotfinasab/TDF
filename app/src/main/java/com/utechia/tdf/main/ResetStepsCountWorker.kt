@@ -17,7 +17,6 @@ class ResetStepsCountWorker(val appContext: Context, workerParams: WorkerParamet
     companion object{
         const val TOTAL_STEPS = "total_Steps"
         const val PREVIOUS_STEPS = "previous_Steps"
-
     }
 
     override fun doWork(): Result {
