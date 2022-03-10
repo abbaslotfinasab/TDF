@@ -213,6 +213,7 @@ class MainActivity : AppCompatActivity(), SensorEventListener {
             ZoneOffset.UTC)
             .format(DateTimeFormatter.ofPattern("yyyy-MM-dd'T'HH:mm:ss.SSS'Z'")).toString()
 
+        if(currentSteps>0)
         mainViewModel.sendSteps(currentSteps,(currentSteps*0.05).toInt(),startTimeZone,endTimeZone)
 
     }
