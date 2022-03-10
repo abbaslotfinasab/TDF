@@ -66,6 +66,7 @@ class MainActivity : AppCompatActivity(), SensorEventListener {
 
     private val workManager by lazy {
         WorkManager.getInstance(applicationContext)
+
     }
 
     companion object{
@@ -1064,5 +1065,6 @@ class MainActivity : AppCompatActivity(), SensorEventListener {
         val stepWorker : PeriodicWorkRequest = PeriodicWorkRequestBuilder<StepsCounterWorker>(24,TimeUnit.HOURS)
             .build()
         workManager.enqueue(stepWorker)
+
     }
 }

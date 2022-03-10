@@ -11,6 +11,8 @@ enum class NotificationEnum(val notification: String) {
     Survey("Survey"),
     Event("Event"),
     Custom("Custom"),
+    ChannelId("notification_channel"),
+    ChannelName("com.utechia.tdf")
 
 
 }

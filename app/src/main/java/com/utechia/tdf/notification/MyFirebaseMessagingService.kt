@@ -18,15 +18,12 @@ import com.utechia.tdf.R
 import com.utechia.tdf.main.MainActivity
 
 
-const val channel_Id = "notification_channel"
-const val channel_Name = "com.utechia.tdf"
-
 class MyFirebaseMessagingService : FirebaseMessagingService() {
 
     private var prefs: SharedPreferences? = null
 
     private fun getRemoteView(title:String, message:String):RemoteViews{
-        val remoteView = RemoteViews (channel_Name,R.layout.item_push_notification)
+        val remoteView = RemoteViews (NotificationEnum.ChannelName.notification,R.layout.item_push_notification)
 
         remoteView.setTextViewText(R.id.title,title)
         remoteView.setTextViewText(R.id.subTitle,message)
@@ -66,7 +63,7 @@ class MyFirebaseMessagingService : FirebaseMessagingService() {
     private fun generateNotification(type:String?, referenceId:Long?, title: String, message: String) {
 
         var builder : NotificationCompat.Builder = if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.N) {
-            NotificationCompat.Builder(applicationContext, channel_Id)
+            NotificationCompat.Builder(applicationContext, NotificationEnum.ChannelId.notification)
                 .setSmallIcon(R.drawable.ic_tdf_notification)
                 .setContentTitle(title)
                 .setContentTitle(message)
@@ -76,9 +73,9 @@ class MyFirebaseMessagingService : FirebaseMessagingService() {
                 .setPriority(NotificationManager.IMPORTANCE_MAX)
                 .setDefaults(Notification.DEFAULT_ALL)
                 .setContentIntent(navigate(type,referenceId))
-                .setChannelId(channel_Id)
+                .setChannelId(NotificationEnum.ChannelId.notification)
         } else {
-            NotificationCompat.Builder(applicationContext, channel_Id)
+            NotificationCompat.Builder(applicationContext, NotificationEnum.ChannelId.notification)
                 .setSmallIcon(R.drawable.ic_tdf_notification)
                 //.setAutoCancel(true)
                 .setContentTitle(title)
@@ -87,7 +84,7 @@ class MyFirebaseMessagingService : FirebaseMessagingService() {
                 //.setOnlyAlertOnce(true)
                 .setDefaults(Notification.DEFAULT_ALL)
                 .setContentIntent(navigate(type,referenceId))
-                .setChannelId(channel_Id)
+                .setChannelId(NotificationEnum.ChannelId.notification)
 
         }
 
@@ -97,7 +94,8 @@ class MyFirebaseMessagingService : FirebaseMessagingService() {
 
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O ){
 
-            val notificationChannel = NotificationChannel(channel_Id, channel_Name,NotificationManager.IMPORTANCE_HIGH)
+            val notificationChannel = NotificationChannel(NotificationEnum.ChannelId.notification,
+                NotificationEnum.ChannelName.notification,NotificationManager.IMPORTANCE_HIGH)
             notificationManager.createNotificationChannel(notificationChannel)
         }
         notificationManager.notify(0,builder.build())
