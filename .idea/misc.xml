@@ -290,7 +290,6 @@
         <entry key="app/src/main/res/drawable/food_state.xml" value="0.1" />
         <entry key="app/src/main/res/drawable/gradiant.xml" value="0.13796296296296295" />
         <entry key="app/src/main/res/drawable/ic_clock.xml" value="0.1717948717948718" />
-        <entry key="app/src/main/res/drawable/ic_delete.xml" value="0.16962025316455695" />
         <entry key="app/src/main/res/drawable/ic_event_back.xml" value="0.209375" />
         <entry key="app/src/main/res/drawable/ic_event_cal.xml" value="0.1" />
         <entry key="app/src/main/res/drawable/ic_event_doc.xml" value="0.1717948717948718" />
@@ -384,7 +383,7 @@
         <entry key="app/src/main/res/layout/item_chat_user.xml" value="0.1" />
         <entry key="app/src/main/res/layout/item_event.xml" value="0.22" />
         <entry key="app/src/main/res/layout/item_guess_event.xml" value="0.25" />
-        <entry key="app/src/main/res/layout/item_health.xml" value="0.5096153846153846" />
+        <entry key="app/src/main/res/layout/item_health.xml" value="0.67" />
         <entry key="app/src/main/res/layout/item_home_news.xml" value="0.33" />
         <entry key="app/src/main/res/layout/item_notification.xml" value="0.18" />
         <entry key="app/src/main/res/layout/item_order_notification.xml" value="0.2" />
@@ -414,7 +413,7 @@
       <item index="3" class="java.lang.String" itemvalue="dagger.hilt.InstallIn" />
     </list>
   </component>
-  <component name="ProjectRootManager" version="2" languageLevel="JDK_11" default="true" project-jdk-name="11" project-jdk-type="JavaSDK">
+  <component name="ProjectRootManager" version="2" languageLevel="JDK_11" default="true" project-jdk-name="1.8" project-jdk-type="JavaSDK">
     <output url="file://$PROJECT_DIR$/out" />
   </component>
   <component name="VisualizationToolProject">
