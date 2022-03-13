@@ -1040,9 +1040,9 @@ class MainActivity : AppCompatActivity(), SensorEventListener {
 
     private fun createPeriodTimeRequest(){
 
-        val delay :Duration = Duration.between(LocalDateTime.now(),LocalDateTime.now().withHour(0).withMinute(0).withSecond(0).withNano(0))
+        val delay :Duration = Duration.between(LocalDateTime.now().withHour(23).withMinute(59).withSecond(59).withNano(0),LocalDateTime.now())
 
-        var time = delay.toMinutes()
+        var time = delay.toHours()
 
         time *= if (time<0){
             -1
@@ -1051,7 +1051,7 @@ class MainActivity : AppCompatActivity(), SensorEventListener {
         }
 
         val stepWorker : PeriodicWorkRequest = PeriodicWorkRequestBuilder<ResetStepsCountWorker>(24,TimeUnit.HOURS)
-            .setInitialDelay((1440-time),TimeUnit.MINUTES)
+            .setInitialDelay(time,TimeUnit.MINUTES)
             .build()
 
         workManager.enqueueUniquePeriodicWork(
