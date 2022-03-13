@@ -24,7 +24,6 @@ import com.utechia.tdf.R
 import com.utechia.tdf.main.MainActivity
 import com.utechia.tdf.databinding.FragmentHomeUserBinding
 import dagger.hilt.android.AndroidEntryPoint
-import java.text.DecimalFormat
 
 @AndroidEntryPoint
 class UserHomeFragment : Fragment() {
@@ -34,7 +33,6 @@ class UserHomeFragment : Fragment() {
     private val userHomeAdapter: UserHomeAdapter = UserHomeAdapter()
     private lateinit var prefs: SharedPreferences
     private var employeeId = ""
-    private val df = DecimalFormat("#.#")
 
 
 
@@ -135,8 +133,7 @@ class UserHomeFragment : Fragment() {
         (activity as MainActivity).mainViewModel.stepCounter.observe(viewLifecycleOwner){
 
             binding.stepsCount.text = it.toString()
-            val cal = df.format(it*0.05)
-            binding.calory.text = cal.toString()
+            binding.calory.text = (it*0.05).toInt().toString()
 
         }
     }
