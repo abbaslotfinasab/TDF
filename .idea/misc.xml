@@ -296,6 +296,7 @@
         <entry key="app/src/main/res/drawable/ic_group_order.xml" value="0.1717948717948718" />
         <entry key="app/src/main/res/drawable/ic_heart_back.xml" value="0.1717948717948718" />
         <entry key="app/src/main/res/drawable/ic_permission.xml" value="0.1" />
+        <entry key="app/src/main/res/drawable/ic_sheet.xml" value="0.16962025316455695" />
         <entry key="app/src/main/res/drawable/ic_teaboy_back.xml" value="0.209375" />
         <entry key="app/src/main/res/drawable/ic_waitning.xml" value="0.1" />
         <entry key="app/src/main/res/drawable/notification_bubble.xml" value="0.1" />
@@ -385,6 +386,7 @@
         <entry key="app/src/main/res/layout/item_guess_event.xml" value="0.25" />
         <entry key="app/src/main/res/layout/item_health.xml" value="0.67" />
         <entry key="app/src/main/res/layout/item_home_news.xml" value="0.33" />
+        <entry key="app/src/main/res/layout/item_marker.xml" value="0.67" />
         <entry key="app/src/main/res/layout/item_notification.xml" value="0.18" />
         <entry key="app/src/main/res/layout/item_order_notification.xml" value="0.2" />
         <entry key="app/src/main/res/layout/item_order_teaboy_delivered.xml" value="0.5" />

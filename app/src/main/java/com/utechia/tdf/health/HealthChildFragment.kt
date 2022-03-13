@@ -49,6 +49,8 @@ class HealthChildFragment(val health: String) : Fragment() {
     private var dayOfMonth = 0f
     private lateinit var dw : List<String>
     private lateinit var customBarChartRenderer: RoundedBarChartRenderer
+    private lateinit var chartMarkerView: ChartMarkerView
+
 
 
 
@@ -70,6 +72,8 @@ class HealthChildFragment(val health: String) : Fragment() {
         dw = requireActivity().resources.getStringArray(R.array.week).toList()
 
         customBarChartRenderer = RoundedBarChartRenderer(binding.chart,binding.chart.animator,binding.chart.viewPortHandler,10f)
+        chartMarkerView = ChartMarkerView(context,R.layout.item_marker,binding.chart.xAxis.valueFormatter)
+        chartMarkerView.chartView = binding.chart
 
         currentDayOfWeek = LocalDateTime.now().dayOfWeek.value
 
@@ -253,6 +257,7 @@ class HealthChildFragment(val health: String) : Fragment() {
         binding.chart.description.isEnabled = false
         binding.chart.axisLeft.axisMinimum = 0f
         binding.chart.renderer = customBarChartRenderer
+        binding.chart.marker = chartMarkerView
         binding.chart.invalidate()
     }
 }
