@@ -122,9 +122,8 @@
     <string name="monthly">Monthly</string>
     <string name="healthData">Healthy Data</string>
     <string name="dailySteps">Daily Steps</string>
-
-
-
+    <string name="kcal">Kcal</string>
+    <string name="steps">STEPS</string>
 
 
     <string-array name="month_array">
