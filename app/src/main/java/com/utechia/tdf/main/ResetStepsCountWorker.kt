@@ -27,6 +27,8 @@ class ResetStepsCountWorker(val appContext: Context, workerParams: WorkerParamet
             this?.putInt(PREVIOUS_STEPS,previousSteps)
         }?.apply()
 
+        prefs?.edit()?.remove(TOTAL_STEPS)?.apply()
+
         return Result.success()
     }
 }

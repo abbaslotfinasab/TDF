@@ -197,9 +197,9 @@ class MainActivity : AppCompatActivity(), SensorEventListener {
             with(prefs.edit()) {
                 putInt(PREVIOUS_STEPS, totalSteps)
             }.apply()
-        }
 
-        previousSteps = prefs.getInt(PREVIOUS_STEPS,0)
+            previousSteps = prefs.getInt(PREVIOUS_STEPS,0)
+        }
 
         currentSteps = totalSteps - previousSteps
 
@@ -1019,17 +1019,20 @@ class MainActivity : AppCompatActivity(), SensorEventListener {
         totalSteps = event?.values?.get(0)?.toInt()?:0
         previousSteps = prefs.getInt(PREVIOUS_STEPS,0)
 
+        // when phone restart
         if(totalSteps<previousSteps || previousSteps==0){
             with(prefs.edit()) {
                 putInt(PREVIOUS_STEPS, totalSteps)
             }.apply()
-        }
 
-        currentSteps = totalSteps - previousSteps
+            previousSteps = prefs.getInt(PREVIOUS_STEPS,0)
+        }
 
         with(prefs.edit()) {
             putInt(TOTAL_STEPS, totalSteps)
         }.apply()
+
+        currentSteps = totalSteps - previousSteps
 
         mainViewModel.stepCount(currentSteps)
 
