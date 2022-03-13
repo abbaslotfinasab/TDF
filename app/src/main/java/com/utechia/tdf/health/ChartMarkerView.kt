@@ -10,15 +10,15 @@ import com.github.mikephil.charting.highlight.Highlight
 import com.github.mikephil.charting.utils.MPPointF
 import com.utechia.tdf.R
 
+
 @SuppressLint("ViewConstructor")
-class ChartMarkerView constructor(context: Context?, layoutResource: Int,private val indexAxisValueFormatter: ValueFormatter) :
+class ChartMarkerView constructor(context: Context?, layoutResource: Int,private val axisValueFormatter: ValueFormatter) :
     MarkerView(context, layoutResource) {
     private val tvContent:TextView = findViewById(R.id.markerCount)
 
     override fun refreshContent(e: Entry?, highlight: Highlight?) {
-        tvContent.text = e?.let { indexAxisValueFormatter.getFormattedValue(it.x) }
+        tvContent.text = e?.let { axisValueFormatter.getFormattedValue(it.y) }
         super.refreshContent(e, highlight)
-
     }
 
     override fun getOffset(): MPPointF {

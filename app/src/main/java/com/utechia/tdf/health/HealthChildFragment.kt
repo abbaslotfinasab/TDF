@@ -54,11 +54,6 @@ class HealthChildFragment(val health: String) : Fragment() {
 
 
 
-
-
-
-
-
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
@@ -73,7 +68,6 @@ class HealthChildFragment(val health: String) : Fragment() {
 
         customBarChartRenderer = RoundedBarChartRenderer(binding.chart,binding.chart.animator,binding.chart.viewPortHandler,10f)
         chartMarkerView = ChartMarkerView(context,R.layout.item_marker,binding.chart.xAxis.valueFormatter)
-        chartMarkerView.chartView = binding.chart
 
         currentDayOfWeek = LocalDateTime.now().dayOfWeek.value
 
@@ -129,11 +123,12 @@ class HealthChildFragment(val health: String) : Fragment() {
                     healthViewModel.getChart(firstDayOfWeek,lastDayOfWeek)
                 }
 
-                for (i in 0..LocalDateTime.MAX.dayOfWeek.value){
+                for (i in 0..7){
                     yValues.add(BarEntry(i.toFloat(),0f))
                 }
                 binding.chart.xAxis.valueFormatter = IndexAxisValueFormatter(dw)
                 designChart()
+
             }
 
             HealthEnum.Monthly.health -> {
@@ -184,6 +179,7 @@ class HealthChildFragment(val health: String) : Fragment() {
             when (it) {
                 is Result.Success -> {
                     binding.refreshLayout.isRefreshing = false
+                    yValues.clear()
 
                     when(health){
 
@@ -193,10 +189,11 @@ class HealthChildFragment(val health: String) : Fragment() {
                                 dayOfWeek = OffsetDateTime.parse(it.data[i].UpdatedAt).atZoneSameInstant(
                                     ZoneId.systemDefault()
                                 ).toLocalDateTime().dayOfWeek.value.toFloat()
-
                                 yValues.add(BarEntry(dayOfWeek,it.data[i].count?.toFloat()?:0f))
                             }
                             binding.chart.xAxis.valueFormatter = IndexAxisValueFormatter(dw)
+                            binding.chart.marker = chartMarkerView
+
                         }
 
                         HealthEnum.Monthly.health -> {
@@ -207,6 +204,8 @@ class HealthChildFragment(val health: String) : Fragment() {
                                 ).toLocalDateTime().dayOfMonth.toFloat()
 
                                 yValues.add(BarEntry(dayOfMonth,it.data[i].count?.toFloat()?:0f))
+                                binding.chart.marker = chartMarkerView
+
                             }
                         }
                     }
@@ -257,7 +256,6 @@ class HealthChildFragment(val health: String) : Fragment() {
         binding.chart.description.isEnabled = false
         binding.chart.axisLeft.axisMinimum = 0f
         binding.chart.renderer = customBarChartRenderer
-        binding.chart.marker = chartMarkerView
         binding.chart.invalidate()
     }
 }
