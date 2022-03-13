@@ -24,6 +24,7 @@ import java.time.OffsetDateTime
 import java.time.ZoneId
 import java.time.ZoneOffset
 import java.time.format.DateTimeFormatter
+import java.time.temporal.ChronoField
 import kotlin.collections.ArrayList
 
 @AndroidEntryPoint
@@ -88,15 +89,15 @@ class HealthChildFragment(val health: String) : Fragment() {
             .format(DateTimeFormatter.ofPattern("yyyy-MM-dd'T'HH:mm:ss.SSS'Z'")).toString()
 
 
-        firstDayOfWeek = LocalDateTime.now().minusDays(currentDayOfWeek.toLong()).atZone(ZoneId.systemDefault()).toOffsetDateTime().withOffsetSameInstant(
+        firstDayOfWeek = LocalDateTime.now().with(ChronoField.DAY_OF_WEEK,1).atZone(ZoneId.systemDefault()).toOffsetDateTime().withOffsetSameInstant(
             ZoneOffset.UTC)
             .format(DateTimeFormatter.ofPattern("yyyy-MM-dd'T'HH:mm:ss.SSS'Z'")).toString()
 
-        lastDayOfWeek = LocalDateTime.now().plusDays((7-currentDayOfWeek).toLong()).atZone(ZoneId.systemDefault()).toOffsetDateTime().withOffsetSameInstant(
+        lastDayOfWeek = LocalDateTime.now().with(ChronoField.DAY_OF_WEEK,7).atZone(ZoneId.systemDefault()).toOffsetDateTime().withOffsetSameInstant(
             ZoneOffset.UTC)
             .format(DateTimeFormatter.ofPattern("yyyy-MM-dd'T'HH:mm:ss.SSS'Z'")).toString()
 
-        firstDayOfMonth = LocalDateTime.now().minusDays((currentDayOfMonth-1).toLong()).atZone(ZoneId.systemDefault()).toOffsetDateTime().withOffsetSameInstant(
+        firstDayOfMonth = LocalDateTime.now().withDayOfMonth(1).atZone(ZoneId.systemDefault()).toOffsetDateTime().withOffsetSameInstant(
             ZoneOffset.UTC)
             .format(DateTimeFormatter.ofPattern("yyyy-MM-dd'T'HH:mm:ss.SSS'Z'")).toString()
 
@@ -124,7 +125,7 @@ class HealthChildFragment(val health: String) : Fragment() {
                     healthViewModel.getChart(firstDayOfWeek,lastDayOfWeek)
                 }
 
-                for (i in 0..6){
+                for (i in 0..LocalDateTime.MAX.dayOfWeek.value){
                     yValues.add(BarEntry(i.toFloat(),0f))
                 }
                 binding.chart.xAxis.valueFormatter = IndexAxisValueFormatter(dw)
@@ -153,8 +154,6 @@ class HealthChildFragment(val health: String) : Fragment() {
             layoutManager = LinearLayoutManager(context,LinearLayoutManager.VERTICAL,false)
             addItemDecoration(HealthItemDecoration())
         }
-
-
         observer()
     }
 
