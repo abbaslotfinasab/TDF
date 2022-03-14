@@ -1,6 +1,7 @@
 package com.utechia.tdf.health
 
 import android.os.Bundle
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -87,11 +88,11 @@ class HealthChildFragment(val health: String) : Fragment() {
             .format(DateTimeFormatter.ofPattern("yyyy-MM-dd'T'HH:mm:ss.SSS'Z'")).toString()
 
 
-        firstDayOfWeek = LocalDateTime.now().with(ChronoField.DAY_OF_WEEK,1).atZone(ZoneId.systemDefault()).toOffsetDateTime().withOffsetSameInstant(
+        firstDayOfWeek = LocalDateTime.now().with(ChronoField.DAY_OF_WEEK,1).minusDays(1).atZone(ZoneId.systemDefault()).toOffsetDateTime().withOffsetSameInstant(
             ZoneOffset.UTC)
             .format(DateTimeFormatter.ofPattern("yyyy-MM-dd'T'HH:mm:ss.SSS'Z'")).toString()
 
-        lastDayOfWeek = LocalDateTime.now().with(ChronoField.DAY_OF_WEEK,7).atZone(ZoneId.systemDefault()).toOffsetDateTime().withOffsetSameInstant(
+        lastDayOfWeek = LocalDateTime.now().with(ChronoField.DAY_OF_WEEK,7).minusDays(1).atZone(ZoneId.systemDefault()).toOffsetDateTime().withOffsetSameInstant(
             ZoneOffset.UTC)
             .format(DateTimeFormatter.ofPattern("yyyy-MM-dd'T'HH:mm:ss.SSS'Z'")).toString()
 
@@ -123,7 +124,7 @@ class HealthChildFragment(val health: String) : Fragment() {
                     healthViewModel.getChart(firstDayOfWeek,lastDayOfWeek)
                 }
 
-                for (i in 0..7){
+                for (i in 1 .. 7){
                     yValues.add(BarEntry(i.toFloat(),0f))
                 }
                 binding.chart.xAxis.valueFormatter = IndexAxisValueFormatter(dw)
@@ -147,6 +148,9 @@ class HealthChildFragment(val health: String) : Fragment() {
                 designChart()
             }
         }
+
+        Log.d("firstDayOfWeek",firstDayOfWeek)
+        Log.d("lastDayOfWeek",lastDayOfWeek)
 
         binding.recyclerView.apply {
             adapter = healthAdapter
@@ -188,8 +192,10 @@ class HealthChildFragment(val health: String) : Fragment() {
                             for (i in 0 until it.data.size){
                                 dayOfWeek = OffsetDateTime.parse(it.data[i].UpdatedAt).atZoneSameInstant(
                                     ZoneId.systemDefault()
-                                ).toLocalDateTime().dayOfWeek.value.toFloat()
+                                ).toLocalDateTime().dayOfWeek.plus(1).value.toFloat()
                                 yValues.add(BarEntry(dayOfWeek,it.data[i].count?.toFloat()?:0f))
+                                Log.d("dayOfWeek",dayOfWeek.toString())
+
                             }
                             binding.chart.xAxis.valueFormatter = IndexAxisValueFormatter(dw)
                             binding.chart.marker = chartMarkerView

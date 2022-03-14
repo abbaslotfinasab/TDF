@@ -63,6 +63,6 @@ class MainRepoImpl @Inject constructor(
     }
 
     override suspend fun sendSteps(steps: Int, calory: Int, start: String, end: String) {
-        service.sendSteps(Steps(steps,calory,start,end))
+        service.sendSteps(Steps(steps,calory,end))
     }
 }

@@ -8,7 +8,6 @@ data class Steps(
 
     var count:Int?,
     var cal:Int?,
-    var fromdate:String?,
-    var todate:String?,
+    var date:String?,
 
 ):Parcelable
