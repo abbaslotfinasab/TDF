@@ -1045,7 +1045,7 @@ class MainActivity : AppCompatActivity(), SensorEventListener {
 
         val delay :Duration = Duration.between(LocalDateTime.now().withHour(23).withMinute(59).withSecond(59).withNano(0),LocalDateTime.now())
 
-        var time = delay.toHours()
+        var time = delay.toMinutes()
 
         time *= if (time<0){
             -1
