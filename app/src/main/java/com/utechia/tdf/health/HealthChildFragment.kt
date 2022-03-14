@@ -88,19 +88,19 @@ class HealthChildFragment(val health: String) : Fragment() {
             .format(DateTimeFormatter.ofPattern("yyyy-MM-dd'T'HH:mm:ss.SSS'Z'")).toString()
 
 
-        firstDayOfWeek = LocalDateTime.now().with(ChronoField.DAY_OF_WEEK,1).minusDays(1).atZone(ZoneId.systemDefault()).toOffsetDateTime().withOffsetSameInstant(
+        firstDayOfWeek = LocalDateTime.now().withHour(0).withMinute(0).withSecond(0).withNano(0).with(ChronoField.DAY_OF_WEEK,1).minusDays(1).atZone(ZoneId.systemDefault()).toOffsetDateTime().withOffsetSameInstant(
             ZoneOffset.UTC)
             .format(DateTimeFormatter.ofPattern("yyyy-MM-dd'T'HH:mm:ss.SSS'Z'")).toString()
 
-        lastDayOfWeek = LocalDateTime.now().with(ChronoField.DAY_OF_WEEK,7).minusDays(1).atZone(ZoneId.systemDefault()).toOffsetDateTime().withOffsetSameInstant(
+        lastDayOfWeek = LocalDateTime.now().withHour(0).withMinute(0).withSecond(0).withNano(0).with(ChronoField.DAY_OF_WEEK,7).minusDays(1).atZone(ZoneId.systemDefault()).toOffsetDateTime().withOffsetSameInstant(
             ZoneOffset.UTC)
             .format(DateTimeFormatter.ofPattern("yyyy-MM-dd'T'HH:mm:ss.SSS'Z'")).toString()
 
-        firstDayOfMonth = LocalDateTime.now().withDayOfMonth(1).atZone(ZoneId.systemDefault()).toOffsetDateTime().withOffsetSameInstant(
+        firstDayOfMonth = LocalDateTime.now().withHour(0).withMinute(0).withSecond(0).withNano(0).withDayOfMonth(1).atZone(ZoneId.systemDefault()).toOffsetDateTime().withOffsetSameInstant(
             ZoneOffset.UTC)
             .format(DateTimeFormatter.ofPattern("yyyy-MM-dd'T'HH:mm:ss.SSS'Z'")).toString()
 
-        lastDayOfMonth = LocalDateTime.now().plusDays((LocalDateTime.MAX.dayOfMonth-currentDayOfMonth).toLong()).atZone(ZoneId.systemDefault()).toOffsetDateTime().withOffsetSameInstant(
+        lastDayOfMonth = LocalDateTime.now().withHour(0).withMinute(0).withSecond(0).withNano(0).plusDays((LocalDateTime.MAX.dayOfMonth-currentDayOfMonth).toLong()).atZone(ZoneId.systemDefault()).toOffsetDateTime().withOffsetSameInstant(
             ZoneOffset.UTC)
             .format(DateTimeFormatter.ofPattern("yyyy-MM-dd'T'HH:mm:ss.SSS'Z'")).toString()
 
