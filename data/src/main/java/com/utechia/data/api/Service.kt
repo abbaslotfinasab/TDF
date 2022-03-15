@@ -200,4 +200,8 @@ interface Service {
     @GET("health/steps/chart")
     suspend fun getChart(@Query("fromdate")fromdate:String ,@Query("todate")todate:String):Response<TopSteps>
 
+    @GET("user/info")
+    suspend fun getProfile():Response<Profile>
+
+
 }
