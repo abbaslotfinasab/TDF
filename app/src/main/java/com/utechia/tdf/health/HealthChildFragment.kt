@@ -260,6 +260,10 @@ class HealthChildFragment(val health: String) : Fragment() {
         binding.chart.xAxis.position = XAxis.XAxisPosition.BOTTOM
         binding.chart.legend.form = Legend.LegendForm.NONE
         binding.chart.description.isEnabled = false
+        binding.chart.setPinchZoom(true)
+        binding.chart.setTouchEnabled(true)
+        binding.chart.setScaleEnabled(true)
+        binding.chart.isDoubleTapToZoomEnabled = true
         binding.chart.axisLeft.axisMinimum = 0f
         binding.chart.renderer = customBarChartRenderer
         binding.chart.invalidate()
