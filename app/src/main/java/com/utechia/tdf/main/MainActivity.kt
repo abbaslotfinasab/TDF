@@ -83,17 +83,6 @@ class MainActivity : AppCompatActivity(), SensorEventListener {
         prefs = getSharedPreferences(MainEnum.Tdf.main, MODE_PRIVATE)
         setContentView(binding.root)
 
-
-            if(ContextCompat.checkSelfPermission(this, Manifest.permission.ACTIVITY_RECOGNITION)
-                    != PackageManager.PERMISSION_GRANTED) {
-
-                if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.Q) {
-                    ActivityCompat.requestPermissions(this,
-                        arrayOf(Manifest.permission.ACTIVITY_RECOGNITION),
-                        1)
-                }
-                    }
-
         FirebaseMessaging.getInstance().token.addOnCompleteListener(OnCompleteListener { task ->
             if (task.isSuccessful) {
                 if (!task.isSuccessful)
@@ -101,7 +90,7 @@ class MainActivity : AppCompatActivity(), SensorEventListener {
                 else {
                     with(prefs.edit()) {
                         putString(MainEnum.Fcm.main, task.result)
-                    }.apply()
+                    }.commit()
                 }
             }
         })
@@ -166,10 +155,9 @@ class MainActivity : AppCompatActivity(), SensorEventListener {
         }
 
         binding.exit.setOnClickListener {
+            logoutFromFCM()
             prefs.edit().clear().apply()
-
             Handler(Looper.getMainLooper()).postDelayed({
-                logoutFromFCM()
                 navController.popBackStack(R.id.nav_graph,true)
                 navController.navigate(R.id.loginFragment)
 
@@ -177,9 +165,9 @@ class MainActivity : AppCompatActivity(), SensorEventListener {
 
             binding.drawerLayout.closeDrawer(GravityCompat.END)
 
+
         }
         observer()
-
         createPeriodTimeRequest()
 
     }
@@ -728,6 +716,15 @@ class MainActivity : AppCompatActivity(), SensorEventListener {
                 binding.bottomNavigation.visibility = View.VISIBLE
                 binding.drawerLayout.setDrawerLockMode(DrawerLayout.LOCK_MODE_UNLOCKED)
 
+                if(ContextCompat.checkSelfPermission(this, Manifest.permission.ACTIVITY_RECOGNITION)
+                    != PackageManager.PERMISSION_GRANTED) {
+
+                    if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.Q) {
+                        ActivityCompat.requestPermissions(this,
+                            arrayOf(Manifest.permission.ACTIVITY_RECOGNITION),
+                            1)
+                    }
+                }
             }
 
             MainEnum.Refreshment.main -> {
@@ -997,8 +994,8 @@ class MainActivity : AppCompatActivity(), SensorEventListener {
 
                 is Result.Error -> {
                     if (it.message == "Unauthorized") {
-                        prefs.edit().clear().apply()
                         logoutFromFCM()
+                        prefs.edit().clear().apply()
                         navController.navigate(R.id.loginFragment,null,NavOptions.Builder()
                             .setLaunchSingleTop(true)
                             .setPopUpTo(R.id.nav_graph,true, saveState = false)
