@@ -92,7 +92,7 @@ class HealthChildFragment(val health: String) : Fragment() {
             ZoneOffset.UTC)
             .format(DateTimeFormatter.ofPattern("yyyy-MM-dd'T'HH:mm:ss.SSS'Z'")).toString()
 
-        lastDayOfWeek = LocalDateTime.now().withHour(0).withMinute(0).withSecond(0).withNano(0).with(ChronoField.DAY_OF_WEEK,7).minusDays(1).atZone(ZoneId.systemDefault()).toOffsetDateTime().withOffsetSameInstant(
+        lastDayOfWeek = LocalDateTime.now().withHour(23).withMinute(59).withSecond(59).withNano(0).with(ChronoField.DAY_OF_WEEK,7).minusDays(1).atZone(ZoneId.systemDefault()).toOffsetDateTime().withOffsetSameInstant(
             ZoneOffset.UTC)
             .format(DateTimeFormatter.ofPattern("yyyy-MM-dd'T'HH:mm:ss.SSS'Z'")).toString()
 
@@ -100,7 +100,7 @@ class HealthChildFragment(val health: String) : Fragment() {
             ZoneOffset.UTC)
             .format(DateTimeFormatter.ofPattern("yyyy-MM-dd'T'HH:mm:ss.SSS'Z'")).toString()
 
-        lastDayOfMonth = LocalDateTime.now().withHour(0).withMinute(0).withSecond(0).withNano(0).plusDays((LocalDateTime.MAX.dayOfMonth-currentDayOfMonth).toLong()).atZone(ZoneId.systemDefault()).toOffsetDateTime().withOffsetSameInstant(
+        lastDayOfMonth = LocalDateTime.now().withHour(23).withMinute(59).withSecond(59).withNano(0).plusDays((LocalDateTime.MAX.dayOfMonth-currentDayOfMonth).toLong()).atZone(ZoneId.systemDefault()).toOffsetDateTime().withOffsetSameInstant(
             ZoneOffset.UTC)
             .format(DateTimeFormatter.ofPattern("yyyy-MM-dd'T'HH:mm:ss.SSS'Z'")).toString()
 
