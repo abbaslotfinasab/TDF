@@ -264,7 +264,7 @@ class HealthChildFragment(val health: String) : Fragment() {
         binding.chart.setPinchZoom(true)
         binding.chart.setTouchEnabled(true)
         binding.chart.setScaleEnabled(true)
-        binding.chart.isDoubleTapToZoomEnabled = true
+        binding.chart.isDoubleTapToZoomEnabled = false
         binding.chart.axisLeft.axisMinimum = 0f
         binding.chart.renderer = customBarChartRenderer
         binding.chart.invalidate()
