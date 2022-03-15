@@ -1,4 +1,7 @@
 package com.utechia.domain.usecases
 
-interface ProfileUseCase {
+interface ProfileUseCase<R> {
+
+    suspend fun execute():R
+
 }

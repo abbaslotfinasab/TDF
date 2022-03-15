@@ -121,4 +121,9 @@ abstract class RepositoryModule {
     abstract fun bindTopStepsRepositoryService(
         topStepsRepoImpl: TopStepsRepoImpl
     ): TopStepsRepo
+
+    @Binds
+    abstract fun bindProfileRepositoryService(
+        profileRepoImpl: ProfileRepoImpl
+    ): ProfileRepo
 }
