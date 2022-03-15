@@ -69,6 +69,7 @@ class HealthChildFragment(val health: String) : Fragment() {
 
         customBarChartRenderer = RoundedBarChartRenderer(binding.chart,binding.chart.animator,binding.chart.viewPortHandler,10f)
         chartMarkerView = ChartMarkerView(context,R.layout.item_marker,binding.chart.xAxis.valueFormatter)
+        chartMarkerView.chartView = binding.chart
 
         currentDayOfWeek = LocalDateTime.now().dayOfWeek.value
 
