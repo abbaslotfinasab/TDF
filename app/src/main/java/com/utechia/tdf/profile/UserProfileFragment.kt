@@ -51,6 +51,7 @@ class UserProfileFragment : Fragment() {
                     Glide.with(requireActivity())
                         .load(it.data.profilePictureModel?.url)
                         .centerCrop()
+                        .placeholder(R.drawable.ic_profile_icon)
                         .error(R.drawable.ic_profile_icon)
                         .into(binding.profilePicture)
                 }

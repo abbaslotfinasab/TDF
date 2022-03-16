@@ -233,6 +233,7 @@
             android:id="@+id/pager"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
+            android:layout_marginBottom="10dp"
             android:layoutDirection="ltr"
             android:orientation="horizontal"
             app:layout_constraintEnd_toEndOf="parent"
@@ -241,12 +242,13 @@
 
 
         <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/constraintLayout6"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:background="#F4F3F7"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent" >
+            app:layout_constraintStart_toStartOf="parent">
 
             <androidx.appcompat.widget.AppCompatButton
                 android:id="@+id/appCompatButton"
