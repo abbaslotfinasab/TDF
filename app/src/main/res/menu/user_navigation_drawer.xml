@@ -23,6 +23,7 @@
         <item
             android:id="@+id/permissionFragment"
             android:icon="@drawable/ic_permission"
+            android:visible="false"
             android:title="@string/leave_request" />
 
         <item
