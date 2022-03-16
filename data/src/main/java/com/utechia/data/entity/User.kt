@@ -9,14 +9,14 @@ import kotlinx.serialization.Serializable
 @Parcelize
 @Serializable
 data class User(
-    val displayName: String,
-    val id: Int,
-    val officeFloor: String,
-    val officeWorkStation: String,
+    val displayName: String?,
+    val id: Int?,
+    val officeFloor: String?,
+    val officeWorkStation: String?,
     val jobTitle:String?,
-    val profilePicture: ProfilePicture,
+    val profilePicture: ProfilePicture?,
     ):Parcelable,ResponseObject<UserModel>{
     override fun toDomain(): UserModel {
-        return UserModel(displayName,id,officeFloor,officeWorkStation,profilePicture.toDomain())
+        return UserModel(displayName,id,officeFloor,officeWorkStation,profilePicture?.toDomain())
     }
 }

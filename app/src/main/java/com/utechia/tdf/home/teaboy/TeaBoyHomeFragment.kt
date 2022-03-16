@@ -11,6 +11,7 @@ import androidx.core.os.bundleOf
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
+import com.bumptech.glide.Glide
 import com.google.firebase.database.DataSnapshot
 import com.google.firebase.database.DatabaseError
 import com.google.firebase.database.DatabaseReference
@@ -26,6 +27,7 @@ import com.utechia.tdf.R
 import com.utechia.tdf.main.MainActivity
 import com.utechia.tdf.databinding.FragmentTeaBoyHomeBinding
 import com.utechia.tdf.order.teaboy.OrderCountViewModel
+import com.utechia.tdf.profile.UserProfileViewModel
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
@@ -33,6 +35,7 @@ class TeaBoyHomeFragment : Fragment(),View.OnClickListener {
 
     private lateinit var binding: FragmentTeaBoyHomeBinding
     private val orderViewModel: OrderCountViewModel by viewModels()
+    private val profileViewModel: UserProfileViewModel by viewModels()
     private lateinit var database: DatabaseReference
     private lateinit var bundle: Bundle
     private lateinit var prefs: SharedPreferences
@@ -86,8 +89,8 @@ class TeaBoyHomeFragment : Fragment(),View.OnClickListener {
 
         }
 
-        binding.name.text = name
-        binding.job.text = "${floor}st Floor TeaBoy"
+        profileViewModel.getProfile()
+
 
         orderViewModel.getOrder()
 
@@ -187,6 +190,33 @@ class TeaBoyHomeFragment : Fragment(),View.OnClickListener {
 
         }
 
+        profileViewModel.profile.observe(viewLifecycleOwner) {
+
+            when (it) {
+                is Result.Success -> {
+                    binding.prg.visibility = View.GONE
+                    binding.name.text = it.data.name
+                    binding.job.text = "${it.data.floor}st Floor ${it.data.jobTitle}"
+
+                    Glide.with(requireActivity())
+                        .load(it.data.profilePictureModel?.url)
+                        .centerCrop()
+                        .error(R.drawable.ic_profile_icon)
+                        .into(binding.profilePicture)
+                }
+
+                is Result.Loading -> {
+                    binding.prg.visibility = View.VISIBLE
+
+                }
+
+                is Result.Error -> {
+                    binding.prg.visibility = View.GONE
+                    Toast.makeText(context, it.message, Toast.LENGTH_SHORT).show()
+
+                }
+            }
+        }
     }
 
     override fun onClick(v: View?) {

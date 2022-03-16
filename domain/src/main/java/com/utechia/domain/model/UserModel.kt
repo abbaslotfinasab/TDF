@@ -6,5 +6,5 @@ data class UserModel (
     val id: Int?,
     val officeFloor: String?,
     val officeWorkStation: String?,
-    val profilePictureModel: ProfilePictureModel,
+    val profilePictureModel: ProfilePictureModel?,
     )

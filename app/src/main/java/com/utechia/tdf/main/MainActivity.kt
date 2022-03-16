@@ -119,23 +119,18 @@ class MainActivity : AppCompatActivity(), SensorEventListener {
         }
         navHostFragment.navController.graph = graph
 
-        binding.customButton.apply {
+        binding.customButton.bringToFront()
 
-            this.bringToFront()
+        binding.customButton.setOnClickListener {
 
-            setOnClickListener {
-
-                binding.bottomNavigation.apply {
-                    menu.setGroupCheckable(0,true,false)
-                    menu.forEach {
-                        it.isChecked = false
-                    }
-                    menu.setGroupCheckable(0,true,true)
+            binding.bottomNavigation.apply {
+                menu.setGroupCheckable(0,true,false)
+                menu.forEach {
+                    it.isChecked = false
                 }
-
-                navController.navigate(R.id.qrCodeFragment)
-
+                menu.setGroupCheckable(0,true,true)
             }
+            navController.navigate(R.id.qrCodeFragment)
         }
 
         binding.backArrow.setOnClickListener{

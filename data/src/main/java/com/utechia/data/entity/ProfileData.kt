@@ -9,16 +9,16 @@ import kotlinx.serialization.Serializable
 @Parcelize
 @Serializable
 data class ProfileData(
-    val displayName: String,
-    val id: Int,
-    val officeFloor: String,
-    val officeWorkStation: String,
+    val displayName: String?,
+    val id: Int?,
+    val officeFloor: String?,
+    val officeWorkStation: String?,
     val jobTitle:String?,
     val mail:String?,
-    val profilePicture: ProfilePicture
+    val profilePicture: ProfilePicture?
 
     ): Parcelable, ResponseObject<ProfileModel> {
     override fun toDomain(): ProfileModel {
-        return ProfileModel(displayName,id,officeFloor,officeWorkStation,jobTitle,mail,profilePicture.toDomain())
+        return ProfileModel(displayName,id,officeFloor,officeWorkStation,jobTitle,mail,profilePicture?.toDomain())
     }
 }

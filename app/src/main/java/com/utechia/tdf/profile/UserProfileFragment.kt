@@ -49,7 +49,7 @@ class UserProfileFragment : Fragment() {
                     binding.job.text = it.data.jobTitle
 
                     Glide.with(requireActivity())
-                        .load(it.data.profilePictureModel.url)
+                        .load(it.data.profilePictureModel?.url)
                         .centerCrop()
                         .error(R.drawable.ic_profile_icon)
                         .into(binding.profilePicture)
