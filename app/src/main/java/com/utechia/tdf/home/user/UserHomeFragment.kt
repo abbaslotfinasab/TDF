@@ -34,17 +34,12 @@ class UserHomeFragment : Fragment() {
     private lateinit var prefs: SharedPreferences
     private var employeeId = ""
 
-
-
     companion object{
 
         const val Start = "start"
         const val ID = "employeeId"
 
-
     }
-
-
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,

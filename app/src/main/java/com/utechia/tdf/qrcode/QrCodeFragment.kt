@@ -1,6 +1,5 @@
 package com.utechia.tdf.qrcode
 
-
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -13,7 +12,6 @@ import dagger.hilt.android.AndroidEntryPoint
 class QrCodeFragment : Fragment() {
 
     private lateinit var binding: FragmentQrCodeBinding
-    private var count = -1
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -25,7 +23,6 @@ class QrCodeFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-
 
     }
 

@@ -105,12 +105,10 @@ class MainActivity : AppCompatActivity(), SensorEventListener {
                 binding.drawerLayout.setDrawerLockMode(DrawerLayout.LOCK_MODE_LOCKED_CLOSED)
             }
             teaBoy() -> {
-                mainViewModel.getCount()
                 graph.setStartDestination(R.id.teaBoyHomeFragment)
                 setupTeaBoy()
             }
             !teaBoy() -> {
-                mainViewModel.getCount()
                 graph.setStartDestination(R.id.userhomeFragment)
                 setupUser()
             }
@@ -123,6 +121,9 @@ class MainActivity : AppCompatActivity(), SensorEventListener {
 
         binding.customButton.setOnClickListener {
 
+            navController.popBackStack()
+            navController.navigate(R.id.qrCodeFragment)
+
             binding.bottomNavigation.apply {
                 menu.setGroupCheckable(0,true,false)
                 menu.forEach {
@@ -130,7 +131,6 @@ class MainActivity : AppCompatActivity(), SensorEventListener {
                 }
                 menu.setGroupCheckable(0,true,true)
             }
-            navController.navigate(R.id.qrCodeFragment)
         }
 
         binding.backArrow.setOnClickListener{
@@ -162,13 +162,16 @@ class MainActivity : AppCompatActivity(), SensorEventListener {
 
 
         }
-        observer()
-        createPeriodTimeRequest()
 
+        observer()
+
+        createPeriodTimeRequest()
     }
 
     override fun onResume() {
         super.onResume()
+
+        mainViewModel.sendToken()
 
         sensorManager = getSystemService(Context.SENSOR_SERVICE) as SensorManager
         sensor = sensorManager?.getDefaultSensor(Sensor.TYPE_STEP_COUNTER)
@@ -249,10 +252,6 @@ class MainActivity : AppCompatActivity(), SensorEventListener {
             menu.clear()
             inflateMenu(R.menu.user_navigation_drawer)
         }
-
-        mainViewModel.getCount()
-
-        mainViewModel.sendToken()
 
             navController.addOnDestinationChangedListener{_, destination, _ ->
                 binding.bottomNavigation.setupWithNavController(navController)
@@ -475,7 +474,6 @@ class MainActivity : AppCompatActivity(), SensorEventListener {
                     else -> {
                         false
                     }
-
                 }
             }
         }
@@ -489,10 +487,6 @@ class MainActivity : AppCompatActivity(), SensorEventListener {
             this.itemTextAppearanceInactive = R.style.TeaBoyMenuItems
 
         }
-
-        mainViewModel.getCount()
-
-        mainViewModel.sendToken()
 
         binding.navigationView.apply {
             menu.clear()
@@ -529,7 +523,6 @@ class MainActivity : AppCompatActivity(), SensorEventListener {
 
                 R.id.permissionFragment -> {
                     design(MainEnum.Permission.main)
-
                 }
 
                 R.id.surveySystemFragment -> {
@@ -681,11 +674,8 @@ class MainActivity : AppCompatActivity(), SensorEventListener {
                 else -> {
                     false
                 }
-
             }
-
         }
-
     }
 
 
@@ -729,7 +719,6 @@ class MainActivity : AppCompatActivity(), SensorEventListener {
                 binding.customButton.visibility = View.VISIBLE
                 binding.bottomNavigation.visibility = View.VISIBLE
                 binding.drawerLayout.setDrawerLockMode(DrawerLayout.LOCK_MODE_UNLOCKED)
-
 
             }
 

@@ -59,8 +59,6 @@ class LoginFragment : Fragment() {
         prefs = requireActivity().getSharedPreferences(MainEnum.Tdf.main, Context.MODE_PRIVATE)
         binding.prg.bringToFront()
 
-
-
         if (arguments != null) {
             code = requireArguments().getString(Code, "")
             arguments?.clear()
