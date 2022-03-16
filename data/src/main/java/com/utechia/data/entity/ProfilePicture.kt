@@ -11,7 +11,7 @@ import kotlinx.serialization.Serializable
 @Serializable
 data class ProfilePicture(
 
-    val url: String,
+    val url: String?,
     val name:String?,
     val path:String?,
 

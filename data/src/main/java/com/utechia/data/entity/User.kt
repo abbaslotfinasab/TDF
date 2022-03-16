@@ -14,8 +14,9 @@ data class User(
     val officeFloor: String,
     val officeWorkStation: String,
     val jobTitle:String?,
+    val profilePicture: ProfilePicture,
     ):Parcelable,ResponseObject<UserModel>{
     override fun toDomain(): UserModel {
-        return UserModel(displayName,id,officeFloor,officeWorkStation)
+        return UserModel(displayName,id,officeFloor,officeWorkStation,profilePicture.toDomain())
     }
 }
