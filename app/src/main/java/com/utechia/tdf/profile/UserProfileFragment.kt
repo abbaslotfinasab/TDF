@@ -4,6 +4,7 @@ package com.utechia.tdf.profile
 import android.content.Context
 import android.content.SharedPreferences
 import android.os.Bundle
+import android.util.Log
 import com.utechia.tdf.databinding.FragmentProfileBinding
 import android.view.LayoutInflater
 import android.view.View
@@ -15,6 +16,7 @@ import com.bumptech.glide.Glide
 import com.utechia.domain.enum.MainEnum
 import com.utechia.domain.utile.Result
 import com.utechia.tdf.R
+import com.utechia.tdf.login.LoginFragment
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
@@ -54,7 +56,9 @@ class UserProfileFragment : Fragment() {
                     binding.name.text = it.data.name
                     binding.email.text = it.data.mail
                     binding.job.text = it.data.jobTitle
-
+                    with(prefs.edit()) {
+                        it.data.employeeId?.let { it1 -> putInt(MainEnum.EmployeeId.main, it1) }
+                    }?.apply()
                     Glide.with(requireActivity())
                         .load(it.data.profilePictureModel?.url)
                         .centerCrop()

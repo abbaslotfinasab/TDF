@@ -15,10 +15,11 @@ data class ProfileData(
     val officeWorkStation: String?,
     val jobTitle:String?,
     val mail:String?,
+    val employeeId: Int?,
     val profilePicture: ProfilePicture?
 
     ): Parcelable, ResponseObject<ProfileModel> {
     override fun toDomain(): ProfileModel {
-        return ProfileModel(displayName,id,officeFloor,officeWorkStation,jobTitle,mail,profilePicture?.toDomain())
+        return ProfileModel(displayName,id,officeFloor,officeWorkStation,jobTitle,mail,employeeId,profilePicture?.toDomain())
     }
 }
