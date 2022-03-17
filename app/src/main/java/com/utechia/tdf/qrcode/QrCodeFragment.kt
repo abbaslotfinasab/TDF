@@ -3,8 +3,8 @@ package com.utechia.tdf.qrcode
 import android.content.Context
 import android.content.SharedPreferences
 import android.graphics.Bitmap
+import android.graphics.Color
 import android.os.Bundle
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -18,6 +18,9 @@ import com.utechia.tdf.R
 import com.utechia.tdf.databinding.FragmentQrCodeBinding
 import dagger.hilt.android.AndroidEntryPoint
 
+
+
+
 @AndroidEntryPoint
 class QrCodeFragment : Fragment() {
 
@@ -26,6 +29,7 @@ class QrCodeFragment : Fragment() {
     private lateinit var matrix: BitMatrix
     private lateinit var barcodeEncoder: BarcodeEncoder
     private lateinit var bitmap: Bitmap
+    private lateinit var newBitmap: Bitmap
     private lateinit var prefs: SharedPreferences
     private var employeeId = ""
 
@@ -55,8 +59,17 @@ class QrCodeFragment : Fragment() {
 
         bitmap = barcodeEncoder.createBitmap(matrix)
 
-        binding.qrCode.setImageBitmap(bitmap)
+        val width: Int = bitmap.width
+        val height: Int = bitmap.height
+        val pixels = IntArray(width * height)
+        bitmap.getPixels(pixels, 0, 1 * width, 0, 0, width, height)
+        for (x in pixels.indices) {
+            if (pixels[x] == Color.WHITE) pixels[x] = 0
+        }
+
+        newBitmap = Bitmap.createBitmap(pixels, width, height, Bitmap.Config.ARGB_8888)
+
+        binding.qrCode.setImageBitmap(newBitmap)
 
     }
-
 }
