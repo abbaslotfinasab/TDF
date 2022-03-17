@@ -17,6 +17,7 @@ enum class MainEnum(val main:String) {
     Refreshment("refreshment"),
     Menu("menu"),
     Cart("cart"),
+    Location("location"),
     UserOrder("user"),
     TeaBoyOrder("TeaBoy"),
     Reservation("reservation"),

@@ -43,7 +43,7 @@ class CartFragment : Fragment() {
         cartViewModel.getCart()
 
         binding.appCompatButton.setOnClickListener {
-            findNavController().navigate(R.id.action_cartFragment_to_cartConfirmationFragment)
+            findNavController().navigate(R.id.action_cartFragment_to_locationOrderFragment)
         }
 
         binding.appBackButton.setOnClickListener {

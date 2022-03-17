@@ -1,0 +1,122 @@
+package com.utechia.tdf.cart
+
+
+import android.content.Context
+import android.content.SharedPreferences
+import android.os.Bundle
+import android.view.LayoutInflater
+import android.view.View
+import android.view.ViewGroup
+import android.widget.Toast
+import androidx.core.os.bundleOf
+import androidx.fragment.app.Fragment
+import androidx.fragment.app.viewModels
+import androidx.navigation.fragment.findNavController
+import com.utechia.domain.enum.MainEnum
+import com.utechia.domain.utile.Result
+import com.utechia.tdf.R
+import com.utechia.tdf.databinding.FragmentLocationOrderBinding
+import dagger.hilt.android.AndroidEntryPoint
+
+@AndroidEntryPoint
+class LocationOrderFragment : Fragment() {
+
+    private lateinit var binding: FragmentLocationOrderBinding
+    private val cartViewModel: CartViewModel by viewModels()
+    private lateinit var prefs: SharedPreferences
+    private var type = 0
+    private var location = ""
+
+
+
+
+
+    override fun onCreateView(
+        inflater: LayoutInflater, container: ViewGroup?,
+        savedInstanceState: Bundle?
+    ): View {
+        binding = FragmentLocationOrderBinding.inflate(inflater, container, false)
+        return binding.root
+    }
+
+    override fun onResume() {
+        super.onResume()
+        binding.radioButton.isChecked = true
+        type = 0
+
+    }
+
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+        prefs = requireActivity().getSharedPreferences(MainEnum.Tdf.main, Context.MODE_PRIVATE)
+
+        binding.myOffice.text = prefs.getString(MainEnum.Location.main,"").toString()
+        location = prefs.getString(MainEnum.Location.main,"").toString()
+
+
+        binding.radioButton.setOnClickListener {
+            binding.radioButton2.isChecked = false
+            binding.radioButton3.isChecked = false
+            location = prefs.getString(MainEnum.Location.main,"").toString()
+            type = 0
+
+        }
+
+        binding.radioButton2.setOnClickListener {
+            binding.radioButton.isChecked = false
+            binding.radioButton3.isChecked = false
+            type = 1
+
+        }
+
+        binding.radioButton3.setOnClickListener {
+            binding.radioButton2.isChecked = false
+            binding.radioButton.isChecked = false
+            location = binding.editText.text.toString()
+            type = 2
+
+        }
+
+        binding.appCompatButton.setOnClickListener {
+            when(type){
+                0 -> {
+                    location = prefs.getString(MainEnum.Location.main,"").toString()
+
+                }
+                1 -> {
+
+                }
+                2 -> {
+                    location = binding.editText.text.toString()
+                }
+            }
+            val bundle = bundleOf(MainEnum.Location.main to location)
+            findNavController().navigate(R.id.action_locationOrderFragment_to_orderFragment,bundle)
+        }
+
+        observer()
+    }
+
+    private fun observer() {
+
+        cartViewModel.cartModel.observe(viewLifecycleOwner) {
+
+            when (it) {
+                is Result.Success -> {
+
+
+                }
+
+                is Result.Loading -> {
+                    binding.prg.visibility = View.VISIBLE
+
+                }
+
+                is Result.Error -> {
+                    binding.prg.visibility = View.GONE
+                    Toast.makeText(context, it.message, Toast.LENGTH_SHORT).show()
+                }
+            }
+        }
+    }
+}

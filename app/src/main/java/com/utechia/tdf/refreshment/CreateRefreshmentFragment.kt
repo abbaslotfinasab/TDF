@@ -33,6 +33,12 @@ class CreateRefreshmentFragment : Fragment(),View.OnClickListener {
 
     }
 
+    override fun onResume() {
+        super.onResume()
+        binding.appCompatButton.visibility = View.VISIBLE
+
+    }
+
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?

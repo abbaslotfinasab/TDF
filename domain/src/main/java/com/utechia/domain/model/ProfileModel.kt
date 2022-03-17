@@ -9,6 +9,7 @@ data class ProfileModel(
     val jobTitle:String?,
     val mail:String?,
     val employeeId: Int?,
+    val officeLocation: String?,
     val profilePictureModel: ProfilePictureModel?
 
     )

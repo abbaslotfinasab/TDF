@@ -299,6 +299,11 @@ class MainActivity : AppCompatActivity(), SensorEventListener {
 
                     }
 
+                    R.id.locationOrderFragment ->{
+                        design(MainEnum.Location.main)
+
+                    }
+
                     R.id.userprofileFragment ->{
                         design(MainEnum.Profile.main)
 
@@ -767,6 +772,17 @@ class MainActivity : AppCompatActivity(), SensorEventListener {
             }
 
             MainEnum.Cart.main ->{
+                window.statusBarColor = ContextCompat.getColor(this, R.color.status)
+                binding.customToolbar.visibility = View.VISIBLE
+                binding.toolbar.visibility = View.INVISIBLE
+                binding.customButton.visibility = View.GONE
+                binding.customTitle.text = getString(R.string.cart)
+                binding.bottomNavigation.visibility = View.GONE
+                binding.drawerLayout.setDrawerLockMode(DrawerLayout.LOCK_MODE_LOCKED_CLOSED)
+
+            }
+
+             MainEnum.Location.main ->{
                 window.statusBarColor = ContextCompat.getColor(this, R.color.status)
                 binding.customToolbar.visibility = View.VISIBLE
                 binding.toolbar.visibility = View.INVISIBLE

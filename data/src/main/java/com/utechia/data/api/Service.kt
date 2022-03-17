@@ -57,7 +57,7 @@ interface Service {
 
     @Headers("Content-Type: application/json")
     @POST("cafeteria")
-    suspend fun postOrder():Response<OrderBody>
+    suspend fun postOrder(@Body locationBody: LocationBody):Response<OrderBody>
 
     @GET("user/orders")
     suspend fun getOrder(@Query("status") status:String,@Query("page") page: Int,@Query("page_size") page_size: Int):Response<UserOrder>
@@ -163,8 +163,8 @@ interface Service {
     @GET("notification")
     suspend fun getNotification(@Query("page") page: Int,@Query("page_size") page_size: Int):Response<Notification>
 
-    @PATCH("notification/{id}")
-    suspend fun readNotification(@Path("id") id: Int):Response<Void>
+    @PATCH("notification/read")
+    suspend fun readNotification(@Body notificationBody: NotificationBody):Response<Void>
 
     @DELETE("notification/{id}")
     suspend fun deleteNotification(@Path("id") id: Int):Response<Void>

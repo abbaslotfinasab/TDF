@@ -3,6 +3,7 @@ package com.utechia.data.repo
 import com.utechia.data.api.Service
 import com.utechia.data.dao.RefreshmentDao
 import com.utechia.data.entity.CartBody
+import com.utechia.data.entity.LocationBody
 import com.utechia.data.utile.NetworkHelper
 import com.utechia.domain.model.CartModel
 import com.utechia.domain.repository.CartRepo
@@ -82,11 +83,11 @@ class CartRepoImpl @Inject constructor(
 
     }
 
-    override suspend fun checkout(): MutableList<CartModel> {
+    override suspend fun checkout(location:String): MutableList<CartModel> {
 
         if (networkHelper.isNetworkConnected()) {
 
-            val result = service.postOrder()
+            val result = service.postOrder(LocationBody(location))
 
             return when (result.isSuccessful) {
 

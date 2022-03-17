@@ -97,6 +97,7 @@ class LoginFragment : Fragment() {
                             putString(Job,it.data.jobTitle)
                             putString(MainEnum.HomeId.main,it.data.userHomeId)
                             putString(Mail,it.data.mail)
+                            putString(MainEnum.Location.main,it.data.officeLocation)
                             it.data.userid?.let { it1 -> putInt(MainEnum.UserId.main, it1) }
                             it.data.employeeId?.let { it2 -> putInt(MainEnum.EmployeeId.main, it2) }
                             putBoolean(Start,true)

@@ -394,6 +394,14 @@
             app:popEnterAnim="@android:anim/fade_in"
             app:popExitAnim="@android:anim/fade_out" />
 
+        <action
+            android:id="@+id/action_cartFragment_to_locationOrderFragment"
+            app:destination="@id/locationOrderFragment"
+            app:enterAnim="@android:anim/fade_in"
+            app:exitAnim="@android:anim/fade_out"
+            app:popEnterAnim="@android:anim/fade_in"
+            app:popExitAnim="@android:anim/fade_out"/>
+
     </fragment>
 
     <fragment
@@ -1354,5 +1362,19 @@
         android:name="com.utechia.tdf.health.HealthChildFragment"
         android:label="fragment_health_child"
         tools:layout="@layout/fragment_health_child" />
+    <fragment
+        android:id="@+id/locationOrderFragment"
+        android:name="com.utechia.tdf.cart.LocationOrderFragment"
+        android:label="fragment_location_order"
+        tools:layout="@layout/fragment_location_order" >
+        <action
+            android:id="@+id/action_locationOrderFragment_to_orderFragment"
+            app:destination="@id/cartConfirmationFragment"
+            app:launchSingleTop="true"
+            app:enterAnim="@android:anim/fade_in"
+            app:exitAnim="@android:anim/fade_out"
+            app:popEnterAnim="@android:anim/fade_in"
+            app:popExitAnim="@android:anim/fade_out"/>
+    </fragment>
 
 </navigation>
