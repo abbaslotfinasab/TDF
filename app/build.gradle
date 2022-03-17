@@ -18,6 +18,10 @@ android {
         viewBinding true
         dataBinding true
     }
+    
+    packagingOptions {
+        exclude 'META-INF/DEPENDENCIES'
+    }
 
     kapt {
         javacOptions {
@@ -48,6 +52,7 @@ defaultConfig {
             proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
         }
     }
+
     compileOptions {
         coreLibraryDesugaringEnabled true
         sourceCompatibility JavaVersion.VERSION_1_8
@@ -63,16 +68,16 @@ dependencies {
     implementation project(':data')
     implementation project(':domain')
     implementation platform('com.google.firebase:firebase-bom:29.0.0')
-    implementation 'com.google.firebase:firebase-messaging-directboot:23.0.0'
-    implementation 'com.google.firebase:firebase-database-ktx:20.0.3'
-    implementation 'com.google.firebase:firebase-crashlytics-ktx:18.2.8'
-    implementation 'com.google.firebase:firebase-perf-ktx:20.0.5'
+    implementation 'com.google.firebase:firebase-messaging-directboot:23.0.1'
+    implementation 'com.google.firebase:firebase-database-ktx:20.0.4'
+    implementation 'com.google.firebase:firebase-crashlytics-ktx:18.2.9'
+    implementation 'com.google.firebase:firebase-perf-ktx:20.0.6'
     implementation 'com.google.android.gms:play-services-fitness:21.0.1'
     implementation 'com.google.android.gms:play-services-auth:20.1.0'
 
     coreLibraryDesugaring 'com.android.tools:desugar_jdk_libs:1.1.5'
 
-    implementation 'com.google.firebase:firebase-messaging-ktx:23.0.0'
+    implementation 'com.google.firebase:firebase-messaging-ktx:23.0.1'
 
     implementation 'com.google.firebase:firebase-analytics-ktx:20.1.0'
 
@@ -149,4 +154,10 @@ dependencies {
     implementation 'androidx.viewpager2:viewpager2:1.0.0'
 
     implementation 'com.github.PhilJay:MPAndroidChart:v3.1.0'
+
+    implementation 'com.google.zxing:core:3.4.1'
+
+    implementation ('com.journeyapps:zxing-android-embedded:4.3.0'){transitive = true}
+
+
 }

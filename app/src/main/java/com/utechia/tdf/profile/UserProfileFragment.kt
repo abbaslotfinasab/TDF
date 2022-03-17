@@ -1,6 +1,8 @@
 package com.utechia.tdf.profile
 
 
+import android.content.Context
+import android.content.SharedPreferences
 import android.os.Bundle
 import com.utechia.tdf.databinding.FragmentProfileBinding
 import android.view.LayoutInflater
@@ -10,6 +12,7 @@ import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import com.bumptech.glide.Glide
+import com.utechia.domain.enum.MainEnum
 import com.utechia.domain.utile.Result
 import com.utechia.tdf.R
 import dagger.hilt.android.AndroidEntryPoint
@@ -19,6 +22,8 @@ class UserProfileFragment : Fragment() {
 
     private lateinit var binding: FragmentProfileBinding
     private val profileViewModel: UserProfileViewModel by viewModels()
+    private lateinit var prefs: SharedPreferences
+
 
 
     override fun onCreateView(
@@ -31,6 +36,8 @@ class UserProfileFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+        prefs = requireActivity().getSharedPreferences(MainEnum.Tdf.main, Context.MODE_PRIVATE)
+
         binding.profilePicture.bringToFront()
 
         profileViewModel.getProfile()

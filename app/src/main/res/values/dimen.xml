@@ -3,6 +3,8 @@
 
     <dimen name="pending_height">170dp</dimen>
     <dimen name="delivered_height">130dp</dimen>
+    <dimen name="qrCode">180dp</dimen>
+
 
 
 </resources>
