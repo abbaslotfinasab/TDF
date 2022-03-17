@@ -5,6 +5,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
+import androidx.navigation.fragment.findNavController
 import com.google.android.material.tabs.TabLayout
 import com.google.android.material.tabs.TabLayoutMediator
 import com.utechia.domain.enum.OrderEnum
@@ -31,6 +32,7 @@ class TeaBoyOrderParentFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         teaBoyViewPagerAdapter = TeaBoyViewPagerAdapter(childFragmentManager, lifecycle)
+
 
         binding.pager.adapter = teaBoyViewPagerAdapter
 

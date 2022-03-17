@@ -8,6 +8,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
+import androidx.core.content.ContextCompat
 import androidx.core.os.bundleOf
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
@@ -29,8 +30,6 @@ class LocationOrderFragment : Fragment() {
 
 
 
-
-
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
@@ -42,7 +41,16 @@ class LocationOrderFragment : Fragment() {
     override fun onResume() {
         super.onResume()
         binding.radioButton.isChecked = true
+        binding.radioButton2.isChecked = false
+        binding.radioButton3.isChecked = false
+        binding.editText.apply {
+            this.setBackgroundColor(ContextCompat.getColor(requireContext(),R.color.disActive))
+            this.isEnabled = false
+            this.text .clear()
+
+        }
         type = 0
+        location = prefs.getString(MainEnum.Location.main,"").toString()
 
     }
 
@@ -51,7 +59,6 @@ class LocationOrderFragment : Fragment() {
         prefs = requireActivity().getSharedPreferences(MainEnum.Tdf.main, Context.MODE_PRIVATE)
 
         binding.myOffice.text = prefs.getString(MainEnum.Location.main,"").toString()
-        location = prefs.getString(MainEnum.Location.main,"").toString()
 
 
         binding.radioButton.setOnClickListener {
@@ -59,6 +66,12 @@ class LocationOrderFragment : Fragment() {
             binding.radioButton3.isChecked = false
             location = prefs.getString(MainEnum.Location.main,"").toString()
             type = 0
+            binding.editText.apply {
+                this.setBackgroundColor(ContextCompat.getColor(requireContext(),R.color.disActive))
+                this.isEnabled = false
+                this.text .clear()
+
+            }
 
         }
 
@@ -66,6 +79,12 @@ class LocationOrderFragment : Fragment() {
             binding.radioButton.isChecked = false
             binding.radioButton3.isChecked = false
             type = 1
+            binding.editText.apply {
+                this.setBackgroundColor(ContextCompat.getColor(requireContext(),R.color.disActive))
+                this.isEnabled = false
+                this.text .clear()
+
+            }
 
         }
 
@@ -74,6 +93,11 @@ class LocationOrderFragment : Fragment() {
             binding.radioButton.isChecked = false
             location = binding.editText.text.toString()
             type = 2
+            binding.editText.apply {
+                this.setBackgroundColor(ContextCompat.getColor(requireContext(),R.color.white))
+                this.isEnabled = true
+
+            }
 
         }
 
@@ -81,7 +105,6 @@ class LocationOrderFragment : Fragment() {
             when(type){
                 0 -> {
                     location = prefs.getString(MainEnum.Location.main,"").toString()
-
                 }
                 1 -> {
 
@@ -103,7 +126,6 @@ class LocationOrderFragment : Fragment() {
 
             when (it) {
                 is Result.Success -> {
-
 
                 }
 

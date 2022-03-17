@@ -78,7 +78,7 @@ class OrderTeaBoyAdapter(private val teaBoyOrdersFragment: TeaBoyOrderChildFragm
             number.text = "${userOrders[position].cart?.items?.size}x"
             oderId.text = "${userOrders[position].id}"
             user.text = userOrders[position].user?.displayName
-            location.text ="${userOrders[position].user?.officeFloor ?:""}st Floor - Room ${userOrders[position].user?.officeWorkStation ?:""}"
+            location.text = "${userOrders[position].user?.officeLocation}"
 
             if (userOrders[position].cart?.items?.size!! > 1) {
                 title.text = userOrders[position].cart?.items?.get(0)?.food?.title + "..."
