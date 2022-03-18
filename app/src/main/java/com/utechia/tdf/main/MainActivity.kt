@@ -263,7 +263,6 @@ class MainActivity : AppCompatActivity(), SensorEventListener {
                 when (destination.id){
 
                     R.id.userhomeFragment ->{
-                        navController.clearBackStack(R.id.loginFragment)
                         design(MainEnum.Home.main)
 
                     }
@@ -508,7 +507,6 @@ class MainActivity : AppCompatActivity(), SensorEventListener {
             when (destination.id){
 
                 R.id.teaBoyHomeFragment ->{
-                    navController.clearBackStack(R.id.loginFragment)
                     design(MainEnum.Home.main)
 
                 }

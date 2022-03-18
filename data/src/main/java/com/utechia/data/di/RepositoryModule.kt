@@ -126,4 +126,9 @@ abstract class RepositoryModule {
     abstract fun bindProfileRepositoryService(
         profileRepoImpl: ProfileRepoImpl
     ): ProfileRepo
+
+    @Binds
+    abstract fun bindOfficeRepositoryService(
+        officeRepoImpl: OfficeRepoImpl
+    ): OfficeRepo
 }

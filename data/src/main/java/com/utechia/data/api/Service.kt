@@ -203,5 +203,8 @@ interface Service {
     @GET("user/info")
     suspend fun getProfile():Response<Profile>
 
+    @GET("user/office-locations")
+    suspend fun getOffice():Response<Office>
+
 
 }
