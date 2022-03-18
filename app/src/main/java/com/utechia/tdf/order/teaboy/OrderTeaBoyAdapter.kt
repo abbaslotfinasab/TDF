@@ -1,7 +1,5 @@
 package com.utechia.tdf.order.teaboy
 
-import android.os.Handler
-import android.os.Looper
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -69,7 +67,6 @@ class OrderTeaBoyAdapter(private val teaBoyOrdersFragment: TeaBoyOrderChildFragm
             ).toLocalDateTime().format(DateTimeFormatter.ofPattern("yyyy.MM.dd"))
             date.text = timeZone
 
-
             timeZone = OffsetDateTime.parse(userOrders[position].updatedAt?:"2022-01-01T10:12:31.484Z").atZoneSameInstant(
                 ZoneId.systemDefault()
             ).toLocalDateTime().format(DateTimeFormatter.ofPattern("HH:mm"))
@@ -78,7 +75,7 @@ class OrderTeaBoyAdapter(private val teaBoyOrdersFragment: TeaBoyOrderChildFragm
             number.text = "${userOrders[position].cart?.items?.size}x"
             oderId.text = "${userOrders[position].id}"
             user.text = userOrders[position].user?.displayName
-            location.text = "${userOrders[position].user?.officeLocation}"
+            location.text = "${userOrders[position].location}"
 
             if (userOrders[position].cart?.items?.size!! > 1) {
                 title.text = userOrders[position].cart?.items?.get(0)?.food?.title + "..."
@@ -135,7 +132,6 @@ class OrderTeaBoyAdapter(private val teaBoyOrdersFragment: TeaBoyOrderChildFragm
                 itemView.findNavController()
                     .navigate(R.id.action_teaBoyOrdersFragment_to_rejectFragment, bundle)
             }
-
 
             layout.setOnClickListener {
                 val bundle = bundleOf(OrderEnum.ID.order to userOrders[position].cart?.id)

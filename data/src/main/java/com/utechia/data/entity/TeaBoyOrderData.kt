@@ -17,6 +17,7 @@ data class TeaBoyOrderData(
     val floor: String?,
     val createdAt: String?,
     val updatedAt: String?,
+    val location:String?,
     val cart: @Contextual @RawValue CartData?,
     val user: @Contextual @RawValue User?
 
@@ -24,6 +25,6 @@ data class TeaBoyOrderData(
 
     ): Parcelable, ResponseObject<TeaBoyOrderDataModel> {
     override fun toDomain(): TeaBoyOrderDataModel {
-        return TeaBoyOrderDataModel(id,status,floor,createdAt,updatedAt,cart?.toDomain(),user?.toDomain())
+        return TeaBoyOrderDataModel(id,status,floor,createdAt,updatedAt,location,cart?.toDomain(),user?.toDomain())
     }
 }

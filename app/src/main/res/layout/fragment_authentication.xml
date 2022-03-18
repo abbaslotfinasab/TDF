@@ -12,7 +12,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="40dp"
-        android:src="@drawable/ic_checkbox"
+        android:src="@drawable/ic_login_error"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
@@ -41,7 +41,7 @@
         android:layout_marginTop="16dp"
         android:layout_marginEnd="45dp"
         android:gravity="center"
-        android:text="Congratulations!\nYou have authenticated."
+        android:text="Your authentication was failed!\nServer is not responding"
         android:textColor="@color/black"
         android:textSize="16sp"
         app:layout_constraintEnd_toEndOf="parent"

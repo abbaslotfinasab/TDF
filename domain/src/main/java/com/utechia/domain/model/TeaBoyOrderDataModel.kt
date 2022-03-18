@@ -7,6 +7,7 @@ data class TeaBoyOrderDataModel(
     val floor: String?,
     val createdAt: String?,
     val updatedAt: String?,
+    val location:String?,
     val cart:CartModel?,
     val user:UserModel?,
 
