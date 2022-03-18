@@ -7,6 +7,7 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.ArrayAdapter
 import android.widget.Toast
 import androidx.core.content.ContextCompat
 import androidx.core.os.bundleOf
@@ -23,7 +24,7 @@ import dagger.hilt.android.AndroidEntryPoint
 class LocationOrderFragment : Fragment() {
 
     private lateinit var binding: FragmentLocationOrderBinding
-    private val cartViewModel: CartViewModel by viewModels()
+    private val officeViewModel: OfficeViewModel by viewModels()
     private lateinit var prefs: SharedPreferences
     private var type = 0
     private var location = ""
@@ -49,6 +50,15 @@ class LocationOrderFragment : Fragment() {
             this.text .clear()
 
         }
+
+        binding.autoCompleteTextView.apply {
+            this.setBackgroundColor(ContextCompat.getColor(requireContext(),R.color.disActive))
+            this.isEnabled = false
+            this.text.clear()
+
+        }
+        binding.textinput.isEnabled = false
+
         type = 0
         location = prefs.getString(MainEnum.Location.main,"").toString()
 
@@ -60,6 +70,7 @@ class LocationOrderFragment : Fragment() {
 
         binding.myOffice.text = prefs.getString(MainEnum.Location.main,"").toString()
 
+        officeViewModel.getOffice()
 
         binding.radioButton.setOnClickListener {
             binding.radioButton2.isChecked = false
@@ -72,7 +83,13 @@ class LocationOrderFragment : Fragment() {
                 this.text .clear()
 
             }
+            binding.textinput.isEnabled = false
 
+            binding.autoCompleteTextView.apply {
+                this.setBackgroundColor(ContextCompat.getColor(requireContext(),R.color.disActive))
+                this.isEnabled = false
+                this.text.clear()
+            }
         }
 
         binding.radioButton2.setOnClickListener {
@@ -85,19 +102,31 @@ class LocationOrderFragment : Fragment() {
                 this.text .clear()
 
             }
+            binding.autoCompleteTextView.apply {
+                this.setBackgroundColor(ContextCompat.getColor(requireContext(),R.color.white))
+                this.isEnabled = true
+                this.text.clear()
 
+            }
+            binding.textinput.isEnabled = true
         }
 
         binding.radioButton3.setOnClickListener {
             binding.radioButton2.isChecked = false
             binding.radioButton.isChecked = false
+            binding.autoCompleteTextView.apply {
+                this.setBackgroundColor(ContextCompat.getColor(requireContext(),R.color.disActive))
+                this.isEnabled = false
+                this.text.clear()
+
+            }
             location = binding.editText.text.toString()
             type = 2
             binding.editText.apply {
                 this.setBackgroundColor(ContextCompat.getColor(requireContext(),R.color.white))
                 this.isEnabled = true
-
             }
+            binding.textinput.isEnabled = false
 
         }
 
@@ -107,7 +136,7 @@ class LocationOrderFragment : Fragment() {
                     location = prefs.getString(MainEnum.Location.main,"").toString()
                 }
                 1 -> {
-
+                    location = binding.autoCompleteTextView.text.toString()
                 }
                 2 -> {
                     location = binding.editText.text.toString()
@@ -122,11 +151,13 @@ class LocationOrderFragment : Fragment() {
 
     private fun observer() {
 
-        cartViewModel.cartModel.observe(viewLifecycleOwner) {
+        officeViewModel.officeModel.observe(viewLifecycleOwner) {
 
             when (it) {
                 is Result.Success -> {
-
+                    binding.prg.visibility = View.GONE
+                    val adapter = ArrayAdapter(requireContext(),R.layout.dropdown_item,it.data)
+                    binding.autoCompleteTextView.setAdapter(adapter)
                 }
 
                 is Result.Loading -> {

@@ -52,9 +52,7 @@ class CartConfirmationFragment : DialogFragment(),View.OnClickListener {
             location = requireArguments().getString(MainEnum.Location.main).toString()
         }
 
-
         observer()
-
     }
 
     private fun observer() {
