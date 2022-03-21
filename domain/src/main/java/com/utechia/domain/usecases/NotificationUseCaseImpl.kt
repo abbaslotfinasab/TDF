@@ -16,8 +16,10 @@ class NotificationUseCaseImpl @Inject constructor(private val notificationRepo: 
         return notificationRepo.delete(id)
     }
 
-    override suspend fun read(id: Int): MutableList<NotificationModel> {
-        return notificationRepo.read(id)
+
+
+    override suspend fun read(id: Int, readAll: Boolean?): MutableList<NotificationModel> {
+        return notificationRepo.read(id,readAll)
     }
 
 }

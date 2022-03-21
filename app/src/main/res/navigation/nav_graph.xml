@@ -111,6 +111,9 @@
             app:exitAnim="@android:anim/fade_out"
             app:popEnterAnim="@android:anim/fade_in"
             app:popExitAnim="@android:anim/fade_out"/>
+        <action
+            android:id="@+id/action_notificationFragment_to_readAllNotificationFragment"
+            app:destination="@id/readAllNotificationFragment" />
 
     </fragment>
 
@@ -1376,5 +1379,9 @@
             app:popEnterAnim="@android:anim/fade_in"
             app:popExitAnim="@android:anim/fade_out"/>
     </fragment>
+    <dialog
+        android:id="@+id/readAllNotificationFragment"
+        android:name="com.utechia.tdf.notification.ReadAllNotificationFragment"
+        android:label="ReadAllNotificationFragment" />
 
 </navigation>

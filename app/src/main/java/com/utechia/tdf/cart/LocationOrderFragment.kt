@@ -45,14 +45,14 @@ class LocationOrderFragment : Fragment() {
         binding.radioButton2.isChecked = false
         binding.radioButton3.isChecked = false
         binding.editText.apply {
-            this.setBackgroundColor(ContextCompat.getColor(requireContext(),R.color.disActive))
+          //  this.setBackgroundColor(ContextCompat.getColor(requireContext(),R.color.disActive))
             this.isEnabled = false
             this.text .clear()
 
         }
 
         binding.autoCompleteTextView.apply {
-            this.setBackgroundColor(ContextCompat.getColor(requireContext(),R.color.disActive))
+           // this.setBackgroundColor(ContextCompat.getColor(requireContext(),R.color.disActive))
             this.isEnabled = false
             this.text.clear()
 
@@ -78,7 +78,7 @@ class LocationOrderFragment : Fragment() {
             location = prefs.getString(MainEnum.Location.main,"").toString()
             type = 0
             binding.editText.apply {
-                this.setBackgroundColor(ContextCompat.getColor(requireContext(),R.color.disActive))
+             //   this.setBackgroundColor(ContextCompat.getColor(requireContext(),R.color.disActive))
                 this.isEnabled = false
                 this.text .clear()
 
@@ -86,7 +86,7 @@ class LocationOrderFragment : Fragment() {
             binding.textinput.isEnabled = false
 
             binding.autoCompleteTextView.apply {
-                this.setBackgroundColor(ContextCompat.getColor(requireContext(),R.color.disActive))
+                //this.setBackgroundColor(ContextCompat.getColor(requireContext(),R.color.disActive))
                 this.isEnabled = false
                 this.text.clear()
             }
@@ -97,7 +97,7 @@ class LocationOrderFragment : Fragment() {
             binding.radioButton3.isChecked = false
             type = 1
             binding.editText.apply {
-                this.setBackgroundColor(ContextCompat.getColor(requireContext(),R.color.disActive))
+               // this.setBackgroundColor(ContextCompat.getColor(requireContext(),R.color.disActive))
                 this.isEnabled = false
                 this.text .clear()
 
@@ -115,7 +115,7 @@ class LocationOrderFragment : Fragment() {
             binding.radioButton2.isChecked = false
             binding.radioButton.isChecked = false
             binding.autoCompleteTextView.apply {
-                this.setBackgroundColor(ContextCompat.getColor(requireContext(),R.color.disActive))
+                //this.setBackgroundColor(ContextCompat.getColor(requireContext(),R.color.disActive))
                 this.isEnabled = false
                 this.text.clear()
 

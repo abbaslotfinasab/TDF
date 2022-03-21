@@ -111,6 +111,22 @@
 
     </androidx.cardview.widget.CardView>
 
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/btnMarAll"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:cornerRadius="48dp"
+            android:textColor="@color/white"
+            android:fontFamily="@font/gilroy_medium"
+            android:text="@string/mark_all_as_read"
+            android:textAllCaps="false"
+            android:layout_margin="16dp"
+            android:backgroundTint="@color/confirm"
+            android:minHeight="56dp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"/>
+
     </androidx.constraintlayout.widget.ConstraintLayout>
 
 </androidx.swiperefreshlayout.widget.SwipeRefreshLayout>

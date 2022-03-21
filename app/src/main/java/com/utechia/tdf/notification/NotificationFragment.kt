@@ -11,21 +11,24 @@ import androidx.core.content.ContextCompat
 import androidx.core.os.bundleOf
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
+import androidx.lifecycle.Observer
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.ItemTouchHelper
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
+
 import com.utechia.domain.utile.Result
 import com.utechia.tdf.R
 import com.utechia.tdf.databinding.FragmentNotificationBinding
 import dagger.hilt.android.AndroidEntryPoint
+import java.lang.invoke.ConstantCallSite
 
 @AndroidEntryPoint
 class NotificationFragment : Fragment() {
 
     private lateinit var binding: FragmentNotificationBinding
-    private  val notificationViewModel:NotificationViewModel by viewModels()
-    private val notificationAdapter:NotificationAdapter = NotificationAdapter()
+    private val notificationViewModel: NotificationViewModel by viewModels()
+    private val notificationAdapter: NotificationAdapter = NotificationAdapter()
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -33,6 +36,18 @@ class NotificationFragment : Fragment() {
     ): View {
         binding = FragmentNotificationBinding.inflate(inflater, container, false)
         return binding.root
+    }
+
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+        val navController = findNavController()
+        val currentBackStackEntry = navController.currentBackStackEntry!!
+        val savedStateHandle = currentBackStackEntry.savedStateHandle
+        savedStateHandle.getLiveData<Boolean>("READ_ALL_NOTIFICATION")
+            .observe(currentBackStackEntry, Observer { readAll ->
+                if (readAll)
+                    notificationViewModel.getNotification()
+            })
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
@@ -45,11 +60,24 @@ class NotificationFragment : Fragment() {
             notificationViewModel.getNotification()
 
         }
+        binding.recyclerView.addOnScrollListener(object : RecyclerView.OnScrollListener() {
+            override fun onScrolled(recyclerView: RecyclerView, dx: Int, dy: Int) {
+                super.onScrolled(recyclerView, dx, dy)
+                if (dy > 0 || dy < 0 &&  binding.btnMarAll.isShown)
+                    binding.btnMarAll?.visibility = View.GONE
 
+            }
+
+            override fun onScrollStateChanged(recyclerView: RecyclerView, newState: Int) {
+                if (newState == RecyclerView.SCROLL_STATE_IDLE)
+                    binding.btnMarAll?.visibility = View.VISIBLE
+                super.onScrollStateChanged(recyclerView, newState)
+            }
+        })
 
 
         binding.recyclerView.apply {
-            layoutManager = LinearLayoutManager(context,LinearLayoutManager.VERTICAL,false)
+            layoutManager = LinearLayoutManager(context, LinearLayoutManager.VERTICAL, false)
             adapter = notificationAdapter
             addItemDecoration(ItemNotificationDecoration())
 
@@ -57,7 +85,7 @@ class NotificationFragment : Fragment() {
                 findNavController().navigate(R.id.action_notificationFragment_self)
             }
 
-            ItemTouchHelper(object : ItemTouchHelper.SimpleCallback(0, ItemTouchHelper.LEFT){
+            ItemTouchHelper(object : ItemTouchHelper.SimpleCallback(0, ItemTouchHelper.LEFT) {
                 override fun onMove(
                     recyclerView: RecyclerView,
                     viewHolder: RecyclerView.ViewHolder,
@@ -65,8 +93,12 @@ class NotificationFragment : Fragment() {
                 ): Boolean = false
 
                 override fun onSwiped(viewHolder: RecyclerView.ViewHolder, direction: Int) {
-                    val bundle = bundleOf("nId" to notificationAdapter.notification[viewHolder.layoutPosition].id)
-                    findNavController().navigate(R.id.action_notificationFragment_to_notificationDeleteFragment,bundle)
+                    val bundle =
+                        bundleOf("nId" to notificationAdapter.notification[viewHolder.layoutPosition].id)
+                    findNavController().navigate(
+                        R.id.action_notificationFragment_to_notificationDeleteFragment,
+                        bundle
+                    )
                 }
 
                 override fun onChildDraw(
@@ -79,19 +111,19 @@ class NotificationFragment : Fragment() {
                     isCurrentlyActive: Boolean
                 ) {
                     if (actionState == ItemTouchHelper.ACTION_STATE_SWIPE) {
-                        val itemView : View = viewHolder.itemView
-                        val icon : Drawable =
+                        val itemView: View = viewHolder.itemView
+                        val icon: Drawable =
                             ContextCompat.getDrawable(context, R.drawable.ic_push_delete)!!
                         val top = itemView.top + (itemView.height - icon.intrinsicHeight) / 2
-                        val left = itemView.width - icon.intrinsicWidth - (itemView.height - icon.intrinsicHeight) / 4
+                        val left =
+                            itemView.width - icon.intrinsicWidth - (itemView.height - icon.intrinsicHeight) / 4
                         val right = left + icon.intrinsicHeight
                         val bottom = top + icon.intrinsicHeight
 
-                        if (dX < 0){
-                            icon.setBounds(left,top,right,bottom)
-                        }
-                        else if (dX > 0){
-                            icon.setBounds(left,top,top,bottom)
+                        if (dX < 0) {
+                            icon.setBounds(left, top, right, bottom)
+                        } else if (dX > 0) {
+                            icon.setBounds(left, top, top, bottom)
 
                         }
                         icon.draw(c)
@@ -100,7 +132,7 @@ class NotificationFragment : Fragment() {
                         c,
                         recyclerView,
                         viewHolder,
-                        dX/3,
+                        dX / 3,
                         dY,
                         actionState,
                         isCurrentlyActive
@@ -109,21 +141,23 @@ class NotificationFragment : Fragment() {
             }).attachToRecyclerView(binding.recyclerView)
         }
 
+        binding.btnMarAll.setOnClickListener {
+            findNavController().navigate(NotificationFragmentDirections.actionNotificationFragmentToReadAllNotificationFragment())
+        }
+
         observer()
     }
 
     private fun observer() {
-        notificationViewModel.notificationModel.observe(viewLifecycleOwner){
-
+        notificationViewModel.notificationModel.observe(viewLifecycleOwner) {
             when (it) {
                 is Result.Success -> {
                     binding.refreshLayout.isRefreshing = false
                     binding.prg.visibility = View.GONE
-
-                    if (it.data.size!=0){
+                    if (it.data.size != 0) {
                         binding.recyclerView.visibility = View.VISIBLE
                         notificationAdapter.addData(it.data)
-                    }else {
+                    } else {
                         binding.recyclerView.visibility = View.GONE
                         binding.emptyLayout.visibility = View.VISIBLE
                     }
@@ -134,7 +168,6 @@ class NotificationFragment : Fragment() {
                     binding.prg.visibility = View.GONE
                     binding.emptyLayout.visibility = View.GONE
                     binding.recyclerView.visibility = View.GONE
-
                 }
 
                 is Result.Error -> {
@@ -143,7 +176,6 @@ class NotificationFragment : Fragment() {
                     binding.emptyLayout.visibility = View.VISIBLE
                     binding.recyclerView.visibility = View.GONE
                     Toast.makeText(context, it.message, Toast.LENGTH_SHORT).show()
-
                 }
             }
         }

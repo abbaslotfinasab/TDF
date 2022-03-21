@@ -55,11 +55,11 @@ class NotificationRepoImpl @Inject constructor(
 
     }
 
-    override suspend fun read(id: Int): MutableList<NotificationModel> {
+    override suspend fun read(id: Int,readAll:Boolean?): MutableList<NotificationModel> {
 
         if (networkHelper.isNetworkConnected()) {
 
-            val result = service.readNotification(NotificationBody(id,false))
+            val result = service.readNotification(NotificationBody(id,readAll?:false))
 
             return when (result.isSuccessful) {
 

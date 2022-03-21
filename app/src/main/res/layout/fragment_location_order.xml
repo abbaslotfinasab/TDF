@@ -61,6 +61,7 @@
             android:layout_height="match_parent"
             android:layout_weight="1"
             android:paddingStart="15dp"
+            android:hint="@string/select_location"
             android:paddingEnd="5dp"
             android:background="@color/white"/>
 

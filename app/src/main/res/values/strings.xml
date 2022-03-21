@@ -130,6 +130,8 @@
     <string name="select_location">Select Location</string>
     <string name="my_office">My Office</string>
     <string name="type_address">Type address...</string>
+    <string name="mark_all_as_read">Mark all as read</string>
+    <string name="are_you_sure_you_want_to_mark_all_notifications_as_read">Are you sure you want to mark all notifications as read?</string>
 
 
     <string-array name="month_array">

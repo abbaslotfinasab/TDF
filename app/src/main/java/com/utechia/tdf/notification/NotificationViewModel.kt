@@ -40,13 +40,13 @@ class NotificationViewModel @Inject constructor(
         }
     }
 
-    fun readNotification(id: Int) {
+    fun readNotification(id: Int,readAll:Boolean?=false) {
 
         viewModelScope.launch(Dispatchers.IO + handler) {
 
             _notificationModel.postValue(Result.Loading)
 
-            notificationUseCaseImpl.read(id).let {
+            notificationUseCaseImpl.read(id,readAll).let {
 
                 _notificationModel.postValue(Result.Success(it))
             }
