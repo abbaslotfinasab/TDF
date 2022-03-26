@@ -137,7 +137,7 @@ class NotificationFragment : Fragment() {
                             ContextCompat.getDrawable(context, R.drawable.ic_push_delete)!!
                         val top = itemView.top + (itemView.height - icon.intrinsicHeight) / 2
                         val left =
-                            itemView.width - icon.intrinsicWidth - (itemView.height - icon.intrinsicHeight) / 4
+                            itemView.width - icon.intrinsicWidth - (itemView.height - icon.intrinsicHeight)/6
                         val right = left + icon.intrinsicHeight
                         val bottom = top + icon.intrinsicHeight
 

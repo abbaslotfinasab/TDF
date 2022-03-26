@@ -12,6 +12,7 @@ import android.os.Handler
 import android.os.Looper
 import android.view.View
 import android.view.WindowManager
+import android.widget.Toast
 import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatDelegate
 import androidx.core.app.ActivityCompat
@@ -1043,7 +1044,7 @@ class MainActivity : AppCompatActivity(), SensorEventListener {
 
     private fun createPeriodTimeRequest(){
 
-        val delay :Duration = Duration.between(LocalDateTime.now().withHour(23).withMinute(59).withSecond(59).withNano(0),LocalDateTime.now())
+        val delay :Duration = Duration.between(LocalDateTime.now().withHour(23).withMinute(59).withSecond(59).withNano(0),LocalDateTime.now().withNano(0))
 
         var time = delay.toMinutes()
 
@@ -1058,7 +1059,7 @@ class MainActivity : AppCompatActivity(), SensorEventListener {
             .build()
 
         workManager.enqueueUniquePeriodicWork(
-            "send_periodic",ExistingPeriodicWorkPolicy.REPLACE,stepWorker
+            "send_periodic",ExistingPeriodicWorkPolicy.KEEP,stepWorker
         )
     }
 }

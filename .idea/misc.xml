@@ -304,6 +304,17 @@
         <entry key="app/src/main/res/drawable/question_back.xml" value="0.12314814814814815" />
         <entry key="app/src/main/res/font/gilory.xml" value="0.18333333333333332" />
         <entry key="app/src/main/res/font/poppins.xml" value="0.18333333333333332" />
+        <entry key="app/src/main/res/layout-land/fragment_tea_boy_home.xml" value="0.140625" />
+        <entry key="app/src/main/res/layout-sw600dp/fragment_tea_boy_home.xml" value="0.225669099756691" />
+        <entry key="app/src/main/res/layout-sw600dp/fragment_tea_boy_order_child.xml" value="0.225669099756691" />
+        <entry key="app/src/main/res/layout-sw600dp/fragment_tea_boy_order_details.xml" value="0.225669099756691" />
+        <entry key="app/src/main/res/layout-sw600dp/fragment_tea_boy_orders.xml" value="0.25" />
+        <entry key="app/src/main/res/layout-sw600dp/order_details_item.xml" value="0.225669099756691" />
+        <entry key="app/src/main/res/layout-sw600dp/order_teaboy_item.xml" value="0.225669099756691" />
+        <entry key="app/src/main/res/layout-sw720dp/fragment_tea_boy_orders.xml" value="0.33" />
+        <entry key="app/src/main/res/layout-sw720dp/order_teaboy_item.xml" value="0.1" />
+        <entry key="app/src/main/res/layout-w720dp-port/fragment_tea_boy_home.xml" value="0.11538461538461539" />
+        <entry key="app/src/main/res/layout-w720dp/fragment_tea_boy_home.xml" value="0.11538461538461539" />
         <entry key="app/src/main/res/layout/activity_main.xml" value="0.22" />
         <entry key="app/src/main/res/layout/cart_item.xml" value="0.12092391304347826" />
         <entry key="app/src/main/res/layout/custom_list_item.xml" value="0.1" />
@@ -403,7 +414,7 @@
         <entry key="app/src/main/res/layout/item_upload.xml" value="0.5" />
         <entry key="app/src/main/res/layout/order_details_item.xml" value="0.5" />
         <entry key="app/src/main/res/layout/order_item.xml" value="0.1" />
-        <entry key="app/src/main/res/layout/order_teaboy_item.xml" value="0.1" />
+        <entry key="app/src/main/res/layout/order_teaboy_item.xml" value="0.25" />
         <entry key="app/src/main/res/layout/refreshment_item.xml" value="0.22" />
         <entry key="app/src/main/res/layout/ticket_item.xml" value="0.1613588110403397" />
         <entry key="app/src/main/res/menu/teaboy_bottom_nav_menu.xml" value="0.15854700854700854" />
