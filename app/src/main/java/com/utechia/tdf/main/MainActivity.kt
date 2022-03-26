@@ -146,7 +146,14 @@ class MainActivity : AppCompatActivity(), SensorEventListener {
         }
 
         binding.notification.setOnClickListener{
-            navController.navigate(R.id.notificationFragment)
+
+            navController.navigate(R.id.notificationFragment,null,NavOptions.Builder()
+                .setEnterAnim(android.R.anim.fade_in)
+                .setExitAnim(android.R.anim.fade_out)
+                .setPopEnterAnim(android.R.anim.fade_out)
+                .setPopEnterAnim(android.R.anim.fade_in)
+                .build())
+
         }
 
         binding.exit.setOnClickListener {
@@ -268,8 +275,6 @@ class MainActivity : AppCompatActivity(), SensorEventListener {
                     }
                     R.id.refreshmentFragment ->{
                         design(MainEnum.Refreshment.main)
-
-
                     }
 
                     R.id.createRefreshmentFragment ->{
@@ -937,8 +942,8 @@ class MainActivity : AppCompatActivity(), SensorEventListener {
             MainEnum.Notification.main->{
                 window.statusBarColor = ContextCompat.getColor(this, R.color.status)
                 binding.customToolbar.background = ContextCompat.getDrawable(this,R.color.status)
-                binding.customToolbar.visibility = View.VISIBLE
-                binding.toolbar.visibility = View.INVISIBLE
+                binding.customToolbar.visibility = View.GONE
+                binding.toolbar.visibility = View.GONE
                 binding.customButton.visibility = View.GONE
                 binding.customTitle.text = getString(R.string.notification)
                 binding.bottomNavigation.visibility = View.GONE

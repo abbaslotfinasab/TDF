@@ -38,6 +38,18 @@ class NotificationFragment : Fragment() {
         return binding.root
     }
 
+    override fun onStop() {
+        super.onStop()
+        binding.customToolbar.visibility = View.GONE
+
+    }
+
+    override fun onResume() {
+        super.onResume()
+        binding.customToolbar.visibility = View.VISIBLE
+
+    }
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         val navController = findNavController()
@@ -60,6 +72,15 @@ class NotificationFragment : Fragment() {
             notificationViewModel.getNotification()
 
         }
+
+        binding.deleteAllIcon.setOnClickListener {
+            findNavController().navigate(R.id.action_notificationFragment_to_deleteAllNotificationFragment)
+        }
+
+        binding.backArrow.setOnClickListener {
+            findNavController().navigateUp()
+        }
+
         binding.recyclerView.addOnScrollListener(object : RecyclerView.OnScrollListener() {
             override fun onScrolled(recyclerView: RecyclerView, dx: Int, dy: Int) {
                 super.onScrolled(recyclerView, dx, dy)

@@ -331,6 +331,7 @@
         <entry key="app/src/main/res/layout/fragment_create_survey_child.xml" value="0.22" />
         <entry key="app/src/main/res/layout/fragment_create_ticket.xml" value="0.33" />
         <entry key="app/src/main/res/layout/fragment_deactivation.xml" value="0.1" />
+        <entry key="app/src/main/res/layout/fragment_delete_all_notification.xml" value="0.2" />
         <entry key="app/src/main/res/layout/fragment_delivered.xml" value="0.1" />
         <entry key="app/src/main/res/layout/fragment_event_details.xml" value="0.1" />
         <entry key="app/src/main/res/layout/fragment_event_rate.xml" value="0.1" />
@@ -345,7 +346,7 @@
         <entry key="app/src/main/res/layout/fragment_location_order.xml" value="0.25" />
         <entry key="app/src/main/res/layout/fragment_login.xml" value="0.1" />
         <entry key="app/src/main/res/layout/fragment_message.xml" value="0.15" />
-        <entry key="app/src/main/res/layout/fragment_notification.xml" value="0.10235507246376811" />
+        <entry key="app/src/main/res/layout/fragment_notification.xml" value="0.1" />
         <entry key="app/src/main/res/layout/fragment_notification_delete.xml" value="0.1" />
         <entry key="app/src/main/res/layout/fragment_notification_details.xml" value="0.18" />
         <entry key="app/src/main/res/layout/fragment_notification_rating.xml" value="0.10235507246376811" />
@@ -360,6 +361,7 @@
         <entry key="app/src/main/res/layout/fragment_qr_code.xml" value="0.19322916666666667" />
         <entry key="app/src/main/res/layout/fragment_rate_confirmation.xml" value="0.1" />
         <entry key="app/src/main/res/layout/fragment_rating_ticket.xml" value="0.22" />
+        <entry key="app/src/main/res/layout/fragment_read_all_notifications.xml" value="0.25" />
         <entry key="app/src/main/res/layout/fragment_refreshment.xml" value="0.25" />
         <entry key="app/src/main/res/layout/fragment_request_details.xml" value="0.5033921302578019" />
         <entry key="app/src/main/res/layout/fragment_reservation_details.xml" value="0.19322916666666667" />
