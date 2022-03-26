@@ -7,7 +7,6 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.ArrayAdapter
 import android.widget.Toast
 import androidx.core.content.ContextCompat
 import androidx.core.os.bundleOf
@@ -25,6 +24,7 @@ class LocationOrderFragment : Fragment() {
 
     private lateinit var binding: FragmentLocationOrderBinding
     private val officeViewModel: OfficeViewModel by viewModels()
+    private lateinit var autoCompleteAdapter: AutoCompleteAdapter
     private lateinit var prefs: SharedPreferences
     private var type = 0
     private var location = ""
@@ -156,8 +156,8 @@ class LocationOrderFragment : Fragment() {
             when (it) {
                 is Result.Success -> {
                     binding.prg.visibility = View.GONE
-                    val adapter = ArrayAdapter(requireContext(),R.layout.dropdown_item,it.data)
-                    binding.autoCompleteTextView.setAdapter(adapter)
+                    autoCompleteAdapter = AutoCompleteAdapter(requireActivity(),R.layout.dropdown_item,R.id.textItem,it.data)
+                    binding.autoCompleteTextView.setAdapter(autoCompleteAdapter)
                 }
 
                 is Result.Loading -> {
