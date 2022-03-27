@@ -305,12 +305,15 @@
         <entry key="app/src/main/res/font/gilory.xml" value="0.18333333333333332" />
         <entry key="app/src/main/res/font/poppins.xml" value="0.18333333333333332" />
         <entry key="app/src/main/res/layout-land/fragment_tea_boy_home.xml" value="0.140625" />
-        <entry key="app/src/main/res/layout-sw600dp/fragment_tea_boy_home.xml" value="0.225669099756691" />
+        <entry key="app/src/main/res/layout-sw600dp/fragment_qr_code.xml" value="0.1576923076923077" />
+        <entry key="app/src/main/res/layout-sw600dp/fragment_tea_boy_home.xml" value="0.33" />
         <entry key="app/src/main/res/layout-sw600dp/fragment_tea_boy_order_child.xml" value="0.225669099756691" />
         <entry key="app/src/main/res/layout-sw600dp/fragment_tea_boy_order_details.xml" value="0.225669099756691" />
         <entry key="app/src/main/res/layout-sw600dp/fragment_tea_boy_orders.xml" value="0.25" />
         <entry key="app/src/main/res/layout-sw600dp/order_details_item.xml" value="0.225669099756691" />
         <entry key="app/src/main/res/layout-sw600dp/order_teaboy_item.xml" value="0.225669099756691" />
+        <entry key="app/src/main/res/layout-sw720dp/fragment_qr_code.xml" value="0.1576923076923077" />
+        <entry key="app/src/main/res/layout-sw720dp/fragment_tea_boy_home.xml" value="0.22" />
         <entry key="app/src/main/res/layout-sw720dp/fragment_tea_boy_orders.xml" value="0.33" />
         <entry key="app/src/main/res/layout-sw720dp/order_teaboy_item.xml" value="0.1" />
         <entry key="app/src/main/res/layout-w720dp-port/fragment_tea_boy_home.xml" value="0.11538461538461539" />

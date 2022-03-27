@@ -50,6 +50,7 @@
             android:layout_height="wrap_content"
             android:layout_marginEnd="12dp"
             android:text="@string/active"
+            android:textSize="16sp"
             android:textColor="#929292"
             app:layout_constraintBottom_toBottomOf="@+id/job"
             app:layout_constraintEnd_toStartOf="@+id/switchCompat"
@@ -186,15 +187,16 @@
         <androidx.constraintlayout.widget.ConstraintLayout
             android:id="@+id/pedometerLayout"
             android:layout_width="0dp"
-            android:visibility="visible"
             android:layout_height="100dp"
             android:layout_marginStart="20dp"
-            android:layout_marginTop="20dp"
+            android:layout_marginTop="30dp"
             android:layout_marginEnd="20dp"
             android:background="@drawable/entrance_exit_bg"
+            android:visibility="visible"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@id/transactionLayout">
+
             <ImageView
                 android:id="@+id/imageView24"
                 android:layout_width="51dp"
@@ -243,8 +245,8 @@
                 android:id="@+id/line0"
                 android:layout_width="1dp"
                 android:layout_height="0dp"
-                android:background="#1A000000"
                 android:layout_marginVertical="12dp"
+                android:background="#1A000000"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
@@ -306,7 +308,7 @@
             android:layout_marginTop="30dp"
             android:text="@string/points"
             android:textColor="@color/black"
-            android:textSize="18sp"
+            android:textSize="22sp"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/pedometerLayout" />
 
@@ -314,7 +316,7 @@
             android:id="@+id/rating"
             style="@style/Widget.AppCompat.RatingBar"
             android:layout_width="wrap_content"
-            android:layout_height="40dp"
+            android:layout_height="wrap_content"
             android:layout_marginStart="20dp"
             android:secondaryProgressTint="#00000000"
             android:isIndicator="true"
@@ -322,11 +324,7 @@
             android:numStars="5"
             android:progressTint="#FFCB45"
             android:rating="0"
-            android:scaleX="0.6"
-            android:scaleY="0.6"
             android:stepSize="0.1"
-            android:transformPivotX="0dp"
-            android:transformPivotY="0dp"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/textView9" />
 
@@ -334,12 +332,13 @@
             android:id="@+id/ratingNum"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginStart="-90dp"
+            android:layout_marginStart="5dp"
+            android:layout_marginTop="5dp"
             android:layout_marginBottom="5dp"
             android:gravity="center"
             android:text="0.0"
             android:textColor="#929292"
-            android:textSize="18sp"
+            android:textSize="22sp"
             app:layout_constraintBottom_toBottomOf="@+id/rating"
             app:layout_constraintStart_toEndOf="@+id/rating"
             app:layout_constraintTop_toTopOf="@+id/rating" />
@@ -349,10 +348,10 @@
             android:layout_width="63dp"
             android:layout_height="37dp"
             android:layout_marginStart="20dp"
-            android:layout_marginTop="20dp"
+            android:layout_marginTop="30dp"
             android:text="@string/tasks"
             android:textColor="@color/black"
-            android:textSize="18sp"
+            android:textSize="22sp"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/rating" />
 
@@ -367,8 +366,8 @@
 
             <androidx.constraintlayout.widget.ConstraintLayout
                 android:id="@+id/pendingLayout"
-                android:layout_width="95dp"
-                android:layout_height="95dp"
+                android:layout_width="105dp"
+                android:layout_height="105dp"
                 android:layout_marginStart="20dp"
                 android:background="@color/white"
                 app:layout_constraintStart_toStartOf="parent"
@@ -382,7 +381,7 @@
                     android:layout_marginTop="13dp"
                     android:text="@string/pending_norders"
                     android:textColor="#040404"
-                    android:textSize="12sp"
+                    android:textSize="14sp"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toTopOf="parent" />
 
@@ -391,7 +390,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginStart="13dp"
-                    android:layout_marginTop="20dp"
+                    android:layout_marginTop="15dp"
                     android:layout_marginBottom="10dp"
                     android:textColor="#F5A62E"
                     android:textSize="24sp"
@@ -403,9 +402,9 @@
 
             <androidx.constraintlayout.widget.ConstraintLayout
                 android:id="@+id/deliveredLayout"
-                android:layout_width="95dp"
-                android:layout_height="95dp"
-                android:layout_marginStart="20dp"
+                android:layout_width="105dp"
+                android:layout_height="105dp"
+                android:layout_marginStart="50dp"
                 android:background="@color/white"
                 app:layout_constraintStart_toEndOf="@id/pendingLayout"
                 app:layout_constraintTop_toBottomOf="@+id/textView11">
@@ -418,7 +417,7 @@
                     android:layout_marginTop="13dp"
                     android:text="@string/delivered_norders"
                     android:textColor="#040404"
-                    android:textSize="12sp"
+                    android:textSize="14sp"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toTopOf="parent" />
 
@@ -427,7 +426,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginStart="13dp"
-                    android:layout_marginTop="20dp"
+                    android:layout_marginTop="15dp"
                     android:layout_marginBottom="10dp"
                     android:textColor="#59B48D"
                     android:textSize="24sp"
@@ -439,9 +438,9 @@
 
             <androidx.constraintlayout.widget.ConstraintLayout
                 android:id="@+id/cancelledLayout"
-                android:layout_width="95dp"
-                android:layout_height="95dp"
-                android:layout_marginStart="20dp"
+                android:layout_width="105dp"
+                android:layout_height="105dp"
+                android:layout_marginStart="50dp"
                 android:background="@color/white"
                 app:layout_constraintStart_toEndOf="@id/deliveredLayout"
                 app:layout_constraintTop_toBottomOf="@+id/textView11">
@@ -454,16 +453,16 @@
                     android:layout_marginTop="13dp"
                     android:text="@string/cancelled_norders"
                     android:textColor="#040404"
-                    android:textSize="12sp"
+                    android:textSize="14sp"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toTopOf="parent" />
 
                 <TextView
                     android:id="@+id/cancelled"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
+                    android:layout_width="0dp"
+                    android:layout_height="35dp"
                     android:layout_marginStart="13dp"
-                    android:layout_marginTop="20dp"
+                    android:layout_marginTop="15dp"
                     android:layout_marginBottom="10dp"
                     android:textColor="#FF6363"
                     android:textSize="24sp"
