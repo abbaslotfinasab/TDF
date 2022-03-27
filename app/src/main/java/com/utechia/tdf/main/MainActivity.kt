@@ -1057,7 +1057,7 @@ class MainActivity : AppCompatActivity(), SensorEventListener {
             .build()
 
         workManager.enqueueUniquePeriodicWork(
-            "send_periodic",ExistingPeriodicWorkPolicy.KEEP,stepWorker
+            "send_periodic",ExistingPeriodicWorkPolicy.REPLACE,stepWorker
         )
     }
 }
