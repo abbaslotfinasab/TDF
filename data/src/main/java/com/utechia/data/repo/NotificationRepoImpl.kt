@@ -1,6 +1,7 @@
 package com.utechia.data.repo
 
 import com.utechia.data.api.Service
+import com.utechia.data.entity.DeleteNotificationBody
 import com.utechia.data.entity.NotificationBody
 import com.utechia.data.utile.NetworkHelper
 import com.utechia.domain.enum.PagingEnum
@@ -35,11 +36,11 @@ class NotificationRepoImpl @Inject constructor(
 
     }
 
-    override suspend fun delete(id: Int): MutableList<NotificationModel> {
+    override suspend fun delete(id: Int,deleteAll:Boolean?): MutableList<NotificationModel> {
 
         if (networkHelper.isNetworkConnected()) {
 
-            val result = service.deleteNotification(id)
+            val result = service.deleteNotification(DeleteNotificationBody(id,deleteAll?:false))
 
             return when (result.isSuccessful) {
 

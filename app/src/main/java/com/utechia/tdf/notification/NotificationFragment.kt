@@ -48,6 +48,7 @@ class NotificationFragment : Fragment() {
         super.onResume()
         binding.customToolbar.visibility = View.VISIBLE
 
+
     }
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -103,7 +104,7 @@ class NotificationFragment : Fragment() {
             addItemDecoration(ItemNotificationDecoration())
 
             binding.appBackButton.setOnClickListener {
-                findNavController().navigate(R.id.action_notificationFragment_self)
+                notificationViewModel.getNotification()
             }
 
             ItemTouchHelper(object : ItemTouchHelper.SimpleCallback(0, ItemTouchHelper.LEFT) {
@@ -177,10 +178,12 @@ class NotificationFragment : Fragment() {
                     binding.prg.visibility = View.GONE
                     if (it.data.size != 0) {
                         binding.recyclerView.visibility = View.VISIBLE
+                        binding.btnMarAll.visibility = View.VISIBLE
                         notificationAdapter.addData(it.data)
                     } else {
                         binding.recyclerView.visibility = View.GONE
                         binding.emptyLayout.visibility = View.VISIBLE
+                        binding.btnMarAll.visibility = View.GONE
                     }
                 }
 
@@ -189,11 +192,14 @@ class NotificationFragment : Fragment() {
                     binding.prg.visibility = View.GONE
                     binding.emptyLayout.visibility = View.GONE
                     binding.recyclerView.visibility = View.GONE
+                    binding.btnMarAll.visibility = View.GONE
+
                 }
 
                 is Result.Error -> {
                     binding.refreshLayout.isRefreshing = false
                     binding.prg.visibility = View.GONE
+                    binding.btnMarAll.visibility = View.GONE
                     binding.emptyLayout.visibility = View.VISIBLE
                     binding.recyclerView.visibility = View.GONE
                     Toast.makeText(context, it.message, Toast.LENGTH_SHORT).show()

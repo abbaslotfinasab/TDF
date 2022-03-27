@@ -12,7 +12,6 @@ import android.os.Handler
 import android.os.Looper
 import android.view.View
 import android.view.WindowManager
-import android.widget.Toast
 import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatDelegate
 import androidx.core.app.ActivityCompat
@@ -284,7 +283,6 @@ class MainActivity : AppCompatActivity(), SensorEventListener {
                     }
 
                     R.id.orderFragment ->{
-                        navController.clearBackStack(R.id.cartFragment)
                         design(MainEnum.UserOrder.main)
 
                     }

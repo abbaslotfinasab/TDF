@@ -53,13 +53,13 @@ class NotificationViewModel @Inject constructor(
         }
     }
 
-    fun deleteNotification(id: Int) {
+    fun deleteNotification(id: Int,deleteAll:Boolean?=false) {
 
         viewModelScope.launch(Dispatchers.IO + handler) {
 
             _notificationModel.postValue(Result.Loading)
 
-            notificationUseCaseImpl.delete(id).let {
+            notificationUseCaseImpl.delete(id,deleteAll).let {
 
                 _notificationModel.postValue(Result.Success(it))
             }

@@ -172,6 +172,7 @@
             android:text="@string/mark_all_as_read"
             android:textAllCaps="false"
             android:layout_margin="16dp"
+            android:visibility="gone"
             android:backgroundTint="@color/confirm"
             android:minHeight="56dp"
             android:layout_width="wrap_content"

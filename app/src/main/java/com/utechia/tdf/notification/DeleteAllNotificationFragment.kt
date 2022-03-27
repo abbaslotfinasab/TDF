@@ -43,7 +43,7 @@ class DeleteAllNotificationFragment : DialogFragment() {
 
 
         binding.btnYes.setOnClickListener {
-            ticketViewModel.readNotification(0,true)
+            ticketViewModel.deleteNotification(0,true)
         }
 
         binding.btnCancel.setOnClickListener {
@@ -65,8 +65,8 @@ class DeleteAllNotificationFragment : DialogFragment() {
             when (it) {
                 is Result.Success -> {
                     binding.prg.visibility = View.GONE
-                    mSavedStateHandle?.set("DELETE_ALL_NOTIFICATION",true)
-                    findNavController().popBackStack()
+                    mSavedStateHandle?.set("READ_ALL_NOTIFICATION",true)
+                    findNavController().navigateUp()
 
                 }
 

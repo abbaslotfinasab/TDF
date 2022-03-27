@@ -12,8 +12,8 @@ class NotificationUseCaseImpl @Inject constructor(private val notificationRepo: 
         return notificationRepo.getAll()
     }
 
-    override suspend fun delete(id: Int): MutableList<NotificationModel> {
-        return notificationRepo.delete(id)
+    override suspend fun delete(id: Int,deleteAll:Boolean?): MutableList<NotificationModel> {
+        return notificationRepo.delete(id,deleteAll)
     }
 
 

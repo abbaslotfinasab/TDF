@@ -166,8 +166,8 @@ interface Service {
     @PATCH("notification/read")
     suspend fun readNotification(@Body notificationBody: NotificationBody):Response<Void>
 
-    @DELETE("notification/{id}")
-    suspend fun deleteNotification(@Path("id") id: Int):Response<Void>
+    @HTTP(method = "DELETE", path = "notification",hasBody = true)
+    suspend fun deleteNotification(@Body deleteNotificationBody: DeleteNotificationBody):Response<Void>
 
     @GET("user/items/count")
     suspend fun countNotification():Response<NotificationCount>
