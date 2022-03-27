@@ -1,7 +1,6 @@
 package com.utechia.tdf.events
 
-import android.animation.Animator
-import android.animation.AnimatorListenerAdapter
+
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -9,12 +8,12 @@ import android.view.ViewGroup
 import android.widget.Toast
 import androidx.core.content.ContextCompat
 import androidx.core.os.bundleOf
-import androidx.core.widget.NestedScrollView
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.bumptech.glide.Glide
+import com.google.android.material.appbar.AppBarLayout
 import com.utechia.domain.enum.EventsEnum
 import com.utechia.domain.utile.Result
 import com.utechia.tdf.R
@@ -53,54 +52,31 @@ class EventDetailsFragment : Fragment() {
 
         eventDetViewModel.getEvent(eId)
 
-        binding.backArrow1.bringToFront()
-        binding.header.bringToFront()
-        binding.header.alpha = 0f
+        binding.appBarLayout.addOnOffsetChangedListener(object :AppBarLayout.OnOffsetChangedListener{
 
+            var isShow = false
+            var scrollRange = -1
 
-        binding.backArrow0.setOnClickListener {
-            findNavController().navigateUp()
-        }
+            override fun onOffsetChanged(appBarLayout: AppBarLayout?, verticalOffset: Int) {
 
-        binding.backArrow1.setOnClickListener {
-            findNavController().navigateUp()
-        }
-
-
-        binding.scrollView.setOnScrollChangeListener(NestedScrollView.OnScrollChangeListener { v, _, scrollY, _, oldScrollY ->
-            when {
-                scrollY>oldScrollY -> {
-                    binding.backArrow1.visibility = View.GONE
-                    //down
-                    binding.eventImage.animate().alpha((scrollY*1.0f) / (binding.eventImage.height - binding.header.height)).setListener(object :AnimatorListenerAdapter(){
-
-                        override fun onAnimationEnd(animation: Animator?) {
-                            super.onAnimationEnd(animation)
-                            binding.header.alpha = (scrollY*1.0f) / (binding.eventImage.height - binding.header.height)
-                        }
-
-                    })
-
+                if (scrollRange == -1) {
+                    if (appBarLayout != null) {
+                        scrollRange = appBarLayout.totalScrollRange
+                    }
                 }
-                scrollY<oldScrollY -> {
-
-                    binding.backArrow1.visibility = View.VISIBLE
-
-                    binding.eventImage.animate().alpha(1.0f).setListener(object :AnimatorListenerAdapter(){
-
-                        override fun onAnimationEnd(animation: Animator?) {
-                            super.onAnimationEnd(animation)
-                            binding.header.alpha = 0f
-
-                        }
-
-                    })
-                }
-                scrollY==0 -> {
-                    binding.header.alpha = 0f
+                if (scrollRange + verticalOffset == 0) {
+                    isShow = true;
+                } else if (isShow) {
+                    isShow = false;
                 }
             }
         })
+
+        binding.toolbar.setNavigationIcon(R.drawable.ic_back)
+
+        binding.toolbar.setNavigationOnClickListener {
+            findNavController().navigateUp()
+        }
 
         observer()
     }
@@ -126,6 +102,7 @@ class EventDetailsFragment : Fragment() {
                     Glide.with(requireActivity())
                         .load(it.data.coverphoto)
                         .centerCrop()
+                        .placeholder(R.mipmap.ic_evente_banner_foreground)
                         .error(R.mipmap.ic_evente_banner_foreground)
                         .into(binding.eventImage)
 

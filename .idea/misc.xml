@@ -316,6 +316,7 @@
         <entry key="app/src/main/res/layout-sw720dp/fragment_tea_boy_home.xml" value="0.22" />
         <entry key="app/src/main/res/layout-sw720dp/fragment_tea_boy_orders.xml" value="0.33" />
         <entry key="app/src/main/res/layout-sw720dp/order_teaboy_item.xml" value="0.1" />
+        <entry key="app/src/main/res/layout-v23/fragment_event_details.xml" value="0.19322916666666667" />
         <entry key="app/src/main/res/layout-w720dp-port/fragment_tea_boy_home.xml" value="0.11538461538461539" />
         <entry key="app/src/main/res/layout-w720dp/fragment_tea_boy_home.xml" value="0.11538461538461539" />
         <entry key="app/src/main/res/layout/activity_main.xml" value="0.22" />
@@ -422,6 +423,7 @@
         <entry key="app/src/main/res/layout/ticket_item.xml" value="0.1613588110403397" />
         <entry key="app/src/main/res/menu/teaboy_bottom_nav_menu.xml" value="0.15854700854700854" />
         <entry key="app/src/main/res/menu/user_navigation_drawer.xml" value="0.1" />
+        <entry key="app/src/main/res/mipmap-anydpi-v26/ic_evente_banner.xml" value="0.1943359375" />
         <entry key="app/src/main/res/mipmap-anydpi-v26/ic_launcher.xml" value="0.11944444444444445" />
         <entry key="app/src/main/res/mipmap-anydpi-v26/ic_launcher_round.xml" value="0.1" />
       </map>
