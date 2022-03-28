@@ -1,8 +1,7 @@
 package com.utechia.tdf.main
 
 import android.Manifest
-import android.content.Context
-import android.content.SharedPreferences
+import android.content.*
 import android.content.pm.PackageManager
 import android.hardware.*
 import android.os.Build
@@ -39,6 +38,7 @@ import com.utechia.tdf.databinding.ActivityMainBinding
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
+import java.lang.Exception
 import java.time.Duration
 import java.time.LocalDateTime
 import java.time.ZoneId
@@ -73,6 +73,11 @@ class MainActivity : AppCompatActivity(), SensorEventListener {
         const val TOTAL_STEPS = "total_Steps"
         const val PREVIOUS_STEPS = "previous_Steps"
 
+        private var ins:MainActivity? = null
+        fun getInstance():MainActivity?{
+            return ins
+        }
+
     }
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -82,6 +87,7 @@ class MainActivity : AppCompatActivity(), SensorEventListener {
         binding = ActivityMainBinding.inflate(layoutInflater)
         prefs = getSharedPreferences(MainEnum.Tdf.main, MODE_PRIVATE)
         setContentView(binding.root)
+        ins = this
 
         FirebaseMessaging.getInstance().token.addOnCompleteListener(OnCompleteListener { task ->
             if (task.isSuccessful) {
@@ -178,6 +184,8 @@ class MainActivity : AppCompatActivity(), SensorEventListener {
     override fun onResume() {
         super.onResume()
 
+        this.registerReceiver(MyBroadCastReceiver(),IntentFilter("counter"))
+
         mainViewModel.sendToken()
 
         sensorManager = getSystemService(Context.SENSOR_SERVICE) as SensorManager
@@ -211,6 +219,16 @@ class MainActivity : AppCompatActivity(), SensorEventListener {
 
     }
 
+    override fun onPause() {
+        try {
+
+            this.unregisterReceiver(MyBroadCastReceiver())
+
+        } catch (e: Exception) {
+            // already unregistered
+        }
+        super.onPause()
+    }
     override fun onBackPressed() {
         super.onBackPressed()
         binding.drawerLayout.closeDrawer(GravityCompat.END)
@@ -1059,5 +1077,19 @@ class MainActivity : AppCompatActivity(), SensorEventListener {
         workManager.enqueueUniquePeriodicWork(
             "send_periodic",ExistingPeriodicWorkPolicy.REPLACE,stepWorker
         )
+    }
+
+    inner class MyBroadCastReceiver:BroadcastReceiver(){
+
+        override fun onReceive(context: Context?, intent: Intent?) {
+
+            try {
+
+                getInstance()?.mainViewModel?.getCount()
+
+            }catch (e:Exception){
+
+            }
+        }
     }
 }

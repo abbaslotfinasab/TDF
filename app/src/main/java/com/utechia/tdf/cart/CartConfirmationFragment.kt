@@ -25,6 +25,8 @@ class CartConfirmationFragment : DialogFragment(),View.OnClickListener {
     private lateinit var binding: FragmentCartConfirmationBinding
     private val cartViewModel: CartViewModel by viewModels()
     private var location = ""
+    private var floor = ""
+
 
 
     override fun onCreateView(
@@ -50,6 +52,7 @@ class CartConfirmationFragment : DialogFragment(),View.OnClickListener {
 
         if (arguments !=null){
             location = requireArguments().getString(MainEnum.Location.main).toString()
+            floor = requireArguments().getString(MainEnum.Floor.main).toString()
         }
 
         observer()
@@ -96,7 +99,7 @@ class CartConfirmationFragment : DialogFragment(),View.OnClickListener {
             }
 
             R.id.btnAccept -> {
-                cartViewModel.checkoutCart(location)
+                cartViewModel.checkoutCart(location,floor)
             }
         }
     }

@@ -4,6 +4,7 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
+import com.utechia.domain.model.OfficeModel
 import com.utechia.domain.usecases.OfficeUseCaseImpl
 import com.utechia.domain.utile.Result
 import dagger.hilt.android.lifecycle.HiltViewModel
@@ -17,8 +18,8 @@ class OfficeViewModel @Inject constructor(
     private val officeUseCaseImpl: OfficeUseCaseImpl
 ):ViewModel() {
 
-    private val _officeModel = MutableLiveData<Result<MutableList<String>>>()
-    val officeModel: LiveData<Result<MutableList<String>>>
+    private val _officeModel = MutableLiveData<Result<MutableList<OfficeModel>>>()
+    val officeModel: LiveData<Result<MutableList<OfficeModel>>>
         get() = _officeModel
 
     private val handler = CoroutineExceptionHandler {

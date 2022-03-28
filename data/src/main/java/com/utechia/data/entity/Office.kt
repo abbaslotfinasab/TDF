@@ -10,7 +10,7 @@ import kotlinx.serialization.Serializable
 @Serializable
 data class Office(
 
-    val data :@Contextual @RawValue MutableList<String>,
+    val data :@Contextual @RawValue MutableList<OfficeData>,
     val error:@Contextual @RawValue Error?
 
 ): Parcelable

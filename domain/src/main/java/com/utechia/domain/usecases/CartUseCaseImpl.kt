@@ -24,8 +24,8 @@ class CartUseCaseImpl @Inject constructor(private val cartRepo: CartRepo):CartUs
         return cartRepo.deleteCart(id)
     }
 
-    override suspend fun execute(location : String): MutableList<CartModel> {
-        return cartRepo.checkout(location)
+    override suspend fun execute(location : String,floor:String): MutableList<CartModel> {
+        return cartRepo.checkout(location,floor)
     }
 
 

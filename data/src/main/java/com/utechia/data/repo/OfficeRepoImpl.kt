@@ -2,6 +2,7 @@ package com.utechia.data.repo
 
 import com.utechia.data.api.Service
 import com.utechia.data.utile.NetworkHelper
+import com.utechia.domain.model.OfficeModel
 import com.utechia.domain.repository.OfficeRepo
 import java.io.IOException
 import javax.inject.Inject
@@ -14,7 +15,7 @@ class OfficeRepoImpl @Inject constructor(
 
 
     ): OfficeRepo {
-    override suspend fun getAllOffice(): MutableList<String> {
+    override suspend fun getAllOffice(): MutableList<OfficeModel> {
 
         if (networkHelper.isNetworkConnected()) {
 
@@ -24,7 +25,7 @@ class OfficeRepoImpl @Inject constructor(
 
                 true -> {
 
-                    result.body()?.data!!.toMutableList()
+                    result.body()?.data?.map { it.toDomain() }!!.toMutableList()
                 }
                 else ->
 
@@ -35,7 +36,4 @@ class OfficeRepoImpl @Inject constructor(
 
     }
 
-    override suspend fun getOffice(office: String): MutableList<String> {
-        return emptyList<String>().toMutableList()
-    }
 }

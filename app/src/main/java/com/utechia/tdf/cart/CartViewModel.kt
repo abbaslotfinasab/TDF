@@ -83,13 +83,13 @@ class CartViewModel @Inject constructor(
 
     }
 
-    fun checkoutCart(location:String){
+    fun checkoutCart(location:String,floor:String){
 
         viewModelScope.launch(Dispatchers.IO+handler) {
 
             _cartModel.postValue(Result.Loading)
 
-            cartUseCaseImpl.execute(location).let {
+            cartUseCaseImpl.execute(location,floor).let {
 
                 _cartModel.postValue(Result.Success(it))
             }

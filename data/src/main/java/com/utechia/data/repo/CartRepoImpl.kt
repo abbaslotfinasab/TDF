@@ -83,11 +83,11 @@ class CartRepoImpl @Inject constructor(
 
     }
 
-    override suspend fun checkout(location:String): MutableList<CartModel> {
+    override suspend fun checkout(location:String,floor:String): MutableList<CartModel> {
 
         if (networkHelper.isNetworkConnected()) {
 
-            val result = service.postOrder(LocationBody(location))
+            val result = service.postOrder(LocationBody(floor,location))
 
             return when (result.isSuccessful) {
 

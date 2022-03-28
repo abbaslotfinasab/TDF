@@ -5,6 +5,7 @@ import android.app.NotificationChannel
 import android.app.NotificationManager
 import android.app.PendingIntent
 import android.content.Context
+import android.content.Intent
 import android.content.SharedPreferences
 import android.os.Build
 import android.widget.RemoteViews
@@ -42,10 +43,19 @@ class MyFirebaseMessagingService : FirebaseMessagingService() {
                         generateNotification(type,
                             refID,remoteMessage.notification?.title?:getString(R.string.new_notification),remoteMessage.notification?.body?:"")
                     } }
+
+            val intent = Intent("counter")
+            intent.putExtra("action","count")
+            this.sendBroadcast(intent)
+
         }else if(remoteMessage.notification!=null)
         {
             generateNotification(null,
                 null,remoteMessage.notification?.title?:getString(R.string.new_notification),remoteMessage.notification?.body?:"")
+
+            val intent = Intent("counter")
+            intent.putExtra("action","count")
+            this.sendBroadcast(intent)
         }
     }
 

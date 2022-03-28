@@ -28,6 +28,8 @@ class LocationOrderFragment : Fragment() {
     private lateinit var prefs: SharedPreferences
     private var type = 0
     private var location = ""
+    private var floor = "11B"
+    private val rooms:MutableList<String> = mutableListOf()
 
 
 
@@ -142,7 +144,7 @@ class LocationOrderFragment : Fragment() {
                     location = binding.editText.text.toString()
                 }
             }
-            val bundle = bundleOf(MainEnum.Location.main to location)
+            val bundle = bundleOf(MainEnum.Location.main to location, MainEnum.Floor.main to floor)
             findNavController().navigate(R.id.action_locationOrderFragment_to_orderFragment,bundle)
         }
 
@@ -156,7 +158,12 @@ class LocationOrderFragment : Fragment() {
             when (it) {
                 is Result.Success -> {
                     binding.prg.visibility = View.GONE
-                    autoCompleteAdapter = AutoCompleteAdapter(requireActivity(),R.layout.dropdown_item,R.id.textItem,it.data)
+
+                    it.data.map { it1 ->
+                        it1.location?.let { it2 -> rooms.add(it2) }
+                    }
+
+                    autoCompleteAdapter = AutoCompleteAdapter(requireActivity(),R.layout.dropdown_item,R.id.textItem,rooms)
                     binding.autoCompleteTextView.setAdapter(autoCompleteAdapter)
                 }
 

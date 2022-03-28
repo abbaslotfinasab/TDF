@@ -5,5 +5,8 @@ import kotlinx.parcelize.Parcelize
 
 @Parcelize
 data class LocationBody(
-    val location:String
+
+    val floor:String,
+    val location:String,
+
 ): Parcelable

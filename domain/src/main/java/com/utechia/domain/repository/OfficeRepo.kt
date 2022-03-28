@@ -1,11 +1,9 @@
 package com.utechia.domain.repository
 
+import com.utechia.domain.model.OfficeModel
+
 
 interface OfficeRepo {
 
-    suspend fun getAllOffice():MutableList<String>
-
-    suspend fun getOffice(office:String):MutableList<String>
-
-
+    suspend fun getAllOffice():MutableList<OfficeModel>
 }

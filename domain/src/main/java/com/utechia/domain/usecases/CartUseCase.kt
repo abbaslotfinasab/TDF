@@ -10,7 +10,7 @@ interface CartUseCase {
     suspend fun postCart(id:Int,quantity:Int)
     suspend fun updateCart(id:Int,quantity:Int)
     suspend fun deleteCart(id:Int):MutableList<CartModel>
-    suspend fun execute(location:String): MutableList<CartModel>
+    suspend fun execute(location:String,floor:String): MutableList<CartModel>
 
 
 }
