@@ -28,7 +28,7 @@ class LocationOrderFragment : Fragment() {
     private lateinit var prefs: SharedPreferences
     private var type = 0
     private var location = ""
-    private var floor = "11B"
+    private var floor = "11"
     private val rooms:MutableList<String> = mutableListOf()
 
 
