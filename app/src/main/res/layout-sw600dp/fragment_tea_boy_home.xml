@@ -404,7 +404,7 @@
                 android:id="@+id/deliveredLayout"
                 android:layout_width="105dp"
                 android:layout_height="105dp"
-                android:layout_marginStart="50dp"
+                android:layout_marginStart="20dp"
                 android:background="@color/white"
                 app:layout_constraintStart_toEndOf="@id/pendingLayout"
                 app:layout_constraintTop_toBottomOf="@+id/textView11">
@@ -440,7 +440,7 @@
                 android:id="@+id/cancelledLayout"
                 android:layout_width="105dp"
                 android:layout_height="105dp"
-                android:layout_marginStart="50dp"
+                android:layout_marginStart="20dp"
                 android:background="@color/white"
                 app:layout_constraintStart_toEndOf="@id/deliveredLayout"
                 app:layout_constraintTop_toBottomOf="@+id/textView11">

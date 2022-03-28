@@ -1,4 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <string name="are_you_sure_you_want_to_delete_n_all_notification">Are you sure you want to delete\n all notification?</string>
+    <string name="when_you_get_notifications_n_they_ll_show_up_here">When you get notifications,\n they’ll show up here</string>
+    <string name="refresh">Refresh</string>
 </resources>
