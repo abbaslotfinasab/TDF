@@ -56,6 +56,7 @@ class UserProfileFragment : Fragment() {
                     with(prefs.edit()) {
                         it.data.employeeId?.let { it1 -> putInt(MainEnum.EmployeeId.main, it1) }
                         it.data.officeLocation?.let { it2 -> putString(MainEnum.Location.main, it2) }
+                        it.data.floor?.let { it3 -> putString(MainEnum.Floor.main, it3) }
 
                     }?.apply()
                     Glide.with(requireActivity())

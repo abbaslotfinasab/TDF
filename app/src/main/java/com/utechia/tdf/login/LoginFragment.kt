@@ -34,7 +34,6 @@ class LoginFragment : Fragment() {
         const val Start = "start"
         const val Code = "code"
         const val Name = "name"
-        const val Floor = "floor"
         const val TeaBoy = "isTeaBoy"
         const val Active = "isTeaBoyActive"
         const val Mail = "mail"
@@ -95,6 +94,7 @@ class LoginFragment : Fragment() {
                         with(prefs.edit()){
                             putString(Name,it.data.name)
                             putString(Job,it.data.jobTitle)
+                            putString(MainEnum.Floor.main, it.data.floor.toString())
                             putString(MainEnum.HomeId.main,it.data.userHomeId)
                             putString(Mail,it.data.mail)
                             putString(MainEnum.Location.main,it.data.officeLocation)
@@ -108,7 +108,7 @@ class LoginFragment : Fragment() {
                     else {
                         with(prefs.edit()){
                             putString(Name,it.data.name)
-                            putString(Floor, it.data.floor.toString())
+                            putString(MainEnum.Floor.main, it.data.floor.toString())
                             putBoolean(TeaBoy, it.data.isTeaBoy == true)
                             putBoolean(Active, it.data.isTeaBoyActive == true)
                             putString(MainEnum.HomeId.main,it.data.userHomeId)
