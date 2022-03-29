@@ -341,7 +341,7 @@
         <entry key="app/src/main/res/layout/fragment_confirm_request.xml" value="0.1" />
         <entry key="app/src/main/res/layout/fragment_confirm_survey.xml" value="0.22" />
         <entry key="app/src/main/res/layout/fragment_create_refreshmen_childt.xml" value="0.1" />
-        <entry key="app/src/main/res/layout/fragment_create_refreshment.xml" value="0.1" />
+        <entry key="app/src/main/res/layout/fragment_create_refreshment.xml" value="0.18" />
         <entry key="app/src/main/res/layout/fragment_create_request.xml" value="0.15854700854700854" />
         <entry key="app/src/main/res/layout/fragment_create_reservation.xml" value="0.19322916666666667" />
         <entry key="app/src/main/res/layout/fragment_create_survey.xml" value="0.22" />

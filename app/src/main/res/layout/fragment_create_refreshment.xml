@@ -19,7 +19,7 @@
             android:layout_width="0dp"
             android:layout_height="50dp"
             android:layout_marginStart="20dp"
-            android:layout_marginTop="40dp"
+            android:layout_marginTop="30dp"
             android:layout_marginEnd="20dp"
             android:background="@color/white"
             android:gravity="start"
@@ -240,6 +240,12 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/tabLayout" />
 
+        <Space
+            android:layout_width="match_parent"
+            android:layout_height="5dp"
+            app:layout_constraintBottom_toTopOf="@+id/constraintLayout6"
+            app:layout_constraintTop_toBottomOf="@+id/pager" />
+
 
         <androidx.constraintlayout.widget.ConstraintLayout
             android:id="@+id/constraintLayout6"
@@ -256,7 +262,7 @@
                 android:layout_height="60dp"
                 android:layout_marginStart="15dp"
                 android:layout_marginEnd="15dp"
-                android:layout_marginBottom="25dp"
+                android:layout_marginBottom="20dp"
                 android:background="#3360DD"
                 android:text="@string/go_to_cart"
                 android:textAllCaps="false"

@@ -1,6 +1,5 @@
 package com.utechia.tdf.cart
 
-
 import android.content.Context
 import android.content.SharedPreferences
 import android.os.Bundle
@@ -28,7 +27,7 @@ class LocationOrderFragment : Fragment() {
     private lateinit var prefs: SharedPreferences
     private var type = 0
     private var location = ""
-    private var floor = "11"
+    private var floor = ""
     private val rooms:MutableList<String> = mutableListOf()
     private val floors:MutableSet<String> = mutableSetOf()
 
@@ -181,9 +180,9 @@ class LocationOrderFragment : Fragment() {
                 2 -> {
                     location = binding.editText.text.toString()
                     floor = binding.autoCompleteTextView2.text.toString()
-
                 }
             }
+
             when {
                 location.isEmpty() -> {
                     Toast.makeText(context,"No location selected",Toast.LENGTH_SHORT).show()
