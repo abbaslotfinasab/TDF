@@ -75,7 +75,7 @@ class UserOrderAdapter: RecyclerView.Adapter<RecyclerView.ViewHolder>() {
 
             number.text = "${userOrders[position].cart?.items?.size}x"
             oderId.text = "${userOrders[position].id}"
-            location.text = userOrders[position].location
+            location.text = "${userOrders[position].floor}-${userOrders[position].location}"
 
             if (userOrders[position].cart?.items?.size?:0 >1){
                 title.text = userOrders[position].cart?.items?.get(0)?.food?.title+"..."
