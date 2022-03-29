@@ -8,6 +8,8 @@ enum class NotificationEnum(val notification: String) {
     Ticket("Ticket"),
     Cafeteria("Cafeteria"),
     Permission("Permission"),
+    Admin("Admin"),
+    User("User"),
     Survey("Survey"),
     Event("Event"),
     Custom("Custom"),

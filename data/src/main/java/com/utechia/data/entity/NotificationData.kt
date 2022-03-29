@@ -17,8 +17,10 @@ data class NotificationData (
     val isRead:Boolean?,
     val createdAt:String?,
     val updatedAt:String?,
-): Parcelable,ResponseObject<NotificationModel> {
+    val access:String?,
+
+    ): Parcelable,ResponseObject<NotificationModel> {
     override fun toDomain(): NotificationModel {
-        return NotificationModel(id,type,referenceId,title,body,isRead,createdAt,updatedAt)
+        return NotificationModel(id,type,referenceId,title,body,isRead,createdAt,updatedAt,access)
     }
 }

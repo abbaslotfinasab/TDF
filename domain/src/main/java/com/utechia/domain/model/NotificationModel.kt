@@ -10,5 +10,7 @@ data class NotificationModel(
     var isRead:Boolean?,
     val createdAt:String?,
     val updatedAt:String?,
+    val access:String?,
+
 
     )
