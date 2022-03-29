@@ -9,5 +9,7 @@ data class UserOrderDataModel(
     val createdAt: String?,
     val updatedAt: String?,
     val cart:CartModel?,
+    val location:String?,
+
 
     )

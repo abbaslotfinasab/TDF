@@ -419,7 +419,7 @@
         <entry key="app/src/main/res/layout/item_ticket_client.xml" value="0.1" />
         <entry key="app/src/main/res/layout/item_upload.xml" value="0.5" />
         <entry key="app/src/main/res/layout/order_details_item.xml" value="0.5" />
-        <entry key="app/src/main/res/layout/order_item.xml" value="0.1" />
+        <entry key="app/src/main/res/layout/order_item.xml" value="0.5" />
         <entry key="app/src/main/res/layout/order_teaboy_item.xml" value="0.25" />
         <entry key="app/src/main/res/layout/refreshment_item.xml" value="0.22" />
         <entry key="app/src/main/res/layout/ticket_item.xml" value="0.1613588110403397" />

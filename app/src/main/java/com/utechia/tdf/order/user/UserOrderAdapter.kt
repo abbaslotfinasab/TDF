@@ -56,6 +56,8 @@ class UserOrderAdapter: RecyclerView.Adapter<RecyclerView.ViewHolder>() {
         private val cancel: TextView = itemView.findViewById(R.id.btnCancel)
         private var ratingBar: RatingBar = itemView.findViewById(R.id.rating)
         private val rateNumber: TextView = itemView.findViewById(R.id.ratingNum)
+        private val location: TextView = itemView.findViewById(R.id.location)
+
 
         fun bind0(position: Int) {
 
@@ -73,6 +75,7 @@ class UserOrderAdapter: RecyclerView.Adapter<RecyclerView.ViewHolder>() {
 
             number.text = "${userOrders[position].cart?.items?.size}x"
             oderId.text = "${userOrders[position].id}"
+            location.text = userOrders[position].location
 
             if (userOrders[position].cart?.items?.size?:0 >1){
                 title.text = userOrders[position].cart?.items?.get(0)?.food?.title+"..."

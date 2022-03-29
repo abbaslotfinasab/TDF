@@ -45,6 +45,29 @@
         app:layout_constraintStart_toEndOf="@+id/subtitle0"
         app:layout_constraintTop_toTopOf="@+id/subtitle0" />
 
+    <ImageView
+        android:id="@+id/imageView12"
+        android:layout_width="16dp"
+        android:layout_height="16dp"
+        android:layout_marginStart="13dp"
+        android:src="@drawable/ic_location"
+        app:layout_constraintBottom_toBottomOf="@+id/subtitle"
+        app:layout_constraintStart_toEndOf="@+id/subtitle"
+        app:layout_constraintTop_toTopOf="@+id/subtitle" />
+
+    <TextView
+        android:id="@+id/location"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="2dp"
+        android:gravity="center"
+        android:textColor="@color/black"
+        android:textSize="12sp"
+        app:layout_constraintBottom_toBottomOf="@+id/imageView12"
+        app:layout_constraintStart_toEndOf="@+id/imageView12"
+        app:layout_constraintTop_toTopOf="@+id/imageView12" />
+
+
     <TextView
         android:id="@+id/status"
         android:layout_width="75dp"
