@@ -15,7 +15,7 @@ class TeaBoyViewPagerAdapter(fa: FragmentManager, lifecycle:Lifecycle) : Fragmen
         return when (position) {
 
             0 -> {
-                TeaBoyOrderChildFragment(OrderEnum.Pending.order)
+                TeaBoyOrderChildFragment()
             }
 
             1 -> {
@@ -27,7 +27,7 @@ class TeaBoyViewPagerAdapter(fa: FragmentManager, lifecycle:Lifecycle) : Fragmen
             }
 
             else -> {
-                TeaBoyOrderChildFragment(OrderEnum.Pending.order)
+                TeaBoyOrderChildFragment()
             }
         }
     }

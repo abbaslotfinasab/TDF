@@ -8,13 +8,14 @@ import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.recyclerview.widget.LinearLayoutManager
+import com.utechia.domain.enum.OrderEnum
 import com.utechia.domain.utile.Result
 import com.utechia.tdf.databinding.FragmentTeaBoyOrderChildBinding
 import com.utechia.tdf.order.user.ItemDecorationOrder
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
-class TeaBoyOrderChildFragment (val order: String) : Fragment() {
+class TeaBoyOrderChildFragment (var order: String?= OrderEnum.Pending.order) : Fragment() {
 
     private lateinit var binding: FragmentTeaBoyOrderChildBinding
     val teaBoyOrderViewModel:TeaBoyOrderViewModel by viewModels()
@@ -32,11 +33,11 @@ class TeaBoyOrderChildFragment (val order: String) : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        teaBoyOrderViewModel.getOrderTeaBoy(order)
+        order?.let { teaBoyOrderViewModel.getOrderTeaBoy(it) }
 
         binding.refreshLayout.setOnRefreshListener {
 
-            teaBoyOrderViewModel.getOrderTeaBoy(order)
+            order?.let { teaBoyOrderViewModel.getOrderTeaBoy(it) }
 
         }
 
