@@ -137,6 +137,7 @@
     <string name="are_you_sure_you_want_to_delete_n_this_notification">Are you sure you want to delete\n this notification?</string>
     <string name="when_you_get_notifications_n_they_ll_show_up_here">When you get notifications,\n they’ll show up here</string>
     <string name="refresh">Refresh</string>
+    <string name="floor">Floor</string>
 
 
     <string-array name="month_array">

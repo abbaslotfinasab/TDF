@@ -55,7 +55,7 @@ class LocationOrderFragment : Fragment() {
         }
 
         binding.autoCompleteTextView.apply {
-           // this.setBackgroundColor(ContextCompat.getColor(requireContext(),R.color.disActive))
+//            this.setBackgroundColor(ContextCompat.getColor(requireContext(),R.color.white))
             this.isEnabled = false
             this.text.clear()
 
@@ -63,7 +63,7 @@ class LocationOrderFragment : Fragment() {
         binding.textinput.isEnabled = false
 
         binding.autoCompleteTextView2.apply {
-            // this.setBackgroundColor(ContextCompat.getColor(requireContext(),R.color.disActive))
+//            this.setBackgroundColor(ContextCompat.getColor(requireContext(),R.color.white))
             this.isEnabled = false
             this.text.clear()
 
@@ -123,7 +123,7 @@ class LocationOrderFragment : Fragment() {
 
             }
             binding.autoCompleteTextView.apply {
-                this.setBackgroundColor(ContextCompat.getColor(requireContext(),R.color.white))
+//                this.setBackgroundColor(ContextCompat.getColor(requireContext(),R.color.white))
                 this.isEnabled = true
                 this.text.clear()
 
