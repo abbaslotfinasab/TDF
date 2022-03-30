@@ -155,10 +155,11 @@ class LocationOrderFragment : Fragment() {
                 this.setBackgroundColor(ContextCompat.getColor(requireContext(),R.color.white))
                 this.isEnabled = true
             }
+
             binding.textinput.isEnabled = false
 
             binding.autoCompleteTextView2.apply {
-                this.setBackgroundColor(ContextCompat.getColor(requireContext(),R.color.white))
+//                this.setBackgroundColor(ContextCompat.getColor(requireContext(),R.color.white))
                 this.isEnabled = true
                 this.text.clear()
 
