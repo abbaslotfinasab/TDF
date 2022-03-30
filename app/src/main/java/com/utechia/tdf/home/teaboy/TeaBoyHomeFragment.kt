@@ -43,6 +43,8 @@ class TeaBoyHomeFragment : Fragment(),View.OnClickListener {
     private var floor = ""
     private var status = false
     private var employeeId = ""
+    private var avg = ""
+
 
     companion object{
         const val Start = "start"
@@ -166,7 +168,8 @@ class TeaBoyHomeFragment : Fragment(),View.OnClickListener {
                     binding.pending.text = it.data[0].pending
                     binding.cancelled.text = it.data[0].cancelled
                     binding.rating.rating = prefs.getFloat(MainEnum.Avg.main,0f)
-                    binding.ratingNum.text = prefs.getFloat(MainEnum.Avg.main,0f).toString()
+                    avg = String().format("%.2f",prefs.getFloat(MainEnum.Avg.main,0f))
+                    binding.ratingNum.text = avg
                 }
 
                 is Result.Loading -> {
@@ -186,7 +189,6 @@ class TeaBoyHomeFragment : Fragment(),View.OnClickListener {
 
             binding.stepsCount.text = it.toString()
             binding.calory.text = (it*0.05).toInt().toString()
-
 
         }
 
