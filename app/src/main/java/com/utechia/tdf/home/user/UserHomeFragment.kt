@@ -76,6 +76,8 @@ class UserHomeFragment : Fragment() {
         tranceActionListener.addValueEventListener(object: ValueEventListener {
             override fun onDataChange(snapshot: DataSnapshot) {
                 binding.prg.visibility = View.GONE
+                binding.newsTitle.visibility = View.VISIBLE
+
 
                 userHomeAdapter.news.clear()
                 snapshot.child("News").children.forEach {

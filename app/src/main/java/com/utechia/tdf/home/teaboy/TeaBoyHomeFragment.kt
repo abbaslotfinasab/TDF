@@ -29,6 +29,7 @@ import com.utechia.tdf.databinding.FragmentTeaBoyHomeBinding
 import com.utechia.tdf.order.teaboy.OrderCountViewModel
 import com.utechia.tdf.profile.UserProfileViewModel
 import dagger.hilt.android.AndroidEntryPoint
+import java.text.DecimalFormat
 
 @AndroidEntryPoint
 class TeaBoyHomeFragment : Fragment(),View.OnClickListener {
@@ -39,8 +40,10 @@ class TeaBoyHomeFragment : Fragment(),View.OnClickListener {
     private lateinit var database: DatabaseReference
     private lateinit var bundle: Bundle
     private lateinit var prefs: SharedPreferences
+    private var decimalFormat:DecimalFormat = DecimalFormat("#.#")
     private var name = ""
     private var floor = ""
+    private var rate = 0f
     private var status = false
     private var employeeId = ""
     private var avg = ""
@@ -167,8 +170,9 @@ class TeaBoyHomeFragment : Fragment(),View.OnClickListener {
                     binding.active.text = it.data[0].delivered
                     binding.pending.text = it.data[0].pending
                     binding.cancelled.text = it.data[0].cancelled
-                    binding.rating.rating = prefs.getFloat(MainEnum.Avg.main,0f)
-                    avg = String().format("%.2f",prefs.getFloat(MainEnum.Avg.main,0f))
+                    rate = prefs.getFloat(MainEnum.Avg.main,0f)
+                    binding.rating.rating = rate
+                    avg = decimalFormat.format(rate)
                     binding.ratingNum.text = avg
                 }
 
