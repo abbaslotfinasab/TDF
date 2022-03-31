@@ -1,273 +1,287 @@
 <?xml version="1.0" encoding="utf-8"?>
+
 <androidx.constraintlayout.widget.ConstraintLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
+    tools:context=".home.user.UserHomeFragment"
     android:background="@color/background"
-    tools:context=".home.user.UserHomeFragment">
-
-
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+    <androidx.core.widget.NestedScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
         <androidx.constraintlayout.widget.ConstraintLayout
-            android:id="@+id/transactionLayout"
-            android:layout_width="0dp"
-            android:visibility="gone"
-            android:layout_height="100dp"
-            android:layout_marginStart="16dp"
-            android:layout_marginTop="16dp"
-            android:layout_marginEnd="16dp"
-            android:background="@drawable/entrance_exit_bg"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent">
 
-            <TextView
-                android:id="@+id/entrance"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="18dp"
-                android:layout_marginTop="15dp"
-                android:text="@string/entrance_time"
-                android:textColor="@color/black"
-                android:textSize="14sp"
-                android:fontFamily="@font/gilroy_semibold"
-                android:textStyle="bold"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent" />
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
 
-            <TextView
-                android:id="@+id/entranceDate"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="18dp"
-                android:layout_marginTop="5dp"
-                android:fontFamily="@font/gilroy_medium"
-                android:textColor="@color/black"
-                android:textSize="13sp"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/entrance" />
+            >
 
-            <TextView
-                android:id="@+id/entranceFloor"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="18dp"
-                android:layout_marginTop="5dp"
-                android:layout_marginBottom="5dp"
-                android:background="@color/accepted"
-                android:paddingStart="5dp"
-                android:paddingTop="1dp"
-                android:paddingEnd="5dp"
-                android:paddingBottom="1dp"
-                android:textColor="@color/white"
-                android:textSize="13sp"
-                app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/entranceDate" />
 
-            <View
-                android:id="@+id/line"
-                android:layout_width="1dp"
-                android:layout_height="0dp"
-                android:background="#1A000000"
-                android:layout_marginVertical="12dp"
-                app:layout_constraintBottom_toBottomOf="parent"
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:id="@+id/transactionLayout"
+                android:layout_width="0dp"
+                android:visibility="gone"
+                android:layout_height="100dp"
+                android:layout_marginStart="16dp"
+                android:layout_marginTop="16dp"
+                android:layout_marginEnd="16dp"
+                android:background="@drawable/entrance_exit_bg"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent" />
+                app:layout_constraintTop_toTopOf="parent">
+
+                <TextView
+                    android:id="@+id/entrance"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="18dp"
+                    android:layout_marginTop="15dp"
+                    android:text="@string/entrance_time"
+                    android:textColor="@color/black"
+                    android:textSize="14sp"
+                    android:fontFamily="@font/gilroy_semibold"
+                    android:textStyle="bold"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+                <TextView
+                    android:id="@+id/entranceDate"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="18dp"
+                    android:layout_marginTop="5dp"
+                    android:fontFamily="@font/gilroy_medium"
+                    android:textColor="@color/black"
+                    android:textSize="13sp"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/entrance" />
+
+                <TextView
+                    android:id="@+id/entranceFloor"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="18dp"
+                    android:layout_marginTop="5dp"
+                    android:layout_marginBottom="5dp"
+                    android:background="@color/accepted"
+                    android:paddingStart="5dp"
+                    android:paddingTop="1dp"
+                    android:paddingEnd="5dp"
+                    android:paddingBottom="1dp"
+                    android:textColor="@color/white"
+                    android:textSize="13sp"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/entranceDate" />
+
+                <View
+                    android:id="@+id/line"
+                    android:layout_width="1dp"
+                    android:layout_height="0dp"
+                    android:background="#1A000000"
+                    android:layout_marginVertical="12dp"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+                <TextView
+                    android:id="@+id/exit"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="18dp"
+                    android:layout_marginTop="15dp"
+                    android:text="@string/exit_time"
+                    android:fontFamily="@font/gilroy_semibold"
+                    android:textColor="@color/black"
+                    android:textSize="14sp"
+                    android:textStyle="bold"
+                    app:layout_constraintStart_toStartOf="@id/line"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+                <TextView
+                    android:id="@+id/exitDate"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="18dp"
+                    android:layout_marginTop="5dp"
+                    android:textColor="@color/black"
+                    android:textSize="13sp"
+                    android:fontFamily="@font/gilroy_medium"
+                    app:layout_constraintStart_toStartOf="@id/line"
+                    app:layout_constraintTop_toBottomOf="@+id/exit" />
+
+                <TextView
+                    android:id="@+id/exitFloor"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="18dp"
+                    android:layout_marginTop="5dp"
+                    android:layout_marginBottom="5dp"
+                    android:background="@color/cancel"
+                    android:paddingStart="5dp"
+                    android:paddingTop="1dp"
+                    android:paddingEnd="5dp"
+                    android:paddingBottom="1dp"
+                    android:textColor="@color/white"
+                    android:textSize="13sp"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintStart_toStartOf="@id/line"
+                    app:layout_constraintTop_toBottomOf="@+id/exitDate" />
+
+
+            </androidx.constraintlayout.widget.ConstraintLayout>
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:id="@+id/pedometerLayout"
+                android:layout_width="0dp"
+                android:visibility="visible"
+                android:layout_height="100dp"
+                android:layout_marginStart="16dp"
+                android:layout_marginTop="16dp"
+                android:layout_marginEnd="16dp"
+                android:background="@drawable/entrance_exit_bg"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/transactionLayout">
+
+                <ImageView
+                    android:id="@+id/imageView24"
+                    android:layout_width="51dp"
+                    android:layout_height="51dp"
+                    android:layout_marginStart="20dp"
+                    android:layout_marginTop="20dp"
+                    android:layout_marginBottom="20dp"
+                    android:src="@mipmap/foot"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+                <TextView
+                    android:id="@+id/stepsCount"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="18dp"
+                    android:layout_marginTop="-5dp"
+                    android:fontFamily="@font/gilroylight"
+                    android:text="0"
+                    android:textColor="#011232"
+                    android:textSize="28sp"
+                    app:layout_constraintStart_toEndOf="@+id/imageView24"
+                    app:layout_constraintTop_toTopOf="@+id/imageView24" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="18dp"
+                    android:layout_marginTop="10dp"
+                    android:background="@color/black"
+                    android:letterSpacing="0.5"
+                    android:paddingStart="9dp"
+                    android:paddingTop="3dp"
+                    android:paddingEnd="9dp"
+                    android:paddingBottom="3dp"
+                    android:text="@string/steps"
+                    android:textColor="@color/white"
+                    android:textSize="9sp"
+                    android:textStyle="bold"
+                    app:layout_constraintBottom_toBottomOf="@+id/imageView24"
+                    app:layout_constraintStart_toEndOf="@+id/imageView24"
+                    app:layout_constraintTop_toBottomOf="@+id/stepsCount" />
+
+                <View
+                    android:id="@+id/line0"
+                    android:layout_width="1dp"
+                    android:layout_height="0dp"
+                    android:background="#1A000000"
+                    android:layout_marginVertical="12dp"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+                <ImageView
+                    android:id="@+id/imageView25"
+                    android:layout_width="48dp"
+                    android:layout_height="48dp"
+                    android:layout_marginStart="30dp"
+                    android:layout_marginTop="20dp"
+                    android:layout_marginBottom="20dp"
+                    android:src="@mipmap/calory"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintStart_toEndOf="@+id/line0"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+                <TextView
+                    android:id="@+id/calory"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="20dp"
+                    android:layout_marginTop="-5dp"
+                    android:fontFamily="@font/gilroylight"
+                    android:text="0"
+                    android:textColor="@color/black"
+                    android:textSize="28sp"
+                    app:layout_constraintStart_toEndOf="@+id/imageView25"
+                    app:layout_constraintTop_toTopOf="@+id/imageView25" />
+
+                <TextView
+                    android:id="@+id/textView10"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="20dp"
+                    android:layout_marginTop="10dp"
+                    android:background="@color/black"
+                    android:letterSpacing="0.5"
+                    android:paddingStart="9dp"
+                    android:paddingTop="3dp"
+                    android:paddingEnd="9dp"
+                    android:paddingBottom="3dp"
+                    android:text="@string/kcal"
+                    android:textColor="@color/white"
+                    android:textSize="9sp"
+                    android:textStyle="bold"
+                    app:layout_constraintBottom_toBottomOf="@+id/imageView25"
+                    app:layout_constraintStart_toEndOf="@+id/imageView25"
+                    app:layout_constraintTop_toBottomOf="@+id/calory" />
+
+
+
+
+            </androidx.constraintlayout.widget.ConstraintLayout>
+
 
             <TextView
-                android:id="@+id/exit"
+                android:id="@+id/newsTitle"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginStart="18dp"
-                android:layout_marginTop="15dp"
-                android:text="@string/exit_time"
-                android:fontFamily="@font/gilroy_semibold"
+                android:layout_marginTop="24dp"
+                android:text="@string/news"
+                android:visibility="visible"
                 android:textColor="@color/black"
-                android:textSize="14sp"
-                android:textStyle="bold"
-                app:layout_constraintStart_toStartOf="@id/line"
-                app:layout_constraintTop_toTopOf="parent" />
+                android:textSize="18sp"
+                app:layout_constraintStart_toStartOf="@+id/pedometerLayout"
+                app:layout_constraintTop_toBottomOf="@+id/pedometerLayout" />
 
-            <TextView
-                android:id="@+id/exitDate"
-                android:layout_width="wrap_content"
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/recyclerView"
+                android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                android:layout_marginStart="18dp"
-                android:layout_marginTop="5dp"
-                android:textColor="@color/black"
-                android:textSize="13sp"
-                android:fontFamily="@font/gilroy_medium"
-                app:layout_constraintStart_toStartOf="@id/line"
-                app:layout_constraintTop_toBottomOf="@+id/exit" />
+                android:clipToPadding="false"
+                android:layout_marginTop="8dp"
+                android:paddingBottom="64dp"
+                app:layout_constraintTop_toBottomOf="@+id/newsTitle"
+                app:layout_constraintEnd_toEndOf="@+id/pedometerLayout"
+                app:layout_constraintStart_toStartOf="@+id/pedometerLayout"
+                tools:itemCount="4"
+                tools:listitem="@layout/item_home_news" />
 
-            <TextView
-                android:id="@+id/exitFloor"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="18dp"
-                android:layout_marginTop="5dp"
-                android:layout_marginBottom="5dp"
-                android:background="@color/cancel"
-                android:paddingStart="5dp"
-                android:paddingTop="1dp"
-                android:paddingEnd="5dp"
-                android:paddingBottom="1dp"
-                android:textColor="@color/white"
-                android:textSize="13sp"
-                app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintStart_toStartOf="@id/line"
-                app:layout_constraintTop_toBottomOf="@+id/exitDate" />
 
 
         </androidx.constraintlayout.widget.ConstraintLayout>
-
-    <androidx.constraintlayout.widget.ConstraintLayout
-        android:id="@+id/pedometerLayout"
-        android:layout_width="0dp"
-        android:visibility="visible"
-        android:layout_height="100dp"
-        android:layout_marginStart="16dp"
-        android:layout_marginTop="16dp"
-        android:layout_marginEnd="16dp"
-        android:background="@drawable/entrance_exit_bg"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/transactionLayout">
-
-        <ImageView
-            android:id="@+id/imageView24"
-            android:layout_width="51dp"
-            android:layout_height="51dp"
-            android:layout_marginStart="20dp"
-            android:layout_marginTop="20dp"
-            android:layout_marginBottom="20dp"
-            android:src="@mipmap/foot"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
-
-        <TextView
-            android:id="@+id/stepsCount"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="18dp"
-            android:layout_marginTop="-5dp"
-            android:fontFamily="@font/gilroylight"
-            android:text="0"
-            android:textColor="#011232"
-            android:textSize="28sp"
-            app:layout_constraintStart_toEndOf="@+id/imageView24"
-            app:layout_constraintTop_toTopOf="@+id/imageView24" />
-
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="18dp"
-            android:layout_marginTop="10dp"
-            android:background="@color/black"
-            android:letterSpacing="0.5"
-            android:paddingStart="9dp"
-            android:paddingTop="3dp"
-            android:paddingEnd="9dp"
-            android:paddingBottom="3dp"
-            android:text="@string/steps"
-            android:textColor="@color/white"
-            android:textSize="9sp"
-            android:textStyle="bold"
-            app:layout_constraintBottom_toBottomOf="@+id/imageView24"
-            app:layout_constraintStart_toEndOf="@+id/imageView24"
-            app:layout_constraintTop_toBottomOf="@+id/stepsCount" />
-
-        <View
-            android:id="@+id/line0"
-            android:layout_width="1dp"
-            android:layout_height="0dp"
-            android:background="#1A000000"
-            android:layout_marginVertical="12dp"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
-
-        <ImageView
-            android:id="@+id/imageView25"
-            android:layout_width="48dp"
-            android:layout_height="48dp"
-            android:layout_marginStart="30dp"
-            android:layout_marginTop="20dp"
-            android:layout_marginBottom="20dp"
-            android:src="@mipmap/calory"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintStart_toEndOf="@+id/line0"
-            app:layout_constraintTop_toTopOf="parent" />
-
-        <TextView
-            android:id="@+id/calory"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="20dp"
-            android:layout_marginTop="-5dp"
-            android:fontFamily="@font/gilroylight"
-            android:text="0"
-            android:textColor="@color/black"
-            android:textSize="28sp"
-            app:layout_constraintStart_toEndOf="@+id/imageView25"
-            app:layout_constraintTop_toTopOf="@+id/imageView25" />
-
-        <TextView
-            android:id="@+id/textView10"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="20dp"
-            android:layout_marginTop="10dp"
-            android:background="@color/black"
-            android:letterSpacing="0.5"
-            android:paddingStart="9dp"
-            android:paddingTop="3dp"
-            android:paddingEnd="9dp"
-            android:paddingBottom="3dp"
-            android:text="@string/kcal"
-            android:textColor="@color/white"
-            android:textSize="9sp"
-            android:textStyle="bold"
-            app:layout_constraintBottom_toBottomOf="@+id/imageView25"
-            app:layout_constraintStart_toEndOf="@+id/imageView25"
-            app:layout_constraintTop_toBottomOf="@+id/calory" />
-
-
-
-
-    </androidx.constraintlayout.widget.ConstraintLayout>
-
-
-    <TextView
-        android:id="@+id/newsTitle"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="16dp"
-        android:layout_marginTop="20dp"
-        android:text="@string/news"
-        android:visibility="gone"
-        android:textColor="@color/black"
-        android:textSize="18sp"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/pedometerLayout" />
-
-    <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/recyclerView"
-        android:layout_width="match_parent"
-        android:layout_height="0dp"
-        android:clipToPadding="false"
-        android:paddingBottom="64dp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="@+id/pedometerLayout"
-        app:layout_constraintStart_toStartOf="@+id/pedometerLayout"
-        app:layout_constraintTop_toBottomOf="@+id/newsTitle"
-        tools:listitem="@layout/item_home_news" />
-
+    </androidx.core.widget.NestedScrollView>
     <androidx.cardview.widget.CardView
         android:id="@+id/prg"
         android:layout_width="72dp"
@@ -299,6 +313,7 @@
             app:lazyloader_thirdDotColor="#3360DD" />
 
     </androidx.cardview.widget.CardView>
+</androidx.constraintlayout.widget.ConstraintLayout>
 
-    </androidx.constraintlayout.widget.ConstraintLayout>
+
 
