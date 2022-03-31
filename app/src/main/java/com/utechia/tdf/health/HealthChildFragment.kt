@@ -19,6 +19,7 @@ import com.utechia.domain.enum.HealthEnum
 import com.utechia.domain.utile.Result
 import com.utechia.tdf.R
 import com.utechia.tdf.databinding.FragmentHealthChildBinding
+import com.utechia.tdf.main.MainActivity
 import dagger.hilt.android.AndroidEntryPoint
 import java.time.LocalDateTime
 import java.time.OffsetDateTime
@@ -110,6 +111,8 @@ class HealthChildFragment(val health: String) : Fragment() {
             HealthEnum.Daily.health -> {
                 healthViewModel.getTop(startTime,endTime)
                 binding.chartLayout.visibility = View.GONE
+                binding.pedometerLayout.visibility = View.VISIBLE
+
 
                 binding.refreshLayout.setOnRefreshListener {
                     healthViewModel.getTop(startTime,endTime)
@@ -117,6 +120,7 @@ class HealthChildFragment(val health: String) : Fragment() {
             }
 
             HealthEnum.Weekly.health -> {
+                binding.pedometerLayout.visibility = View.GONE
                 healthViewModel.getTop(firstDayOfWeek,lastDayOfWeek)
                 healthViewModel.getChart(firstDayOfWeek,lastDayOfWeek)
 
@@ -134,6 +138,7 @@ class HealthChildFragment(val health: String) : Fragment() {
             }
 
             HealthEnum.Monthly.health -> {
+                binding.pedometerLayout.visibility = View.GONE
                 healthViewModel.getTop(firstDayOfMonth,lastDayOfMonth)
                 healthViewModel.getChart(firstDayOfMonth,lastDayOfMonth)
 
@@ -149,9 +154,6 @@ class HealthChildFragment(val health: String) : Fragment() {
                 designChart()
             }
         }
-
-        Log.d("firstDayOfWeek",firstDayOfWeek)
-        Log.d("lastDayOfWeek",lastDayOfWeek)
 
         binding.recyclerView.apply {
             adapter = healthAdapter
@@ -180,6 +182,16 @@ class HealthChildFragment(val health: String) : Fragment() {
             }
         }
 
+        if(health == HealthEnum.Daily.health ) {
+
+            (activity as MainActivity).mainViewModel.stepCounter.observe(viewLifecycleOwner) {
+
+                binding.stepsCount.text = it.toString()
+                binding.calory.text = (it * 0.05).toInt().toString()
+
+            }
+        }
+
         healthViewModel.chartModel.observe(viewLifecycleOwner){
             when (it) {
                 is Result.Success -> {
@@ -195,7 +207,6 @@ class HealthChildFragment(val health: String) : Fragment() {
                                     ZoneId.systemDefault()
                                 ).toLocalDateTime().dayOfWeek.plus(1).value.toFloat()
                                 yValues.add(BarEntry(dayOfWeek,it.data[i].count?.toFloat()?:0f))
-                                Log.d("dayOfWeek",dayOfWeek.toString())
 
                             }
                             binding.chart.xAxis.valueFormatter = IndexAxisValueFormatter(dw)
