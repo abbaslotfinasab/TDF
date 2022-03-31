@@ -139,6 +139,7 @@
     <string name="refresh">Refresh</string>
     <string name="floor">Floor</string>
     <string name="news">News</string>
+    <string name="tdf_oms">TDF OMS</string>
 
 
     <string-array name="month_array">

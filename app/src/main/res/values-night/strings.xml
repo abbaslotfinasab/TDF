@@ -4,4 +4,5 @@
     <string name="when_you_get_notifications_n_they_ll_show_up_here">When you get notifications,\n they’ll show up here</string>
     <string name="refresh">Refresh</string>
     <string name="news">News</string>
+    <string name="tdf_oms">TDF OMS</string>
 </resources>

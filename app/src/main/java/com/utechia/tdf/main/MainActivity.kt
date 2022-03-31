@@ -722,6 +722,7 @@ class MainActivity : AppCompatActivity(), SensorEventListener {
                 window.statusBarColor = ContextCompat.getColor(this,R.color.status)
                 binding.toolbar.visibility = View.VISIBLE
                 binding.customToolbar.visibility = View.GONE
+                binding.title.text = getString(R.string.tdf_oms)
                 binding.customButton.visibility = View.VISIBLE
                 binding.bottomNavigation.visibility = View.VISIBLE
                 binding.drawerLayout.setDrawerLockMode(DrawerLayout.LOCK_MODE_UNLOCKED)
@@ -774,6 +775,7 @@ class MainActivity : AppCompatActivity(), SensorEventListener {
                 window.statusBarColor = ContextCompat.getColor(this, R.color.status)
                 binding.customToolbar.visibility = View.INVISIBLE
                 binding.toolbar.visibility = View.VISIBLE
+                binding.title.text = getString(R.string.order)
                 binding.customButton.visibility = View.VISIBLE
                 binding.bottomNavigation.visibility = View.VISIBLE
                 binding.drawerLayout.setDrawerLockMode(DrawerLayout.LOCK_MODE_UNLOCKED)
