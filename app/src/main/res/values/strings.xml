@@ -140,6 +140,8 @@
     <string name="floor">Floor</string>
     <string name="news">News</string>
     <string name="tdf_oms">TDF OMS</string>
+    <string name="my_steps">MY STEPS</string>
+    <string name="top_5_users">TOP 5 USERS</string>
 
 
     <string-array name="month_array">

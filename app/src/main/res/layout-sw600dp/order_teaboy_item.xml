@@ -1,7 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/orderLayout"
     android:layout_width="match_parent"
     android:layout_height="150dp"
@@ -16,7 +15,7 @@
         android:layout_marginBottom="5dp"
         android:ellipsize="end"
         android:textColor="@color/black"
-        android:textSize="14sp"
+        android:textSize="16sp"
         android:textStyle="bold"
         app:layout_constraintBottom_toTopOf="@+id/guideline2"
         app:layout_constraintStart_toStartOf="parent"
@@ -31,7 +30,7 @@
         android:layout_marginTop="15dp"
         android:text="@string/orderid"
         android:textColor="@color/black"
-        android:textSize="11sp"
+        android:textSize="13sp"
         android:textStyle="bold"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
@@ -43,7 +42,7 @@
         android:layout_height="wrap_content"
         android:layout_marginStart="2dp"
         android:textColor="@color/black"
-        android:textSize="11sp"
+        android:textSize="13sp"
         app:layout_constraintBottom_toBottomOf="@+id/subtitle0"
         app:layout_constraintStart_toEndOf="@+id/subtitle0"
         app:layout_constraintTop_toTopOf="@+id/subtitle0" />
@@ -79,7 +78,7 @@
         android:layout_marginStart="2dp"
         android:gravity="center"
         android:textColor="@color/black"
-        android:textSize="12sp"
+        android:textSize="13sp"
         app:layout_constraintBottom_toBottomOf="@+id/imageView12"
         app:layout_constraintStart_toEndOf="@+id/imageView12"
         app:layout_constraintTop_toTopOf="@+id/imageView12" />
@@ -103,7 +102,7 @@
         android:layout_marginStart="2dp"
         android:gravity="center"
         android:textColor="@color/black"
-        android:textSize="12sp"
+        android:textSize="13sp"
         app:layout_constraintBottom_toBottomOf="@+id/imageView15"
         app:layout_constraintStart_toEndOf="@+id/imageView15"
         app:layout_constraintTop_toTopOf="@+id/imageView15" />
@@ -126,7 +125,7 @@
         android:layout_marginStart="2dp"
         android:gravity="center"
         android:textColor="@color/black"
-        android:textSize="12sp"
+        android:textSize="14sp"
         app:layout_constraintBottom_toBottomOf="@+id/imageView13"
         app:layout_constraintStart_toEndOf="@+id/imageView13"
         app:layout_constraintTop_toTopOf="@+id/imageView13" />

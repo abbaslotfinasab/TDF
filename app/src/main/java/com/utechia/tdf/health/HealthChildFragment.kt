@@ -121,6 +121,7 @@ class HealthChildFragment(val health: String) : Fragment() {
 
             HealthEnum.Weekly.health -> {
                 binding.pedometerLayout.visibility = View.GONE
+                binding.stepsTitleHeader.visibility = View.GONE
                 healthViewModel.getTop(firstDayOfWeek,lastDayOfWeek)
                 healthViewModel.getChart(firstDayOfWeek,lastDayOfWeek)
 
@@ -139,6 +140,7 @@ class HealthChildFragment(val health: String) : Fragment() {
 
             HealthEnum.Monthly.health -> {
                 binding.pedometerLayout.visibility = View.GONE
+                binding.stepsTitleHeader.visibility = View.GONE
                 healthViewModel.getTop(firstDayOfMonth,lastDayOfMonth)
                 healthViewModel.getChart(firstDayOfMonth,lastDayOfMonth)
 
