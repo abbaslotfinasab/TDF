@@ -6,6 +6,7 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.AdapterView
 import android.widget.Toast
 import androidx.core.content.ContextCompat
 import androidx.core.os.bundleOf
@@ -26,6 +27,7 @@ class LocationOrderFragment : Fragment() {
     private lateinit var autoCompleteAdapter: AutoCompleteAdapter
     private lateinit var prefs: SharedPreferences
     private var type = 0
+    private var floorId = 0
     private var location = ""
     private var floor = ""
     private val rooms:MutableList<String> = mutableListOf()
@@ -120,7 +122,6 @@ class LocationOrderFragment : Fragment() {
                // this.setBackgroundColor(ContextCompat.getColor(requireContext(),R.color.disActive))
                 this.isEnabled = false
                 this.text .clear()
-
             }
             binding.autoCompleteTextView.apply {
 //                this.setBackgroundColor(ContextCompat.getColor(requireContext(),R.color.white))
@@ -169,6 +170,11 @@ class LocationOrderFragment : Fragment() {
 
         }
 
+        binding.autoCompleteTextView.onItemClickListener =
+            AdapterView.OnItemClickListener { _, _, position, _ ->
+                floorId = position
+            }
+
         binding.appCompatButton.setOnClickListener {
             when(type){
                 0 -> {
@@ -177,7 +183,9 @@ class LocationOrderFragment : Fragment() {
                 }
                 1 -> {
                     location = binding.autoCompleteTextView.text.toString()
+                    floor = floors.elementAt(floorId).toString()
                 }
+
                 2 -> {
                     location = binding.editText.text.toString()
                     floor = binding.autoCompleteTextView2.text.toString()
@@ -221,7 +229,9 @@ class LocationOrderFragment : Fragment() {
                     }
 
                     it.data.map { it1 ->
-                        it1.floor?.let { it2 -> floors.add(it2) }
+                        if(it1.active==true) {
+                            it1.floor?.let { it2 -> floors.add(it2) }
+                        }
                     }
 
                     autoCompleteAdapter = AutoCompleteAdapter(requireActivity(),R.layout.dropdown_item,R.id.textItem,rooms)
