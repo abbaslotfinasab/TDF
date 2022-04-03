@@ -12,7 +12,7 @@ data class OfficeData (
 
     val id :Int?,
     val name: String?,
-    val active: String?,
+    val active: Boolean?,
     val floor: String?,
 
     ): Parcelable, ResponseObject<OfficeModel> {
