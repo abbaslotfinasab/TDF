@@ -215,7 +215,9 @@ class LocationOrderFragment : Fragment() {
                     binding.prg.visibility = View.GONE
 
                     it.data.map { it1 ->
-                        it1.location?.let { it2 -> rooms.add(it2) }
+                        if(it1.active==true) {
+                            it1.location?.let { it2 -> rooms.add(it2) }
+                        }
                     }
 
                     it.data.map { it1 ->
