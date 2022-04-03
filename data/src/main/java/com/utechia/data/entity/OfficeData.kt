@@ -10,16 +10,14 @@ import kotlinx.serialization.Serializable
 @Serializable
 data class OfficeData (
 
-    val location: String?,
+    val id :Int?,
+    val name: String?,
     val active: String?,
     val floor: String?,
-    val zone: String?,
-    val workStation: String?,
-
 
     ): Parcelable, ResponseObject<OfficeModel> {
 
     override fun toDomain(): OfficeModel {
-        return OfficeModel(location, active, floor, zone, workStation)
+        return OfficeModel(name, active, floor)
     }
 }

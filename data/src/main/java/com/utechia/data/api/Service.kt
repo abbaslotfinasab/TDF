@@ -203,7 +203,7 @@ interface Service {
     @GET("user/info")
     suspend fun getProfile():Response<Profile>
 
-    @GET("user/office-locations")
+    @GET("location")
     suspend fun getOffice():Response<Office>
 
 
