@@ -20,6 +20,7 @@ import androidx.recyclerview.widget.RecyclerView
 import com.utechia.domain.utile.Result
 import com.utechia.tdf.R
 import com.utechia.tdf.databinding.FragmentNotificationBinding
+import com.utechia.tdf.main.MainActivity
 import dagger.hilt.android.AndroidEntryPoint
 import java.lang.invoke.ConstantCallSite
 
@@ -168,6 +169,7 @@ class NotificationFragment : Fragment() {
         }
 
         observer()
+
     }
 
     private fun observer() {
@@ -205,6 +207,10 @@ class NotificationFragment : Fragment() {
                     Toast.makeText(context, it.message, Toast.LENGTH_SHORT).show()
                 }
             }
+        }
+
+        (activity as MainActivity).mainViewModel.orderCounter.observe(viewLifecycleOwner){
+            notificationViewModel.getNotification()
         }
     }
 }
