@@ -21,6 +21,7 @@ import com.utechia.domain.utile.Result
 import com.utechia.tdf.R
 import com.utechia.tdf.databinding.FragmentNotificationBinding
 import com.utechia.tdf.main.MainActivity
+import com.utechia.tdf.main.MainViewModel
 import dagger.hilt.android.AndroidEntryPoint
 import java.lang.invoke.ConstantCallSite
 
@@ -29,6 +30,7 @@ class NotificationFragment : Fragment() {
 
     private lateinit var binding: FragmentNotificationBinding
     private val notificationViewModel: NotificationViewModel by viewModels()
+    private val mainViewModel: MainViewModel by viewModels({ requireActivity() })
     private val notificationAdapter: NotificationAdapter = NotificationAdapter()
 
     override fun onCreateView(
@@ -86,7 +88,7 @@ class NotificationFragment : Fragment() {
         binding.recyclerView.addOnScrollListener(object : RecyclerView.OnScrollListener() {
             override fun onScrolled(recyclerView: RecyclerView, dx: Int, dy: Int) {
                 super.onScrolled(recyclerView, dx, dy)
-                if (dy > 0 || dy < 0 &&  binding.btnMarAll.isShown)
+                if (dy > 0 || dy < 0 && binding.btnMarAll.isShown)
                     binding.btnMarAll?.visibility = View.GONE
 
             }
@@ -139,7 +141,7 @@ class NotificationFragment : Fragment() {
                             ContextCompat.getDrawable(context, R.drawable.ic_push_delete)!!
                         val top = itemView.top + (itemView.height - icon.intrinsicHeight) / 2
                         val left =
-                            itemView.width - icon.intrinsicWidth - (itemView.height - icon.intrinsicHeight)/6
+                            itemView.width - icon.intrinsicWidth - (itemView.height - icon.intrinsicHeight) / 6
                         val right = left + icon.intrinsicHeight
                         val bottom = top + icon.intrinsicHeight
 
@@ -209,8 +211,9 @@ class NotificationFragment : Fragment() {
             }
         }
 
-        (activity as MainActivity).mainViewModel.orderCounter.observe(viewLifecycleOwner){
-            notificationViewModel.getNotification()
+        NotificationListener._notificationListener.observe(viewLifecycleOwner) { comeNewNotification ->
+            if (comeNewNotification == true)
+                notificationViewModel.getNotification()
         }
     }
 }
