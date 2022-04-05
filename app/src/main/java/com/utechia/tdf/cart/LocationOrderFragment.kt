@@ -46,6 +46,11 @@ class LocationOrderFragment : Fragment() {
 
     override fun onResume() {
         super.onResume()
+
+        floors.add("11")
+        floors.add("12")
+        floors.add("13")
+
         binding.radioButton.isChecked = true
         binding.radioButton2.isChecked = false
         binding.radioButton3.isChecked = false
@@ -228,11 +233,11 @@ class LocationOrderFragment : Fragment() {
                         }
                     }
 
-                    it.data.map { it1 ->
+                  /*  it.data.map { it1 ->
                         if(it1.active==true) {
                             it1.floor?.let { it2 -> floors.add(it2) }
                         }
-                    }
+                    }*/
 
                     autoCompleteAdapter = AutoCompleteAdapter(requireActivity(),R.layout.dropdown_item,R.id.textItem,rooms)
                     binding.autoCompleteTextView.setAdapter(autoCompleteAdapter)
