@@ -31,6 +31,7 @@ class LocationOrderFragment : Fragment() {
     private var location = ""
     private var floor = ""
     private val rooms:MutableList<String> = mutableListOf()
+    private val locationFloors:MutableList<String> = mutableListOf()
     private val floors:MutableSet<String> = mutableSetOf()
 
 
@@ -188,7 +189,7 @@ class LocationOrderFragment : Fragment() {
                 }
                 1 -> {
                     location = binding.autoCompleteTextView.text.toString()
-                    floor = floors.elementAt(floorId).toString()
+                    floor = locationFloors[floorId]
                 }
 
                 2 -> {
@@ -233,11 +234,16 @@ class LocationOrderFragment : Fragment() {
                         }
                     }
 
-                  /*  it.data.map { it1 ->
+                    it.data.map { it1 ->
                         if(it1.active==true) {
-                            it1.floor?.let { it2 -> floors.add(it2) }
+                            it1.floor?.let { it2 -> locationFloors.add(it2) }
                         }
-                    }*/
+
+                       /* it.data.map { it1 ->
+                            if(it1.active==true) {
+                                it1.floor?.let { it2 -> floors.add(it2) }
+                            }*/
+                    }
 
                     autoCompleteAdapter = AutoCompleteAdapter(requireActivity(),R.layout.dropdown_item,R.id.textItem,rooms)
                     binding.autoCompleteTextView.setAdapter(autoCompleteAdapter)
