@@ -9,9 +9,9 @@ import android.view.ViewGroup
 import android.view.Window
 import androidx.fragment.app.DialogFragment
 import androidx.fragment.app.viewModels
-import androidx.lifecycle.SavedStateHandle
 import androidx.navigation.fragment.findNavController
 import com.utechia.domain.utile.Result
+import com.utechia.tdf.R
 import com.utechia.tdf.databinding.FragmentDeleteAllNotificationBinding
 import dagger.hilt.android.AndroidEntryPoint
 
@@ -20,7 +20,6 @@ class DeleteAllNotificationFragment : DialogFragment() {
 
     private lateinit var binding: FragmentDeleteAllNotificationBinding
     private val ticketViewModel:NotificationViewModel by viewModels()
-    private  var mSavedStateHandle: SavedStateHandle?=null
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -39,7 +38,6 @@ class DeleteAllNotificationFragment : DialogFragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        mSavedStateHandle = findNavController().previousBackStackEntry?.savedStateHandle
 
 
         binding.btnYes.setOnClickListener {
@@ -65,8 +63,8 @@ class DeleteAllNotificationFragment : DialogFragment() {
             when (it) {
                 is Result.Success -> {
                     binding.prg.visibility = View.GONE
-                    mSavedStateHandle?.set("READ_ALL_NOTIFICATION",true)
-                    findNavController().navigateUp()
+                    findNavController().navigate(R.id.action_deleteAllNotificationFragment_to_notificationFragment)
+                    dialog?.dismiss()
 
                 }
 

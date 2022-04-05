@@ -20,17 +20,13 @@ import androidx.recyclerview.widget.RecyclerView
 import com.utechia.domain.utile.Result
 import com.utechia.tdf.R
 import com.utechia.tdf.databinding.FragmentNotificationBinding
-import com.utechia.tdf.main.MainActivity
-import com.utechia.tdf.main.MainViewModel
 import dagger.hilt.android.AndroidEntryPoint
-import java.lang.invoke.ConstantCallSite
 
 @AndroidEntryPoint
 class NotificationFragment : Fragment() {
 
     private lateinit var binding: FragmentNotificationBinding
     private val notificationViewModel: NotificationViewModel by viewModels()
-    private val mainViewModel: MainViewModel by viewModels({ requireActivity() })
     private val notificationAdapter: NotificationAdapter = NotificationAdapter()
 
     override fun onCreateView(

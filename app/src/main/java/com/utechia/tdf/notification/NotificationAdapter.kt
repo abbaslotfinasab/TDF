@@ -107,7 +107,7 @@ class NotificationAdapter: RecyclerView.Adapter<RecyclerView.ViewHolder>() {
                 }
 
                 else -> {
-                    name.text = "${(duration.toDays() / 365).toInt()}y ago"
+                    name.text = itemView.resources.getText(R.string.today)
                 }
             }
 

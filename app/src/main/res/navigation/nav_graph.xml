@@ -1395,12 +1395,35 @@
     <dialog
         android:id="@+id/readAllNotificationFragment"
         android:name="com.utechia.tdf.notification.ReadAllNotificationFragment"
-        android:label="ReadAllNotificationFragment" />
+        android:label="ReadAllNotificationFragment" >
+
+        <action
+            android:id="@+id/action_readAllNotificationFragment_to_notificationFragment"
+            app:destination="@id/notificationFragment"
+            app:launchSingleTop="true"
+            app:popUpTo="@id/userhomeFragment"
+            app:enterAnim="@android:anim/fade_in"
+            app:exitAnim="@android:anim/fade_out"
+            app:popEnterAnim="@android:anim/fade_in"
+            app:popExitAnim="@android:anim/fade_out"/>
+    </dialog>
 
     <dialog
         android:id="@+id/deleteAllNotificationFragment"
         android:name="com.utechia.tdf.notification.DeleteAllNotificationFragment"
         android:label="fragment_delete_all_notification"
-        tools:layout="@layout/fragment_delete_all_notification" />
+        tools:layout="@layout/fragment_delete_all_notification" >
+
+        <action
+            android:id="@+id/action_deleteAllNotificationFragment_to_notificationFragment"
+            app:destination="@id/notificationFragment"
+            app:launchSingleTop="true"
+            app:popUpTo="@id/userhomeFragment"
+            app:enterAnim="@android:anim/fade_in"
+            app:exitAnim="@android:anim/fade_out"
+            app:popEnterAnim="@android:anim/fade_in"
+            app:popExitAnim="@android:anim/fade_out"/>
+
+    </dialog>
 
 </navigation>
