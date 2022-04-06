@@ -1,7 +1,6 @@
 package com.utechia.tdf.health
 
 import android.os.Bundle
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -19,7 +18,7 @@ import com.utechia.domain.enum.HealthEnum
 import com.utechia.domain.utile.Result
 import com.utechia.tdf.R
 import com.utechia.tdf.databinding.FragmentHealthChildBinding
-import com.utechia.tdf.main.MainActivity
+import com.utechia.tdf.main.MainViewModel
 import dagger.hilt.android.AndroidEntryPoint
 import java.time.LocalDateTime
 import java.time.OffsetDateTime
@@ -34,6 +33,7 @@ class HealthChildFragment(val health: String) : Fragment() {
 
     private lateinit var binding: FragmentHealthChildBinding
     private val healthViewModel:HealthViewModel by viewModels()
+    private val mainViewModel: MainViewModel by viewModels({ requireActivity()})
     private val healthAdapter :HealthAdapter = HealthAdapter()
     private lateinit var barDateSet :BarDataSet
     private val yValues : ArrayList<BarEntry> = arrayListOf()
@@ -186,7 +186,7 @@ class HealthChildFragment(val health: String) : Fragment() {
 
         if(health == HealthEnum.Daily.health ) {
 
-            (activity as MainActivity).mainViewModel.stepCounter.observe(viewLifecycleOwner) {
+            mainViewModel.stepCounter.observe(viewLifecycleOwner) {
 
                 binding.stepsCount.text = it.toString()
                 binding.calory.text = (it * 0.05).toInt().toString()

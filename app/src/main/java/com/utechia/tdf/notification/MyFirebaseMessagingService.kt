@@ -35,7 +35,7 @@ class MyFirebaseMessagingService : FirebaseMessagingService() {
 
     override fun onMessageReceived(remoteMessage: RemoteMessage) {
         super.onMessageReceived(remoteMessage)
-        NotificationListener._notificationListener.postValue(true)
+        NotificationListener.notificationListener.postValue(true)
         if(remoteMessage.notification!=null && remoteMessage.data.isNullOrEmpty())
         {
             remoteMessage.data[NotificationEnum.Type.notification]?.let { type ->

@@ -998,11 +998,6 @@ class MainActivity : AppCompatActivity(), SensorEventListener {
                         binding.bubble.bringToFront()
                         binding.notificationNumber.bringToFront()
                         binding.notificationNumber.text = it.data.unread_notification.toString()
-                        it.data.unread_notification?.let { it1 ->
-                            mainViewModel.notificationCount(
-                                it1
-                            )
-                        }
                     }
                     if(it.data.pending_orders!=0) {
                         binding.bottomNavigation.getOrCreateBadge(R.id.refreshmentFragment).backgroundColor = ContextCompat.getColor(this,R.color.bubble)

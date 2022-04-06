@@ -89,19 +89,4 @@ class MainViewModel @Inject constructor(
         }
 
     }
-
-
-    private val _notificationCounter = MutableLiveData<Result<Int>>()
-    val notificationCounter: LiveData<Result<Int>>
-        get() = _notificationCounter
-
-
-    fun notificationCount(notification:Int){
-
-        viewModelScope.launch(Dispatchers.IO+handler) {
-
-            _notificationCounter.postValue(Result.Success(notification))
-
-        }
-    }
 }

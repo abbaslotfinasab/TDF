@@ -8,6 +8,7 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
 import androidx.fragment.app.Fragment
+import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.google.firebase.database.DataSnapshot
@@ -23,6 +24,7 @@ import com.utechia.domain.enum.MainEnum
 import com.utechia.tdf.R
 import com.utechia.tdf.main.MainActivity
 import com.utechia.tdf.databinding.FragmentHomeUserBinding
+import com.utechia.tdf.main.MainViewModel
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
@@ -30,6 +32,7 @@ class UserHomeFragment : Fragment() {
 
     private lateinit var binding: FragmentHomeUserBinding
     private lateinit var database: DatabaseReference
+    private val mainViewModel: MainViewModel by viewModels({ requireActivity()})
     private val userHomeAdapter: UserHomeAdapter = UserHomeAdapter()
     private lateinit var prefs: SharedPreferences
     private var employeeId = ""
@@ -127,7 +130,7 @@ class UserHomeFragment : Fragment() {
 
     private fun observer() {
 
-        (activity as MainActivity).mainViewModel.stepCounter.observe(viewLifecycleOwner){
+        mainViewModel.stepCounter.observe(viewLifecycleOwner){
 
             binding.stepsCount.text = it.toString()
             binding.calory.text = (it*0.05).toInt().toString()

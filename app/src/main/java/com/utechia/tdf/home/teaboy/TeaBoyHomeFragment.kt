@@ -26,6 +26,7 @@ import com.utechia.domain.utile.Result
 import com.utechia.tdf.R
 import com.utechia.tdf.main.MainActivity
 import com.utechia.tdf.databinding.FragmentTeaBoyHomeBinding
+import com.utechia.tdf.main.MainViewModel
 import com.utechia.tdf.order.teaboy.OrderCountViewModel
 import com.utechia.tdf.profile.UserProfileViewModel
 import dagger.hilt.android.AndroidEntryPoint
@@ -37,6 +38,7 @@ class TeaBoyHomeFragment : Fragment(),View.OnClickListener {
     private lateinit var binding: FragmentTeaBoyHomeBinding
     private val orderViewModel: OrderCountViewModel by viewModels()
     private val profileViewModel: UserProfileViewModel by viewModels()
+    private val mainViewModel: MainViewModel by viewModels({ requireActivity()})
     private lateinit var database: DatabaseReference
     private lateinit var bundle: Bundle
     private lateinit var prefs: SharedPreferences
@@ -189,7 +191,7 @@ class TeaBoyHomeFragment : Fragment(),View.OnClickListener {
             }
         }
 
-        (activity as MainActivity).mainViewModel.stepCounter.observe(viewLifecycleOwner){
+       mainViewModel.stepCounter.observe(viewLifecycleOwner){
 
             binding.stepsCount.text = it.toString()
             binding.calory.text = (it*0.05).toInt().toString()

@@ -11,7 +11,6 @@ import androidx.core.content.ContextCompat
 import androidx.core.os.bundleOf
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
-import androidx.lifecycle.Observer
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.ItemTouchHelper
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -50,18 +49,6 @@ class NotificationFragment : Fragment() {
 
     }
 
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-        val navController = findNavController()
-        val currentBackStackEntry = navController.currentBackStackEntry!!
-        val savedStateHandle = currentBackStackEntry.savedStateHandle
-        savedStateHandle.getLiveData<Boolean>("READ_ALL_NOTIFICATION")
-            .observe(currentBackStackEntry, Observer { readAll ->
-                if (readAll)
-                    notificationViewModel.getNotification()
-            })
-    }
-
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
@@ -85,13 +72,13 @@ class NotificationFragment : Fragment() {
             override fun onScrolled(recyclerView: RecyclerView, dx: Int, dy: Int) {
                 super.onScrolled(recyclerView, dx, dy)
                 if (dy > 0 || dy < 0 && binding.btnMarAll.isShown)
-                    binding.btnMarAll?.visibility = View.GONE
+                    binding.btnMarAll.visibility = View.GONE
 
             }
 
             override fun onScrollStateChanged(recyclerView: RecyclerView, newState: Int) {
                 if (newState == RecyclerView.SCROLL_STATE_IDLE)
-                    binding.btnMarAll?.visibility = View.VISIBLE
+                    binding.btnMarAll.visibility = View.VISIBLE
                 super.onScrollStateChanged(recyclerView, newState)
             }
         })
@@ -207,7 +194,7 @@ class NotificationFragment : Fragment() {
             }
         }
 
-        NotificationListener._notificationListener.observe(viewLifecycleOwner) { comeNewNotification ->
+        NotificationListener.notificationListener.observe(viewLifecycleOwner) { comeNewNotification ->
             if (comeNewNotification == true)
                 notificationViewModel.getNotification()
         }

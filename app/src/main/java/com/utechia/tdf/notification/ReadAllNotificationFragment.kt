@@ -74,6 +74,7 @@ class ReadAllNotificationFragment : DialogFragment() {
 
                 is Result.Error -> {
                     binding.prg.visibility = View.GONE
+                    dialog?.dismiss()
                 }
             }
         }
