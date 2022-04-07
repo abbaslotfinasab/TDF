@@ -7,11 +7,12 @@ import android.view.ViewGroup
 import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
-import androidx.navigation.fragment.findNavController
+import androidx.paging.LoadState
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.utechia.domain.utile.Result
 import com.utechia.tdf.databinding.FragmentPendingBinding
 import dagger.hilt.android.AndroidEntryPoint
+
 
 @AndroidEntryPoint
 class UserOrderChildFragment(val order: String) : Fragment() {
@@ -41,7 +42,7 @@ class UserOrderChildFragment(val order: String) : Fragment() {
 
         binding.recyclerView.apply {
             adapter = userOrderAdapter
-            layoutManager = LinearLayoutManager(context,LinearLayoutManager.VERTICAL,false)
+            layoutManager = LinearLayoutManager(context, LinearLayoutManager.VERTICAL, false)
             addItemDecoration(ItemDecorationOrder())
         }
 
@@ -49,33 +50,38 @@ class UserOrderChildFragment(val order: String) : Fragment() {
     }
 
     private fun observer() {
-        userOrderViewModel.userOrderModel.observe(viewLifecycleOwner){
 
+        userOrderViewModel.userOrderModel.observe(viewLifecycleOwner) {
 
             when (it) {
+
                 is Result.Success -> {
-                    binding.prg.visibility = View.GONE
-                    binding.refreshLayout.isRefreshing = false
 
-                    if (it.data.size!=0){
-                        binding.recyclerView.visibility = View.VISIBLE
-                        binding.emptyLayout.visibility = View.GONE
-                        userOrderAdapter.addData(it.data)
+                        it.data.observe(viewLifecycleOwner) { it1 ->
+                            userOrderAdapter.submitData(lifecycle,it1)
+                        }
 
+                    userOrderAdapter.addLoadStateListener { loadState ->
+                        if (loadState.source.refresh is LoadState.NotLoading && loadState.append.endOfPaginationReached && userOrderAdapter.itemCount < 1) {
+                            binding.recyclerView.visibility = View.GONE
+                            binding.prg.visibility = View.GONE
+                            binding.emptyLayout.visibility = View.VISIBLE
+                            binding.refreshLayout.isRefreshing = false
+
+                        }else if (loadState.source.refresh is LoadState.Loading ){
+                            binding.prg.visibility = View.GONE
+                            binding.refreshLayout.isRefreshing = true
+                            binding.recyclerView.visibility = View.GONE
+                            binding.emptyLayout.visibility = View.GONE
+                        }else{
+                            binding.prg.visibility = View.GONE
+                            binding.refreshLayout.isRefreshing = false
+                            binding.recyclerView.visibility = View.VISIBLE
+                        }
                     }
-                    else{
-                        binding.recyclerView.visibility = View.GONE
-                        binding.emptyLayout.visibility = View.VISIBLE
-                    }
-
                 }
 
-                is Result.Loading -> {
-                    binding.prg.visibility = View.GONE
-                    binding.refreshLayout.isRefreshing = true
-                    binding.recyclerView.visibility = View.GONE
-                    binding.emptyLayout.visibility = View.GONE
-                }
+                is Result.Loading -> {}
 
                 is Result.Error -> {
                     binding.prg.visibility = View.GONE

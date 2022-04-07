@@ -1,6 +1,8 @@
 package com.utechia.data.di
 
 import com.utechia.data.repo.*
+import com.utechia.data.repo.userorder.UserOrderDetailsRepoImpl
+import com.utechia.data.repo.userorder.UserOrderRepoImpl
 import com.utechia.domain.repository.*
 import dagger.Binds
 import dagger.Module
@@ -131,4 +133,9 @@ abstract class RepositoryModule {
     abstract fun bindOfficeRepositoryService(
         officeRepoImpl: OfficeRepoImpl
     ): OfficeRepo
+
+    @Binds
+    abstract fun bindUserOrderDetailsService(
+        userOrderDetailsRepoImpl: UserOrderDetailsRepoImpl
+    ): UserOrderDetailsRepo
 }

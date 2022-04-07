@@ -23,11 +23,10 @@ import dagger.hilt.android.AndroidEntryPoint
 class RateConfirmationFragment : DialogFragment() {
 
     private lateinit var binding: FragmentRateConfirmationBinding
-    private val orderRateVieModel: UserOrderViewModel by viewModels()
+    private val userOrderViewModel: UserOrderDetailsViewModel by viewModels()
     private lateinit var bundle: Bundle
     private var orderId = 0
     private var rate = 0
-
 
 
     override fun onCreateView(
@@ -36,7 +35,7 @@ class RateConfirmationFragment : DialogFragment() {
     ): View {
         binding = FragmentRateConfirmationBinding.inflate(inflater, container, false)
 
-        if(dialog !=null && dialog?.window !=null){
+        if (dialog != null && dialog?.window != null) {
             dialog?.window?.setBackgroundDrawable(ColorDrawable(Color.TRANSPARENT))
             dialog?.window?.requestFeature(Window.FEATURE_NO_TITLE)
             dialog?.setCancelable(false)
@@ -64,7 +63,7 @@ class RateConfirmationFragment : DialogFragment() {
 
 
         binding.btnAccept.setOnClickListener {
-            orderRateVieModel.setRate(orderId,rate)
+            userOrderViewModel.setRate(orderId, rate)
         }
 
         binding.exit.setOnClickListener {
@@ -75,13 +74,17 @@ class RateConfirmationFragment : DialogFragment() {
     }
 
     private fun observer() {
-        orderRateVieModel.userOrderModel.observe(viewLifecycleOwner){
 
+
+        userOrderViewModel.userOrderModel.observe(viewLifecycleOwner) {
 
             when (it) {
                 is Result.Success -> {
                     binding.prg.visibility = View.GONE
-                    findNavController().navigate(R.id.rateConfirmationFragment_to_OrderFragment,bundle)
+                    findNavController().navigate(
+                        R.id.rateConfirmationFragment_to_OrderFragment,
+                        bundle
+                    )
                     dialog?.dismiss()
 
                 }
@@ -93,9 +96,11 @@ class RateConfirmationFragment : DialogFragment() {
                 is Result.Error -> {
                     binding.prg.visibility = View.GONE
                     Toast.makeText(context, it.message, Toast.LENGTH_SHORT).show()
-                    findNavController().navigate(R.id.rateConfirmationFragment_to_OrderFragment,bundle)
+                    findNavController().navigate(
+                        R.id.rateConfirmationFragment_to_OrderFragment,
+                        bundle
+                    )
                     dialog?.dismiss()
-
 
                 }
             }

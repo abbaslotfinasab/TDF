@@ -21,7 +21,7 @@ import dagger.hilt.android.AndroidEntryPoint
 class UserOrderDetailsFragment : DialogFragment() {
 
     private lateinit var binding: FragmentOrderDetailsBinding
-    private val userOrderViewModel: UserOrderViewModel by viewModels()
+    private val userOrderViewModel: UserOrderDetailsViewModel by viewModels()
     private val userOrderAdapter: UserOrderDetailsAdapter = UserOrderDetailsAdapter()
     private var cartId = 0
 
@@ -31,7 +31,7 @@ class UserOrderDetailsFragment : DialogFragment() {
     ): View {
         binding = FragmentOrderDetailsBinding.inflate(inflater, container, false)
 
-        if(dialog !=null && dialog?.window !=null){
+        if (dialog != null && dialog?.window != null) {
             dialog?.window?.setBackgroundDrawable(ColorDrawable(Color.TRANSPARENT))
             dialog?.window?.requestFeature(Window.FEATURE_NO_TITLE)
             dialog?.setCancelable(false)
@@ -43,7 +43,7 @@ class UserOrderDetailsFragment : DialogFragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        if (arguments !=null){
+        if (arguments != null) {
             cartId = requireArguments().getInt(OrderEnum.ID.order)
         }
 
@@ -51,7 +51,7 @@ class UserOrderDetailsFragment : DialogFragment() {
 
         binding.recyclerView.apply {
             adapter = userOrderAdapter
-            layoutManager = LinearLayoutManager(context,LinearLayoutManager.VERTICAL,false)
+            layoutManager = LinearLayoutManager(context, LinearLayoutManager.VERTICAL, false)
             addItemDecoration(ItemDecorationOrderDetails())
         }
 
@@ -69,7 +69,8 @@ class UserOrderDetailsFragment : DialogFragment() {
     }
 
     private fun observer() {
-        userOrderViewModel.userOrderModel.observe(viewLifecycleOwner){
+
+        userOrderViewModel.userOrderModel.observe(viewLifecycleOwner) {
 
 
             when (it) {

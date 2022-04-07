@@ -22,7 +22,7 @@ import dagger.hilt.android.AndroidEntryPoint
 class UserCancelFragment : DialogFragment(),View.OnClickListener {
 
     private lateinit var binding: FragmentCancelBinding
-    private val userOrderViewModel: UserOrderViewModel by viewModels()
+    private val userOrderViewModel: UserOrderDetailsViewModel by viewModels()
     private lateinit var bundle: Bundle
     private var orderId = 0
 
@@ -35,7 +35,7 @@ class UserCancelFragment : DialogFragment(),View.OnClickListener {
         binding.btnKeep.setOnClickListener(this)
         binding.exit.setOnClickListener(this)
 
-        if(dialog !=null && dialog?.window !=null){
+        if (dialog != null && dialog?.window != null) {
             dialog?.window?.setBackgroundDrawable(ColorDrawable(Color.TRANSPARENT))
             dialog?.window?.requestFeature(Window.FEATURE_NO_TITLE)
             dialog?.setCancelable(false)
@@ -60,13 +60,15 @@ class UserCancelFragment : DialogFragment(),View.OnClickListener {
 
     private fun observer() {
 
-        userOrderViewModel.userOrderModel.observe(viewLifecycleOwner){
-
+        userOrderViewModel.userOrderModel.observe(viewLifecycleOwner) {
 
             when (it) {
                 is Result.Success -> {
                     binding.prg.visibility = View.GONE
-                    findNavController().navigate(R.id.action_cancelFragment_to_orderFragment,bundle)
+                    findNavController().navigate(
+                        R.id.action_cancelFragment_to_orderFragment,
+                        bundle
+                    )
                     dialog?.dismiss()
 
                 }
@@ -83,12 +85,17 @@ class UserCancelFragment : DialogFragment(),View.OnClickListener {
                 is Result.Error -> {
                     binding.prg.visibility = View.GONE
                     Toast.makeText(context, it.message, Toast.LENGTH_SHORT).show()
-                    findNavController().navigate(R.id.action_cancelFragment_to_orderFragment,bundle)
+                    findNavController().navigate(
+                        R.id.action_cancelFragment_to_orderFragment,
+                        bundle
+                    )
                     dialog?.dismiss()
                 }
             }
         }
     }
+
+
 
     override fun onClick(v: View?) {
         when(v?.id){

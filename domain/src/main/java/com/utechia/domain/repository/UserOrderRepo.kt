@@ -1,13 +1,11 @@
 package com.utechia.domain.repository
 
+import androidx.lifecycle.LiveData
+import androidx.paging.PagingData
 import com.utechia.domain.model.UserOrderDataModel
+import kotlinx.coroutines.flow.Flow
 
 interface UserOrderRepo {
 
-    suspend fun getOrder(status:String):MutableList<UserOrderDataModel>
-    suspend fun cancelOrder(id:Int):MutableList<UserOrderDataModel>
-    suspend fun singleOrder(id:Int):MutableList<UserOrderDataModel>
-    suspend fun rate(order:Int,rate:Int):MutableList<UserOrderDataModel>
-
-
+    suspend fun getOrder(status:String): LiveData<PagingData<UserOrderDataModel>>
 }

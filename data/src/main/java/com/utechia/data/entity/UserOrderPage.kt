@@ -11,6 +11,6 @@ import kotlinx.serialization.Serializable
 data class UserOrderPage(
 
     val totalPages: Int?,
-    val list:@Contextual @RawValue MutableList<UserOrderData>?,
+    val list:@Contextual @RawValue List<UserOrderData>?,
 
     ): Parcelable

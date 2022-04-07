@@ -1,40 +1,21 @@
-package com.utechia.data.repo
+package com.utechia.data.repo.userorder
+
 
 import com.utechia.data.api.Service
 import com.utechia.data.entity.FavoriteBody
 import com.utechia.data.entity.OrderRateBody
 import com.utechia.data.utile.NetworkHelper
-import com.utechia.domain.enum.PagingEnum
 import com.utechia.domain.model.UserOrderDataModel
-import com.utechia.domain.repository.UserOrderRepo
+import com.utechia.domain.repository.UserOrderDetailsRepo
 import java.io.IOException
 import javax.inject.Inject
 import javax.inject.Singleton
 
 @Singleton
-class UserOrderRepoImpl @Inject constructor(
+class UserOrderDetailsRepoImpl @Inject constructor(
     private val service: Service,
     private val networkHelper: NetworkHelper,
-):UserOrderRepo {
-    override suspend fun getOrder(status: String): MutableList<UserOrderDataModel> {
-
-        if (networkHelper.isNetworkConnected()) {
-
-            val result = service.getOrder(status, PagingEnum.Number.page, PagingEnum.Size.page)
-
-            return when (result.isSuccessful && result.body() !=null) {
-
-                true -> {
-                    result.body()?.data?.list?.map { it.toDomain() }!!.toMutableList()
-                }
-
-                else ->
-                    throw IOException("Server is Not Responding")
-            }
-
-        } else throw IOException("No Internet Connection")
-
-    }
+): UserOrderDetailsRepo {
 
     override suspend fun cancelOrder(id: Int): MutableList<UserOrderDataModel> {
 
@@ -44,9 +25,8 @@ class UserOrderRepoImpl @Inject constructor(
 
             return when (result.isSuccessful) {
 
-                true -> {
-                    emptyList<UserOrderDataModel>().toMutableList()
-                }
+                true -> emptyList<UserOrderDataModel>().toMutableList()
+
 
                 else ->
                     throw IOException("Server is Not Responding")
@@ -55,7 +35,7 @@ class UserOrderRepoImpl @Inject constructor(
         } else throw IOException("No Internet Connection")
     }
 
-    override suspend fun singleOrder(id: Int): MutableList<UserOrderDataModel> {
+    override suspend fun singleOrder(id: Int): MutableList<UserOrderDataModel>{
 
         if (networkHelper.isNetworkConnected()) {
 
@@ -90,6 +70,5 @@ class UserOrderRepoImpl @Inject constructor(
             }
 
         } else throw IOException("No Internet Connection")
-
     }
 }

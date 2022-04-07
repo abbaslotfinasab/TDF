@@ -4,7 +4,6 @@ import android.graphics.Rect
 import android.view.View
 import androidx.annotation.NonNull
 import androidx.recyclerview.widget.RecyclerView
-import com.utechia.tdf.R
 
 class ItemDecorationOrder: RecyclerView.ItemDecoration(){
 
