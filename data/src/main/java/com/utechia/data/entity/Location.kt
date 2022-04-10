@@ -2,23 +2,23 @@ package com.utechia.data.entity
 
 import android.os.Parcelable
 import com.utechia.data.base.ResponseObject
+import com.utechia.domain.model.LocationModel
 import com.utechia.domain.model.OfficeModel
 import kotlinx.parcelize.Parcelize
 import kotlinx.serialization.Serializable
 
 @Parcelize
 @Serializable
-data class OfficeData (
+data class Location(
 
     val id :Int?,
     val name: String?,
-    val isDeleted: Boolean?,
-    val locations: MutableList<Location>?
+    val active: Boolean?,
 
+    ): Parcelable, ResponseObject<LocationModel> {
 
-): Parcelable, ResponseObject<OfficeModel> {
-
-    override fun toDomain(): OfficeModel {
-        return OfficeModel(id, name, isDeleted,locations?.map { it.toDomain() }!!.toMutableList())
+    override fun toDomain(): LocationModel {
+        return LocationModel(id, name, active)
     }
 }
+

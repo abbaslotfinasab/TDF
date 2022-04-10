@@ -16,7 +16,7 @@ class TicketUseCaseImpl @Inject constructor(private val ticketRepo: TicketRepo):
         title: String,
         category: Int,
         Priority: String,
-        Floor: String,
+        Floor: Int,
         mediaurl: MutableSet<String>
     ): MutableList<TicketModel> {
         return ticketRepo.postTicket(description,title,category,Priority,Floor,mediaurl)

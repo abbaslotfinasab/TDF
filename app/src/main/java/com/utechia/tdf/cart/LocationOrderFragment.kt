@@ -32,7 +32,8 @@ class LocationOrderFragment : Fragment() {
     private var floor = 0
     private val rooms:MutableList<String> = mutableListOf()
     private val locationFloors:MutableList<String> = mutableListOf()
-    private val floors:MutableSet<String> = mutableSetOf()
+    private val locationFloorsId:ArrayList<Int> = arrayListOf()
+
 
 
 
@@ -214,7 +215,12 @@ class LocationOrderFragment : Fragment() {
 
         }
 
-        binding.selectLocationAutoCompleteTextView.onItemClickListener =
+        binding.floorSelectLocationAutoCompleteTextView.onItemClickListener =
+            AdapterView.OnItemClickListener { _, _, position, _ ->
+                floorId = position
+            }
+
+        binding.otherAutoCompleteTextView.onItemClickListener =
             AdapterView.OnItemClickListener { _, _, position, _ ->
                 floorId = position
             }
@@ -223,16 +229,16 @@ class LocationOrderFragment : Fragment() {
             when(type){
                 0 -> {
                     location = prefs.getString(MainEnum.Location.main,"").toString()
-                    floor = prefs.getString(MainEnum.Floor.main,"").toString().toInt()
+                    floor = 10
                 }
                 1 -> {
                     location = binding.selectLocationAutoCompleteTextView.text.toString()
-                    floor = locationFloors[floorId].toInt()
+                    floor = locationFloorsId[floorId]
                 }
 
                 2 -> {
                     location = binding.addressInput.text.toString()
-                    floor = binding.otherAutoCompleteTextView.text.toString().toInt()
+                    floor = locationFloorsId[floorId]
                 }
             }
 
@@ -260,34 +266,42 @@ class LocationOrderFragment : Fragment() {
 
     private fun observer() {
 
-        officeViewModel.officeModel.observe(viewLifecycleOwner) {
+        officeViewModel.officeModel.observe(viewLifecycleOwner) { it ->
 
             when (it) {
                 is Result.Success -> {
                     binding.prg.visibility = View.GONE
 
                     it.data.map { it1 ->
-                        if(it1.active==true) {
-                            it1.location?.let { it2 -> rooms.add(it2) }
+                        if (it1.isDeleted == false) {
+                            it1.locations?.map { it.name?.let { it2 -> rooms.add(it2) } }
                         }
                     }
 
                     it.data.map { it1 ->
-                        if(it1.active==true) {
-                            it1.floor?.let { it2 -> locationFloors.add(it2) }
+                        if (it1.isDeleted == false) {
+                            it1.name?.let { it2 -> locationFloors.add(it2) }
+                        }
+                    }
+
+                        it.data.map { it1 ->
+                            if (it1.isDeleted == false) {
+                                it1.id?.let { it2 -> locationFloorsId.add(it2) }
+                            }
                         }
 
                        /* it.data.map { it1 ->
                             if(it1.active==true) {
                                 it1.floor?.let { it2 -> floors.add(it2) }
                             }*/
-                    }
 
                     autoCompleteAdapter = AutoCompleteAdapter(requireActivity(),R.layout.dropdown_item,R.id.textItem,rooms)
                     binding.selectLocationAutoCompleteTextView.setAdapter(autoCompleteAdapter)
 
-                    autoCompleteAdapter = AutoCompleteAdapter(requireActivity(),R.layout.dropdown_item,R.id.textItem,floors.toMutableList())
+                    autoCompleteAdapter = AutoCompleteAdapter(requireActivity(),R.layout.dropdown_item,R.id.textItem,locationFloors)
                     binding.otherAutoCompleteTextView.setAdapter(autoCompleteAdapter)
+                    binding.floorSelectLocationAutoCompleteTextView.setAdapter(autoCompleteAdapter)
+
 
 
 

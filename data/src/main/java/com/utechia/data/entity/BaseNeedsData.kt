@@ -13,11 +13,11 @@ import kotlinx.serialization.Serializable
 data class BaseNeedsData(
 
     val category: @Contextual @RawValue MutableList<Category>?,
-    val ListFloor: ArrayList<String>?,
+    val ListFloor: @Contextual @RawValue MutableList<Floor>?,
     val Priority: ArrayList<String>?,
 
     ):Parcelable,ResponseObject<BaseNeedsModel> {
     override fun toDomain(): BaseNeedsModel {
-        return BaseNeedsModel(category?.map { it.toDomain() }!!.toMutableList(),ListFloor,Priority)
+        return BaseNeedsModel(category?.map { it.toDomain() }!!.toMutableList(),ListFloor?.map { it.toDomain() }!!.toMutableList(),Priority)
     }
 }

@@ -43,7 +43,7 @@ class TicketRepoImpl @Inject constructor(
         title: String,
         category: Int,
         Priority: String,
-        Floor: String,
+        Floor: Int,
         mediaurl: MutableSet<String>
     ): MutableList<TicketModel> {
 

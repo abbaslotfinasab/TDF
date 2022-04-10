@@ -1,11 +1,9 @@
 package com.utechia.domain.model
 
-
-data class OfficeModel (
+data class FloorModel (
 
     val id :Int?,
     val name: String?,
     val isDeleted: Boolean?,
-    val locations: MutableList<LocationModel>?
 
     )

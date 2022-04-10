@@ -46,7 +46,7 @@ class TicketViewModel @Inject constructor(
 
     }
 
-    fun postTicket(description:String,title:String,category:Int,Priority:String,Floor:String,mediaurl:MutableSet<String>){
+    fun postTicket(description:String,title:String,category:Int,Priority:String,Floor:Int,mediaurl:MutableSet<String>){
 
         viewModelScope.launch(Dispatchers.IO+handler) {
 

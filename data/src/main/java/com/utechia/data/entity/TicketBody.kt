@@ -1,9 +1,7 @@
 package com.utechia.data.entity
 
-import android.net.Uri
 import android.os.Parcelable
 import kotlinx.parcelize.Parcelize
-import kotlinx.serialization.Serializable
 
 @Parcelize
 data class TicketBody(
@@ -11,7 +9,7 @@ data class TicketBody(
     val Priority: String?,
     val category: Int?,
     val description: String?,
-    val floor: String?,
+    val floorId: Int?,
     val mediaurl: MutableSet<String>?,
     val title: String?,
 
