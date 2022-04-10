@@ -29,7 +29,7 @@ class LocationOrderFragment : Fragment() {
     private var type = 0
     private var floorId = 0
     private var location = ""
-    private var floor = ""
+    private var floor = 0
     private val rooms:MutableList<String> = mutableListOf()
     private val locationFloors:MutableList<String> = mutableListOf()
     private val floors:MutableSet<String> = mutableSetOf()
@@ -48,39 +48,43 @@ class LocationOrderFragment : Fragment() {
     override fun onResume() {
         super.onResume()
 
-        floors.add("11")
-        floors.add("12")
-        floors.add("13")
-
-        binding.radioButton.isChecked = true
-        binding.radioButton2.isChecked = false
-        binding.radioButton3.isChecked = false
-        binding.editText.apply {
+        binding.myRadioButton.isChecked = true
+        binding.selectRadioButton.isChecked = false
+        binding.otherRadioButton.isChecked = false
+        binding.addressInput.apply {
           //  this.setBackgroundColor(ContextCompat.getColor(requireContext(),R.color.disActive))
             this.isEnabled = false
             this.text .clear()
 
         }
 
-        binding.autoCompleteTextView.apply {
+        binding.floorSelectLocationInputLayout.isEnabled = false
+
+        binding.floorSelectLocationAutoCompleteTextView.apply {
+            //this.setBackgroundColor(ContextCompat.getColor(requireContext(),R.color.disActive))
+            this.isEnabled = false
+            this.text.clear()
+        }
+
+        binding.selectLocationAutoCompleteTextView.apply {
 //            this.setBackgroundColor(ContextCompat.getColor(requireContext(),R.color.white))
             this.isEnabled = false
             this.text.clear()
 
         }
-        binding.textinput.isEnabled = false
+        binding.selectLocationLayout.isEnabled = false
 
-        binding.autoCompleteTextView2.apply {
+        binding.otherAutoCompleteTextView.apply {
 //            this.setBackgroundColor(ContextCompat.getColor(requireContext(),R.color.white))
             this.isEnabled = false
             this.text.clear()
 
         }
-        binding.textinput2.isEnabled = false
+        binding.otherTextInputLayout.isEnabled = false
 
         type = 0
         location = prefs.getString(MainEnum.Location.main,"").toString()
-        floor = prefs.getString(MainEnum.Floor.main,"").toString()
+        floor = prefs.getString(MainEnum.Floor.main,"").toString().toInt()
 
 
     }
@@ -93,53 +97,71 @@ class LocationOrderFragment : Fragment() {
 
         officeViewModel.getOffice()
 
-        binding.radioButton.setOnClickListener {
-            binding.radioButton2.isChecked = false
-            binding.radioButton3.isChecked = false
+        binding.myRadioButton.setOnClickListener {
+            binding.selectRadioButton.isChecked = false
+            binding.otherRadioButton.isChecked = false
             location = prefs.getString(MainEnum.Location.main,"").toString()
             type = 0
-            binding.editText.apply {
+            binding.addressInput.apply {
              //   this.setBackgroundColor(ContextCompat.getColor(requireContext(),R.color.disActive))
                 this.isEnabled = false
                 this.text .clear()
 
             }
-            binding.textinput.isEnabled = false
 
-            binding.autoCompleteTextView.apply {
+            binding.floorSelectLocationInputLayout.isEnabled = false
+
+            binding.floorSelectLocationAutoCompleteTextView.apply {
                 //this.setBackgroundColor(ContextCompat.getColor(requireContext(),R.color.disActive))
                 this.isEnabled = false
                 this.text.clear()
             }
-            binding.textinput2.isEnabled = false
 
-            binding.autoCompleteTextView2.apply {
+            binding.selectLocationLayout.isEnabled = false
+
+            binding.selectLocationAutoCompleteTextView.apply {
+                //this.setBackgroundColor(ContextCompat.getColor(requireContext(),R.color.disActive))
+                this.isEnabled = false
+                this.text.clear()
+            }
+            binding.otherTextInputLayout.isEnabled = false
+
+            binding.otherAutoCompleteTextView.apply {
                 //this.setBackgroundColor(ContextCompat.getColor(requireContext(),R.color.disActive))
                 this.isEnabled = false
                 this.text.clear()
             }
         }
 
-        binding.radioButton2.setOnClickListener {
-            binding.radioButton.isChecked = false
-            binding.radioButton3.isChecked = false
+        binding.selectRadioButton.setOnClickListener {
+            binding.myRadioButton.isChecked = false
+            binding.otherRadioButton.isChecked = false
             type = 1
-            binding.editText.apply {
+            binding.addressInput.apply {
                // this.setBackgroundColor(ContextCompat.getColor(requireContext(),R.color.disActive))
                 this.isEnabled = false
                 this.text .clear()
             }
-            binding.autoCompleteTextView.apply {
+
+            binding.floorSelectLocationInputLayout.isEnabled = true
+
+            binding.floorSelectLocationAutoCompleteTextView.apply {
+                //this.setBackgroundColor(ContextCompat.getColor(requireContext(),R.color.disActive))
+                this.isEnabled = true
+                this.text.clear()
+            }
+
+            binding.selectLocationAutoCompleteTextView.apply {
 //                this.setBackgroundColor(ContextCompat.getColor(requireContext(),R.color.white))
                 this.isEnabled = true
                 this.text.clear()
 
             }
-            binding.textinput.isEnabled = true
+            binding.selectLocationLayout.isEnabled = true
 
-            binding.textinput2.isEnabled = false
+            binding.otherTextInputLayout.isEnabled = false
 
-            binding.autoCompleteTextView2.apply {
+            binding.otherAutoCompleteTextView.apply {
                 //this.setBackgroundColor(ContextCompat.getColor(requireContext(),R.color.disActive))
                 this.isEnabled = false
                 this.text.clear()
@@ -147,36 +169,52 @@ class LocationOrderFragment : Fragment() {
 
         }
 
-        binding.radioButton3.setOnClickListener {
-            binding.radioButton2.isChecked = false
-            binding.radioButton.isChecked = false
-            binding.autoCompleteTextView.apply {
+        binding.otherRadioButton.setOnClickListener {
+            binding.selectRadioButton.isChecked = false
+            binding.myRadioButton.isChecked = false
+            binding.selectLocationAutoCompleteTextView.apply {
                 //this.setBackgroundColor(ContextCompat.getColor(requireContext(),R.color.disActive))
                 this.isEnabled = false
                 this.text.clear()
 
             }
-            location = binding.editText.text.toString()
+
+            location = binding.addressInput.text.toString()
             type = 2
-            binding.editText.apply {
+            binding.addressInput.apply {
                 this.setBackgroundColor(ContextCompat.getColor(requireContext(),R.color.white))
                 this.isEnabled = true
             }
 
-            binding.textinput.isEnabled = false
+            binding.floorSelectLocationInputLayout.isEnabled = false
 
-            binding.autoCompleteTextView2.apply {
+            binding.floorSelectLocationAutoCompleteTextView.apply {
+                //this.setBackgroundColor(ContextCompat.getColor(requireContext(),R.color.disActive))
+                this.isEnabled = false
+                this.text.clear()
+            }
+
+            binding.selectLocationLayout.isEnabled = false
+
+            binding.selectLocationAutoCompleteTextView.apply {
+//                this.setBackgroundColor(ContextCompat.getColor(requireContext(),R.color.white))
+                this.isEnabled = false
+                this.text.clear()
+
+            }
+
+            binding.otherAutoCompleteTextView.apply {
 //                this.setBackgroundColor(ContextCompat.getColor(requireContext(),R.color.white))
                 this.isEnabled = true
                 this.text.clear()
 
             }
-            binding.textinput2.isEnabled = true
+            binding.otherTextInputLayout.isEnabled = true
 
 
         }
 
-        binding.autoCompleteTextView.onItemClickListener =
+        binding.selectLocationAutoCompleteTextView.onItemClickListener =
             AdapterView.OnItemClickListener { _, _, position, _ ->
                 floorId = position
             }
@@ -185,16 +223,16 @@ class LocationOrderFragment : Fragment() {
             when(type){
                 0 -> {
                     location = prefs.getString(MainEnum.Location.main,"").toString()
-                    floor = prefs.getString(MainEnum.Floor.main,"").toString()
+                    floor = prefs.getString(MainEnum.Floor.main,"").toString().toInt()
                 }
                 1 -> {
-                    location = binding.autoCompleteTextView.text.toString()
-                    floor = locationFloors[floorId]
+                    location = binding.selectLocationAutoCompleteTextView.text.toString()
+                    floor = locationFloors[floorId].toInt()
                 }
 
                 2 -> {
-                    location = binding.editText.text.toString()
-                    floor = binding.autoCompleteTextView2.text.toString()
+                    location = binding.addressInput.text.toString()
+                    floor = binding.otherAutoCompleteTextView.text.toString().toInt()
                 }
             }
 
@@ -202,7 +240,7 @@ class LocationOrderFragment : Fragment() {
                 location.isEmpty() -> {
                     Toast.makeText(context,"No location selected",Toast.LENGTH_SHORT).show()
                 }
-                floor.isEmpty() -> {
+                floor==0-> {
                     Toast.makeText(context,"No floor selected",Toast.LENGTH_SHORT).show()
 
                 }
@@ -246,10 +284,10 @@ class LocationOrderFragment : Fragment() {
                     }
 
                     autoCompleteAdapter = AutoCompleteAdapter(requireActivity(),R.layout.dropdown_item,R.id.textItem,rooms)
-                    binding.autoCompleteTextView.setAdapter(autoCompleteAdapter)
+                    binding.selectLocationAutoCompleteTextView.setAdapter(autoCompleteAdapter)
 
                     autoCompleteAdapter = AutoCompleteAdapter(requireActivity(),R.layout.dropdown_item,R.id.textItem,floors.toMutableList())
-                    binding.autoCompleteTextView2.setAdapter(autoCompleteAdapter)
+                    binding.otherAutoCompleteTextView.setAdapter(autoCompleteAdapter)
 
 
 

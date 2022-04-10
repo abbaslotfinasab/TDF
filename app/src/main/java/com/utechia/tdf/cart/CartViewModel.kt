@@ -83,7 +83,7 @@ class CartViewModel @Inject constructor(
 
     }
 
-    fun checkoutCart(location:String,floor:String){
+    fun checkoutCart(location:String,floor:Int){
 
         viewModelScope.launch(Dispatchers.IO+handler) {
 

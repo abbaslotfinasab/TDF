@@ -83,7 +83,7 @@ class CartRepoImpl @Inject constructor(
 
     }
 
-    override suspend fun checkout(location:String,floor:String): MutableList<CartModel> {
+    override suspend fun checkout(location:String,floor:Int): MutableList<CartModel> {
 
         if (networkHelper.isNetworkConnected()) {
 

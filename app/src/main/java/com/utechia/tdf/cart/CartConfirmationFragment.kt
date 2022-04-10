@@ -25,7 +25,7 @@ class CartConfirmationFragment : DialogFragment(),View.OnClickListener {
     private lateinit var binding: FragmentCartConfirmationBinding
     private val cartViewModel: CartViewModel by viewModels()
     private var location = ""
-    private var floor = ""
+    private var floor = 0
 
 
 
@@ -52,7 +52,7 @@ class CartConfirmationFragment : DialogFragment(),View.OnClickListener {
 
         if (arguments !=null){
             location = requireArguments().getString(MainEnum.Location.main).toString()
-            floor = requireArguments().getString(MainEnum.Floor.main).toString()
+            floor = requireArguments().getInt(MainEnum.Floor.main,0)
         }
 
         observer()

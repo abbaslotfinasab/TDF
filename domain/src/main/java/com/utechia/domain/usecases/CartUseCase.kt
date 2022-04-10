@@ -1,7 +1,6 @@
 package com.utechia.domain.usecases
 
 import com.utechia.domain.model.CartModel
-import com.utechia.domain.model.OrderBodyModel
 
 
 interface CartUseCase {
@@ -10,7 +9,7 @@ interface CartUseCase {
     suspend fun postCart(id:Int,quantity:Int)
     suspend fun updateCart(id:Int,quantity:Int)
     suspend fun deleteCart(id:Int):MutableList<CartModel>
-    suspend fun execute(location:String,floor:String): MutableList<CartModel>
+    suspend fun execute(location:String,floor:Int): MutableList<CartModel>
 
 
 }
