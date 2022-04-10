@@ -20,7 +20,6 @@ import com.github.dhaval2404.imagepicker.ImagePicker
 import com.google.android.material.snackbar.Snackbar
 import com.utechia.domain.enum.TicketEnum
 import com.utechia.domain.model.CategoryModel
-import com.utechia.domain.model.FloorModel
 import com.utechia.domain.utile.Result
 import com.utechia.tdf.R
 import com.utechia.tdf.databinding.FragmentCreateTicketBinding
@@ -36,7 +35,8 @@ class CreateTicketFragment : Fragment() {
     private val baseNeedsViewModel:BaseNeedsViewModel by viewModels()
     private val uploadViewModel:UploadViewModel by viewModels()
     private val uploadAdapter:UploadAdapter = UploadAdapter()
-    private val floor:MutableList<FloorModel> = mutableListOf()
+    private val locationFloor:MutableList<String> = mutableListOf()
+    private val floorId:MutableList<Int> = mutableListOf()
     private val categoryList:ArrayList<CategoryModel> = arrayListOf()
     private var selectedFloor = 0
     private var priority = "Low"
@@ -56,7 +56,7 @@ class CreateTicketFragment : Fragment() {
     override fun onResume() {
         super.onResume()
 
-        val arrayAdapter = ArrayAdapter(requireContext(),R.layout.dropdown_item,floor)
+        val arrayAdapter = ArrayAdapter(requireContext(),R.layout.dropdown_item,locationFloor)
         binding.autoCompleteTextView.setAdapter(arrayAdapter)
 
         binding.segmented.apply{
@@ -103,7 +103,7 @@ class CreateTicketFragment : Fragment() {
         }
 
         binding.autoCompleteTextView.onItemClickListener =
-            AdapterView.OnItemClickListener { _, _, position, _ -> selectedFloor = floor[position].id?:0
+            AdapterView.OnItemClickListener { _, _, position, _ -> selectedFloor = floorId[position]
             }
 
         binding.category.setOnClickListener {
@@ -174,9 +174,25 @@ class CreateTicketFragment : Fragment() {
                     binding.uploadLayout.visibility= View.VISIBLE
                     binding.appCompatButton.visibility= View.VISIBLE
                     categoryList.clear()
-                    floor.clear()
-                    it.data.ListFloor?.let { it1 -> floor.addAll(it1) }
-                    it.data.category?.let { it1 -> categoryList.addAll(it1) }
+                    locationFloor.clear()
+                    floorId.clear()
+
+                    it.data.ListFloor?.let {it1 -> it1.map {it2 ->
+                        it2.name?.let { it3 ->
+                        locationFloor.add(
+                            it3
+                        )
+                    } }}
+
+
+                    it.data.ListFloor?.let {it1 -> it1.map {it2 ->
+                        it2.id?.let { it3 ->
+                            floorId.add(
+                                it3
+                            )
+                        } }}
+
+                    it.data.category?.let {it1 -> categoryList.addAll(it1) }
 
                 }
 

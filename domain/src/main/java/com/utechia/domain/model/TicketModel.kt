@@ -5,7 +5,6 @@ data class TicketModel(
     val id: Int?,
     val title: String?,
     val Priority: String?,
-    val floor: String?,
     val status: String?,
     val fid: String?,
     val description: String?,

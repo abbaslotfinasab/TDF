@@ -13,7 +13,6 @@ data class TicketData(
     val id: Int?,
     val title: String?,
     val Priority: String?,
-    val floor: String?,
     val status: String?,
     val fid: String?,
     val description: String?,
@@ -31,7 +30,7 @@ data class TicketData(
     ):Parcelable, ResponseObject<TicketModel> {
     override fun toDomain(): TicketModel {
         return TicketModel(
-            id,title, Priority, floor, status, fid, description , mediaurl , datetime , dateupdate , rateable, category.toDomain(), department, requestername, adminname
+            id,title, Priority, status, fid, description , mediaurl , datetime , dateupdate , rateable, category.toDomain(), department, requestername, adminname
         )
     }
 }
