@@ -16,7 +16,7 @@ import dagger.hilt.android.AndroidEntryPoint
 class NotificationDetailsFragment : DialogFragment() {
 
     private lateinit var binding: FragmentNotificationDetailsBinding
-    private val notificationViewModel:NotificationViewModel by viewModels()
+    private val notificationViewModel:NotificationDetailsViewModel by viewModels()
     private var nId = 0
     private var title = ""
     private var body = ""

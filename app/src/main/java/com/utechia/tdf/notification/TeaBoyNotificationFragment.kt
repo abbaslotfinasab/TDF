@@ -16,7 +16,7 @@ import com.utechia.domain.enum.OrderEnum
 import com.utechia.domain.utile.Result
 import com.utechia.tdf.R
 import com.utechia.tdf.databinding.FragmentNotificationTeaboyBinding
-import com.utechia.tdf.order.teaboy.TeaBoyOrderViewModel
+import com.utechia.tdf.order.teaboy.TeaBoyOrderDetailsViewModel
 import dagger.hilt.android.AndroidEntryPoint
 import java.time.OffsetDateTime
 import java.time.ZoneId
@@ -27,12 +27,9 @@ class TeaBoyNotificationFragment : DialogFragment() {
 
     private lateinit var binding: FragmentNotificationTeaboyBinding
     private val orderAdapterTeaBoy: TeaBoyNotificationAdapter = TeaBoyNotificationAdapter()
-    private val teaOrderViewModel: TeaBoyOrderViewModel by viewModels()
+    private val teaOrderViewModel: TeaBoyOrderDetailsViewModel by viewModels()
     private var cartId = 0
     private var timeZone = ""
-
-
-
 
 
     override fun onCreateView(

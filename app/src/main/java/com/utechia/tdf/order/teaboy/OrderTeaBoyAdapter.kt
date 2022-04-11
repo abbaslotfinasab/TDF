@@ -7,47 +7,32 @@ import android.widget.TextView
 import androidx.constraintlayout.widget.ConstraintLayout
 import androidx.core.os.bundleOf
 import androidx.navigation.findNavController
+import androidx.paging.PagingDataAdapter
+import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.RecyclerView
 import com.utechia.domain.enum.OrderEnum
-import com.utechia.domain.model.TeaBoyOrderDataModel
+import com.utechia.domain.model.order.TeaBoyOrderDataModel
 import com.utechia.tdf.R
 import java.time.OffsetDateTime
 import java.time.ZoneId
 import java.time.format.DateTimeFormatter
 
-class OrderTeaBoyAdapter(private val teaBoyOrdersFragment: TeaBoyOrderChildFragment): RecyclerView.Adapter<RecyclerView.ViewHolder>() {
+class OrderTeaBoyAdapter(val teaBoyOrderChildFragment:TeaBoyOrderChildFragment): PagingDataAdapter<TeaBoyOrderDataModel, OrderTeaBoyAdapter.MyViewHolder>(
+    DiffUtilCallBack()
+){
 
-    var userOrders: MutableList<TeaBoyOrderDataModel> = mutableListOf()
-    private var timeZone = ""
-
-    fun addData(_teaBoyOrders: MutableList<TeaBoyOrderDataModel>) {
-        userOrders.clear()
-        notifyDataSetChanged()
-        userOrders.addAll(_teaBoyOrders)
-        notifyItemRangeChanged(0, _teaBoyOrders.size - 1)
-
-    }
-
-
-    override fun getItemViewType(position: Int):Int = position
-
-    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): RecyclerView.ViewHolder {
-
-       return ViewHolder(
+    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): MyViewHolder =
+        MyViewHolder(
             LayoutInflater.from(parent.context)
                 .inflate(R.layout.order_teaboy_item, parent, false)
         )
-    }
 
 
-    override fun onBindViewHolder(holder: RecyclerView.ViewHolder, position: Int) {
-        (holder as ViewHolder).bind0(position)
-    }
+    override fun onBindViewHolder(holder: MyViewHolder, position: Int) {
+        getItem(position)?.let { holder.bind(it) }
+}
 
-
-    override fun getItemCount(): Int = userOrders.size
-
-    inner class ViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
+    inner class MyViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
         private val date: TextView = itemView.findViewById(R.id.date)
         private val time: TextView = itemView.findViewById(R.id.time)
         private val number: TextView = itemView.findViewById(R.id.numberText)
@@ -59,30 +44,31 @@ class OrderTeaBoyAdapter(private val teaBoyOrdersFragment: TeaBoyOrderChildFragm
         private val accept: TextView = itemView.findViewById(R.id.btnAccept)
         private val details: TextView = itemView.findViewById(R.id.btnDetails)
         private val layout: ConstraintLayout = itemView.findViewById(R.id.orderLayout)
+        private var timeZone = ""
 
-        fun bind0(position: Int) {
+        fun bind(teaBoyOrderDataModel: TeaBoyOrderDataModel) {
 
-            timeZone = OffsetDateTime.parse(userOrders[position].updatedAt?:"2022-01-01T10:12:31.484Z").atZoneSameInstant(
+            timeZone = OffsetDateTime.parse(teaBoyOrderDataModel.updatedAt?:"2022-01-01T10:12:31.484Z").atZoneSameInstant(
                 ZoneId.systemDefault()
             ).toLocalDateTime().format(DateTimeFormatter.ofPattern("yyyy.MM.dd"))
             date.text = timeZone
 
-            timeZone = OffsetDateTime.parse(userOrders[position].updatedAt?:"2022-01-01T10:12:31.484Z").atZoneSameInstant(
+            timeZone = OffsetDateTime.parse(teaBoyOrderDataModel.updatedAt?:"2022-01-01T10:12:31.484Z").atZoneSameInstant(
                 ZoneId.systemDefault()
             ).toLocalDateTime().format(DateTimeFormatter.ofPattern("HH:mm"))
             time.text = timeZone
 
-            number.text = "${userOrders[position].cart?.items?.size}x"
-            oderId.text = "${userOrders[position].id}"
-            user.text = userOrders[position].user?.displayName
-            location.text = "${userOrders[position].floor}-${userOrders[position].location}"
+            number.text = "${teaBoyOrderDataModel.cart?.items?.size}x"
+            oderId.text = "${teaBoyOrderDataModel.id}"
+            user.text = teaBoyOrderDataModel.user?.displayName
+            location.text = "${teaBoyOrderDataModel.floor}-${teaBoyOrderDataModel.location}"
 
-            if (userOrders[position].cart?.items?.size!! > 1) {
-                title.text = userOrders[position].cart?.items?.get(0)?.food?.title + "..."
-            } else if (userOrders[position].cart?.items?.size != 0)
-                title.text = userOrders[position].cart?.items?.get(0)?.food?.title
+            if (teaBoyOrderDataModel.cart?.items?.size!! > 1) {
+                title.text = teaBoyOrderDataModel.cart?.items?.get(0)?.food?.title + "..."
+            } else if (teaBoyOrderDataModel.cart?.items?.size != 0)
+                title.text = teaBoyOrderDataModel.cart?.items?.get(0)?.food?.title
 
-            when (userOrders[position].status) {
+            when (teaBoyOrderDataModel.status) {
 
                 OrderEnum.Wait.order -> {
                     reject.visibility = View.VISIBLE
@@ -91,7 +77,7 @@ class OrderTeaBoyAdapter(private val teaBoyOrdersFragment: TeaBoyOrderChildFragm
                         text = resources.getText(R.string.accept)
 
                         setOnClickListener {
-                            val bundle = bundleOf(OrderEnum.ID.order to userOrders[position].id)
+                            val bundle = bundleOf(OrderEnum.ID.order to teaBoyOrderDataModel.id)
                             itemView.findNavController()
                                 .navigate(R.id.action_teaBoyOrdersFragment_to_acceptFragment, bundle)
                         }                        }
@@ -103,7 +89,7 @@ class OrderTeaBoyAdapter(private val teaBoyOrdersFragment: TeaBoyOrderChildFragm
                         text = resources.getText(R.string.complete)
 
                         setOnClickListener {
-                            teaBoyOrdersFragment.teaBoyOrderViewModel.deliverOrder(userOrders[position].id?:0)
+
                         }
                     }
 
@@ -128,23 +114,39 @@ class OrderTeaBoyAdapter(private val teaBoyOrdersFragment: TeaBoyOrderChildFragm
             }
 
             reject.setOnClickListener {
-                val bundle = bundleOf(OrderEnum.ID.order to userOrders[position].id)
+                val bundle = bundleOf(OrderEnum.ID.order to teaBoyOrderDataModel.id)
                 itemView.findNavController()
                     .navigate(R.id.action_teaBoyOrdersFragment_to_rejectFragment, bundle)
             }
 
             layout.setOnClickListener {
-                val bundle = bundleOf(OrderEnum.ID.order to userOrders[position].cart?.id)
+                val bundle = bundleOf(OrderEnum.ID.order to teaBoyOrderDataModel.cart?.id)
                 itemView.findNavController()
                     .navigate(R.id.action_teaBoyOrdersFragment_to_teaBoyOrderDetailsFragment,bundle)
             }
 
             details.setOnClickListener {
-                val bundle = bundleOf(OrderEnum.ID.order to userOrders[position].cart?.id)
+                val bundle = bundleOf(OrderEnum.ID.order to teaBoyOrderDataModel.cart?.id)
                 itemView.findNavController()
                     .navigate(R.id.action_teaBoyOrdersFragment_to_teaBoyOrderDetailsFragment,bundle)
             }
 
+        }
+    }
+
+    class DiffUtilCallBack : DiffUtil.ItemCallback<TeaBoyOrderDataModel>() {
+        override fun areItemsTheSame(
+            oldItem: TeaBoyOrderDataModel,
+            newItem: TeaBoyOrderDataModel
+        ): Boolean {
+            return oldItem.id == newItem.id
+        }
+
+        override fun areContentsTheSame(
+            oldItem: TeaBoyOrderDataModel,
+            newItem: TeaBoyOrderDataModel
+        ): Boolean {
+            return oldItem == newItem
         }
     }
 }

@@ -20,7 +20,7 @@ import dagger.hilt.android.AndroidEntryPoint
 class NotificationDeleteFragment : DialogFragment() {
 
     private lateinit var binding: FragmentNotificationDeleteBinding
-    private val notificationViewModel:NotificationViewModel by viewModels()
+    private val notificationViewModel:NotificationDetailsViewModel by viewModels()
     private var nId = 0
 
     override fun onCreateView(

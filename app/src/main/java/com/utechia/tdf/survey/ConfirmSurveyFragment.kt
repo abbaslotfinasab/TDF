@@ -8,12 +8,9 @@ import android.view.View
 import android.view.ViewGroup
 import android.view.Window
 import android.widget.Toast
-import androidx.core.os.bundleOf
 import androidx.fragment.app.DialogFragment
 import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
-import com.utechia.domain.enum.SurveyEnum
-import com.utechia.domain.model.AnswerModel
 import com.utechia.domain.utile.Result
 import com.utechia.tdf.R
 import com.utechia.tdf.databinding.FragmentConfirmSurveyBinding
@@ -25,7 +22,7 @@ import org.json.JSONArray
 class ConfirmSurveyFragment : DialogFragment() {
 
     private lateinit var binding: FragmentConfirmSurveyBinding
-    private val surveyViewModel: SurveyViewModel by viewModels()
+    private val surveyViewModel: SurveyDetailsViewModel by viewModels()
     private lateinit var answer:ArrayList<*>
     private lateinit var jsonArray: JSONArray
 

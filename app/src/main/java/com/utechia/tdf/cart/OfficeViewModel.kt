@@ -4,8 +4,8 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.utechia.domain.model.OfficeModel
-import com.utechia.domain.usecases.OfficeUseCaseImpl
+import com.utechia.domain.model.cart.OfficeModel
+import com.utechia.domain.usecases.cart.OfficeUseCaseImpl
 import com.utechia.domain.utile.Result
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.CoroutineExceptionHandler

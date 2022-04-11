@@ -4,7 +4,7 @@ import androidx.paging.PagingSource
 import androidx.paging.PagingState
 import com.utechia.data.api.Service
 import com.utechia.domain.enum.PagingEnum
-import com.utechia.domain.model.NotificationModel
+import com.utechia.domain.model.notification.NotificationModel
 import retrofit2.HttpException
 import java.io.IOException
 

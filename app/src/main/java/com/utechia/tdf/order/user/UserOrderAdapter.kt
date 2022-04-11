@@ -14,7 +14,7 @@ import androidx.paging.PagingDataAdapter
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.RecyclerView
 import com.utechia.domain.enum.OrderEnum
-import com.utechia.domain.model.UserOrderDataModel
+import com.utechia.domain.model.order.UserOrderDataModel
 import com.utechia.tdf.R
 import java.time.OffsetDateTime
 import java.time.ZoneId

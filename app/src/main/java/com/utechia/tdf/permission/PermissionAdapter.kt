@@ -8,42 +8,31 @@ import androidx.constraintlayout.widget.ConstraintLayout
 import androidx.core.content.ContextCompat
 import androidx.core.os.bundleOf
 import androidx.navigation.findNavController
+import androidx.paging.PagingDataAdapter
+import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.RecyclerView
 import com.utechia.domain.enum.PermissionEnum
-import com.utechia.domain.model.PermissionModel
+import com.utechia.domain.model.permission.PermissionModel
 import com.utechia.tdf.R
 import java.time.OffsetDateTime
 import java.time.ZoneId
 import java.time.format.DateTimeFormatter
 
-class PermissionAdapter(private val permissionFragment: PermissionChildFragment): RecyclerView.Adapter<RecyclerView.ViewHolder>() {
+class PermissionAdapter(private val permissionFragment: PermissionChildFragment): PagingDataAdapter<PermissionModel, PermissionAdapter.MyViewHolder>(
+    DiffUtilCallBack()
+){
 
-    var permission: MutableList<PermissionModel> = mutableListOf()
-    private var startTimeZone = ""
-    private var endTimeZone = ""
-
-
-
-    fun addData(_permission: MutableList<PermissionModel>) {
-        permission.clear()
-        permission.addAll(_permission)
-        notifyDataSetChanged()
-    }
-
-
-    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): RecyclerView.ViewHolder =
-        ViewHolder(
+    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): MyViewHolder =
+        MyViewHolder(
             LayoutInflater.from(parent.context)
                 .inflate(R.layout.item_permission, parent, false)
         )
 
-    override fun onBindViewHolder(holder: RecyclerView.ViewHolder, position: Int) {
-        (holder as ViewHolder).bind0(position)
+    override fun onBindViewHolder(holder: MyViewHolder, position: Int) {
+        getItem(position)?.let { holder.bind(it) }
     }
 
-    override fun getItemCount(): Int = permission.size
-
-    inner class ViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
+    inner class MyViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
         private val date: TextView = itemView.findViewById(R.id.endDate)
         private val number: TextView = itemView.findViewById(R.id.numberText)
         private val title: TextView = itemView.findViewById(R.id.title)
@@ -52,26 +41,28 @@ class PermissionAdapter(private val permissionFragment: PermissionChildFragment)
         private val details: TextView = itemView.findViewById(R.id.btnDetails)
         private val cancel: TextView = itemView.findViewById(R.id.btnCancel)
         private val layout: ConstraintLayout = itemView.findViewById(R.id.permissionLayout)
+        private var startTimeZone = ""
+        private var endTimeZone = ""
 
 
 
-        fun bind0(position: Int) {
+        fun bind(permission:PermissionModel) {
 
-            startTimeZone = OffsetDateTime.parse(permission[position].datestarts).atZoneSameInstant(
+            startTimeZone = OffsetDateTime.parse(permission.datestarts).atZoneSameInstant(
                 ZoneId.systemDefault()
             ).toLocalDateTime().format(DateTimeFormatter.ofPattern("yyyy.MM.dd-HH:mm"))
-            from.text = "$startTimeZone"
+            from.text = startTimeZone
 
-            endTimeZone = OffsetDateTime.parse(permission[position].dateends).atZoneSameInstant(
+            endTimeZone = OffsetDateTime.parse(permission.dateends).atZoneSameInstant(
                 ZoneId.systemDefault()
             ).toLocalDateTime().format(DateTimeFormatter.ofPattern("yyyy.MM.dd-HH:mm"))
-            date.text = "$endTimeZone"
+            date.text = endTimeZone
 
-            title.text = permission[position].type
-            number.text = permission[position].timeLength
+            title.text = permission.type
+            number.text = permission.timeLength
 
 
-            when (permission[position].status){
+            when (permission.status){
 
                 PermissionEnum.Wait.permission -> {
                     status.apply {
@@ -90,8 +81,6 @@ class PermissionAdapter(private val permissionFragment: PermissionChildFragment)
                         setBackgroundColor(ContextCompat.getColor(itemView.context,R.color.accepted ))
                     }
                     cancel.visibility = View.VISIBLE
-
-
                 }
                 PermissionEnum.Expired.permission ->{
                     cancel.visibility = View.GONE
@@ -119,20 +108,35 @@ class PermissionAdapter(private val permissionFragment: PermissionChildFragment)
             }
 
             cancel.setOnClickListener {
-                val bundle = bundleOf(PermissionEnum.ID.permission to permission[position].id)
+                val bundle = bundleOf(PermissionEnum.ID.permission to permission.id)
                 itemView.findNavController().navigate(R.id.action_permissionFragment_to_cancelRequestFragment,bundle)
                 permissionFragment.onPause()
             }
 
             details.setOnClickListener {
-                val bundle = bundleOf("title" to  permission[position].type , "description" to  permission[position].description , "startTime" to  permission[position].datestarts , "endTime" to  permission[position].dateends)
+                val bundle = bundleOf("title" to  permission.type , "description" to  permission.description , "startTime" to  permission.datestarts , "endTime" to  permission.dateends)
                 itemView.findNavController().navigate(R.id.action_permissionFragment_to_requestDetailsFragment,bundle)
             }
 
             layout.setOnClickListener {
-                val bundle = bundleOf("title" to  permission[position].type , "description" to  permission[position].description , "startTime" to  permission[position].datestarts , "endTime" to  permission[position].dateends)
+                val bundle = bundleOf("title" to  permission.type , "description" to  permission.description , "startTime" to  permission.datestarts , "endTime" to  permission.dateends)
                 itemView.findNavController().navigate(R.id.action_permissionFragment_to_requestDetailsFragment,bundle)
             }
+        }
+    }
+    class DiffUtilCallBack : DiffUtil.ItemCallback<PermissionModel>() {
+        override fun areItemsTheSame(
+            oldItem: PermissionModel,
+            newItem: PermissionModel
+        ): Boolean {
+            return oldItem.id == newItem.id
+        }
+
+        override fun areContentsTheSame(
+            oldItem: PermissionModel,
+            newItem: PermissionModel
+        ): Boolean {
+            return oldItem == newItem
         }
     }
 }

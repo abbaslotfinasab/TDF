@@ -4,8 +4,10 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.utechia.domain.model.NotificationModel
-import com.utechia.domain.usecases.NotificationUseCaseImpl
+import androidx.paging.PagingData
+import androidx.paging.cachedIn
+import com.utechia.domain.model.notification.NotificationModel
+import com.utechia.domain.usecases.notification.NotificationUseCaseImpl
 import com.utechia.domain.utile.Result
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.CoroutineExceptionHandler
@@ -19,8 +21,8 @@ class NotificationViewModel @Inject constructor(
 
 ):ViewModel() {
 
-    private val _notificationModel = MutableLiveData<Result<MutableList<NotificationModel>>>()
-    val notificationModel: LiveData<Result<MutableList<NotificationModel>>>
+    private val _notificationModel = MutableLiveData<Result<LiveData<PagingData<NotificationModel>>>>()
+    val notificationModel: LiveData<Result<LiveData<PagingData<NotificationModel>>>>
         get() = _notificationModel
 
     private val handler = CoroutineExceptionHandler { _, exception ->
@@ -33,33 +35,7 @@ class NotificationViewModel @Inject constructor(
 
             _notificationModel.postValue(Result.Loading)
 
-            notificationUseCaseImpl.getAll().let {
-
-                _notificationModel.postValue(Result.Success(it))
-            }
-        }
-    }
-
-    fun readNotification(id: Int,readAll:Boolean?=false) {
-
-        viewModelScope.launch(Dispatchers.IO + handler) {
-
-            _notificationModel.postValue(Result.Loading)
-
-            notificationUseCaseImpl.read(id,readAll).let {
-
-                _notificationModel.postValue(Result.Success(it))
-            }
-        }
-    }
-
-    fun deleteNotification(id: Int,deleteAll:Boolean?=false) {
-
-        viewModelScope.launch(Dispatchers.IO + handler) {
-
-            _notificationModel.postValue(Result.Loading)
-
-            notificationUseCaseImpl.delete(id,deleteAll).let {
+            notificationUseCaseImpl.getAll().cachedIn(viewModelScope).let {
 
                 _notificationModel.postValue(Result.Success(it))
             }

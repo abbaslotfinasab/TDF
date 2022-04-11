@@ -3,7 +3,7 @@ package com.utechia.data.utile
 
 import android.content.Context
 import android.content.SharedPreferences
-import com.utechia.data.entity.VerifyData
+import com.utechia.data.entity.login.VerifyData
 import com.utechia.domain.enum.MainEnum
 import dagger.hilt.android.qualifiers.ApplicationContext
 import javax.inject.Inject

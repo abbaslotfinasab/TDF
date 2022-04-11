@@ -12,10 +12,10 @@ import androidx.core.os.bundleOf
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
+import androidx.paging.LoadState
 import androidx.recyclerview.widget.ItemTouchHelper
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
-
 import com.utechia.domain.utile.Result
 import com.utechia.tdf.R
 import com.utechia.tdf.databinding.FragmentNotificationBinding
@@ -101,8 +101,10 @@ class NotificationFragment : Fragment() {
                 ): Boolean = false
 
                 override fun onSwiped(viewHolder: RecyclerView.ViewHolder, direction: Int) {
+
                     val bundle =
-                        bundleOf("nId" to notificationAdapter.notification[viewHolder.layoutPosition].id)
+                        bundleOf("nId" to notificationAdapter.snapshot()[viewHolder.absoluteAdapterPosition]?.id
+                        )
                     findNavController().navigate(
                         R.id.action_notificationFragment_to_notificationDeleteFragment,
                         bundle
@@ -161,27 +163,37 @@ class NotificationFragment : Fragment() {
         notificationViewModel.notificationModel.observe(viewLifecycleOwner) {
             when (it) {
                 is Result.Success -> {
-                    binding.refreshLayout.isRefreshing = false
                     binding.prg.visibility = View.GONE
-                    if (it.data.size != 0) {
-                        binding.recyclerView.visibility = View.VISIBLE
-                        binding.btnMarAll.visibility = View.VISIBLE
-                        notificationAdapter.addData(it.data)
-                    } else {
-                        binding.recyclerView.visibility = View.GONE
-                        binding.emptyLayout.visibility = View.VISIBLE
-                        binding.btnMarAll.visibility = View.GONE
+                    binding.refreshLayout.isRefreshing = false
+
+                    it.data.observe(viewLifecycleOwner) { it1 ->
+                        notificationAdapter.submitData(lifecycle,it1)
+                    }
+
+                    notificationAdapter.addLoadStateListener { loadState ->
+                        if (loadState.source.refresh is LoadState.NotLoading && loadState.append.endOfPaginationReached && notificationAdapter.itemCount < 1) {
+                            binding.recyclerView.visibility = View.GONE
+                            binding.prg.visibility = View.GONE
+                            binding.btnMarAll.visibility = View.GONE
+                            binding.emptyLayout.visibility = View.VISIBLE
+                            binding.refreshLayout.isRefreshing = false
+
+                        }else if (loadState.source.refresh is LoadState.Loading ){
+                            binding.prg.visibility = View.GONE
+                            binding.refreshLayout.isRefreshing = true
+                            binding.recyclerView.visibility = View.GONE
+                            binding.btnMarAll.visibility = View.GONE
+                            binding.emptyLayout.visibility = View.GONE
+                        }else{
+                            binding.prg.visibility = View.GONE
+                            binding.refreshLayout.isRefreshing = false
+                            binding.recyclerView.visibility = View.VISIBLE
+                            binding.btnMarAll.visibility = View.VISIBLE
+                        }
                     }
                 }
 
-                is Result.Loading -> {
-                    binding.refreshLayout.isRefreshing = true
-                    binding.prg.visibility = View.GONE
-                    binding.emptyLayout.visibility = View.GONE
-                    binding.recyclerView.visibility = View.GONE
-                    binding.btnMarAll.visibility = View.GONE
-
-                }
+                is Result.Loading -> {}
 
                 is Result.Error -> {
                     binding.refreshLayout.isRefreshing = false

@@ -5,7 +5,7 @@ import androidx.fragment.app.FragmentManager
 import androidx.lifecycle.Lifecycle
 import androidx.viewpager2.adapter.FragmentStateAdapter
 import com.utechia.domain.enum.SurveyEnum
-import com.utechia.domain.model.QuestionModel
+import com.utechia.domain.model.survey.QuestionModel
 
 class CreateSurveyViewPagerAdapter(fa: FragmentManager, lifecycle:Lifecycle , val type:String,  val survey:List<QuestionModel>) : FragmentStateAdapter(fa,lifecycle) {
 

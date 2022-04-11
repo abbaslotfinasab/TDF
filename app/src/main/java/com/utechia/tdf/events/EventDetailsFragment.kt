@@ -28,8 +28,7 @@ class EventDetailsFragment : Fragment() {
 
     private lateinit var binding: FragmentEventDetailsBinding
     private val guestAdapter:GuestAdapter = GuestAdapter()
-    private val eventDetViewModel:EventDetailsViewModel by viewModels()
-    private val eventViewModel:EventViewModel by viewModels()
+    private val eventDetailsViewModel:EventDetailsViewModel by viewModels()
     private lateinit var bundle:Bundle
     private var eId = 0
     private var contributeId = 0
@@ -50,7 +49,7 @@ class EventDetailsFragment : Fragment() {
             eId = requireArguments().getInt(EventsEnum.ID.event ,0)
         }
 
-        eventDetViewModel.getEvent(eId)
+        eventDetailsViewModel.getEvent(eId)
 
         binding.appBarLayout.addOnOffsetChangedListener(object :AppBarLayout.OnOffsetChangedListener{
 
@@ -65,9 +64,9 @@ class EventDetailsFragment : Fragment() {
                     }
                 }
                 if (scrollRange + verticalOffset == 0) {
-                    isShow = true;
+                    isShow = true
                 } else if (isShow) {
-                    isShow = false;
+                    isShow = false
                 }
             }
         })
@@ -83,12 +82,12 @@ class EventDetailsFragment : Fragment() {
 
     private fun observer() {
 
-        eventDetViewModel.event.observe(viewLifecycleOwner){
+        eventDetailsViewModel.event.observe(viewLifecycleOwner){
 
             when (it) {
                 is Result.Success -> {
                     binding.prg.visibility = View.GONE
-                    guestAdapter.addData(it.data.guestModels)
+                    guestAdapter.addData(it.data[0].guestModels)
 
                     binding.recyclerView.apply {
                         adapter = guestAdapter
@@ -100,31 +99,31 @@ class EventDetailsFragment : Fragment() {
                     }
 
                     Glide.with(requireActivity())
-                        .load(it.data.coverphoto)
+                        .load(it.data[0].coverphoto)
                         .centerCrop()
                         .placeholder(R.mipmap.ic_evente_banner_foreground)
                         .error(R.mipmap.ic_evente_banner_foreground)
                         .into(binding.eventImage)
 
-                    binding.title.text = it.data.title
-                    binding.type.text = it.data.type
-                    binding.capacity.text = "${it.data.joinnumbr}/${it.data.capacity.toString()}"
-                    timeZone = OffsetDateTime.parse(it.data.datestart).atZoneSameInstant(
+                    binding.title.text = it.data[0].title
+                    binding.type.text = it.data[0].type
+                    binding.capacity.text = "${it.data[0].joinnumbr}/${it.data[0].capacity.toString()}"
+                    timeZone = OffsetDateTime.parse(it.data[0].datestart).atZoneSameInstant(
                         ZoneId.systemDefault()
                     ).toLocalDateTime().format(DateTimeFormatter.ofPattern("yyyy.MM.dd  HH:mm"))
 
                     binding.date.text = timeZone
-                    binding.time.text = "${it.data.duration} min"
+                    binding.time.text = "${it.data[0].duration} min"
 
-                    binding.description.text = it.data.description
-                    binding.location.text = it.data.eventPlace
+                    binding.description.text = it.data[0].description
+                    binding.location.text = it.data[0].eventPlace
 
 
-                    if(it.data.isPublic==true) {
+                    if(it.data[0].isPublic==true) {
                         binding.appCompatButton.visibility = View.GONE
                         binding.status.visibility = View.VISIBLE
 
-                        if(it.data.userrate == null && it.data.status == EventsEnum.End.event){
+                        if(it.data[0].userrate == null && it.data[0].status == EventsEnum.End.event){
                             binding.appCompatButton.apply {
                                 visibility = View.VISIBLE
                                 text = resources.getText(R.string.evaluate)
@@ -141,7 +140,7 @@ class EventDetailsFragment : Fragment() {
                                 R.id.action_eventDetailsFragment_to_eventRateFragment,
                                 bundle
                             )
-                        }else if(it.data.userrate != null && it.data.status == EventsEnum.End.event){
+                        }else if(it.data[0].userrate != null && it.data[0].status == EventsEnum.End.event){
                             binding.appCompatButton.apply {
                                 visibility = View.VISIBLE
                                 text = resources.getText(R.string.evaluate)
@@ -162,14 +161,14 @@ class EventDetailsFragment : Fragment() {
 
                         binding.status.visibility = View.GONE
 
-                        when (it.data.status) {
+                        when (it.data[0].status) {
 
                             EventsEnum.End.event -> {
 
-                                when (it.data.contribute) {
+                                when (it.data[0].contribute) {
 
                                     EventsEnum.Attending.event -> {
-                                        if (it.data.userrate != null) {
+                                        if (it.data[0].userrate != null) {
                                             binding.appCompatButton.apply {
                                                 visibility = View.VISIBLE
                                                 text = resources.getText(R.string.evaluate)
@@ -209,7 +208,7 @@ class EventDetailsFragment : Fragment() {
                                 binding.appCompatButton.visibility = View.GONE
                             }
                             EventsEnum.Upcoming.event -> {
-                                when (it.data.contribute) {
+                                when (it.data[0].contribute) {
 
                                     null -> {
                                         binding.appCompatButton.apply {
@@ -223,7 +222,7 @@ class EventDetailsFragment : Fragment() {
                                             )
                                             isEnabled = true
                                             setOnClickListener {
-                                                eventViewModel.applyEvent(eId)
+                                                eventDetailsViewModel.applyEvent(eId)
                                                 applyObserver()
                                             }
                                         }
@@ -242,7 +241,7 @@ class EventDetailsFragment : Fragment() {
                                             )
                                             isEnabled = true
                                             setOnClickListener {
-                                                eventViewModel.applyEvent(eId)
+                                                eventDetailsViewModel.applyEvent(eId)
                                                 applyObserver()
                                             }
                                         }
@@ -260,7 +259,7 @@ class EventDetailsFragment : Fragment() {
                                             )
                                             isEnabled = true
                                             setOnClickListener {
-                                                eventViewModel.applyEvent(eId)
+                                                eventDetailsViewModel.applyEvent(eId)
                                                 applyObserver()
                                             }
                                         }
@@ -268,7 +267,7 @@ class EventDetailsFragment : Fragment() {
 
                                     EventsEnum.Pending.event -> {
                                         binding.appCompatButton.apply {
-                                            contributeId = it.data.contributeId!!
+                                            contributeId = it.data[0].contributeId!!
                                             visibility = View.VISIBLE
                                             text = resources.getText(R.string.cancel)
                                             setBackgroundColor(
@@ -291,7 +290,7 @@ class EventDetailsFragment : Fragment() {
 
                                     EventsEnum.Attending.event -> {
                                         binding.appCompatButton.apply {
-                                            contributeId = it.data.contributeId!!
+                                            contributeId = it.data[0].contributeId!!
                                             visibility = View.VISIBLE
                                             text = resources.getText(R.string.cancel)
                                             setBackgroundColor(
@@ -332,7 +331,7 @@ class EventDetailsFragment : Fragment() {
     }
 
     private fun applyObserver() {
-        eventViewModel.event.observe(viewLifecycleOwner){
+        eventDetailsViewModel.event.observe(viewLifecycleOwner){
 
             when (it) {
                 is Result.Success -> {

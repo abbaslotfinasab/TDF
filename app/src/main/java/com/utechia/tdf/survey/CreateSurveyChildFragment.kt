@@ -11,7 +11,7 @@ import android.widget.RatingBar
 import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.NavHostFragment
 import com.utechia.domain.enum.SurveyEnum
-import com.utechia.domain.model.QuestionModel
+import com.utechia.domain.model.survey.QuestionModel
 import com.utechia.tdf.R
 import com.utechia.tdf.databinding.FragmentCreateSurveyChildBinding
 import dagger.hilt.android.AndroidEntryPoint

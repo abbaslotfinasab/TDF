@@ -7,7 +7,7 @@ import android.widget.ImageView
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
-import com.utechia.domain.model.FavoriteModel
+import com.utechia.domain.model.favorite.FavoriteModel
 import com.utechia.tdf.R
 
 class FavoriteAdapter(private val favoriteFragment: FavoriteFragment): RecyclerView.Adapter<RecyclerView.ViewHolder>() {

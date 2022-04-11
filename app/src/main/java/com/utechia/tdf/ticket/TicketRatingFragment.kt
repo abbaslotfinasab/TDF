@@ -21,7 +21,7 @@ import dagger.hilt.android.AndroidEntryPoint
 class TicketRatingFragment : DialogFragment() {
 
     private lateinit var binding: FragmentRatingTicketBinding
-    private val ticketViewModel: TicketViewModel by viewModels()
+    private val ticketViewModel: TicketDetailsViewModel by viewModels()
     private var ticket = 0
     private var rate = 0
 

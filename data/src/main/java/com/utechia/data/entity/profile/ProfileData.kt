@@ -1,0 +1,26 @@
+package com.utechia.data.entity.profile
+
+import android.os.Parcelable
+import com.utechia.data.base.ResponseObject
+import com.utechia.domain.model.profile.ProfileModel
+import kotlinx.parcelize.Parcelize
+import kotlinx.serialization.Serializable
+
+@Parcelize
+@Serializable
+data class ProfileData(
+    val displayName: String?,
+    val id: Int?,
+    val officeFloor: String?,
+    val officeWorkStation: String?,
+    val jobTitle:String?,
+    val mail:String?,
+    val employeeId: Int?,
+    val officeLocation: String?,
+    val profilePicture: ProfilePicture?
+
+    ): Parcelable, ResponseObject<ProfileModel> {
+    override fun toDomain(): ProfileModel {
+        return ProfileModel(displayName,id,officeFloor,officeWorkStation,jobTitle,mail,employeeId,officeLocation,profilePicture?.toDomain())
+    }
+}

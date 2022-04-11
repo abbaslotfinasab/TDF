@@ -4,8 +4,8 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.utechia.domain.model.CartModel
-import com.utechia.domain.usecases.CartUseCaseImpl
+import com.utechia.domain.model.cart.CartModel
+import com.utechia.domain.usecases.cart.CartUseCaseImpl
 import com.utechia.domain.utile.Result
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.CoroutineExceptionHandler

@@ -5,8 +5,8 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.utechia.domain.model.RoomModel
-import com.utechia.domain.usecases.RoomUseCaseImpl
+import com.utechia.domain.model.reservation.RoomModel
+import com.utechia.domain.usecases.reservation.RoomUseCaseImpl
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.CoroutineExceptionHandler
 import kotlinx.coroutines.Dispatchers

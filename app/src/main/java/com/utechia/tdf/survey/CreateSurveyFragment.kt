@@ -21,7 +21,7 @@ import dagger.hilt.android.AndroidEntryPoint
 class CreateSurveyFragment : Fragment(),View.OnClickListener {
 
     private lateinit var binding: FragmentCreateSurveyBinding
-    val surveyViewModel: SurveyViewModel by viewModels()
+    val surveyViewModel: SurveyDetailsViewModel by viewModels()
     private lateinit var createSurveyViewPagerAdapter: CreateSurveyViewPagerAdapter
     private var questionSize: Int = 0
     private var surveyId = 0

@@ -8,10 +8,9 @@ import android.view.View
 import android.view.ViewGroup
 import android.view.Window
 import androidx.navigation.fragment.NavHostFragment
-import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.google.android.material.bottomsheet.BottomSheetDialogFragment
-import com.utechia.domain.model.CategoryModel
+import com.utechia.domain.model.ticket.CategoryModel
 import com.utechia.tdf.R
 import com.utechia.tdf.databinding.FragmentCategoryFragmentBinding
 import dagger.hilt.android.AndroidEntryPoint

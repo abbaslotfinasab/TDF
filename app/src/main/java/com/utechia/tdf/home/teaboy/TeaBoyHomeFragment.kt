@@ -19,7 +19,7 @@ import com.google.firebase.database.ValueEventListener
 import com.google.firebase.database.ktx.database
 import com.google.firebase.database.ktx.getValue
 import com.google.firebase.ktx.Firebase
-import com.utechia.data.entity.Transaction
+import com.utechia.data.entity.home.Transaction
 import com.utechia.domain.enum.MainEnum
 import com.utechia.domain.enum.OrderEnum
 import com.utechia.domain.utile.Result

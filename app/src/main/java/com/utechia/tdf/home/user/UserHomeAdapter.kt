@@ -11,7 +11,7 @@ import androidx.constraintlayout.widget.ConstraintLayout
 import androidx.core.content.ContextCompat
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
-import com.utechia.data.entity.News
+import com.utechia.data.entity.home.News
 import com.utechia.tdf.R
 
 
@@ -20,7 +20,7 @@ class UserHomeAdapter: RecyclerView.Adapter<RecyclerView.ViewHolder>() {
     var news: MutableList<News> = mutableListOf()
 
 
-    fun addData(_news:News) {
+    fun addData(_news: News) {
         news.add(_news)
         notifyItemChanged(news.size)
 

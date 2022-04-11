@@ -23,7 +23,7 @@ class CancelRequestFragment : DialogFragment() {
 
     private lateinit var binding: FragmentCancelRequestBinding
     private lateinit var bundle : Bundle
-    private val permissionViewModel:PermissionViewModel by viewModels()
+    private val permissionViewModel:PermissionDetailsViewModel by viewModels()
     private var permissionId = 0
 
 

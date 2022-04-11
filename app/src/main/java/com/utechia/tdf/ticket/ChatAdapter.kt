@@ -9,8 +9,8 @@ import android.view.ViewGroup
 import android.widget.TextView
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.RecyclerView
-import com.utechia.data.entity.Chat
-import com.utechia.domain.model.TicketModel
+import com.utechia.data.entity.ticket.Chat
+import com.utechia.domain.model.ticket.TicketModel
 import com.utechia.tdf.R
 import java.time.OffsetDateTime
 import java.time.ZoneId
@@ -32,7 +32,7 @@ class ChatAdapter(private val ticketDetailsFragment: TicketDetailsFragment): Rec
 
     }
 
-    fun addDetails(_ticket:TicketModel) {
+    fun addDetails(_ticket: TicketModel) {
         ticket.clear()
         ticket.add(_ticket)
     }

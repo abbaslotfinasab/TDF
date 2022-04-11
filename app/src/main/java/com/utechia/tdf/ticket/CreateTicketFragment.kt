@@ -19,7 +19,7 @@ import androidx.recyclerview.widget.GridLayoutManager
 import com.github.dhaval2404.imagepicker.ImagePicker
 import com.google.android.material.snackbar.Snackbar
 import com.utechia.domain.enum.TicketEnum
-import com.utechia.domain.model.CategoryModel
+import com.utechia.domain.model.ticket.CategoryModel
 import com.utechia.domain.utile.Result
 import com.utechia.tdf.R
 import com.utechia.tdf.databinding.FragmentCreateTicketBinding
@@ -31,7 +31,7 @@ class CreateTicketFragment : Fragment() {
 
     private lateinit var binding: FragmentCreateTicketBinding
     private lateinit var snackbar: Snackbar
-    private val ticketViewModel:TicketViewModel by viewModels()
+    private val ticketViewModel:TicketDetailsViewModel by viewModels()
     private val baseNeedsViewModel:BaseNeedsViewModel by viewModels()
     private val uploadViewModel:UploadViewModel by viewModels()
     private val uploadAdapter:UploadAdapter = UploadAdapter()

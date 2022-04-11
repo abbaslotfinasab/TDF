@@ -21,7 +21,7 @@ import com.google.firebase.database.*
 import com.google.firebase.database.ktx.database
 import com.google.firebase.database.ktx.getValue
 import com.google.firebase.ktx.Firebase
-import com.utechia.data.entity.Chat
+import com.utechia.data.entity.ticket.Chat
 import com.utechia.domain.enum.TicketEnum
 import com.utechia.domain.utile.Result
 import com.utechia.tdf.databinding.FragmentTicketDetailsBinding
@@ -187,10 +187,10 @@ class TicketDetailsFragment : Fragment() {
                 is Result.Success -> {
 
                     binding.prg.visibility = View.GONE
-                    chatAdapter.addDetails(it0.data)
+                    chatAdapter.addDetails(it0.data[0])
 
 
-                    val ticketListener = database.child("Ticketmessage").child("Ticket-${it0.data.fid!!}").orderByValue()
+                    val ticketListener = database.child("Ticketmessage").child("Ticket-${it0.data[0].fid}").orderByValue()
 
                     ticketListener.addValueEventListener(object:ValueEventListener{
                         override fun onDataChange(snapshot: DataSnapshot) {
@@ -220,7 +220,7 @@ class TicketDetailsFragment : Fragment() {
 
                     }
 
-                    if (it0.data.status == TicketEnum.Close.ticket){
+                    if (it0.data[0].status == TicketEnum.Close.ticket){
                         binding.btnReply.visibility = View.VISIBLE
                         binding.btnClose.visibility = View.VISIBLE
                         binding.btnClose.isEnabled = false

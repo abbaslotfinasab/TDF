@@ -21,7 +21,7 @@ import dagger.hilt.android.AndroidEntryPoint
 class RejectFragment : DialogFragment(),View.OnClickListener {
 
     private lateinit var binding: FragmentRejectBinding
-    private val teaBoyOrderViewModel: TeaBoyOrderViewModel by viewModels()
+    private val teaBoyOrderViewModel: TeaBoyOrderDetailsViewModel by viewModels()
     private var orderId = 0
 
 

@@ -7,7 +7,7 @@ import android.widget.ImageView
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
-import com.utechia.domain.model.TopStepsModel
+import com.utechia.domain.model.health.TopStepsModel
 import com.utechia.tdf.R
 
 

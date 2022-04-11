@@ -11,37 +11,30 @@ import androidx.constraintlayout.widget.ConstraintLayout
 import androidx.core.content.ContextCompat
 import androidx.core.os.bundleOf
 import androidx.navigation.findNavController
+import androidx.paging.PagingDataAdapter
+import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.utechia.domain.enum.EventsEnum
-import com.utechia.domain.model.EventModel
+import com.utechia.domain.model.event.EventModel
 import com.utechia.tdf.R
 
 
-class EventAdapter: RecyclerView.Adapter<RecyclerView.ViewHolder>() {
+class EventAdapter: PagingDataAdapter<EventModel, EventAdapter.MyViewHolder>(
+    DiffUtilCallBack()
+) {
 
-    var event: MutableList<EventModel> = mutableListOf()
-
-    fun addData(_event: MutableList<EventModel>) {
-        event.clear()
-        notifyDataSetChanged()
-        event.addAll(_event)
-        notifyItemRangeChanged(0,_event.size-1)
-    }
-
-    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): RecyclerView.ViewHolder =
-        ViewHolder(
+    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): MyViewHolder =
+        MyViewHolder(
             LayoutInflater.from(parent.context)
                 .inflate(R.layout.item_event, parent, false)
         )
 
-    override fun onBindViewHolder(holder: RecyclerView.ViewHolder, position: Int) {
-        (holder as ViewHolder).bind0(position)
+    override fun onBindViewHolder(holder: MyViewHolder, position: Int) {
+        getItem(position)?.let { holder.bind(it) }
     }
 
-    override fun getItemCount(): Int = event.size
-
-    inner class ViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
+    inner class MyViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
         private val title: TextView = itemView.findViewById(R.id.title)
         private val subTitle: TextView = itemView.findViewById(R.id.subTitle)
         private val btnPublic: TextView = itemView.findViewById(R.id.status)
@@ -52,28 +45,28 @@ class EventAdapter: RecyclerView.Adapter<RecyclerView.ViewHolder>() {
         private val layout: ConstraintLayout = itemView.findViewById(R.id.eventLayout)
 
 
-        fun bind0(position: Int) {
+        fun bind(event:EventModel) {
 
-            title.text = event[position].title
-            subTitle.text = event[position].signstatus
-            status.text = event[position].type
+            title.text = event.title
+            subTitle.text = event.signstatus
+            status.text = event.type
             rate.rating = 5.0f
 
             Glide.with(itemView.context)
-                .load(event[position].coverphoto)
+                .load(event.coverphoto)
                 .error(R.mipmap.ic_evente_banner_foreground)
                 .into(image)
 
             
             
-            if (event[position].isPublic==true){
+            if (event.isPublic==true){
                 subTitle.visibility = View.GONE
                 btnPublic.visibility = View.VISIBLE
                 rate.visibility = View.GONE
-                if (event[position].status == EventsEnum.End.event){
+                if (event.status == EventsEnum.End.event){
                     result.visibility = View.VISIBLE
                     result.text = itemView.resources.getText(R.string.evaluate)
-                    if (event[position].userrate == null){
+                    if (event.userrate == null){
                         rate.visibility = View.GONE
                         result.setBackgroundColor(
                             ContextCompat.getColor(
@@ -91,7 +84,7 @@ class EventAdapter: RecyclerView.Adapter<RecyclerView.ViewHolder>() {
                         )
                         result.isEnabled = false
                         rate.visibility = View.VISIBLE
-                        rate.rating = event[position].userrate?.toFloat()?:5.0f
+                        rate.rating = event.userrate?.toFloat()?:5.0f
                     }
 
                 }
@@ -103,11 +96,11 @@ class EventAdapter: RecyclerView.Adapter<RecyclerView.ViewHolder>() {
             }
             else {
                 btnPublic.visibility = View.GONE
-                when (event[position].contribute) {
+                when (event.contribute) {
 
                     null -> {
                         subTitle.visibility = View.GONE
-                        when (event[position].status) {
+                        when (event.status) {
 
                             EventsEnum.End.event -> {
                                 result.visibility = View.GONE
@@ -147,7 +140,7 @@ class EventAdapter: RecyclerView.Adapter<RecyclerView.ViewHolder>() {
                             )
                         )
 
-                        when (event[position].status) {
+                        when (event.status) {
 
                             EventsEnum.End.event -> {
                                 result.visibility = View.VISIBLE
@@ -195,7 +188,7 @@ class EventAdapter: RecyclerView.Adapter<RecyclerView.ViewHolder>() {
                             )
                         )
 
-                        when (event[position].status) {
+                        when (event.status) {
 
                             EventsEnum.End.event -> {
                                 result.visibility = View.VISIBLE
@@ -243,7 +236,7 @@ class EventAdapter: RecyclerView.Adapter<RecyclerView.ViewHolder>() {
                             )
                         )
 
-                        when (event[position].status) {
+                        when (event.status) {
 
                             EventsEnum.End.event -> {
                                 result.visibility = View.VISIBLE
@@ -289,12 +282,12 @@ class EventAdapter: RecyclerView.Adapter<RecyclerView.ViewHolder>() {
                             )
                         )
 
-                        when (event[position].status) {
+                        when (event.status) {
 
                             EventsEnum.End.event -> {
                                 result.visibility = View.VISIBLE
                                 result.text = itemView.resources.getText(R.string.evaluate)
-                                if (event[position].userrate != null) {
+                                if (event.userrate != null) {
                                     rate.visibility = View.VISIBLE
                                     result.setBackgroundColor(
                                         ContextCompat.getColor(
@@ -303,7 +296,7 @@ class EventAdapter: RecyclerView.Adapter<RecyclerView.ViewHolder>() {
                                         )
                                     )
                                     result.isEnabled = false
-                                    rate.rating = event[position].userrate?.toFloat()!!
+                                    rate.rating = event.userrate?.toFloat()!!
                                 } else {
                                     rate.visibility = View.GONE
                                     result.setBackgroundColor(
@@ -343,13 +336,29 @@ class EventAdapter: RecyclerView.Adapter<RecyclerView.ViewHolder>() {
             }
 
             result.setOnClickListener {
-                val bundle = bundleOf(   EventsEnum.ID.event to event[position].id)
+                val bundle = bundleOf(   EventsEnum.ID.event to event.id)
                 itemView.findNavController().navigate(R.id.action_eventSystemFragment_to_eventDetailsFragment,bundle)
             }
             layout.setOnClickListener {
-                val bundle = bundleOf(EventsEnum.ID.event  to event[position].id)
+                val bundle = bundleOf(EventsEnum.ID.event  to event.id)
                 itemView.findNavController().navigate(R.id.action_eventSystemFragment_to_eventDetailsFragment,bundle)
             }
+        }
+    }
+
+    class DiffUtilCallBack : DiffUtil.ItemCallback<EventModel>() {
+        override fun areItemsTheSame(
+            oldItem: EventModel,
+            newItem: EventModel
+        ): Boolean {
+            return oldItem.id == newItem.id
+        }
+
+        override fun areContentsTheSame(
+            oldItem: EventModel,
+            newItem: EventModel
+        ): Boolean {
+            return oldItem == newItem
         }
     }
 }

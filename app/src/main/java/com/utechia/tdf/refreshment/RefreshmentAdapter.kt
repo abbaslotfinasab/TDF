@@ -9,7 +9,7 @@ import android.widget.TextView
 import androidx.cardview.widget.CardView
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
-import com.utechia.domain.model.RefreshmentModel
+import com.utechia.domain.model.refreshment.RefreshmentModel
 import com.utechia.tdf.R
 
 class RefreshmentAdapter(private val createRefreshmentFragment: CreateRefreshmentFragment) : RecyclerView.Adapter<RecyclerView.ViewHolder>()  {

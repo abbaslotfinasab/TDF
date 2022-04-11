@@ -7,7 +7,7 @@ import android.widget.TextView
 import androidx.appcompat.widget.AppCompatButton
 import androidx.navigation.findNavController
 import androidx.recyclerview.widget.RecyclerView
-import com.utechia.domain.model.ReservationModel
+import com.utechia.domain.model.reservation.ReservationModel
 import com.utechia.tdf.R
 
 class BookedAdapter:RecyclerView.Adapter<RecyclerView.ViewHolder>() {

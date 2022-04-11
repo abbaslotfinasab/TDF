@@ -5,8 +5,8 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.utechia.domain.model.RefreshmentModel
-import com.utechia.domain.usecases.RefreshmentUseCaseImpl
+import com.utechia.domain.model.refreshment.RefreshmentModel
+import com.utechia.domain.usecases.refreshment.RefreshmentUseCaseImpl
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.CoroutineExceptionHandler
 import kotlinx.coroutines.Dispatchers

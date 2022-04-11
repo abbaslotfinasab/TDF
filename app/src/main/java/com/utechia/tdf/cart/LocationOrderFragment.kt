@@ -14,7 +14,7 @@ import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
 import com.utechia.domain.enum.MainEnum
-import com.utechia.domain.model.OfficeModel
+import com.utechia.domain.model.cart.OfficeModel
 import com.utechia.domain.utile.Result
 import com.utechia.tdf.R
 import com.utechia.tdf.databinding.FragmentLocationOrderBinding

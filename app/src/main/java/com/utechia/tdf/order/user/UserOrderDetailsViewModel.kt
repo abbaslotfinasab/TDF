@@ -4,8 +4,8 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.utechia.domain.model.UserOrderDataModel
-import com.utechia.domain.usecases.UserOrderDetailsUSeCaseImpl
+import com.utechia.domain.model.order.UserOrderDataModel
+import com.utechia.domain.usecases.order.UserOrderDetailsUSeCaseImpl
 import com.utechia.domain.utile.Result
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.CoroutineExceptionHandler

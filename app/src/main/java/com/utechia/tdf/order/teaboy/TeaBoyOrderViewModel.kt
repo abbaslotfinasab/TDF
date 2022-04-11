@@ -4,9 +4,10 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.utechia.domain.enum.OrderEnum
-import com.utechia.domain.model.TeaBoyOrderDataModel
-import com.utechia.domain.usecases.TeaBoyOrderUseCaseImpl
+import androidx.paging.PagingData
+import androidx.paging.cachedIn
+import com.utechia.domain.model.order.TeaBoyOrderDataModel
+import com.utechia.domain.usecases.order.TeaBoyOrderUseCaseImpl
 import com.utechia.domain.utile.Result
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.CoroutineExceptionHandler
@@ -21,8 +22,8 @@ class TeaBoyOrderViewModel @Inject constructor(
 
 ):ViewModel() {
 
-    private val _orderModel = MutableLiveData<Result<MutableList<TeaBoyOrderDataModel>>>()
-    val orderModel: LiveData<Result<MutableList<TeaBoyOrderDataModel>>>
+    private val _orderModel = MutableLiveData<Result<LiveData<PagingData<TeaBoyOrderDataModel>>>>()
+    val orderModel: LiveData<Result<LiveData<PagingData<TeaBoyOrderDataModel>>>>
         get() = _orderModel
 
     private val handler = CoroutineExceptionHandler {
@@ -36,63 +37,9 @@ class TeaBoyOrderViewModel @Inject constructor(
 
             _orderModel.postValue(Result.Loading)
 
-            orderUseCaseImpl.getOrder(status).let {
+            orderUseCaseImpl.getOrder(status).cachedIn(viewModelScope).let {
 
                 _orderModel.postValue(Result.Success(it))
-            }
-        }
-    }
-    fun singleOrderTeaBoy(id:Int){
-
-        viewModelScope.launch(Dispatchers.IO+handler) {
-
-            _orderModel.postValue(Result.Loading)
-
-            orderUseCaseImpl.singleOrderTeaBoy(id).let {
-
-                _orderModel.postValue(Result.Success(it))
-            }
-        }
-    }
-
-
-    fun acceptOrder(id:Int){
-
-        viewModelScope.launch(Dispatchers.IO+handler) {
-
-            _orderModel.postValue(Result.Loading)
-
-            orderUseCaseImpl.acceptOrder(id).let {
-
-                _orderModel.postValue(Result.Success(it))
-            }
-        }
-    }
-
-
-
-    fun rejectOrder(id:Int){
-
-        viewModelScope.launch(Dispatchers.IO+handler) {
-
-            _orderModel.postValue(Result.Loading)
-
-            orderUseCaseImpl.rejectOrder(id).let {
-
-                _orderModel.postValue(Result.Success(it))
-            }
-        }
-    }
-
-    fun deliverOrder(id:Int){
-
-        viewModelScope.launch(Dispatchers.IO+handler) {
-
-            _orderModel.postValue(Result.Loading)
-
-            orderUseCaseImpl.deliveredOrder(id).let {
-
-                getOrderTeaBoy(OrderEnum.Pending.order)
             }
         }
     }

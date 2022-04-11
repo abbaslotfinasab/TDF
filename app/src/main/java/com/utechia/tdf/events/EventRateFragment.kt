@@ -21,7 +21,7 @@ import dagger.hilt.android.AndroidEntryPoint
 class EventRateFragment : DialogFragment() {
 
     private lateinit var binding: FragmentEventRateBinding
-    private val eventViewModel:EventViewModel by viewModels()
+    private val eventViewModel:EventDetailsViewModel by viewModels()
     private var event = 0
     private var rate = 0
 

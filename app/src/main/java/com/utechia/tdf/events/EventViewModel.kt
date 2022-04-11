@@ -5,8 +5,10 @@ import com.utechia.domain.utile.Result
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.utechia.domain.model.EventModel
-import com.utechia.domain.usecases.EventUseCaseImpl
+import androidx.paging.PagingData
+import androidx.paging.cachedIn
+import com.utechia.domain.model.event.EventModel
+import com.utechia.domain.usecases.event.EventUseCaseImpl
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.CoroutineExceptionHandler
 import kotlinx.coroutines.Dispatchers
@@ -18,8 +20,8 @@ class EventViewModel @Inject constructor(
     private val eventUseCaseImpl: EventUseCaseImpl
 ):ViewModel() {
 
-    private val _event = MutableLiveData<Result<MutableList<EventModel>>>()
-    val event:LiveData<Result<MutableList<EventModel>>>
+    private val _event = MutableLiveData<Result<LiveData<PagingData<EventModel>>>>()
+    val event:LiveData<Result<LiveData<PagingData<EventModel>>>>
     get() = _event
 
     private val handler = CoroutineExceptionHandler {
@@ -33,51 +35,11 @@ class EventViewModel @Inject constructor(
 
             _event.postValue(Result.Loading)
 
-            eventUseCaseImpl.execute(status).let {
+            eventUseCaseImpl.execute(status).cachedIn(viewModelScope).let {
 
                 _event.postValue(Result.Success(it))
 
             }
         }
     }
-
-     fun applyEvent(id:Int){
-
-        viewModelScope.launch(Dispatchers.IO+handler) {
-
-            _event.postValue(Result.Loading)
-
-            eventUseCaseImpl.apply(id).let {
-
-                _event.postValue(Result.Success(it))
-            }
-        }
-    }
-
-    fun cancelEvent(id:Int){
-
-        viewModelScope.launch(Dispatchers.IO+handler) {
-
-            _event.postValue(Result.Loading)
-
-            eventUseCaseImpl.cancel(id).let {
-
-                _event.postValue(Result.Success(it))
-            }
-        }
-    }
-
-    fun rateEvent(id:Int,rate:Int){
-
-        viewModelScope.launch(Dispatchers.IO+handler) {
-
-            _event.postValue(Result.Loading)
-
-            eventUseCaseImpl.rate(id,rate).let {
-
-                _event.postValue(Result.Success(it))
-            }
-        }
-    }
-
 }

@@ -27,7 +27,7 @@ import dagger.hilt.android.AndroidEntryPoint
 class MessageFragment : BottomSheetDialogFragment() {
 
     private lateinit var binding: FragmentMessageBinding
-    private val ticketViwModel:TicketViewModel by viewModels()
+    private val ticketViwModel:TicketDetailsViewModel by viewModels()
     val uploadOrder:UploadReplyAdapter = UploadReplyAdapter(this)
     private var ticketId = 0
 

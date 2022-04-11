@@ -22,7 +22,7 @@ import java.time.format.DateTimeFormatter
 class ConfirmRequestFragment : DialogFragment() {
 
     private lateinit var binding: FragmentConfirmRequestBinding
-    private val permissionViewModel: PermissionViewModel by viewModels()
+    private val permissionViewModel: PermissionDetailsViewModel by viewModels()
 
     private val sdf:DateTimeFormatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm")
     private var start = ""

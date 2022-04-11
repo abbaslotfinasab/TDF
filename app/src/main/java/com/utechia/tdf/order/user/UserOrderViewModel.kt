@@ -6,8 +6,8 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import androidx.paging.PagingData
 import androidx.paging.cachedIn
-import com.utechia.domain.model.UserOrderDataModel
-import com.utechia.domain.usecases.UserOrderUseCaseImpl
+import com.utechia.domain.model.order.UserOrderDataModel
+import com.utechia.domain.usecases.order.UserOrderUseCaseImpl
 import com.utechia.domain.utile.Result
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.CoroutineExceptionHandler
@@ -38,11 +38,9 @@ class UserOrderViewModel @Inject constructor(
 
             _orderModel.postValue(Result.Loading)
 
-            orderUseCaseImpl.execute(status).let {
+            orderUseCaseImpl.execute(status).cachedIn(viewModelScope).let {
 
                 _orderModel.postValue(Result.Success(it))
-
-                it.cachedIn(viewModelScope)
 
             }
         }

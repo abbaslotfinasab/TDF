@@ -22,7 +22,7 @@ import dagger.hilt.android.AndroidEntryPoint
 class CancelEventFragment : DialogFragment() {
 
     private lateinit var binding: FragmentCancelEventBinding
-    private val eventViewModel:EventViewModel by viewModels()
+    private val eventViewModel:EventDetailsViewModel by viewModels()
     private lateinit var bundle : Bundle
     private var eId = 0
 

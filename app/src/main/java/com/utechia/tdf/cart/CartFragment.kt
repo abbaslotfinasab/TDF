@@ -15,7 +15,7 @@ import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.ItemTouchHelper
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
-import com.utechia.domain.model.ItemModel
+import com.utechia.domain.model.refreshment.ItemModel
 import com.utechia.domain.utile.Result
 import com.utechia.tdf.R
 import com.utechia.tdf.databinding.FragmentCartBinding
@@ -64,7 +64,7 @@ class CartFragment : Fragment() {
                 ): Boolean = false
 
                 override fun onSwiped(viewHolder: RecyclerView.ViewHolder, direction: Int) {
-                    val bundle = bundleOf("foodId" to food[viewHolder.layoutPosition].food.id)
+                    val bundle = bundleOf("foodId" to food[viewHolder.absoluteAdapterPosition].food.id)
                     findNavController().navigate(R.id.action_cartFragment_to_deleteFragment,bundle)
                 }
 

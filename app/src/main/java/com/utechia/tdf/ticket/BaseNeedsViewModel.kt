@@ -7,8 +7,8 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.utechia.domain.model.BaseNeedsModel
-import com.utechia.domain.usecases.BaseNeedsUseCaseImpl
+import com.utechia.domain.model.ticket.BaseNeedsModel
+import com.utechia.domain.usecases.ticket.BaseNeedsUseCaseImpl
 import com.utechia.domain.utile.Result
 import kotlinx.coroutines.CoroutineExceptionHandler
 import kotlinx.coroutines.Dispatchers

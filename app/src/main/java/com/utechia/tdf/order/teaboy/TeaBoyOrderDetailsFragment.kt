@@ -21,7 +21,7 @@ import dagger.hilt.android.AndroidEntryPoint
 class TeaBoyOrderDetailsFragment : DialogFragment() {
 
     private lateinit var binding: FragmentOrderDetailsBinding
-    private val userOrderViewModel: TeaBoyOrderViewModel by viewModels()
+    private val userOrderViewModel: TeaBoyOrderDetailsViewModel by viewModels()
     private val userOrderAdapter: UserOrderDetailsAdapter = UserOrderDetailsAdapter()
     private var cartId = 0
 

@@ -19,7 +19,7 @@ import dagger.hilt.android.AndroidEntryPoint
 class ReadAllNotificationFragment : DialogFragment() {
 
     private lateinit var binding: FragmentReadAllNotificationsBinding
-    private val ticketViewModel:NotificationViewModel by viewModels()
+    private val ticketViewModel:NotificationDetailsViewModel by viewModels()
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,

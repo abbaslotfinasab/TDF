@@ -1,9 +1,59 @@
 package com.utechia.data.di
 
-import com.utechia.data.repo.*
-import com.utechia.data.repo.userorder.UserOrderDetailsRepoImpl
-import com.utechia.data.repo.userorder.UserOrderRepoImpl
-import com.utechia.domain.repository.*
+import com.utechia.data.repo.cart.CartRepoImpl
+import com.utechia.data.repo.cart.OfficeRepoImpl
+import com.utechia.data.repo.event.EventDetailsRepoImpl
+import com.utechia.data.repo.event.EventRepoImpl
+import com.utechia.data.repo.favorite.FavoriteRepoImpl
+import com.utechia.data.repo.health.TopStepsRepoImpl
+import com.utechia.data.repo.login.LoginRepoImpl
+import com.utechia.data.repo.login.VerifyRepoImpl
+import com.utechia.data.repo.main.MainRepoImpl
+import com.utechia.data.repo.notification.NotificationDetailsRepoImpl
+import com.utechia.data.repo.notification.NotificationRepoImpl
+import com.utechia.data.repo.order.teaboyorder.OrderCountRepoImpl
+import com.utechia.data.repo.order.teaboyorder.TeaBoyOrderDetailsRepoImpl
+import com.utechia.data.repo.permission.PermissionRepoImpl
+import com.utechia.data.repo.permission.PermissionTypeRepoImpl
+import com.utechia.data.repo.survey.SurveyRepoImpl
+import com.utechia.data.repo.order.teaboyorder.TeaBoyOrderRepoImpl
+import com.utechia.data.repo.ticket.BaseNeedsRepoImpl
+import com.utechia.data.repo.ticket.TicketDetailsRepoImpl
+import com.utechia.data.repo.ticket.TicketRepoImpl
+import com.utechia.data.repo.order.userorder.UserOrderDetailsRepoImpl
+import com.utechia.data.repo.order.userorder.UserOrderRepoImpl
+import com.utechia.data.repo.permission.PermissionDetailsRepoImpl
+import com.utechia.data.repo.profile.ProfileRepoImpl
+import com.utechia.data.repo.refreshment.RefreshmentRepoImpl
+import com.utechia.data.repo.reservation.ReservationRepoImpl
+import com.utechia.data.repo.reservation.RoomRepoImpl
+import com.utechia.data.repo.survey.SurveyDetailsRepoImpl
+import com.utechia.data.repo.ticket.UploadRepoImpl
+import com.utechia.domain.repository.cart.CartRepo
+import com.utechia.domain.repository.cart.OfficeRepo
+import com.utechia.domain.repository.event.EventDetailRepo
+import com.utechia.domain.repository.event.EventRepo
+import com.utechia.domain.repository.favorite.FavoriteRepo
+import com.utechia.domain.repository.health.TopStepsRepo
+import com.utechia.domain.repository.login.LoginRepo
+import com.utechia.domain.repository.main.MainRepo
+import com.utechia.domain.repository.notification.NotificationDetailsRepo
+import com.utechia.domain.repository.notification.NotificationRepo
+import com.utechia.domain.repository.order.OrderCountRepo
+import com.utechia.domain.repository.order.TeaBoyOrderDetailsRepo
+import com.utechia.domain.repository.order.TeaBoyOrderRepo
+import com.utechia.domain.repository.permission.PermissionDetailsRepo
+import com.utechia.domain.repository.permission.PermissionRepo
+import com.utechia.domain.repository.permission.PermissionTypeRepo
+import com.utechia.domain.repository.profile.ProfileRepo
+import com.utechia.domain.repository.profile.UserOrderDetailsRepo
+import com.utechia.domain.repository.profile.UserOrderRepo
+import com.utechia.domain.repository.refreshment.RefreshmentRepo
+import com.utechia.domain.repository.reservation.ReservationRepo
+import com.utechia.domain.repository.reservation.RoomRepo
+import com.utechia.domain.repository.survey.SurveyDetailsRepo
+import com.utechia.domain.repository.survey.SurveyRepo
+import com.utechia.domain.repository.ticket.*
 import dagger.Binds
 import dagger.Module
 import dagger.hilt.InstallIn
@@ -14,12 +64,12 @@ import dagger.hilt.components.SingletonComponent
 abstract class RepositoryModule {
 
     @Binds
-    abstract fun bindCategoryRepositoryService(
+    abstract fun bindRoomRepositoryService(
         roomRepoImpl: RoomRepoImpl
     ): RoomRepo
 
     @Binds
-    abstract fun bindContentRepositoryService(
+    abstract fun bindReservationRepositoryService(
         reservationRepoImpl: ReservationRepoImpl
     ): ReservationRepo
 
@@ -138,4 +188,24 @@ abstract class RepositoryModule {
     abstract fun bindUserOrderDetailsService(
         userOrderDetailsRepoImpl: UserOrderDetailsRepoImpl
     ): UserOrderDetailsRepo
+
+    @Binds
+    abstract fun bindTeaBoyOrderDetailsService(
+        teaBoyOrderDetailsRepoImpl: TeaBoyOrderDetailsRepoImpl
+    ): TeaBoyOrderDetailsRepo
+
+    @Binds
+    abstract fun bindNotificationDetailsService(
+        notificationDetailsRepoImpl: NotificationDetailsRepoImpl
+    ): NotificationDetailsRepo
+
+    @Binds
+    abstract fun bindSurveyDetailsService(
+        surveyDetailsRepoImpl: SurveyDetailsRepoImpl
+    ): SurveyDetailsRepo
+
+    @Binds
+    abstract fun bindPermissionDetailsService(
+        permissionDetailsRepoImpl: PermissionDetailsRepoImpl
+    ): PermissionDetailsRepo
 }

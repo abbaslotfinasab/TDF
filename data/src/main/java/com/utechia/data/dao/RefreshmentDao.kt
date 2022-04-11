@@ -4,7 +4,7 @@ import androidx.room.Dao
 import androidx.room.Insert
 import androidx.room.OnConflictStrategy
 import androidx.room.Query
-import com.utechia.data.entity.RefreshmentData
+import com.utechia.data.entity.refreshment.RefreshmentData
 
 
 @Dao

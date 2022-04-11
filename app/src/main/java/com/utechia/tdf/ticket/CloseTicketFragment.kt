@@ -21,7 +21,7 @@ import dagger.hilt.android.AndroidEntryPoint
 class CloseTicketFragment : DialogFragment() {
 
     private lateinit var binding: FragmentCloseTicketBinding
-    private val ticketViewModel:TicketViewModel by viewModels()
+    private val ticketViewModel:TicketDetailsViewModel by viewModels()
     private lateinit var bundle : Bundle
     private var ticketId = 0
 

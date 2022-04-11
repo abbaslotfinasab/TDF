@@ -10,7 +10,7 @@ import android.view.Window
 import androidx.fragment.app.DialogFragment
 import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
-import com.utechia.domain.model.ReservationModel
+import com.utechia.domain.model.reservation.ReservationModel
 import com.utechia.tdf.R
 import com.utechia.tdf.databinding.FragmentResultBinding
 import dagger.hilt.android.AndroidEntryPoint
@@ -20,7 +20,7 @@ class ResultFragment : DialogFragment() {
 
     private lateinit var binding: FragmentResultBinding
     private val reservationViewModel: ReservationViewModel by viewModels()
-    private lateinit var reservationModel:ReservationModel
+    private lateinit var reservationModel: ReservationModel
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,

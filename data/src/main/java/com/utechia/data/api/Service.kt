@@ -1,7 +1,36 @@
 package com.utechia.data.api
 
-import NotificationCount
-import com.utechia.data.entity.*
+import com.utechia.data.entity.notification.NotificationCount
+import com.utechia.data.entity.cart.Cart
+import com.utechia.data.entity.cart.CartBody
+import com.utechia.data.entity.cart.LocationBody
+import com.utechia.data.entity.cart.Office
+import com.utechia.data.entity.event.Event
+import com.utechia.data.entity.event.EventDetails
+import com.utechia.data.entity.event.RateEvent
+import com.utechia.data.entity.favorite.Favorite
+import com.utechia.data.entity.favorite.FavoriteBody
+import com.utechia.data.entity.home.Average
+import com.utechia.data.entity.health.Steps
+import com.utechia.data.entity.health.TopSteps
+import com.utechia.data.entity.login.Login
+import com.utechia.data.entity.login.Verify
+import com.utechia.data.entity.main.RefreshToken
+import com.utechia.data.entity.main.Token
+import com.utechia.data.entity.notification.DeleteNotificationBody
+import com.utechia.data.entity.notification.Notification
+import com.utechia.data.entity.notification.NotificationBody
+import com.utechia.data.entity.notification.NotificationToken
+import com.utechia.data.entity.order.*
+import com.utechia.data.entity.permission.Permission
+import com.utechia.data.entity.permission.PermissionPostBody
+import com.utechia.data.entity.permission.PermissionType
+import com.utechia.data.entity.permission.PermissionUpdateBody
+import com.utechia.data.entity.profile.Profile
+import com.utechia.data.entity.refreshment.Refreshment
+import com.utechia.data.entity.survey.SingleSurvey
+import com.utechia.data.entity.survey.Survey
+import com.utechia.data.entity.ticket.*
 import okhttp3.MultipartBody
 import retrofit2.Response
 import retrofit2.http.*
@@ -13,7 +42,7 @@ interface Service {
 
     @Headers("Content-Type: application/json")
     @POST("auth/refresh-token")
-    suspend fun refresh(@Body body:RefreshToken):Response<Token>
+    suspend fun refresh(@Body body: RefreshToken):Response<Token>
 
     @POST("auth/verify-login")
     @FormUrlEncoded
@@ -33,7 +62,7 @@ interface Service {
 
     @Headers("Content-Type: application/json")
     @POST("user/favorite")
-    suspend fun like(@Body body:FavoriteBody)
+    suspend fun like(@Body body: FavoriteBody)
 
     @DELETE("user/favorite/{id}")
     suspend fun dislike(@Path("id")id:Int)
@@ -43,11 +72,11 @@ interface Service {
 
     @Headers("Content-Type: application/json")
     @POST("cafeteria/cart")
-    suspend fun postCart(@Body body:CartBody)
+    suspend fun postCart(@Body body: CartBody)
 
     @Headers("Content-Type: application/json")
     @PATCH("cafeteria/cart")
-    suspend fun updateCart(@Body body:CartBody)
+    suspend fun updateCart(@Body body: CartBody)
 
     @DELETE("cafeteria/cart/{id}")
     suspend fun deleteCart(@Path("id")id:Int):Response<Void>
@@ -67,7 +96,7 @@ interface Service {
 
     @Headers("Content-Type: application/json")
     @PATCH("cafeteria/cancel-order")
-    suspend fun cancelOrder(@Body favoriteBody: FavoriteBody ):Response<CancelOrder>
+    suspend fun cancelOrder(@Body favoriteBody: FavoriteBody):Response<Void>
 
     @PATCH("teaboy/status")
     suspend fun updateStatus(@Query("status") status: Boolean):Response<Void>
@@ -83,15 +112,15 @@ interface Service {
 
     @Headers("Content-Type: application/json")
     @PATCH("teaboy/reject-order")
-    suspend fun rejectOrder(@Body favoriteBody: FavoriteBody ):Response<Void>
+    suspend fun rejectOrder(@Body favoriteBody: FavoriteBody):Response<Void>
 
     @Headers("Content-Type: application/json")
     @PATCH("teaboy/accept-order")
-    suspend fun acceptOrder(@Body favoriteBody: FavoriteBody ):Response<Void>
+    suspend fun acceptOrder(@Body favoriteBody: FavoriteBody):Response<Void>
 
     @Headers("Content-Type: application/json")
     @PATCH("teaboy/delivered-order")
-    suspend fun deliverOrder(@Body favoriteBody: FavoriteBody ):Response<Void>
+    suspend fun deliverOrder(@Body favoriteBody: FavoriteBody):Response<Void>
 
     @Headers("Content-Type: application/json")
     @PATCH("user/firebase")
@@ -150,7 +179,7 @@ interface Service {
 
     @Headers("Content-Type: application/json")
     @POST("ticket/replymessagefromuser")
-    suspend fun reply(@Body replyBody:ReplyBody):Response<Void>
+    suspend fun reply(@Body replyBody: ReplyBody):Response<Void>
 
     @Multipart
     @POST("ticket/upload")

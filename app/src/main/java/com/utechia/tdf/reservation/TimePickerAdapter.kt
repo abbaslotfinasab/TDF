@@ -7,7 +7,7 @@ import android.widget.TextView
 import androidx.constraintlayout.widget.ConstraintLayout
 import android.graphics.Color.parseColor
 import androidx.recyclerview.widget.RecyclerView
-import com.utechia.domain.model.HourModel
+import com.utechia.domain.model.reservation.HourModel
 import com.utechia.tdf.R
 
 class TimePickerAdapter(private val createReservationFragment: CreateReservationFragment):RecyclerView.Adapter<RecyclerView.ViewHolder>() {

@@ -4,8 +4,8 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.utechia.domain.model.LoginModel
-import com.utechia.domain.usecases.LoginUseCaseImpl
+import com.utechia.domain.model.login.LoginModel
+import com.utechia.domain.usecases.login.LoginUseCaseImpl
 import com.utechia.domain.utile.Result
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.CoroutineExceptionHandler
@@ -16,7 +16,7 @@ import javax.inject.Inject
 @HiltViewModel
 class LoginViewModel @Inject constructor(
 
-    private val loginUseCaseImpl:LoginUseCaseImpl
+    private val loginUseCaseImpl: LoginUseCaseImpl
 
 ): ViewModel(){
 
