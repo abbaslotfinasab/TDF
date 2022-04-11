@@ -33,6 +33,12 @@ class FavoriteFragment : Fragment() {
 
         favoriteViewModel.getFavorite()
 
+        binding.refreshLayout.setOnRefreshListener {
+
+            favoriteViewModel.getFavorite()
+
+        }
+
         binding.favoriteRecycler.apply {
             adapter=favoriteAdapter
             layoutManager = LinearLayoutManager(context,LinearLayoutManager.VERTICAL,false)
@@ -52,6 +58,7 @@ class FavoriteFragment : Fragment() {
             when (it) {
                 is Result.Success -> {
                     binding.prg.visibility = View.GONE
+                    binding.refreshLayout.isRefreshing = false
 
                     if (it.data.size!=0){
                         binding.favoriteRecycler.visibility = View.VISIBLE
@@ -66,7 +73,9 @@ class FavoriteFragment : Fragment() {
                 is Result.Loading -> {
                     binding.favoriteRecycler.visibility = View.GONE
                     binding.emptyLayout.visibility = View.GONE
-                    binding.prg.visibility = View.VISIBLE
+                    binding.prg.visibility = View.GONE
+                    binding.refreshLayout.isRefreshing = true
+
                 }
 
                 is Result.Error -> {
