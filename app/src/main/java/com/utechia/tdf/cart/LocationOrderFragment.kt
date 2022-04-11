@@ -14,6 +14,7 @@ import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
 import com.utechia.domain.enum.MainEnum
+import com.utechia.domain.model.OfficeModel
 import com.utechia.domain.utile.Result
 import com.utechia.tdf.R
 import com.utechia.tdf.databinding.FragmentLocationOrderBinding
@@ -29,10 +30,11 @@ class LocationOrderFragment : Fragment() {
     private var type = 0
     private var floorId = 0
     private var location = ""
-    private var floor = 0
+    private var floor = -1
+    private val locations:MutableList<OfficeModel> = mutableListOf()
     private val rooms:MutableList<String> = mutableListOf()
-    private val locationFloors:MutableList<String> = mutableListOf()
-    private val locationFloorsId:ArrayList<Int> = arrayListOf()
+    private val floorsName:MutableList<String> = mutableListOf()
+    private val floorsId:ArrayList<Int> = arrayListOf()
 
 
 
@@ -110,6 +112,8 @@ class LocationOrderFragment : Fragment() {
 
             }
 
+            binding.selectLocationAutoCompleteTextView.setAdapter(null)
+
             binding.floorSelectLocationInputLayout.isEnabled = false
 
             binding.floorSelectLocationAutoCompleteTextView.apply {
@@ -149,13 +153,11 @@ class LocationOrderFragment : Fragment() {
             binding.floorSelectLocationAutoCompleteTextView.apply {
                 //this.setBackgroundColor(ContextCompat.getColor(requireContext(),R.color.disActive))
                 this.isEnabled = true
-                this.text.clear()
             }
 
             binding.selectLocationAutoCompleteTextView.apply {
 //                this.setBackgroundColor(ContextCompat.getColor(requireContext(),R.color.white))
                 this.isEnabled = true
-                this.text.clear()
 
             }
             binding.selectLocationLayout.isEnabled = true
@@ -187,6 +189,8 @@ class LocationOrderFragment : Fragment() {
                 this.isEnabled = true
             }
 
+            binding.selectLocationAutoCompleteTextView.setAdapter(null)
+
             binding.floorSelectLocationInputLayout.isEnabled = false
 
             binding.floorSelectLocationAutoCompleteTextView.apply {
@@ -207,17 +211,16 @@ class LocationOrderFragment : Fragment() {
             binding.otherAutoCompleteTextView.apply {
 //                this.setBackgroundColor(ContextCompat.getColor(requireContext(),R.color.white))
                 this.isEnabled = true
-                this.text.clear()
 
             }
             binding.otherTextInputLayout.isEnabled = true
-
-
         }
 
+
         binding.floorSelectLocationAutoCompleteTextView.onItemClickListener =
-            AdapterView.OnItemClickListener { _, _, position, _ ->
+            AdapterView.OnItemClickListener { parent, _, position, _ ->
                 floorId = position
+                collectLocation(parent.getItemAtPosition(position).toString())
             }
 
         binding.otherAutoCompleteTextView.onItemClickListener =
@@ -233,12 +236,12 @@ class LocationOrderFragment : Fragment() {
                 }
                 1 -> {
                     location = binding.selectLocationAutoCompleteTextView.text.toString()
-                    floor = locationFloorsId[floorId]
+                    floor = floorsId[floorId]
                 }
 
                 2 -> {
                     location = binding.addressInput.text.toString()
-                    floor = locationFloorsId[floorId]
+                    floor = floorsId[floorId]
                 }
             }
 
@@ -246,7 +249,7 @@ class LocationOrderFragment : Fragment() {
                 location.isEmpty() -> {
                     Toast.makeText(context,"No location selected",Toast.LENGTH_SHORT).show()
                 }
-                floor==0-> {
+                floor==-1-> {
                     Toast.makeText(context,"No floor selected",Toast.LENGTH_SHORT).show()
 
                 }
@@ -266,44 +269,31 @@ class LocationOrderFragment : Fragment() {
 
     private fun observer() {
 
-        officeViewModel.officeModel.observe(viewLifecycleOwner) { it ->
+        officeViewModel.officeModel.observe(viewLifecycleOwner) {
 
             when (it) {
                 is Result.Success -> {
                     binding.prg.visibility = View.GONE
 
+                    locations.addAll(it.data)
+
+                    floorsName.clear()
                     it.data.map { it1 ->
                         if (it1.isDeleted == false) {
-                            it1.locations?.map { it.name?.let { it2 -> rooms.add(it2) } }
+                            it1.name?.let { it2 -> floorsName.add(it2) }
                         }
                     }
 
+                    floorsId.clear()
                     it.data.map { it1 ->
                         if (it1.isDeleted == false) {
-                            it1.name?.let { it2 -> locationFloors.add(it2) }
+                            it1.id?.let { it2 -> floorsId.add(it2) }
                         }
                     }
 
-                        it.data.map { it1 ->
-                            if (it1.isDeleted == false) {
-                                it1.id?.let { it2 -> locationFloorsId.add(it2) }
-                            }
-                        }
-
-                       /* it.data.map { it1 ->
-                            if(it1.active==true) {
-                                it1.floor?.let { it2 -> floors.add(it2) }
-                            }*/
-
-                    autoCompleteAdapter = AutoCompleteAdapter(requireActivity(),R.layout.dropdown_item,R.id.textItem,rooms)
-                    binding.selectLocationAutoCompleteTextView.setAdapter(autoCompleteAdapter)
-
-                    autoCompleteAdapter = AutoCompleteAdapter(requireActivity(),R.layout.dropdown_item,R.id.textItem,locationFloors)
+                    autoCompleteAdapter = AutoCompleteAdapter(requireActivity(),R.layout.dropdown_item,R.id.textItem,floorsName)
                     binding.otherAutoCompleteTextView.setAdapter(autoCompleteAdapter)
                     binding.floorSelectLocationAutoCompleteTextView.setAdapter(autoCompleteAdapter)
-
-
-
 
                 }
 
@@ -318,5 +308,23 @@ class LocationOrderFragment : Fragment() {
                 }
             }
         }
+    }
+
+    private fun collectLocation(floor:String){
+
+        binding.selectLocationAutoCompleteTextView.text.clear()
+
+        rooms.clear()
+        locations.map { it1 ->
+            if (it1.isDeleted == false && it1.name == floor) {
+                it1.locations?.map {
+                    if(it.active==true)
+                    it.name?.let { it2 -> rooms.add(it2) }
+                }
+            }
+        }
+        autoCompleteAdapter = AutoCompleteAdapter(requireActivity(),R.layout.dropdown_item,R.id.textItem,rooms)
+        binding.selectLocationAutoCompleteTextView.setAdapter(autoCompleteAdapter)
+
     }
 }
