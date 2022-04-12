@@ -1,5 +1,6 @@
 package com.utechia.data.repo.order.userorder
 
+import android.util.Log
 import androidx.paging.PagingSource
 import androidx.paging.PagingState
 import com.utechia.data.api.Service
@@ -31,7 +32,11 @@ class UserOrderPagingSource(
             LoadResult.Page(
                 data = response?.body()?.data?.list?.map { it.toDomain() }?: emptyList(),
                 prevKey = if (pageIndex == PagingEnum.Number.page) null else pageIndex,
-                nextKey = null
+                nextKey =
+                if(pageIndex<response?.body()?.data?.totalPages?:0)
+                pageIndex.plus(1)
+            else
+                null
             )
         }catch (exception: IOException) {
             LoadResult.Error(exception)
