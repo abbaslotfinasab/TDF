@@ -599,6 +599,14 @@
             app:popExitAnim="@android:anim/fade_out"/>
 
         <action
+            android:id="@+id/action_teaBoyOrdersFragment_to_completeFragment"
+            app:destination="@id/teaBoyCompleteConfirmFragment"
+            app:enterAnim="@android:anim/fade_in"
+            app:exitAnim="@android:anim/fade_out"
+            app:popEnterAnim="@android:anim/fade_in"
+            app:popExitAnim="@android:anim/fade_out"/>
+
+        <action
             android:id="@+id/action_teaBoyOrdersFragment_to_teaBoyOrderDetailsFragment"
             app:destination="@id/teaBoyOrderDetailsFragment"
             app:enterAnim="@android:anim/fade_in"
@@ -1419,6 +1427,27 @@
             app:destination="@id/notificationFragment"
             app:launchSingleTop="true"
             app:popUpTo="@id/userhomeFragment"
+            app:enterAnim="@android:anim/fade_in"
+            app:exitAnim="@android:anim/fade_out"
+            app:popEnterAnim="@android:anim/fade_in"
+            app:popExitAnim="@android:anim/fade_out"/>
+
+    </dialog>
+
+    <dialog
+        android:id="@+id/teaBoyCompleteConfirmFragment"
+        android:name="com.utechia.tdf.order.teaboy.TeaBoyCompleteConfirmFragment"
+        android:label="fragment_tea_boy_complete_confirm"
+        tools:layout="@layout/fragment_tea_boy_complete_confirm" >
+
+        <argument
+            android:name="orderId"
+            app:argType="integer"
+            android:defaultValue="0" />
+        <action
+            android:id="@+id/action_completeFragment_to_orderFragment"
+            app:launchSingleTop="true"
+            app:destination="@id/teaBoyOrdersFragment"
             app:enterAnim="@android:anim/fade_in"
             app:exitAnim="@android:anim/fade_out"
             app:popEnterAnim="@android:anim/fade_in"

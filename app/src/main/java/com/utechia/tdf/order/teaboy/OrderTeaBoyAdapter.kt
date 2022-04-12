@@ -17,7 +17,7 @@ import java.time.OffsetDateTime
 import java.time.ZoneId
 import java.time.format.DateTimeFormatter
 
-class OrderTeaBoyAdapter(val teaBoyOrderChildFragment:TeaBoyOrderChildFragment): PagingDataAdapter<TeaBoyOrderDataModel, OrderTeaBoyAdapter.MyViewHolder>(
+class OrderTeaBoyAdapter: PagingDataAdapter<TeaBoyOrderDataModel, OrderTeaBoyAdapter.MyViewHolder>(
     DiffUtilCallBack()
 ){
 
@@ -89,7 +89,8 @@ class OrderTeaBoyAdapter(val teaBoyOrderChildFragment:TeaBoyOrderChildFragment):
                         text = resources.getText(R.string.complete)
 
                         setOnClickListener {
-
+                            val bundle = bundleOf(OrderEnum.ID.order to teaBoyOrderDataModel.id)
+                            itemView.findNavController().navigate(R.id.action_teaBoyOrdersFragment_to_completeFragment,bundle)
                         }
                     }
 

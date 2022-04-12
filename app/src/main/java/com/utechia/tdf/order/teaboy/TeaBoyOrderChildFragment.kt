@@ -20,7 +20,7 @@ class TeaBoyOrderChildFragment (var order: String?= OrderEnum.Pending.order) : F
 
     private lateinit var binding: FragmentTeaBoyOrderChildBinding
     val teaBoyOrderViewModel:TeaBoyOrderViewModel by viewModels()
-    private val orderTeaBoyAdapter:OrderTeaBoyAdapter = OrderTeaBoyAdapter(this)
+    private val orderTeaBoyAdapter:OrderTeaBoyAdapter = OrderTeaBoyAdapter()
 
 
 

@@ -384,6 +384,7 @@
         <entry key="app/src/main/res/layout/fragment_rating_ticket.xml" value="0.22" />
         <entry key="app/src/main/res/layout/fragment_read_all_notifications.xml" value="0.25" />
         <entry key="app/src/main/res/layout/fragment_refreshment.xml" value="0.25" />
+        <entry key="app/src/main/res/layout/fragment_reject.xml" value="0.18" />
         <entry key="app/src/main/res/layout/fragment_request_details.xml" value="0.5033921302578019" />
         <entry key="app/src/main/res/layout/fragment_reservation_details.xml" value="0.19322916666666667" />
         <entry key="app/src/main/res/layout/fragment_result.xml" value="0.1" />
@@ -391,6 +392,7 @@
         <entry key="app/src/main/res/layout/fragment_status.xml" value="0.1" />
         <entry key="app/src/main/res/layout/fragment_survey_child.xml" value="0.1" />
         <entry key="app/src/main/res/layout/fragment_survey_system.xml" value="0.1" />
+        <entry key="app/src/main/res/layout/fragment_tea_boy_complete_confirm.xml" value="0.33" />
         <entry key="app/src/main/res/layout/fragment_tea_boy_home.xml" value="0.18" />
         <entry key="app/src/main/res/layout/fragment_tea_boy_order_child.xml" value="0.1" />
         <entry key="app/src/main/res/layout/fragment_tea_boy_order_details.xml" value="0.19322916666666667" />
