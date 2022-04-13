@@ -316,7 +316,7 @@
         <entry key="app/src/main/res/layout-sw600dp/fragment_tea_boy_order_details.xml" value="0.225669099756691" />
         <entry key="app/src/main/res/layout-sw600dp/fragment_tea_boy_orders.xml" value="0.1" />
         <entry key="app/src/main/res/layout-sw600dp/order_details_item.xml" value="0.225669099756691" />
-        <entry key="app/src/main/res/layout-sw600dp/order_teaboy_item.xml" value="0.225669099756691" />
+        <entry key="app/src/main/res/layout-sw600dp/order_teaboy_item.xml" value="0.5" />
         <entry key="app/src/main/res/layout-sw720dp/fragment_health_parent.xml" value="0.1" />
         <entry key="app/src/main/res/layout-sw720dp/fragment_qr_code.xml" value="0.1576923076923077" />
         <entry key="app/src/main/res/layout-sw720dp/fragment_tea_boy_home.xml" value="0.22" />
