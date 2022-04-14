@@ -13,6 +13,7 @@ import com.utechia.data.entity.favorite.FavoriteBody
 import com.utechia.data.entity.home.Average
 import com.utechia.data.entity.health.Steps
 import com.utechia.data.entity.health.TopSteps
+import com.utechia.data.entity.home.TeaBoyActive
 import com.utechia.data.entity.login.Login
 import com.utechia.data.entity.login.Verify
 import com.utechia.data.entity.main.RefreshToken
@@ -99,7 +100,7 @@ interface Service {
     suspend fun cancelOrder(@Body favoriteBody: FavoriteBody):Response<Void>
 
     @PATCH("teaboy/status")
-    suspend fun updateStatus(@Query("status") status: Boolean):Response<Void>
+    suspend fun updateStatus(@Query("status") status: Boolean,@Query("floorId") floorId: Int):Response<Void>
 
     @GET("teaboy/order-count")
     suspend fun getOrderCount():Response<OrderCount>
@@ -234,6 +235,9 @@ interface Service {
 
     @GET("location")
     suspend fun getOffice():Response<Office>
+
+    @GET("teaboy/status")
+    suspend fun getTeaBoyActive():Response<TeaBoyActive>
 
 
 }

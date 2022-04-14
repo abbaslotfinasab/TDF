@@ -29,44 +29,33 @@
             android:layout_height="wrap_content"
             android:layout_marginStart="15dp"
             android:textColor="@color/black"
-            android:textSize="18sp"
+            android:textSize="20sp"
             android:textStyle="bold"
+            app:layout_constraintBottom_toBottomOf="@+id/profilePicture"
             app:layout_constraintStart_toEndOf="@+id/profilePicture"
             app:layout_constraintTop_toTopOf="@+id/profilePicture" />
 
-        <TextView
-            android:id="@+id/job"
-            android:layout_width="wrap_content"
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/activeLayout"
+            android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:layout_marginStart="15dp"
-            android:textColor="@color/black"
-            android:textSize="14sp"
-            app:layout_constraintBottom_toBottomOf="@+id/profilePicture"
-            app:layout_constraintStart_toEndOf="@+id/profilePicture" />
-
-        <TextView
-            android:id="@+id/status"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginEnd="12dp"
-            android:text="@string/active"
-            android:textSize="16sp"
-            android:textColor="#929292"
-            app:layout_constraintBottom_toBottomOf="@+id/job"
-            app:layout_constraintEnd_toStartOf="@+id/switchCompat"
-            app:layout_constraintTop_toBottomOf="@+id/name" />
-
-
-        <androidx.appcompat.widget.SwitchCompat
-            android:id="@+id/switchCompat"
-            android:layout_width="wrap_content"
-            android:layout_height="20dp"
+            android:layout_marginStart="20dp"
+            android:layout_marginTop="30dp"
             android:layout_marginEnd="20dp"
-            app:layout_constraintBottom_toBottomOf="@+id/status"
+            android:background="@drawable/entrance_exit_bg"
+            android:visibility="visible"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toTopOf="@+id/status"
-            app:thumbTint="@color/white"
-            app:trackTint="@drawable/switch_back" />
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/profilePicture">
+
+            <androidx.recyclerview.widget.RecyclerView
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
 
 
         <androidx.constraintlayout.widget.ConstraintLayout
@@ -74,13 +63,13 @@
             android:layout_width="0dp"
             android:layout_height="100dp"
             android:layout_marginStart="20dp"
-            android:layout_marginTop="16dp"
+            android:layout_marginTop="20dp"
             android:layout_marginEnd="20dp"
             android:background="@drawable/entrance_exit_bg"
             android:visibility="gone"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/profilePicture">
+            app:layout_constraintTop_toBottomOf="@+id/activeLayout">
 
             <TextView
                 android:id="@+id/entrance"

@@ -6,6 +6,6 @@ interface OrderCountRepo {
 
     suspend fun getOrderCount():MutableList<OrderCountModel>
 
-    suspend fun setStatus(status:Boolean):MutableList<OrderCountModel>
+    suspend fun setStatus(status:Boolean,floorId:Int):MutableList<OrderCountModel>
 
 }

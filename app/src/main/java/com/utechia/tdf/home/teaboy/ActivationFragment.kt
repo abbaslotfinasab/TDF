@@ -13,6 +13,7 @@ import android.widget.Toast
 import androidx.fragment.app.DialogFragment
 import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
+import com.utechia.domain.enum.OrderEnum
 import com.utechia.domain.utile.Result
 import com.utechia.tdf.R
 import com.utechia.tdf.databinding.FragmentActivationBinding
@@ -25,6 +26,8 @@ class ActivationFragment : DialogFragment(),View.OnClickListener{
     private lateinit var binding: FragmentActivationBinding
     private val orderViewModel: OrderCountViewModel by viewModels()
     private lateinit var prefs: SharedPreferences
+    private var floorId = 0
+
 
 
     override fun onCreateView(
@@ -47,6 +50,10 @@ class ActivationFragment : DialogFragment(),View.OnClickListener{
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+
+        if (arguments !=null){
+            floorId = requireArguments().getInt("floorId",0)
+        }
 
         prefs = requireActivity().getSharedPreferences("tdf", Context.MODE_PRIVATE)
 
@@ -99,7 +106,7 @@ class ActivationFragment : DialogFragment(),View.OnClickListener{
 
             R.id.btnDelete -> {
 
-                orderViewModel.setStatus(true)
+                orderViewModel.setStatus(true,floorId)
             }
         }
     }

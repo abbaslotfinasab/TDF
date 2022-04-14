@@ -110,7 +110,6 @@ class LoginFragment : Fragment() {
                             putString(Name,it.data.name)
                             putString(MainEnum.Floor.main, it.data.floor.toString())
                             putBoolean(TeaBoy, it.data.isTeaBoy == true)
-                            putBoolean(Active, it.data.isTeaBoyActive == true)
                             putString(MainEnum.HomeId.main,it.data.userHomeId)
                             it.data.userid?.let { it1 -> putInt(MainEnum.UserId.main, it1) }
                             it.data.employeeId?.let { it2 -> putInt(MainEnum.EmployeeId.main, it2) }

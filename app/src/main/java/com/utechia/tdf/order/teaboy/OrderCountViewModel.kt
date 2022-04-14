@@ -43,12 +43,12 @@ class OrderCountViewModel @Inject constructor(
         }
     }
 
-    fun setStatus(status:Boolean){
+    fun setStatus(status:Boolean,floorId:Int){
         viewModelScope.launch(Dispatchers.IO+handler) {
 
             _orderModel.postValue(Result.Loading)
 
-            orderCountUseCaseImpl.setStatus(status).let {
+            orderCountUseCaseImpl.setStatus(status,floorId).let {
 
                 _orderModel.postValue(Result.Success(it))
             }

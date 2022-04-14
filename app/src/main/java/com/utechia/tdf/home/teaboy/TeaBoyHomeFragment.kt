@@ -11,6 +11,7 @@ import androidx.core.os.bundleOf
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
+import androidx.recyclerview.widget.LinearLayoutManager
 import com.bumptech.glide.Glide
 import com.google.firebase.database.DataSnapshot
 import com.google.firebase.database.DatabaseError
@@ -39,6 +40,8 @@ class TeaBoyHomeFragment : Fragment(),View.OnClickListener {
     private val orderViewModel: OrderCountViewModel by viewModels()
     private val profileViewModel: UserProfileViewModel by viewModels()
     private val mainViewModel: MainViewModel by viewModels({ requireActivity()})
+    private val teaBoyActiveViewModel: TeaBoyActiveViewModel by viewModels()
+    private val teaBoyActiveAdapter:TeaBoyActiveAdapter = TeaBoyActiveAdapter()
     private lateinit var database: DatabaseReference
     private lateinit var bundle: Bundle
     private lateinit var prefs: SharedPreferences
@@ -46,7 +49,6 @@ class TeaBoyHomeFragment : Fragment(),View.OnClickListener {
     private var name = ""
     private var floor = ""
     private var rate = 0f
-    private var status = false
     private var employeeId = ""
     private var avg = ""
 
@@ -55,7 +57,6 @@ class TeaBoyHomeFragment : Fragment(),View.OnClickListener {
         const val Start = "start"
         const val Name = "name"
         const val Floor = "floor"
-        const val Active = "isTeaBoyActive"
         const val ID = "employeeId"
 
     }
@@ -96,18 +97,12 @@ class TeaBoyHomeFragment : Fragment(),View.OnClickListener {
 
         }
 
+        teaBoyActiveViewModel.getActiveList()
+
         profileViewModel.getProfile()
 
 
         orderViewModel.getOrder()
-
-        status = prefs.getBoolean(Active,true)
-        binding.switchCompat.isChecked = status
-
-        if (status){
-            binding.status.text = getString(R.string.active)
-        }else
-            binding.status.text = getString(R.string.deactive)
 
 
         val tranceActionListener = database.child("Transaction").child(employeeId)
@@ -143,16 +138,9 @@ class TeaBoyHomeFragment : Fragment(),View.OnClickListener {
             }
         })
 
-
-
-        binding.switchCompat.setOnCheckedChangeListener { _, isChecked ->
-
-            if (isChecked){
-                findNavController().navigate(R.id.action_teaBoyHomeFragment_to_activationFragment)
-            }
-            else
-                findNavController().navigate(R.id.action_teaBoyHomeFragment_to_deactivationFragment)
-
+        binding.activeRecyclerView?.apply {
+            adapter = teaBoyActiveAdapter
+            layoutManager = LinearLayoutManager(requireActivity(),LinearLayoutManager.VERTICAL,false)
         }
 
         binding.pedometerLayout.setOnClickListener {
@@ -204,7 +192,6 @@ class TeaBoyHomeFragment : Fragment(),View.OnClickListener {
                 is Result.Success -> {
                     binding.prg.visibility = View.GONE
                     binding.name.text = it.data.name
-                    binding.job.text = "${it.data.floor}st Floor ${it.data.jobTitle}"
 
                     Glide.with(requireActivity())
                         .load(it.data.profilePictureModel?.url)
@@ -225,6 +212,28 @@ class TeaBoyHomeFragment : Fragment(),View.OnClickListener {
 
                 }
             }
+        }
+
+        teaBoyActiveViewModel.active.observe(viewLifecycleOwner){
+
+            when (it) {
+                is Result.Success -> {
+                    binding.prg.visibility = View.GONE
+                    teaBoyActiveAdapter.addData(it.data)
+                }
+
+                is Result.Loading -> {
+                    binding.prg.visibility = View.VISIBLE
+
+                }
+
+                is Result.Error -> {
+                    binding.prg.visibility = View.GONE
+                    Toast.makeText(context, it.message, Toast.LENGTH_SHORT).show()
+
+                }
+            }
+
         }
     }
 

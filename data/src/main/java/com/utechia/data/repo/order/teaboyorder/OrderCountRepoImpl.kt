@@ -43,11 +43,11 @@ class OrderCountRepoImpl @Inject constructor(
 
     }
 
-    override suspend fun setStatus(status: Boolean):MutableList<OrderCountModel>{
+    override suspend fun setStatus(status: Boolean,floorId:Int):MutableList<OrderCountModel>{
 
         if (networkHelper.isNetworkConnected()) {
 
-            val result = service.updateStatus(status)
+            val result = service.updateStatus(status,floorId)
 
             return when (result.isSuccessful) {
 

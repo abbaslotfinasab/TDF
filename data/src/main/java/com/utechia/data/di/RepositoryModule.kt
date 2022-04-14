@@ -6,6 +6,7 @@ import com.utechia.data.repo.event.EventDetailsRepoImpl
 import com.utechia.data.repo.event.EventRepoImpl
 import com.utechia.data.repo.favorite.FavoriteRepoImpl
 import com.utechia.data.repo.health.TopStepsRepoImpl
+import com.utechia.data.repo.home.TeaBoyActiveRepoImpl
 import com.utechia.data.repo.login.LoginRepoImpl
 import com.utechia.data.repo.login.VerifyRepoImpl
 import com.utechia.data.repo.main.MainRepoImpl
@@ -35,6 +36,7 @@ import com.utechia.domain.repository.event.EventDetailRepo
 import com.utechia.domain.repository.event.EventRepo
 import com.utechia.domain.repository.favorite.FavoriteRepo
 import com.utechia.domain.repository.health.TopStepsRepo
+import com.utechia.domain.repository.home.TeaBoyActiveRepo
 import com.utechia.domain.repository.login.LoginRepo
 import com.utechia.domain.repository.main.MainRepo
 import com.utechia.domain.repository.notification.NotificationDetailsRepo
@@ -208,4 +210,9 @@ abstract class RepositoryModule {
     abstract fun bindPermissionDetailsService(
         permissionDetailsRepoImpl: PermissionDetailsRepoImpl
     ): PermissionDetailsRepo
+
+    @Binds
+    abstract fun bindTeaBoyActiveService(
+        teaBoyActiveRepoImpl: TeaBoyActiveRepoImpl
+    ): TeaBoyActiveRepo
 }
