@@ -13,7 +13,6 @@ import android.widget.Toast
 import androidx.fragment.app.DialogFragment
 import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
-import com.utechia.domain.enum.OrderEnum
 import com.utechia.domain.utile.Result
 import com.utechia.tdf.R
 import com.utechia.tdf.databinding.FragmentActivationBinding
@@ -67,12 +66,9 @@ class ActivationFragment : DialogFragment(),View.OnClickListener{
             when (it) {
                 is Result.Success -> {
                     binding.prg.visibility = View.GONE
+                    findNavController().navigate(R.id.action_activationFragment_to_teaBoyHomeFragment)
 
-                    with(prefs.edit()) {
-                        putBoolean("isTeaBoyActive", true)
-                    }.apply()
 
-                    dialog?.dismiss()
                 }
 
                 is Result.Loading -> {

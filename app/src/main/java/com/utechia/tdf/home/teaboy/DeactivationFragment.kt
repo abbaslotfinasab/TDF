@@ -66,13 +66,8 @@ class DeactivationFragment : DialogFragment(),View.OnClickListener {
             when (it) {
                 is Result.Success -> {
                     binding.prg.visibility = View.GONE
+                    findNavController().navigate(R.id.action_deactivationFragment_to_teaBoyHomeFragment)
 
-                    with(prefs.edit()) {
-                        putBoolean("isTeaBoyActive", false)
-                    }.apply()
-
-
-                    dialog?.dismiss()
 
 
                 }
