@@ -6,13 +6,15 @@ import android.view.ViewGroup
 import android.widget.TextView
 import androidx.appcompat.widget.SwitchCompat
 import androidx.core.os.bundleOf
+import androidx.navigation.Navigation
+import androidx.navigation.Navigation.findNavController
 import androidx.navigation.findNavController
 import androidx.recyclerview.widget.RecyclerView
 import com.utechia.domain.model.home.TeaBoyActiveModel
 import com.utechia.tdf.R
 
 
-class TeaBoyActiveAdapter: RecyclerView.Adapter<RecyclerView.ViewHolder>() {
+class TeaBoyActiveAdapter(private val teaBoyHomeFragment:TeaBoyHomeFragment): RecyclerView.Adapter<RecyclerView.ViewHolder>() {
 
     var active: MutableList<TeaBoyActiveModel> = mutableListOf()
 
@@ -56,16 +58,10 @@ class TeaBoyActiveAdapter: RecyclerView.Adapter<RecyclerView.ViewHolder>() {
                 statusTitle.text = itemView.context.getText(R.string.active)
             }
 
-            val bundle = bundleOf("floorId" to active[position].id)
 
             status.setOnCheckedChangeListener { _, isChecked ->
 
-                if (!isChecked){
-                    itemView.findNavController().navigate(R.id.action_teaBoyHomeFragment_to_deactivationFragment,bundle)
-                }else{
-                    itemView.findNavController().navigate(R.id.action_teaBoyHomeFragment_to_activationFragment,bundle)
-                }
-
+                active[position].id?.let { teaBoyHomeFragment.navigateToPopup(isChecked, it) }
 
             }
 

@@ -536,26 +536,17 @@
         android:name="com.utechia.tdf.home.teaboy.TeaBoyHomeFragment"
         android:label="fragment_tea_boy_home"
         tools:layout="@layout/fragment_tea_boy_home" >
-        <action
-            android:id="@+id/action_teaBoyHomeFragment_to_statusFragment"
-            app:destination="@id/statusFragment"
-            app:enterAnim="@android:anim/fade_in"
-            app:exitAnim="@android:anim/fade_out"
-            app:popEnterAnim="@android:anim/fade_in"
-            app:popExitAnim="@android:anim/fade_out"/>
+
         <action
             android:id="@+id/action_teaBoyHomeFragment_to_deactivationFragment"
             app:destination="@id/deactivationFragment"
-            app:launchSingleTop="true"
-            app:popUpTo="@id/teaBoyHomeFragment"
             app:enterAnim="@android:anim/fade_in"
             app:exitAnim="@android:anim/fade_out"
             app:popEnterAnim="@android:anim/fade_in"
             app:popExitAnim="@android:anim/fade_out"/>
+
         <action
             android:id="@+id/action_teaBoyHomeFragment_to_activationFragment"
-            app:launchSingleTop="true"
-            app:popUpTo="@id/teaBoyHomeFragment"
             app:destination="@id/activationFragment"
             app:enterAnim="@android:anim/fade_in"
             app:exitAnim="@android:anim/fade_out"
@@ -583,6 +574,7 @@
         android:name="com.utechia.tdf.order.teaboy.TeaBoyOrderParentFragment"
         android:label="fragment_tea_boy_orders"
         tools:layout="@layout/fragment_tea_boy_orders" >
+
         <action
             android:id="@+id/action_teaBoyOrdersFragment_to_acceptFragment"
             app:destination="@id/acceptFragment"
@@ -590,6 +582,7 @@
             app:exitAnim="@android:anim/fade_out"
             app:popEnterAnim="@android:anim/fade_in"
             app:popExitAnim="@android:anim/fade_out"/>
+
         <action
             android:id="@+id/action_teaBoyOrdersFragment_to_rejectFragment"
             app:destination="@id/rejectFragment"

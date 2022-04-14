@@ -41,7 +41,7 @@ class TeaBoyHomeFragment : Fragment(),View.OnClickListener {
     private val profileViewModel: UserProfileViewModel by viewModels()
     private val mainViewModel: MainViewModel by viewModels({ requireActivity()})
     private val teaBoyActiveViewModel: TeaBoyActiveViewModel by viewModels()
-    private val teaBoyActiveAdapter:TeaBoyActiveAdapter = TeaBoyActiveAdapter()
+    private val teaBoyActiveAdapter:TeaBoyActiveAdapter = TeaBoyActiveAdapter(this)
     private lateinit var database: DatabaseReference
     private lateinit var bundle: Bundle
     private lateinit var prefs: SharedPreferences
@@ -138,7 +138,7 @@ class TeaBoyHomeFragment : Fragment(),View.OnClickListener {
             }
         })
 
-        binding.activeRecyclerView?.apply {
+        binding.activeRecyclerView.apply {
             adapter = teaBoyActiveAdapter
             layoutManager = LinearLayoutManager(requireActivity(),LinearLayoutManager.VERTICAL,false)
         }
@@ -235,6 +235,18 @@ class TeaBoyHomeFragment : Fragment(),View.OnClickListener {
             }
 
         }
+    }
+
+    fun navigateToPopup(isChecked:Boolean,floorId:Int){
+
+        val bundle = bundleOf("floorId" to floorId)
+
+        if (!isChecked){
+            findNavController().navigate(R.id.action_teaBoyHomeFragment_to_deactivationFragment,bundle)
+        }else{
+            findNavController().navigate(R.id.action_teaBoyHomeFragment_to_activationFragment,bundle)
+        }
+
     }
 
     override fun onClick(v: View?) {
