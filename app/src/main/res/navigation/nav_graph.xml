@@ -540,6 +540,8 @@
         <action
             android:id="@+id/action_teaBoyHomeFragment_to_deactivationFragment"
             app:destination="@id/deactivationFragment"
+            app:launchSingleTop="true"
+            app:popUpTo="@id/teaBoyHomeFragment"
             app:enterAnim="@android:anim/fade_in"
             app:exitAnim="@android:anim/fade_out"
             app:popEnterAnim="@android:anim/fade_in"
@@ -548,6 +550,7 @@
         <action
             android:id="@+id/action_teaBoyHomeFragment_to_activationFragment"
             app:destination="@id/activationFragment"
+            app:popUpTo="@id/teaBoyHomeFragment"
             app:enterAnim="@android:anim/fade_in"
             app:exitAnim="@android:anim/fade_out"
             app:popEnterAnim="@android:anim/fade_in"
@@ -719,6 +722,9 @@
         <action
             android:id="@+id/action_activationFragment_to_teaBoyHomeFragment"
             app:destination="@id/teaBoyHomeFragment"
+            app:launchSingleTop="true"
+            app:popUpToInclusive="true"
+            app:popUpTo="@id/nav_graph"
             app:enterAnim="@android:anim/fade_in"
             app:exitAnim="@android:anim/fade_out"
             app:popEnterAnim="@android:anim/fade_in"
@@ -732,6 +738,9 @@
         <action
             android:id="@+id/action_deactivationFragment_to_teaBoyHomeFragment"
             app:destination="@id/teaBoyHomeFragment"
+            app:launchSingleTop="true"
+            app:popUpToInclusive="true"
+            app:popUpTo="@id/nav_graph"
             app:enterAnim="@android:anim/fade_in"
             app:exitAnim="@android:anim/fade_out"
             app:popEnterAnim="@android:anim/fade_in"

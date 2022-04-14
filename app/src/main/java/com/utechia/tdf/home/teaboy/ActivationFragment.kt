@@ -69,6 +69,7 @@ class ActivationFragment : DialogFragment(),View.OnClickListener{
                     findNavController().navigate(R.id.action_activationFragment_to_teaBoyHomeFragment)
 
 
+
                 }
 
                 is Result.Loading -> {

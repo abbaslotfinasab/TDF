@@ -70,6 +70,7 @@ class DeactivationFragment : DialogFragment(),View.OnClickListener {
 
 
 
+
                 }
 
                 is Result.Loading -> {
