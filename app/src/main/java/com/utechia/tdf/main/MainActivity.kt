@@ -24,7 +24,6 @@ import androidx.navigation.NavOptions
 import androidx.navigation.fragment.NavHostFragment
 import androidx.navigation.ui.setupWithNavController
 import androidx.work.*
-import com.google.android.gms.fitness.data.*
 import com.google.android.gms.tasks.OnCompleteListener
 import com.google.firebase.analytics.FirebaseAnalytics
 import com.google.firebase.analytics.ktx.analytics
@@ -130,13 +129,6 @@ class MainActivity : AppCompatActivity(), SensorEventListener {
             navController.popBackStack()
             navController.navigate(R.id.qrCodeFragment)
 
-            binding.bottomNavigation.apply {
-                menu.setGroupCheckable(0,true,false)
-                menu.forEach {
-                    it.isChecked = false
-                }
-                menu.setGroupCheckable(0,true,true)
-            }
         }
 
         binding.backArrow.setOnClickListener{
@@ -822,6 +814,14 @@ class MainActivity : AppCompatActivity(), SensorEventListener {
                 binding.customToolbar.visibility = View.GONE
                 binding.bottomNavigation.visibility = View.VISIBLE
                 binding.drawerLayout.setDrawerLockMode(DrawerLayout.LOCK_MODE_UNLOCKED)
+
+                binding.bottomNavigation.apply {
+                    menu.setGroupCheckable(0,true,false)
+                    menu.forEach {
+                        it.isChecked = false
+                    }
+                    menu.setGroupCheckable(0,true,true)
+                }
 
             }
 
