@@ -86,8 +86,8 @@ class LocationOrderFragment : Fragment() {
         binding.otherTextInputLayout.isEnabled = false
 
         type = 0
-        location = prefs.getString(MainEnum.Location.main,"").toString()
-        floor = prefs.getString(MainEnum.Floor.main,"").toString().toInt()
+        location = "test"
+        floor = 10
 
 
     }
@@ -231,7 +231,7 @@ class LocationOrderFragment : Fragment() {
         binding.appCompatButton.setOnClickListener {
             when(type){
                 0 -> {
-                    location = prefs.getString(MainEnum.Location.main,"").toString()
+                    location = "test"
                     floor = 10
                 }
                 1 -> {
@@ -279,14 +279,14 @@ class LocationOrderFragment : Fragment() {
 
                     floorsName.clear()
                     it.data.map { it1 ->
-                        if (it1.isDeleted == false) {
+                        if (it1.isDeleted == false && it1.id !=null) {
                             it1.name?.let { it2 -> floorsName.add(it2) }
                         }
                     }
 
                     floorsId.clear()
                     it.data.map { it1 ->
-                        if (it1.isDeleted == false) {
+                        if (it1.isDeleted == false && it1.id !=null) {
                             it1.id?.let { it2 -> floorsId.add(it2) }
                         }
                     }
