@@ -1,6 +1,5 @@
 package com.utechia.domain.model.profile
 
-import com.utechia.domain.model.profile.ProfilePictureModel
 
 data class UserModel (
 

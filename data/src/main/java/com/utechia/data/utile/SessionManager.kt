@@ -19,6 +19,16 @@ class SessionManager @Inject constructor(@ApplicationContext private val context
         editor.apply()
     }
 
+    fun saveMyRoom(officeWorkStation:String,officeLocation:String,floorId:Int){
+        val editor = prefs.edit()
+        editor.putInt(MainEnum.FloorId.main, floorId)
+        editor.putString(MainEnum.Location.main, officeLocation)
+        editor.putString(MainEnum.WorkStation.main, officeWorkStation)
+
+        editor.apply()
+    }
+
+
 
     fun saveAuthToken(verify: VerifyData) {
         val editor = prefs.edit()

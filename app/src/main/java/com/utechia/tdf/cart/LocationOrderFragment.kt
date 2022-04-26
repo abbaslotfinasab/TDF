@@ -231,8 +231,8 @@ class LocationOrderFragment : Fragment() {
         binding.appCompatButton.setOnClickListener {
             when(type){
                 0 -> {
-                    location = "WOO"
-                    floor = 9
+                    location = prefs.getString(MainEnum.Location.main,"").toString()
+                    floor = prefs.getInt(MainEnum.FloorId.main,-1)
                 }
                 1 -> {
                     location = binding.selectLocationAutoCompleteTextView.text.toString()
@@ -253,6 +253,7 @@ class LocationOrderFragment : Fragment() {
                     Toast.makeText(context,"No floor selected",Toast.LENGTH_SHORT).show()
 
                 }
+
                 else -> {
                     val bundle =
                         bundleOf(MainEnum.Location.main to location, MainEnum.Floor.main to floor)

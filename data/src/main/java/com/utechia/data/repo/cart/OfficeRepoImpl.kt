@@ -2,6 +2,7 @@ package com.utechia.data.repo.cart
 
 import com.utechia.data.api.Service
 import com.utechia.data.utile.NetworkHelper
+import com.utechia.data.utile.SessionManager
 import com.utechia.domain.model.cart.OfficeModel
 import com.utechia.domain.repository.cart.OfficeRepo
 import java.io.IOException
@@ -12,6 +13,8 @@ import javax.inject.Singleton
 class OfficeRepoImpl @Inject constructor(
     private val service: Service,
     private val networkHelper: NetworkHelper,
+    private val sessionManager: SessionManager,
+
 
 
     ): OfficeRepo {
@@ -24,7 +27,13 @@ class OfficeRepoImpl @Inject constructor(
             return when (result.isSuccessful && result.body() !=null) {
 
                 true -> {
-
+                    result.body()?.data?.myRoom.let {myRoom ->
+                        myRoom?.floor?.let { it ->
+                            sessionManager.saveMyRoom(myRoom.workStation.toString(),myRoom.location.toString(),
+                                it
+                            )
+                        }
+                    }
                     result.body()?.data?.list?.map { it.toDomain() }!!.toMutableList()
                 }
                 else ->

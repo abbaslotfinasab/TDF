@@ -35,7 +35,6 @@ class LoginFragment : Fragment() {
         const val Code = "code"
         const val Name = "name"
         const val TeaBoy = "isTeaBoy"
-        const val Active = "isTeaBoyActive"
         const val Mail = "mail"
         const val Job = "job"
         const val ID = "userId"
@@ -98,6 +97,7 @@ class LoginFragment : Fragment() {
                             putString(MainEnum.HomeId.main,it.data.userHomeId)
                             putString(Mail,it.data.mail)
                             putString(MainEnum.Location.main,it.data.officeLocation)
+                            putString(MainEnum.WorkStation.main,it.data.officeWorkStation)
                             it.data.userid?.let { it1 -> putInt(MainEnum.UserId.main, it1) }
                             it.data.employeeId?.let { it2 -> putInt(MainEnum.EmployeeId.main, it2) }
                             putBoolean(Start,true)

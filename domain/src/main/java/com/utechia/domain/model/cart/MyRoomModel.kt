@@ -1,5 +1,7 @@
 package com.utechia.domain.model.cart
 
 data class MyRoomModel(
-    val officeWorkStation: String?,
+    val floor:Int?,
+    val location: String?,
+    val workStation: String?,
     )

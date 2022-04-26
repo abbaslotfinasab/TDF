@@ -9,11 +9,14 @@ import kotlinx.serialization.Serializable
 @Parcelize
 @Serializable
 data class MyRoom (
-    val officeWorkStation: String?,
+
+    val floor:Int?,
+    val location: String?,
+    val workStation: String?,
 
     ):Parcelable, ResponseObject<MyRoomModel> {
 
     override fun toDomain(): MyRoomModel {
-        return MyRoomModel(officeWorkStation)
+        return MyRoomModel(floor,location,workStation)
     }
 }
