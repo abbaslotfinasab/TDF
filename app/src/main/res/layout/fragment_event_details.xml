@@ -43,6 +43,7 @@
                 android:minHeight="85dp"
                 app:layout_collapseMode="pin"
                 android:fitsSystemWindows="true"
+                android:paddingTop="10dp"
                 app:popupTheme="@style/ThemeOverlay.AppCompat.Light"
                 app:theme="@style/ThemeOverlay.AppCompat.Dark.ActionBar" />
 
