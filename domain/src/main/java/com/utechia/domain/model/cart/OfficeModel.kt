@@ -1,7 +1,5 @@
 package com.utechia.domain.model.cart
 
-import com.utechia.domain.model.cart.LocationModel
-
 
 data class OfficeModel (
 

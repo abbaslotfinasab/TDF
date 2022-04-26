@@ -231,8 +231,8 @@ class LocationOrderFragment : Fragment() {
         binding.appCompatButton.setOnClickListener {
             when(type){
                 0 -> {
-                    location = "test"
-                    floor = 10
+                    location = "WOO"
+                    floor = 9
                 }
                 1 -> {
                     location = binding.selectLocationAutoCompleteTextView.text.toString()

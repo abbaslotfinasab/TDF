@@ -24,14 +24,14 @@
         android:layout_height="wrap_content"
         android:layout_marginStart="20dp"
         android:layout_marginTop="8dp"
+        android:layout_marginEnd="5dp"
         android:ellipsize="end"
-        android:maxLines="1"
-        android:singleLine="true"
         android:textColor="#313131"
-        android:textStyle="bold"
         android:textSize="16sp"
+        android:textStyle="bold"
+        app:layout_constraintEnd_toStartOf="@+id/browser"
         app:layout_constraintStart_toEndOf="@+id/avatar"
-        app:layout_constraintTop_toTopOf="parent"/>
+        app:layout_constraintTop_toTopOf="parent" />
 
     <TextView
         android:id="@+id/subTitle"
