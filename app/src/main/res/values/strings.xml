@@ -143,6 +143,8 @@
     <string name="tdf_oms">TDF OMS</string>
     <string name="my_steps">MY STEPS</string>
     <string name="top_5_users">TOP 5 USERS</string>
+    <string name="not_defined">Not defined</string>
+
 
 
     <string-array name="month_array">

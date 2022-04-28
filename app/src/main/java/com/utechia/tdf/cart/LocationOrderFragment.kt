@@ -51,7 +51,21 @@ class LocationOrderFragment : Fragment() {
     override fun onResume() {
         super.onResume()
 
-        binding.myRadioButton.isChecked = true
+        type = 0
+        floor = prefs.getInt(MainEnum.FloorId.main,-1)
+
+        if(floor == -1) {
+            location = getString(R.string.not_defined)
+            binding.myOffice.text = getString(R.string.not_defined)
+            binding.myRadioButton.isChecked = false
+            binding.myRadioButton.isEnabled = false
+        }
+        else{
+            location = prefs.getString(MainEnum.Location.main, "").toString()
+            binding.myRadioButton.isChecked = true
+            binding.myRadioButton.isEnabled = true
+        }
+
         binding.selectRadioButton.isChecked = false
         binding.otherRadioButton.isChecked = false
         binding.addressInput.apply {
@@ -85,18 +99,11 @@ class LocationOrderFragment : Fragment() {
         }
         binding.otherTextInputLayout.isEnabled = false
 
-        type = 0
-        location = "test"
-        floor = 10
-
-
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         prefs = requireActivity().getSharedPreferences(MainEnum.Tdf.main, Context.MODE_PRIVATE)
-
-        binding.myOffice.text = prefs.getString(MainEnum.Location.main,"").toString()
 
         officeViewModel.getOffice()
 
@@ -276,6 +283,21 @@ class LocationOrderFragment : Fragment() {
                 is Result.Success -> {
                     binding.prg.visibility = View.GONE
 
+                    floor = prefs.getInt(MainEnum.FloorId.main,-1)
+
+                    if(floor == -1) {
+                        location = getString(R.string.not_defined)
+                        binding.myOffice.text = getString(R.string.not_defined)
+                        binding.myRadioButton.isChecked = false
+                        binding.myRadioButton.isEnabled = false
+
+                    }
+                    else{
+                        location = prefs.getString(MainEnum.Location.main, "").toString()
+                        binding.myRadioButton.isChecked = true
+                        binding.myRadioButton.isEnabled = true
+
+                    }
                     locations.addAll(it.data)
 
                     floorsName.clear()
