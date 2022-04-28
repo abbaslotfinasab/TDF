@@ -29,9 +29,11 @@ class OfficeRepoImpl @Inject constructor(
                 true -> {
                     result.body()?.data?.myRoom.let {myRoom ->
                         myRoom?.floor?.let { it ->
-                            sessionManager.saveMyRoom(myRoom.workStation.toString(),myRoom.location.toString(),
-                                it
-                            )
+                            it.id?.let { it1 ->
+                                sessionManager.saveMyRoom(myRoom.workStation.toString(),myRoom.location.toString(),
+                                    it1
+                                )
+                            }
                         }
                     }
                     result.body()?.data?.list?.map { it.toDomain() }!!.toMutableList()

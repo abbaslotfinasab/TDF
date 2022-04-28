@@ -55,13 +55,13 @@ class LocationOrderFragment : Fragment() {
         floor = prefs.getInt(MainEnum.FloorId.main,-1)
 
         if(floor == -1) {
-            location = getString(R.string.not_defined)
             binding.myOffice.text = getString(R.string.not_defined)
             binding.myRadioButton.isChecked = false
             binding.myRadioButton.isEnabled = false
         }
         else{
             location = prefs.getString(MainEnum.Location.main, "").toString()
+            binding.myOffice.text =prefs.getString(MainEnum.Location.main, getString(R.string.not_defined)).toString()
             binding.myRadioButton.isChecked = true
             binding.myRadioButton.isEnabled = true
         }
@@ -286,14 +286,13 @@ class LocationOrderFragment : Fragment() {
                     floor = prefs.getInt(MainEnum.FloorId.main,-1)
 
                     if(floor == -1) {
-                        location = getString(R.string.not_defined)
                         binding.myOffice.text = getString(R.string.not_defined)
                         binding.myRadioButton.isChecked = false
                         binding.myRadioButton.isEnabled = false
-
                     }
                     else{
                         location = prefs.getString(MainEnum.Location.main, "").toString()
+                        binding.myOffice.text = prefs.getString(MainEnum.Location.main, "").toString()
                         binding.myRadioButton.isChecked = true
                         binding.myRadioButton.isEnabled = true
 

@@ -8,7 +8,7 @@ import kotlinx.serialization.Serializable
 @Serializable
 data class OfficeList (
 
-    val myRoom:MyRoom,
-    val list: MutableList<OfficeData>
+    val myRoom:MyRoom?,
+    val list: MutableList<OfficeData>?
 
         ): Parcelable

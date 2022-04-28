@@ -10,13 +10,13 @@ import kotlinx.serialization.Serializable
 @Serializable
 data class MyRoom (
 
-    val floor:Int?,
+    val floor:Floor?,
     val location: String?,
     val workStation: String?,
 
     ):Parcelable, ResponseObject<MyRoomModel> {
 
     override fun toDomain(): MyRoomModel {
-        return MyRoomModel(floor,location,workStation)
+        return MyRoomModel(floor?.id,location,workStation)
     }
 }
