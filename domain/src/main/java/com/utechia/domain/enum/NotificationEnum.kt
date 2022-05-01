@@ -2,8 +2,11 @@ package com.utechia.domain.enum
 
 enum class NotificationEnum(val notification: String) {
 
-    ID("referenceId"),
+    Id("id"),
+    ReferenceId("referenceId"),
     Type("type"),
+    Access("access"),
+    Url("url"),
     TeaBoy("Teaboy"),
     Ticket("Ticket"),
     Cafeteria("Cafeteria"),

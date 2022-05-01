@@ -1,5 +1,6 @@
 package com.utechia.tdf.ticket
 
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -48,6 +49,7 @@ class TicketAdapter: PagingDataAdapter<TicketModel, TicketAdapter.MyViewHolder>(
 
             layout.setOnClickListener {
                 val bundle = bundleOf("fid" to ticket.fid , "ticketId" to ticket.id)
+                Log.d("ticketId",ticket.id.toString())
                 itemView.findNavController().clearBackStack(R.id.ticketSystemFragment)
                 itemView.findNavController().navigate(R.id.action_ticketSystemFragment_to_ticketDetailsFragment,bundle)
 
