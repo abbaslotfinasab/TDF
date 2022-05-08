@@ -166,7 +166,7 @@ class MyFirebaseMessagingService : FirebaseMessagingService() {
 
             NotificationEnum.TeaBoy.notification -> {
 
-                val bundle = bundleOf(OrderEnum.ID.order to referenceId)
+                val bundle = bundleOf(OrderEnum.ID.order to referenceId?.toInt())
 
                 return NavDeepLinkBuilder(applicationContext)
                     .setGraph(R.navigation.nav_graph)
@@ -180,7 +180,7 @@ class MyFirebaseMessagingService : FirebaseMessagingService() {
 
             NotificationEnum.Ticket.notification -> {
 
-                val bundle = bundleOf(TicketEnum.Id.ticket to referenceId)
+                val bundle = bundleOf(TicketEnum.Id.ticket to referenceId?.toInt())
 
                 return NavDeepLinkBuilder(applicationContext)
                     .setGraph(R.navigation.nav_graph)
@@ -216,7 +216,7 @@ class MyFirebaseMessagingService : FirebaseMessagingService() {
 
             NotificationEnum.Survey.notification -> {
 
-                val bundle = bundleOf(SurveyEnum.Id.survey to referenceId)
+                val bundle = bundleOf(SurveyEnum.Id.survey to referenceId?.toInt())
 
                 return NavDeepLinkBuilder(applicationContext)
                     .setGraph(R.navigation.nav_graph)
@@ -230,7 +230,7 @@ class MyFirebaseMessagingService : FirebaseMessagingService() {
 
             NotificationEnum.Event.notification -> {
 
-                val bundle = bundleOf(EventsEnum.ID.event to referenceId)
+                val bundle = bundleOf(EventsEnum.ID.event to referenceId?.toInt())
 
                 return NavDeepLinkBuilder(applicationContext)
                     .setGraph(R.navigation.nav_graph)
@@ -264,15 +264,14 @@ class MyFirebaseMessagingService : FirebaseMessagingService() {
                 else
                         PendingIntent.FLAG_ONE_SHOT
 
-
                 )
             }
+
             else -> {
                 return NavDeepLinkBuilder(applicationContext)
                     .setGraph(R.navigation.nav_graph)
                     .setDestination(R.id.nav_graph)
                     .createPendingIntent()
-
             }
         }
     }
