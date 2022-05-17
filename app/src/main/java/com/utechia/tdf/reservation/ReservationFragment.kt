@@ -35,12 +35,10 @@ class ReservationFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
+        reservationViewModel.getBooked()
 
         binding.plus.setOnClickListener {
-
-
             findNavController().navigate(R.id.action_reservationFragment_to_createReservationFragment)
-
         }
 
 
@@ -50,8 +48,6 @@ class ReservationFragment : Fragment() {
             layoutManager = LinearLayoutManager(context,LinearLayoutManager.VERTICAL,false)
         addItemDecoration(ItemDecorationReservation())
         }
-
-        reservationViewModel.getBooked()
         observerViewModel()
 
     }

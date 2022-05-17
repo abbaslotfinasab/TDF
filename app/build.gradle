@@ -63,6 +63,7 @@ defaultConfig {
     kotlinOptions {
         jvmTarget = '1.8'
     }
+    namespace 'com.utechia.tdf'
 }
 
 dependencies {
@@ -70,20 +71,20 @@ dependencies {
     implementation project(':data')
     implementation project(':domain')
     implementation platform('com.google.firebase:firebase-bom:29.0.0')
-    implementation 'com.google.firebase:firebase-messaging-directboot:23.0.3'
-    implementation 'com.google.firebase:firebase-database-ktx:20.0.4'
-    implementation 'com.google.firebase:firebase-crashlytics-ktx:18.2.9'
+    implementation 'com.google.firebase:firebase-messaging-directboot:23.0.4'
+    implementation 'com.google.firebase:firebase-database-ktx:20.0.5'
+    implementation 'com.google.firebase:firebase-crashlytics-ktx:18.2.10'
     implementation 'com.google.firebase:firebase-perf-ktx:20.0.6'
     implementation 'com.google.android.gms:play-services-fitness:21.0.1'
-    implementation 'com.google.android.gms:play-services-auth:20.1.0'
+    implementation 'com.google.android.gms:play-services-auth:20.2.0'
 
     coreLibraryDesugaring 'com.android.tools:desugar_jdk_libs:1.1.5'
 
-    implementation 'com.google.firebase:firebase-messaging-ktx:23.0.3'
+    implementation 'com.google.firebase:firebase-messaging-ktx:23.0.4'
 
-    implementation 'com.google.firebase:firebase-analytics-ktx:20.1.2'
+    implementation 'com.google.firebase:firebase-analytics-ktx:21.0.0'
 
-    implementation 'org.jetbrains.kotlinx:kotlinx-coroutines-android:1.6.0'
+    implementation 'org.jetbrains.kotlinx:kotlinx-coroutines-android:1.6.1'
 
     implementation "androidx.work:work-runtime-ktx:2.7.1"
     implementation "androidx.work:work-multiprocess:2.7.1"
@@ -92,7 +93,7 @@ dependencies {
 
     implementation 'androidx.core:core-ktx:1.7.0'
     implementation 'androidx.appcompat:appcompat:1.4.1'
-    implementation 'com.google.android.material:material:1.5.0'
+    implementation 'com.google.android.material:material:1.6.0'
     implementation 'androidx.constraintlayout:constraintlayout:2.1.3'
     implementation 'androidx.legacy:legacy-support-v4:1.0.0'
     implementation 'com.google.android.gms:play-services-base:18.0.1'
@@ -108,7 +109,7 @@ dependencies {
     implementation "androidx.navigation:navigation-ui-ktx:2.4.2"
     implementation "androidx.navigation:navigation-dynamic-features-fragment:2.4.2"
     androidTestImplementation "androidx.navigation:navigation-testing:2.4.2"
-    implementation "androidx.navigation:navigation-compose:2.5.0-beta01"
+    implementation "androidx.navigation:navigation-compose:2.5.0-rc01"
 
     implementation "androidx.hilt:hilt-lifecycle-viewmodel:1.0.0-alpha03"
     implementation 'com.google.dagger:hilt-android:2.40.5'

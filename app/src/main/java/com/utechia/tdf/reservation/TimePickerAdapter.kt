@@ -17,7 +17,6 @@ class TimePickerAdapter(private val createReservationFragment: CreateReservation
 
 
     fun addData(data:MutableList<HourModel>){
-
         timeList.clear()
         selected.clear()
         timeList.addAll(data)
@@ -77,9 +76,6 @@ class TimePickerAdapter(private val createReservationFragment: CreateReservation
 
                         false
                     }
-
-                    createReservationFragment.setTime(selected.size,selected.elementAt(0),selected.elementAt(selected.size-1))
-
                 }
             }
         }
