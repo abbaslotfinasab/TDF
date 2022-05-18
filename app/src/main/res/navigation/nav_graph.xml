@@ -155,6 +155,15 @@
             app:exitAnim="@android:anim/fade_out"
             app:popEnterAnim="@android:anim/fade_in"
             app:popExitAnim="@android:anim/fade_out"/>
+
+        <action
+            android:id="@+id/action_createReservationFragment_to_invitePeopleFragmente"
+            app:destination="@id/invitePeopleFragment"
+            app:enterAnim="@android:anim/fade_in"
+            app:exitAnim="@android:anim/fade_out"
+            app:popEnterAnim="@android:anim/fade_in"
+            app:popExitAnim="@android:anim/fade_out"/>
+
     </fragment>
     <fragment
         android:id="@+id/reservationDetails"
@@ -658,11 +667,6 @@
             app:popExitAnim="@android:anim/fade_out"/>
     </dialog>
 
-    <dialog
-        android:id="@+id/statusFragment"
-        android:name="com.utechia.tdf.home.teaboy.StatusFragment"
-        android:label="fragment_status"
-        tools:layout="@layout/fragment_status" />
     <dialog
         android:id="@+id/orderDetailsFragment"
         android:name="com.utechia.tdf.order.user.UserOrderDetailsFragment"
@@ -1446,6 +1450,7 @@
             android:name="orderId"
             app:argType="integer"
             android:defaultValue="0" />
+
         <action
             android:id="@+id/action_completeFragment_to_orderFragment"
             app:launchSingleTop="true"
@@ -1456,5 +1461,21 @@
             app:popExitAnim="@android:anim/fade_out"/>
 
     </dialog>
+
+    <dialog
+        android:id="@+id/invitePeopleFragment"
+        android:name="com.utechia.tdf.reservation.InvitePeopleFragment"
+        android:label="fragment_invite_people"
+        tools:layout="@layout/fragment_invite_people" />
+    <fragment
+        android:id="@+id/searchPeopleFragment"
+        android:name="com.utechia.tdf.reservation.SearchPeopleFragment"
+        android:label="fragment_search_people"
+        tools:layout="@layout/fragment_search_people" />
+    <fragment
+        android:id="@+id/addGuestFragment"
+        android:name="com.utechia.tdf.reservation.AddGuestFragment"
+        android:label="fragment_add_guest"
+        tools:layout="@layout/fragment_add_guest" />
 
 </navigation>
