@@ -157,6 +157,14 @@
             app:popExitAnim="@android:anim/fade_out"/>
 
         <action
+            android:id="@+id/action_createReservationFragment_to_roomListFragment"
+            app:destination="@id/roomListFragment"
+            app:enterAnim="@android:anim/fade_in"
+            app:exitAnim="@android:anim/fade_out"
+            app:popEnterAnim="@android:anim/fade_in"
+            app:popExitAnim="@android:anim/fade_out"/>
+
+        <action
             android:id="@+id/action_createReservationFragment_to_invitePeopleFragmente"
             app:destination="@id/invitePeopleFragment"
             app:enterAnim="@android:anim/fade_in"
@@ -1477,5 +1485,16 @@
         android:name="com.utechia.tdf.reservation.AddGuestFragment"
         android:label="fragment_add_guest"
         tools:layout="@layout/fragment_add_guest" />
+    <fragment
+        android:id="@+id/reservationChildFragment"
+        android:name="com.utechia.tdf.reservation.ReservationChildFragment"
+        android:label="fragment_reservation_child"
+        tools:layout="@layout/fragment_reservation_child" />
+
+    <dialog
+        android:id="@+id/roomListFragment"
+        android:name="com.utechia.tdf.reservation.RoomListFragment"
+        android:label="fragment_room_list"
+        tools:layout="@layout/fragment_room_list" />
 
 </navigation>

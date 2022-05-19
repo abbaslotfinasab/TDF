@@ -4,12 +4,9 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.Toast
-import com.utechia.domain.utile.Result
 import androidx.fragment.app.Fragment
-import androidx.fragment.app.viewModels
-import androidx.navigation.fragment.findNavController
-import androidx.recyclerview.widget.LinearLayoutManager
+import com.google.android.material.tabs.TabLayoutMediator
+import com.utechia.domain.enum.OrderEnum
 import com.utechia.tdf.R
 import com.utechia.tdf.databinding.FragmentReservationBinding
 
@@ -18,10 +15,9 @@ import dagger.hilt.android.AndroidEntryPoint
 @AndroidEntryPoint
 class ReservationFragment : Fragment() {
 
+    private var type:String = ""
     private lateinit var binding: FragmentReservationBinding
-    private val reservationViewModel: ReservationViewModel by viewModels()
-    private val bookedAdapter: BookedAdapter = BookedAdapter()
-
+    private lateinit var reservationViewPagerAdapter: ReservationViewPagerAdapter
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -29,69 +25,22 @@ class ReservationFragment : Fragment() {
     ): View {
         binding = FragmentReservationBinding.inflate(inflater, container, false)
         return binding.root
-
     }
-
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        reservationViewModel.getBooked()
+        reservationViewPagerAdapter = ReservationViewPagerAdapter(childFragmentManager, lifecycle)
 
-        binding.plus.setOnClickListener {
-            findNavController().navigate(R.id.action_reservationFragment_to_createReservationFragment)
+        binding.pager.adapter = reservationViewPagerAdapter
+
+        if (arguments != null) {
+            type = requireArguments().getString(OrderEnum.Type.order, "")
         }
 
-
-        binding.bookedRecyclerView.apply {
-            adapter =bookedAdapter
-            addItemDecoration(ItemDecorationBooked())
-            layoutManager = LinearLayoutManager(context,LinearLayoutManager.VERTICAL,false)
-        addItemDecoration(ItemDecorationReservation())
-        }
-        observerViewModel()
-
+        val tabTitles =
+            listOf(getText(R.string.my_meetings), getText(R.string.invitations))
+        TabLayoutMediator(binding.tabLayout, binding.pager) { tab, position ->
+            tab.text = tabTitles[position]
+        }.attach()
     }
-
-    private fun observerViewModel(){
-
-        reservationViewModel.reservationModel.observe(viewLifecycleOwner){
-
-            when(it){
-                is Result.Success -> {
-
-                    if(it.data.size ==0){
-                        binding.createLayout.visibility = View.VISIBLE
-                        binding.bookedRecyclerView.visibility = View.GONE
-                        binding.prg.visibility = View.GONE
-
-
-                    }
-                    else{
-                        binding.createLayout.visibility = View.GONE
-                        binding.bookedRecyclerView.visibility = View.VISIBLE
-                        binding.prg.visibility = View.GONE
-                        bookedAdapter.addData(it.data)
-
-                    }
-
-                }
-
-                is Result.Loading ->{
-                    binding.createLayout.visibility = View.GONE
-                    binding.bookedRecyclerView.visibility = View.GONE
-                    binding.prg.visibility = View.VISIBLE
-
-                }
-
-                is Result.Error ->{
-                    binding.createLayout.visibility = View.GONE
-                    binding.bookedRecyclerView.visibility = View.GONE
-                    binding.prg.visibility = View.GONE
-                    Toast.makeText(context,it.message,Toast.LENGTH_SHORT).show()
-                }
-            }
-
-        }
-    }
-
 }

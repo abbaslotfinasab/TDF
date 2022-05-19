@@ -2,29 +2,17 @@ package com.utechia.data.entity.reservation
 
 import android.os.Parcelable
 import com.utechia.data.base.ResponseObject
+import com.utechia.data.entity.refreshment.RefreshmentData
 import com.utechia.domain.model.reservation.RoomModel
 import kotlinx.parcelize.Parcelize
+import kotlinx.parcelize.RawValue
+import kotlinx.serialization.Contextual
 import kotlinx.serialization.Serializable
 
 
 @Parcelize
 @Serializable
 data class Room(
-
-    var id:Int?,
-
-    var name:String?,
-
-    var floor:String?,
-
-    var capacity:Int?,
-
-    var hour:MutableList<Hour>
-
-
-
-):Parcelable , ResponseObject<RoomModel> {
-    override fun toDomain(): RoomModel {
-        return RoomModel(id,name,floor,capacity,hour.map {it.toDomain()}.toMutableList())
-    }
-}
+    val data: @Contextual @RawValue MutableList<RoomData>?,
+    val error:  @Contextual @RawValue Any?
+):Parcelable

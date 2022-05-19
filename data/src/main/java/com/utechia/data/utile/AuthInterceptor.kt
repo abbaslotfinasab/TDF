@@ -19,7 +19,6 @@ class AuthInterceptor @Inject constructor(@ApplicationContext context: Context) 
 
             Log.i("Bearer","Bearer $it")
         }
-
         return chain.proceed(requestBuilder.build())
     }
 }

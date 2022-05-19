@@ -239,5 +239,8 @@ interface Service {
     @GET("teaboy/status")
     suspend fun getTeaBoyActive():Response<TeaBoyActive>
 
+    @GET("reservation/room")
+    suspend fun getReservationRoom():Response<TeaBoyActive>
+
 
 }
