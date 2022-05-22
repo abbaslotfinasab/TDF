@@ -29,13 +29,21 @@
 
     <style name="AppBottomSheetDialogTheme"
         parent="Theme.MaterialComponents.Light.BottomSheetDialog">
-
         <item name="bottomSheetStyle">@style/CustomeBottomSheeteStyle</item>
+    </style>
+
+    <style name="RoomBottomSheetDialogTheme"
+        parent="Theme.MaterialComponents.Light.BottomSheetDialog">
+        <item name="bottomSheetStyle">@style/CustomeRoomBottomSheeteStyle</item>
     </style>
 
     <style name="CustomeBottomSheeteStyle"
         parent="Widget.Design.BottomSheet.Modal">
         <item name="android:background">@drawable/category_back</item>
+    </style>
+    <style name="CustomeRoomBottomSheeteStyle"
+        parent="Widget.Design.BottomSheet.Modal">
+        <item name="android:background">@drawable/select_room_back</item>
     </style>
 
     <style name="ProgressBar" parent="Theme.AppCompat.Light">

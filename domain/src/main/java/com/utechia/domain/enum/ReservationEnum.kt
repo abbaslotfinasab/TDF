@@ -1,0 +1,8 @@
+package com.utechia.domain.enum
+
+enum class ReservationEnum(val reservation:String) {
+    ID("reservationId"),
+    Cover("cover"),
+    Title("title"),
+
+}

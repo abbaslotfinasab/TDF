@@ -2,10 +2,12 @@
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
-    android:layout_height="150dp">
+    android:layout_height="150dp"
+    android:layout_marginBottom="10dp"
+    android:background="@color/white">
 
     <ImageView
-        android:id="@+id/imageView3"
+        android:id="@+id/coverPhoto"
         android:layout_width="125dp"
         android:layout_height="0dp"
         android:layout_marginStart="12dp"
@@ -16,18 +18,63 @@
         app:layout_constraintTop_toTopOf="parent" />
 
     <TextView
+        android:id="@+id/title"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="20dp"
-        android:layout_marginTop="16dp"
+        android:layout_marginTop="4dp"
         android:textColor="@color/black"
         android:textSize="12sp"
         android:textStyle="bold"
-        app:layout_constraintStart_toEndOf="@+id/imageView3"
-        app:layout_constraintTop_toTopOf="@+id/imageView3" />
+        app:layout_constraintStart_toEndOf="@+id/coverPhoto"
+        app:layout_constraintTop_toTopOf="@+id/coverPhoto" />
 
+    <ImageView
+        android:id="@+id/imageView1"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:src="@drawable/location_room"
+        android:layout_marginStart="20dp"
+        android:layout_marginTop="13dp"
+        app:layout_constraintStart_toEndOf="@+id/coverPhoto"
+        app:layout_constraintTop_toBottomOf="@+id/title" />
+
+    <TextView
+        android:id="@+id/locationRoom"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="5dp"
+        android:textColor="#979797"
+        android:textSize="12sp"
+        android:textStyle="italic"
+        app:layout_constraintBottom_toBottomOf="@+id/imageView1"
+        app:layout_constraintStart_toEndOf="@+id/imageView1"
+        app:layout_constraintTop_toTopOf="@+id/imageView1" />
+
+    <ImageView
+        android:id="@+id/imageView2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="20dp"
+        android:src="@drawable/profile_2user"
+        android:layout_marginTop="13dp"
+        app:layout_constraintStart_toEndOf="@+id/coverPhoto"
+        app:layout_constraintTop_toBottomOf="@+id/imageView1" />
+
+    <TextView
+        android:id="@+id/capacityRoom"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="5dp"
+        android:textColor="#979797"
+        android:textSize="12sp"
+        android:textStyle="italic"
+        app:layout_constraintBottom_toBottomOf="@+id/imageView2"
+        app:layout_constraintStart_toEndOf="@+id/imageView2"
+        app:layout_constraintTop_toTopOf="@+id/imageView2" />
 
     <androidx.appcompat.widget.AppCompatButton
+        android:id="@+id/btnSelect"
         android:layout_width="0dp"
         android:layout_height="36dp"
         android:textColor="#3360DD"
@@ -35,9 +82,8 @@
         android:layout_marginStart="20dp"
         android:layout_marginEnd="20dp"
         android:background="#1A3360DD"
-
-        app:layout_constraintBottom_toBottomOf="@+id/imageView3"
+        app:layout_constraintBottom_toBottomOf="@+id/coverPhoto"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toEndOf="@+id/imageView3" />
+        app:layout_constraintStart_toEndOf="@+id/coverPhoto" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

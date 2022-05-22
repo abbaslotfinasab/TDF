@@ -142,12 +142,7 @@
             app:exitAnim="@android:anim/fade_out"
             app:popEnterAnim="@android:anim/fade_in"
             app:popExitAnim="@android:anim/fade_out"/>
-        <argument
-            android:name="month_id"
-            app:argType="integer" />
-        <argument
-            android:name="day_id"
-            app:argType="integer" />
+
         <action
             android:id="@+id/action_createReservationFragment_to_reservationDetails"
             app:destination="@id/reservationDetails"
@@ -1495,6 +1490,16 @@
         android:id="@+id/roomListFragment"
         android:name="com.utechia.tdf.reservation.RoomListFragment"
         android:label="fragment_room_list"
-        tools:layout="@layout/fragment_room_list" />
+        tools:layout="@layout/fragment_room_list" >
+
+        <action
+            android:id="@+id/action_roomListFragment_to_createReservationFragment"
+            app:destination="@id/createReservationFragment"
+            app:enterAnim="@android:anim/fade_in"
+            app:exitAnim="@android:anim/fade_out"
+            app:popEnterAnim="@android:anim/fade_in"
+            app:popExitAnim="@android:anim/fade_out"/>
+
+    </dialog>
 
 </navigation>

@@ -1,21 +1,23 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.coordinatorlayout.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.coordinatorlayout.widget.CoordinatorLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:background="@color/background"
+    android:layout_gravity="center"
+    android:layout_height="750dp"
     tools:context=".reservation.RoomListFragment">
 
     <FrameLayout
         android:id="@+id/frameLayout"
         android:layout_width="match_parent"
-        android:background="@color/background"
-        android:layout_height="match_parent">
+        android:layout_gravity="center"
+        android:layout_height="750dp">
 
         <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
+            android:layout_gravity="center"
             android:gravity="center_horizontal">
 
             <TextView
@@ -25,6 +27,7 @@
                 android:layout_marginTop="28dp"
                 android:text="@string/select_room"
                 android:textColor="@color/black"
+                android:textStyle="bold"
                 android:textSize="16sp"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
@@ -48,11 +51,46 @@
             <androidx.recyclerview.widget.RecyclerView
                 android:id="@+id/inviteRecycler"
                 android:layout_width="0dp"
-                android:layout_height="wrap_content"
+                android:layout_height="0dp"
                 android:layout_marginTop="20dp"
+                android:layout_marginBottom="5dp"
+                app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="@+id/searchView"
                 app:layout_constraintStart_toStartOf="@+id/searchView"
                 app:layout_constraintTop_toBottomOf="@+id/searchView" />
+
+
+
+            <androidx.cardview.widget.CardView
+                android:id="@+id/prg"
+                android:layout_width="72dp"
+                android:layout_height="72dp"
+                app:cardElevation="6dp"
+                app:cardCornerRadius="36dp"
+                android:visibility="gone"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:cardPreventCornerOverlap="true"
+                app:layout_constraintCircleRadius="36dp"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent">
+
+                <com.agrawalsuneet.dotsloader.loaders.LazyLoader
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:gravity="center"
+                    android:layout_gravity="center"
+                    app:lazyloader_animDur="800"
+                    app:lazyloader_dotsDist="5dp"
+                    app:lazyloader_dotsRadius="5dp"
+                    app:lazyloader_firstDelayDur="150"
+                    app:lazyloader_firstDotColor="#3360DD"
+                    app:lazyloader_interpolator="@android:anim/decelerate_interpolator"
+                    app:lazyloader_secondDelayDur="300"
+                    app:lazyloader_secondDotColor="#3360DD"
+                    app:lazyloader_thirdDotColor="#3360DD" />
+
+            </androidx.cardview.widget.CardView>
 
         </androidx.constraintlayout.widget.ConstraintLayout>
 

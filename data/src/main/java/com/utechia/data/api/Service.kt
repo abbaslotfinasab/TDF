@@ -29,6 +29,7 @@ import com.utechia.data.entity.permission.PermissionType
 import com.utechia.data.entity.permission.PermissionUpdateBody
 import com.utechia.data.entity.profile.Profile
 import com.utechia.data.entity.refreshment.Refreshment
+import com.utechia.data.entity.reservation.Room
 import com.utechia.data.entity.survey.SingleSurvey
 import com.utechia.data.entity.survey.Survey
 import com.utechia.data.entity.ticket.*
@@ -240,7 +241,7 @@ interface Service {
     suspend fun getTeaBoyActive():Response<TeaBoyActive>
 
     @GET("reservation/room")
-    suspend fun getReservationRoom():Response<TeaBoyActive>
+    suspend fun getReservationRoom():Response<Room>
 
 
 }

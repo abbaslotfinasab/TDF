@@ -1,45 +1,45 @@
 package com.utechia.data.repo.reservation
 
-import com.utechia.data.entity.reservation.Hour
-import com.utechia.data.entity.reservation.Room
+import com.utechia.data.api.Service
+import com.utechia.data.dao.RoomDao
+import com.utechia.data.entity.reservation.RoomData
+import com.utechia.data.utile.NetworkHelper
 import com.utechia.domain.model.reservation.RoomModel
 import com.utechia.domain.repository.reservation.RoomRepo
+import java.io.IOException
 import javax.inject.Inject
 import javax.inject.Singleton
 
 @Singleton
 class RoomRepoImpl @Inject constructor(
 
-  /*  private val service: Service,*/
+    private val service: Service,
+    private val networkHelper: NetworkHelper,
+    private val roomDao: RoomDao
 
-    ): RoomRepo {
 
-    private var room: MutableList<Room> = mutableListOf()
-    private var hour: MutableList<Hour> = mutableListOf()
+): RoomRepo {
 
-    override suspend fun getRoom(): MutableList<RoomModel> {
-        hour.clear()
-        hour.add(Hour(0, "8:00", true))
-        hour.add(Hour(1, "8:30", true))
-        hour.add(Hour(2, "9:00", true))
-        hour.add(Hour(3, "9:30", false))
-        hour.add(Hour(4, "10:00", false))
-        hour.add(Hour(5, "10:30", false))
-        hour.add(Hour(6, "11:00", false))
-        hour.add(Hour(7, "11:30", false))
-        hour.add(Hour(8, "12:00", true))
-        hour.add(Hour(9, "12:30", true))
-        hour.add(Hour(10, "13:00", true))
-        hour.add(Hour(11, "13:30", true))
-        hour.add(Hour(12, "14:00", true))
-        hour.add(Hour(13, "14:30", true))
-        hour.add(Hour(14, "15:00", true))
-        hour.add(Hour(15, "15:30", true))
-        hour.add(Hour(16, "16:00", true))
-        hour.add(Hour(17, "16:30", true))
-        hour.add(Hour(18, "17:00", false))
+    override suspend fun getRoom(query:String?): MutableList<RoomModel> {
 
-        return emptyList<RoomModel>().toMutableList()
+        if (networkHelper.isNetworkConnected()) {
+
+            return if (query==null){
+                val result = service.getReservationRoom()
+
+                if (result.isSuccessful && result.body()?.data!=null){
+                    roomDao.insertAll(result.body()?.data?: emptyList<RoomData>().toMutableList())
+                    result.body()?.data?.map { it.toDomain() }!!.toMutableList()
+                }else{
+                    throw IOException("Server is Not Responding")
+                }
+            }else{
+                roomDao.search(query).map {
+                    it.toDomain()
+                }.toMutableList()
+            }
+
+        } else throw IOException("No Internet Connection")
     }
 }
 

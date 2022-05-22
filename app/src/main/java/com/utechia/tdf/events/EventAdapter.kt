@@ -57,8 +57,6 @@ class EventAdapter: PagingDataAdapter<EventModel, EventAdapter.MyViewHolder>(
                 .error(R.mipmap.ic_evente_banner_foreground)
                 .into(image)
 
-            
-            
             if (event.isPublic==true){
                 subTitle.visibility = View.GONE
                 btnPublic.visibility = View.VISIBLE

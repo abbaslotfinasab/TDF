@@ -108,7 +108,7 @@ class RefreshmentAdapter(private val createRefreshmentFragment: CreateRefreshmen
                 .into(image)
 
             add.setOnClickListener {
-                refreshment[position].number = refreshment[position].number?.plus(1)
+                refreshment[position].number = refreshment[position].number.plus(1)
                 numberText.text = refreshment[position].number .toString()
                 refreshment[position].open=true
                 it.visibility = View.GONE
@@ -116,14 +116,14 @@ class RefreshmentAdapter(private val createRefreshmentFragment: CreateRefreshmen
                 createRefreshmentFragment.refreshmentViewModel.postCart(refreshment[position].id?:0,refreshment[position].number?:0 )
             }
             plus.setOnClickListener {
-                refreshment[position].number = refreshment[position].number?.plus(1)
+                refreshment[position].number = refreshment[position].number.plus(1)
                 numberText.text = refreshment[position].number .toString()
                 createRefreshmentFragment.refreshmentViewModel.updateCart(refreshment[position].id?:0,refreshment[position].number?:0 )
             }
 
             minus.setOnClickListener {
                 if (refreshment[position].number?:0 >1) {
-                    refreshment[position].number = refreshment[position].number?.minus(1)
+                    refreshment[position].number = refreshment[position].number.minus(1)
                     createRefreshmentFragment.refreshmentViewModel.updateCart(
                         refreshment[position].id?:0,
                         refreshment[position].number?:0

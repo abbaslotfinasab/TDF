@@ -28,4 +28,8 @@ class RoomModule {
     @Provides
     fun provideCategoryDao(db: AppDataBase) = db.refreshmentDao()
 
+    @Singleton
+    @Provides
+    fun provideRoomDao(db: AppDataBase) = db.roomDao()
+
 }

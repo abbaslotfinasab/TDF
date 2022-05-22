@@ -10,8 +10,8 @@ import javax.inject.Singleton
 class RoomUseCaseImpl @Inject constructor(private val roomRepo: RoomRepo):
     RoomUseCase<RoomModel> {
 
-    override suspend fun execute(): MutableList<RoomModel> {
-        return roomRepo.getRoom()
+    override suspend fun execute(query:String?): MutableList<RoomModel> {
+        return roomRepo.getRoom(query)
     }
 
 
