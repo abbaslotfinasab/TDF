@@ -4,5 +4,7 @@ enum class ReservationEnum(val reservation:String) {
     ID("reservationId"),
     Cover("cover"),
     Title("title"),
+    Date("date"),
+    DayOfWeek("dayOfWeek"),
 
 }

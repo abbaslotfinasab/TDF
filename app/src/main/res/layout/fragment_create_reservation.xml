@@ -151,10 +151,21 @@
                     android:layout_height="0dp"
                     android:layout_marginTop="6dp"
                     android:layout_marginBottom="5dp"
+                    tools:listitem="@layout/item_date"
                     app:layout_constraintBottom_toBottomOf="parent"
-                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintEnd_toStartOf="@+id/btnCalendar"
                     app:layout_constraintStart_toStartOf="@+id/textView6"
                     app:layout_constraintTop_toBottomOf="@+id/textView6" />
+
+                <ImageButton
+                    android:id="@+id/btnCalendar"
+                    android:layout_width="43dp"
+                    android:layout_height="60dp"
+                    android:layout_marginEnd="20dp"
+                    android:background="#EDEDF3"
+                    android:src="@drawable/calendar"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintTop_toTopOf="@+id/dateRecycler" />
 
             </androidx.constraintlayout.widget.ConstraintLayout>
 
@@ -200,7 +211,7 @@
                     android:layout_marginTop="6dp"
                     android:layout_marginBottom="5dp"
                     app:layout_constraintBottom_toBottomOf="parent"
-                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintEnd_toStartOf="parent"
                     app:layout_constraintStart_toStartOf="@+id/textView7"
                     app:layout_constraintTop_toBottomOf="@+id/textView7" />
 

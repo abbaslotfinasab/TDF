@@ -160,6 +160,14 @@
             app:popExitAnim="@android:anim/fade_out"/>
 
         <action
+            android:id="@+id/action_createReservationFragment_to_datePickerFragment"
+            app:destination="@id/datePickerFragment"
+            app:enterAnim="@android:anim/fade_in"
+            app:exitAnim="@android:anim/fade_out"
+            app:popEnterAnim="@android:anim/fade_in"
+            app:popExitAnim="@android:anim/fade_out"/>
+
+        <action
             android:id="@+id/action_createReservationFragment_to_invitePeopleFragmente"
             app:destination="@id/invitePeopleFragment"
             app:enterAnim="@android:anim/fade_in"
@@ -1494,6 +1502,22 @@
 
         <action
             android:id="@+id/action_roomListFragment_to_createReservationFragment"
+            app:destination="@id/createReservationFragment"
+            app:enterAnim="@android:anim/fade_in"
+            app:exitAnim="@android:anim/fade_out"
+            app:popEnterAnim="@android:anim/fade_in"
+            app:popExitAnim="@android:anim/fade_out"/>
+
+    </dialog>
+
+    <dialog
+        android:id="@+id/datePickerFragment"
+        android:name="com.utechia.tdf.reservation.DatePickerFragment"
+        android:label="fragment_date_picker"
+        tools:layout="@layout/fragment_date_picker" >
+
+        <action
+            android:id="@+id/action_datePickerFragment_to_createReservationFragment"
             app:destination="@id/createReservationFragment"
             app:enterAnim="@android:anim/fade_in"
             app:exitAnim="@android:anim/fade_out"

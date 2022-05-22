@@ -75,17 +75,21 @@ class ReservationChildFragment(val reservation: String?= SurveyEnum.Evaluate.sur
                             binding.recyclerView.visibility = View.GONE
                             binding.prg.visibility = View.GONE
                             binding.createLayout.visibility = View.VISIBLE
+                            binding.more.visibility = View.GONE
                             binding.refreshLayout.isRefreshing = false
 
                         }else if (loadState.source.refresh is LoadState.Loading ){
                             binding.prg.visibility = View.GONE
                             binding.refreshLayout.isRefreshing = true
                             binding.recyclerView.visibility = View.GONE
+                            binding.more.visibility = View.GONE
                             binding.createLayout.visibility = View.GONE
                         }else{
                             binding.prg.visibility = View.GONE
                             binding.refreshLayout.isRefreshing = false
                             binding.recyclerView.visibility = View.VISIBLE
+                            binding.createLayout.visibility = View.GONE
+                            binding.more.visibility = View.VISIBLE
                         }
                     }
                 }

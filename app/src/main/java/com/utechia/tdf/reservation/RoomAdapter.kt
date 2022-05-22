@@ -6,6 +6,7 @@ import android.view.ViewGroup
 import android.widget.ImageView
 import android.widget.TextView
 import androidx.appcompat.widget.AppCompatButton
+import androidx.constraintlayout.widget.ConstraintLayout
 import androidx.core.os.bundleOf
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.RecyclerView
@@ -45,6 +46,7 @@ class RoomAdapter(val roomListFragment: RoomListFragment) :
         private val floor: TextView = itemView.findViewById(R.id.locationRoom)
         private val capacity: TextView = itemView.findViewById(R.id.capacityRoom)
         private val select: AppCompatButton = itemView.findViewById(R.id.btnSelect)
+        private val layout: ConstraintLayout = itemView.findViewById(R.id.roomLayout)
 
         fun bind0(position: Int) {
 
@@ -59,6 +61,11 @@ class RoomAdapter(val roomListFragment: RoomListFragment) :
                 .into(cover)
 
             select.setOnClickListener {
+                val bundle = bundleOf(ReservationEnum.ID.reservation to roomList[position].id,ReservationEnum.Title.reservation to roomList[position].name.toString() , ReservationEnum.Cover.reservation to "${roomList[position].coverPhoto}" )
+                roomListFragment.findNavController().navigate(R.id.action_roomListFragment_to_createReservationFragment,bundle)
+                roomListFragment.dismiss()
+            }
+            layout.setOnClickListener {
                 val bundle = bundleOf(ReservationEnum.ID.reservation to roomList[position].id,ReservationEnum.Title.reservation to roomList[position].name.toString() , ReservationEnum.Cover.reservation to "${roomList[position].coverPhoto}" )
                 roomListFragment.findNavController().navigate(R.id.action_roomListFragment_to_createReservationFragment,bundle)
                 roomListFragment.dismiss()
