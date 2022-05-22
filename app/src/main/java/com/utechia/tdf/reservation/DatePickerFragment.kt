@@ -26,7 +26,9 @@ class DatePickerFragment : BottomSheetDialogFragment() {
     private lateinit var binding: FragmentDatePickerBinding
     private var date = LocalDateTime.now().format(DateTimeFormatter.ofPattern("dd.MM.yyyy"))
     private var dayOfWeek = LocalDateTime.now().dayOfWeek.name
-
+    private var _year = LocalDateTime.now().year
+    private var month = LocalDateTime.now().month.value
+    private var day = LocalDateTime.now().dayOfMonth
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -53,11 +55,14 @@ class DatePickerFragment : BottomSheetDialogFragment() {
         super.onViewCreated(view, savedInstanceState)
 
         binding.datePicker.setOnDateChangedListener { _, year, monthOfYear, dayOfMonth ->
-            date = LocalDateTime.of(year,monthOfYear,dayOfMonth,0,0).format(DateTimeFormatter.ofPattern("dd.MM.yyyy")).toString()
-            dayOfWeek = LocalDateTime.of(year,monthOfYear,dayOfMonth,0,0).dayOfWeek.name
+            _year = year
+            month = monthOfYear
+            day = dayOfMonth
         }
 
         binding.btnSelect.setOnClickListener {
+            date = LocalDateTime.of(_year,month,day,0,0).format(DateTimeFormatter.ofPattern("dd.MM.yyyy")).toString()
+            dayOfWeek = LocalDateTime.of(_year,month,day,0,0).dayOfWeek.name
             val bundle = bundleOf(ReservationEnum.Date.reservation to date, ReservationEnum.DayOfWeek.reservation to dayOfWeek)
             findNavController().navigate(R.id.action_datePickerFragment_to_createReservationFragment,bundle)
             dialog?.dismiss()
