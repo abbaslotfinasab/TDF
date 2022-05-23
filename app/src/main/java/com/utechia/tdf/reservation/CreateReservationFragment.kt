@@ -26,15 +26,17 @@ import java.time.format.DateTimeFormatter
 class CreateReservationFragment : Fragment(),View.OnClickListener {
 
     private lateinit var binding: FragmentCreateReservationBinding
+    private val invitePeopleAdapter:InvitePeopleAdapter = InvitePeopleAdapter()
+    private val inviteGuestAdapter:InviteGuestAdapter = InviteGuestAdapter()
     private val reservationDateAdapter:ReservationDateAdapter = ReservationDateAdapter(this)
-    private val roomViewModel: RoomViewModel by viewModels()
+    private val reservationViewModel: ReservationViewModel by viewModels()
     private var date = ""
     private val dateModel:MutableList<DateModel> = mutableListOf()
     private var name = ""
     private var number = ""
     private var title = ""
     private var cover = ""
-    private var roomId = 0
+    private var roomId = -1
     private var reservationDate = ""
     private var reservationDayOfWeek = ""
 
@@ -75,13 +77,26 @@ class CreateReservationFragment : Fragment(),View.OnClickListener {
         }
         reservationDateAdapter.addData(dateModel)
 
+        binding.invitePeopleRecycler.apply {
+            adapter = invitePeopleAdapter
+            layoutManager = LinearLayoutManager(requireActivity(),
+                LinearLayoutManager.VERTICAL,false)
+        }
+
+        binding.inviteGuestPeopleRecycler.apply {
+            adapter = inviteGuestAdapter
+            layoutManager = LinearLayoutManager(requireActivity(),
+                LinearLayoutManager.VERTICAL,false)
+        }
+
         selectRoom()
         setDate()
+        invitePeople()
         roomObserver()
     }
 
     private fun roomObserver() {
-        roomViewModel.roomModel.observe(viewLifecycleOwner){
+        reservationViewModel.reservationModel.observe(viewLifecycleOwner){
             when (it) {
                 is Result.Success -> {
 
@@ -98,50 +113,121 @@ class CreateReservationFragment : Fragment(),View.OnClickListener {
         }
     }
 
+    private fun invitePeople(){
+        InvitationListener.addInvitationListener.observe(viewLifecycleOwner) {
+            if (it != null) {
+                it.id?.let { it1 -> reservationViewModel.addGuess(it1) }
+                invitePeopleAdapter.addData(it)
+            }else {
+                invitePeopleAdapter.userList.clear()
+                invitePeopleAdapter.notifyDataSetChanged()
+            }
+            checkLayout()
+        }
+        InvitationListener.removeInvitationListener.observe(viewLifecycleOwner){
+            it.id?.let { it1 -> reservationViewModel.removeGuess(it1) }
+
+            for(i in 0 until invitePeopleAdapter.userList.size )
+                if (invitePeopleAdapter.userList[i].id == it.id){
+                    invitePeopleAdapter.userList.removeAt(i)
+                    invitePeopleAdapter.notifyItemRemoved(i)
+                    break
+            }
+            checkLayout()
+        }
+        InvitationListener.addGuestListener.observe(viewLifecycleOwner){
+            if (it !=null) {
+                it.id?.let { it1 -> reservationViewModel.addGuess(it1) }
+                inviteGuestAdapter.addData(it)
+                checkLayout()
+            }else{
+                inviteGuestAdapter.userList.clear()
+                inviteGuestAdapter.notifyDataSetChanged()
+            }
+            checkLayout()
+        }
+        InvitationListener.removeGuestListener.observe(viewLifecycleOwner){
+            checkLayout()
+        }
+    }
+
     private fun setDate(){
 
         DateListener.dateAdapterListener.observe(viewLifecycleOwner){
 
-            binding.dateTitle.text = "${it.name?.lowercase()?.replaceFirstChar { it1 ->
-                it1.uppercase()
-            }}  ${it.date}"
+            if (it !=null) {
 
-            reservationDate = it.date.toString()
-            binding.btnCalendarSelected.visibility = View.INVISIBLE
-            binding.btnCalendarUnSelected.visibility = View.VISIBLE
+                binding.dateTitle.text = "${
+                    it.name?.lowercase()?.replaceFirstChar { it1 ->
+                        it1.uppercase()
+                    }
+                }  ${it.date}"
+
+                reservationDate = it.date.toString()
+                binding.btnCalendarSelected.visibility = View.INVISIBLE
+                binding.btnCalendarUnSelected.visibility = View.VISIBLE
+            }else{
+                binding.dateTitle.text = ""
+                reservationDate = ""
+                reservationDateAdapter.previousIndex = -1
+                reservationDateAdapter.notifyDataSetChanged()
+                binding.btnCalendarSelected.visibility = View.INVISIBLE
+                binding.btnCalendarUnSelected.visibility = View.VISIBLE
+            }
 
         }
-        DateListener.datePickerListener.observe(viewLifecycleOwner){
+        DateListener.datePickerListener.observe(viewLifecycleOwner) {
+            if (it != null) {
 
-            binding.dateTitle.text = "${it.name?.lowercase()?.replaceFirstChar { it1 ->
-                it1.uppercase()
-            }}  ${it.date}"
+                binding.dateTitle.text = "${
+                    it.name?.lowercase()?.replaceFirstChar { it1 ->
+                        it1.uppercase()
+                    }
+                }  ${it.date}"
 
-            reservationDate = it.date.toString()
-            reservationDateAdapter.previousIndex = -1
-            reservationDateAdapter.notifyDataSetChanged()
-            binding.btnCalendarSelected.visibility = View.VISIBLE
-            binding.btnCalendarUnSelected.visibility = View.INVISIBLE        }
+                reservationDate = it.date.toString()
+                reservationDateAdapter.previousIndex = -1
+                reservationDateAdapter.notifyDataSetChanged()
+                binding.btnCalendarSelected.visibility = View.VISIBLE
+                binding.btnCalendarUnSelected.visibility = View.INVISIBLE
+            }else{
+                binding.dateTitle.text = ""
+                reservationDate = ""
+                reservationDateAdapter.previousIndex = -1
+                reservationDateAdapter.notifyDataSetChanged()
+            }
+        }
     }
 
     private fun selectRoom(){
 
-        RoomListener.roomListener.observe(viewLifecycleOwner){
+        RoomListener.roomListener.observe(viewLifecycleOwner) {
+            if (it != null) {
 
-            binding.title.setTextColor(Color.WHITE)
-            binding.btnSelect.visibility = View.GONE
-            binding.imageRoom.visibility = View.VISIBLE
-            binding.roomTitle.visibility = View.VISIBLE
-            binding.btnRoom.visibility = View.VISIBLE
-            binding.roomTitle.text = it.name
+                binding.title.setTextColor(Color.WHITE)
+                binding.btnSelect.visibility = View.GONE
+                binding.imageRoom.visibility = View.VISIBLE
+                binding.roomTitle.visibility = View.VISIBLE
+                binding.btnRoom.visibility = View.VISIBLE
+                binding.roomTitle.text = it.name
 
-            Glide.with(requireActivity())
-                .load(it.coverPhoto)
-                .transform(BlurTransformation(10,2))
-                .into(binding.imageRoom)
+                Glide.with(requireActivity())
+                    .load(it.coverPhoto)
+                    .transform(BlurTransformation(10, 2))
+                    .into(binding.imageRoom)
 
+                roomId = it.id?:-1
+            }else{
+                binding.title.setTextColor(Color.BLACK)
+                binding.btnSelect.visibility = View.VISIBLE
+                binding.imageRoom.visibility = View.GONE
+                binding.roomTitle.visibility = View.GONE
+                binding.btnRoom.visibility = View.GONE
+
+                roomId = -1
+
+            }
         }
-
     }
 
     private fun calculateDays(){
@@ -156,6 +242,35 @@ class CreateReservationFragment : Fragment(),View.OnClickListener {
             number = LocalDateTime.now().plusDays(i.toLong()).dayOfMonth.toString()
             name = LocalDateTime.now().plusDays(i.toLong()).dayOfWeek.name
             dateModel.add(DateModel(i,number,name, date))
+        }
+    }
+    private fun checkLayout(){
+        when {
+            invitePeopleAdapter.userList.size == 0 && inviteGuestAdapter.userList.size == 0 -> {
+                binding.invitePeopleRecycler.visibility = View.GONE
+                binding.inviteGuestPeopleRecycler.visibility = View.GONE
+                binding.guessTitle.visibility = View.GONE
+                binding.emptyTitle.visibility = View.VISIBLE
+                binding.btnAdd.visibility = View.VISIBLE
+                binding.btnMore.visibility = View.GONE
+            }
+
+            inviteGuestAdapter.userList.size == 0 -> {
+                binding.invitePeopleRecycler.visibility = View.VISIBLE
+                binding.inviteGuestPeopleRecycler.visibility = View.GONE
+                binding.guessTitle.visibility = View.GONE
+                binding.emptyTitle.visibility = View.GONE
+                binding.btnAdd.visibility = View.GONE
+                binding.btnMore.visibility = View.VISIBLE
+            }
+            else -> {
+                binding.invitePeopleRecycler.visibility = View.VISIBLE
+                binding.inviteGuestPeopleRecycler.visibility = View.VISIBLE
+                binding.guessTitle.visibility = View.VISIBLE
+                binding.emptyTitle.visibility = View.GONE
+                binding.btnAdd.visibility = View.GONE
+                binding.btnMore.visibility = View.VISIBLE
+            }
         }
     }
 
@@ -181,6 +296,16 @@ class CreateReservationFragment : Fragment(),View.OnClickListener {
                 findNavController().navigate(R.id.action_createReservationFragment_to_invitePeopleFragmente)
             }
         }
+    }
+
+    override fun onDestroy() {
+        super.onDestroy()
+        reservationViewModel.deleteAll()
+        RoomListener.roomListener.postValue(null)
+        DateListener.dateAdapterListener.postValue(null)
+        DateListener.datePickerListener.postValue(null)
+        InvitationListener.addInvitationListener.postValue(null)
+        InvitationListener.addGuestListener.postValue(null)
     }
 }
 

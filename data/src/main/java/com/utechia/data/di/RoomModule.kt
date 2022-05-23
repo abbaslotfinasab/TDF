@@ -17,10 +17,11 @@ class RoomModule {
 
     @Provides
     @Singleton
-    fun provideAppDatabase(@ApplicationContext context:Context): AppDataBase {
+    fun provideAppDatabase(@ApplicationContext context: Context): AppDataBase {
         return Room.databaseBuilder(
             context,
-            AppDataBase::class.java, "AppDatabase")
+            AppDataBase::class.java, "AppDatabase"
+        )
             .fallbackToDestructiveMigration()
             .build()
 
@@ -34,4 +35,9 @@ class RoomModule {
     @Provides
     fun provideRoomDao(db: AppDataBase) = db.roomDao()
 
+    @Singleton
+    @Provides
+    fun provideProfileDao(db: AppDataBase) = db.profileDao()
+
 }
+

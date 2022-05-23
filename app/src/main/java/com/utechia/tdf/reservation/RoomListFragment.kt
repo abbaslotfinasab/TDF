@@ -11,7 +11,6 @@ import android.widget.FrameLayout
 import android.widget.SearchView
 import android.widget.Toast
 import androidx.fragment.app.viewModels
-import androidx.navigation.fragment.NavHostFragment
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.google.android.material.bottomsheet.BottomSheetBehavior
 import com.google.android.material.bottomsheet.BottomSheetDialog
@@ -27,9 +26,6 @@ class RoomListFragment : BottomSheetDialogFragment() {
     private lateinit var binding: FragmentRoomListBinding
     private val roomViewModel:RoomViewModel by viewModels()
     private val roomAdapter:RoomAdapter = RoomAdapter(this)
-    private lateinit var navHostFragment :NavHostFragment
-    private lateinit var parent:CreateReservationFragment
-
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -54,12 +50,6 @@ class RoomListFragment : BottomSheetDialogFragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-
-        navHostFragment = requireActivity().supportFragmentManager.fragments[0] as NavHostFragment
-        parent = navHostFragment.childFragmentManager.primaryNavigationFragment as CreateReservationFragment
-
-
-
         roomViewModel.getRoom()
 
         binding.searchView.setOnQueryTextListener(object :SearchView.OnQueryTextListener{

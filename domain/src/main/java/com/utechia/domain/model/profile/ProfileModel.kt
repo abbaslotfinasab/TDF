@@ -10,6 +10,7 @@ data class ProfileModel(
     val mail:String?,
     val employeeId: Int?,
     val officeLocation: String?,
-    val profilePictureModel: ProfilePictureModel?
+    val profilePictureModel: ProfilePictureModel?,
+    var added:Boolean?=false
 
     )

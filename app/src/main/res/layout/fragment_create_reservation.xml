@@ -6,39 +6,39 @@
     android:layout_height="match_parent"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:background="@color/background"
+    android:fillViewport="true"
     tools:context=".reservation.CreateReservationFragment">
 
     <androidx.core.widget.NestedScrollView
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="0dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         android:background="@color/background"
-        android:fillViewport="true"
+        app:layout_constraintBottom_toTopOf="@+id/btnBook"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent">
 
         <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
-            android:layout_marginBottom="100dp"
             android:layout_height="match_parent">
 
             <androidx.constraintlayout.widget.ConstraintLayout
-                    android:id="@+id/constraintLayout10"
-                    android:layout_width="0dp"
-                    android:layout_height="132dp"
-                    android:layout_marginTop="24dp"
-                    android:background="@color/white"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toTopOf="parent">
+                android:id="@+id/constraintLayout10"
+                android:layout_width="0dp"
+                android:layout_height="132dp"
+                android:layout_marginTop="24dp"
+                android:background="@color/white"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent">
 
                 <ImageView
                     android:id="@+id/imageRoom"
-                    android:visibility="gone"
-                    android:scaleType="centerCrop"
                     android:layout_width="match_parent"
-                    android:layout_height="match_parent"/>
+                    android:layout_height="match_parent"
+                    android:scaleType="centerCrop"
+                    android:visibility="gone" />
 
                 <TextView
                     android:id="@+id/title"
@@ -74,14 +74,14 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:gravity="center"
-                    android:visibility="gone"
                     android:text="@string/vip_meeting_room"
                     android:textColor="@color/white"
                     android:textSize="18sp"
+                    android:visibility="gone"
                     app:layout_constraintBottom_toTopOf="@+id/btnRoom"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="@+id/imageRoom"
-                    app:layout_constraintTop_toBottomOf="@+id/textView5" />
+                    app:layout_constraintTop_toBottomOf="@+id/title" />
 
                 <TextView
                     android:id="@+id/btnRoom"
@@ -90,12 +90,12 @@
                     android:layout_marginStart="20dp"
                     android:layout_marginEnd="20dp"
                     android:layout_marginBottom="24dp"
+                    android:backgroundTintMode="src_in"
                     android:gravity="center"
-                    android:visibility="gone"
-                    android:textSize="14sp"
                     android:text="@string/change_room"
                     android:textColor="@color/white"
-                    android:backgroundTintMode="src_in"
+                    android:textSize="14sp"
+                    android:visibility="gone"
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent" />
@@ -151,7 +151,6 @@
                     android:layout_height="0dp"
                     android:layout_marginTop="6dp"
                     android:layout_marginBottom="5dp"
-                    tools:listitem="@layout/item_date"
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintEnd_toStartOf="@+id/btnCalendarSelected"
                     app:layout_constraintStart_toStartOf="@+id/textView6"
@@ -172,9 +171,9 @@
                     android:layout_width="43dp"
                     android:layout_height="60dp"
                     android:layout_marginEnd="20dp"
-                    android:visibility="invisible"
                     android:background="@color/btnCalendarBack"
                     android:src="@drawable/calendar_selected"
+                    android:visibility="invisible"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintTop_toTopOf="@+id/dateRecycler" />
 
@@ -291,7 +290,9 @@
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="24dp"
+                android:layout_marginBottom="5dp"
                 android:background="@color/white"
+                app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@id/constraintLayout13">
@@ -314,17 +315,17 @@
                     android:layout_width="100dp"
                     android:layout_height="20dp"
                     android:layout_marginEnd="20dp"
-                    android:text="@string/add_people"
                     android:background="?android:selectableItemBackground"
+                    android:text="@string/add_people"
                     android:textColor="#3360DD"
-                    android:visibility="gone"
                     android:textSize="14sp"
+                    android:visibility="gone"
                     app:layout_constraintBottom_toBottomOf="@+id/textView9"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintTop_toTopOf="@+id/textView9" />
 
                 <TextView
-                    android:id="@+id/textView31"
+                    android:id="@+id/emptyTitle"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="@string/you_did_t_add_any_people_to_this_meeting_yet"
@@ -341,24 +342,50 @@
                     android:layout_height="20dp"
                     android:layout_marginTop="10dp"
                     android:layout_marginBottom="20dp"
-                    android:text="@string/add_someone"
                     android:background="?android:selectableItemBackground"
+                    android:text="@string/add_someone"
                     android:textColor="#3360DD"
                     android:textSize="14sp"
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@+id/textView31" />
+                    app:layout_constraintTop_toBottomOf="@+id/emptyTitle" />
 
                 <androidx.recyclerview.widget.RecyclerView
                     android:id="@+id/invitePeopleRecycler"
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_marginTop="12dp"
+                    android:nestedScrollingEnabled="false"
+                    android:visibility="gone"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/textView9" />
+
+                <TextView
+                    android:id="@+id/guessTitle"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="20dp"
+                    android:layout_marginTop="30dp"
+                    android:text="@string/guests"
+                    android:textColor="@color/black"
+                    android:textSize="16sp"
+                    android:textStyle="bold"
+                    android:visibility="gone"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/invitePeopleRecycler" />
+
+                <androidx.recyclerview.widget.RecyclerView
+                    android:id="@+id/inviteGuestPeopleRecycler"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="12dp"
                     android:visibility="gone"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@+id/textView9" />
+                    app:layout_constraintTop_toBottomOf="@+id/guessTitle" />
+
 
             </androidx.constraintlayout.widget.ConstraintLayout>
 
@@ -366,16 +393,8 @@
 
     </androidx.core.widget.NestedScrollView>
 
-    <androidx.constraintlayout.widget.ConstraintLayout
-        android:id="@+id/constraintLayout5"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:background="@color/background"
-        android:layout_gravity="bottom"
-        app:layout_constraintBottom_toBottomOf="parent">
-
         <androidx.appcompat.widget.AppCompatButton
-            android:id="@+id/appCompatButton"
+            android:id="@+id/btnBook"
             android:layout_width="0dp"
             android:layout_height="60dp"
             android:layout_marginStart="20dp"
@@ -389,8 +408,6 @@
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent" />
-
-    </androidx.constraintlayout.widget.ConstraintLayout>
 
     <androidx.cardview.widget.CardView
         android:id="@+id/prg"

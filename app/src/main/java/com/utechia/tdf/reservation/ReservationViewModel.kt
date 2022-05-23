@@ -31,29 +31,33 @@ class ReservationViewModel @Inject constructor(
         _reservationModel.postValue(exception.message?.let { Result.Error(it) })
     }
 
-
-    fun getBooked(){
+    fun addGuess(id:Int){
 
         viewModelScope.launch(Dispatchers.IO+handler) {
 
             _reservationModel.postValue(Result.Loading)
 
-            delay(1000)
-
-            reservationUseCaseImpl.getAll().let {
-
-                _reservationModel.postValue(Result.Success(it))
-
-            }
+            reservationUseCaseImpl.add(id)
         }
-    }
 
-    fun reserve(reservationModel: ReservationModel){
+    }
+    fun removeGuess(id:Int){
 
         viewModelScope.launch(Dispatchers.IO+handler) {
 
-            reservationUseCaseImpl.reserve(reservationModel)
+            _reservationModel.postValue(Result.Loading)
 
+            reservationUseCaseImpl.remove(id)
+        }
+    }
+
+    fun deleteAll(){
+
+        viewModelScope.launch(Dispatchers.IO+handler) {
+
+            _reservationModel.postValue(Result.Loading)
+
+            reservationUseCaseImpl.deleteAll()
         }
     }
 }

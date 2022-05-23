@@ -18,6 +18,7 @@ import androidx.core.content.ContextCompat
 import androidx.core.view.GravityCompat
 import androidx.core.view.forEach
 import androidx.drawerlayout.widget.DrawerLayout
+import androidx.fragment.app.viewModels
 import androidx.lifecycle.lifecycleScope
 import androidx.navigation.NavController
 import androidx.navigation.NavOptions
@@ -31,9 +32,11 @@ import com.google.firebase.installations.FirebaseInstallations
 import com.google.firebase.ktx.Firebase
 import com.google.firebase.messaging.FirebaseMessaging
 import com.utechia.domain.enum.MainEnum
+import com.utechia.domain.model.reservation.ReservationModel
 import com.utechia.domain.utile.Result
 import com.utechia.tdf.R
 import com.utechia.tdf.databinding.ActivityMainBinding
+import com.utechia.tdf.reservation.ReservationViewModel
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
@@ -50,6 +53,7 @@ class MainActivity : AppCompatActivity(), SensorEventListener {
 
     private lateinit var binding:ActivityMainBinding
     val mainViewModel:MainViewModel by viewModels()
+    private val reservationViewModel: ReservationViewModel by viewModels()
     private var navHostFragment : NavHostFragment = NavHostFragment()
     private var navController : NavController = NavController(this)
     private lateinit var prefs: SharedPreferences
@@ -132,9 +136,8 @@ class MainActivity : AppCompatActivity(), SensorEventListener {
         }
 
         binding.backArrow.setOnClickListener{
-
             navController.navigateUp()
-
+            reservationViewModel.deleteAll()
         }
 
         binding.menu.setOnClickListener {
@@ -224,6 +227,7 @@ class MainActivity : AppCompatActivity(), SensorEventListener {
     override fun onBackPressed() {
         super.onBackPressed()
         binding.drawerLayout.closeDrawer(GravityCompat.END)
+        reservationViewModel.deleteAll()
 
     }
 
@@ -1005,7 +1009,6 @@ class MainActivity : AppCompatActivity(), SensorEventListener {
                             it.data.pending_orders!!
 
                         mainViewModel.orderCount(it.data.pending_orders!!)
-
                     }
                     else {
                         mainViewModel.orderCount(0)
@@ -1086,12 +1089,16 @@ class MainActivity : AppCompatActivity(), SensorEventListener {
         override fun onReceive(context: Context?, intent: Intent?) {
 
             try {
-
                 getInstance()?.mainViewModel?.getCount()
 
             }catch (e:Exception){
 
             }
         }
+    }
+
+    override fun onDestroy() {
+        super.onDestroy()
+        reservationViewModel.deleteAll()
     }
 }

@@ -29,6 +29,7 @@ import com.utechia.data.entity.permission.PermissionType
 import com.utechia.data.entity.permission.PermissionUpdateBody
 import com.utechia.data.entity.profile.Profile
 import com.utechia.data.entity.refreshment.Refreshment
+import com.utechia.data.entity.reservation.Invitation
 import com.utechia.data.entity.reservation.Room
 import com.utechia.data.entity.survey.SingleSurvey
 import com.utechia.data.entity.survey.Survey
@@ -242,6 +243,9 @@ interface Service {
 
     @GET("reservation/room")
     suspend fun getReservationRoom():Response<Room>
+
+    @GET("user/list")
+    suspend fun getUserList(@Query("search") query: String):Response<Invitation>
 
 
 }

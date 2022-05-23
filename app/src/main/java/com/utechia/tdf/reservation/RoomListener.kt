@@ -4,5 +4,5 @@ import androidx.lifecycle.MutableLiveData
 import com.utechia.domain.model.reservation.RoomModel
 
 object RoomListener {
-    val roomListener = MutableLiveData<RoomModel>()
+    val roomListener = MutableLiveData<RoomModel?>()
 }

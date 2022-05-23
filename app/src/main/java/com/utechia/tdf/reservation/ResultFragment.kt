@@ -36,18 +36,6 @@ class ResultFragment : DialogFragment() {
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
-        super.onViewCreated(view, savedInstanceState)
-
-        dialog?.setOnDismissListener {
-            reservationViewModel.reserve(reservationModel)
-            findNavController().navigate(R.id.action_resultFragment_to_reservationFragment)
-        }
-
-        binding.btnConfirm.setOnClickListener {
-            reservationViewModel.reserve(reservationModel)
-            findNavController().navigate(R.id.action_resultFragment_to_reservationFragment)
-
-        }
 
     }
 

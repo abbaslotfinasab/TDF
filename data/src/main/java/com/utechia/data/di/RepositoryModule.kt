@@ -26,6 +26,7 @@ import com.utechia.data.repo.order.userorder.UserOrderRepoImpl
 import com.utechia.data.repo.permission.PermissionDetailsRepoImpl
 import com.utechia.data.repo.profile.ProfileRepoImpl
 import com.utechia.data.repo.refreshment.RefreshmentRepoImpl
+import com.utechia.data.repo.reservation.InvitationRepoImpl
 import com.utechia.data.repo.reservation.ReservationRepoImpl
 import com.utechia.data.repo.reservation.RoomRepoImpl
 import com.utechia.data.repo.survey.SurveyDetailsRepoImpl
@@ -51,6 +52,7 @@ import com.utechia.domain.repository.profile.ProfileRepo
 import com.utechia.domain.repository.profile.UserOrderDetailsRepo
 import com.utechia.domain.repository.profile.UserOrderRepo
 import com.utechia.domain.repository.refreshment.RefreshmentRepo
+import com.utechia.domain.repository.reservation.InvitationRepo
 import com.utechia.domain.repository.reservation.ReservationRepo
 import com.utechia.domain.repository.reservation.RoomRepo
 import com.utechia.domain.repository.survey.SurveyDetailsRepo
@@ -215,4 +217,9 @@ abstract class RepositoryModule {
     abstract fun bindTeaBoyActiveService(
         teaBoyActiveRepoImpl: TeaBoyActiveRepoImpl
     ): TeaBoyActiveRepo
+
+    @Binds
+    abstract fun bindInvitationService(
+        invitationRepo: InvitationRepoImpl
+    ): InvitationRepo
 }
