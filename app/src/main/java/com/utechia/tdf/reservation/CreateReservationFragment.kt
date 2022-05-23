@@ -175,10 +175,10 @@ class CreateReservationFragment : Fragment(),View.OnClickListener {
 
             }
             binding.btnAdd -> {
-
+                findNavController().navigate(R.id.action_createReservationFragment_to_invitePeopleFragmente)
             }
             binding.btnMore -> {
-
+                findNavController().navigate(R.id.action_createReservationFragment_to_invitePeopleFragmente)
             }
         }
     }

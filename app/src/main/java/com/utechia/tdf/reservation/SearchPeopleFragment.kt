@@ -4,12 +4,13 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.fragment.app.Fragment
 import com.google.android.material.bottomsheet.BottomSheetDialogFragment
 import com.utechia.tdf.databinding.FragmentSearchPeopleBinding
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
-class SearchPeopleFragment : BottomSheetDialogFragment() {
+class SearchPeopleFragment : Fragment() {
 
     private lateinit var binding: FragmentSearchPeopleBinding
 

@@ -1478,6 +1478,7 @@
         android:name="com.utechia.tdf.reservation.InvitePeopleFragment"
         android:label="fragment_invite_people"
         tools:layout="@layout/fragment_invite_people" />
+
     <fragment
         android:id="@+id/searchPeopleFragment"
         android:name="com.utechia.tdf.reservation.SearchPeopleFragment"
