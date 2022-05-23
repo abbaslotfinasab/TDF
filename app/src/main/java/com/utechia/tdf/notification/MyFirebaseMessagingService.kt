@@ -32,7 +32,6 @@ class MyFirebaseMessagingService : FirebaseMessagingService() {
         remoteView.setTextViewText(R.id.subTitle, message)
         remoteView.setImageViewResource(R.id.image, R.drawable.ic_notification)
         return remoteView
-
     }
 
     override fun onMessageReceived(remoteMessage: RemoteMessage) {
@@ -55,7 +54,6 @@ class MyFirebaseMessagingService : FirebaseMessagingService() {
                                                 ?: getString(R.string.new_notification),
                                             remoteMessage.notification?.body ?: ""
                                         )
-
                                     }
                                 }
                                 else{

@@ -6,6 +6,7 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.TextView
 import androidx.constraintlayout.widget.ConstraintLayout
+import androidx.core.content.ContextCompat
 import androidx.recyclerview.widget.RecyclerView
 import com.utechia.domain.model.reservation.DateModel
 import com.utechia.tdf.R
@@ -60,11 +61,10 @@ class ReservationDateAdapter(private val createReservationFragment: CreateReserv
 
             dateLayout.setOnClickListener {
                 previousIndex = position
-                dateLayout.setBackgroundColor(Color.parseColor("#3360DD"))
+                dateLayout.setBackgroundColor(ContextCompat.getColor(itemView.context,R.color.btnCalendarBack))
                 dayNumber.setTextColor(Color.WHITE)
                 dayTitle.setTextColor(Color.WHITE)
-                createReservationFragment.reservationDate = dateList[position].date.toString()
-                createReservationFragment.setDate(dateList[position].date.toString(),dateList[position].name.toString())
+                DateListener.dateAdapterListener.postValue(dateList[position])
                 notifyDataSetChanged()
             }
         }

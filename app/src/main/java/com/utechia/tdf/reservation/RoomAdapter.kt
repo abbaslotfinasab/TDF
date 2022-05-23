@@ -7,11 +7,8 @@ import android.widget.ImageView
 import android.widget.TextView
 import androidx.appcompat.widget.AppCompatButton
 import androidx.constraintlayout.widget.ConstraintLayout
-import androidx.core.os.bundleOf
-import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
-import com.utechia.domain.enum.ReservationEnum
 import com.utechia.domain.model.reservation.RoomModel
 import com.utechia.tdf.R
 
@@ -61,13 +58,11 @@ class RoomAdapter(val roomListFragment: RoomListFragment) :
                 .into(cover)
 
             select.setOnClickListener {
-                val bundle = bundleOf(ReservationEnum.ID.reservation to roomList[position].id,ReservationEnum.Title.reservation to roomList[position].name.toString() , ReservationEnum.Cover.reservation to "${roomList[position].coverPhoto}" )
-                roomListFragment.findNavController().navigate(R.id.action_roomListFragment_to_createReservationFragment,bundle)
+                RoomListener.roomListener.postValue(roomList[position])
                 roomListFragment.dismiss()
             }
             layout.setOnClickListener {
-                val bundle = bundleOf(ReservationEnum.ID.reservation to roomList[position].id,ReservationEnum.Title.reservation to roomList[position].name.toString() , ReservationEnum.Cover.reservation to "${roomList[position].coverPhoto}" )
-                roomListFragment.findNavController().navigate(R.id.action_roomListFragment_to_createReservationFragment,bundle)
+                RoomListener.roomListener.postValue(roomList[position])
                 roomListFragment.dismiss()
             }
         }

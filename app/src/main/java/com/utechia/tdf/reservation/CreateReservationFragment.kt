@@ -23,7 +23,7 @@ import java.time.format.DateTimeFormatter
 
 
 @AndroidEntryPoint
-class CreateReservationFragment : Fragment() {
+class CreateReservationFragment : Fragment(),View.OnClickListener {
 
     private lateinit var binding: FragmentCreateReservationBinding
     private val reservationDateAdapter:ReservationDateAdapter = ReservationDateAdapter(this)
@@ -35,7 +35,7 @@ class CreateReservationFragment : Fragment() {
     private var title = ""
     private var cover = ""
     private var roomId = 0
-    var reservationDate = ""
+    private var reservationDate = ""
     private var reservationDayOfWeek = ""
 
 
@@ -44,6 +44,13 @@ class CreateReservationFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View {
         binding = FragmentCreateReservationBinding.inflate(inflater, container, false)
+        with(binding){
+            listOf(
+                btnAdd,btnRoom,btnMore,btnSelect,btnCalendarSelected,btnCalendarUnSelected
+            ).forEach{button ->
+                button.setOnClickListener{view -> onClick(view)}
+            }
+        }
         return binding.root
     }
 
@@ -58,27 +65,6 @@ class CreateReservationFragment : Fragment() {
             reservationDayOfWeek = requireArguments().getString(ReservationEnum.DayOfWeek.reservation, "")
         }
 
-        if (cover.isEmpty()){
-            binding.title.setTextColor(Color.BLACK)
-            binding.btnSelect.visibility = View.VISIBLE
-            binding.imageRoom.visibility = View.GONE
-            binding.roomTitle.visibility = View.GONE
-            binding.btnRoom.visibility = View.GONE
-        }else{
-            binding.title.setTextColor(Color.WHITE)
-            binding.btnSelect.visibility = View.GONE
-            binding.imageRoom.visibility = View.VISIBLE
-            binding.roomTitle.visibility = View.VISIBLE
-            binding.btnRoom.visibility = View.VISIBLE
-
-            binding.roomTitle.text = title
-
-            Glide.with(requireActivity())
-                .load(cover)
-                .transform(BlurTransformation(10,2))
-                .into(binding.imageRoom)
-        }
-
         calculateDays()
 
         binding.dateRecycler.apply {
@@ -89,22 +75,8 @@ class CreateReservationFragment : Fragment() {
         }
         reservationDateAdapter.addData(dateModel)
 
-        if (reservationDayOfWeek.isNotEmpty() && reservationDate.isNotEmpty()){
-            setDate(reservationDate,reservationDayOfWeek)
-            reservationDateAdapter.previousIndex = -1
-            reservationDateAdapter.notifyDataSetChanged()
-        }
-
-        binding.btnSelect.setOnClickListener {
-            findNavController().navigate(R.id.action_createReservationFragment_to_roomListFragment)
-        }
-        binding.btnRoom.setOnClickListener {
-            findNavController().navigate(R.id.action_createReservationFragment_to_roomListFragment)
-        }
-
-        binding.btnCalendar.setOnClickListener{
-            findNavController().navigate(R.id.action_createReservationFragment_to_datePickerFragment)
-        }
+        selectRoom()
+        setDate()
         roomObserver()
     }
 
@@ -126,11 +98,50 @@ class CreateReservationFragment : Fragment() {
         }
     }
 
-    fun setDate(date:String,day:String?=null){
+    private fun setDate(){
 
-        binding.dateTitle.text = "${day?.lowercase()?.replaceFirstChar { 
-            it.uppercase()
-        }}  $date"
+        DateListener.dateAdapterListener.observe(viewLifecycleOwner){
+
+            binding.dateTitle.text = "${it.name?.lowercase()?.replaceFirstChar { it1 ->
+                it1.uppercase()
+            }}  ${it.date}"
+
+            reservationDate = it.date.toString()
+            binding.btnCalendarSelected.visibility = View.INVISIBLE
+            binding.btnCalendarUnSelected.visibility = View.VISIBLE
+
+        }
+        DateListener.datePickerListener.observe(viewLifecycleOwner){
+
+            binding.dateTitle.text = "${it.name?.lowercase()?.replaceFirstChar { it1 ->
+                it1.uppercase()
+            }}  ${it.date}"
+
+            reservationDate = it.date.toString()
+            reservationDateAdapter.previousIndex = -1
+            reservationDateAdapter.notifyDataSetChanged()
+            binding.btnCalendarSelected.visibility = View.VISIBLE
+            binding.btnCalendarUnSelected.visibility = View.INVISIBLE        }
+    }
+
+    private fun selectRoom(){
+
+        RoomListener.roomListener.observe(viewLifecycleOwner){
+
+            binding.title.setTextColor(Color.WHITE)
+            binding.btnSelect.visibility = View.GONE
+            binding.imageRoom.visibility = View.VISIBLE
+            binding.roomTitle.visibility = View.VISIBLE
+            binding.btnRoom.visibility = View.VISIBLE
+            binding.roomTitle.text = it.name
+
+            Glide.with(requireActivity())
+                .load(it.coverPhoto)
+                .transform(BlurTransformation(10,2))
+                .into(binding.imageRoom)
+
+        }
+
     }
 
     private fun calculateDays(){
@@ -145,6 +156,30 @@ class CreateReservationFragment : Fragment() {
             number = LocalDateTime.now().plusDays(i.toLong()).dayOfMonth.toString()
             name = LocalDateTime.now().plusDays(i.toLong()).dayOfWeek.name
             dateModel.add(DateModel(i,number,name, date))
+        }
+    }
+
+    override fun onClick(v: View?) {
+        when(v){
+            binding.btnSelect -> {
+                findNavController().navigate(R.id.action_createReservationFragment_to_roomListFragment)
+            }
+            binding.btnRoom -> {
+                findNavController().navigate(R.id.action_createReservationFragment_to_roomListFragment)
+            }
+            binding.btnCalendarSelected -> {
+                findNavController().navigate(R.id.action_createReservationFragment_to_datePickerFragment)
+            }
+            binding.btnCalendarUnSelected -> {
+                findNavController().navigate(R.id.action_createReservationFragment_to_datePickerFragment)
+
+            }
+            binding.btnAdd -> {
+
+            }
+            binding.btnMore -> {
+
+            }
         }
     }
 }

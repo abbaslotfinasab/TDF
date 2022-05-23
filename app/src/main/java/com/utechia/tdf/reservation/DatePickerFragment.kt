@@ -14,6 +14,7 @@ import com.google.android.material.bottomsheet.BottomSheetBehavior
 import com.google.android.material.bottomsheet.BottomSheetDialog
 import com.google.android.material.bottomsheet.BottomSheetDialogFragment
 import com.utechia.domain.enum.ReservationEnum
+import com.utechia.domain.model.reservation.DateModel
 import com.utechia.tdf.R
 import com.utechia.tdf.databinding.FragmentDatePickerBinding
 import dagger.hilt.android.AndroidEntryPoint
@@ -61,10 +62,9 @@ class DatePickerFragment : BottomSheetDialogFragment() {
         }
 
         binding.btnSelect.setOnClickListener {
-            date = LocalDateTime.of(_year,month,day,0,0).format(DateTimeFormatter.ofPattern("dd.MM.yyyy")).toString()
-            dayOfWeek = LocalDateTime.of(_year,month,day,0,0).dayOfWeek.name
-            val bundle = bundleOf(ReservationEnum.Date.reservation to date, ReservationEnum.DayOfWeek.reservation to dayOfWeek)
-            findNavController().navigate(R.id.action_datePickerFragment_to_createReservationFragment,bundle)
+            date = LocalDateTime.of(_year,month+1,day,0,0).format(DateTimeFormatter.ofPattern("dd.MM.yyyy")).toString()
+            dayOfWeek = LocalDateTime.of(_year,month+1,day,0,0).dayOfWeek.name
+            DateListener.datePickerListener.postValue(DateModel(0,day.toString(),dayOfWeek,date))
             dialog?.dismiss()
         }
     }
