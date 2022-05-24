@@ -4,9 +4,8 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.utechia.domain.model.profile.ProfileModel
+import com.utechia.domain.model.reservation.AnswerReservationModel
 import com.utechia.domain.model.reservation.TimeModel
-import com.utechia.domain.usecases.reservation.InvitationUseCaseImpl
 import com.utechia.domain.usecases.reservation.TimeUseCaseImpl
 import com.utechia.domain.utile.Result
 import dagger.hilt.android.lifecycle.HiltViewModel

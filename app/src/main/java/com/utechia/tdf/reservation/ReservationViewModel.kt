@@ -5,12 +5,12 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
+import com.utechia.domain.model.reservation.AnswerReservationModel
 import com.utechia.domain.model.reservation.ReservationModel
 import com.utechia.domain.usecases.reservation.ReservationUseCaseImpl
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.CoroutineExceptionHandler
 import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
 import javax.inject.Inject
 
@@ -29,6 +29,20 @@ class ReservationViewModel @Inject constructor(
     private val handler = CoroutineExceptionHandler {
             _, exception ->
         _reservationModel.postValue(exception.message?.let { Result.Error(it) })
+    }
+
+    fun createMeeting(answerReservationModel: AnswerReservationModel) {
+
+        viewModelScope.launch(Dispatchers.IO + handler) {
+
+            _reservationModel.postValue(Result.Loading)
+
+            reservationUseCaseImpl.create(answerReservationModel).let {
+
+                _reservationModel.postValue(Result.Success(it))
+
+            }
+        }
     }
 
     fun addGuess(id:Int){

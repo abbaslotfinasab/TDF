@@ -1,6 +1,5 @@
 package com.utechia.data.repo.reservation
 
-import android.util.Log
 import com.utechia.data.api.Service
 import com.utechia.data.utile.NetworkHelper
 import com.utechia.domain.model.reservation.TimeModel
@@ -40,4 +39,5 @@ class TimeRepoImpl @Inject constructor(
         } else throw IOException("No Internet Connection")
 
     }
+
 }

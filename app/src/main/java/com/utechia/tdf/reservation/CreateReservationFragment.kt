@@ -13,13 +13,16 @@ import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.bumptech.glide.Glide
 import com.utechia.domain.enum.ReservationEnum
+import com.utechia.domain.model.reservation.AnswerReservationModel
 import com.utechia.domain.model.reservation.DateModel
+import com.utechia.domain.model.reservation.Guests
 import com.utechia.domain.utile.Result
 import com.utechia.tdf.R
 import com.utechia.tdf.databinding.FragmentCreateReservationBinding
 import dagger.hilt.android.AndroidEntryPoint
 import jp.wasabeef.glide.transformations.BlurTransformation
 import java.time.LocalDateTime
+import java.time.LocalTime
 import java.time.format.DateTimeFormatter
 
 
@@ -31,7 +34,7 @@ class CreateReservationFragment : Fragment(),View.OnClickListener {
     private val invitePeopleAdapter:InvitePeopleAdapter = InvitePeopleAdapter()
     private val inviteGuestAdapter:InviteGuestAdapter = InviteGuestAdapter()
     private val reservationDateAdapter:ReservationDateAdapter = ReservationDateAdapter(this)
-    private val reservationTimeAdapter:ReservationTimeAdapter = ReservationTimeAdapter(this)
+    private val reservationTimeAdapter:ReservationTimeAdapter = ReservationTimeAdapter()
     private val reservationViewModel: ReservationViewModel by viewModels()
     private val timeViewModel:TimeViewModel by viewModels()
     private var date = ""
@@ -43,6 +46,9 @@ class CreateReservationFragment : Fragment(),View.OnClickListener {
     private var roomId = -1
     private var reservationDate = ""
     private var reservationDayOfWeek = ""
+    private var startTime = ""
+    private var endTime = ""
+    private var guests:MutableList<Guests> = mutableListOf()
 
 
     override fun onCreateView(
@@ -52,7 +58,7 @@ class CreateReservationFragment : Fragment(),View.OnClickListener {
         binding = FragmentCreateReservationBinding.inflate(inflater, container, false)
         with(binding){
             listOf(
-                btnAdd,btnRoom,btnMore,btnSelect,btnCalendarSelected,btnCalendarUnSelected
+                btnAdd,btnRoom,btnMore,btnSelect,btnCalendarSelected,btnCalendarUnSelected,btnBook
             ).forEach{button ->
                 button.setOnClickListener{view -> onClick(view)}
             }
@@ -100,6 +106,7 @@ class CreateReservationFragment : Fragment(),View.OnClickListener {
 
         selectRoom()
         setDate()
+        setTime()
         invitePeople()
         roomObserver()
         timeObserver()
@@ -109,15 +116,17 @@ class CreateReservationFragment : Fragment(),View.OnClickListener {
         reservationViewModel.reservationModel.observe(viewLifecycleOwner){
             when (it) {
                 is Result.Success -> {
-
+                    binding.prg.visibility = View.GONE
+                    findNavController().navigate(R.id.action_createReservationFragment_to_reservationFragment)
                 }
 
                 is Result.Loading -> {
-
+                    binding.prg.visibility = View.VISIBLE
                 }
 
                 is Result.Error -> {
-
+                    binding.prg.visibility = View.GONE
+                    Toast.makeText(context,it.message,Toast.LENGTH_SHORT).show()
                 }
             }
         }
@@ -240,6 +249,22 @@ class CreateReservationFragment : Fragment(),View.OnClickListener {
         }
     }
 
+    private fun setTime(){
+        TimeListener.timeListener.observe(viewLifecycleOwner){
+            startTime = it.elementAt(0).start.toString()
+            endTime = it.elementAt(0).end.toString()
+            it.forEach { duration ->
+                if (LocalTime.parse(duration.start, DateTimeFormatter.ofPattern("HH:mm")).toSecondOfDay()<LocalTime.parse(startTime, DateTimeFormatter.ofPattern("HH:mm")).toSecondOfDay())
+                    startTime = duration.start.toString()
+            }
+            it.forEach { duration ->
+                if (LocalTime.parse(duration.end, DateTimeFormatter.ofPattern("HH:mm")).toSecondOfDay()>LocalTime.parse(endTime, DateTimeFormatter.ofPattern("HH:mm")).toSecondOfDay())
+                    endTime = duration.end.toString()
+            }
+            binding.timeTitle.text = "$startTime - $endTime"
+        }
+    }
+
     private fun selectRoom(){
 
         RoomListener.roomListener.observe(viewLifecycleOwner) {
@@ -251,6 +276,8 @@ class CreateReservationFragment : Fragment(),View.OnClickListener {
                 binding.roomTitle.visibility = View.VISIBLE
                 binding.btnRoom.visibility = View.VISIBLE
                 binding.roomTitle.text = it.name
+                binding.capacityRoom.text = "capacity: ${it.capacity}"
+                binding.capacityImage.visibility = View.VISIBLE
 
                 Glide.with(requireActivity())
                     .load(it.coverPhoto)
@@ -270,6 +297,8 @@ class CreateReservationFragment : Fragment(),View.OnClickListener {
                 binding.imageRoom.visibility = View.GONE
                 binding.roomTitle.visibility = View.GONE
                 binding.btnRoom.visibility = View.GONE
+                binding.capacityRoom.visibility = View.GONE
+                binding.capacityImage.visibility = View.GONE
 
                 roomId = -1
 
@@ -340,6 +369,16 @@ class CreateReservationFragment : Fragment(),View.OnClickListener {
             }
             binding.btnMore -> {
                 findNavController().navigate(R.id.action_createReservationFragment_to_invitePeopleFragmente)
+            }
+            binding.btnBook -> {
+                invitePeopleAdapter.userList.map {
+                    guests.add(Guests(it.name,it.mail,it.jobTitle))
+                }
+                inviteGuestAdapter.userList.map {
+                    guests.add(Guests(it.name,it.mail,it.jobTitle))
+                }
+                reservationViewModel.createMeeting(AnswerReservationModel(binding.titleInput.text.toString(),binding.noteInput.text.toString(),reservationDate,startTime,endTime,
+                    emptyList<Any>().toMutableList(),guests,roomId))
             }
         }
     }

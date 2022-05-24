@@ -6,5 +6,7 @@ data class TimeModel(
 
     var time:String?,
 
-    var reserved:Boolean?
+    var reserved:Boolean?,
+
+    var clicked:Boolean?=false
 )

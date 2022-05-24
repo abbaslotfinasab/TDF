@@ -51,12 +51,11 @@ class RoomAdapter(val roomListFragment: RoomListFragment) :
             floor.text = "${roomList[position].floor.name}nd Floor"
             capacity.text = "capacity: ${roomList[position].capacity}"
 
-
             Glide.with(itemView.context)
                 .load("${roomList[position].coverPhoto}")
-                .centerCrop()
                 .placeholder(R.mipmap.meet_place)
                 .error(R.mipmap.meet_place)
+                .centerCrop()
                 .into(cover)
 
             select.setOnClickListener {

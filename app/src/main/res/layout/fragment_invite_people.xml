@@ -23,6 +23,8 @@
                 android:layout_marginTop="40dp"
                 android:background="@color/inviteTabBack"
                 android:textAlignment="center"
+                app:tabPaddingStart="10dp"
+                app:tabPaddingEnd="10dp"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent"

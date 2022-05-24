@@ -35,6 +35,7 @@ import com.utechia.data.entity.reservation.Time
 import com.utechia.data.entity.survey.SingleSurvey
 import com.utechia.data.entity.survey.Survey
 import com.utechia.data.entity.ticket.*
+import com.utechia.domain.model.reservation.AnswerReservationModel
 import okhttp3.MultipartBody
 import retrofit2.Response
 import retrofit2.http.*
@@ -250,5 +251,9 @@ interface Service {
 
     @GET("reservation/room/{roomId}/meeting-times")
     suspend fun getMeetingTime(@Path("roomId") roomId: Int,@Query("date") date:String):Response<Time>
+
+    @Headers("Content-Type: application/json")
+    @POST("reservation/meeting")
+    suspend fun createMeeting(@Body answerReservationModel: AnswerReservationModel):Response<Void>
 
 }

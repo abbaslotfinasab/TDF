@@ -293,10 +293,12 @@
         <entry key="..\:/Users/lotfinasab/AndroidStudioProjects/tdf_oms_android_application_kotlin_v1/app/src/main/res/drawable/ic_invite_remove.xml" value="0.144" />
         <entry key="..\:/Users/lotfinasab/AndroidStudioProjects/tdf_oms_android_application_kotlin_v1/app/src/main/res/drawable/invite_back.xml" value="0.122" />
         <entry key="..\:/Users/lotfinasab/AndroidStudioProjects/tdf_oms_android_application_kotlin_v1/app/src/main/res/drawable/item_search_people.xml" value="0.122" />
+        <entry key="..\:/Users/lotfinasab/AndroidStudioProjects/tdf_oms_android_application_kotlin_v1/app/src/main/res/drawable/profile_2user.xml" value="0.144" />
         <entry key="..\:/Users/lotfinasab/AndroidStudioProjects/tdf_oms_android_application_kotlin_v1/app/src/main/res/drawable/tab_color_selector.xml" value="0.122" />
+        <entry key="..\:/Users/lotfinasab/AndroidStudioProjects/tdf_oms_android_application_kotlin_v1/app/src/main/res/layout/ca.xml" value="0.2" />
         <entry key="..\:/Users/lotfinasab/AndroidStudioProjects/tdf_oms_android_application_kotlin_v1/app/src/main/res/layout/fragment_add_guest.xml" value="0.22" />
         <entry key="..\:/Users/lotfinasab/AndroidStudioProjects/tdf_oms_android_application_kotlin_v1/app/src/main/res/layout/fragment_category_fragment.xml" value="0.2" />
-        <entry key="..\:/Users/lotfinasab/AndroidStudioProjects/tdf_oms_android_application_kotlin_v1/app/src/main/res/layout/fragment_create_reservation.xml" value="0.25" />
+        <entry key="..\:/Users/lotfinasab/AndroidStudioProjects/tdf_oms_android_application_kotlin_v1/app/src/main/res/layout/fragment_create_reservation.xml" value="0.4280936454849498" />
         <entry key="..\:/Users/lotfinasab/AndroidStudioProjects/tdf_oms_android_application_kotlin_v1/app/src/main/res/layout/fragment_date_picker.xml" value="0.2" />
         <entry key="..\:/Users/lotfinasab/AndroidStudioProjects/tdf_oms_android_application_kotlin_v1/app/src/main/res/layout/fragment_invite_people.xml" value="0.3361629881154499" />
         <entry key="..\:/Users/lotfinasab/AndroidStudioProjects/tdf_oms_android_application_kotlin_v1/app/src/main/res/layout/fragment_message.xml" value="0.22" />
@@ -317,7 +319,7 @@
         <entry key="..\:/Users/lotfinasab/AndroidStudioProjects/tdf_oms_android_application_kotlin_v1/app/src/main/res/layout/item_reservation.xml" value="0.33" />
         <entry key="..\:/Users/lotfinasab/AndroidStudioProjects/tdf_oms_android_application_kotlin_v1/app/src/main/res/layout/item_reservation_room.xml" value="0.2" />
         <entry key="..\:/Users/lotfinasab/AndroidStudioProjects/tdf_oms_android_application_kotlin_v1/app/src/main/res/layout/item_search_people.xml" value="0.25" />
-        <entry key="..\:/Users/lotfinasab/AndroidStudioProjects/tdf_oms_android_application_kotlin_v1/app/src/main/res/layout/item_select_room.xml" value="0.1" />
+        <entry key="..\:/Users/lotfinasab/AndroidStudioProjects/tdf_oms_android_application_kotlin_v1/app/src/main/res/layout/item_select_room.xml" value="0.33" />
         <entry key="..\:/Users/lotfinasab/AndroidStudioProjects/tdf_oms_android_application_kotlin_v1/app/src/main/res/layout/item_time.xml" value="0.67" />
         <entry key="..\:/Users/lotfinasab/AndroidStudioProjects/tdf_oms_android_application_kotlin_v1/app/src/main/res/layout/search_item.xml" value="0.2" />
         <entry key="..\:/Users/lotfinasab/AndroidStudioProjects/tdf_oms_android_application_kotlin_v1/app/src/main/res/layout/select_room_back.xml" value="0.2" />

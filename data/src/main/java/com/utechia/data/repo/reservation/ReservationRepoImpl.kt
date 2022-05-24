@@ -1,9 +1,13 @@
 package com.utechia.data.repo.reservation
 
+import android.util.Log
 import com.utechia.data.api.Service
 import com.utechia.data.dao.ProfileDao
 import com.utechia.data.utile.NetworkHelper
+import com.utechia.domain.model.reservation.AnswerReservationModel
+import com.utechia.domain.model.reservation.ReservationModel
 import com.utechia.domain.repository.reservation.ReservationRepo
+import java.io.IOException
 import javax.inject.Inject
 import javax.inject.Singleton
 
@@ -15,6 +19,28 @@ class ReservationRepoImpl @Inject constructor(
     private val profileDao: ProfileDao
 
     ): ReservationRepo {
+
+    override suspend fun crete(answerReservationModel: AnswerReservationModel): MutableList<ReservationModel> {
+
+        if (networkHelper.isNetworkConnected()) {
+
+            Log.d("testit",answerReservationModel.toString())
+            val result = service.createMeeting(answerReservationModel)
+
+            return when (result.isSuccessful){
+
+                true -> {
+                    emptyList<ReservationModel>().toMutableList()
+                }
+
+                else ->
+                    throw IOException("Server is Not Responding")
+            }
+
+        } else throw IOException("No Internet Connection")
+
+    }
+
     override suspend fun addGuess(id: Int) {
         profileDao.add(id,true)
     }

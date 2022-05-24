@@ -1,6 +1,5 @@
 package com.utechia.tdf.reservation
 
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -8,19 +7,23 @@ import android.widget.TextView
 import androidx.constraintlayout.widget.ConstraintLayout
 import androidx.core.content.ContextCompat
 import androidx.recyclerview.widget.RecyclerView
+import com.utechia.domain.model.reservation.DurationModel
 import com.utechia.domain.model.reservation.TimeModel
 import com.utechia.tdf.R
+import java.time.LocalTime
+import java.time.format.DateTimeFormatter
 
 
-class ReservationTimeAdapter(private val createReservationFragment: CreateReservationFragment):
+class ReservationTimeAdapter:
     RecyclerView.Adapter<RecyclerView.ViewHolder>() {
 
     private val timeList: MutableList<TimeModel> = mutableListOf()
+    private var duration:MutableSet<DurationModel> = mutableSetOf()
     var previousIndex = -1
-
 
     fun addData(_timeList: MutableList<TimeModel>) {
         timeList.clear()
+        duration.clear()
         notifyDataSetChanged()
         timeList.addAll(_timeList)
         notifyItemRangeChanged(0, timeList.size)
@@ -34,7 +37,7 @@ class ReservationTimeAdapter(private val createReservationFragment: CreateReserv
 
     override fun onBindViewHolder(holder: RecyclerView.ViewHolder, position: Int) {
 
-        (holder as ViewHolder).bind0(holder.adapterPosition)
+        (holder as ViewHolder).bind0(position)
 
     }
 
@@ -51,20 +54,142 @@ class ReservationTimeAdapter(private val createReservationFragment: CreateReserv
 
             timeTitle.text = timeList[position].time
 
-            if (timeList[position].reserved==true){
-                timeLayout.background = ContextCompat.getDrawable(itemView.context,R.drawable.reserved_back)
-                timeTitle.setTextColor(ContextCompat.getColor(itemView.context,R.color.reserved_title))
-                timeLayout.isEnabled = false
-
-            }else{
-                timeLayout.setBackgroundColor(ContextCompat.getColor(itemView.context,R.color.background))
-                timeTitle.setTextColor(ContextCompat.getColor(itemView.context,R.color.black))
+            when {
+                timeList[position].reserved == true -> {
+                    timeLayout.background =
+                        ContextCompat.getDrawable(itemView.context, R.drawable.reserved_back)
+                    timeTitle.setTextColor(
+                        ContextCompat.getColor(
+                            itemView.context,
+                            R.color.reserved_title
+                        )
+                    )
+                    timeLayout.isEnabled = false
+                }
+                timeList[position].clicked == true -> {
+                    timeLayout.setBackgroundColor(
+                        ContextCompat.getColor(
+                            itemView.context,
+                            R.color.btnCalendarBack
+                        )
+                    )
+                    timeTitle.setTextColor(
+                        ContextCompat.getColor(
+                            itemView.context,
+                            R.color.white
+                        )
+                    )
+                }
+                else -> {
+                    timeLayout.setBackgroundColor(
+                        ContextCompat.getColor(
+                            itemView.context,
+                            R.color.background
+                        )
+                    )
+                    timeTitle.setTextColor(ContextCompat.getColor(itemView.context, R.color.black))
+                }
             }
 
             timeLayout.setOnClickListener {
-                timeLayout.setBackgroundColor(ContextCompat.getColor(itemView.context,R.color.btnCalendarBack))
-                timeTitle.setTextColor(ContextCompat.getColor(itemView.context,R.color.white))
-                previousIndex = position
+
+                when(position - previousIndex){
+                    -1 -> {
+                        if (timeList[position].clicked==false) {
+                            timeLayout.setBackgroundColor(
+                                ContextCompat.getColor(
+                                    itemView.context,
+                                    R.color.btnCalendarBack
+                                )
+                            )
+                            timeTitle.setTextColor(
+                                ContextCompat.getColor(
+                                    itemView.context,
+                                    R.color.white
+                                )
+                            )
+                            previousIndex = position
+
+                            timeList[position].clicked=true
+
+                            val endTime = LocalTime.parse(timeList[position].time, DateTimeFormatter.ofPattern("HH:mm")).plusMinutes(30).toString()
+                            duration.add(DurationModel(timeList[position].time,endTime))
+                            TimeListener.timeListener.postValue(duration)
+
+                        }else{
+                            timeLayout.setBackgroundColor(ContextCompat.getColor(itemView.context,R.color.background))
+                            timeTitle.setTextColor(ContextCompat.getColor(itemView.context,R.color.black))
+                            previousIndex = position
+                        }
+                    }
+                    0 -> {
+                        if (timeList[position].clicked == false) {
+                            timeLayout.setBackgroundColor(
+                                ContextCompat.getColor(
+                                    itemView.context,
+                                    R.color.btnCalendarBack
+                                )
+                            )
+                            timeTitle.setTextColor(
+                                ContextCompat.getColor(
+                                    itemView.context,
+                                    R.color.white
+                                )
+                            )
+                            previousIndex = position
+
+                            timeList[position].clicked = true
+
+                            val endTime = LocalTime.parse(timeList[position].time, DateTimeFormatter.ofPattern("HH:mm")).plusMinutes(30).toString()
+                            duration.add(DurationModel(timeList[position].time,endTime))
+                            TimeListener.timeListener.postValue(duration)
+                        }
+                        else{
+                            timeLayout.setBackgroundColor(ContextCompat.getColor(itemView.context,R.color.background))
+                            timeTitle.setTextColor(ContextCompat.getColor(itemView.context,R.color.black))
+                            previousIndex = position
+                        }
+                    }
+                    1 -> {
+                        if (timeList[position].clicked==false) {
+                            timeLayout.setBackgroundColor(
+                                ContextCompat.getColor(
+                                    itemView.context,
+                                    R.color.btnCalendarBack
+                                )
+                            )
+                            timeTitle.setTextColor(
+                                ContextCompat.getColor(
+                                    itemView.context,
+                                    R.color.white
+                                )
+                            )
+                            previousIndex = position
+
+                            timeList[position].clicked = true
+
+                            val endTime = LocalTime.parse(timeList[position].time, DateTimeFormatter.ofPattern("HH:mm")).plusMinutes(30).toString()
+                            duration.add(DurationModel(timeList[position].time,endTime))
+                            TimeListener.timeListener.postValue(duration)
+                        }
+                    }
+                    else -> {
+
+                        timeList.forEach {
+                            it.clicked=false
+                        }
+                        duration.clear()
+                        notifyDataSetChanged()
+                        timeLayout.setBackgroundColor(ContextCompat.getColor(itemView.context,R.color.btnCalendarBack))
+                        timeTitle.setTextColor(ContextCompat.getColor(itemView.context,R.color.white))
+                        previousIndex = position
+                        timeList[position].clicked=true
+
+                        val endTime = LocalTime.parse(timeList[position].time, DateTimeFormatter.ofPattern("HH:mm")).plusMinutes(30).toString()
+                        duration.add(DurationModel(timeList[position].time,endTime))
+                        TimeListener.timeListener.postValue(duration)
+                    }
+                }
             }
         }
     }
