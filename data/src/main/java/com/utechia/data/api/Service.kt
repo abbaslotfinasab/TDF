@@ -31,6 +31,7 @@ import com.utechia.data.entity.profile.Profile
 import com.utechia.data.entity.refreshment.Refreshment
 import com.utechia.data.entity.reservation.Invitation
 import com.utechia.data.entity.reservation.Room
+import com.utechia.data.entity.reservation.Time
 import com.utechia.data.entity.survey.SingleSurvey
 import com.utechia.data.entity.survey.Survey
 import com.utechia.data.entity.ticket.*
@@ -247,5 +248,7 @@ interface Service {
     @GET("user/list")
     suspend fun getUserList(@Query("search") query: String):Response<Invitation>
 
+    @GET("reservation/room/{roomId}/meeting-times")
+    suspend fun getMeetingTime(@Path("roomId") roomId: Int,@Query("date") date:String):Response<Time>
 
 }

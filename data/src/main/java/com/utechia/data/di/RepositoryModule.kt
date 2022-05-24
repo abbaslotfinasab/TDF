@@ -29,6 +29,7 @@ import com.utechia.data.repo.refreshment.RefreshmentRepoImpl
 import com.utechia.data.repo.reservation.InvitationRepoImpl
 import com.utechia.data.repo.reservation.ReservationRepoImpl
 import com.utechia.data.repo.reservation.RoomRepoImpl
+import com.utechia.data.repo.reservation.TimeRepoImpl
 import com.utechia.data.repo.survey.SurveyDetailsRepoImpl
 import com.utechia.data.repo.ticket.UploadRepoImpl
 import com.utechia.domain.repository.cart.CartRepo
@@ -55,6 +56,7 @@ import com.utechia.domain.repository.refreshment.RefreshmentRepo
 import com.utechia.domain.repository.reservation.InvitationRepo
 import com.utechia.domain.repository.reservation.ReservationRepo
 import com.utechia.domain.repository.reservation.RoomRepo
+import com.utechia.domain.repository.reservation.TimeRepo
 import com.utechia.domain.repository.survey.SurveyDetailsRepo
 import com.utechia.domain.repository.survey.SurveyRepo
 import com.utechia.domain.repository.ticket.*
@@ -222,4 +224,9 @@ abstract class RepositoryModule {
     abstract fun bindInvitationService(
         invitationRepo: InvitationRepoImpl
     ): InvitationRepo
+
+    @Binds
+    abstract fun bindMeetingTineService(
+        timeRepoImpl: TimeRepoImpl
+    ): TimeRepo
 }

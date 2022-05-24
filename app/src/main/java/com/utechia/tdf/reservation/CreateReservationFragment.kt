@@ -5,9 +5,11 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
+import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.bumptech.glide.Glide
 import com.utechia.domain.enum.ReservationEnum
@@ -29,7 +31,9 @@ class CreateReservationFragment : Fragment(),View.OnClickListener {
     private val invitePeopleAdapter:InvitePeopleAdapter = InvitePeopleAdapter()
     private val inviteGuestAdapter:InviteGuestAdapter = InviteGuestAdapter()
     private val reservationDateAdapter:ReservationDateAdapter = ReservationDateAdapter(this)
+    private val reservationTimeAdapter:ReservationTimeAdapter = ReservationTimeAdapter(this)
     private val reservationViewModel: ReservationViewModel by viewModels()
+    private val timeViewModel:TimeViewModel by viewModels()
     private var date = ""
     private val dateModel:MutableList<DateModel> = mutableListOf()
     private var name = ""
@@ -77,6 +81,11 @@ class CreateReservationFragment : Fragment(),View.OnClickListener {
         }
         reservationDateAdapter.addData(dateModel)
 
+        binding.timeRecycler.apply {
+            adapter = reservationTimeAdapter
+            layoutManager = GridLayoutManager(requireActivity(),6)
+        }
+
         binding.invitePeopleRecycler.apply {
             adapter = invitePeopleAdapter
             layoutManager = LinearLayoutManager(requireActivity(),
@@ -93,6 +102,7 @@ class CreateReservationFragment : Fragment(),View.OnClickListener {
         setDate()
         invitePeople()
         roomObserver()
+        timeObserver()
     }
 
     private fun roomObserver() {
@@ -113,6 +123,30 @@ class CreateReservationFragment : Fragment(),View.OnClickListener {
         }
     }
 
+    private fun timeObserver() {
+        timeViewModel.timeModel.observe(viewLifecycleOwner){
+            when (it) {
+                is Result.Success -> {
+                    if (it.data.size!=0) {
+                        binding.reservationTimeLayout.visibility = View.VISIBLE
+                        reservationTimeAdapter.addData(it.data)
+                    }
+                    else{
+                        binding.reservationTimeLayout.visibility = View.GONE
+                    }
+                }
+
+                is Result.Loading -> {
+
+                }
+
+                is Result.Error -> {
+                    binding.reservationTimeLayout.visibility = View.GONE
+                    Toast.makeText(context,it.message,Toast.LENGTH_SHORT).show()
+                }
+            }
+        }
+    }
     private fun invitePeople(){
         InvitationListener.addInvitationListener.observe(viewLifecycleOwner) {
             if (it != null) {
@@ -156,16 +190,18 @@ class CreateReservationFragment : Fragment(),View.OnClickListener {
         DateListener.dateAdapterListener.observe(viewLifecycleOwner){
 
             if (it !=null) {
-
                 binding.dateTitle.text = "${
                     it.name?.lowercase()?.replaceFirstChar { it1 ->
                         it1.uppercase()
                     }
                 }  ${it.date}"
-
                 reservationDate = it.date.toString()
                 binding.btnCalendarSelected.visibility = View.INVISIBLE
                 binding.btnCalendarUnSelected.visibility = View.VISIBLE
+
+                if (reservationDate.isNotEmpty() && roomId != -1){
+                    timeViewModel.getMeetingTime(reservationDate, roomId)
+                }
             }else{
                 binding.dateTitle.text = ""
                 reservationDate = ""
@@ -190,7 +226,12 @@ class CreateReservationFragment : Fragment(),View.OnClickListener {
                 reservationDateAdapter.notifyDataSetChanged()
                 binding.btnCalendarSelected.visibility = View.VISIBLE
                 binding.btnCalendarUnSelected.visibility = View.INVISIBLE
-            }else{
+
+                if (reservationDate.isNotEmpty() && roomId != -1) {
+                    timeViewModel.getMeetingTime(reservationDate, roomId)
+                }
+            }
+            else{
                 binding.dateTitle.text = ""
                 reservationDate = ""
                 reservationDateAdapter.previousIndex = -1
@@ -217,6 +258,10 @@ class CreateReservationFragment : Fragment(),View.OnClickListener {
                     .into(binding.imageRoom)
 
                 roomId = it.id?:-1
+
+                if (reservationDate.isNotEmpty() && roomId != -1) {
+                    timeViewModel.getMeetingTime(reservationDate, roomId)
+                }
             }else{
                 binding.title.setTextColor(Color.BLACK)
                 binding.btnSelect.visibility = View.VISIBLE
@@ -232,13 +277,13 @@ class CreateReservationFragment : Fragment(),View.OnClickListener {
 
     private fun calculateDays(){
         dateModel.clear()
-        date = LocalDateTime.now().format(DateTimeFormatter.ofPattern("dd.MM.yyyy"))
+        date = LocalDateTime.now().format(DateTimeFormatter.ofPattern("yyyy-MM-dd"))
         number = LocalDateTime.now().dayOfMonth.toString()
         name = LocalDateTime.now().dayOfWeek.name
         dateModel.add(DateModel(0,number,name,date))
 
         for (i in 1 until  6) {
-            date = LocalDateTime.now().plusDays(i.toLong()).format(DateTimeFormatter.ofPattern("dd.MM.yyyy"))
+            date = LocalDateTime.now().plusDays(i.toLong()).format(DateTimeFormatter.ofPattern("yyyy-MM-dd"))
             number = LocalDateTime.now().plusDays(i.toLong()).dayOfMonth.toString()
             name = LocalDateTime.now().plusDays(i.toLong()).dayOfWeek.name
             dateModel.add(DateModel(i,number,name, date))
@@ -287,7 +332,6 @@ class CreateReservationFragment : Fragment(),View.OnClickListener {
             }
             binding.btnCalendarUnSelected -> {
                 findNavController().navigate(R.id.action_createReservationFragment_to_datePickerFragment)
-
             }
             binding.btnAdd -> {
                 findNavController().navigate(R.id.action_createReservationFragment_to_invitePeopleFragmente)

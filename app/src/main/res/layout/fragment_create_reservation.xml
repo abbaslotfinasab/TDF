@@ -180,10 +180,11 @@
             </androidx.constraintlayout.widget.ConstraintLayout>
 
             <androidx.constraintlayout.widget.ConstraintLayout
-                android:id="@+id/constraintLayout12"
+                android:id="@+id/reservationTimeLayout"
                 android:layout_width="0dp"
-                android:layout_height="136dp"
+                android:layout_height="wrap_content"
                 android:layout_marginTop="20dp"
+                android:visibility="visible"
                 android:background="@color/white"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
@@ -217,11 +218,11 @@
                 <androidx.recyclerview.widget.RecyclerView
                     android:id="@+id/timeRecycler"
                     android:layout_width="0dp"
-                    android:layout_height="0dp"
-                    android:layout_marginTop="6dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="15dp"
                     android:layout_marginBottom="5dp"
                     app:layout_constraintBottom_toBottomOf="parent"
-                    app:layout_constraintEnd_toStartOf="parent"
+                    app:layout_constraintEnd_toEndOf="@+id/timeTitle"
                     app:layout_constraintStart_toStartOf="@+id/textView7"
                     app:layout_constraintTop_toBottomOf="@+id/textView7" />
 
@@ -235,7 +236,7 @@
                 android:background="@color/white"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@id/constraintLayout12">
+                app:layout_constraintTop_toBottomOf="@id/reservationTimeLayout">
 
                 <TextView
                     android:id="@+id/textView8"
@@ -358,8 +359,8 @@
                     android:layout_marginTop="12dp"
                     android:nestedScrollingEnabled="false"
                     android:visibility="gone"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintEnd_toEndOf="@id/btnMore"
+                    app:layout_constraintStart_toStartOf="@id/textView9"
                     app:layout_constraintTop_toBottomOf="@+id/textView9" />
 
                 <TextView
@@ -382,8 +383,8 @@
                     android:layout_height="wrap_content"
                     android:layout_marginTop="12dp"
                     android:visibility="gone"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintEnd_toEndOf="@id/btnMore"
+                    app:layout_constraintStart_toStartOf="@id/guessTitle"
                     app:layout_constraintTop_toBottomOf="@+id/guessTitle" />
 
 

@@ -25,7 +25,7 @@ import java.time.format.DateTimeFormatter
 class DatePickerFragment : BottomSheetDialogFragment() {
 
     private lateinit var binding: FragmentDatePickerBinding
-    private var date = LocalDateTime.now().format(DateTimeFormatter.ofPattern("dd.MM.yyyy"))
+    private var date = LocalDateTime.now().format(DateTimeFormatter.ofPattern("yyyy-MM-d"))
     private var dayOfWeek = LocalDateTime.now().dayOfWeek.name
     private var _year = LocalDateTime.now().year
     private var month = LocalDateTime.now().month.value
@@ -62,7 +62,7 @@ class DatePickerFragment : BottomSheetDialogFragment() {
         }
 
         binding.btnSelect.setOnClickListener {
-            date = LocalDateTime.of(_year,month+1,day,0,0).format(DateTimeFormatter.ofPattern("dd.MM.yyyy")).toString()
+            date = LocalDateTime.of(_year,month+1,day,0,0).format(DateTimeFormatter.ofPattern("yyyy-MM-dd")).toString()
             dayOfWeek = LocalDateTime.of(_year,month+1,day,0,0).dayOfWeek.name
             DateListener.datePickerListener.postValue(DateModel(0,day.toString(),dayOfWeek,date))
             dialog?.dismiss()
