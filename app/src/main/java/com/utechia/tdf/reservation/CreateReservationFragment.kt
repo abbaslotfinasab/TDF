@@ -254,6 +254,8 @@ class CreateReservationFragment : Fragment(),View.OnClickListener {
 
                 Glide.with(requireActivity())
                     .load(it.coverPhoto)
+                    .placeholder(R.mipmap.meet_place)
+                    .error(R.mipmap.meet_place)
                     .transform(BlurTransformation(10, 2))
                     .into(binding.imageRoom)
 

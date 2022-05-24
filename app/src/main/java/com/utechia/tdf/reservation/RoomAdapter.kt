@@ -55,6 +55,8 @@ class RoomAdapter(val roomListFragment: RoomListFragment) :
             Glide.with(itemView.context)
                 .load("${roomList[position].coverPhoto}")
                 .centerCrop()
+                .placeholder(R.mipmap.meet_place)
+                .error(R.mipmap.meet_place)
                 .into(cover)
 
             select.setOnClickListener {
