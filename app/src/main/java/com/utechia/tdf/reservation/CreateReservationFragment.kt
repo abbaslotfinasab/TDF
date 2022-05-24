@@ -49,6 +49,8 @@ class CreateReservationFragment : Fragment(),View.OnClickListener {
     private var startTime = ""
     private var endTime = ""
     private var guests:MutableList<Guests> = mutableListOf()
+    private var attendees:MutableSet<Int> = mutableSetOf()
+
 
 
     override fun onCreateView(
@@ -120,9 +122,7 @@ class CreateReservationFragment : Fragment(),View.OnClickListener {
                     findNavController().navigate(R.id.action_createReservationFragment_to_reservationFragment)
                 }
 
-                is Result.Loading -> {
-                    binding.prg.visibility = View.VISIBLE
-                }
+                is Result.Loading -> {}
 
                 is Result.Error -> {
                     binding.prg.visibility = View.GONE
@@ -372,13 +372,13 @@ class CreateReservationFragment : Fragment(),View.OnClickListener {
             }
             binding.btnBook -> {
                 invitePeopleAdapter.userList.map {
-                    guests.add(Guests(it.name,it.mail,it.jobTitle))
+                    it.id?.let { it1 -> attendees.add(it1) }
                 }
                 inviteGuestAdapter.userList.map {
                     guests.add(Guests(it.name,it.mail,it.jobTitle))
                 }
                 reservationViewModel.createMeeting(AnswerReservationModel(binding.titleInput.text.toString(),binding.noteInput.text.toString(),reservationDate,startTime,endTime,
-                    emptyList<Any>().toMutableList(),guests,roomId))
+                    attendees.toMutableList(),guests,roomId))
             }
         }
     }
