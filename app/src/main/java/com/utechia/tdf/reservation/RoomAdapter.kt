@@ -49,7 +49,7 @@ class RoomAdapter(val roomListFragment: RoomListFragment) :
 
             title.text = roomList[position].name
             floor.text = "${roomList[position].floor.name}nd Floor"
-            capacity.text = "${roomList[position].capacity} People"
+            capacity.text = "capacity: ${roomList[position].capacity}"
 
 
             Glide.with(itemView.context)
