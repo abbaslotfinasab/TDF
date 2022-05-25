@@ -6,6 +6,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
+import androidx.core.content.ContextCompat
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
@@ -306,10 +307,12 @@ class CreateReservationFragment : Fragment(),View.OnClickListener {
 
                 Glide.with(requireContext())
                     .load(it.coverPhoto)
-                    .error(R.mipmap.meet_place)
+                    .error(R.mipmap.meet_place_blur)
                     .centerCrop()
                     .transform(BlurTransformation(10, 2))
                     .into(binding.imageRoom)
+                    .onLoadStarted(ContextCompat.getDrawable(requireContext(),R.mipmap.meet_place_blur))
+
 
                 roomId = it.id?:-1
 
