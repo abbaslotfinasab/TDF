@@ -1,6 +1,5 @@
 package com.utechia.tdf.reservation
 
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -15,18 +14,18 @@ import com.utechia.tdf.R
 
 class InviteGuestAdapter : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
 
-    val userList:MutableList<ProfileModel> = mutableListOf()
+    val userList:MutableSet<ProfileModel> = mutableSetOf()
 
     fun addData(profileModel:ProfileModel){
         userList.add(profileModel)
-        notifyItemInserted(userList.size-1)
+        notifyDataSetChanged()
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): RecyclerView.ViewHolder = ViewHolder(
         LayoutInflater.from(parent.context).inflate(R.layout.item_invite_eople, parent, false))
 
     override fun onBindViewHolder(holder: RecyclerView.ViewHolder, position: Int) {
-        (holder as ViewHolder).bind0(position)
+        (holder as ViewHolder).bind0(userList.elementAt(position))
     }
 
     override fun getItemCount(): Int = userList.size
@@ -41,22 +40,25 @@ class InviteGuestAdapter : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
         private val remove: ImageButton = itemView.findViewById(R.id.btnRemove)
 
 
-        fun bind0(position: Int) {
-            title.text = userList[position].name
-            jobTitle.text = userList[position].jobTitle
+        fun bind0(profileModel: ProfileModel) {
+            title.text = profileModel.name
+            if(!profileModel.jobTitle.isNullOrEmpty()) {
+                jobTitle.text = profileModel.jobTitle
+            }else{
+                jobTitle.text = profileModel.mail
+            }
 
             Glide.with(itemView.context)
-                .load("${userList[position].profilePictureModel?.url}")
+                .load("${profileModel.profilePictureModel?.url}")
                 .centerCrop()
                 .placeholder(R.drawable.ic_profile_icon)
                 .error(R.drawable.ic_profile_icon)
                 .into(cover)
 
             remove.setOnClickListener {
-                userList.removeAt(position)
-                notifyItemRemoved(position)
+                userList.remove(profileModel)
                 notifyDataSetChanged()
-                InvitationListener.removeGuestListener.postValue(userList[position])
+                InvitationListener.removeGuestListener.postValue(profileModel)
             }
         }
     }

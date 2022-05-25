@@ -22,6 +22,7 @@ import com.utechia.tdf.databinding.FragmentCreateReservationBinding
 import dagger.hilt.android.AndroidEntryPoint
 import jp.wasabeef.glide.transformations.BlurTransformation
 import java.time.Duration
+import java.time.LocalDate
 import java.time.LocalDateTime
 import java.time.LocalTime
 import java.time.format.DateTimeFormatter
@@ -220,7 +221,7 @@ class CreateReservationFragment : Fragment(),View.OnClickListener {
                     it.name?.lowercase()?.replaceFirstChar { it1 ->
                         it1.uppercase()
                     }
-                }  ${it.date}"
+                }  ${LocalDate.parse(it.date,DateTimeFormatter.ofPattern("yyyy-MM-dd")).format(DateTimeFormatter.ofPattern("dd.MM.yyyy"))}"
                 reservationDate = it.date.toString()
                 binding.btnCalendarSelected.visibility = View.INVISIBLE
                 binding.btnCalendarUnSelected.visibility = View.VISIBLE
@@ -245,7 +246,7 @@ class CreateReservationFragment : Fragment(),View.OnClickListener {
                     it.name?.lowercase()?.replaceFirstChar { it1 ->
                         it1.uppercase()
                     }
-                }  ${it.date}"
+                }  ${LocalDate.parse(it.date,DateTimeFormatter.ofPattern("yyyy-MM-dd")).format(DateTimeFormatter.ofPattern("dd.MM.yyyy"))}"
 
                 reservationDate = it.date.toString()
                 reservationDateAdapter.previousIndex = -1

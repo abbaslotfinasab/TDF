@@ -43,8 +43,11 @@ class InvitePeopleAdapter : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
 
         fun bind0(position: Int) {
             title.text = userList[position].name
-            jobTitle.text = userList[position].jobTitle
-
+            if(!userList[position].jobTitle.isNullOrEmpty()) {
+                jobTitle.text = userList[position].jobTitle
+            }else{
+                jobTitle.text = userList[position].mail
+            }
             Glide.with(itemView.context)
                 .load("${userList[position].profilePictureModel?.url}")
                 .centerCrop()
