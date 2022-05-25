@@ -21,6 +21,7 @@ import com.utechia.tdf.R
 import com.utechia.tdf.databinding.FragmentCreateReservationBinding
 import dagger.hilt.android.AndroidEntryPoint
 import jp.wasabeef.glide.transformations.BlurTransformation
+import java.time.Duration
 import java.time.LocalDateTime
 import java.time.LocalTime
 import java.time.format.DateTimeFormatter
@@ -261,7 +262,9 @@ class CreateReservationFragment : Fragment(),View.OnClickListener {
                 if (LocalTime.parse(duration.end, DateTimeFormatter.ofPattern("HH:mm")).toSecondOfDay()>LocalTime.parse(endTime, DateTimeFormatter.ofPattern("HH:mm")).toSecondOfDay())
                     endTime = duration.end.toString()
             }
-            binding.timeTitle.text = "$startTime - $endTime"
+            val delay : Duration = Duration.between(LocalTime.parse(startTime,DateTimeFormatter.ofPattern("HH:mm")),LocalTime.parse(endTime,DateTimeFormatter.ofPattern("HH:mm")))
+
+            binding.timeTitle.text = "$startTime - $endTime  ${delay.toMinutes()}M"
         }
     }
 

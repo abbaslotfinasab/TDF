@@ -46,8 +46,8 @@ class ReservationAdapter: PagingDataAdapter<MeetingModel, ReservationAdapter.MyV
             dayNumber.text = LocalDate.parse(meetingModel.date, DateTimeFormatter.ofPattern("yyyy-MM-dd")).dayOfMonth.toString()
             floor.text = "Floor ${meetingModel.room?.floor?.name}"
             title.text = meetingModel.subject
-            dayOfWeek.text = "${LocalDate.parse(meetingModel.date, DateTimeFormatter.ofPattern("yyyy-MM-dd")).dayOfWeek.name.lowercase().replaceFirstChar { it.uppercase() }} , "
-            dateTime.text = "${LocalTime.parse(meetingModel.startsAt,DateTimeFormatter.ofPattern("HH:mm:ss")).format(DateTimeFormatter.ofPattern("HH:mm"))} to ${LocalTime.parse(meetingModel.endsAt,DateTimeFormatter.ofPattern("HH:mm:ss")).format(DateTimeFormatter.ofPattern("HH:mm"))} (${meetingModel.duration}M)"
+            dayOfWeek.text = "${LocalDate.parse(meetingModel.date, DateTimeFormatter.ofPattern("yyyy-MM-dd")).dayOfWeek.name.lowercase().replaceFirstChar { it.uppercase() }}"
+            dateTime.text = ", ${LocalTime.parse(meetingModel.startsAt,DateTimeFormatter.ofPattern("HH:mm:ss")).format(DateTimeFormatter.ofPattern("HH:mm"))} to ${LocalTime.parse(meetingModel.endsAt,DateTimeFormatter.ofPattern("HH:mm:ss")).format(DateTimeFormatter.ofPattern("HH:mm"))} (${meetingModel.duration}M)"
 
             if (meetingModel.status == ReservationEnum.Cancel.reservation){
                 cancel.visibility = View.VISIBLE
