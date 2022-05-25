@@ -16,34 +16,49 @@
             android:layout_height="match_parent"
             android:gravity="center_horizontal">
 
-            <com.google.android.material.tabs.TabLayout
-                android:id="@+id/tabLayout"
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:id="@+id/tabBackLayout"
                 android:layout_width="0dp"
                 android:layout_height="56dp"
-                android:layout_marginTop="40dp"
                 android:background="@color/inviteTabBack"
-                android:textAlignment="center"
-                app:tabPaddingStart="10dp"
-                app:tabPaddingEnd="10dp"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent"
-                app:tabBackground="@drawable/tab_color_selector"
-                app:tabTextAppearance="@style/MyCustomTextAppearance"
-                app:tabTextColor="@color/white">
+                android:layout_marginTop="40dp"
+                app:layout_constraintTop_toTopOf="parent">
 
-                <com.google.android.material.tabs.TabItem
-                    android:layout_width="wrap_content"
-                    android:layout_height="match_parent"
-                    android:text="@string/search_people" />
+                <com.google.android.material.tabs.TabLayout
+                    android:id="@+id/tabLayout"
+                    android:layout_width="0dp"
+                    android:layout_height="42dp"
+                    android:layout_marginStart="20dp"
+                    android:layout_marginEnd="20dp"
+                    android:background="@color/inviteTabBack"
+                    android:textAlignment="center"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent"
+                    app:tabInlineLabel="false"
+                    app:tabIndicator="@null"
+                    app:tabBackground="@drawable/tab_color_selector"
+                    app:tabTextAppearance="@style/MyCustomTextAppearance"
+                    app:tabTextColor="@color/white">
 
-                <com.google.android.material.tabs.TabItem
-                    android:layout_width="wrap_content"
-                    android:layout_height="match_parent"
-                    android:text="@string/add_guest" />
 
+                    <com.google.android.material.tabs.TabItem
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="@string/search_people" />
 
-            </com.google.android.material.tabs.TabLayout>
+                    <com.google.android.material.tabs.TabItem
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="@string/add_guest" />
+
+                </com.google.android.material.tabs.TabLayout>
+
+            </androidx.constraintlayout.widget.ConstraintLayout>
 
             <androidx.viewpager2.widget.ViewPager2
                 android:id="@+id/pager"
@@ -52,9 +67,9 @@
                 android:layoutDirection="ltr"
                 android:orientation="horizontal"
                 app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintEnd_toEndOf="@+id/tabLayout"
-                app:layout_constraintStart_toStartOf="@+id/tabLayout"
-                app:layout_constraintTop_toBottomOf="@+id/tabLayout" />
+                app:layout_constraintEnd_toEndOf="@+id/tabBackLayout"
+                app:layout_constraintStart_toStartOf="@+id/tabBackLayout"
+                app:layout_constraintTop_toBottomOf="@+id/tabBackLayout" />
 
         </androidx.constraintlayout.widget.ConstraintLayout>
 

@@ -176,6 +176,7 @@
     <string name="cancel_meeting">Cancel Meeting</string>
     <string name="canceled">Canceled</string>
     <string name="book_meeting">Book Meeting</string>
+    <string name="close">Close</string>
 
 
     <string-array name="month_array">

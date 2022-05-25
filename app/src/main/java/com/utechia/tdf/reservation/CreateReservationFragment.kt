@@ -395,7 +395,27 @@ class CreateReservationFragment : Fragment(),View.OnClickListener {
                 findNavController().navigate(R.id.action_createReservationFragment_to_invitePeopleFragmente)
             }
             binding.btnBook -> {
-                findNavController().navigate(R.id.action_createReservationFragment_to_reservationBookConfirmationFragment)
+                when{
+                    roomId == -1 ->{
+                        Toast.makeText(context,"No room selected",Toast.LENGTH_SHORT).show()
+                    }
+
+                    reservationDate == "" -> {
+                        Toast.makeText(context,"No date selected",Toast.LENGTH_SHORT).show()
+                    }
+                    startTime == "" -> {
+                        Toast.makeText(context,"No time selected",Toast.LENGTH_SHORT).show()
+                    }
+                    endTime == "" -> {
+                        Toast.makeText(context,"No time selected",Toast.LENGTH_SHORT).show()
+                    }
+                    invitePeopleAdapter.userList.size==0 -> {
+                        Toast.makeText(context,"No people invited",Toast.LENGTH_SHORT).show()
+                    }
+                    else -> {
+                        findNavController().navigate(R.id.action_createReservationFragment_to_reservationBookConfirmationFragment)
+                    }
+                }
             }
         }
     }
@@ -408,6 +428,7 @@ class CreateReservationFragment : Fragment(),View.OnClickListener {
         DateListener.datePickerListener.postValue(null)
         InvitationListener.addInvitationListener.postValue(null)
         InvitationListener.addGuestListener.postValue(null)
+        BookListener.bookListener.postValue(null)
     }
 }
 
