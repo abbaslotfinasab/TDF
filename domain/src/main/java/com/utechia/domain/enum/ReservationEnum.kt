@@ -6,5 +6,9 @@ enum class ReservationEnum(val reservation:String) {
     Title("title"),
     Date("date"),
     DayOfWeek("dayOfWeek"),
+    Invited("false"),
+    None("true"),
+    Cancel("Cancelled"),
+
 
 }

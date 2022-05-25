@@ -26,10 +26,7 @@ import com.utechia.data.repo.order.userorder.UserOrderRepoImpl
 import com.utechia.data.repo.permission.PermissionDetailsRepoImpl
 import com.utechia.data.repo.profile.ProfileRepoImpl
 import com.utechia.data.repo.refreshment.RefreshmentRepoImpl
-import com.utechia.data.repo.reservation.InvitationRepoImpl
-import com.utechia.data.repo.reservation.ReservationRepoImpl
-import com.utechia.data.repo.reservation.RoomRepoImpl
-import com.utechia.data.repo.reservation.TimeRepoImpl
+import com.utechia.data.repo.reservation.*
 import com.utechia.data.repo.survey.SurveyDetailsRepoImpl
 import com.utechia.data.repo.ticket.UploadRepoImpl
 import com.utechia.domain.repository.cart.CartRepo
@@ -53,10 +50,7 @@ import com.utechia.domain.repository.profile.ProfileRepo
 import com.utechia.domain.repository.profile.UserOrderDetailsRepo
 import com.utechia.domain.repository.profile.UserOrderRepo
 import com.utechia.domain.repository.refreshment.RefreshmentRepo
-import com.utechia.domain.repository.reservation.InvitationRepo
-import com.utechia.domain.repository.reservation.ReservationRepo
-import com.utechia.domain.repository.reservation.RoomRepo
-import com.utechia.domain.repository.reservation.TimeRepo
+import com.utechia.domain.repository.reservation.*
 import com.utechia.domain.repository.survey.SurveyDetailsRepo
 import com.utechia.domain.repository.survey.SurveyRepo
 import com.utechia.domain.repository.ticket.*
@@ -226,7 +220,12 @@ abstract class RepositoryModule {
     ): InvitationRepo
 
     @Binds
-    abstract fun bindMeetingTineService(
+    abstract fun bindMeetingTimeService(
         timeRepoImpl: TimeRepoImpl
     ): TimeRepo
+
+    @Binds
+    abstract fun bindMeetingService(
+        meetingRepoImpl: MeetingRepoImpl
+    ): MeetingRepo
 }

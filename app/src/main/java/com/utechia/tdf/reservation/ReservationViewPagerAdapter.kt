@@ -4,7 +4,7 @@ import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentManager
 import androidx.lifecycle.Lifecycle
 import androidx.viewpager2.adapter.FragmentStateAdapter
-import com.utechia.domain.enum.SurveyEnum
+import com.utechia.domain.enum.ReservationEnum
 
 class ReservationViewPagerAdapter(fa: FragmentManager, lifecycle:Lifecycle) : FragmentStateAdapter(fa,lifecycle) {
 
@@ -15,15 +15,15 @@ class ReservationViewPagerAdapter(fa: FragmentManager, lifecycle:Lifecycle) : Fr
         return when (position) {
 
             0 -> {
-                ReservationChildFragment(SurveyEnum.Evaluate.survey)
+                ReservationChildFragment(ReservationEnum.Invited.reservation)
             }
 
             1 -> {
-                ReservationChildFragment(SurveyEnum.Expired.survey)
+                ReservationChildFragment(ReservationEnum.None.reservation)
             }
 
             else -> {
-                ReservationChildFragment(SurveyEnum.Evaluate.survey)
+                ReservationChildFragment(ReservationEnum.Invited.reservation)
             }
         }
     }

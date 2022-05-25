@@ -30,6 +30,7 @@ import com.utechia.data.entity.permission.PermissionUpdateBody
 import com.utechia.data.entity.profile.Profile
 import com.utechia.data.entity.refreshment.Refreshment
 import com.utechia.data.entity.reservation.Invitation
+import com.utechia.data.entity.reservation.Meeting
 import com.utechia.data.entity.reservation.Room
 import com.utechia.data.entity.reservation.Time
 import com.utechia.data.entity.survey.SingleSurvey
@@ -255,5 +256,9 @@ interface Service {
     @Headers("Content-Type: application/json")
     @POST("reservation/meeting")
     suspend fun createMeeting(@Body answerReservationModel: AnswerReservationModel):Response<Void>
+
+
+    @GET("reservation/meeting")
+    suspend fun getAllMeeting(@Query("page") page: Int,@Query("page_size") page_size: Int,@Query("invited") status: String):Response<Meeting>
 
 }
