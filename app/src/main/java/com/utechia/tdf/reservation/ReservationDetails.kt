@@ -7,8 +7,10 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
+import androidx.core.os.bundleOf
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
+import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.bumptech.glide.Glide
 import com.utechia.domain.enum.MainEnum
@@ -55,6 +57,11 @@ class ReservationDetails : Fragment() {
             adapter = inviteDetailsAdapter
             layoutManager = LinearLayoutManager(requireActivity(),
                 LinearLayoutManager.VERTICAL,false)
+        }
+
+        binding.btnBook.setOnClickListener {
+            val bundle = bundleOf(ReservationEnum.ID.reservation to meetId)
+            findNavController().navigate(R.id.action_reservationDetails_to_cancelReservationFragment,bundle)
         }
 
         observer()

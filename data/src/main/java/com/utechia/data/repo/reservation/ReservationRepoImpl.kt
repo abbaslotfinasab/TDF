@@ -1,6 +1,5 @@
 package com.utechia.data.repo.reservation
 
-import android.util.Log
 import com.utechia.data.api.Service
 import com.utechia.data.dao.ProfileDao
 import com.utechia.data.utile.NetworkHelper
@@ -24,8 +23,26 @@ class ReservationRepoImpl @Inject constructor(
 
         if (networkHelper.isNetworkConnected()) {
 
-            Log.d("testit",answerReservationModel.toString())
             val result = service.createMeeting(answerReservationModel)
+
+            return when (result.isSuccessful){
+
+                true -> {
+                    emptyList<ReservationModel>().toMutableList()
+                }
+
+                else ->
+                    throw IOException("Server is Not Responding")
+            }
+
+        } else throw IOException("No Internet Connection")
+
+    }
+
+    override suspend fun cancel(meetId: Int): MutableList<ReservationModel> {
+        if (networkHelper.isNetworkConnected()) {
+
+            val result = service.cancelMeet(meetId)
 
             return when (result.isSuccessful){
 

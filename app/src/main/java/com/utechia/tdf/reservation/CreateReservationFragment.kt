@@ -113,6 +113,22 @@ class CreateReservationFragment : Fragment(),View.OnClickListener {
         invitePeople()
         roomObserver()
         timeObserver()
+        bookReservation()
+    }
+
+    private fun bookReservation(){
+        BookListener.bookListener.observe(viewLifecycleOwner){
+            if (it==true){
+                invitePeopleAdapter.userList.map { it1->
+                    it1.id?.let { it2 -> attendees.add(it2) }
+                }
+                inviteGuestAdapter.userList.map {it1 ->
+                    guests.add(GuestsModel(it1.name,it1.mail,it1.jobTitle))
+                }
+                reservationViewModel.createMeeting(AnswerReservationModel(binding.titleInput.text.toString(),binding.noteInput.text.toString(),reservationDate,startTime,endTime,
+                    attendees.toMutableList(),guests,roomId))
+            }
+        }
     }
 
     private fun roomObserver() {
@@ -379,14 +395,7 @@ class CreateReservationFragment : Fragment(),View.OnClickListener {
                 findNavController().navigate(R.id.action_createReservationFragment_to_invitePeopleFragmente)
             }
             binding.btnBook -> {
-                invitePeopleAdapter.userList.map {
-                    it.id?.let { it1 -> attendees.add(it1) }
-                }
-                inviteGuestAdapter.userList.map {
-                    guests.add(GuestsModel(it.name,it.mail,it.jobTitle))
-                }
-                reservationViewModel.createMeeting(AnswerReservationModel(binding.titleInput.text.toString(),binding.noteInput.text.toString(),reservationDate,startTime,endTime,
-                    attendees.toMutableList(),guests,roomId))
+                findNavController().navigate(R.id.action_createReservationFragment_to_reservationBookConfirmationFragment)
             }
         }
     }

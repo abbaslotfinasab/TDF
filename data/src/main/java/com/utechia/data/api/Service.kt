@@ -260,4 +260,8 @@ interface Service {
     @GET("reservation/meeting/{meetingId}")
     suspend fun getSingleMeeting(@Path("meetingId") meetingId:Int):Response<SingleMeeting>
 
+    @PATCH("reservation/meeting/{meetingId}")
+    suspend fun cancelMeet(@Path("meetingId") meetingId:Int):Response<Reservation>
+
+
 }

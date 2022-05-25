@@ -2,7 +2,6 @@ package com.utechia.domain.usecases.reservation
 
 import com.utechia.domain.model.reservation.AnswerReservationModel
 import com.utechia.domain.model.reservation.ReservationModel
-import com.utechia.domain.model.reservation.TimeModel
 import com.utechia.domain.repository.reservation.ReservationRepo
 import javax.inject.Inject
 import javax.inject.Singleton
@@ -27,4 +26,7 @@ class ReservationUseCaseImpl @Inject constructor(private val reservationRepo: Re
         reservationRepo.deleteAll()
     }
 
+    override suspend fun cancel(meetId: Int): MutableList<ReservationModel> {
+        return reservationRepo.cancel(meetId)
+    }
 }

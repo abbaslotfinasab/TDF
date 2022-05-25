@@ -183,6 +183,15 @@
             app:exitAnim="@android:anim/fade_out"
             app:popEnterAnim="@android:anim/fade_in"
             app:popExitAnim="@android:anim/fade_out"/>
+        <action
+            android:id="@+id/action_createReservationFragment_to_reservationBookConfirmationFragment"
+            app:destination="@id/reservationBookConfirmationFragment"
+            app:launchSingleTop="true"
+            app:enterAnim="@android:anim/fade_in"
+            app:exitAnim="@android:anim/fade_out"
+            app:popEnterAnim="@android:anim/fade_in"
+            app:popExitAnim="@android:anim/fade_out"
+            />
 
     </fragment>
     <fragment
@@ -206,7 +215,16 @@
             app:exitAnim="@android:anim/fade_out"
             app:popEnterAnim="@android:anim/fade_in"
             app:popExitAnim="@android:anim/fade_out"/>
+        <action
+            android:id="@+id/action_reservationDetails_to_cancelReservationFragment"
+            app:destination="@id/cancelReservationFragment"
+            app:launchSingleTop="true"
+            app:enterAnim="@android:anim/fade_in"
+            app:exitAnim="@android:anim/fade_out"
+            app:popEnterAnim="@android:anim/fade_in"
+            app:popExitAnim="@android:anim/fade_out"/>
     </fragment>
+
     <fragment
         android:id="@+id/qrCodeFragment"
         android:name="com.utechia.tdf.qrcode.QrCodeFragment"
@@ -1516,5 +1534,27 @@
             app:popExitAnim="@android:anim/fade_out"/>
 
     </dialog>
+    <dialog
+        android:id="@+id/cancelReservationFragment"
+        android:name="com.utechia.tdf.reservation.CancelReservationFragment"
+        android:label="fragment_cancel_reservation"
+        tools:layout="@layout/fragment_cancel_reservation" >
+
+        <action
+            android:id="@+id/action_cancelReservationFragment_to_reservationFragment"
+            app:destination="@id/reservationFragment"
+            app:launchSingleTop="true"
+            app:enterAnim="@android:anim/fade_in"
+            app:exitAnim="@android:anim/fade_out"
+            app:popEnterAnim="@android:anim/fade_in"
+            app:popExitAnim="@android:anim/fade_out"/>
+
+    </dialog>
+
+    <dialog
+        android:id="@+id/reservationBookConfirmationFragment"
+        android:name="com.utechia.tdf.reservation.ReservationBookConfirmationFragment"
+        android:label="fragment_reservation_book_confirmation"
+        tools:layout="@layout/fragment_reservation_book_confirmation" />
 
 </navigation>

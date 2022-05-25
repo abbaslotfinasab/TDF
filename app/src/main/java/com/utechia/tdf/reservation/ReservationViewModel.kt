@@ -45,6 +45,20 @@ class ReservationViewModel @Inject constructor(
         }
     }
 
+    fun cancelMeeting(meetId:Int) {
+
+        viewModelScope.launch(Dispatchers.IO + handler) {
+
+            _reservationModel.postValue(Result.Loading)
+
+            reservationUseCaseImpl.cancel(meetId).let {
+
+                _reservationModel.postValue(Result.Success(it))
+
+            }
+        }
+    }
+
     fun addGuess(id:Int){
 
         viewModelScope.launch(Dispatchers.IO+handler) {
