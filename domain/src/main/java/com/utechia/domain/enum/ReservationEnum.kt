@@ -9,6 +9,10 @@ enum class ReservationEnum(val reservation:String) {
     Invited("false"),
     None("true"),
     Cancel("Cancelled"),
+    Guest("Guest"),
+    Attend("Attend"),
+    Presenter("Inviter"),
+
 
 
 }

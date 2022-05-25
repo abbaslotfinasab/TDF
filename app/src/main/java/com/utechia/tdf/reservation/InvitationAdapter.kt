@@ -56,7 +56,7 @@ class InvitationAdapter : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
             }
 
             Glide.with(itemView.context)
-                .load("${userList[position].profilePictureModel}")
+                .load("${userList[position].profilePictureModel?.url}")
                 .centerCrop()
                 .placeholder(R.drawable.ic_profile_icon)
                 .error(R.drawable.ic_profile_icon)

@@ -23,6 +23,7 @@ enum class MainEnum(val main:String) {
     UserOrder("user"),
     TeaBoyOrder("TeaBoy"),
     Reservation("reservation"),
+    ReservationDetails("reservationDetails"),
     Favorite("favorite"),
     Profile("profile"),
     Code("code"),

@@ -190,24 +190,7 @@
         android:name="com.utechia.tdf.reservation.ReservationDetails"
         android:label="fragment_reservation_details"
         tools:layout="@layout/fragment_reservation_details" >
-        <argument
-            android:name="roomTitle"
-            app:argType="string" />
-        <argument
-            android:name="currentDay"
-            app:argType="integer" />
-        <argument
-            android:name="currentMonth"
-            app:argType="integer" />
-        <argument
-            android:name="imageRoom"
-            app:argType="string" />
-        <argument
-            android:name="time"
-            app:argType="string" />
-        <argument
-            android:name="capacity"
-            app:argType="integer" />
+
         <action
             android:id="@+id/action_reservationDetails_to_resultFragment"
             app:destination="@id/resultFragment"
@@ -215,9 +198,7 @@
             app:exitAnim="@android:anim/fade_out"
             app:popEnterAnim="@android:anim/fade_in"
             app:popExitAnim="@android:anim/fade_out"/>
-        <argument
-            android:name="duration"
-            app:argType="string" />
+
         <action
             android:id="@+id/action_reservationDetails_to_createReservationFragment"
             app:destination="@id/createReservationFragment"

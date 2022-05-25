@@ -9,6 +9,7 @@ import kotlinx.serialization.Serializable
 @Parcelize
 @Serializable
 data class MeetingData (
+
     val id:Int?,
     val subject:String?,
     val description:String?,
@@ -18,7 +19,6 @@ data class MeetingData (
     val room:RoomData?,
     val duration:Int?,
     val status:String?,
-
 
     ): Parcelable, ResponseObject<MeetingModel> {
     override fun toDomain(): MeetingModel {

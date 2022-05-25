@@ -17,6 +17,6 @@ data class ProfilePicture(
 
     ): Parcelable, ResponseObject<ProfilePictureModel> {
     override fun toDomain(): ProfilePictureModel {
-        return ProfilePictureModel("${ BuildConfig.BASE_URL}$url",name,path)
+        return ProfilePictureModel("${BuildConfig.BASE_URL}$url",name,path)
     }
 }

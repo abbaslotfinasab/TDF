@@ -173,6 +173,8 @@
     <string name="select_date">Select Date</string>
     <string name="added">Added</string>
     <string name="guests">Guests</string>
+    <string name="cancel_meeting">Cancel Meeting</string>
+    <string name="canceled">Canceled</string>
 
 
     <string-array name="month_array">

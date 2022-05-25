@@ -7,7 +7,7 @@ data class AnswerReservationModel(
     var startsAt:String?,
     var endsAt:String?,
     var attendees:MutableList<Int>?,
-    var guests: MutableList<Guests>?,
+    var guests: MutableList<GuestsModel>?,
     var roomId:Int?,
 
-)
+    )

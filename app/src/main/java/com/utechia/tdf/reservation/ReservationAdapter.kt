@@ -4,6 +4,9 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.TextView
+import androidx.constraintlayout.widget.ConstraintLayout
+import androidx.core.os.bundleOf
+import androidx.navigation.findNavController
 import androidx.paging.PagingDataAdapter
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.RecyclerView
@@ -39,6 +42,8 @@ class ReservationAdapter: PagingDataAdapter<MeetingModel, ReservationAdapter.MyV
         private val dateTime: TextView = itemView.findViewById(R.id.dateTime)
         private val floor: TextView = itemView.findViewById(R.id.floor)
         private val cancel: TextView = itemView.findViewById(R.id.btnCancel)
+        private val reservation: ConstraintLayout = itemView.findViewById(R.id.reservationLayout)
+
 
 
         fun bind(meetingModel: MeetingModel) {
@@ -47,7 +52,11 @@ class ReservationAdapter: PagingDataAdapter<MeetingModel, ReservationAdapter.MyV
             floor.text = "Floor ${meetingModel.room?.floor?.name}"
             title.text = meetingModel.subject
             dayOfWeek.text = "${LocalDate.parse(meetingModel.date, DateTimeFormatter.ofPattern("yyyy-MM-dd")).dayOfWeek.name.lowercase().replaceFirstChar { it.uppercase() }}"
-            dateTime.text = ", ${LocalTime.parse(meetingModel.startsAt,DateTimeFormatter.ofPattern("HH:mm:ss")).format(DateTimeFormatter.ofPattern("HH:mm"))} to ${LocalTime.parse(meetingModel.endsAt,DateTimeFormatter.ofPattern("HH:mm:ss")).format(DateTimeFormatter.ofPattern("HH:mm"))} (${meetingModel.duration}M)"
+            dateTime.text = ", ${LocalTime.parse(meetingModel.startsAt,DateTimeFormatter.ofPattern("HH:mm:ss")).format(DateTimeFormatter.ofPattern("HH:mm"))} to ${LocalTime.parse(meetingModel.endsAt,DateTimeFormatter.ofPattern("HH:mm:ss")).format(DateTimeFormatter.ofPattern("HH:mm"))} (${(meetingModel.duration?.div(
+                60
+            ))}H ${(meetingModel.duration?.rem(
+                60
+            ))}M)"
 
             if (meetingModel.status == ReservationEnum.Cancel.reservation){
                 cancel.visibility = View.VISIBLE
@@ -55,6 +64,10 @@ class ReservationAdapter: PagingDataAdapter<MeetingModel, ReservationAdapter.MyV
                 cancel.visibility = View.INVISIBLE
             }
 
+            reservation.setOnClickListener{
+                val bundle = bundleOf(ReservationEnum.ID.reservation to meetingModel.id)
+                itemView.findNavController().navigate(R.id.action_reservationFragment_to_reservationDetails,bundle)
+            }
 
 
         }

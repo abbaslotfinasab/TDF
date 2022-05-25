@@ -351,6 +351,11 @@ class MainActivity : AppCompatActivity(), SensorEventListener {
 
                     }
 
+                    R.id.reservationDetails -> {
+                        design(MainEnum.ReservationDetails.main)
+
+                    }
+
                     R.id.calendarFragment -> {
                         design(MainEnum.Calendar.main)
 
@@ -548,6 +553,11 @@ class MainActivity : AppCompatActivity(), SensorEventListener {
 
                 R.id.surveySystemFragment -> {
                     design(MainEnum.Survey.main)
+
+                }
+
+                R.id.reservationDetails -> {
+                    design(MainEnum.ReservationDetails.main)
 
                 }
 
@@ -981,6 +991,17 @@ class MainActivity : AppCompatActivity(), SensorEventListener {
                 binding.toolbar.visibility = View.INVISIBLE
                 binding.customButton.visibility = View.GONE
                 binding.customTitle.text = getString(R.string.healthData)
+                binding.bottomNavigation.visibility = View.GONE
+                binding.drawerLayout.setDrawerLockMode(DrawerLayout.LOCK_MODE_LOCKED_CLOSED)
+
+            }
+
+            MainEnum.ReservationDetails.main ->{
+                window.statusBarColor = ContextCompat.getColor(this, R.color.status)
+                binding.customToolbar.visibility = View.VISIBLE
+                binding.toolbar.visibility = View.INVISIBLE
+                binding.customButton.visibility = View.GONE
+                binding.customTitle.text = ""
                 binding.bottomNavigation.visibility = View.GONE
                 binding.drawerLayout.setDrawerLockMode(DrawerLayout.LOCK_MODE_LOCKED_CLOSED)
 

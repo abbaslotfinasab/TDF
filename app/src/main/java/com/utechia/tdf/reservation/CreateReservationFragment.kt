@@ -15,7 +15,7 @@ import com.bumptech.glide.Glide
 import com.utechia.domain.enum.ReservationEnum
 import com.utechia.domain.model.reservation.AnswerReservationModel
 import com.utechia.domain.model.reservation.DateModel
-import com.utechia.domain.model.reservation.Guests
+import com.utechia.domain.model.reservation.GuestsModel
 import com.utechia.domain.utile.Result
 import com.utechia.tdf.R
 import com.utechia.tdf.databinding.FragmentCreateReservationBinding
@@ -49,7 +49,7 @@ class CreateReservationFragment : Fragment(),View.OnClickListener {
     private var reservationDayOfWeek = ""
     private var startTime = ""
     private var endTime = ""
-    private var guests:MutableList<Guests> = mutableListOf()
+    private var guests:MutableList<GuestsModel> = mutableListOf()
     private var attendees:MutableSet<Int> = mutableSetOf()
 
 
@@ -264,7 +264,11 @@ class CreateReservationFragment : Fragment(),View.OnClickListener {
             }
             val delay : Duration = Duration.between(LocalTime.parse(startTime,DateTimeFormatter.ofPattern("HH:mm")),LocalTime.parse(endTime,DateTimeFormatter.ofPattern("HH:mm")))
 
-            binding.timeTitle.text = "$startTime - $endTime  ${delay.toMinutes()}M"
+            binding.timeTitle.text = "$startTime - $endTime  (${(delay.toMinutes().div(
+                60
+            ))}H ${(delay.toMinutes().rem(
+                60
+            ))}M)"
         }
     }
 
@@ -279,13 +283,14 @@ class CreateReservationFragment : Fragment(),View.OnClickListener {
                 binding.roomTitle.visibility = View.VISIBLE
                 binding.btnRoom.visibility = View.VISIBLE
                 binding.roomTitle.text = it.name
-                binding.capacityRoom.text = "capacity: ${it.capacity}"
                 binding.capacityImage.visibility = View.VISIBLE
+                binding.capacityRoom.visibility = View.VISIBLE
+                binding.capacityRoom.text = "capacity: ${it.capacity}"
 
-                Glide.with(requireActivity())
+                Glide.with(requireContext())
                     .load(it.coverPhoto)
-                    .placeholder(R.mipmap.meet_place)
                     .error(R.mipmap.meet_place)
+                    .centerCrop()
                     .transform(BlurTransformation(10, 2))
                     .into(binding.imageRoom)
 
@@ -378,7 +383,7 @@ class CreateReservationFragment : Fragment(),View.OnClickListener {
                     it.id?.let { it1 -> attendees.add(it1) }
                 }
                 inviteGuestAdapter.userList.map {
-                    guests.add(Guests(it.name,it.mail,it.jobTitle))
+                    guests.add(GuestsModel(it.name,it.mail,it.jobTitle))
                 }
                 reservationViewModel.createMeeting(AnswerReservationModel(binding.titleInput.text.toString(),binding.noteInput.text.toString(),reservationDate,startTime,endTime,
                     attendees.toMutableList(),guests,roomId))

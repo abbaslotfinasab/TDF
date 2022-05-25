@@ -228,4 +228,9 @@ abstract class RepositoryModule {
     abstract fun bindMeetingService(
         meetingRepoImpl: MeetingRepoImpl
     ): MeetingRepo
+
+    @Binds
+    abstract fun bindSingleMeetService(
+        singleMeetingRepoImpl: SingleMeetingRepoImpl
+    ): SingleMeetingRepo
 }
