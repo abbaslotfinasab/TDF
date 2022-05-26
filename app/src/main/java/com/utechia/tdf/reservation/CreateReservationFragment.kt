@@ -320,10 +320,10 @@ class CreateReservationFragment : Fragment(),View.OnClickListener {
                 Glide.with(requireContext())
                     .load(it.coverPhoto)
                     .error(R.mipmap.meet_place_blur)
+                    .placeholder(R.mipmap.meet_place_blur)
                     .centerCrop()
                     .transform(BlurTransformation(10, 2))
                     .into(binding.imageRoom)
-                    .onLoadStarted(ContextCompat.getDrawable(requireContext(),R.mipmap.meet_place_blur))
 
 
                 roomId = it.id?:-1
