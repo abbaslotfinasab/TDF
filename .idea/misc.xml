@@ -288,6 +288,7 @@
         <entry key="..\:/Users/lotfinasab/AndroidStudioProjects/tdf_oms_android_application_kotlin_v1/app/src/main/res/drawable/cancel_rservation_back.xml" value="0.122" />
         <entry key="..\:/Users/lotfinasab/AndroidStudioProjects/tdf_oms_android_application_kotlin_v1/app/src/main/res/drawable/category_back.xml" value="0.144" />
         <entry key="..\:/Users/lotfinasab/AndroidStudioProjects/tdf_oms_android_application_kotlin_v1/app/src/main/res/drawable/chat_details_back.xml" value="0.144" />
+        <entry key="..\:/Users/lotfinasab/AndroidStudioProjects/tdf_oms_android_application_kotlin_v1/app/src/main/res/drawable/gradiant.xml" value="0.144" />
         <entry key="..\:/Users/lotfinasab/AndroidStudioProjects/tdf_oms_android_application_kotlin_v1/app/src/main/res/drawable/ic_ant_design_calendar_outlined.xml" value="0.2075" />
         <entry key="..\:/Users/lotfinasab/AndroidStudioProjects/tdf_oms_android_application_kotlin_v1/app/src/main/res/drawable/ic_event_cal.xml" value="0.2075" />
         <entry key="..\:/Users/lotfinasab/AndroidStudioProjects/tdf_oms_android_application_kotlin_v1/app/src/main/res/drawable/ic_exit.xml" value="0.144" />
@@ -297,6 +298,7 @@
         <entry key="..\:/Users/lotfinasab/AndroidStudioProjects/tdf_oms_android_application_kotlin_v1/app/src/main/res/drawable/item_search_people.xml" value="0.122" />
         <entry key="..\:/Users/lotfinasab/AndroidStudioProjects/tdf_oms_android_application_kotlin_v1/app/src/main/res/drawable/location_room.xml" value="0.2075" />
         <entry key="..\:/Users/lotfinasab/AndroidStudioProjects/tdf_oms_android_application_kotlin_v1/app/src/main/res/drawable/profile_2user.xml" value="0.144" />
+        <entry key="..\:/Users/lotfinasab/AndroidStudioProjects/tdf_oms_android_application_kotlin_v1/app/src/main/res/drawable/room_gradiant.xml" value="0.144" />
         <entry key="..\:/Users/lotfinasab/AndroidStudioProjects/tdf_oms_android_application_kotlin_v1/app/src/main/res/drawable/tab_color_selector.xml" value="0.122" />
         <entry key="..\:/Users/lotfinasab/AndroidStudioProjects/tdf_oms_android_application_kotlin_v1/app/src/main/res/layout/activity_main.xml" value="0.2" />
         <entry key="..\:/Users/lotfinasab/AndroidStudioProjects/tdf_oms_android_application_kotlin_v1/app/src/main/res/layout/ca.xml" value="0.2" />

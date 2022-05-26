@@ -1001,7 +1001,7 @@ class MainActivity : AppCompatActivity(), SensorEventListener {
                 binding.customToolbar.visibility = View.VISIBLE
                 binding.toolbar.visibility = View.INVISIBLE
                 binding.customButton.visibility = View.GONE
-                binding.customTitle.text = ""
+                binding.customTitle.text = getString(R.string.reservationDetails)
                 binding.bottomNavigation.visibility = View.GONE
                 binding.drawerLayout.setDrawerLockMode(DrawerLayout.LOCK_MODE_LOCKED_CLOSED)
 

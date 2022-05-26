@@ -74,6 +74,7 @@
     <string name="survey_system">Survey System</string>
     <string name="refreshments">Refreshments</string>
     <string name="reservation">Reserve Room</string>
+    <string name="reservationDetails">Meeting Details</string>
     <string name="profile">Profile</string>
     <string name="home">Home</string>
     <string name="orders">Orders</string>

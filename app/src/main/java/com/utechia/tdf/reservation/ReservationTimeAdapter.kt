@@ -53,6 +53,7 @@ class ReservationTimeAdapter:
         fun bind0(position: Int) {
 
             timeTitle.text = timeList[position].time
+            var counter = 0
 
             when {
                 timeList[position].reserved == true -> {
@@ -117,10 +118,21 @@ class ReservationTimeAdapter:
                             TimeListener.timeListener.postValue(duration)
 
                         }else{
-                            timeLayout.setBackgroundColor(ContextCompat.getColor(itemView.context,R.color.background))
-                            timeTitle.setTextColor(ContextCompat.getColor(itemView.context,R.color.black))
+                            timeList.forEach {
+                                it.clicked=false
+                            }
+                            duration.clear()
+                            notifyDataSetChanged()
+                            timeLayout.setBackgroundColor(ContextCompat.getColor(itemView.context,R.color.btnCalendarBack))
+                            timeTitle.setTextColor(ContextCompat.getColor(itemView.context,R.color.white))
                             previousIndex = position
+                            timeList[position].clicked=true
+
+                            val endTime = LocalTime.parse(timeList[position].time, DateTimeFormatter.ofPattern("HH:mm")).plusMinutes(30).toString()
+                            duration.add(DurationModel(timeList[position].time,endTime))
+                            TimeListener.timeListener.postValue(duration)
                         }
+
                     }
                     0 -> {
                         if (timeList[position].clicked == false) {
@@ -145,9 +157,22 @@ class ReservationTimeAdapter:
                             TimeListener.timeListener.postValue(duration)
                         }
                         else{
+                            val endTime = LocalTime.parse(timeList[position].time, DateTimeFormatter.ofPattern("HH:mm")).plusMinutes(30).toString()
+                            duration.remove(DurationModel(timeList[position].time,endTime))
+                            timeList[position].clicked =false
+                            timeList.forEach {
+                                if (it.clicked==true)
+                                    counter += 1
+                            }
+                            if (counter>0){
+                                TimeListener.timeListener.postValue(duration)
+                            }else{
+                                TimeListener.timeListener.postValue(null)
+                            }
                             timeLayout.setBackgroundColor(ContextCompat.getColor(itemView.context,R.color.background))
                             timeTitle.setTextColor(ContextCompat.getColor(itemView.context,R.color.black))
                             previousIndex = position
+                            notifyDataSetChanged()
                         }
                     }
                     1 -> {
@@ -167,6 +192,21 @@ class ReservationTimeAdapter:
                             previousIndex = position
 
                             timeList[position].clicked = true
+
+                            val endTime = LocalTime.parse(timeList[position].time, DateTimeFormatter.ofPattern("HH:mm")).plusMinutes(30).toString()
+                            duration.add(DurationModel(timeList[position].time,endTime))
+                            TimeListener.timeListener.postValue(duration)
+                        }
+                        else{
+                            timeList.forEach {
+                                it.clicked=false
+                            }
+                            duration.clear()
+                            notifyDataSetChanged()
+                            timeLayout.setBackgroundColor(ContextCompat.getColor(itemView.context,R.color.btnCalendarBack))
+                            timeTitle.setTextColor(ContextCompat.getColor(itemView.context,R.color.white))
+                            previousIndex = position
+                            timeList[position].clicked=true
 
                             val endTime = LocalTime.parse(timeList[position].time, DateTimeFormatter.ofPattern("HH:mm")).plusMinutes(30).toString()
                             duration.add(DurationModel(timeList[position].time,endTime))
