@@ -282,11 +282,23 @@ class CreateReservationFragment : Fragment(),View.OnClickListener {
             }
             val delay : Duration = Duration.between(LocalTime.parse(startTime,DateTimeFormatter.ofPattern("HH:mm")),LocalTime.parse(endTime,DateTimeFormatter.ofPattern("HH:mm")))
 
-            binding.timeTitle.text = "$startTime - $endTime  (${(delay.toMinutes().div(
-                60
-            ))}H ${(delay.toMinutes().rem(
-                60
-            ))}M)"
+            val hour = delay.toMinutes().div(60).toInt()
+            val minute = delay.toMinutes().rem(60).toInt()
+            when{
+                hour==0 ->{
+                    binding.timeTitle.text = "$startTime - $endTime  (${minute}M)"
+                }
+                minute ==0 -> {
+                    binding.timeTitle.text = "$startTime - $endTime  (${hour}H)"
+                }
+                else ->{
+                    binding.timeTitle.text = "$startTime - $endTime  (${(delay.toMinutes().div(
+                        60
+                    ))}H ${(delay.toMinutes().rem(
+                        60
+                    ))}M)"
+                }
+            }
         }
     }
 
@@ -413,7 +425,7 @@ class CreateReservationFragment : Fragment(),View.OnClickListener {
                     endTime == "" -> {
                         Toast.makeText(context,"No time selected",Toast.LENGTH_SHORT).show()
                     }
-                    invitePeopleAdapter.userList.size==0 -> {
+                    invitePeopleAdapter.userList.size==0 && inviteGuestAdapter.userList.size==0 -> {
                         Toast.makeText(context,"No people invited",Toast.LENGTH_SHORT).show()
                     }
                     else -> {
@@ -424,8 +436,8 @@ class CreateReservationFragment : Fragment(),View.OnClickListener {
         }
     }
 
-    override fun onDestroy() {
-        super.onDestroy()
+    override fun onStop() {
+        super.onStop()
         reservationViewModel.deleteAll()
         RoomListener.roomListener.postValue(null)
         DateListener.dateAdapterListener.postValue(null)

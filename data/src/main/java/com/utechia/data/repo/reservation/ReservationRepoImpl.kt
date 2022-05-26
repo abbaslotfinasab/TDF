@@ -1,5 +1,6 @@
 package com.utechia.data.repo.reservation
 
+import android.util.Log
 import com.utechia.data.api.Service
 import com.utechia.data.dao.ProfileDao
 import com.utechia.data.utile.NetworkHelper
@@ -23,7 +24,12 @@ class ReservationRepoImpl @Inject constructor(
 
         if (networkHelper.isNetworkConnected()) {
 
+            Log.d("answerReservationModel",answerReservationModel.toString())
+
             val result = service.createMeeting(answerReservationModel)
+
+            Log.d("resultReservation",result.toString())
+
 
             return when (result.isSuccessful){
 

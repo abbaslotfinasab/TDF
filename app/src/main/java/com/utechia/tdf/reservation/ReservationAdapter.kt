@@ -17,7 +17,7 @@ import java.time.LocalDate
 import java.time.LocalTime
 import java.time.format.DateTimeFormatter
 
-class ReservationAdapter: PagingDataAdapter<MeetingModel, ReservationAdapter.MyViewHolder>(
+class ReservationAdapter(val reservation: String?= "false"): PagingDataAdapter<MeetingModel, ReservationAdapter.MyViewHolder>(
     DiffUtilCallBack()
 ) {
 
@@ -52,11 +52,27 @@ class ReservationAdapter: PagingDataAdapter<MeetingModel, ReservationAdapter.MyV
             floor.text = "Floor ${meetingModel.room?.floor?.name}"
             title.text = meetingModel.subject
             dayOfWeek.text = "${LocalDate.parse(meetingModel.date, DateTimeFormatter.ofPattern("yyyy-MM-dd")).dayOfWeek.name.lowercase().replaceFirstChar { it.uppercase() }}"
-            dateTime.text = ", ${LocalTime.parse(meetingModel.startsAt,DateTimeFormatter.ofPattern("HH:mm:ss")).format(DateTimeFormatter.ofPattern("HH:mm"))} to ${LocalTime.parse(meetingModel.endsAt,DateTimeFormatter.ofPattern("HH:mm:ss")).format(DateTimeFormatter.ofPattern("HH:mm"))} (${(meetingModel.duration?.div(
-                60
-            ))}H ${(meetingModel.duration?.rem(
-                60
-            ))}M)"
+            val hour = meetingModel.duration?.div(60)
+            val minute = meetingModel.duration?.rem(60)
+            when{
+                hour==0 ->{
+                    dateTime.text = ", ${LocalTime.parse(meetingModel.startsAt,DateTimeFormatter.ofPattern("HH:mm:ss")).format(DateTimeFormatter.ofPattern("HH:mm"))} to ${LocalTime.parse(meetingModel.endsAt,DateTimeFormatter.ofPattern("HH:mm:ss")).format(DateTimeFormatter.ofPattern("HH:mm"))} (${(meetingModel.duration?.rem(
+                        60
+                    ))}M)"
+                }
+                minute ==0 -> {
+                    dateTime.text = ", ${LocalTime.parse(meetingModel.startsAt,DateTimeFormatter.ofPattern("HH:mm:ss")).format(DateTimeFormatter.ofPattern("HH:mm"))} to ${LocalTime.parse(meetingModel.endsAt,DateTimeFormatter.ofPattern("HH:mm:ss")).format(DateTimeFormatter.ofPattern("HH:mm"))} (${(meetingModel.duration?.div(
+                        60
+                    ))}H)"                }
+                else ->{
+                    dateTime.text = ", ${LocalTime.parse(meetingModel.startsAt,DateTimeFormatter.ofPattern("HH:mm:ss")).format(DateTimeFormatter.ofPattern("HH:mm"))} to ${LocalTime.parse(meetingModel.endsAt,DateTimeFormatter.ofPattern("HH:mm:ss")).format(DateTimeFormatter.ofPattern("HH:mm"))} (${(meetingModel.duration?.div(
+                        60
+                    ))}H ${(meetingModel.duration?.rem(
+                        60
+                    ))}M)"
+                }
+            }
+
 
             if (meetingModel.status == ReservationEnum.Cancel.reservation){
                 cancel.visibility = View.VISIBLE
@@ -65,7 +81,7 @@ class ReservationAdapter: PagingDataAdapter<MeetingModel, ReservationAdapter.MyV
             }
 
             reservation.setOnClickListener{
-                val bundle = bundleOf(ReservationEnum.ID.reservation to meetingModel.id)
+                val bundle = bundleOf(ReservationEnum.ID.reservation to meetingModel.id,ReservationEnum.None.reservation to reservation.toString())
                 itemView.findNavController().navigate(R.id.action_reservationFragment_to_reservationDetails,bundle)
             }
 

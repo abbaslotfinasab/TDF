@@ -149,7 +149,7 @@
     <string name="select_room">Select Room</string>
     <string name="date">Date</string>
     <string name="time">Time</string>
-    <string name="invite_people">Invite People</string>
+    <string name="invite_people">Invited People</string>
     <string name="you_did_t_add_any_people_to_this_meeting_yet">You did’t add any People to This Meeting yet</string>
     <string name="add_someone">Add Someone</string>
     <string name="book_now">Book Now</string>

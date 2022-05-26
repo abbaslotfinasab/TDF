@@ -33,6 +33,8 @@ class ReservationDetails : Fragment() {
     private val inviteDetailsAdapter:InviteDetailsAdapter = InviteDetailsAdapter()
     private lateinit var prefs: SharedPreferences
     private var meetId:Int = 0
+    private var reservation = ""
+
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -49,6 +51,7 @@ class ReservationDetails : Fragment() {
 
         if (arguments!=null) {
             meetId = requireArguments().getInt(ReservationEnum.ID.reservation,0)
+            reservation = requireArguments().getString(ReservationEnum.None.reservation,"")
         }
 
         reservationDetailsViewModel.getSingleMeeting(meetId)
@@ -79,16 +82,31 @@ class ReservationDetails : Fragment() {
                             "${LocalDate.parse(it.data.date, DateTimeFormatter.ofPattern("yyyy-MM-dd")).month.name.uppercase().subSequence(0,3)}, " +
                             "${LocalDate.parse(it.data.date, DateTimeFormatter.ofPattern("yyyy-MM-dd")).year}"
 
-                    binding.timeLine.text = "${LocalTime.parse(it.data.startsAt,DateTimeFormatter.ofPattern("HH:mm:ss")).format(DateTimeFormatter.ofPattern("HH:mm"))} to ${LocalTime.parse(it.data.endsAt,DateTimeFormatter.ofPattern("HH:mm:ss")).format(DateTimeFormatter.ofPattern("HH:mm"))} (${(it.data.duration?.div(
-                        60
-                    ))}H ${(it.data.duration?.rem(
-                        60
-                    ))}M)"
+                    val hour = it.data.duration?.div(60)
+                    val minute = it.data.duration?.rem(60)
+                    when{
+                        hour==0 ->{
+                            binding.timeLine.text = "${LocalTime.parse(it.data.startsAt,DateTimeFormatter.ofPattern("HH:mm:ss")).format(DateTimeFormatter.ofPattern("HH:mm"))} to ${LocalTime.parse(it.data.endsAt,DateTimeFormatter.ofPattern("HH:mm:ss")).format(DateTimeFormatter.ofPattern("HH:mm"))} (${(it.data.duration?.rem(
+                                60
+                            ))}M)"
+                        }
+                        minute ==0 -> {
+                            binding.timeLine.text = "${LocalTime.parse(it.data.startsAt,DateTimeFormatter.ofPattern("HH:mm:ss")).format(DateTimeFormatter.ofPattern("HH:mm"))} to ${LocalTime.parse(it.data.endsAt,DateTimeFormatter.ofPattern("HH:mm:ss")).format(DateTimeFormatter.ofPattern("HH:mm"))} (${(it.data.duration?.div(
+                                60
+                            ))}H)"                }
+                        else ->{
+                            binding.timeLine.text = "${LocalTime.parse(it.data.startsAt,DateTimeFormatter.ofPattern("HH:mm:ss")).format(DateTimeFormatter.ofPattern("HH:mm"))} to ${LocalTime.parse(it.data.endsAt,DateTimeFormatter.ofPattern("HH:mm:ss")).format(DateTimeFormatter.ofPattern("HH:mm"))} (${(it.data.duration?.div(
+                                60
+                            ))}H ${(it.data.duration?.rem(
+                                60
+                            ))}M)"
+                        }
+                    }
 
                     binding.location.text = "Floor ${it.data.room?.floor?.name}"
                     binding.roomName.text =  it.data.room?.name
 
-                    if(it.data.status == ReservationEnum.Cancel.reservation){
+                    if(it.data.status == ReservationEnum.Cancel.reservation || reservation == ReservationEnum.None.reservation){
                         binding.btnBook.visibility =  View.GONE
                     }else{
                         binding.btnBook.visibility =  View.VISIBLE
@@ -97,9 +115,9 @@ class ReservationDetails : Fragment() {
                     Glide.with(requireActivity())
                         .load(it.data.room?.coverPhoto)
                         .error(R.mipmap.meet_place)
+                        .placeholder(R.mipmap.meet_place)
                         .centerCrop()
                         .into(binding.roomImage)
-                        .onLoadStarted(resources.getDrawable(R.mipmap.meet_place,null))
 
                     inviteDetailsAdapter.addData(InviteDetailsModel(it.data.presenter.name,it.data.presenter.jobTitle,it.data.presenter.mail,it.data.presenter.profilePictureModel?.url,ReservationEnum.Presenter.reservation))
 

@@ -56,6 +56,9 @@ class InvitePeopleFragment : BottomSheetDialogFragment() {
             tab.text = tabTitles[position]
         }.attach()
 
+        binding.exitBtn.setOnClickListener {
+            dialog?.dismiss()
+        }
     }
 }
 

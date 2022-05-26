@@ -6,6 +6,8 @@
     android:background="@color/white"
     android:id="@+id/reservationLayout"
     android:layout_marginBottom="12dp"
+    android:layout_marginStart="20dp"
+    android:layout_marginEnd="20dp"
     android:layout_height="wrap_content">
 
     <TextView
@@ -14,6 +16,8 @@
         android:layout_height="wrap_content"
         android:layout_marginStart="12dp"
         android:layout_marginTop="12dp"
+        android:gravity="center"
+        android:textAlignment="center"
         android:maxLines="1"
         android:maxLength="3"
         android:textAllCaps="true"
@@ -26,12 +30,14 @@
         android:id="@+id/dayNumber"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="12dp"
+        android:layout_marginTop="2dp"
+        android:gravity="center"
+        android:textAlignment="center"
+        android:textColor="#3360DD"
         android:textSize="20sp"
         android:textStyle="bold"
-        android:textColor="#3360DD"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="@+id/dayTitle"
+        app:layout_constraintStart_toStartOf="@+id/dayTitle"
         app:layout_constraintTop_toBottomOf="@+id/dayTitle" />
 
     <TextView
@@ -42,6 +48,9 @@
         android:layout_marginEnd="5dp"
         android:textColor="@color/black"
         android:textSize="16sp"
+        android:singleLine="true"
+        android:maxLines="1"
+        android:ellipsize="end"
         android:textStyle="bold"
         app:layout_constraintBottom_toBottomOf="@+id/dayTitle"
         app:layout_constraintEnd_toStartOf="@+id/btnCancel"
@@ -74,7 +83,6 @@
         app:layout_constraintTop_toTopOf="@+id/dayOfWeek" />
 
 
-
     <TextView
         android:id="@+id/floor"
         android:layout_width="wrap_content"
@@ -82,18 +90,18 @@
         android:layout_marginEnd="15dp"
         android:gravity="start"
         android:padding="3dp"
-        android:textColor="@color/black"
-        android:textSize="16sp"
+        android:textColor="#011232"
+        android:textSize="14sp"
         android:textStyle="italic"
-        app:layout_constraintBottom_toBottomOf="@+id/dayNumber"
+        app:layout_constraintBottom_toBottomOf="@+id/dayOfWeek"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/dayTitle" />
+        app:layout_constraintTop_toTopOf="@+id/dayOfWeek" />
 
 
     <TextView
         android:id="@+id/btnCancel"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_width="62dp"
+        android:layout_height="18dp"
         android:layout_marginTop="12dp"
         android:layout_marginEnd="12dp"
         android:textColor="@color/white"
@@ -103,7 +111,7 @@
         android:paddingTop="2dp"
         android:paddingBottom="2dp"
         android:visibility="invisible"
-        android:textSize="11sp"
+        android:textSize="9sp"
         android:gravity="center"
         android:background="@drawable/cancel_rservation_back"
         app:layout_constraintEnd_toEndOf="parent"

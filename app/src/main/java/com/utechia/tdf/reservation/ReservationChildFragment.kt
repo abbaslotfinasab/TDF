@@ -13,7 +13,6 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import com.utechia.domain.utile.Result
 import com.utechia.tdf.R
 import com.utechia.tdf.databinding.FragmentReservationChildBinding
-import com.utechia.tdf.order.user.ItemDecorationOrder
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
@@ -21,7 +20,7 @@ class ReservationChildFragment(val reservation: String?= "false") : Fragment() {
 
     private lateinit var binding: FragmentReservationChildBinding
     private val meetingViewModel:MeetingViewModel by viewModels()
-    private val reservationAdapter:ReservationAdapter = ReservationAdapter()
+    private val reservationAdapter:ReservationAdapter = ReservationAdapter(reservation)
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -53,7 +52,7 @@ class ReservationChildFragment(val reservation: String?= "false") : Fragment() {
         binding.recyclerView.apply {
             adapter = reservationAdapter
             layoutManager = LinearLayoutManager(context, LinearLayoutManager.VERTICAL,false)
-            addItemDecoration(ItemDecorationOrder())
+
         }
 
         observer()

@@ -19,7 +19,6 @@ class SearchPeopleFragment : Fragment() {
     private lateinit var binding: FragmentSearchPeopleBinding
     private val invitationViewModel:InvitationViewModel by viewModels()
     private val invitationAdapter:InvitationAdapter = InvitationAdapter()
-    private lateinit var invitePeopleFragment: InvitePeopleFragment
 
 
     override fun onCreateView(
@@ -32,8 +31,6 @@ class SearchPeopleFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-
-        invitePeopleFragment = this.parentFragment as InvitePeopleFragment
 
 
         binding.searchView.setOnQueryTextListener(object : SearchView.OnQueryTextListener{
@@ -62,10 +59,6 @@ class SearchPeopleFragment : Fragment() {
             adapter = invitationAdapter
             layoutManager = LinearLayoutManager(requireActivity(),
                 LinearLayoutManager.VERTICAL,false)
-        }
-
-        binding.btnSelect.setOnClickListener {
-            invitePeopleFragment.dismiss()
         }
 
         observer()
